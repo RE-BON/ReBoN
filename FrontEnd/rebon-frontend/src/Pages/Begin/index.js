@@ -1,5 +1,7 @@
+import Header from '../../Components/Header';
+
 function Begin() {
-  return <div>ddsssd</div>;
+  return <Header />;
 }
 
 export default Begin;
