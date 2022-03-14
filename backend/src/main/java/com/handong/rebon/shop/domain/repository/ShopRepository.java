@@ -1,6 +1,6 @@
 package com.handong.rebon.shop.domain.repository;
 
-import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.shop.domain.Shop;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

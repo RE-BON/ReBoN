@@ -2,7 +2,7 @@ package com.handong.rebon.shop.domain.category;
 
 import javax.persistence.*;
 
-import com.handong.rebon.shop.domain.item.Shops;
+import com.handong.rebon.shop.domain.Shops;
 
 @Entity
 public class Category {

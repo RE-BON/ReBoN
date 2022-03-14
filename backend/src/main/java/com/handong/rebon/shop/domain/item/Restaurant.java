@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.handong.rebon.menu.domain.Menu;
+import com.handong.rebon.shop.domain.Shop;
 
 @Entity
 @DiscriminatorValue("R")

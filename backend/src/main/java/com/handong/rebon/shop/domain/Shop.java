@@ -1,11 +1,10 @@
-package com.handong.rebon.shop.domain.item;
+package com.handong.rebon.shop.domain;
 
 import java.util.List;
 import javax.persistence.*;
 
-import com.handong.rebon.shop.domain.Location;
+import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.category.Category;
-import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.content.ShopContent;

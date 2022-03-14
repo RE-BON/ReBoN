@@ -2,7 +2,7 @@ package com.handong.rebon.shop.domain.content;
 
 import javax.persistence.*;
 
-import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.shop.domain.Shop;
 
 @Entity
 public class ShopImage {
