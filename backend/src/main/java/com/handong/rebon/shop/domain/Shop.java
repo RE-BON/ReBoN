@@ -11,8 +11,13 @@ import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.like.Like;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn
 public class Shop {
 
@@ -40,4 +45,16 @@ public class Shop {
     @OneToMany(mappedBy = "shop")
     private List<ShopTag> shopTags;
 
+    @Builder
+    public Shop(Long id, Category category, ShopContent shopContent, ShopImages shopImages, Location location,
+                ShopScore shopScore, List<Like> likes, List<ShopTag> shopTags) {
+        this.id = id;
+        this.category = category;
+        this.shopContent = shopContent;
+        this.shopImages = shopImages;
+        this.location = location;
+        this.shopScore = shopScore;
+        this.likes = likes;
+        this.shopTags = shopTags;
+    }
 }
