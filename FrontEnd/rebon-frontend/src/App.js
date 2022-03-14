@@ -1,25 +1,77 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const Test = styled.div`
-  color: red;
-`;
-
-const ButtonTest = styled.button`
-  width: 500px;
-  height: 300px;
-  border: 1px solid blue;
-  background-color: 'red';
-`;
+import { createGlobalStyle } from 'styled-components';
+import Begin from './Pages/Begin';
 
 function App() {
-  const hello = () => {
-    console.log('hihihi');
-  };
+  const GlobalStyle = createGlobalStyle`
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+  html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, menu, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+    display: none;
+}
+body {
+  line-height: 1;
+}
+menu, ol, ul, li {
+  list-style: none;
+
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*{
+  box-sizing: border-box;
+}
+body{
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color:inherit;
+// 링크가 클릭되었을 때 너무 못생겨져서 부모로부터 상속받게 하여 색깔을 유지
+}
+  `;
+
   return (
     <>
-      <Test>안녕하세요~~</Test>
-      <ButtonTest onClick={hello}>이렇게 버튼을 만듭니다</ButtonTest>
+      <GlobalStyle />
+      <Begin />
     </>
   );
 }
