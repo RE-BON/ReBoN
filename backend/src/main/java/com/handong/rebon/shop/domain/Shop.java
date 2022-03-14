@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.*;
 
+import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -52,6 +53,9 @@ public class Shop {
     private List<ShopTag> shopTags = new ArrayList<>();
 
     public void addTags(List<Tag> tags) {
+        if (tags.isEmpty()) {
+            throw new ShopTagNumberException();
+        }
         List<ShopTag> shopTags = tags.stream()
                                     .map(tag -> new ShopTag(this, tag))
                                     .collect(Collectors.toList());
