@@ -1,8 +1,9 @@
-package com.handong.rebon.shop.domain.tag;
+package com.handong.rebon.shop.domain.tag.domain;
 
 import javax.persistence.*;
 
 import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.shop.domain.tag.domain.Tag;
 
 @Entity
 public class ShopTag {
