@@ -1,6 +1,8 @@
 package com.handong.rebon.shop.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.*;
 
 import com.handong.rebon.shop.domain.location.Location;
@@ -10,13 +12,15 @@ import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.like.Like;
 import com.handong.rebon.shop.domain.tag.ShopTag;
+import com.handong.rebon.shop.domain.tag.Tag;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Builder
+@Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn
 public class Shop {
@@ -39,22 +43,18 @@ public class Shop {
     @Embedded
     private ShopScore shopScore;
 
+    @Builder.Default
     @OneToMany(mappedBy = "shop")
-    private List<Like> likes;
+    private List<Like> likes = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "shop")
-    private List<ShopTag> shopTags;
+    private List<ShopTag> shopTags = new ArrayList<>();
 
-    @Builder
-    public Shop(Long id, Category category, ShopContent shopContent, ShopImages shopImages, Location location,
-                ShopScore shopScore, List<Like> likes, List<ShopTag> shopTags) {
-        this.id = id;
-        this.category = category;
-        this.shopContent = shopContent;
-        this.shopImages = shopImages;
-        this.location = location;
-        this.shopScore = shopScore;
-        this.likes = likes;
-        this.shopTags = shopTags;
+    public void addTags(List<Tag> tags) {
+        List<ShopTag> shopTags = tags.stream()
+                                    .map(tag -> new ShopTag(this, tag))
+                                    .collect(Collectors.toList());
+        this.shopTags.addAll(shopTags);
     }
 }
