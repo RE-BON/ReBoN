@@ -9,4 +9,8 @@ public abstract class RebonException extends RuntimeException {
         super(message);
         this.httpStatus = httpStatus;
     }
+
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
 }
