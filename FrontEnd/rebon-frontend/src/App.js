@@ -1,8 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import Begin from './Pages/Begin';
-import Search from './Pages/Search';
+import Router from './Router';
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -72,7 +70,7 @@ a{
   return (
     <>
       <GlobalStyle />
-      <Search />
+      <Router />
     </>
   );
 }
