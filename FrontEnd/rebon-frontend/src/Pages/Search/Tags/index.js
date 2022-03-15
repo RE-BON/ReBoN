@@ -4,8 +4,8 @@ function Tags() {
   return (
     <Wrapper>
       <div>추천 태그</div>
-      {api.map((tagApi) => (
-        <Tag>{tagApi}</Tag>
+      {api.map((item) => (
+        <Tag>{item}</Tag>
       ))}
     </Wrapper>
   );
