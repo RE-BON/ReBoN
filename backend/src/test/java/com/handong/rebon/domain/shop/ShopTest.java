@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.handong.rebon.exception.shop.ShopTagNumberException;
-import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
+import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.shop.domain.tag.Tag;
 
@@ -25,9 +25,9 @@ class ShopTest {
                                          .name("팜스발리")
                                          .build();
 
-        Shop shop = Shop.builder()
-                        .shopContent(content)
-                        .build();
+        Restaurant restaurant = Restaurant.builder()
+                                          .shopContent(content)
+                                          .build();
 
         List<Tag> tags = List.of(
                 new Tag("포항"),
@@ -35,8 +35,8 @@ class ShopTest {
         );
 
         // when
-        shop.addTags(tags);
-        List<ShopTag> shopTags = shop.getShopTags();
+        restaurant.addTags(tags);
+        List<ShopTag> shopTags = restaurant.getShopTags();
 
         // then
         assertThat(shopTags).hasSize(2);
@@ -53,14 +53,14 @@ class ShopTest {
                                          .name("팜스발리")
                                          .build();
 
-        Shop shop = Shop.builder()
-                        .shopContent(content)
-                        .build();
+        Restaurant restaurant = Restaurant.builder()
+                                          .shopContent(content)
+                                          .build();
 
         List<Tag> tags = Collections.emptyList();
 
         // when & then
-        assertThatThrownBy(() -> shop.addTags(tags))
+        assertThatThrownBy(() -> restaurant.addTags(tags))
                 .isInstanceOf(ShopTagNumberException.class);
     }
 }

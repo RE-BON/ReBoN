@@ -4,7 +4,11 @@ import javax.persistence.*;
 
 import com.handong.rebon.shop.domain.Shops;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +24,12 @@ public class Category {
 
     @Embedded
     private Categories children;
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public boolean isSameName(String name) {
+        return this.name.equals(name);
+    }
 }
