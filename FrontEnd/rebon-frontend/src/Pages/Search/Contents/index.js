@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
+import Tags from '../Tags';
 // 이 콘텐츠 이름은 다른 분들것과 따라 맞추자
 function Contents() {
   return (
@@ -17,21 +17,7 @@ function Contents() {
           <FontAwesomeIcon icon={faSearch} className="search" />
         </InputBar>
 
-        <Tags>
-          <div>추천 태그</div>
-          <Tag>영일대</Tag>
-          <Tag>양덕</Tag>
-          <Tag>구룡포</Tag>
-          <Tag>칠포해수욕장</Tag>
-
-          <Tag>영일대</Tag>
-          <Tag>양덕</Tag>
-          <Tag>구룡포</Tag>
-          <Tag>칠포해수욕장</Tag>
-
-          <Tag>구룡포</Tag>
-          <Tag>칠포해수욕장</Tag>
-        </Tags>
+        <Tags />
       </ContentStyle>
     </Wrapper>
   );
@@ -79,30 +65,6 @@ const Input = styled.input`
   border: none;
   &:focus {
     outline: none;
-  }
-`;
-
-const Tags = styled.ul`
-  font-size: 15px;
-  padding: 0 5px;
-  div {
-    color: rgba(0, 0, 0, 0.3);
-    grid-column: 1 / 5;
-    margin-bottom: 10px;
-  }
-`;
-
-const Tag = styled.li`
-  width: fit-content;
-  padding: 5px 7px;
-  margin: 5px;
-  float: left;
-  border: 1px solid black;
-  border-radius: 50px;
-  font-weight: 500;
-  &:hover {
-    color: white;
-    background-color: black;
   }
 `;
 
