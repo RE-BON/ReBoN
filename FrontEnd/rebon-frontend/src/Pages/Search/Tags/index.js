@@ -4,21 +4,14 @@ function Tags() {
   return (
     <Wrapper>
       <div>추천 태그</div>
-      <Tag>영일대</Tag>
-      <Tag>양덕</Tag>
-      <Tag>구룡포</Tag>
-      <Tag>칠포해수욕장</Tag>
-
-      <Tag>영일대</Tag>
-      <Tag>양덕</Tag>
-      <Tag>구룡포</Tag>
-      <Tag>칠포해수욕장</Tag>
-
-      <Tag>구룡포</Tag>
-      <Tag>칠포해수욕장</Tag>
+      {api.map((tagApi) => (
+        <Tag>{tagApi}</Tag>
+      ))}
     </Wrapper>
   );
 }
+const api = ['영일대', '양덕', '구룡포', '칠포해수욕장', '영일대', '양덕', '구룡포', '칠포해수욕장', '구룡포', '칠포해수욕장'];
+
 const Wrapper = styled.ul`
   font-size: 15px;
   padding: 0 5px;
