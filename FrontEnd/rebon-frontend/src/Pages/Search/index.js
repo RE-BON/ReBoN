@@ -1,4 +1,11 @@
-import styled from '../../Components/Header';
-function Search() {}
+import Header from '../../Components/Header';
+import Contents from './Contents';
 
-export default Search;
+export default function Search() {
+  return (
+    <>
+      <Header />
+      <Contents />
+    </>
+  );
+}
