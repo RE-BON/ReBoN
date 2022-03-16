@@ -1,4 +1,4 @@
-package com.handong.rebon.domain.shop;
+package com.handong.rebon.unit.shop.domain;
 
 import java.util.Collections;
 import java.util.List;

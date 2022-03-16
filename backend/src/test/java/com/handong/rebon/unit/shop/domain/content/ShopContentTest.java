@@ -1,4 +1,4 @@
-package com.handong.rebon.domain.shop.content;
+package com.handong.rebon.unit.shop.domain.content;
 
 import com.handong.rebon.exception.shop.ShopNameException;
 import com.handong.rebon.shop.domain.content.ShopContent;
