@@ -5,27 +5,50 @@ import Slider from 'react-slick';
 import Review from './Review';
 import '../../assets/css/detail.css';
 
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return <div className={className} style={{ ...style, display: 'block', background: '#C4C4C4', borderRadius: '20px', paddingLeft: '5px' }} onClick={onClick} />;
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return <div className={className} style={{ ...style, display: 'block', background: '#C4C4C4', borderRadius: '20px', paddingLeft: '5px' }} onClick={onClick} />;
+}
+
 function Detail() {
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    centerMode: false,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   return (
     <div className="detail-wrapper">
-      <div className="detail-image-wrapper">
-        <img className="detail-main-image" alt="review-image" src="image/detail.png" />
+      <Slider {...settings}>
+        <div className="detail-image-wrapper">
+          <img className="detail-main-image" alt="review-image" src="image/detail.png" />
+        </div>
         <div className="detail-sub-wrapper">
           <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
           <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
           <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
           <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
         </div>
-      </div>
+        <div className="detail-image-wrapper">
+          <img className="detail-main-image" alt="review-image" src="image/detail.png" />
+        </div>
+        <div className="detail-sub-wrapper">
+          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
+        </div>
+      </Slider>
       <div className="detail-shop-wrapper">
         <div className="detail-title-wrapper">
           <h3 className="detail-shop-name">마라도 물회</h3>

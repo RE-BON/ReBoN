@@ -43,7 +43,8 @@
   font-size: 20px;
   line-height: 1;
   opacity: 0.75;
-  color: white;
+  color: #898c8f;
+  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -52,14 +53,13 @@
 }
 [dir='rtl'] .slick-prev {
   right: -25px;
-
   left: auto;
 }
 .slick-prev:before {
-  content: '←';
+  content: '❮';
 }
 [dir='rtl'] .slick-prev:before {
-  content: '→';
+  content: '❯';
 }
 .slick-next {
   right: -25px;
@@ -69,10 +69,10 @@
   left: -25px;
 }
 .slick-next:before {
-  content: '→';
+  content: '❯';
 }
 [dir='rtl'] .slick-next:before {
-  content: '←';
+  content: '❮';
 }
 .slick-dotted.slick-slider {
   margin-bottom: 30px;

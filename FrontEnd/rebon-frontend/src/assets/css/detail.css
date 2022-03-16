@@ -1,16 +1,17 @@
 .detail-image-wrapper {
   margin-top: 5%;
-  margin-left: 30%;
-  width: 40%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 5%;
 }
 .detail-main-image {
-  width: 100%;
+  width: 96%;
+}
+.detail-sub-wrapper {
+  margin-top: 5%;
 }
 .detail-sub-image {
   width: 48%;
-  height: 50%;
   margin-left: 1%;
 }
 .detail-shop-wrapper {
