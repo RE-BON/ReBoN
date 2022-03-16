@@ -12,6 +12,6 @@ public class ReviewImage {
 
     private String url;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
 }
