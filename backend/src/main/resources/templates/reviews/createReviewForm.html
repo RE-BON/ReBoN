@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <!--<div th:replace="fragments/bodyHeader :: bodyHeader" />-->
-    <form role="form" action="/admin/reviews/new" th:object="${reviewRequest}" method="post">
+    <form role="form" action="/admin/reviews/new" th:object="${adminReviewCreateRequest}" method="post">
         <div class="form-group">
             <label th:for="title">title</label>
             <input type="text" th:field="*{title}" class="form-control" placeholder="제목을 입력하세요"
