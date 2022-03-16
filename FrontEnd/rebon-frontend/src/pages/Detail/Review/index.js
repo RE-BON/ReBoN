@@ -1,12 +1,11 @@
 import React from 'react';
-import '../../assets/css/review.css';
-import styled from 'styled-components';
+import '../../../styles/review.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faShareNodes, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 
-function Review() {
+export default function Review() {
   return (
     <div className="review-wrapper">
       <div className="review-title-wrapper">
@@ -90,5 +89,3 @@ function Review() {
     </div>
   );
 }
-
-export default Review;

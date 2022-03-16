@@ -1,9 +1,9 @@
 import React from 'react';
-import '../../assets/css/slick.css';
-import '../../assets/css/slick-theme.css';
 import Slider from 'react-slick';
 import Review from './Review';
-import '../../assets/css/detail.css';
+import '../../styles/slick.css';
+import '../../styles/slick-theme.css';
+import '../../styles/detail.css';
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -15,7 +15,7 @@ function SamplePrevArrow(props) {
   return <div className={className} style={{ ...style, display: 'block', background: '#C4C4C4', borderRadius: '20px', paddingLeft: '5px' }} onClick={onClick} />;
 }
 
-function Detail() {
+export default function Detail() {
   const settings = {
     dots: false,
     infinite: true,
@@ -102,5 +102,3 @@ function Detail() {
     </div>
   );
 }
-
-export default Detail;
