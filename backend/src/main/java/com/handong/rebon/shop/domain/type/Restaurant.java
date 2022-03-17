@@ -38,4 +38,8 @@ public class Restaurant extends Shop {
         super(id, category, shopContent, shopImages, location, shopScore);
         this.menus = menus;
     }
+
+    public void addMenu(List<Menu> menus) {
+
+    }
 }

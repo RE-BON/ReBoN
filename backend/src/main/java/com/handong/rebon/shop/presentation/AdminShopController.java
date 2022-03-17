@@ -18,7 +18,7 @@ public class AdminShopController {
 
     @PostMapping("/shops")
     public String registerOne(ShopRequest shopRequest) {
-        Long id = shopService.register(shopRequest.toDto());
+        Long id = shopService.create(shopRequest.toDto());
         return "";
     }
 }

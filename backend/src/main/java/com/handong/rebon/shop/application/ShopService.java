@@ -3,11 +3,9 @@ package com.handong.rebon.shop.application;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.handong.rebon.menu.domain.Menu;
-import com.handong.rebon.shop.domain.adapter.ShopAdapter;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.ShopData;
+import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
@@ -22,30 +20,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class ShopService {
-    private final ShopRepository shopRepository;
     private final ShopAdapterService shopAdapterService;
+    private final ShopRepository shopRepository;
 
     @Transactional
-    public Long register(ShopRequestDto shopRequestDto) {
+    public Long create(ShopRequestDto shopRequestDto) {
         // TODO 카테고리 가져오기
-        // Category category = categoryService.findById(shopRequest.getCategoryId());
         Category category = new Category("식당");
 
         // TODO 태그 가져오기
-        // tagService.findTags(shopRequest.getTags());
         List<Tag> tags = new ArrayList<>();
 
         // TODO 이미지 저장
         ShopImages shopImages = saveImages(shopRequestDto.getImages());
 
-        // TODO 메뉴 등록(식당, 카페만)
-        // menuService.registerMenus(shopRequest.getMenus());
-        List<Menu> menus = new ArrayList<>();
+        ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
+        Shop shop = adapter.create(category, shopImages, shopRequestDto);
 
-        ShopData data = shopRequestDto.toShopData(category, shopImages, menus);
-
-        ShopAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
-        Shop shop = adapter.create(data);
         shop.addTags(tags);
 
         Shop savedShop = shopRepository.save(shop);

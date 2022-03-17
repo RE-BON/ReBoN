@@ -1,9 +1,10 @@
-package com.handong.rebon.unit.shop.domain.adapter;
+package com.handong.rebon.unit.shop.application.adapter;
 
-import com.handong.rebon.shop.domain.adapter.LodgingAdapter;
+import com.handong.rebon.shop.application.adapter.LodgingServiceAdapter;
+import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.ShopData;
 import com.handong.rebon.shop.domain.category.Category;
+import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.type.Lodging;
 
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ class LodgingAdapterTest {
     @DisplayName("숙소 카테고리인 경우 지원한다.")
     void supportCategory() {
         // given
-        LodgingAdapter adapter = new LodgingAdapter();
+        LodgingServiceAdapter adapter = new LodgingServiceAdapter();
         Category category = new Category("숙소");
 
         // when
@@ -34,7 +35,7 @@ class LodgingAdapterTest {
     @DisplayName("숙소 카테고리가 아닌 경우 지원하지 않는다.")
     void notSupportCategory(String name) {
         // given
-        LodgingAdapter adapter = new LodgingAdapter();
+        LodgingServiceAdapter adapter = new LodgingServiceAdapter();
         Category category = new Category(name);
 
         // when
@@ -48,11 +49,15 @@ class LodgingAdapterTest {
     @DisplayName("숙소를 생성한다")
     void create() {
         // given
-        LodgingAdapter adapter = new LodgingAdapter();
-        ShopData shopData = new ShopData();
+        LodgingServiceAdapter adapter = new LodgingServiceAdapter();
+        Category category = new Category("숙소");
+        ShopImages shopImages = new ShopImages();
+        ShopRequestDto data = ShopRequestDto.builder()
+                                            .name("호텔1")
+                                            .build();
 
         // when
-        Shop shop = adapter.create(shopData);
+        Shop shop = adapter.create(category, shopImages, data);
 
         // then
         assertThat(shop).isInstanceOf(Lodging.class);
