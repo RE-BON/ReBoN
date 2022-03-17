@@ -18,9 +18,9 @@ public class CategoryService {
     public Long add(String name){
         isCategoryExist(name);
 
-        Category.CategoryBuilder builder = Category.builder()
-                .name(name);
-        Category newCategory = builder.build();
+        Category newCategory = Category.builder()
+                .name(name)
+                .build();
         categoryRepository.save(newCategory);
         return newCategory.getId();
     }
