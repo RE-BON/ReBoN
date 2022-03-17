@@ -2,6 +2,7 @@ package com.handong.rebon.shop.application;
 
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
+import com.handong.rebon.shop.application.dto.CategoryRequestDto;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +26,15 @@ public class CategoryService {
         return newCategory.getId();
     }
 
-    public Long add(String name, String parentName){
-        isCategoryExist(name);
+    public Long add(CategoryRequestDto categoryRequestDto){
+        String categoryName = categoryRequestDto.getName();
+        isCategoryExist(categoryName);
 
-        Category parent = categoryRepository.findByName(parentName)
+        Category parent = categoryRepository.findByName(categoryRequestDto.getParent())
                 .orElseThrow(CategoryNoParentException::new);
 
         Category newCategory = Category.builder()
-                .name(name)
+                .name(categoryName)
                 .parent(parent)
                 .build();
 
