@@ -5,7 +5,9 @@ import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.shop.application.dto.CategoryRequestDto;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.repository.CategoryRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,35 +18,36 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Long create(String name){
+    public Long create(String name) {
         isCategoryExist(name);
 
         Category newCategory = Category.builder()
-                .name(name)
-                .build();
+                                       .name(name)
+                                       .build();
         categoryRepository.save(newCategory);
         return newCategory.getId();
     }
 
-    public Long create(CategoryRequestDto categoryRequestDto){
+    public Long create(CategoryRequestDto categoryRequestDto) {
         String categoryName = categoryRequestDto.getName();
         isCategoryExist(categoryName);
         Category parent = categoryRepository.findByName(categoryRequestDto.getParent())
-                .orElseThrow(CategoryNoParentException::new);
+                                            .orElseThrow(CategoryNoParentException::new);
 
         Category newCategory = Category.builder()
-                .name(categoryName)
-                .parent(parent)
-                .build();
+                                       .name(categoryName)
+                                       .parent(parent)
+                                       .build();
 
         categoryRepository.save(newCategory);
 
         return newCategory.getId();
     }
 
-    private void isCategoryExist(String name){
+    private void isCategoryExist(String name) {
         Optional<Category> category = categoryRepository.findByName(name);
-        if(category.isPresent()) throw new CategoryExistException();
+        if (category.isPresent())
+            throw new CategoryExistException();
     }
 
 }

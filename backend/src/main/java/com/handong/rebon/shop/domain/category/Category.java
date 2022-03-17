@@ -3,6 +3,7 @@ package com.handong.rebon.shop.domain.category;
 import javax.persistence.*;
 
 import com.handong.rebon.exception.category.CategoryNameException;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,8 @@ import java.util.List;
 @Getter
 public class Category {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -31,7 +33,7 @@ public class Category {
     private Categories children;
 
     @Builder
-    public Category(String name, List<ShopCategory> shopCategories, Category parent, Categories children){
+    public Category(String name, List<ShopCategory> shopCategories, Category parent, Categories children) {
         validatesBlankName(name);
         this.name = name;
         this.parent = parent;
