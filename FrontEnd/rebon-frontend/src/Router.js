@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Detail from './pages/Detail';
 import Search from './pages/Search';
+
 function Router() {
   return (
     <BrowserRouter>
