@@ -36,7 +36,7 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
                         .shopScore(new ShopScore(0.0, 0))
                         .build();
 
-        List<Menu> menus = menuService.createMenu(data.getMenus());
+        List<Menu> menus = menuService.createMenu(cafe, data.getMenus());
         cafe.addMenu(menus);
         return cafe;
     }

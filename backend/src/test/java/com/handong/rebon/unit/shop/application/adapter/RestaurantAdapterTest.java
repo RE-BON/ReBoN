@@ -67,7 +67,7 @@ class RestaurantAdapterTest {
         ShopRequestDto data = ShopRequestDto.builder()
                                             .name("팜스발리")
                                             .build();
-        given(menuService.createMenu(any())).willReturn(new ArrayList<>());
+        given(menuService.createMenu(any(), any())).willReturn(new ArrayList<>());
 
         // when
         Shop shop = adapter.create(shopImages, data);

@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 import com.handong.rebon.shop.domain.Shop;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 @Entity
 public class Menu {
 
@@ -18,4 +21,11 @@ public class Menu {
 
     @ManyToOne
     private Shop shop;
+
+    public Menu(String name, int price, MenuGroup menuGroup, Shop shop) {
+        this.name = name;
+        this.price = price;
+        this.menuGroup = menuGroup;
+        this.shop = shop;
+    }
 }

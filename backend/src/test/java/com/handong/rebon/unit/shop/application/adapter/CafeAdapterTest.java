@@ -67,7 +67,7 @@ class CafeAdapterTest {
         ShopRequestDto data = ShopRequestDto.builder()
                                             .name("스타벅스")
                                             .build();
-        given(menuService.createMenu(any())).willReturn(new ArrayList<>());
+        given(menuService.createMenu(any(), any())).willReturn(new ArrayList<>());
 
         // when
         Shop shop = adapter.create(shopImages, data);
