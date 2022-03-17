@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Detail from './pages/Detail';
-import Header from './components/Header';
+import Search from './pages/Search';
+
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/detail" element={<Detail />} />
-        <Route path="/header" element={<Header />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );
