@@ -5,6 +5,7 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
+import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.type.Lodging;
 
@@ -28,6 +29,7 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
                       .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
                       .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
                       .shopImages(shopImages)
+                      .shopScore(new ShopScore(0.0, 0))
                       .build();
     }
 }

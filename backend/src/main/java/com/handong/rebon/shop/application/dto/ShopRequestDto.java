@@ -24,6 +24,6 @@ public class ShopRequestDto {
     private String longitude;
     private String latitude;
     private List<MultipartFile> images;
-    private List<String> tags;
+    private List<Long> tags;
     private List<MenuGroupRequest> menus;
 }
