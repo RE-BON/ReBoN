@@ -1,0 +1,64 @@
+.header-wrapper {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100%;
+  top: 15px;
+  z-index: 5;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid red;
+}
+
+.header-wrapper header {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.header-logo {
+  width: 20%;
+  height: 90%;
+  margin-right: 150px;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.header-log-on {
+  display: flex;
+  font-weight: 700;
+}
+
+.header-log-on-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.header-log-on-profile div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
+  margin-left: 40px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.header-log-on-profile .userProfile {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.header-log-off {
+  font-weight: 700;
+}
+
+.header-log-off span {
+  margin-left: 50px;
+}
