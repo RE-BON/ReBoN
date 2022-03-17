@@ -1,6 +1,7 @@
 package com.handong.rebon.shop.domain.tag.domain;
 
 import com.handong.rebon.exception.tag.TagNameException;
+import lombok.Builder;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,12 +19,13 @@ public class Tag {
     @OneToMany(mappedBy = "tag")
     private List<ShopTag> shopTags;
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    @Builder
+    public Tag(
+            Long id,
+            String name
+    ) {
+        this.id = id;
+        this.name = name;
     }
 
     public Tag(String name) {
@@ -37,16 +39,16 @@ public class Tag {
         return Objects.isNull(name)
                 || name.isBlank();
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Tag)) {
-            return false;
-        }
-        Tag tag = (Tag) o;
-        return Objects.equals(name, tag.getName());
-    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) {
+//            return true;
+//        }
+//        if (!(o instanceof Tag)) {
+//            return false;
+//        }
+//        Tag tag = (Tag) o;
+//        return Objects.equals(name, tag.getName());
+//    }
 }
