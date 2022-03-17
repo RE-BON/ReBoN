@@ -1,7 +1,8 @@
 package com.handong.rebon.review.presentation;
 
 import com.handong.rebon.review.application.ReviewService;
-import com.handong.rebon.review.presentation.dto.AdminReviewCreateRequest;
+import com.handong.rebon.review.domain.Review;
+import com.handong.rebon.review.presentation.dto.AdminReviewPostRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,17 +19,14 @@ public class AdminReviewController {
 
     @GetMapping("/new")
     public String createForm(Model model) {
-        model.addAttribute("adminReviewCreateRequest", new AdminReviewCreateRequest());
-        return "reviews/createReviewForm";
+        model.addAttribute("adminReviewPostRequest", new AdminReviewPostRequest());
+        return "reviews/createForm";
     }
 
     @PostMapping("/new")
-    public String create(String title, String content, String tip) {
-        AdminReviewCreateRequest reviewRequest = new AdminReviewCreateRequest(title, content, tip);
-        Long id = reviewService.adminReviewCreate(reviewRequest.toAdminReviewCreateDto());
+    public String create(AdminReviewPostRequest adminReviewPostRequest) {
+        Long id = reviewService.adminReviewCreate(adminReviewPostRequest.toAdminReviewCreateDto());
         log.info("id: " + id);
         return "";
     }
-
-
 }

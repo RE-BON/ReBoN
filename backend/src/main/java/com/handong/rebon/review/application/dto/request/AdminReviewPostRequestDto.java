@@ -5,7 +5,8 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class AdminReviewCreateRequestDto {
+public class AdminReviewPostRequestDto {
+    private Long id;
     private String title;
     private String content;
     private String tip;

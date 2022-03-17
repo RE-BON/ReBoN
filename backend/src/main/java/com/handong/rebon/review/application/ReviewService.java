@@ -1,6 +1,6 @@
 package com.handong.rebon.review.application;
 
-import com.handong.rebon.review.application.dto.request.AdminReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.request.AdminReviewPostRequestDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImage;
@@ -15,33 +15,30 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    public Long adminReviewCreate(AdminReviewCreateRequestDto adminReviewCreateRequestDto) {
-        //reviewcontent 생성
-        ReviewContent reviewContent = createReviewContent(adminReviewCreateRequestDto);
+    public Long adminReviewCreate(AdminReviewPostRequestDto adminReviewPostRequestDto) {
+        //reviewContent 생성
+        ReviewContent reviewContent = createReviewContent(adminReviewPostRequestDto);
 
         //review score 생성
         ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        //이미지 저장
-        ReviewImage reviewImage = new ReviewImage();
-
-        Review review = create(reviewContent, reviewScore, reviewImage);
+        
+        Review review = createReview(reviewContent, reviewScore);
 
         reviewRepository.save(review);
         return review.getId();
     }
 
-    private Review create(ReviewContent reviewContent, ReviewScore reviewScore, ReviewImage reviewImage) {
+    private Review createReview(ReviewContent reviewContent, ReviewScore reviewScore) {
         return Review.builder()
                     .reviewContent(reviewContent)
                     .reviewScore(reviewScore)
                     .build();
     }
 
-    private ReviewContent createReviewContent(AdminReviewCreateRequestDto adminReviewCreateRequestDto) {
+    private ReviewContent createReviewContent(AdminReviewPostRequestDto adminReviewPostRequestDto) {
         return new ReviewContent(
-                adminReviewCreateRequestDto.getTitle(),
-                adminReviewCreateRequestDto.getContent(),
-                adminReviewCreateRequestDto.getTip());
+                adminReviewPostRequestDto.getTitle(),
+                adminReviewPostRequestDto.getContent(),
+                adminReviewPostRequestDto.getTip());
     }
 }

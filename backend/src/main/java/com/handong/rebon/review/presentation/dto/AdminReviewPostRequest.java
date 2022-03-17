@@ -1,20 +1,21 @@
 package com.handong.rebon.review.presentation.dto;
 
-import com.handong.rebon.review.application.dto.request.AdminReviewCreateRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.handong.rebon.review.application.dto.request.AdminReviewPostRequestDto;
+import lombok.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminReviewCreateRequest {
+@Builder
+public class AdminReviewPostRequest {
+    private Long id;
     private String title;
     private String content;
     private String tip;
 
-    public AdminReviewCreateRequestDto toAdminReviewCreateDto() {
-        return AdminReviewCreateRequestDto.builder()
+    public AdminReviewPostRequestDto toAdminReviewCreateDto() {
+        return AdminReviewPostRequestDto.builder()
                                           .title(title)
                                           .content(content)
                                           .tip(tip)
