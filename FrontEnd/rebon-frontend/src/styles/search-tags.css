@@ -1,0 +1,32 @@
+menu,
+ol,
+ul,
+li {
+  list-style: none;
+}
+
+.tags-wrapper {
+  font-size: 15px;
+  padding: 0 5px;
+}
+
+.tags-wrapper div {
+  color: rgba(0, 0, 0, 0.3);
+  grid-column: 1 / 5;
+  margin-bottom: 10px;
+}
+
+.tags-wrapper li {
+  width: fit-content;
+  padding: 5px 10px;
+  margin: 5px;
+  float: left;
+  border: 1px solid black;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+.tags-wrapper li:hover {
+  color: white;
+  background-color: black;
+}
