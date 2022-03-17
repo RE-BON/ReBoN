@@ -9,8 +9,8 @@ import com.handong.rebon.shop.domain.ShopCategory;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.tag.ShopTag;
-import com.handong.rebon.shop.domain.tag.Tag;
+import com.handong.rebon.shop.domain.tag.domain.ShopTag;
+import com.handong.rebon.shop.domain.tag.domain.Tag;
 import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.junit.jupiter.api.DisplayName;

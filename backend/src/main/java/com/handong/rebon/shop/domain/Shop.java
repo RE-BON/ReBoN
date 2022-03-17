@@ -12,8 +12,8 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.like.Like;
 import com.handong.rebon.shop.domain.location.Location;
-import com.handong.rebon.shop.domain.tag.ShopTag;
-import com.handong.rebon.shop.domain.tag.Tag;
+import com.handong.rebon.shop.domain.tag.domain.ShopTag;
+import com.handong.rebon.shop.domain.tag.domain.Tag;
 
 import lombok.AccessLevel;
 import lombok.Getter;

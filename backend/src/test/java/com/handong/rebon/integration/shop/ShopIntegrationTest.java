@@ -12,8 +12,8 @@ import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.category.CategoryRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
-import com.handong.rebon.shop.domain.tag.Tag;
-import com.handong.rebon.shop.domain.tag.TagRepository;
+import com.handong.rebon.shop.domain.tag.domain.Tag;
+import com.handong.rebon.shop.domain.tag.domain.repository.TagRepository;
 import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;

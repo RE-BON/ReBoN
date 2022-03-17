@@ -12,8 +12,8 @@ import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
-import com.handong.rebon.shop.domain.tag.Tag;
-import com.handong.rebon.shop.domain.tag.TagService;
+import com.handong.rebon.shop.domain.tag.application.TagService;
+import com.handong.rebon.shop.domain.tag.domain.Tag;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
