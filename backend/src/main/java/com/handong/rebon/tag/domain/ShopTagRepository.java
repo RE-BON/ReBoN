@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.domain.tag.domain.repository;
+package com.handong.rebon.tag.domain.content;
 
 import com.handong.rebon.shop.domain.tag.domain.ShopTag;
 import org.springframework.data.jpa.repository.JpaRepository;
