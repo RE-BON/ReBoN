@@ -8,5 +8,5 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 public interface ShopServiceAdapter {
     boolean supports(Category category);
 
-    Shop create(Category category, ShopImages shopImages, ShopRequestDto shopRequestDto);
+    Shop create(ShopImages shopImages, ShopRequestDto shopRequestDto);
 }

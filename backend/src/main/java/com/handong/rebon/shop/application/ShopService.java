@@ -34,6 +34,7 @@ public class ShopService {
     public Long create(ShopRequestDto shopRequestDto) {
         // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopRequestDto.getCategoryId());
+        List<Category> subCategories = categoryService.findAll(shopRequestDto.getSubCategories());
 
         // TODO 태그 가져오기
         List<Tag> tags = tagService.findAll(shopRequestDto.getTags());
@@ -42,9 +43,10 @@ public class ShopService {
         ShopImages shopImages = saveImages(shopRequestDto.getImages());
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
-        Shop shop = adapter.create(category, shopImages, shopRequestDto);
+        Shop shop = adapter.create(shopImages, shopRequestDto);
 
         shop.addTags(tags);
+        shop.addCategories(category, subCategories);
 
         Shop savedShop = shopRepository.save(shop);
         return savedShop.getId();

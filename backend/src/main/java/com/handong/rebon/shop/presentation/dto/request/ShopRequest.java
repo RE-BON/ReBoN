@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ShopRequest {
     private Long categoryId;
+    private List<Long> subCategories;
     private String name;
     private String businessHour;
     private String phone;
@@ -27,6 +28,7 @@ public class ShopRequest {
     public ShopRequestDto toDto() {
         return ShopRequestDto.builder()
                              .categoryId(categoryId)
+                             .subCategories(subCategories)
                              .name(name)
                              .businessHour(businessHour)
                              .phone(phone)

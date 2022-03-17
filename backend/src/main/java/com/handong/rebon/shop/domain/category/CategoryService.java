@@ -1,5 +1,8 @@
 package com.handong.rebon.shop.domain.category;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,5 +12,12 @@ public class CategoryService {
     // 카테고리 파트랑 머지할 때 삭제하면 될듯
     public Category findById(Long categoryId) {
         return new Category("식당");
+    }
+
+    public List<Category> findAll(List<Long> subCategories) {
+        return Arrays.asList(
+                new Category("분식"),
+                new Category("양식")
+        );
     }
 }

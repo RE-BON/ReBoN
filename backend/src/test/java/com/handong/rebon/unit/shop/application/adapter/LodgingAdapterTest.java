@@ -50,14 +50,13 @@ class LodgingAdapterTest {
     void create() {
         // given
         LodgingServiceAdapter adapter = new LodgingServiceAdapter();
-        Category category = new Category("숙소");
         ShopImages shopImages = new ShopImages();
         ShopRequestDto data = ShopRequestDto.builder()
                                             .name("호텔1")
                                             .build();
 
         // when
-        Shop shop = adapter.create(category, shopImages, data);
+        Shop shop = adapter.create(shopImages, data);
 
         // then
         assertThat(shop).isInstanceOf(Lodging.class);

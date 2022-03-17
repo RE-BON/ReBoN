@@ -63,7 +63,6 @@ class RestaurantAdapterTest {
     void create() {
         // given
         RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuService);
-        Category category = new Category("식당");
         ShopImages shopImages = new ShopImages();
         ShopRequestDto data = ShopRequestDto.builder()
                                             .name("팜스발리")
@@ -71,7 +70,7 @@ class RestaurantAdapterTest {
         given(menuService.createMenu(any())).willReturn(new ArrayList<>());
 
         // when
-        Shop shop = adapter.create(category, shopImages, data);
+        Shop shop = adapter.create(shopImages, data);
 
         // then
         assertThat(shop).isInstanceOf(Restaurant.class);

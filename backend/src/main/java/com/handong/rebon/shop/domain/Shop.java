@@ -16,7 +16,6 @@ import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.shop.domain.tag.Tag;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +32,9 @@ public abstract class Shop {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
+
+    @OneToMany(mappedBy = "shop")
+    private final List<ShopCategory> shopCategories = new ArrayList<>();
 
     @Embedded
     private ShopContent shopContent;
@@ -76,5 +78,14 @@ public abstract class Shop {
                                      .map(tag -> new ShopTag(this, tag))
                                      .collect(Collectors.toList());
         this.shopTags.addAll(shopTags);
+    }
+
+    public void addCategories(Category parent, List<Category> subCategories) {
+        this.category = parent;
+        List<ShopCategory> shopCategories = subCategories.stream()
+                                                         .map(category -> new ShopCategory(this, category))
+                                                         .collect(Collectors.toList());
+
+        this.shopCategories.addAll(shopCategories);
     }
 }

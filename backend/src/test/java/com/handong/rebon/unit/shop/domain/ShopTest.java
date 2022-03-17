@@ -1,13 +1,16 @@
 package com.handong.rebon.unit.shop.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import com.handong.rebon.exception.shop.ShopTagNumberException;
+import com.handong.rebon.shop.domain.ShopCategory;
+import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopContent;
-import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.shop.domain.tag.Tag;
+import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,5 +65,37 @@ class ShopTest {
         // when & then
         assertThatThrownBy(() -> restaurant.addTags(tags))
                 .isInstanceOf(ShopTagNumberException.class);
+    }
+
+    @Test
+    @DisplayName("카테고리를 등록한다.")
+    void addCategories() {
+        // given
+        Category parent = new Category("식당");
+        List<Category> subCategories = Arrays.asList(
+                new Category("한식"),
+                new Category("분식")
+        );
+
+        ShopContent content = ShopContent.builder()
+                                         .name("팜스발리")
+                                         .build();
+
+        Restaurant restaurant = Restaurant.builder()
+                                          .shopContent(content)
+                                          .build();
+
+        // when
+        restaurant.addCategories(parent, subCategories);
+        Category parentCategory = restaurant.getCategory();
+        List<ShopCategory> shopCategories = restaurant.getShopCategories();
+
+        // then
+        assertThat(parentCategory).extracting("name")
+                                  .isEqualTo("식당");
+        assertThat(shopCategories).hasSize(2);
+        assertThat(shopCategories).extracting("category")
+                                  .extracting("name")
+                                  .contains("한식", "분식");
     }
 }

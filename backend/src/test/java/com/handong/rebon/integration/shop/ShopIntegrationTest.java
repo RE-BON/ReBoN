@@ -28,6 +28,7 @@ class ShopIntegrationTest {
         // TODO 나중에 로그인 된 유저만 할 수 있는지도 검증해야함
         ShopRequestDto shopRequestDto = ShopRequestDto.builder()
                                                       .categoryId(1L) // TODO 카테고리 파트와 머지 되면 여러 값 넣어보면서 테스트
+                                                      .subCategories(Arrays.asList(2L, 3L))
                                                       .name("팜스발리")
                                                       .businessHour("10:00 ~ 22:00")
                                                       .phone("010-1234-5678")

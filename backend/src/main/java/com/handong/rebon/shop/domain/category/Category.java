@@ -1,7 +1,10 @@
 package com.handong.rebon.shop.domain.category;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
+import com.handong.rebon.shop.domain.ShopCategory;
 import com.handong.rebon.shop.domain.Shops;
 
 import lombok.AccessLevel;
@@ -24,6 +27,9 @@ public class Category {
 
     @Embedded
     private Categories children;
+
+    @OneToMany(mappedBy = "category")
+    private final List<ShopCategory> shopCategories = new ArrayList<>();
 
     public Category(String name) {
         this.name = name;

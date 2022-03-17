@@ -28,9 +28,8 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public Shop create(Category category, ShopImages shopImages, ShopRequestDto data) {
+    public Shop create(ShopImages shopImages, ShopRequestDto data) {
         Restaurant restaurant = Restaurant.builder()
-                                          .category(category)
                                           .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
                                           .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
                                           .shopImages(shopImages)
