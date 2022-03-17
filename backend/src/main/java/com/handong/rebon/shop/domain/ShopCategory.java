@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 import com.handong.rebon.shop.domain.category.Category;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 @Entity
 public class ShopCategory {
 
@@ -11,10 +14,10 @@ public class ShopCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     public ShopCategory(Shop shop, Category category) {

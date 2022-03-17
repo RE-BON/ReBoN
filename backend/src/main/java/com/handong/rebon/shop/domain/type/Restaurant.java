@@ -1,6 +1,8 @@
 package com.handong.rebon.shop.domain.type;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,15 +17,17 @@ import com.handong.rebon.shop.domain.location.Location;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @DiscriminatorValue("R")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Restaurant extends Shop {
 
-    @OneToMany(mappedBy = "shop")
-    private List<Menu> menus;
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
+    private final List<Menu> menus = new ArrayList<>();
 
     @Builder
     public Restaurant(
@@ -32,14 +36,13 @@ public class Restaurant extends Shop {
             ShopContent shopContent,
             ShopImages shopImages,
             Location location,
-            ShopScore shopScore,
-            List<Menu> menus
+            ShopScore shopScore
     ) {
         super(id, category, shopContent, shopImages, location, shopScore);
-        this.menus = menus;
     }
 
     public void addMenu(List<Menu> menus) {
-
+        this.menus.addAll(menus);
+        menus.forEach(menu -> menu.belongShop(this));
     }
 }

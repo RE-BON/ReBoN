@@ -2,7 +2,7 @@ package com.handong.rebon.shop.application.adapter;
 
 import java.util.List;
 
-import com.handong.rebon.menu.application.MenuService;
+import com.handong.rebon.menu.application.MenuGroupService;
 import com.handong.rebon.menu.domain.Menu;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Component
 public class RestaurantServiceAdapter implements ShopServiceAdapter {
-    private final MenuService menuService;
+    private final MenuGroupService menuGroupService;
 
     @Override
     public boolean supports(Category category) {
@@ -36,7 +36,7 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
                                           .shopScore(new ShopScore(0.0, 0))
                                           .build();
 
-        List<Menu> menus = menuService.createMenu(restaurant, data.getMenus());
+        List<Menu> menus = menuGroupService.createMenu(restaurant, data.getMenus());
         restaurant.addMenu(menus);
         return restaurant;
     }

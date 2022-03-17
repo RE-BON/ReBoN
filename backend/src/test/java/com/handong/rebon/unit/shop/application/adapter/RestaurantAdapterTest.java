@@ -2,7 +2,7 @@ package com.handong.rebon.unit.shop.application.adapter;
 
 import java.util.ArrayList;
 
-import com.handong.rebon.menu.application.MenuService;
+import com.handong.rebon.menu.application.MenuGroupService;
 import com.handong.rebon.shop.application.adapter.RestaurantServiceAdapter;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
@@ -27,13 +27,13 @@ import static org.mockito.BDDMockito.given;
 class RestaurantAdapterTest {
 
     @Mock
-    private MenuService menuService;
+    private MenuGroupService menuGroupService;
 
     @Test
     @DisplayName("식당 카테고리인 경우 지원한다.")
     void supportCategory() {
         // given
-        RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuService);
+        RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuGroupService);
         Category category = new Category("식당");
 
         // when
@@ -48,7 +48,7 @@ class RestaurantAdapterTest {
     @DisplayName("식당 카테고리가 아닌 경우 지원하지 않는다.")
     void notSupportCategory(String name) {
         // given
-        RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuService);
+        RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuGroupService);
         Category category = new Category(name);
 
         // when
@@ -62,12 +62,12 @@ class RestaurantAdapterTest {
     @DisplayName("Restaurant를 생성한다")
     void create() {
         // given
-        RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuService);
+        RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuGroupService);
         ShopImages shopImages = new ShopImages();
         ShopRequestDto data = ShopRequestDto.builder()
                                             .name("팜스발리")
                                             .build();
-        given(menuService.createMenu(any(), any())).willReturn(new ArrayList<>());
+        given(menuGroupService.createMenu(any(), any())).willReturn(new ArrayList<>());
 
         // when
         Shop shop = adapter.create(shopImages, data);

@@ -13,7 +13,8 @@ import com.handong.rebon.shop.domain.Shop;
 @Entity
 public class Review {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

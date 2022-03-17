@@ -17,11 +17,19 @@ public class ShopImage {
 
     private String url;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
+
+    public ShopImage(String url) {
+        this(null, url);
+    }
 
     public ShopImage(Long id, String url) {
         this.id = id;
         this.url = url;
+    }
+
+    public void belongTo(Shop shop) {
+        this.shop = shop;
     }
 }

@@ -6,8 +6,10 @@ import com.handong.rebon.exception.shop.ShopNameException;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ShopContent {

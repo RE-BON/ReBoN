@@ -8,6 +8,7 @@ import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.ShopCategory;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopContent;
+import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.shop.domain.tag.Tag;
 import com.handong.rebon.shop.domain.type.Restaurant;
@@ -30,6 +31,7 @@ class ShopTest {
 
         Restaurant restaurant = Restaurant.builder()
                                           .shopContent(content)
+                                          .shopImages(new ShopImages())
                                           .build();
 
         List<Tag> tags = List.of(
@@ -58,6 +60,7 @@ class ShopTest {
 
         Restaurant restaurant = Restaurant.builder()
                                           .shopContent(content)
+                                          .shopImages(new ShopImages())
                                           .build();
 
         List<Tag> tags = Collections.emptyList();
@@ -83,6 +86,7 @@ class ShopTest {
 
         Restaurant restaurant = Restaurant.builder()
                                           .shopContent(content)
+                                          .shopImages(new ShopImages())
                                           .build();
 
         // when

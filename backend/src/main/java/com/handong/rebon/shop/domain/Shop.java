@@ -33,7 +33,7 @@ public abstract class Shop {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private final List<ShopCategory> shopCategories = new ArrayList<>();
 
     @Embedded
@@ -48,10 +48,10 @@ public abstract class Shop {
     @Embedded
     private ShopScore shopScore;
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private final List<Like> likes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private final List<ShopTag> shopTags = new ArrayList<>();
 
     public Shop(
@@ -68,6 +68,8 @@ public abstract class Shop {
         this.shopImages = shopImages;
         this.location = location;
         this.shopScore = shopScore;
+
+        shopImages.belongTo(this);
     }
 
     public void addTags(List<Tag> tags) {
