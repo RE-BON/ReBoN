@@ -16,7 +16,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Long add(String name){
+    public Long create(String name){
         isCategoryExist(name);
 
         Category newCategory = Category.builder()
@@ -26,10 +26,9 @@ public class CategoryService {
         return newCategory.getId();
     }
 
-    public Long add(CategoryRequestDto categoryRequestDto){
+    public Long create(CategoryRequestDto categoryRequestDto){
         String categoryName = categoryRequestDto.getName();
         isCategoryExist(categoryName);
-
         Category parent = categoryRepository.findByName(categoryRequestDto.getParent())
                 .orElseThrow(CategoryNoParentException::new);
 
@@ -38,7 +37,7 @@ public class CategoryService {
                 .parent(parent)
                 .build();
 
-        categoryRepository.save(new Category());
+        categoryRepository.save(newCategory);
 
         return newCategory.getId();
     }
