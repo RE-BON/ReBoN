@@ -1,0 +1,61 @@
+menu,
+ol,
+ul,
+li {
+  list-style: none;
+}
+button {
+  width: 25px;
+  height: 25px;
+  border: 0;
+  outline: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.modal-wrapper {
+  display: grid;
+  grid-template-rows: repeat(3, 80px);
+}
+
+.modal-wrapper-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-wrapper .search-list {
+  margin: auto;
+  width: 90%;
+}
+
+.search-list li {
+  padding: 10px 0;
+  border-radius: 5px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: bolder;
+}
+
+.modal-wrapper .tag-list {
+  font-size: 15px;
+  padding: 0 5px;
+  margin-top: 60px;
+}
+
+.modal-wrapper .tag-list div {
+  color: rgba(0, 0, 0, 0.3);
+  grid-column: 1 / 5;
+  margin-bottom: 10px;
+}
+
+.modal-wrapper .tag-list li {
+  width: fit-content;
+  padding: 5px 10px;
+  margin: 10px;
+  float: left;
+  border: 1px solid black;
+  border-radius: 50px;
+  font-weight: bolder;
+}

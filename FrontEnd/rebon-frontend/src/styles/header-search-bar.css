@@ -1,0 +1,27 @@
+.search-bar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 389px;
+  height: 38px;
+  padding: 20px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.search-bar-wrapper .search {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.search-bar-wrapper input {
+  width: 90%;
+  height: 35px;
+  border-radius: 50px;
+  background-color: transparent;
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}

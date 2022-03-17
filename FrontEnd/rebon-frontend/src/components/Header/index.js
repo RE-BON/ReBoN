@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <div className="header-wrapper">
       <header>
-        <div className="header-logo">dd</div>
+        <div className="header-logo"></div>
         {isLogin ? (
           <div className="header-log-on">
             <SearchModal />
