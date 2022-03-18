@@ -1,7 +1,6 @@
 package com.handong.rebon.shop.domain.tag.domain;
 
 import javax.persistence.*;
-
 import com.handong.rebon.shop.domain.item.Shop;
 import com.handong.rebon.shop.domain.tag.domain.Tag;
 
@@ -16,4 +15,14 @@ public class ShopTag {
 
     @ManyToOne
     private Tag tag;
+
+//    public void setShop(Shop shop){
+//        this.shop = shop;
+//        shop.getShops().add(this);
+//    }
+//
+//    public void setTag(Tag tag){
+//        this.tag = tag;
+//        tag.getTags().add(this);
+//    }
 }
