@@ -1,44 +1,67 @@
 package com.handong.rebon.review.application;
 
-import com.handong.rebon.review.application.dto.request.AdminReviewPostRequestDto;
+import java.util.Arrays;
+import java.util.List;
+
+import com.handong.rebon.member.application.MemberService;
+import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.review.application.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.domain.Review;
-import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImage;
-import com.handong.rebon.review.domain.content.ReviewScore;
+import com.handong.rebon.review.domain.content.ReviewImages;
+import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
+import com.handong.rebon.shop.application.ShopService;
+import com.handong.rebon.shop.domain.item.Shop;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Service
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final MemberService memberService;
+    private final ShopService shopService;
+    private final ReviewImageRepository reviewImageRepository;
 
-    public Long adminReviewCreate(AdminReviewPostRequestDto adminReviewPostRequestDto) {
-        //reviewContent 생성
-        ReviewContent reviewContent = createReviewContent(adminReviewPostRequestDto);
+    @Transactional
+    public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
+        //TODO 멤버 찾아오기
+        Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
 
-        //review score 생성
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-        
-        Review review = createReview(reviewContent, reviewScore);
+        //TODO shop 찾아오기
+        Shop shop = shopService.findById(reviewCreateRequestDto.getShopId());
 
-        reviewRepository.save(review);
-        return review.getId();
+        //TODO 이미지 저장
+        ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImages());
+
+        Review review = Review.builder()
+                              .member(member)
+                              .shop(shop)
+                              .reviewContent(reviewCreateRequestDto.getReviewContent())
+                              .reviewScore(reviewCreateRequestDto.getReviewScore())
+                              .reviewImages(reviewImages)
+                              .build();
+
+        Review savedReview = reviewRepository.save(review);
+
+        return savedReview.getId();
     }
 
-    private Review createReview(ReviewContent reviewContent, ReviewScore reviewScore) {
-        return Review.builder()
-                    .reviewContent(reviewContent)
-                    .reviewScore(reviewScore)
-                    .build();
+    //TODO 이미지 저장 기능
+    private ReviewImages saveImages(List<MultipartFile> images) {
+        ReviewImage url1 = new ReviewImage("url1");
+        ReviewImage url2 = new ReviewImage("url2");
+
+        reviewImageRepository.save(url1);
+        reviewImageRepository.save(url2);
+
+        return new ReviewImages(Arrays.asList(url1, url2));
     }
 
-    private ReviewContent createReviewContent(AdminReviewPostRequestDto adminReviewPostRequestDto) {
-        return new ReviewContent(
-                adminReviewPostRequestDto.getTitle(),
-                adminReviewPostRequestDto.getContent(),
-                adminReviewPostRequestDto.getTip());
-    }
 }

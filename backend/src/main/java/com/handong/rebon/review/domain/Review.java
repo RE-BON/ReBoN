@@ -9,6 +9,7 @@ import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.item.Shop;
+
 import lombok.*;
 
 @Builder
@@ -18,7 +19,8 @@ import lombok.*;
 @Entity
 public class Review {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,4 +41,31 @@ public class Review {
     @OneToMany(mappedBy = "review")
     private List<Empathy> empathies;
 
+    public String getTitle() {
+        return getReviewContent().getTitle();
+    }
+
+    public String getContent() {
+        return getReviewContent().getContent();
+    }
+
+    public String getTip() {
+        return getReviewContent().getTip();
+    }
+
+    public double getStar() {
+        return getReviewScore().getStar();
+    }
+
+    public int getLikeCount() {
+        return getReviewScore().getLikeCount();
+    }
+
+    public String getAuthorName() {
+        return getMember().getProfile().getNickName();
+    }
+
+    public String getShopName() {
+        return getShop().getShopContent().getName();
+    }
 }

@@ -2,12 +2,15 @@ package com.handong.rebon.review.domain.content;
 
 import com.handong.rebon.exception.review.ReviewContentFormatException;
 import com.handong.rebon.exception.review.ReviewTitleFormatException;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Getter
+@NoArgsConstructor
 @Embeddable
 public class ReviewContent {
 
@@ -15,35 +18,28 @@ public class ReviewContent {
     private String content;
     private String tip;
 
-    protected ReviewContent() {
-    }
 
     public ReviewContent(String title, String content) {
-        IsNotValidtitleAndContent(title, content);
-        this.title = title;
-        this.content = content;
+        this(title, content, "");
     }
 
     public ReviewContent(String title, String content, String tip) {
-        this(title,content);
+        isNotValidTitleAndContent(title, content);
+        this.title = title;
+        this.content = content;
         this.tip = tip;
     }
 
-    private boolean isNotValidTitle(String title) {
-        return Objects.isNull(title) ||
-                title.isBlank();
+    private boolean isNotValidData(String data) {
+        return Objects.isNull(data) ||
+                data.isBlank();
     }
 
-    private boolean isNotValidContent(String content) {
-        return Objects.isNull(content) ||
-                content.isBlank();
-    }
-
-    private void IsNotValidtitleAndContent(String title, String content) throws ReviewTitleFormatException, ReviewContentFormatException {
-        if(isNotValidTitle(title)){
+    private void isNotValidTitleAndContent(String title, String content) {
+        if (isNotValidData(title)) {
             throw new ReviewTitleFormatException();
         }
-        if(isNotValidContent(content)){
+        if (isNotValidData(content)) {
             throw new ReviewContentFormatException();
         }
     }
