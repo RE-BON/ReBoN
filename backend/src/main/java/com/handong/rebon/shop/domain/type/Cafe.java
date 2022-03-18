@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 public class Cafe extends Shop {
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private final List<Menu> menus = new ArrayList<>();
+    private List<Menu> menus = new ArrayList<>();
 
     @Builder
     public Cafe(

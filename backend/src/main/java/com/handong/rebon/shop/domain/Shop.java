@@ -49,10 +49,10 @@ public abstract class Shop {
     private ShopScore shopScore;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private final List<Like> likes = new ArrayList<>();
+    private List<Like> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private final List<ShopTag> shopTags = new ArrayList<>();
+    private List<ShopTag> shopTags = new ArrayList<>();
 
     public Shop(
             Long id,

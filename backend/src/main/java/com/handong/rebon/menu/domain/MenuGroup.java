@@ -25,7 +25,7 @@ public class MenuGroup {
     private Shop shop;
 
     @OneToMany(mappedBy = "menuGroup", cascade = CascadeType.ALL)
-    private final List<Menu> menus = new ArrayList<>();
+    private List<Menu> menus = new ArrayList<>();
 
     public MenuGroup(String name) {
         this.name = name;

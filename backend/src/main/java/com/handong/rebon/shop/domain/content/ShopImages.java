@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class ShopImages {
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private final List<ShopImage> shopImages = new ArrayList<>();
+    private List<ShopImage> shopImages = new ArrayList<>();
 
     public ShopImages(List<ShopImage> shopImages) {
         this.shopImages.addAll(shopImages);
