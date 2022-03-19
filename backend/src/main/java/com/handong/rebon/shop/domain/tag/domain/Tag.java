@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +23,7 @@ public class Tag {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "tag")
+    @OneToMany(mappedBy = "tag", fetch = FetchType.LAZY)
     private List<ShopTag> shopTags = new ArrayList<ShopTag>();
 
     @Builder
@@ -36,8 +35,7 @@ public class Tag {
     }
 
     private boolean isNotValidTag(String name) {
-        return Objects.isNull(name)
-                || name.isBlank();
+        return Objects.isNull(name) || name.isBlank();
     }
 
     public Long getId() {
@@ -47,5 +45,4 @@ public class Tag {
     public String getName() {
         return name;
     }
-
 }
