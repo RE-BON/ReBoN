@@ -15,14 +15,4 @@ public class ShopTag {
 
     @ManyToOne
     private Tag tag;
-
-//    public void setShop(Shop shop){
-//        this.shop = shop;
-//        shop.getShops().add(this);
-//    }
-//
-//    public void setTag(Tag tag){
-//        this.tag = tag;
-//        tag.getTags().add(this);
-//    }
 }
