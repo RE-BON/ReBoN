@@ -33,6 +33,9 @@ class MenuTest {
 
         // then
         assertThat(menu.getShop()).isNotNull();
+        assertThat(menu.getShop()).extracting("shopContent")
+                                  .extracting("name")
+                                  .isEqualTo("팜스발리");
     }
 
     @Test
@@ -47,5 +50,7 @@ class MenuTest {
 
         // then
         assertThat(menu.getMenuGroup()).isNotNull();
+        assertThat(menu.getMenuGroup()).extracting("name")
+                                       .isEqualTo("피자메뉴");
     }
 }
