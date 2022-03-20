@@ -3,6 +3,7 @@ package com.handong.rebon.review.domain;
 import java.util.List;
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -11,7 +12,7 @@ import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.item.Shop;
 
 @Entity
-public class Review {
+public class Review extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
