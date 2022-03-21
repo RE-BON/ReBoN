@@ -44,7 +44,7 @@ public class Category {
     }
 
     public void addChildCategory(Category category){
-        this.getChildren().addChild(category);
+        this.children.addChild(category);
         category.connectParent(this);
     }
 
