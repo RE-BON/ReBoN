@@ -1,6 +1,6 @@
 package com.handong.rebon.shop.domain.category;
 
-import com.handong.rebon.member.domain.domain.item.Shop;
+import com.handong.rebon.member.domain.item.Shop;
 
 import javax.persistence.*;
 

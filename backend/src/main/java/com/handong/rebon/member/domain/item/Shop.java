@@ -1,16 +1,15 @@
-package com.handong.rebon.shop.domain.item;
+package com.handong.rebon.member.domain.item;
 
 import java.util.List;
 import javax.persistence.*;
 
-import com.handong.rebon.shop.domain.Location;
+import com.handong.rebon.member.domain.content.ShopContent;
+import com.handong.rebon.member.domain.content.ShopImages;
+import com.handong.rebon.member.domain.content.ShopScore;
+import com.handong.rebon.member.domain.like.Like;
 import com.handong.rebon.shop.domain.category.Category;
-import com.handong.rebon.shop.domain.content.ShopImage;
-import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.content.ShopContent;
-import com.handong.rebon.shop.domain.like.Like;
-import com.handong.rebon.shop.domain.tag.ShopTag;
+import com.handong.rebon.member.domain.Location;
+import com.handong.rebon.member.domain.tag.ShopTag;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)

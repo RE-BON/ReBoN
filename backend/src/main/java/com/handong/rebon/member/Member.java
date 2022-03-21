@@ -1,10 +1,10 @@
-package com.handong.rebon.member.domain;
+package com.handong.rebon.member;
 
 import java.util.List;
 import javax.persistence.*;
 
 import com.handong.rebon.review.domain.empathy.Empathy;
-import com.handong.rebon.shop.domain.like.Like;
+import com.handong.rebon.member.domain.like.Like;
 
 @Entity
 public class Member {

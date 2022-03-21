@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.domain.item;
+package com.handong.rebon.member.domain.item;
 
 import java.util.List;
 import javax.persistence.Embeddable;

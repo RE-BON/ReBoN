@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.domain.tag;
+package com.handong.rebon.member.domain.tag;
 
 import java.util.List;
 import javax.persistence.*;

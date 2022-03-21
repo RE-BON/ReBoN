@@ -1,9 +1,9 @@
-package com.handong.rebon.shop.domain.like;
+package com.handong.rebon.member.domain.like;
 
 import javax.persistence.*;
 
-import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.member.Member;
+import com.handong.rebon.member.domain.item.Shop;
 
 @Entity
 @Table(name = "LIKES")
