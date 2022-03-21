@@ -9,7 +9,8 @@ import com.handong.rebon.shop.domain.like.Like;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String oauthId;

@@ -2,12 +2,18 @@ package com.handong.rebon.menu.domain;
 
 import javax.persistence.*;
 
-import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.shop.domain.Shop;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 @Entity
 public class Menu {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -18,4 +24,17 @@ public class Menu {
 
     @ManyToOne
     private Shop shop;
+
+    public Menu(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public void belongTo(MenuGroup menuGroup) {
+        this.menuGroup = menuGroup;
+    }
+
+    public void belongShop(Shop shop) {
+        this.shop = shop;
+    }
 }

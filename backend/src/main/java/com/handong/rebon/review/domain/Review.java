@@ -9,12 +9,13 @@ import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.domain.empathy.Empathy;
-import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.shop.domain.Shop;
 
 @Entity
 public class Review extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
