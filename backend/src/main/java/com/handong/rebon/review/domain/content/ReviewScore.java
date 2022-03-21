@@ -13,16 +13,16 @@ import com.handong.rebon.exception.review.ReviewStarException;
 @Embeddable
 public class ReviewScore {
     private double star;
-    private int likeCount; // empathyCount로 바꾸는 건 어떨까?
+    private int empathyCount;
 
-    public ReviewScore(double star, int likeCount) {
-        validatesNegative(star, likeCount);
+    public ReviewScore(double star, int empathyCount) {
+        validatesRangeOfValues(star, empathyCount);
         this.star = star;
-        this.likeCount = likeCount;
+        this.empathyCount = empathyCount;
     }
 
-    private void validatesNegative(double star, int likeCount) {
-        if (star < 0) {
+    private void validatesRangeOfValues(double star, int likeCount) {
+        if (star < 0 || star > 5) {
             throw new ReviewStarException();
         }
         if (likeCount < 0) {
