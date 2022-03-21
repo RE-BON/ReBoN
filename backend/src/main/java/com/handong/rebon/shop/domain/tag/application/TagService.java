@@ -13,21 +13,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class TagService {
 
-    @Autowired
-    TagRepository tagRepository;
+    private final TagRepository tagRepository;
 
-    public Long createTag(String name) {
-        validateDuplicateTag(name);
-
-        Tag newTag = Tag.builder()
-                .name(name)
-                .build();
-
-        tagRepository.save(newTag);
-        return newTag.getId();
+    public TagService(TagRepository tagRepository){
+        this.tagRepository = tagRepository;
     }
 
     public Long createTag(TagRequestDto tagRequestDto) {
@@ -38,14 +29,14 @@ public class TagService {
                 .name(tagName)
                 .build();
 
-        tagRepository.save(newTag);
-        return newTag.getId();
+        Tag savedTag = tagRepository.save(newTag);
+        return savedTag.getId();
     }
 
     private void validateDuplicateTag(String name) {
-        Optional<Tag> tag = tagRepository.findByName(name);
-        if (tag.isPresent())
+        if (tagRepository.findByName(name).isPresent()){
             throw new TagExistException();
+        }
     }
 
     public List<Tag> findTags() {

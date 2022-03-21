@@ -31,4 +31,20 @@ class TagIntegrationTest {
         // then
         assertEquals(tagName, savedTag.getName());
     }
+
+    @Test
+    @Rollback(value = false)
+    void createNotValidTag() {
+        // given
+        String tagName = "";
+        Tag newTag = Tag.builder()
+                .name(tagName)
+                .build();
+
+        // when
+        Tag savedTag = tagRepository.save(newTag);
+
+        // then
+        assertEquals(tagName, savedTag.getName());
+    }
 }
