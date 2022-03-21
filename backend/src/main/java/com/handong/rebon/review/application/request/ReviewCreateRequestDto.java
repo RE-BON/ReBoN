@@ -20,13 +20,12 @@ public class ReviewCreateRequestDto {
     private String tip;
     private List<MultipartFile> images;
     private double star;
-    private int likeCount;
 
     public ReviewContent getReviewContent() {
         return new ReviewContent(title, content, tip);
     }
 
     public ReviewScore getReviewScore() {
-        return new ReviewScore(star, likeCount);
+        return new ReviewScore(star, 0);
     }
 }
