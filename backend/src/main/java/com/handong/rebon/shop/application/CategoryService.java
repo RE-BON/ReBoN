@@ -50,9 +50,7 @@ public class CategoryService {
     }
 
     private void isCategoryExist(String name) {
-        Optional<Category> category = categoryRepository.findByName(name);
-        if (category.isPresent())
-            throw new CategoryExistException();
+        if(categoryRepository.existsByName(name)) throw new CategoryExistException();
     }
 
 }
