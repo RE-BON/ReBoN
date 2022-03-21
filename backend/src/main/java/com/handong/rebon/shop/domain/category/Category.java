@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@Setter
 public class Category {
 
     @Id
@@ -41,5 +42,10 @@ public class Category {
         if (name.isBlank()) {
             throw new CategoryNameException();
         }
+    }
+
+    public void addChildCategory(Category category){
+        this.getChildren().addChild(category);
+        category.setParent(this);
     }
 }

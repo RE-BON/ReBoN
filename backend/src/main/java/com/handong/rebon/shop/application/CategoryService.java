@@ -29,16 +29,17 @@ public class CategoryService {
     }
 
     public Long create(CategoryRequestDto categoryRequestDto) {
-        String categoryName = categoryRequestDto.getName();
-        isCategoryExist(categoryName);
-        Category parent = categoryRepository.findByName(categoryRequestDto.getParent())
+
+        Category parent = categoryRepository.findById(categoryRequestDto.getParentId())
                                             .orElseThrow(CategoryNoParentException::new);
+
+        String categoryName = categoryRequestDto.getName();
 
         Category newCategory = Category.builder()
                                        .name(categoryName)
-                                       .parent(parent)
                                        .build();
 
+        parent.addChildCategory(newCategory);
         categoryRepository.save(newCategory);
 
         return newCategory.getId();
