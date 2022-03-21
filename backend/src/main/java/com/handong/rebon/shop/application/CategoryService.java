@@ -26,7 +26,6 @@ public class CategoryService {
 
         Category newCategory = Category.builder()
                                        .name(name)
-                                       .children(new Categories())
                                        .build();
         categoryRepository.save(newCategory);
         return newCategory.getId();
@@ -41,7 +40,6 @@ public class CategoryService {
 
         Category newCategory = Category.builder()
                                        .name(categoryName)
-                                       .children(new Categories())
                                        .build();
 
         parent.addChildCategory(newCategory);
@@ -51,7 +49,9 @@ public class CategoryService {
     }
 
     private void checkCategoryExist(String name) {
-        if(categoryRepository.existsByName(name)) throw new CategoryExistException();
+        if(categoryRepository.existsByName(name)){
+            throw new CategoryExistException();
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.handong.rebon.integration.category;
 
+import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.shop.application.CategoryService;
 import com.handong.rebon.shop.application.dto.CategoryRequestDto;
 import com.handong.rebon.shop.domain.category.Category;
@@ -69,7 +70,7 @@ public class CategoryIntegrationTest {
                                                                   .name("테스트한식")
                                                                   .build();
         //when
-        final RuntimeException exception = assertThrows(RuntimeException.class, () -> categoryService.create(categoryRequestDto));
+        CategoryNoParentException exception = assertThrows(CategoryNoParentException.class, () -> categoryService.create(categoryRequestDto));
         //then
         assertThat(exception.getMessage()).isEqualTo("저장하려는 카테고리의 부모 카테고리가 존재하지 않습니다.");
 

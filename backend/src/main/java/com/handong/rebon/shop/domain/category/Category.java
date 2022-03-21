@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-@Setter
 public class Category {
 
     @Id
@@ -35,7 +34,7 @@ public class Category {
         validatesBlankName(name);
         this.name = name;
         this.parent = parent;
-        this.children = children;
+        this.children = new Categories();
     }
 
     private void validatesBlankName(String name) {
@@ -46,6 +45,10 @@ public class Category {
 
     public void addChildCategory(Category category){
         this.getChildren().addChild(category);
-        category.setParent(this);
+        category.connectParent(this);
+    }
+
+    public void connectParent(Category parent) {
+        this.parent = parent;
     }
 }
