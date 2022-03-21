@@ -17,11 +17,7 @@ import lombok.NoArgsConstructor;
 public class Categories {
 
     @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Category> categories;
-
-    public Categories(){
-        this.categories = new ArrayList<>();
-    }
+    private List<Category> categories = new ArrayList<>();
 
     public void addChild(Category category){
         this.getCategories().add(category);
