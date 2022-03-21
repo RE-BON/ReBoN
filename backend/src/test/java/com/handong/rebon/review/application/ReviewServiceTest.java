@@ -56,7 +56,6 @@ class ReviewServiceTest {
                                                                               .content(reviewContent.getContent())
                                                                               .tip(reviewContent.getTip())
                                                                               .star(reviewScore.getStar())
-                                                                              .likeCount(reviewScore.getLikeCount())
                                                                               //.images() TODO 이미지 저장 구현시 추가
                                                                               .build();
 
@@ -69,7 +68,6 @@ class ReviewServiceTest {
         assertThat(review.getContent()).isEqualTo(reviewContent.getContent());
         assertThat(review.getTip()).isEqualTo(reviewContent.getTip());
         assertThat(review.getStar()).isEqualTo(reviewScore.getStar());
-        assertThat(review.getLikeCount()).isEqualTo(reviewScore.getLikeCount());
         assertThat(review.getAuthorName()).isEqualTo(member.getProfile().getNickName());
         assertThat(review.getShopName()).isEqualTo(shop.getShopContent().getName());
 
