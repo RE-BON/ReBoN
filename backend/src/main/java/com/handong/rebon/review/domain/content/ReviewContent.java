@@ -13,7 +13,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @Embeddable
 public class ReviewContent {
-
     private String title;
     private String content;
     private String tip;
@@ -24,23 +23,25 @@ public class ReviewContent {
     }
 
     public ReviewContent(String title, String content, String tip) {
-        isNotValidTitleAndContent(title, content);
+        validateTitleAndContent(title, content);
         this.title = title;
         this.content = content;
         this.tip = tip;
     }
 
-    private boolean isNotValidData(String data) {
+    private void validateTitleAndContent(String title, String content) {
+        if (validatesData(title)) {
+            throw new ReviewTitleFormatException();
+        }
+        if (validatesData(content)) {
+            throw new ReviewContentFormatException();
+        }
+    }
+
+    private boolean validatesData(String data) {
         return Objects.isNull(data) ||
                 data.isBlank();
     }
 
-    private void isNotValidTitleAndContent(String title, String content) {
-        if (isNotValidData(title)) {
-            throw new ReviewTitleFormatException();
-        }
-        if (isNotValidData(content)) {
-            throw new ReviewContentFormatException();
-        }
-    }
+
 }
