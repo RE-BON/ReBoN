@@ -2,7 +2,6 @@ package com.handong.rebon.shop.domain.category;
 
 import javax.persistence.*;
 
-import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
 
 import lombok.*;
@@ -45,19 +44,9 @@ public class Category {
     }
 
     public void addChildCategory(Category category) {
-        checkDuplicateCategory(category);
+        this.children.checkDuplicateCategory(category);
         this.children.addChild(category);
         category.connectParent(this);
-    }
-
-    private void checkDuplicateCategory(Category category) {
-        this.children.getCategories().forEach(child -> checkSameName(child, category));
-    }
-
-    private void checkSameName(Category child, Category category) {
-        if (child.getName().equals(category.getName())) {
-            throw new CategoryExistException();
-        }
     }
 
     public void connectParent(Category parent) {

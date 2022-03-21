@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 
+import com.handong.rebon.exception.category.CategoryExistException;
+
 import lombok.Getter;
 
 
@@ -18,5 +20,14 @@ public class Categories {
 
     public void addChild(Category category) {
         this.getCategories().add(category);
+    }
+    public void checkDuplicateCategory(Category category) {
+        this.categories.forEach(child -> checkSameName(child, category));
+    }
+
+    private void checkSameName(Category child, Category category) {
+        if (child.getName().equals(category.getName())) {
+            throw new CategoryExistException();
+        }
     }
 }
