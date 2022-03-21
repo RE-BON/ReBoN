@@ -3,16 +3,10 @@ package com.handong.rebon.shop.application;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.shop.application.dto.CategoryRequestDto;
-import com.handong.rebon.shop.domain.category.Categories;
 import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.repository.CategoryRepository;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Optional;
 import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
@@ -30,6 +24,7 @@ public class CategoryService {
         categoryRepository.save(newCategory);
         return newCategory.getId();
     }
+
     @Transactional
     public Long create(CategoryRequestDto categoryRequestDto) {
 
@@ -49,7 +44,7 @@ public class CategoryService {
     }
 
     private void checkCategoryExist(String name) {
-        if(categoryRepository.existsByName(name)){
+        if (categoryRepository.existsByName(name)) {
             throw new CategoryExistException();
         }
     }
