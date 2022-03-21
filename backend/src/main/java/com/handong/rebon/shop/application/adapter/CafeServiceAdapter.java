@@ -2,15 +2,15 @@ package com.handong.rebon.shop.application.adapter;
 
 import java.util.List;
 
-import com.handong.rebon.menu.application.MenuGroupService;
-import com.handong.rebon.menu.domain.Menu;
+import com.handong.rebon.category.Category;
+import com.handong.rebon.shop.application.MenuGroupService;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
+import com.handong.rebon.shop.domain.menu.Menu;
 import com.handong.rebon.shop.domain.type.Cafe;
 
 import org.springframework.stereotype.Component;

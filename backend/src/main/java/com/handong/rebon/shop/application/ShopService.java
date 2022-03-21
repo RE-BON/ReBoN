@@ -3,17 +3,17 @@ package com.handong.rebon.shop.application;
 import java.util.Arrays;
 import java.util.List;
 
+import com.handong.rebon.category.Category;
+import com.handong.rebon.category.CategoryService;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.category.Category;
-import com.handong.rebon.shop.domain.category.CategoryService;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
-import com.handong.rebon.shop.domain.tag.application.TagService;
-import com.handong.rebon.shop.domain.tag.domain.Tag;
+import com.handong.rebon.tag.application.TagService;
+import com.handong.rebon.tag.domain.Tag;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

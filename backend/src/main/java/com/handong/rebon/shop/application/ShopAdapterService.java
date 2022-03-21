@@ -2,9 +2,9 @@ package com.handong.rebon.shop.application;
 
 import java.util.List;
 
+import com.handong.rebon.category.Category;
 import com.handong.rebon.exception.shop.NoSuchCategoryException;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
-import com.handong.rebon.shop.domain.category.Category;
 
 import org.springframework.stereotype.Service;
 

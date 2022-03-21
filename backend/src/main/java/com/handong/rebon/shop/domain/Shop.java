@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.*;
 
+import com.handong.rebon.category.Category;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
-import com.handong.rebon.shop.domain.category.Category;
+import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.like.Like;
 import com.handong.rebon.shop.domain.location.Location;
-import com.handong.rebon.shop.domain.tag.domain.ShopTag;
-import com.handong.rebon.shop.domain.tag.domain.Tag;
+import com.handong.rebon.shop.domain.tag.ShopTag;
+import com.handong.rebon.tag.domain.Tag;
 
 import lombok.AccessLevel;
 import lombok.Getter;
