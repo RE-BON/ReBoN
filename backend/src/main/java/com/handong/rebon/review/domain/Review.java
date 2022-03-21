@@ -1,5 +1,6 @@
 package com.handong.rebon.review.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -39,7 +40,7 @@ public class Review {
     private ReviewScore reviewScore;
 
     @OneToMany(mappedBy = "review")
-    private List<Empathy> empathies;
+    private List<Empathy> empathies = new ArrayList<>();
 
     public String getTitle() {
         return getReviewContent().getTitle();
@@ -57,8 +58,8 @@ public class Review {
         return getReviewScore().getStar();
     }
 
-    public int getLikeCount() {
-        return getReviewScore().getLikeCount();
+    public int getEmpathyCount() {
+        return getReviewScore().getEmpathyCount();
     }
 
     public String getAuthorName() {
