@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Categories {
 
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "parent", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Category> categories;
 
     public Categories(){

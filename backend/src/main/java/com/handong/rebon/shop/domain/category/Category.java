@@ -21,10 +21,10 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
     private List<ShopCategory> shopCategories;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category parent;
 
     @Embedded

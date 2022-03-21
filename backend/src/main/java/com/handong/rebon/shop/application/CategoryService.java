@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -21,7 +22,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
     public Long create(String name) {
-        isCategoryExist(name);
+        checkCategoryExist(name);
 
         Category newCategory = Category.builder()
                                        .name(name)
@@ -30,7 +31,7 @@ public class CategoryService {
         categoryRepository.save(newCategory);
         return newCategory.getId();
     }
-
+    @Transactional
     public Long create(CategoryRequestDto categoryRequestDto) {
 
         Category parent = categoryRepository.findById(categoryRequestDto.getParentId())
@@ -44,12 +45,12 @@ public class CategoryService {
                                        .build();
 
         parent.addChildCategory(newCategory);
-        categoryRepository.save(newCategory);
+        Category savedCategory = categoryRepository.save(newCategory);
 
-        return newCategory.getId();
+        return savedCategory.getId();
     }
 
-    private void isCategoryExist(String name) {
+    private void checkCategoryExist(String name) {
         if(categoryRepository.existsByName(name)) throw new CategoryExistException();
     }
 
