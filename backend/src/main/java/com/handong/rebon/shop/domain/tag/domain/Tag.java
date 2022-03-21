@@ -22,7 +22,7 @@ public class Tag {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "tag", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tag")
     private List<ShopTag> shopTags = new ArrayList<>();
 
     @Builder

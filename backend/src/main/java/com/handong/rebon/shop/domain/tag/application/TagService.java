@@ -4,12 +4,9 @@ import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.shop.domain.tag.application.dto.TagRequestDto;
 import com.handong.rebon.shop.domain.tag.domain.Tag;
 import com.handong.rebon.shop.domain.tag.domain.repository.TagRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -39,8 +36,8 @@ public class TagService {
         }
     }
 
-    public List<Tag> findTags() {
-        return tagRepository.findAll();
-    }
+//    public List<Tag> findTags() {
+//        return tagRepository.findAll();
+//    }
 }
 

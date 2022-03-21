@@ -1,12 +1,13 @@
 package com.handong.rebon.integration.tag;
 
-import com.handong.rebon.shop.domain.tag.domain.Tag;
-import com.handong.rebon.shop.domain.tag.domain.repository.TagRepository;
+import com.handong.rebon.shop.domain.tag.application.TagService;
+import com.handong.rebon.shop.domain.tag.application.dto.TagRequestDto;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import javax.transaction.Transactional;
 
 @SpringBootTest
@@ -14,37 +15,41 @@ import javax.transaction.Transactional;
 class TagIntegrationTest {
 
     @Autowired
-    TagRepository tagRepository;
+    TagService tagService;
 
     @Test
     @Rollback(value = false)
+    @DisplayName("태그 생성")
     void createTag() {
         // given
-        String tagName = "북구";
-        Tag newTag = Tag.builder()
+        String tagName = "흥해";
+
+        TagRequestDto tagRequestDto = TagRequestDto.builder()
                 .name(tagName)
                 .build();
 
         // when
-        Tag savedTag = tagRepository.save(newTag);
+        Long id = tagService.createTag(tagRequestDto);
 
         // then
-        assertEquals(tagName, savedTag.getName());
+        assertThat(id).isNotNull();
     }
 
     @Test
     @Rollback(value = false)
+    @DisplayName("유효하지 않은 태그 생성")
     void createNotValidTag() {
         // given
         String tagName = "";
-        Tag newTag = Tag.builder()
+
+        TagRequestDto tagRequestDto = TagRequestDto.builder()
                 .name(tagName)
                 .build();
 
         // when
-        Tag savedTag = tagRepository.save(newTag);
+        Long id = tagService.createTag(tagRequestDto);
 
         // then
-        assertEquals(tagName, savedTag.getName());
+        assertThat(id).isNotNull();
     }
 }
