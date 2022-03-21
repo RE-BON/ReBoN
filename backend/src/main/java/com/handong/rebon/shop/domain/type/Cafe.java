@@ -7,13 +7,13 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.handong.rebon.menu.domain.Menu;
+import com.handong.rebon.category.Category;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
+import com.handong.rebon.shop.domain.menu.Menu;
 
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -2,7 +2,7 @@ package com.handong.rebon.shop.application.dto;
 
 import java.util.List;
 
-import com.handong.rebon.menu.presentation.dto.request.MenuGroupRequest;
+import com.handong.rebon.shop.presentation.dto.request.MenuGroupRequest;
 
 import org.springframework.web.multipart.MultipartFile;
 

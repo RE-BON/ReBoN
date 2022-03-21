@@ -2,11 +2,11 @@ package com.handong.rebon.unit.shop.application.adapter;
 
 import java.util.ArrayList;
 
-import com.handong.rebon.menu.application.MenuGroupService;
+import com.handong.rebon.category.Category;
+import com.handong.rebon.shop.application.MenuGroupService;
 import com.handong.rebon.shop.application.adapter.CafeServiceAdapter;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.category.Category;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.type.Cafe;
 

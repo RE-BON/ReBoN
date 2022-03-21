@@ -3,9 +3,9 @@ package com.handong.rebon.unit.shop.domain.type;
 import java.util.Arrays;
 import java.util.List;
 
-import com.handong.rebon.menu.domain.Menu;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
+import com.handong.rebon.shop.domain.menu.Menu;
 import com.handong.rebon.shop.domain.type.Cafe;
 
 import org.junit.jupiter.api.DisplayName;

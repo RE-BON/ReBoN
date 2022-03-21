@@ -5,16 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.handong.rebon.menu.presentation.dto.request.MenuGroupRequest;
-import com.handong.rebon.menu.presentation.dto.request.MenuRequest;
+import com.handong.rebon.category.Category;
+import com.handong.rebon.category.CategoryRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
-import com.handong.rebon.shop.domain.category.Category;
-import com.handong.rebon.shop.domain.category.CategoryRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
-import com.handong.rebon.shop.domain.tag.domain.Tag;
-import com.handong.rebon.shop.domain.tag.domain.repository.TagRepository;
 import com.handong.rebon.shop.domain.type.Restaurant;
+import com.handong.rebon.shop.presentation.dto.request.MenuGroupRequest;
+import com.handong.rebon.shop.presentation.dto.request.MenuRequest;
+import com.handong.rebon.tag.domain.Tag;
+import com.handong.rebon.tag.domain.repository.TagRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
