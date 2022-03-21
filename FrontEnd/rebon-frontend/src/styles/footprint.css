@@ -1,10 +1,21 @@
 .footprint-wrapper {
+  margin-top: 5%;
   margin-left: 20%;
   width: 60%;
 }
 .footprint-name {
   margin-left: 5%;
   width: 90%;
+}
+.footprint-bold-hr {
+  /* background-color: blue;
+  height: 90px; */
+  border: solid 1px #000000;
+}
+.footprint-light-hr {
+  border: 1px solid #d8d8d8;
+  margin-left: 2%;
+  width: 96%;
 }
 .footprint-content {
   margin-left: 5%;
@@ -16,7 +27,7 @@
 .footprint-remove-button {
   color: white;
   background-color: black;
-  border-radius: 5px;
+  border-radius: 1000px;
   font-size: 0.8rem;
   padding-left: 7px;
   padding-right: 7px;
@@ -32,14 +43,14 @@
   display: inline;
   font-size: 1.3rem;
   font-weight: bold;
-  margin-right: 3%;
+  margin-right: 1%;
 }
 .footprint-rating {
   display: inline;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #898c8f;
-  margin-right: 3%;
+  margin-right: 1%;
 }
 .footprint-date {
   display: inline;
@@ -69,8 +80,8 @@
   font-size: 0.5rem;
   font-weight: bold;
   border-radius: 5px;
-  margin-right: 3%;
-  margin-left: 2%;
+  margin-right: 2%;
+  margin-left: 1%;
 }
 .footprint-tip-content {
   font-size: 14px;
@@ -85,6 +96,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .footprint-image {
-  width: 190px;
-  height: 150px;
+  width: 98%;
+  height: 135px;
+  margin-right: 2%;
 }

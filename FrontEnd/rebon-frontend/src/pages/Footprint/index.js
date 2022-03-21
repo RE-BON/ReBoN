@@ -9,7 +9,7 @@ export default function Footprint() {
   return (
     <div className="footprint-wrapper">
       <h4 className="footprint-name">발자국</h4>
-      <hr className="bold-hr" />
+      <hr className="footprint-bold-hr" />
 
       <div className="footprint-content">
         <div className="footprint-remove-wrapper">
@@ -29,7 +29,7 @@ export default function Footprint() {
           </div>
         </div>
       </div>
-      <hr className="bold-hr" />
+      <hr className="footprint-light-hr" />
 
       <div className="footprint-content">
         <div className="footprint-remove-wrapper">
@@ -55,7 +55,7 @@ export default function Footprint() {
           <img className="footprint-image" alt="footprint-image" src="image/detail.png" />
         </div>
       </div>
-      <hr className="bold-hr" />
+      <hr className="footprint-light-hr" />
     </div>
   );
 }
