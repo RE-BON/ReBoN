@@ -1,5 +1,6 @@
 package com.handong.rebon.integration.category;
 
+import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.shop.application.CategoryService;
 import com.handong.rebon.shop.application.dto.CategoryRequestDto;
@@ -74,5 +75,18 @@ public class CategoryIntegrationTest {
         //then
         assertThat(exception.getMessage()).isEqualTo("저장하려는 카테고리의 부모 카테고리가 존재하지 않습니다.");
 
+    }
+
+    @Test
+    @DisplayName("부모 카테고리를 생성할 때 이미 존재하는 카테고리라면 예외 발생")
+    public void createDuplicationParentCategory() {
+        //given
+        String categoryRequestName = "테스트중복한식";
+
+        //when
+        categoryService.create(categoryRequestName);
+        CategoryExistException exception = assertThrows(CategoryExistException.class, () -> categoryService.create(categoryRequestName));
+        //then
+        assertThat(exception.getMessage()).isEqualTo("이미 존재하는 이름의 Category 입니다.");
     }
 }
