@@ -1,4 +1,4 @@
-package com.handong.rebon.review.application.request;
+package com.handong.rebon.review.application.dto.request;
 
 import java.util.List;
 

@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.review.application.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
+import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -30,7 +32,7 @@ public class ReviewService {
     private final ReviewImageRepository reviewImageRepository;
 
     @Transactional
-    public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
+    public ReviewResponseDto create(ReviewCreateRequestDto reviewCreateRequestDto) {
         //TODO 멤버 찾아오기
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
 
@@ -45,12 +47,13 @@ public class ReviewService {
                               .shop(shop)
                               .reviewContent(reviewCreateRequestDto.getReviewContent())
                               .reviewScore(reviewCreateRequestDto.getReviewScore())
-                              .reviewImages(reviewImages)
                               .build();
+
+        review.addReviewImage(reviewImages);
 
         Review savedReview = reviewRepository.save(review);
 
-        return savedReview.getId();
+        return ReviewDtoAssembler.reviewResponseDto(savedReview);
     }
 
     //TODO 이미지 저장 기능
