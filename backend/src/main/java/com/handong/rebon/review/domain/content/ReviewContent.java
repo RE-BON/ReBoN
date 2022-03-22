@@ -17,7 +17,6 @@ public class ReviewContent {
     private String content;
     private String tip;
 
-
     public ReviewContent(String title, String content) {
         this(title, content, "");
     }

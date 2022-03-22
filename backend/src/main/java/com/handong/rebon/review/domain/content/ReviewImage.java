@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 import com.handong.rebon.review.domain.Review;
 
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReviewImage {
 
     @Id
@@ -21,5 +22,9 @@ public class ReviewImage {
 
     public ReviewImage(String url) {
         this.url = url;
+    }
+
+    public void addReview(Review review) {
+        this.review = review;
     }
 }

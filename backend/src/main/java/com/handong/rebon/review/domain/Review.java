@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.content.ReviewContent;
+import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.domain.empathy.Empathy;
@@ -68,5 +69,11 @@ public class Review {
 
     public String getShopName() {
         return getShop().getShopContent().getName();
+    }
+
+    public void addReviewImage(ReviewImages reviewImages) {
+        this.reviewImages = reviewImages;
+        reviewImages.getReviewImages().forEach(reviewImage -> reviewImage.addReview(this));
+
     }
 }
