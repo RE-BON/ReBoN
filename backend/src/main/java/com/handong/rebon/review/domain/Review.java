@@ -44,36 +44,35 @@ public class Review {
     private List<Empathy> empathies = new ArrayList<>();
 
     public String getTitle() {
-        return getReviewContent().getTitle();
+        return reviewContent.getTitle();
     }
 
     public String getContent() {
-        return getReviewContent().getContent();
+        return reviewContent.getContent();
     }
 
     public String getTip() {
-        return getReviewContent().getTip();
+        return reviewContent.getTip();
     }
 
     public double getStar() {
-        return getReviewScore().getStar();
+        return reviewScore.getStar();
     }
 
     public int getEmpathyCount() {
-        return getReviewScore().getEmpathyCount();
+        return reviewScore.getEmpathyCount();
     }
 
     public String getAuthorName() {
-        return getMember().getNickName();
+        return member.getNickName();
     }
 
     public String getShopName() {
-        return getShop().getShopName();
+        return shop.getShopName();
     }
 
     public void addReviewImage(ReviewImages reviewImages) {
         this.reviewImages = reviewImages;
-        reviewImages.getReviewImages().forEach(reviewImage -> reviewImage.addReview(this));
-
+        this.reviewImages.addReviewImages(this);
     }
 }

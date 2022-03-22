@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 
+import com.handong.rebon.review.domain.Review;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,4 +20,8 @@ public class ReviewImages {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST)
     private List<ReviewImage> reviewImages = new ArrayList<>();
+
+    public void addReviewImages(Review review) {
+        reviewImages.forEach(reviewImage -> reviewImage.addReview(review));
+    }
 }
