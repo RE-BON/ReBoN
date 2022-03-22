@@ -1,4 +1,136 @@
 .post-wrapper {
   padding-top: 10%;
-  margin: 0 20%;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.post-title {
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.post-star {
+  width: 40%;
+  height: 10%;
+  margin: 5% auto;
+  text-align: center;
+}
+
+.post-tip {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 1%;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+
+.post-tip-box {
+  padding: 1%;
+  border: 1px solid #ff6b6c;
+  background-color: #ffeded;
+  border-radius: 8px;
+  margin: 1% 1% 1% 2%;
+  font-weight: bold;
+}
+
+.post-tip input {
+  width: 82%;
+  height: fit-content;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+}
+
+.post-tip input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.post-tip input:focus {
+  outline: none;
+}
+
+.post-tip-count {
+  margin-top: 0.2%;
+  text-align: end;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.post-review {
+  margin-top: 3%;
+}
+
+.post-review textarea {
+  width: 100%;
+  height: 130%;
+  padding: 2%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background-color: transparent;
+  resize: none;
+}
+
+.post-review textarea:focus {
+  outline: none;
+}
+
+.post-review-count {
+  margin-top: 0.2%;
+  text-align: end;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.post-attach-contents {
+  width: 15%;
+  margin-top: 1%;
+}
+
+.post-attach-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10% 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  font-size: 300%;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.post-attach-count {
+  margin-top: 0.2%;
+  text-align: end;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.post-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 7%;
+}
+
+.post-button-cancel {
+  width: 20%;
+  margin-right: 3%;
+  padding: 1.5% 0;
+  color: #ff6b6c;
+  border: 1px solid #ff6b6c;
+  background-color: white;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.post-button-finish {
+  width: 20%;
+  padding: 1.5% 0;
+  color: #ffeded;
+  background-color: #ff6b6c;
+  border-radius: 50px;
+  text-align: center;
 }
