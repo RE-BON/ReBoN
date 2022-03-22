@@ -1,8 +1,9 @@
-package com.handong.rebon.review.application;
+package com.handong.rebon.integration.review;
 
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
+import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
@@ -30,7 +31,7 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 @Transactional
 @Rollback(value = false)
-class ReviewServiceTest {
+class ReviewIntegrationTest {
 
     @Autowired
     private ReviewService reviewService;
@@ -54,14 +55,12 @@ class ReviewServiceTest {
         ReviewContent reviewContent = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
 
-
         ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
-        ReviewResponseDto reviewResponseDto = reviewService.create(reviewCreateRequestDto);
-        ReviewResponse reviewResponse = ReviewAssembler.reviewResponse(reviewResponseDto);
-        Review review = reviewRepository.findById(reviewResponse.getId()).get();
+        Long id = reviewService.create(reviewCreateRequestDto);
+        Review review = reviewRepository.findById(id).get();
 
         //then
         assertThat(review.getReviewContent().getTitle()).isEqualTo(reviewContent.getTitle());

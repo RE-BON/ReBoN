@@ -1,7 +1,8 @@
-package com.handong.rebon.review.domain.content;
+package com.handong.rebon.unit.review.domain.content;
 
 import com.handong.rebon.exception.review.ReviewLikeCountException;
 import com.handong.rebon.exception.review.ReviewStarException;
+import com.handong.rebon.review.domain.content.ReviewScore;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
