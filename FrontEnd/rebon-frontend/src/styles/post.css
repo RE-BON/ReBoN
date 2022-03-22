@@ -10,8 +10,7 @@
 }
 
 .post-star {
-  width: 40%;
-  height: 10%;
+  width: 45%;
   margin: 5% auto;
   text-align: center;
 }
@@ -93,7 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10% 0;
+  padding: 25% 0;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   font-size: 300%;
