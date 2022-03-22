@@ -64,11 +64,11 @@ public class Review {
     }
 
     public String getAuthorName() {
-        return getMember().getProfile().getNickName();
+        return getMember().getNickName();
     }
 
     public String getShopName() {
-        return getShop().getShopContent().getName();
+        return getShop().getShopName();
     }
 
     public void addReviewImage(ReviewImages reviewImages) {

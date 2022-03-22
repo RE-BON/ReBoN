@@ -50,4 +50,8 @@ public class Shop {
         this.shopContent = shopContent;
         this.shopScore = shopScore;
     }
+
+    public String getShopName() {
+        return shopContent.getName();
+    }
 }

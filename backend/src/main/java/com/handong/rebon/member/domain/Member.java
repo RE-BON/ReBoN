@@ -32,4 +32,8 @@ public class Member {
     public Member(Profile profile) {
         this.profile = profile;
     }
+
+    public String getNickName() {
+        return profile.getNickName();
+    }
 }
