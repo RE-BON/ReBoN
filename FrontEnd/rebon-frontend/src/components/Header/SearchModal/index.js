@@ -11,13 +11,11 @@ export default function SearchModal() {
   const [opacity, setOpacity] = useState(0);
 
   function toggleModal(e) {
-    // open하는 함수
     setOpacity(0);
     setIsOpen(!isOpen);
   }
 
   function afterOpen() {
-    // 시간차 두고 open, 불투명하게 하는 함수
     setTimeout(() => {
       setOpacity(1);
     }, 100);
