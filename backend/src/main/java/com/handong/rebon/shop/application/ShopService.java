@@ -2,11 +2,14 @@ package com.handong.rebon.shop.application;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.handong.rebon.category.Category;
 import com.handong.rebon.category.CategoryService;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -32,19 +35,19 @@ public class ShopService {
     private final ShopImageRepository shopImageRepository;
 
     @Transactional
-    public Long create(ShopRequestDto shopRequestDto) {
+    public Long create(ShopCreateRequestDto shopCreateRequestDto) {
         // TODO 카테고리 가져오기
-        Category category = categoryService.findById(shopRequestDto.getCategoryId());
-        List<Category> subCategories = categoryService.findAll(shopRequestDto.getSubCategories());
+        Category category = categoryService.findById(shopCreateRequestDto.getCategoryId());
+        List<Category> subCategories = categoryService.findAll(shopCreateRequestDto.getSubCategories());
 
         // TODO 태그 가져오기
-        List<Tag> tags = tagService.findAll(shopRequestDto.getTags());
+        List<Tag> tags = tagService.findAll(shopCreateRequestDto.getTags());
 
         // TODO 이미지 저장
-        ShopImages shopImages = saveImages(shopRequestDto.getImages());
+        ShopImages shopImages = saveImages(shopCreateRequestDto.getImages());
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
-        Shop shop = adapter.create(shopImages, shopRequestDto);
+        Shop shop = adapter.create(shopImages, shopCreateRequestDto);
 
         shop.addTags(tags);
         shop.addCategories(category, subCategories);
@@ -62,5 +65,17 @@ public class ShopService {
         shopImageRepository.save(url2);
 
         return new ShopImages(Arrays.asList(url1, url2));
+    }
+
+    @Transactional(readOnly = true)
+    public List<ShopSimpleResponseDto> findByCategory(ShopRequestDto shopRequestDto) {
+        // TODO 카테고리 가져오기
+        Category category = categoryService.findById(shopRequestDto.getCategoryId());
+
+        List<Shop> shops = shopRepository.findAllByCategory(category);
+
+        return shops.stream()
+                    .map(ShopSimpleResponseDto::from)
+                    .collect(Collectors.toList());
     }
 }

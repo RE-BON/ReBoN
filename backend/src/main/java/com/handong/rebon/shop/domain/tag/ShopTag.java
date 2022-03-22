@@ -6,8 +6,10 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.tag.domain.Tag;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ShopTag {

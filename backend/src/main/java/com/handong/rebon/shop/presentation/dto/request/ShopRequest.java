@@ -2,7 +2,7 @@ package com.handong.rebon.shop.presentation.dto.request;
 
 import java.util.List;
 
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,19 +26,19 @@ public class ShopRequest {
     private List<Long> tags;
     private List<MenuGroupRequest> menus;
 
-    public ShopRequestDto toDto() {
-        return ShopRequestDto.builder()
-                             .categoryId(categoryId)
-                             .subCategories(subCategories)
-                             .name(name)
-                             .businessHour(businessHour)
-                             .phone(phone)
-                             .address(address)
-                             .longitude(longitude)
-                             .latitude(latitude)
-                             .images(images)
-                             .tags(tags)
-                             .menus(menus)
-                             .build();
+    public ShopCreateRequestDto toDto() {
+        return ShopCreateRequestDto.builder()
+                                   .categoryId(categoryId)
+                                   .subCategories(subCategories)
+                                   .name(name)
+                                   .businessHour(businessHour)
+                                   .phone(phone)
+                                   .address(address)
+                                   .longitude(longitude)
+                                   .latitude(latitude)
+                                   .images(images)
+                                   .tags(tags)
+                                   .menus(menus)
+                                   .build();
     }
 }

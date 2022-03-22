@@ -35,7 +35,7 @@ public abstract class Shop {
     private Category category;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private final List<ShopCategory> shopCategories = new ArrayList<>();
+    private List<ShopCategory> shopCategories = new ArrayList<>();
 
     @Embedded
     private ShopContent shopContent;
@@ -90,5 +90,13 @@ public abstract class Shop {
                                                          .collect(Collectors.toList());
 
         this.shopCategories.addAll(shopCategories);
+    }
+
+    public String getName() {
+        return shopContent.getName();
+    }
+
+    public double getStar() {
+        return shopScore.getStar();
     }
 }

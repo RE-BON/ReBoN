@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.application.dto;
+package com.handong.rebon.shop.application.dto.request;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopRequestDto {
+public class ShopCreateRequestDto {
     private Long categoryId;
     private List<Long> subCategories;
     private String name;

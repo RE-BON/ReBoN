@@ -2,7 +2,7 @@ package com.handong.rebon.unit.shop.application.adapter;
 
 import com.handong.rebon.category.Category;
 import com.handong.rebon.shop.application.adapter.LodgingServiceAdapter;
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.type.Lodging;
@@ -51,9 +51,9 @@ class LodgingAdapterTest {
         // given
         LodgingServiceAdapter adapter = new LodgingServiceAdapter();
         ShopImages shopImages = new ShopImages();
-        ShopRequestDto data = ShopRequestDto.builder()
-                                            .name("호텔1")
-                                            .build();
+        ShopCreateRequestDto data = ShopCreateRequestDto.builder()
+                                                        .name("호텔1")
+                                                        .build();
 
         // when
         Shop shop = adapter.create(shopImages, data);

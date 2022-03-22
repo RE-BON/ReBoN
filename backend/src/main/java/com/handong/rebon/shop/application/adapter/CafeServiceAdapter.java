@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.handong.rebon.category.Category;
 import com.handong.rebon.shop.application.MenuGroupService;
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -28,7 +28,7 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public Shop create(ShopImages shopImages, ShopRequestDto data) {
+    public Shop create(ShopImages shopImages, ShopCreateRequestDto data) {
         Cafe cafe = Cafe.builder()
                         .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
                         .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
