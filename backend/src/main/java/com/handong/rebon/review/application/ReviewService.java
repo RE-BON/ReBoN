@@ -32,7 +32,7 @@ public class ReviewService {
     private final ReviewImageRepository reviewImageRepository;
 
     @Transactional
-    public ReviewResponseDto create(ReviewCreateRequestDto reviewCreateRequestDto) {
+    public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
         //TODO 멤버 찾아오기
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
 
@@ -53,7 +53,7 @@ public class ReviewService {
 
         Review savedReview = reviewRepository.save(review);
 
-        return ReviewDtoAssembler.reviewResponseDto(savedReview);
+        return savedReview.getId();
     }
 
     //TODO 이미지 저장 기능
