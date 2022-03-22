@@ -2,6 +2,7 @@ package com.handong.rebon.review.domain.content;
 
 import com.handong.rebon.exception.review.ReviewContentFormatException;
 import com.handong.rebon.exception.review.ReviewTitleFormatException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -17,8 +18,7 @@ class ReviewContentTest {
     public void reviewTitleIsNullOrEmptyException(String title) {
         //given
         //when, then
-
-        assertThatThrownBy(() ->new ReviewContent(title, "너무 좋아요"))
+        assertThatThrownBy(() -> new ReviewContent(title, "너무 좋아요"))
                 .isInstanceOf(ReviewTitleFormatException.class);
     }
 
