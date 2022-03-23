@@ -18,15 +18,11 @@ class TagIntegrationTest {
     TagService tagService;
 
     @Test
-    @Rollback(value = false)
     @DisplayName("태그 생성")
     void createTag() {
         // given
         String tagName = "흥해";
-
-        TagRequestDto tagRequestDto = TagRequestDto.builder()
-                .name(tagName)
-                .build();
+        TagRequestDto tagRequestDto = new TagRequestDto(tagName);
 
         // when
         Long id = tagService.createTag(tagRequestDto);
@@ -36,15 +32,11 @@ class TagIntegrationTest {
     }
 
     @Test
-    @Rollback(value = false)
     @DisplayName("유효하지 않은 태그 생성")
     void createNotValidTag() {
         // given
         String tagName = "";
-
-        TagRequestDto tagRequestDto = TagRequestDto.builder()
-                .name(tagName)
-                .build();
+        TagRequestDto tagRequestDto = new TagRequestDto(tagName);
 
         // when
         Long id = tagService.createTag(tagRequestDto);

@@ -5,11 +5,10 @@ import com.handong.rebon.shop.domain.tag.application.dto.TagRequestDto;
 import com.handong.rebon.shop.domain.tag.domain.Tag;
 import com.handong.rebon.shop.domain.tag.domain.repository.TagRepository;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class TagService {
 
     private final TagRepository tagRepository;
@@ -31,13 +30,8 @@ public class TagService {
     }
 
     private void validateDuplicateTag(String name) {
-        if (tagRepository.findByName(name).isPresent()){
-            throw new TagExistException();
-        }
+        tagRepository.findByName(name)
+                .orElseThrow(TagExistException::new);
     }
-
-//    public List<Tag> findTags() {
-//        return tagRepository.findAll();
-//    }
 }
 
