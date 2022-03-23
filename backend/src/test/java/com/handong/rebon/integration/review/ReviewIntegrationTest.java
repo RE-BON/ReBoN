@@ -5,14 +5,12 @@ import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
-import com.handong.rebon.review.presentation.dto.response.ReviewResponse;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.item.Shop;
@@ -20,13 +18,12 @@ import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
