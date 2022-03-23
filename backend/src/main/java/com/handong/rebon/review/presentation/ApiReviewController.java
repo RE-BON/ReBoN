@@ -1,9 +1,6 @@
 package com.handong.rebon.review.presentation;
 
 import com.handong.rebon.review.application.ReviewService;
-import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
-import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewResponse;
 

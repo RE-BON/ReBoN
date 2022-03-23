@@ -1,12 +1,12 @@
 package com.handong.rebon.review.domain.content;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.Embeddable;
 
 import com.handong.rebon.exception.review.ReviewLikeCountException;
 import com.handong.rebon.exception.review.ReviewStarException;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor

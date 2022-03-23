@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -16,11 +14,11 @@ import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.item.Shop;
 
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -49,7 +47,7 @@ public class ReviewService {
                               .reviewScore(reviewCreateRequestDto.getReviewScore())
                               .build();
 
-        review.addReviewImage(reviewImages);
+        review.addReviewImages(reviewImages);
 
         Review savedReview = reviewRepository.save(review);
 
