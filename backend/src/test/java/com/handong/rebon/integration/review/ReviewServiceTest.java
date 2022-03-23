@@ -30,7 +30,6 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
 class ReviewIntegrationTest {
 
     @Autowired
