@@ -27,7 +27,7 @@ export default function Review() {
       <hr className="bold-hr" />
       <div className="review-order">
         <select class="form-select" aria-label="Default select example" className="review-select">
-          <option selected value="1">
+          <option selected value="1" className="review-select-option">
             베스트 리뷰순
           </option>
           <option value="2">평점순</option>

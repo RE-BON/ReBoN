@@ -30,4 +30,5 @@ public class ShopContent {
             throw new ShopNameException();
         }
     }
+
 }
