@@ -21,7 +21,7 @@ public class ReviewImages {
     @OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST)
     private List<ReviewImage> reviewImages = new ArrayList<>();
 
-    public void addReviewImages(Review review) {
+    public void connectReviewToReviewImage(Review review) {
         reviewImages.forEach(reviewImage -> reviewImage.addReview(review));
     }
 }
