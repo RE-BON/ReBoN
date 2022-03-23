@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class ShopService {
+
     private final CategoryService categoryService;
     private final TagService tagService;
     private final ShopAdapterService shopAdapterService;
@@ -53,6 +54,11 @@ public class ShopService {
         return savedShop.getId();
     }
 
+    //Review 메서드 작동을 하기 위해 만들어 놓은 임시 메서드
+    public Shop findById(Long id) {
+        return shopRepository.findById(id).get();
+    }
+
     // TODO 이미지 저장 기능 구현(따로 서비스로 분리해도 될듯?)
     private ShopImages saveImages(List<MultipartFile> images) {
         ShopImage url1 = new ShopImage("url1");
@@ -63,4 +69,6 @@ public class ShopService {
 
         return new ShopImages(Arrays.asList(url1, url2));
     }
+
+
 }
