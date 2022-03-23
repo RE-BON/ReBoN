@@ -6,24 +6,22 @@ li {
 }
 
 .tags-wrapper {
-  font-size: 15px;
-  padding: 0 5px;
+  font-size: 90%;
+  padding: 0 2%;
 }
 
 .tags-wrapper div {
   color: rgba(0, 0, 0, 0.3);
-  grid-column: 1 / 5;
   margin-bottom: 10px;
 }
 
 .tags-wrapper li {
   width: fit-content;
-  padding: 5px 10px;
-  margin: 5px;
+  padding: 1.5% 3%;
+  margin: 1.5%;
   float: left;
   border: 1px solid black;
   border-radius: 50px;
-  font-weight: 500;
 }
 
 .tags-wrapper li:hover {
