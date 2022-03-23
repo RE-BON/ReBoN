@@ -12,7 +12,7 @@ import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
-import com.handong.rebon.shop.domain.item.Shop;
+import com.handong.rebon.shop.domain.Shop;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

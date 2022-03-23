@@ -11,10 +11,12 @@ import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
+import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
+import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.item.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
+import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -81,7 +83,8 @@ class ReviewIntegrationTest {
     }
 
     private Shop createShop() {
-        Shop shop = new Shop(new ShopContent("토시래", "12:00-23:00", "010-1234-1212"), new ShopScore(0.0, 0));
+
+        Shop shop = new Restaurant(null, null, new ShopContent("토시래", "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
         return shopRepository.save(shop);
     }
 
