@@ -29,7 +29,7 @@ public class CategoryIntegrationTest {
     private CategoryRepository categoryRepository;
 
     @Test
-    @DisplayName("최상단 카테고리 생성")
+    @DisplayName("최상단 카테고리 생성한다.")
     public void createCategory() {
         //given
         String categoryRequestName = "테스트숙소카테고리";
@@ -42,7 +42,7 @@ public class CategoryIntegrationTest {
     }
 
     @Test
-    @DisplayName("부모있는 카테고리 생성")
+    @DisplayName("부모있는 카테고리를 생성한다.")
     public void createCategoryWithParent() {
         //given
         String parentName = "테스트식당";
@@ -62,7 +62,7 @@ public class CategoryIntegrationTest {
     }
 
     @Test
-    @DisplayName("카테고리를 부모와 함께 생성할 때 부모가 없는 부모면 예외 발생")
+    @DisplayName("카테고리를 부모와 함께 생성할 때 부모가 없는 부모면 예외가 발생한다.")
     public void createCategoryWithParentException() {
         //given
         long parentId = -1;
@@ -91,7 +91,7 @@ public class CategoryIntegrationTest {
     }
 
     @Test
-    @DisplayName("같은 부모 카테고리를 생성할 때 이미 존재하는 카테고리라면 예외 발생")
+    @DisplayName("같은 부모 카테고리를 생성할 때 이미 존재하는 카테고리라면 예외가 발생한다.")
     public void createSameParentDuplicateCategory() {
 
         //given
