@@ -1,8 +1,12 @@
 package com.handong.rebon.shop.domain.category;
 
 import javax.persistence.*;
+
+import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
+
 import lombok.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,14 +47,12 @@ public class Category {
     public void addChildCategory(Category category) {
         this.children.checkDuplicateCategory(category);
         this.children.addChild(category);
-        category.connectParent(this);
+        category.parent = this;
     }
 
-    public boolean IsSameName(String categoryName) {
-        return this.name.equals(categoryName);
-    }
-
-    public void connectParent(Category parent) {
-        this.parent = parent;
+    public void validateSame(Category category) {
+        if (this.name.equals(category.name)) {
+            throw new CategoryExistException();
+        }
     }
 }

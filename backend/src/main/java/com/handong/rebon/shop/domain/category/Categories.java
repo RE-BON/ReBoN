@@ -17,17 +17,10 @@ public class Categories {
     private List<Category> categories = new ArrayList<>();
 
     public void addChild(Category category) {
-        this.getCategories().add(category);
+        this.categories.add(category);
     }
 
     public void checkDuplicateCategory(Category category) {
-        this.categories.forEach(child -> checkSameName(child, category));
-    }
-
-    private void checkSameName(Category child, Category category) {
-        String newCategoryName = category.getName();
-        if (child.IsSameName(newCategoryName)) {
-            throw new CategoryExistException();
-        }
+        this.categories.forEach(child -> child.validateSame(category));
     }
 }
