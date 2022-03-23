@@ -1,18 +1,19 @@
 .star-wrapper {
   background-color: #f5f5f5;
   border-radius: 20px;
+  padding-bottom: 2%;
 }
 
 .star-wrapper-pharases {
   width: 100%;
   text-align: center;
-  margin-top: 1%;
 }
 
 .star-wrapper-pharases span {
   padding: 0 1%;
   border-radius: 10px;
   font-weight: bold;
+  border: 2px solid black;
 }
 
 #myform fieldset {

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 export default function Star() {
   const [pharase, setPharase] = useState(null);
+  let state = pharase;
   return (
     <form name="myform" id="myform" method="post" action="./save">
       <div className="star-wrapper">
@@ -18,9 +19,7 @@ export default function Star() {
           <input onClick={() => setPharase('별로예요.')} type="radio" name="rating" value="1" id="rate5" />
           <label htmlFor="rate5">★</label>
         </fieldset>
-        <div className="star-wrapper-pharases">
-          <span>{pharase}</span>
-        </div>
+        <div className="star-wrapper-pharases">{state == null ? null : <span>{pharase}</span>}</div>
       </div>
     </form>
   );
