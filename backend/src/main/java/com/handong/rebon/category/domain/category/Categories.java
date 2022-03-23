@@ -1,11 +1,11 @@
-package com.handong.rebon.shop.domain.category;
+package com.handong.rebon.category.domain.category;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
-import com.handong.rebon.exception.category.CategoryExistException;
+
 import lombok.Getter;
 
 

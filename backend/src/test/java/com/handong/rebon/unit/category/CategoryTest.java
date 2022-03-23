@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
-import com.handong.rebon.shop.domain.category.Category;
+import com.handong.rebon.category.domain.category.Category;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

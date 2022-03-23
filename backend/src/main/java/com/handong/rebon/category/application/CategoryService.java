@@ -1,10 +1,10 @@
-package com.handong.rebon.shop.application;
+package com.handong.rebon.category.application;
 
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
-import com.handong.rebon.shop.application.dto.CategoryRequestDto;
-import com.handong.rebon.shop.domain.category.Category;
-import com.handong.rebon.shop.domain.repository.CategoryRepository;
+import com.handong.rebon.category.application.dto.CategoryRequestDto;
+import com.handong.rebon.category.domain.category.Category;
+import com.handong.rebon.category.domain.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;

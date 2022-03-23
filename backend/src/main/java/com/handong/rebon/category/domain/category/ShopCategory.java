@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.domain.category;
+package com.handong.rebon.category.domain.category;
 
 import com.handong.rebon.member.domain.item.Shop;
 
