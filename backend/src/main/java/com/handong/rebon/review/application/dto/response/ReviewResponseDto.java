@@ -1,9 +1,6 @@
 package com.handong.rebon.review.application.dto.response;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -19,5 +16,5 @@ public class ReviewResponseDto {
     private String tip;
     private double star;
     private int empathyCount;
-    private List<MultipartFile> images;
+    private List<String> images;
 }
