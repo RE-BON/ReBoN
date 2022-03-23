@@ -15,12 +15,12 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Long create(String name) {
-        checkCategoryExist(name);
+    @Transactional
+    public Long create(String categoryName) {
+        checkCategoryExist(categoryName);
 
-        Category newCategory = Category.builder()
-                                       .name(name)
-                                       .build();
+        Category newCategory = new Category(categoryName);
+
         categoryRepository.save(newCategory);
         return newCategory.getId();
     }
@@ -33,9 +33,7 @@ public class CategoryService {
 
         String categoryName = categoryRequestDto.getName();
 
-        Category newCategory = Category.builder()
-                                       .name(categoryName)
-                                       .build();
+        Category newCategory = new Category(categoryName);
 
         parent.addChildCategory(newCategory);
         Category savedCategory = categoryRepository.save(newCategory);
