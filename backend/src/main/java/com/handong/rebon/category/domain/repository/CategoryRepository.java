@@ -1,6 +1,6 @@
 package com.handong.rebon.category.domain.repository;
 
-import com.handong.rebon.category.domain.category.Category;
+import com.handong.rebon.category.domain.Category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

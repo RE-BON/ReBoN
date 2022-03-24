@@ -1,9 +1,12 @@
 package com.handong.rebon.category.application;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.category.application.dto.CategoryRequestDto;
-import com.handong.rebon.category.domain.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,5 +49,13 @@ public class CategoryService {
             throw new CategoryExistException();
         }
     }
+    public Category findById(Long categoryId) {
+        return categoryRepository.findById(categoryId).get();
+    }
 
+    public List<Category> findAll(List<Long> subCategories) {
+        return subCategories.stream()
+                            .map(t -> categoryRepository.findById(t).get())
+                            .collect(Collectors.toList());
+    }
 }
