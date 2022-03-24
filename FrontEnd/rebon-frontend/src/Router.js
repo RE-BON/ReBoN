@@ -5,6 +5,7 @@ import Search from './pages/Search';
 import Post from './pages/Post';
 import Footprint from './pages/Footprint';
 import Mypage from './pages/Mypage';
+import Bookmark from './pages/Mypage/Bookmark';
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
         <Route path="/post" element={<Post />} />
         <Route path="/footprint" element={<Footprint />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/bookmark" element={<Bookmark />} />
       </Routes>
     </BrowserRouter>
   );
