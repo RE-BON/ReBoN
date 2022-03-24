@@ -1,127 +1,135 @@
 .TabPanel {
-    margin: 0 20%;
+  margin: 0 20%;
+  font-size: 18px;
+}
+
+.MuiTab-root {
+  font-size: 18px !important;
+  color: #898c8f !important;
 }
 
 .Mui-selected {
-    color: black !important;
-    border-color: black !important;
+  color: black !important;
+  border-color: black !important;
 }
 
 .tag {
-    margin-right: 5px;
-    margin-top: 5px;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 13px;
+  margin-right: 5px;
+  margin-top: 5px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 13px;
 }
 
 .searchTitle {
-    margin: 20px 10px;
-    font-weight: bold;
-    font-size: 24px;
+  margin: 20px 10px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 /* Best Card CSS */
 .bestCard {
-    border: 1px solid #c4c4c4;
-    border-radius: 20px;
-    min-width: 48%;
-    margin-bottom: 25px;
-    padding: 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+  min-width: 48%;
+  margin-bottom: 25px;
+  padding: 10px;
 }
 .best-img {
-    height: 150px;
-    background-color: #f5f5f5;
-    border-radius: 20px;
+  height: 150px;
+  background-color: #f5f5f5;
+  border-radius: 20px;
 }
 
 .best-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .titleRow {
-    display: flex;
-    margin: 8px 5px;
+  display: flex;
+  margin: 8px 5px;
 }
 
 .placeName {
-    margin-right: 10px;
-    font-weight: bold;
+  margin-right: 10px;
+  font-weight: bold;
 }
 
 .starNum {
-    font-weight: bold;
-    color: gray;
+  font-weight: bold;
+  color: gray;
 }
 
 /* Main Card */
 .mainCard {
-    width: 30%;
-    margin-bottom: 35px;
+  width: 30%;
+  margin-bottom: 35px;
 }
 
 .mainCard-img {
-    height: 150px;
-    background-color: #f5f5f5;
-    border-radius: 16px;
+  height: 150px;
+  background-color: #f5f5f5;
+  border-radius: 16px;
 }
 
 .mainCard-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 /* Main Page */
 .category-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 .category-btn {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
 .divider {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .filter {
-    block-size: fit-content;
-    border: 1px solid #d9d9d9;
-    border-radius: 5px;
-    padding: 5px 35px 5px 5px;
+  block-size: fit-content;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  padding: 5px 35px 5px 5px;
+  font-size: 14;
+  font-weight: normal;
 }
 
 .select {
-    padding: 15px 10px;
+  padding: 15px 10px;
 }
-.select input[type="radio"] {
-    display: none;
+.select input[type='radio'] {
+  display: none;
 }
-.select input[type="radio"] + label {
-    display: inline-block;
-    cursor: pointer;
-    height: 24px;
-    padding: 0 15px;
-    margin: 0 5px;
-    border: 1px solid #333;
-    border-radius: 20px;
-    line-height: 24px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 13px;
+.select input[type='radio'] + label {
+  display: inline-block;
+  cursor: pointer;
+  height: 24px;
+  padding: 0 15px;
+  margin: 0 5px;
+  border: 1px solid #333;
+  border-radius: 20px;
+  line-height: 24px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
 }
-.select input[type="radio"] + label {
-    background-color: #fff;
-    color: #333;
+.select input[type='radio'] + label {
+  background-color: #fff;
+  color: #333;
 }
-.select input[type="radio"]:checked + label {
-    background-color: #333;
-    color: #fff;
+.select input[type='radio']:checked + label {
+  background-color: #333;
+  color: #fff;
 }
