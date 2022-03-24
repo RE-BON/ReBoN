@@ -102,6 +102,17 @@ class ShopIntegrationTest extends IntegrationTest {
         return shopRepository.save(restaurant);
     }
 
+    protected Restaurant createRestaurant(Category category, List<Tag> tags, String name) {
+        Restaurant restaurant = Restaurant.builder()
+                                          .category(category)
+                                          .shopContent(new ShopContent(name))
+                                          .shopScore(new ShopScore(4.8, 100))
+                                          .shopImages(new ShopImages())
+                                          .build();
+        restaurant.addTags(tags);
+        return shopRepository.save(restaurant);
+    }
+
     protected Cafe createCafe(Category category, String name) {
         Cafe cafe = Cafe.builder()
                         .category(category)
@@ -109,6 +120,17 @@ class ShopIntegrationTest extends IntegrationTest {
                         .shopScore(new ShopScore(4.8, 100))
                         .shopImages(new ShopImages())
                         .build();
+        return shopRepository.save(cafe);
+    }
+
+    protected Cafe createCafe(Category category,List<Tag> tags, String name) {
+        Cafe cafe = Cafe.builder()
+                        .category(category)
+                        .shopContent(new ShopContent(name))
+                        .shopScore(new ShopScore(4.8, 100))
+                        .shopImages(new ShopImages())
+                        .build();
+        cafe.addTags(tags);
         return shopRepository.save(cafe);
     }
 

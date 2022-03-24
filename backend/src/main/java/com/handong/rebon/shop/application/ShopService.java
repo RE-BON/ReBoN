@@ -68,7 +68,7 @@ public class ShopService {
     }
 
     @Transactional(readOnly = true)
-    public List<ShopSimpleResponseDto> findByCategory(ShopRequestDto shopRequestDto) {
+    public List<ShopSimpleResponseDto> search(ShopRequestDto shopRequestDto) {
         // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopRequestDto.getCategoryId());
 
