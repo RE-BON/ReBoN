@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.handong.rebon.category.Category;
-import com.handong.rebon.category.CategoryRepository;
+import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.ShopRequestDto;
 import com.handong.rebon.shop.domain.repository.ShopRepository;

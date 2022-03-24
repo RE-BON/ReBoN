@@ -20,6 +20,7 @@ import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -57,6 +58,7 @@ class ReviewIntegrationTest {
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
+
         Long id = reviewService.create(reviewCreateRequestDto);
         Review review = reviewRepository.findById(id).get();
 
