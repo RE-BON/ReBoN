@@ -49,6 +49,7 @@ public class CategoryService {
             throw new CategoryExistException();
         }
     }
+    // Shop 에서 사용하는 기능, Read 기능 구현 시 수정 예정
     public Category findById(Long categoryId) {
         return categoryRepository.findById(categoryId).get();
     }

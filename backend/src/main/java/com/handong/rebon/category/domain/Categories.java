@@ -1,12 +1,10 @@
-package com.handong.rebon.category.domain.categories;
+package com.handong.rebon.category.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
-
-import com.handong.rebon.category.domain.Category;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.handong.rebon.unit.category;
+package com.handong.rebon.unit.category.domain;
 
 import java.util.List;
 

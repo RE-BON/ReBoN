@@ -1,16 +1,17 @@
 package com.handong.rebon.category.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
-import com.handong.rebon.category.domain.categories.Categories;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 
-import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -35,7 +36,7 @@ public class Category {
 
 
     public Category(String name) {
-        validatesBlankName(name);
+        this.validatesBlankName(name);
         this.name = name;
         this.children = new Categories();
     }
@@ -53,11 +54,11 @@ public class Category {
     }
 
     public void validateSame(Category category) {
-        if (isSameName(category.name)) {
+        if (this.isSameName(category.name)) {
             throw new CategoryExistException();
         }
     }
-    
+
     public boolean isSameName(String name) {
         return this.name.equals(name);
     }
