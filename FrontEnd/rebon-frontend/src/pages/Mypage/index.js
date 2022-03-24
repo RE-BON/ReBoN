@@ -5,7 +5,7 @@ import '../../styles/myedit.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faXmark, faCamera } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/Header';
-export default function MyEdit() {
+export default function Mypage() {
   return (
     <div className="my-wrapper">
       <Header />
@@ -13,7 +13,6 @@ export default function MyEdit() {
         <div className="myedit-nav">
           <SideMenu />
         </div>
-
         <div className="myedit-content-wrapper">
           <div className="myedit-content-title">
             <div>회원정보 수정</div>
