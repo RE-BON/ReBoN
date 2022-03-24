@@ -8,7 +8,6 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 
-
 @Embeddable
 @Getter
 public class Categories {
@@ -17,10 +16,11 @@ public class Categories {
     private List<Category> categories = new ArrayList<>();
 
     public void addChild(Category category) {
+        checkDuplicateCategory(category);
         this.categories.add(category);
     }
 
-    public void checkDuplicateCategory(Category category) {
+    private void checkDuplicateCategory(Category category) {
         this.categories.forEach(child -> child.validateSame(category));
     }
 }

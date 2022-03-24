@@ -48,7 +48,6 @@ public class Category {
     }
 
     public void addChildCategory(Category category) {
-        this.children.checkDuplicateCategory(category);
         this.children.addChild(category);
         category.parent = this;
     }
