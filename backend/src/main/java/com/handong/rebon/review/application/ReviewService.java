@@ -1,11 +1,16 @@
 package com.handong.rebon.review.application;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
+import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -54,6 +59,29 @@ public class ReviewService {
         return savedReview.getId();
     }
 
+    @Transactional
+    public List<ReviewResponseDto> search(AdminReviewGetRequestDto adminReviewGetRequestDto) {
+
+        String keyword = adminReviewGetRequestDto.getKeyword();
+        List<Review> reviews = new ArrayList<>();
+        if (keyword == null) {
+            reviews = reviewRepository.findAll();
+            return ReviewDtoAssembler.reviewResponseDtos(reviews);
+        }
+
+        reviews.addAll(reviewRepository.findAllByReviewContentContaining("%" + keyword + "%"));
+
+        return ReviewDtoAssembler.reviewResponseDtos(reviews);
+    }
+
+    @Transactional
+    public List<ReviewResponseDto> search(Long memberId){
+        List<Review> reviews = reviewRepository.findAllByMember(memberId);
+
+        return ReviewDtoAssembler.reviewResponseDtos(reviews);
+    }
+
+
     //TODO 이미지 저장 기능
     private ReviewImages saveImages(List<MultipartFile> images) {
         ReviewImage url1 = new ReviewImage("url1");
@@ -64,5 +92,6 @@ public class ReviewService {
 
         return new ReviewImages(Arrays.asList(url1, url2));
     }
+
 
 }

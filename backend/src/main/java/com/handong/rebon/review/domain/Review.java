@@ -52,4 +52,32 @@ public class Review extends BaseEntity {
         return reviewContent.getContent();
     }
 
+    public String getAuthorName() {
+        return member.getNickName();
+    }
+
+    public String getShopName() {
+        return shop.getShopName();
+    }
+
+    public String getTitle() {
+        return reviewContent.getTitle();
+    }
+
+    public String getTip() {
+        return reviewContent.getTip();
+    }
+
+    public double getStar() {
+        return reviewScore.getStar();
+    }
+
+    public int getEmpathyCount() {
+        return reviewScore.getEmpathyCount();
+    }
+
+    public List<String> getImageUrls() {
+        return reviewImages.getUrls();
+    }
+
 }

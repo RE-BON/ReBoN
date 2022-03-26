@@ -2,6 +2,7 @@ package com.handong.rebon.review.domain.content;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
@@ -23,5 +24,11 @@ public class ReviewImages {
 
     public void connectReviewToReviewImage(Review review) {
         reviewImages.forEach(reviewImage -> reviewImage.addReview(review));
+    }
+
+    public List<String> getUrls() {
+        return reviewImages.stream()
+                           .map(reviewImage -> reviewImage.getUrl())
+                           .collect(Collectors.toList());
     }
 }
