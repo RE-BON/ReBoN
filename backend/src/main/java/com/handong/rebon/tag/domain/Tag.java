@@ -1,12 +1,13 @@
-package com.handong.rebon.shop.domain.tag.domain;
+package com.handong.rebon.tag.domain;
 
 import com.handong.rebon.exception.tag.TagNameException;
-import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
@@ -24,15 +25,14 @@ public class Tag {
     @OneToMany(mappedBy = "tag")
     private List<ShopTag> shopTags = new ArrayList<>();
 
-    @Builder
     public Tag(String name) {
-        if (isNotValidTag(name)) {
-            throw new TagNameException();
-        }
+        this.validateBlankName(name);
         this.name = name;
     }
 
-    private boolean isNotValidTag(String name) {
-        return Objects.isNull(name) || name.isBlank();
+    private void validateBlankName(String name) {
+        if (name.isBlank()) {
+            throw new TagNameException();
+        }
     }
 }

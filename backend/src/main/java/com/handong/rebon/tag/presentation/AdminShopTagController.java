@@ -1,6 +1,6 @@
-package com.handong.rebon.shop.domain.tag.presentation;
+package com.handong.rebon.tag.presentation;
 
-import com.handong.rebon.shop.domain.tag.application.ShopTagService;
+import com.handong.rebon.tag.application.ShopTagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/shoptags")
 @Controller
 public class AdminShopTagController {
-    private final ShopTagService shopTagService;
 
+    private final ShopTagService shopTagService;
 }

@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.domain.tag.application.dto;
+package com.handong.rebon.tag.application.dto;
 
 import lombok.Getter;
 

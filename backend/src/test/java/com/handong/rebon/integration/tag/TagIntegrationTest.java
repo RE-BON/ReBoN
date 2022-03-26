@@ -1,47 +1,52 @@
 package com.handong.rebon.integration.tag;
 
-import com.handong.rebon.shop.domain.tag.application.TagService;
-import com.handong.rebon.shop.domain.tag.application.dto.TagRequestDto;
+import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.tag.application.TagService;
+import com.handong.rebon.tag.domain.Tag;
+import com.handong.rebon.tag.domain.repository.TagRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import javax.transaction.Transactional;
 
 @SpringBootTest
 @Transactional
-class TagIntegrationTest {
+public class TagIntegrationTest {
 
     @Autowired
     TagService tagService;
 
+    @Autowired
+    TagRepository tagRepository;
+
     @Test
-    @DisplayName("태그 생성")
+    @DisplayName("태그를 생성한다.")
     void createTag() {
         // given
-        String tagName = "흥해";
-        TagRequestDto tagRequestDto = new TagRequestDto(tagName);
+        String tagName = "남구";
 
         // when
-        Long id = tagService.createTag(tagRequestDto);
+        Long id = tagService.createTag(tagName);
+        Tag newTag = tagRepository.getById(id);
 
         // then
-        assertThat(id).isNotNull();
+        assertThat(newTag.getName()).isEqualTo(tagName);
     }
 
     @Test
-    @DisplayName("유효하지 않은 태그 생성")
-    void createNotValidTag() {
+    @DisplayName("태그 이름이 중복되면 생성할 수 없다.")
+    void createExistTag() {
         // given
-        String tagName = "";
-        TagRequestDto tagRequestDto = new TagRequestDto(tagName);
+        String tagName = "장성동";
 
         // when
-        Long id = tagService.createTag(tagRequestDto);
+        tagService.createTag(tagName);
+        TagExistException exception = assertThrows(TagExistException.class, () -> tagService.createTag(tagName));
 
-        // then
-        assertThat(id).isNotNull();
+        //then
+        assertThat(exception.getMessage()).isEqualTo("이미 존재하는 태그 입니다.");
     }
 }

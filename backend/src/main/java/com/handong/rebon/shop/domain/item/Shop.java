@@ -9,7 +9,7 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.like.Like;
-import com.handong.rebon.shop.domain.tag.domain.ShopTag;
+import com.handong.rebon.tag.domain.ShopTag;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
