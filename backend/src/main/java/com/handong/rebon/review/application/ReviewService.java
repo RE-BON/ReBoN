@@ -88,6 +88,13 @@ public class ReviewService {
         return ReviewDtoAssembler.reviewResponseDtos(reviews);
     }
 
+    @Transactional
+    public ReviewResponseDto findByReviewId(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).get();
+
+        return ReviewDtoAssembler.reviewResponseDto(review);
+    }
+
     //TODO 이미지 저장 기능
     private ReviewImages saveImages(List<MultipartFile> images) {
         ReviewImage url1 = new ReviewImage("url1");

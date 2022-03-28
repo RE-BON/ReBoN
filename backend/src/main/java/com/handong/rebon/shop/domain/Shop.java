@@ -91,4 +91,8 @@ public abstract class Shop {
 
         this.shopCategories.addAll(shopCategories);
     }
+
+    public String getShopName() {
+        return shopContent.getName();
+    }
 }

@@ -44,7 +44,6 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto("나쁜");
 
         //when
-
         List<ReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
 
         //then
@@ -79,7 +78,6 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto(null);
 
         //when
-
         List<ReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
 
         //then
@@ -112,8 +110,8 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
 
         Long memberId = member1.getId();
-        //when
 
+        //when
         List<ReviewResponseDto> reviews = reviewService.findByMemberId(memberId);
 
         //then
@@ -146,9 +144,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto1);
         reviewService.create(reviewCreateRequestDto2);
 
-
         //when
-
         List<ReviewResponseDto> reviews = reviewService.findByShopId(shop1.getId());
 
         //then
@@ -160,7 +156,27 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
     @Test
     @DisplayName("하나의 리뷰만 가져온다.")
     void getReview() {
+        //given
+        Member member = createMember("peace");
+        Shop shop = createShop("토시래");
 
+        ReviewContent reviewContent = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewScore reviewScore = new ReviewScore(5, 0);
+
+        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
+        ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
+
+        Long reviewId = reviewService.create(reviewCreateRequestDto);
+
+        //when
+
+        ReviewResponseDto review = reviewService.findByReviewId(reviewId);
+
+        //then
+        assertThat(review).extracting("content")
+                          .isEqualTo(reviewContent.getContent());
+        assertThat(review).extracting("tip")
+                          .isEqualTo(reviewContent.getTip());
     }
 
 
