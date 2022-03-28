@@ -48,6 +48,10 @@ public class Review extends BaseEntity {
         this.reviewImages.connectReviewToReviewImage(this);
     }
 
+    public boolean isMemberLiked(Member member) {
+        return empathies.stream().anyMatch(empathy -> empathy.isSameMember(member));
+    }
+
     public String getContent() {
         return reviewContent.getContent();
     }

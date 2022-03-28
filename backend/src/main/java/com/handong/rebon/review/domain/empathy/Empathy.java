@@ -17,4 +17,9 @@ public class Empathy {
 
     @ManyToOne
     private Review review;
+
+    public boolean isSameMember(Member member) {
+        if(member.getId() == this.member.getId()) return true;
+        return false;
+    }
 }

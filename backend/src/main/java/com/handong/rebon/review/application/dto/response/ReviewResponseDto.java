@@ -17,4 +17,5 @@ public class ReviewResponseDto {
     private double star;
     private int empathyCount;
     private List<String> images;
+    private boolean isLiked;
 }
