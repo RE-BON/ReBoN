@@ -24,7 +24,7 @@ public class TagService {
     }
 
     private void validateDuplicateTag(String name) {
-        if(tagRepository.existsByName(name)){
+        if (tagRepository.existsByName(name)) {
             throw new TagExistException();
         }
     }
