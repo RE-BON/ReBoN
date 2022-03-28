@@ -75,12 +75,18 @@ public class ReviewService {
     }
 
     @Transactional
-    public List<ReviewResponseDto> search(Long memberId){
-        List<Review> reviews = reviewRepository.findAllByMember(memberId);
+    public List<ReviewResponseDto> findByMemberId(Long memberId) {
+        List<Review> reviews = reviewRepository.findAllByMemberId(memberId);
 
         return ReviewDtoAssembler.reviewResponseDtos(reviews);
     }
 
+    @Transactional
+    public List<ReviewResponseDto> findByShopId(Long shopId) {
+        List<Review> reviews = reviewRepository.findAllByShopId(shopId);
+
+        return ReviewDtoAssembler.reviewResponseDtos(reviews);
+    }
 
     //TODO 이미지 저장 기능
     private ReviewImages saveImages(List<MultipartFile> images) {

@@ -11,5 +11,8 @@ import org.springframework.data.repository.query.Param;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select r from Review r where r.reviewContent.content like :keyword or r.reviewContent.tip like :keyword")
     List<Review> findAllByReviewContentContaining(@Param("keyword") String keyword);
-    List<Review> findAllByMember(Long id);
+
+    List<Review> findAllByMemberId(Long memberId);
+
+    List<Review> findAllByShopId(Long shopId);
 }
