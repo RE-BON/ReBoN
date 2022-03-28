@@ -5,11 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.handong.rebon.exception.member.MemberNotFoundException;
+import com.handong.rebon.exception.review.ReviewNotFoundException;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
 import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
@@ -33,6 +37,7 @@ public class ReviewService {
     private final MemberService memberService;
     private final ShopService shopService;
     private final ReviewImageRepository reviewImageRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
@@ -75,22 +80,32 @@ public class ReviewService {
     }
 
     @Transactional
-    public List<ReviewResponseDto> findByMemberId(Long memberId) {
+    public List<ReviewResponseDto> findByMemberId(ReviewRequestDto reviewRequestDto) {
+        Long memberId = reviewRequestDto.getMemberId();
+
         List<Review> reviews = reviewRepository.findAllByMemberId(memberId);
 
-        return ReviewDtoAssembler.reviewResponseDtos(reviews);
+        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+
+        return ReviewDtoAssembler.reviewResponseDtos(reviews, member);
     }
 
     @Transactional
-    public List<ReviewResponseDto> findByShopId(Long shopId) {
+    public List<ReviewResponseDto> findByShopId(ReviewRequestDto reviewRequestDto) {
+        Long shopId = reviewRequestDto.getShopId();
+        Long memberId = reviewRequestDto.getMemberId();
+
         List<Review> reviews = reviewRepository.findAllByShopId(shopId);
 
-        return ReviewDtoAssembler.reviewResponseDtos(reviews);
+        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+
+        return ReviewDtoAssembler.reviewResponseDtos(reviews, member);
     }
 
     @Transactional
     public ReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId).get();
+        Review review = reviewRepository.findById(reviewId)
+                                        .orElseThrow(ReviewNotFoundException::new);
 
         return ReviewDtoAssembler.reviewResponseDto(review);
     }
@@ -105,6 +120,8 @@ public class ReviewService {
 
         return new ReviewImages(Arrays.asList(url1, url2));
     }
+
+
 
 
 }
