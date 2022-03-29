@@ -25,6 +25,7 @@ li {
 }
 
 .tags-wrapper li:hover {
-  color: white;
-  background-color: black;
+  color: #ff6c6c;
+  font-weight: bold;
+  border: 1px solid #ff6c6c;
 }
