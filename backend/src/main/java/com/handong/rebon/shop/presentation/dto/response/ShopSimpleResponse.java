@@ -6,8 +6,13 @@ import java.util.stream.Collectors;
 import com.handong.rebon.shop.application.dto.response.ShopTagResponse;
 import com.handong.rebon.shop.domain.Shop;
 
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopSimpleResponse {
     private Long id;
     private String name;

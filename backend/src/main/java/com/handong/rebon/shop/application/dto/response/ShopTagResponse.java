@@ -2,9 +2,12 @@ package com.handong.rebon.shop.application.dto.response;
 
 import com.handong.rebon.tag.domain.Tag;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopTagResponse {
     private Long id;
     private String name;
