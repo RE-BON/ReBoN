@@ -1,13 +1,13 @@
 package com.handong.rebon.review.domain.content;
 
+import java.util.Objects;
+import javax.persistence.Embeddable;
+
 import com.handong.rebon.exception.review.ReviewContentFormatException;
 import com.handong.rebon.exception.review.ReviewTitleFormatException;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
-import java.util.Objects;
 
 @Getter
 @NoArgsConstructor

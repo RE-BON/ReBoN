@@ -23,7 +23,7 @@ class ReviewScoreTest {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {6,5.5})
+    @ValueSource(doubles = {6, 5.5})
     @DisplayName("review star는 5점을 넘을 수 없다.")
     public void reviewStarExcessFiveException(double star) {
         //given

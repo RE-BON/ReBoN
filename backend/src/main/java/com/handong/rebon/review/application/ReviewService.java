@@ -46,7 +46,7 @@ public class ReviewService {
                               .reviewContent(reviewCreateRequestDto.getReviewContent())
                               .reviewScore(reviewCreateRequestDto.getReviewScore())
                               .build();
-        
+
         review.addReviewImages(reviewImages);
         Review savedReview = reviewRepository.save(review);
 
