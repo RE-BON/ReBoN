@@ -1,6 +1,6 @@
 package com.handong.rebon.member.application;
 
-import com.handong.rebon.member.domain.Member;
+//import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 
 import org.springframework.stereotype.Service;

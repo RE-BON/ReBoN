@@ -1,34 +1,40 @@
 package com.handong.rebon.tag.domain;
 
+import com.handong.rebon.exception.tag.TagNameException;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-import com.handong.rebon.shop.domain.tag.ShopTag;
-
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "tag")
-    private List<ShopTag> shopTags;
+    private List<ShopTag> shopTags = new ArrayList<>();
 
     public Tag(String name) {
-        this(null, name);
+        this.validateBlankName(name);
+        this.name = name;
     }
 
-    public Tag(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    private void validateBlankName(String name) {
+        if (name.isBlank()) {
+            throw new TagNameException();
+        }
     }
 }

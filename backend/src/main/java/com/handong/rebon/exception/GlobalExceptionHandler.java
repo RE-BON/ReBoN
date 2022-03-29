@@ -10,6 +10,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RebonException.class)
     public ResponseEntity<ExceptionResponse> rebonException(RebonException e) {
         return ResponseEntity.status(e.getHttpStatus())
-                             .body(new ExceptionResponse(e.getMessage()));
+                .body(new ExceptionResponse(e.getMessage()));
     }
 }
