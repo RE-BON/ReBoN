@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 
@@ -34,22 +35,22 @@ public class ReviewDtoAssembler {
                                 .build();
     }
 
-    public static List<ReviewResponseDto> reviewResponseDtos(List<Review> reviews) {
+    public static List<AdminReviewResponseDto> adminReviewResponseDtos(List<Review> reviews) {
         return reviews.stream()
-                      .map(review -> reviewResponseDto(review))
+                      .map(review -> adminReviewResponseDto(review))
                       .collect(Collectors.toList());
     }
 
-    public static ReviewResponseDto reviewResponseDto(Review review) {
-        return ReviewResponseDto.builder()
-                                .id(review.getId())
-                                .authorName(review.getAuthorName())
-                                .shopName(review.getShopName())
-                                .title(review.getTitle())
-                                .content(review.getContent())
-                                .tip(review.getTip())
-                                .star(review.getStar())
-                                .empathyCount(review.getEmpathyCount())
-                                .build();
+    public static AdminReviewResponseDto adminReviewResponseDto(Review review) {
+        return AdminReviewResponseDto.builder()
+                                     .id(review.getId())
+                                     .authorName(review.getAuthorName())
+                                     .shopName(review.getShopName())
+                                     .title(review.getTitle())
+                                     .content(review.getContent())
+                                     .tip(review.getTip())
+                                     .star(review.getStar())
+                                     .empathyCount(review.getEmpathyCount())
+                                     .build();
     }
 }

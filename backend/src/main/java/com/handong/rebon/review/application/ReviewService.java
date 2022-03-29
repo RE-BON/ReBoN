@@ -13,6 +13,7 @@ import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
+import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
@@ -65,7 +66,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public List<ReviewResponseDto> search(AdminReviewGetRequestDto adminReviewGetRequestDto) {
+    public List<AdminReviewResponseDto> search(AdminReviewGetRequestDto adminReviewGetRequestDto) {
         String keyword = adminReviewGetRequestDto.getKeyword();
         Pageable pageable = adminReviewGetRequestDto.getPageable();
 
@@ -73,12 +74,12 @@ public class ReviewService {
 
         if (keyword == null) {
             reviews = reviewRepository.findAll(pageable).toList();
-            return ReviewDtoAssembler.reviewResponseDtos(reviews);
+            return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
 
         reviews.addAll(reviewRepository.findAllByReviewContentContaining(makeContainingKeyword(keyword), pageable));
 
-        return ReviewDtoAssembler.reviewResponseDtos(reviews);
+        return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
     }
 
     @Transactional
@@ -107,11 +108,11 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewResponseDto findByReviewId(Long reviewId) {
+    public AdminReviewResponseDto findByReviewId(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
                                         .orElseThrow(ReviewNotFoundException::new);
 
-        return ReviewDtoAssembler.reviewResponseDto(review);
+        return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
 
     //TODO 이미지 저장 기능

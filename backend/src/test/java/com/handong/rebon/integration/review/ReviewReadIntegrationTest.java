@@ -6,6 +6,7 @@ import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
+import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewScore;
@@ -47,7 +48,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto("나쁜", PageRequest.of(0, 10));
 
         //when
-        List<ReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
+        List<AdminReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
 
         //then
         assertThat(reviews).hasSize(1);
@@ -81,7 +82,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto(null, PageRequest.of(0, 10));
 
         //when
-        List<ReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
+        List<AdminReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
 
         //then
         assertThat(reviews).hasSize(2);
@@ -187,7 +188,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Long reviewId = reviewService.create(reviewCreateRequestDto);
 
         //when
-        ReviewResponseDto review = reviewService.findByReviewId(reviewId);
+        AdminReviewResponseDto review = reviewService.findByReviewId(reviewId);
 
         //then
         assertThat(review).extracting("content")
