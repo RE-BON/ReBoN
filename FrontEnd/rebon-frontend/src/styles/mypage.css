@@ -1,5 +1,5 @@
 .my-wrapper {
-  padding-top: 5%;
+  padding-top: 6%;
 }
 
 .mypage-wrapper {
@@ -9,21 +9,22 @@
 .mypage-tab {
   position: fixed;
   width: 40%;
-  height: 100%;
   padding-left: 20%;
   background-color: #f5f5f5;
 }
 
 .mypage-content {
   width: 40%;
+
   margin-left: 40%;
   /* 지금 여기가 문제인데, 각자꺼에서 아마 패딩, 마진을 줘서 그렇습니다
-  그래서 그대로 가져오면 안되는 상황입니다 새로 css를 만들어서 가져와야 할 듯 합니다 
+  그래서 그대로 가져오면 안되는 상황입니다 새로 css를 수정해야 할 듯 합니다 
   css도 폴더별로 정리하는게 어떨까요?*/
 }
 
 .sideMenu-wrapper {
   background-color: #f5f5f5;
+  height: 100vh;
 }
 
 .sideMenu-intro {
@@ -76,6 +77,6 @@
 
 .sideMenu-bottom {
   position: absolute;
-  bottom: 140px;
+  bottom: 110px;
   font-size: 14px;
 }
