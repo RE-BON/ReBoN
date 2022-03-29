@@ -2,17 +2,17 @@ package com.handong.rebon.unit.category.domain;
 
 import java.util.List;
 
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
-import com.handong.rebon.category.domain.Category;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CategoryTest {
     @ParameterizedTest

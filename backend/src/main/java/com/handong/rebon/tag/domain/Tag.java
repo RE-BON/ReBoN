@@ -1,10 +1,11 @@
 package com.handong.rebon.tag.domain;
 
-import com.handong.rebon.exception.tag.TagNameException;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+
+import com.handong.rebon.exception.tag.TagNameException;
+import com.handong.rebon.shop.domain.tag.ShopTag;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

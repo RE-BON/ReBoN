@@ -1,7 +1,8 @@
 package com.handong.rebon.exception.tag;
 
-import org.springframework.http.HttpStatus;
 import com.handong.rebon.exception.RebonException;
+
+import org.springframework.http.HttpStatus;
 
 public abstract class TagException extends RebonException {
 
