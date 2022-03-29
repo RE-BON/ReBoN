@@ -11,7 +11,7 @@ import Bookmark from './Bookmark';
 import Footprint from './Footprint';
 import Edit from './Edit';
 import Header from '../../components/Header';
-
+import Withdrawal from './Withdrawal';
 import '../../styles/mypage.css';
 
 export default function Mypage() {
@@ -69,9 +69,7 @@ export default function Mypage() {
             </Link>
 
             <Row className="sideMenu-bottom">
-              <Link to="/search" style={{ color: 'inherit', textDecoration: 'none' }}>
-                <div className="mb-2">로그아웃</div>
-              </Link>
+              <div className="mb-2">로그아웃</div>
               <Link to="withdrawal" style={{ color: 'inherit', textDecoration: 'none' }}>
                 <div>회원탈퇴</div>
               </Link>
@@ -84,7 +82,7 @@ export default function Mypage() {
             <Route path="" element={<Edit />} />
             <Route path="footprint" element={<Footprint />} />
             <Route path="bookmark" element={<Bookmark />} />
-            <Route path="withdrawal" element={<Bookmark />} />
+            <Route path="withdrawal" element={<Withdrawal />} />
           </Routes>
         </div>
       </div>
