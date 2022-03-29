@@ -40,6 +40,7 @@ public class Review extends BaseEntity {
     @Embedded
     private ReviewScore reviewScore;
 
+    @Builder.Default
     @OneToMany(mappedBy = "review")
     private List<Empathy> empathies = new ArrayList<>();
 
@@ -49,7 +50,8 @@ public class Review extends BaseEntity {
     }
 
     public boolean isMemberLiked(Member member) {
-        return empathies.stream().anyMatch(empathy -> empathy.isSameMember(member));
+        return empathies.stream()
+                        .anyMatch(empathy -> empathy.isSameMember(member));
     }
 
     public String getContent() {
