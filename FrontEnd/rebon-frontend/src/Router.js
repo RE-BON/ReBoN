@@ -16,7 +16,7 @@ function Router() {
         <Route path="/main" element={<Main />} />
         <Route path="/post" element={<Post />} />
         <Route path="/footprint" element={<Footprint />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/bookmark" element={<Bookmark />} />
       </Routes>
     </BrowserRouter>
