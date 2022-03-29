@@ -3,7 +3,6 @@ package com.handong.rebon.review.application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
@@ -23,6 +22,7 @@ import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,15 +66,17 @@ public class ReviewService {
 
     @Transactional
     public List<ReviewResponseDto> search(AdminReviewGetRequestDto adminReviewGetRequestDto) {
-
         String keyword = adminReviewGetRequestDto.getKeyword();
+        Pageable pageable = adminReviewGetRequestDto.getPageable();
+
         List<Review> reviews = new ArrayList<>();
+
         if (keyword == null) {
-            reviews = reviewRepository.findAll();
+            reviews = reviewRepository.findAll(pageable).toList();
             return ReviewDtoAssembler.reviewResponseDtos(reviews);
         }
 
-        reviews.addAll(reviewRepository.findAllByReviewContentContaining("%" + keyword + "%"));
+        reviews.addAll(reviewRepository.findAllByReviewContentContaining(makeContainingKeyword(keyword), pageable));
 
         return ReviewDtoAssembler.reviewResponseDtos(reviews);
     }
@@ -82,8 +84,9 @@ public class ReviewService {
     @Transactional
     public List<ReviewResponseDto> findByMemberId(ReviewRequestDto reviewRequestDto) {
         Long memberId = reviewRequestDto.getMemberId();
+        Pageable pageable = reviewRequestDto.getPageable();
 
-        List<Review> reviews = reviewRepository.findAllByMemberId(memberId);
+        List<Review> reviews = reviewRepository.findAllByMemberId(memberId, pageable);
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
@@ -94,8 +97,9 @@ public class ReviewService {
     public List<ReviewResponseDto> findByShopId(ReviewRequestDto reviewRequestDto) {
         Long shopId = reviewRequestDto.getShopId();
         Long memberId = reviewRequestDto.getMemberId();
+        Pageable pageable = reviewRequestDto.getPageable();
 
-        List<Review> reviews = reviewRepository.findAllByShopId(shopId);
+        List<Review> reviews = reviewRepository.findAllByShopId(shopId, pageable);
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
@@ -121,7 +125,7 @@ public class ReviewService {
         return new ReviewImages(Arrays.asList(url1, url2));
     }
 
-
-
-
+    private String makeContainingKeyword(String keyword) {
+        return "%" + keyword + "%";
+    }
 }
