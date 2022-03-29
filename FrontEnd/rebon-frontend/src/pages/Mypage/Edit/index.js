@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faXmark, faCamera, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 export default function Edit() {
-  const [bgColor, setbgColor] = useState('#c4c4c4');
+  const [bgColor, setbgColor] = useState('white');
   const ChnageBgColor = (e) => {
-    setbgColor(bgColor === '#c4c4c4' ? '#ff6b6c' : '#c4c4c4');
+    setbgColor(bgColor === 'white' ? '#ff6b6c' : 'white');
   };
 
   return (

@@ -115,7 +115,8 @@
 .agree-button {
   padding: 0 4px;
   border-radius: 50%;
-  background-color: #c4c4c4;
+  border: 1px solid #c4c4c4;
+  background-color: white;
   margin-right: 15px;
   color: white;
 }
