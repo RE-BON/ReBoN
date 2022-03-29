@@ -19,7 +19,9 @@ public class Empathy {
     private Review review;
 
     public boolean isSameMember(Member member) {
-        if(member.getId() == this.member.getId()) return true;
+        if (member.getId() == this.member.getId()) {
+            return true;
+        }
         return false;
     }
 }
