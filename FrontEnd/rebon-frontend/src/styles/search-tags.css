@@ -11,7 +11,6 @@ li {
 }
 
 .tags-wrapper div {
-  color: rgba(0, 0, 0, 0.3);
   margin-bottom: 10px;
 }
 
@@ -20,7 +19,7 @@ li {
   padding: 1.5% 3%;
   margin: 1.5%;
   float: left;
-  border: 1px solid black;
+  border: 1px solid #c4c4c4;
   border-radius: 50px;
 }
 

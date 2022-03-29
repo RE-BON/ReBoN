@@ -14,7 +14,7 @@ export default function Star() {
           <label htmlFor="rate2">★</label>
           <input onClick={() => setPharase('괜찮아요.')} type="radio" name="rating" value="3" id="rate3" />
           <label htmlFor="rate3">★</label>
-          <input onClick={() => setPharase('그저 그래요')} type="radio" name="rating" value="2" id="rate4" />
+          <input onClick={() => setPharase('그저 그래요.')} type="radio" name="rating" value="2" id="rate4" />
           <label htmlFor="rate4">★</label>
           <input onClick={() => setPharase('별로예요.')} type="radio" name="rating" value="1" id="rate5" />
           <label htmlFor="rate5">★</label>
