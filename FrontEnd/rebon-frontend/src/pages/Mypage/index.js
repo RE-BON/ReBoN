@@ -11,6 +11,7 @@ import Footprint from './Footprint';
 import Edit from './Edit';
 import Header from '../../components/Header';
 import Withdrawal from './Withdrawal';
+import LogoutModal from './LogoutModal';
 import '../../styles/mypage.css';
 
 export default function Mypage() {
@@ -68,7 +69,9 @@ export default function Mypage() {
             </Link>
 
             <Row className="sideMenu-bottom">
-              <div className="mb-2">로그아웃</div>
+              <div className="mb-2">
+                <LogoutModal />
+              </div>
               <Link to="withdrawal" style={{ color: 'inherit', textDecoration: 'none' }}>
                 <div>회원탈퇴</div>
               </Link>
