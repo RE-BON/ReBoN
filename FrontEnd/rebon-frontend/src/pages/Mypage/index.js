@@ -3,7 +3,6 @@ import { ImCog } from 'react-icons/im';
 import { RiFootprintLine } from 'react-icons/ri';
 import { FiHeart } from 'react-icons/fi';
 import { IoIosArrowForward } from 'react-icons/io';
-
 import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 
