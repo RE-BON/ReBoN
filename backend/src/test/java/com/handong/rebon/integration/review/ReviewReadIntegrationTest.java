@@ -5,12 +5,15 @@ import java.util.List;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
 import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.shop.domain.Shop;
+
+import org.springframework.data.domain.PageRequest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +44,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto1);
         reviewService.create(reviewCreateRequestDto2);
 
-        AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto("나쁜");
+        AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto("나쁜", PageRequest.of(0, 10));
 
         //when
         List<ReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
@@ -75,7 +78,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto1);
         reviewService.create(reviewCreateRequestDto2);
 
-        AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto(null);
+        AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto(null, PageRequest.of(0, 10));
 
         //when
         List<ReviewResponseDto> reviews = reviewService.search(adminReviewGetRequestDto);
@@ -109,10 +112,12 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto1);
         reviewService.create(reviewCreateRequestDto2);
 
-        Long memberId = member1.getId();
+        ReviewRequestDto reviewRequestDto = ReviewRequestDto.builder()
+                                                            .memberId(member1.getId())
+                                                            .build();
 
         //when
-        List<ReviewResponseDto> reviews = reviewService.findByMemberId(memberId);
+        List<ReviewResponseDto> reviews = reviewService.findByMemberId(reviewRequestDto);
 
         //then
         assertThat(reviews).hasSize(1);
@@ -135,20 +140,33 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         ReviewContent reviewContent2 = new ReviewContent("피자가 맛있어요", "피자 맛이 좋아요", "치킨이랑 피자 시켜드세요");
         ReviewScore reviewScore2 = new ReviewScore(4, 0);
 
+        ReviewContent reviewContent3 = new ReviewContent("토시래 짱", "토시래 족발 굳", "앞족발 시켜드세요");
+        ReviewScore reviewScore3 = new ReviewScore(5, 0);
+
+
         ReviewRequest reviewRequest1 = createReviewRequest(reviewContent1, reviewScore1);
         ReviewCreateRequestDto reviewCreateRequestDto1 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop1.getId(), reviewRequest1);
 
         ReviewRequest reviewRequest2 = createReviewRequest(reviewContent2, reviewScore2);
         ReviewCreateRequestDto reviewCreateRequestDto2 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop2.getId(), reviewRequest2);
 
+        ReviewRequest reviewRequest3 = createReviewRequest(reviewContent3, reviewScore3);
+        ReviewCreateRequestDto reviewCreateRequestDto3 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop1.getId(), reviewRequest3);
+
         reviewService.create(reviewCreateRequestDto1);
         reviewService.create(reviewCreateRequestDto2);
+        reviewService.create(reviewCreateRequestDto3);
+
+        ReviewRequestDto reviewRequestDto = ReviewRequestDto.builder()
+                                                            .shopId(shop1.getId())
+                                                            .memberId(member.getId())
+                                                            .build();
 
         //when
-        List<ReviewResponseDto> reviews = reviewService.findByShopId(shop1.getId());
+        List<ReviewResponseDto> reviews = reviewService.findByShopId(reviewRequestDto);
 
         //then
-        assertThat(reviews).hasSize(1);
+        assertThat(reviews).hasSize(2);
         assertThat(reviews).extracting("shopName")
                            .contains(shop1.getShopName());
     }
@@ -169,7 +187,6 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Long reviewId = reviewService.create(reviewCreateRequestDto);
 
         //when
-
         ReviewResponseDto review = reviewService.findByReviewId(reviewId);
 
         //then
@@ -178,6 +195,5 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         assertThat(review).extracting("tip")
                           .isEqualTo(reviewContent.getTip());
     }
-
 
 }
