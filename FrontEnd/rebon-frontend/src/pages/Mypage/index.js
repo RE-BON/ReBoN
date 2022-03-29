@@ -69,8 +69,12 @@ export default function Mypage() {
             </Link>
 
             <Row className="sideMenu-bottom">
-              <div className="mb-2">로그아웃</div>
-              <div>회원탈퇴</div>
+              <Link to="/search" style={{ color: 'inherit', textDecoration: 'none' }}>
+                <div className="mb-2">로그아웃</div>
+              </Link>
+              <Link to="withdrawal" style={{ color: 'inherit', textDecoration: 'none' }}>
+                <div>회원탈퇴</div>
+              </Link>
             </Row>
           </div>
         </div>
@@ -80,6 +84,7 @@ export default function Mypage() {
             <Route path="" element={<Edit />} />
             <Route path="footprint" element={<Footprint />} />
             <Route path="bookmark" element={<Bookmark />} />
+            <Route path="withdrawal" element={<Bookmark />} />
           </Routes>
         </div>
       </div>
