@@ -16,12 +16,12 @@ public class AdminReviewController {
     private final ReviewService reviewService;
 
     @GetMapping("/")
-    public String getReviews(){
+    public String getReviews() {
         return "";
     }
 
     @GetMapping("/{reviewId}")
-    public String getReview(){
+    public String getReview() {
         return "";
     }
 }

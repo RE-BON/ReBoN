@@ -1,10 +1,6 @@
 package com.handong.rebon.review.presentation;
 
-import java.util.List;
-
 import com.handong.rebon.review.application.ReviewService;
-import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
-import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewResponse;
 
