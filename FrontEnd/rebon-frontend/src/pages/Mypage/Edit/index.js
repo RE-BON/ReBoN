@@ -1,9 +1,8 @@
-import '../../../styles/mypage.css';
 import '../../../styles/myedit.css';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faXmark, faCamera, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+
 export default function Edit() {
   const [bgColor, setbgColor] = useState('white');
   const ChnageBgColor = (e) => {
@@ -41,7 +40,6 @@ export default function Edit() {
 
         <div className="edit-info-agree " onClick={ChnageBgColor}>
           <span className="agree-button" style={{ backgroundColor: bgColor }}>
-            {console.log(bgColor)}
             <FontAwesomeIcon icon={faCheck} size="1x" />
           </span>
           <span>수신 동의하기</span>

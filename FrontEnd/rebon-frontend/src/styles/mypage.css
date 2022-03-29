@@ -15,7 +15,6 @@
 
 .mypage-content {
   width: 40%;
-
   margin-left: 40%;
   /* 지금 여기가 문제인데, 각자꺼에서 아마 패딩, 마진을 줘서 그렇습니다
   그래서 그대로 가져오면 안되는 상황입니다 새로 css를 수정해야 할 듯 합니다 
@@ -77,6 +76,6 @@
 
 .sideMenu-bottom {
   position: absolute;
-  bottom: 100px;
+  bottom: 20%;
   font-size: 13px;
 }
