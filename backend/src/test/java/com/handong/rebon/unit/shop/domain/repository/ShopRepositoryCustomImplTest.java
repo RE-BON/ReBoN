@@ -3,7 +3,7 @@ package com.handong.rebon.unit.shop.domain.repository;
 import java.util.*;
 import javax.persistence.EntityManager;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.ShopSearchCondition;
 import com.handong.rebon.shop.domain.content.ShopContent;

@@ -3,7 +3,7 @@ package com.handong.rebon.shop.domain.type;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;

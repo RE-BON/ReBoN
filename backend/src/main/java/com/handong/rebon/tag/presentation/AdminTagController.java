@@ -11,6 +11,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/admin/tags")
 @Controller
 public class AdminTagController {
-    private final TagService tagService;
 
+    private final TagService tagService;
 }

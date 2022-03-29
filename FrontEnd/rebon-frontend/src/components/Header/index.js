@@ -1,7 +1,7 @@
 import '../../styles/header.css';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import SearchModal from './SearchModal';
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
@@ -13,17 +13,17 @@ export default function Header() {
       <header>
         <div className="header-logo"></div>
         {isLogin ? (
-          <div className="header-log-on">
-            <SearchModal />
-            <div className="header-log-on-profile">
-              <div>
-                <FontAwesomeIcon icon={faUser} className="userProfile" />
-              </div>
-              홍길동
+          <div className="header-logon">
+            <div className="header-logon-modal">
+              <SearchModal />
             </div>
+            <div className="header-logon-icon">
+              <FontAwesomeIcon icon={faCircleUser} size="2x" color="#BDBDBD" />
+            </div>
+            <span>홍길동</span>
           </div>
         ) : (
-          <div onClick={Login} className="header-log-off">
+          <div onClick={Login} className="header-logoff">
             <span>로그인</span>
             <span>회원가입</span>
           </div>

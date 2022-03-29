@@ -1,11 +1,9 @@
 .search-bar-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 389px;
-  height: 38px;
-  padding: 20px;
+  width: 100%;
   border-radius: 100px;
+  padding: 2%;
   background-color: rgba(0, 0, 0, 0.05);
   color: rgba(0, 0, 0, 0.4);
 }
@@ -15,8 +13,8 @@
 }
 
 .search-bar-wrapper input {
-  width: 90%;
-  height: 35px;
+  width: 100%;
+  height: 100%;
   border-radius: 50px;
   background-color: transparent;
   border: none;

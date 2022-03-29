@@ -6,7 +6,7 @@ import com.handong.rebon.acceptance.AcceptanceTest;
 import com.handong.rebon.acceptance.admin.AdminCategoryRegister;
 import com.handong.rebon.acceptance.admin.AdminShopRegister;
 import com.handong.rebon.acceptance.admin.AdminTagRegister;
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;

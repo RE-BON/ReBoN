@@ -3,7 +3,7 @@ package com.handong.rebon.shop.domain;
 import java.util.Collections;
 import java.util.List;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.tag.domain.Tag;
 
 import lombok.Getter;

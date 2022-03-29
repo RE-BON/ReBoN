@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.category.Category;
-import com.handong.rebon.category.CategoryRepository;
+import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.category.domain.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;

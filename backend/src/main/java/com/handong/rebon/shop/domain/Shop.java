@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.*;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.category.ShopCategory;

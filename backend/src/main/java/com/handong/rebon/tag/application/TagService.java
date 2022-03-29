@@ -1,27 +1,41 @@
 package com.handong.rebon.tag.application;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class TagService {
+
     private final TagRepository tagRepository;
 
-    public TagService(TagRepository tagRepository) {
-        this.tagRepository = tagRepository;
+    @Transactional
+    public Long createTag(String tagName) {
+        validateDuplicateTag(tagName);
+
+        Tag newTag = new Tag(tagName);
+
+        Tag savedTag = tagRepository.save(newTag);
+        return savedTag.getId();
     }
 
-    // 태그 담당이 아니라 Shop 메서드가 잘 돌아가는지만 확인하기 위해 임시로 만든것.
-    // 태그 파트랑 머지할 때 삭제하면 될듯
+    private void validateDuplicateTag(String name) {
+        if (tagRepository.existsByName(name)) {
+            throw new TagExistException();
+        }
+    }
+
+    // TODO temp
     public List<Tag> findAll(List<Long> tags) {
-        return tags.stream()
-                   .map(t -> tagRepository.findById(t).get())
-                   .collect(Collectors.toList());
+        return tagRepository.findAll();
     }
 
     public Tag findById(Long id) {
@@ -29,3 +43,4 @@ public class TagService {
                             .orElseThrow(IllegalArgumentException::new);
     }
 }
+

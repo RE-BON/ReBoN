@@ -3,7 +3,7 @@ package com.handong.rebon.acceptance.admin;
 import java.util.Collections;
 import java.util.List;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.ShopAdapterService;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;

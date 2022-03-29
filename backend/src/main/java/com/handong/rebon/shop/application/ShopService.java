@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.category.Category;
-import com.handong.rebon.category.CategoryService;
+import com.handong.rebon.category.application.CategoryService;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
@@ -56,6 +56,11 @@ public class ShopService {
 
         Shop savedShop = shopRepository.save(shop);
         return savedShop.getId();
+    }
+
+    //Review 메서드 작동을 하기 위해 만들어 놓은 임시 메서드
+    public Shop findById(Long id) {
+        return shopRepository.findById(id).get();
     }
 
     // TODO 이미지 저장 기능 구현(따로 서비스로 분리해도 될듯?)

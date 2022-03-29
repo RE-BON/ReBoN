@@ -3,8 +3,8 @@ package com.handong.rebon.integration.shop;
 import java.util.Arrays;
 import java.util.List;
 
-import com.handong.rebon.category.Category;
-import com.handong.rebon.category.CategoryRepository;
+import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
