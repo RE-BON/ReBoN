@@ -43,6 +43,11 @@ public class Category {
         this.name = name;
     }
 
+    public Category(String name, Category parent) {
+        this.name = name;
+        this.parent = parent;
+    }
+
     public boolean isSameName(String name) {
         return this.name.equals(name);
     }

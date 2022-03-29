@@ -24,4 +24,12 @@ public class ShopImages {
     public void belongTo(Shop shop) {
         shopImages.forEach(image -> image.belongTo(shop));
     }
+
+    public String mainImage() {
+        return shopImages.stream()
+                         .filter(ShopImage::isMain)
+                         .map(ShopImage::getUrl)
+                         .findFirst()
+                         .orElseThrow();
+    }
 }

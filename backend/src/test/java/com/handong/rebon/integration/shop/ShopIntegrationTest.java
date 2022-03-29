@@ -123,7 +123,7 @@ class ShopIntegrationTest extends IntegrationTest {
         return shopRepository.save(cafe);
     }
 
-    protected Cafe createCafe(Category category,List<Tag> tags, String name) {
+    protected Cafe createCafe(Category category, List<Tag> tags, String name) {
         Cafe cafe = Cafe.builder()
                         .category(category)
                         .shopContent(new ShopContent(name))

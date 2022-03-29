@@ -23,4 +23,9 @@ public class TagService {
                    .map(t -> tagRepository.findById(t).get())
                    .collect(Collectors.toList());
     }
+
+    public Tag findById(Long id) {
+        return tagRepository.findById(id)
+                            .orElseThrow(IllegalArgumentException::new);
+    }
 }

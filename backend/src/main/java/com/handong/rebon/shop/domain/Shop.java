@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.persistence.*;
 
 import com.handong.rebon.category.Category;
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn
-public abstract class Shop {
+public abstract class Shop extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,6 +91,10 @@ public abstract class Shop {
                                                          .collect(Collectors.toList());
 
         this.shopCategories.addAll(shopCategories);
+    }
+
+    public String getMainImage() {
+        return shopImages.mainImage();
     }
 
     public String getName() {
