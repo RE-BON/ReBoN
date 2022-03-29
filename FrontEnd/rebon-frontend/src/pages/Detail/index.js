@@ -7,12 +7,16 @@ import '../../styles/detail.css';
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: 'block', background: '#C4C4C4', borderRadius: '20px', paddingLeft: '5px' }} onClick={onClick} />;
+  return (
+    <div className={className} style={{ ...style, display: 'block', background: '#F5F5F5', borderRadius: '20px', paddingLeft: '18px', paddingTop: '13px' }} onClick={onClick} />
+  );
 }
 
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: 'block', background: '#C4C4C4', borderRadius: '20px', paddingLeft: '5px' }} onClick={onClick} />;
+  return (
+    <div className={className} style={{ ...style, display: 'block', background: '#F5F5F5', borderRadius: '20px', paddingLeft: '16px', paddingTop: '13px' }} onClick={onClick} />
+  );
 }
 
 export default function Detail() {

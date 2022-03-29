@@ -1,62 +1,62 @@
 .header-wrapper {
-  display: flex;
   position: fixed;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 13%;
   width: 100%;
-  top: 15px;
+  top: 0;
   z-index: 5;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 .header-wrapper header {
-  width: 60%;
-  height: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  margin: 0% 20%;
 }
 
 .header-logo {
   width: 20%;
-  height: 90%;
-  margin-right: 150px;
+  height: 60%;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.header-log-on {
+.header-logon {
   display: flex;
-  font-weight: 700;
-}
-
-.header-log-on-profile {
-  display: flex;
+  justify-content: right;
   align-items: center;
-  justify-content: center;
+  width: 80%;
+  height: 50%;
   font-weight: 700;
 }
 
-.header-log-on-profile div {
+.header-logon-modal {
+  width: 60%;
+  font-weight: 700;
+}
+
+.header-logon-icon {
+  margin-left: 5%;
+}
+
+.header-logon span {
+  margin-left: 1%;
+}
+
+.header-logoff {
   display: flex;
+  justify-content: right;
   align-items: center;
-  justify-content: center;
-  width: 35px;
-  height: 35px;
-  margin-right: 5px;
-  margin-left: 40px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.header-log-on-profile .userProfile {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.header-log-off {
+  width: 80%;
   font-weight: 700;
 }
 
-.header-log-off span {
-  margin-left: 50px;
+.header-logoff span {
+  margin-left: 7%;
+  margin-right: 2%;
 }

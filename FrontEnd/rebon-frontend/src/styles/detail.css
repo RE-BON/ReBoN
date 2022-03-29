@@ -16,7 +16,7 @@
 }
 .detail-shop-wrapper {
   margin-left: 20%;
-  width: 40%;
+  width: 60%;
   margin-bottom: 10%;
 }
 .detail-title-wrapper {
@@ -75,6 +75,6 @@
   margin-top: 5%;
 }
 .detail-map-image {
-  height: 150px;
-  width: 350px;
+  height: 400px;
+  width: 600px;
 }
