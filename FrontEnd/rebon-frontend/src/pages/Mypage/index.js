@@ -13,7 +13,6 @@ import Edit from './Edit';
 import Header from '../../components/Header';
 
 import '../../styles/mypage.css';
-import '../../styles/myedit.css';
 
 export default function Mypage() {
   return (
@@ -21,20 +20,18 @@ export default function Mypage() {
       <Header />
       <div className="mypage-wrapper">
         <div className="mypage-tab">
-          {/* sideMaenu */}
           <div className="sideMenu-wrapper">
             <div className="sideMenu-intro">
               안녕하세요.
               <br />
               <span className="name">홍길동</span>님{' '}
-              <Link to="#">
-                {/* 여기서 페이지 이동 어디로? */}
+              <Link to="">
                 <ImCog color="black" size="18" />
               </Link>
             </div>
 
-            <Link to="/mypage/footprint">
-              <Row className="sidebtn-wrapper align-middle">
+            <Link to="/mypage/footprint" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Row className="sidebtn-wrapper">
                 <Col md={2}>
                   <div className="sidebtn-icon">
                     <RiFootprintLine size="24" color="#898C8F" />
@@ -44,7 +41,7 @@ export default function Mypage() {
                   <div className="btn-name">발자국</div>
                   <div className="sub-txt">리뷰를 확인할 수 있어요.</div>
                 </Col>
-                <Col md={2}>
+                <Col md={1}>
                   <div>
                     <IoIosArrowForward color="#A5A9AB" />
                   </div>
@@ -52,7 +49,7 @@ export default function Mypage() {
               </Row>
             </Link>
 
-            <Link to="/mypage/bookmark">
+            <Link to="/mypage/bookmark" style={{ color: 'inherit', textDecoration: 'none' }}>
               <Row className="sidebtn-wrapper">
                 <Col md={2}>
                   <div className="sidebtn-icon">
@@ -78,9 +75,9 @@ export default function Mypage() {
           </div>
         </div>
 
-        <div className="myedit-content-wrapper">
+        <div className="mypage-content">
           <Routes>
-            <Route path="/" element={<Edit />} />
+            <Route path="" element={<Edit />} />
             <Route path="footprint" element={<Footprint />} />
             <Route path="bookmark" element={<Bookmark />} />
           </Routes>
