@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class ShopImages {
+    public static String DEFAULT_IMAGE_URL = "default image url";
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private List<ShopImage> shopImages = new ArrayList<>();
@@ -30,6 +31,6 @@ public class ShopImages {
                          .filter(ShopImage::isMain)
                          .map(ShopImage::getUrl)
                          .findFirst()
-                         .orElseThrow();
+                         .orElseGet(() -> DEFAULT_IMAGE_URL);
     }
 }
