@@ -2,7 +2,7 @@ package com.handong.rebon.shop.application.dto.request;
 
 import java.util.List;
 
-import com.handong.rebon.shop.presentation.dto.request.MenuGroupRequest;
+import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,5 +26,6 @@ public class ShopCreateRequestDto {
     private String latitude;
     private List<MultipartFile> images;
     private List<Long> tags;
-    private List<MenuGroupRequest> menus;
+    //    private List<MenuGroupRequest> menus;
+    private List<MenuGroupRequestDto> menus;
 }

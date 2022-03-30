@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
+import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.presentation.dto.request.ShopSearchRequest;
 import com.handong.rebon.shop.presentation.dto.response.ShopSimpleResponse;
 
@@ -29,7 +30,7 @@ public class ApiShopController {
             @PageableDefault Pageable pageable
     ) {
         ShopSearchDto shopSearchDto = condition.toDto(pageable);
-        List<ShopSimpleResponse> responses = shopService.search(shopSearchDto);
-        return ResponseEntity.ok(responses);
+        List<ShopSimpleResponseDto> responses = shopService.search(shopSearchDto);
+        return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
     }
 }

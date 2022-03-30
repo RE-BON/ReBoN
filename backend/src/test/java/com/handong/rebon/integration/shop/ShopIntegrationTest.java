@@ -8,15 +8,10 @@ import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
-import com.handong.rebon.shop.domain.content.ShopContent;
-import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.content.ShopScore;
+import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
+import com.handong.rebon.shop.application.dto.request.menu.MenuRequestDto;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
-import com.handong.rebon.shop.domain.type.Cafe;
-import com.handong.rebon.shop.domain.type.Lodging;
 import com.handong.rebon.shop.domain.type.Restaurant;
-import com.handong.rebon.shop.presentation.dto.request.MenuGroupRequest;
-import com.handong.rebon.shop.presentation.dto.request.MenuRequest;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 
@@ -52,14 +47,14 @@ class ShopIntegrationTest extends IntegrationTest {
         Tag 포항 = createTag("포항");
         Tag 영일대 = createTag("영일대");
 
-        List<MenuGroupRequest> menuGroupRequests = Arrays.asList(
-                new MenuGroupRequest("피자메뉴", Arrays.asList(
-                        new MenuRequest("치즈 피자", 15000),
-                        new MenuRequest("페퍼로니 피자", 16000)
+        List<MenuGroupRequestDto> menuGroupRequests = Arrays.asList(
+                new MenuGroupRequestDto("피자메뉴", Arrays.asList(
+                        new MenuRequestDto("치즈 피자", 15000),
+                        new MenuRequestDto("페퍼로니 피자", 16000)
                 )),
-                new MenuGroupRequest("파스타메뉴", Arrays.asList(
-                        new MenuRequest("토마토 파스타", 13000),
-                        new MenuRequest("크림 파스타", 13000)
+                new MenuGroupRequestDto("파스타메뉴", Arrays.asList(
+                        new MenuRequestDto("토마토 파스타", 13000),
+                        new MenuRequestDto("크림 파스타", 13000)
                 ))
         );
 
@@ -90,58 +85,6 @@ class ShopIntegrationTest extends IntegrationTest {
         assertThat(restaurant.getShopTags()).hasSize(2);
         assertThat(restaurant.getCategory().getName()).isEqualTo("식당");
         assertThat(restaurant.getShopCategories()).hasSize(2);
-    }
-
-    protected Restaurant createRestaurant(Category category, String name) {
-        Restaurant restaurant = Restaurant.builder()
-                                          .category(category)
-                                          .shopContent(new ShopContent(name))
-                                          .shopScore(new ShopScore(4.8, 100))
-                                          .shopImages(new ShopImages())
-                                          .build();
-        return shopRepository.save(restaurant);
-    }
-
-    protected Restaurant createRestaurant(Category category, List<Tag> tags, String name) {
-        Restaurant restaurant = Restaurant.builder()
-                                          .category(category)
-                                          .shopContent(new ShopContent(name))
-                                          .shopScore(new ShopScore(4.8, 100))
-                                          .shopImages(new ShopImages())
-                                          .build();
-        restaurant.addTags(tags);
-        return shopRepository.save(restaurant);
-    }
-
-    protected Cafe createCafe(Category category, String name) {
-        Cafe cafe = Cafe.builder()
-                        .category(category)
-                        .shopContent(new ShopContent(name))
-                        .shopScore(new ShopScore(4.8, 100))
-                        .shopImages(new ShopImages())
-                        .build();
-        return shopRepository.save(cafe);
-    }
-
-    protected Cafe createCafe(Category category, List<Tag> tags, String name) {
-        Cafe cafe = Cafe.builder()
-                        .category(category)
-                        .shopContent(new ShopContent(name))
-                        .shopScore(new ShopScore(4.8, 100))
-                        .shopImages(new ShopImages())
-                        .build();
-        cafe.addTags(tags);
-        return shopRepository.save(cafe);
-    }
-
-    protected Lodging createLodging(Category category, String name) {
-        Lodging lodging = Lodging.builder()
-                                 .category(category)
-                                 .shopContent(new ShopContent(name))
-                                 .shopScore(new ShopScore(4.8, 100))
-                                 .shopImages(new ShopImages())
-                                 .build();
-        return shopRepository.save(lodging);
     }
 
     protected Category createCategory(String name) {

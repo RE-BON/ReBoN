@@ -3,8 +3,7 @@ package com.handong.rebon.shop.presentation.dto.response;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.shop.application.dto.response.ShopTagResponse;
-import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -29,17 +28,23 @@ public class ShopSimpleResponse {
         this.image = image;
     }
 
-    public static ShopSimpleResponse from(Shop shop) {
-        List<ShopTagResponse> tags = shop.getShopTags().stream()
-                                         .map(shopTag -> ShopTagResponse.from(shopTag.getTag()))
-                                         .collect(Collectors.toList());
+    public static List<ShopSimpleResponse> convert(List<ShopSimpleResponseDto> responses) {
+        return responses.stream()
+                        .map(ShopSimpleResponse::from)
+                        .collect(Collectors.toList());
+    }
+
+    private static ShopSimpleResponse from(ShopSimpleResponseDto dto) {
+        List<ShopTagResponse> tags = dto.getTags().stream()
+                                        .map(ShopTagResponse::from)
+                                        .collect(Collectors.toList());
 
         return ShopSimpleResponse.builder()
-                                 .id(shop.getId())
-                                 .name(shop.getName())
-                                 .star(shop.getStar())
+                                 .id(dto.getId())
+                                 .name(dto.getName())
+                                 .star(dto.getStar())
                                  .tags(tags)
-                                 .image(shop.getMainImage())
+                                 .image(dto.getImage())
                                  .build();
     }
 }

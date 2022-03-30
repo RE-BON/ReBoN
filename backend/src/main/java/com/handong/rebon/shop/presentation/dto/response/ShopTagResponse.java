@@ -1,6 +1,6 @@
-package com.handong.rebon.shop.application.dto.response;
+package com.handong.rebon.shop.presentation.dto.response;
 
-import com.handong.rebon.tag.domain.Tag;
+import com.handong.rebon.shop.application.dto.response.ShopTagResponseDto;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class ShopTagResponse {
         this.name = name;
     }
 
-    public static ShopTagResponse from(Tag tag) {
-        return new ShopTagResponse(tag.getId(), tag.getName());
+    public static ShopTagResponse from(ShopTagResponseDto dto) {
+        return new ShopTagResponse(dto.getId(), dto.getName());
     }
 }
