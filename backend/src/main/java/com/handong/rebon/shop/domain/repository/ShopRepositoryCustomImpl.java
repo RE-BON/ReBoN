@@ -36,7 +36,7 @@ public class ShopRepositoryCustomImpl extends QuerydslRepositorySupport implemen
         JPAQuery<Shop> query = queryFactory.select(shop)
                                            .from(shop)
                                            .where(categoryEq(condition.getCategory())
-                                                   .and(tadEq(condition.getTag()))
+                                                   .and(tagEq(condition.getTag()))
                                                    .and(containsSubCategories(condition.getSubs()))
                                                    .and(isMainImage()))
                                            .leftJoin(shop.shopTags, shopTag)
@@ -53,7 +53,7 @@ public class ShopRepositoryCustomImpl extends QuerydslRepositorySupport implemen
         return shop.category.eq(category);
     }
 
-    private BooleanExpression tadEq(Tag tag) {
+    private BooleanExpression tagEq(Tag tag) {
         return shop.shopTags.any().tag.eq(tag);
     }
 
