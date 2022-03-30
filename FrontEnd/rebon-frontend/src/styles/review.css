@@ -70,6 +70,16 @@
 .review-list-icon {
   float: right;
   margin-right: 1%;
+  background-color: transparent;
+  border: none;
+}
+.review-list-icon:hover {
+  background-color: transparent;
+  border: none;
+}
+.review-list-icon:active {
+  background-color: transparent;
+  border: none;
 }
 .review-user-name {
   color: #262626;
