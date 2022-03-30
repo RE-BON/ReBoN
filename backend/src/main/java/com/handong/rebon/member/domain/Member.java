@@ -4,7 +4,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.handong.rebon.review.domain.empathy.Empathy;
-import com.handong.rebon.shop.domain.like.Like;
+import com.handong.rebon.shop.domain.like.Likes;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +24,7 @@ public class Member {
     private Profile profile;
 
     @OneToMany(mappedBy = "member")
-    private List<Like> likes;
+    private List<Likes> likes;
 
     @OneToMany(mappedBy = "member")
     private List<Empathy> empathies;

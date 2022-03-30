@@ -6,8 +6,7 @@ import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.shop.domain.Shop;
 
 @Entity
-@Table(name = "LIKES")
-public class Like {
+public class Likes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

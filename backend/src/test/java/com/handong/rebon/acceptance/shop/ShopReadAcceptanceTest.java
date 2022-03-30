@@ -119,7 +119,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     }
 
     private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
-        return RestAssured.given()
+        return RestAssured.given(super.spec)
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)
                           .queryParam("tag", tag)
@@ -131,6 +131,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
                           .log().all()
                           .extract();
     }
+
 
     private void initShops() {
         shops.clear();

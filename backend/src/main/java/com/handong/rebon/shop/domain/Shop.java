@@ -12,7 +12,7 @@ import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.like.Like;
+import com.handong.rebon.shop.domain.like.Likes;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.tag.domain.Tag;
@@ -51,7 +51,7 @@ public abstract class Shop extends BaseEntity {
     private ShopScore shopScore;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private List<ShopTag> shopTags = new ArrayList<>();
