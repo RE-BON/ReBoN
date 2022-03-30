@@ -1,3 +1,11 @@
+.bookmark-title {
+  margin: 8% 5% 5% 5%;
+  border-bottom: 2px solid black;
+  font-size: 15px;
+  padding: 0 0 2% 5%;
+  font-weight: bolder;
+}
+
 .detail-image-wrapper {
   margin-top: 5%;
   display: grid;
