@@ -1,6 +1,5 @@
 package com.handong.rebon.review.application.dto.response;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Builder;
