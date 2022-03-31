@@ -22,4 +22,8 @@ public abstract class BaseEntity {
     private LocalDateTime updatedAt;
 
     private boolean isDeleted;
+
+    public void deleteContent() {
+        isDeleted = true;
+    }
 }
