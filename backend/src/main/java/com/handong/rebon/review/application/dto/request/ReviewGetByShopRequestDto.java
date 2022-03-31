@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ReviewRequestDto {
+public class ReviewGetByShopRequestDto {
     private Long memberId;
     private Long shopId;
     private Pageable pageable;
