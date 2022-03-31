@@ -5,6 +5,7 @@ import javax.persistence.*;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.Review;
 
+
 @Entity
 public class Empathy {
 
@@ -19,9 +20,14 @@ public class Empathy {
     private Review review;
 
     public boolean isSameMember(Member member) {
-        if (member.getId() == this.member.getId()) {
-            return true;
-        }
-        return false;
+        return this.member.isSame(member);
+    }
+
+    public void belongTo(Review review) {
+        this.review = review;
+    }
+
+    public void belongTo(Member member) {
+        this.member = member;
     }
 }
