@@ -29,6 +29,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Empathy> empathies;
 
+    private boolean isAgreed;
+    private boolean isDeleted;
+
     public Member(Profile profile) {
         this.profile = profile;
     }

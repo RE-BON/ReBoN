@@ -15,14 +15,13 @@ import lombok.Getter;
 public class ReviewCreateRequestDto {
     private Long memberId;
     private Long shopId;
-    private String title;
     private String content;
     private String tip;
     private List<MultipartFile> images;
-    private double star;
+    private int star;
 
     public ReviewContent getReviewContent() {
-        return new ReviewContent(title, content, tip);
+        return new ReviewContent(content, tip);
     }
 
     public ReviewScore getReviewScore() {
