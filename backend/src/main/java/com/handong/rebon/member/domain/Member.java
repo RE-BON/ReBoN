@@ -29,7 +29,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Empathy> empathies;
 
-    private boolean isAgreementMarketingReceptionTerm;
+    private boolean isAgreed;
     private boolean isDeleted;
 
     public Member(Profile profile) {
