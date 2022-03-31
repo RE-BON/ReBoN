@@ -48,6 +48,14 @@ public class Review extends BaseEntity {
         this.reviewImages.connectReviewToReviewImage(this);
     }
 
+    public boolean canDelete(Member member) {
+        return this.member.isSame(member) || member.isAdmin();
+    }
+
+    public void delete() {
+        deleteContent();
+    }
+
     public String getContent() {
         return reviewContent.getContent();
     }
