@@ -76,10 +76,9 @@ public class ReviewService {
         String keyword = adminReviewGetRequestDto.getKeyword();
         Pageable pageable = adminReviewGetRequestDto.getPageable();
 
-
         if (StringUtils.hasText(keyword)) {
-
-            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(StringUtil.makeContainingKeyword(keyword), pageable)
+            String containingKeyword = StringUtil.makeContainingKeyword(keyword);
+            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(containingKeyword, pageable)
                                                    .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
@@ -90,7 +89,7 @@ public class ReviewService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReviewGetByMemberResponseDto> findReviewsByMember(ReviewGetByMemberRequestDto reviewGetByMemberRequestDto) {
+    public List<ReviewGetByMemberResponseDto> findAllByMember(ReviewGetByMemberRequestDto reviewGetByMemberRequestDto) {
         Long memberId = reviewGetByMemberRequestDto.getMemberId();
         Pageable pageable = reviewGetByMemberRequestDto.getPageable();
 
@@ -102,7 +101,7 @@ public class ReviewService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReviewGetByShopResponseDto> findReviewsByShop(ReviewGetByShopRequestDto reviewGetByShopRequestDto) {
+    public List<ReviewGetByShopResponseDto> findAllByShop(ReviewGetByShopRequestDto reviewGetByShopRequestDto) {
         Long shopId = reviewGetByShopRequestDto.getShopId();
         Long memberId = reviewGetByShopRequestDto.getMemberId();
         Pageable pageable = reviewGetByShopRequestDto.getPageable();
@@ -116,7 +115,7 @@ public class ReviewService {
         return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
                                         .orElseThrow(ReviewNotFoundException::new);
