@@ -3,6 +3,7 @@ package com.handong.rebon.member.domain;
 import java.util.List;
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.like.Likes;
 
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +31,8 @@ public class Member {
     private List<Empathy> empathies;
 
     private boolean isAgreed;
-    private boolean isDeleted;
+
+    private boolean isAdmin;
 
     public Member(Profile profile) {
         this.profile = profile;
