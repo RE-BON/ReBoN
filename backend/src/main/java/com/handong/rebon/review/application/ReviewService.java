@@ -25,6 +25,7 @@ import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
+import com.handong.rebon.util.StringUtil;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -78,7 +79,8 @@ public class ReviewService {
 
         if (StringUtils.hasText(keyword)) {
 
-            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(makeContainingKeyword(keyword), pageable);
+            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(StringUtil.makeContainingKeyword(keyword), pageable)
+                                                   .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
 
@@ -94,7 +96,7 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByMemberId(member, pageable);
+        List<Review> reviews = reviewRepository.findAllByMemberId(member, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByMemberResponseDtos(reviews);
     }
@@ -109,7 +111,7 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByShopId(shop, pageable);
+        List<Review> reviews = reviewRepository.findAllByShopId(shop, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
@@ -133,11 +135,5 @@ public class ReviewService {
         return new ReviewImages(Arrays.asList(url1, url2));
     }
 
-    private String makeContainingKeyword(String keyword) {
-        StringBuilder stringbuilder = new StringBuilder();
-        stringbuilder.append("%");
-        stringbuilder.append(keyword);
-        stringbuilder.append("%");
-        return stringbuilder.toString();
-    }
+
 }
