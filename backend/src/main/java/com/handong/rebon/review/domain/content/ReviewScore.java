@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class ReviewScore {
-    private double star;
+    private int star;
     private int empathyCount;
 
-    public ReviewScore(double star, int empathyCount) {
+    public ReviewScore(int star, int empathyCount) {
         validatesRangeOfValues(star, empathyCount);
         this.star = star;
         this.empathyCount = empathyCount;
     }
 
     private void validatesRangeOfValues(double star, int likeCount) {
-        if (star < 0 || star > 5) {
+        if (star <= 0 || star > 5) {
             throw new ReviewStarException();
         }
         if (likeCount < 0) {

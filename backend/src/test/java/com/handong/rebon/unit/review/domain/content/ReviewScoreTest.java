@@ -13,19 +13,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ReviewScoreTest {
 
-    @Test
-    @DisplayName("review star에는 음수가 들어갈 수 없다.")
-    public void reviewStarNegativeException() {
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1})
+    @DisplayName("review star에는 0 또는 음수가 들어갈 수 없다.")
+    public void reviewStarNegativeException(int star) {
         //given
         //when, then
-        assertThatThrownBy(() -> new ReviewScore(-1, 5))
+        assertThatThrownBy(() -> new ReviewScore(star, 5))
                 .isInstanceOf(ReviewStarException.class);
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {6,5.5})
+    @ValueSource(ints = {6,7})
     @DisplayName("review star는 5점을 넘을 수 없다.")
-    public void reviewStarExcessFiveException(double star) {
+    public void reviewStarExcessFiveException(int star) {
         //given
         //when, then
         assertThatThrownBy(() -> new ReviewScore(star, 0))
@@ -37,7 +38,7 @@ class ReviewScoreTest {
     public void reviewLikeCountNegativeException() {
         //given
         //when, then
-        assertThatThrownBy(() -> new ReviewScore(0, -1))
+        assertThatThrownBy(() -> new ReviewScore(1, -1))
                 .isInstanceOf(ReviewLikeCountException.class);
     }
 }
