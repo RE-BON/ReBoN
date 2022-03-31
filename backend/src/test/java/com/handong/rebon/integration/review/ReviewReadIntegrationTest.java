@@ -5,9 +5,11 @@ import java.util.List;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
-import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
@@ -30,10 +32,10 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Member member = createMember("peace");
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent1 = new ReviewContent("맛이다", "나쁜족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewContent reviewContent1 = new ReviewContent("나쁜족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore1 = new ReviewScore(5, 0);
 
-        ReviewContent reviewContent2 = new ReviewContent("먹을만 해요", "여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
+        ReviewContent reviewContent2 = new ReviewContent("여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
         ReviewScore reviewScore2 = new ReviewScore(4, 0);
 
         ReviewRequest reviewRequest1 = createReviewRequest(reviewContent1, reviewScore1);
@@ -52,8 +54,8 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
 
         //then
         assertThat(reviews).hasSize(1);
-        assertThat(reviews).extracting("title")
-                           .contains(reviewContent1.getTitle());
+        assertThat(reviews).extracting("content")
+                           .contains(reviewContent1.getContent());
 
     }
 
@@ -64,10 +66,10 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Member member = createMember("peace");
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent1 = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewContent reviewContent1 = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore1 = new ReviewScore(5, 0);
 
-        ReviewContent reviewContent2 = new ReviewContent("먹을만 해요", "여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
+        ReviewContent reviewContent2 = new ReviewContent("여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
         ReviewScore reviewScore2 = new ReviewScore(4, 0);
 
         ReviewRequest reviewRequest1 = createReviewRequest(reviewContent1, reviewScore1);
@@ -98,10 +100,10 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Shop shop = createShop("토시래");
         Member member2 = createMember("pg13");
 
-        ReviewContent reviewContent1 = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewContent reviewContent1 = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore1 = new ReviewScore(5, 0);
 
-        ReviewContent reviewContent2 = new ReviewContent("먹을만 해요", "여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
+        ReviewContent reviewContent2 = new ReviewContent( "여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
         ReviewScore reviewScore2 = new ReviewScore(4, 0);
 
         ReviewRequest reviewRequest1 = createReviewRequest(reviewContent1, reviewScore1);
@@ -113,17 +115,17 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto1);
         reviewService.create(reviewCreateRequestDto2);
 
-        ReviewRequestDto reviewRequestDto = ReviewRequestDto.builder()
-                                                            .memberId(member1.getId())
-                                                            .build();
+        ReviewGetByMemberRequestDto reviewGetByMemberRequestDto = ReviewGetByMemberRequestDto.builder()
+                                                                                  .memberId(member1.getId())
+                                                                                  .build();
 
         //when
-        List<ReviewResponseDto> reviews = reviewService.findByMemberId(reviewRequestDto);
+        List<ReviewGetByMemberResponseDto> reviews = reviewService.findReviewsByMemberId(reviewGetByMemberRequestDto);
 
         //then
         assertThat(reviews).hasSize(1);
-        assertThat(reviews).extracting("authorName")
-                           .contains(member1.getNickName());
+        assertThat(reviews).extracting("content")
+                           .contains(reviewContent1.getContent());
     }
 
     @Test
@@ -135,13 +137,13 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Shop shop2 = createShop("팜스발리");
 
 
-        ReviewContent reviewContent1 = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewContent reviewContent1 = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore1 = new ReviewScore(5, 0);
 
-        ReviewContent reviewContent2 = new ReviewContent("피자가 맛있어요", "피자 맛이 좋아요", "치킨이랑 피자 시켜드세요");
+        ReviewContent reviewContent2 = new ReviewContent("피자 맛이 좋아요", "치킨이랑 피자 시켜드세요");
         ReviewScore reviewScore2 = new ReviewScore(4, 0);
 
-        ReviewContent reviewContent3 = new ReviewContent("토시래 짱", "토시래 족발 굳", "앞족발 시켜드세요");
+        ReviewContent reviewContent3 = new ReviewContent("토시래 족발 굳", "앞족발 시켜드세요");
         ReviewScore reviewScore3 = new ReviewScore(5, 0);
 
 
@@ -158,13 +160,13 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
         reviewService.create(reviewCreateRequestDto3);
 
-        ReviewRequestDto reviewRequestDto = ReviewRequestDto.builder()
-                                                            .shopId(shop1.getId())
-                                                            .memberId(member.getId())
-                                                            .build();
+        ReviewGetByShopRequestDto reviewGetByShopRequestDto = ReviewGetByShopRequestDto.builder()
+                                                                              .shopId(shop1.getId())
+                                                                              .memberId(member.getId())
+                                                                              .build();
 
         //when
-        List<ReviewResponseDto> reviews = reviewService.findByShopId(reviewRequestDto);
+        List<ReviewGetByShopResponseDto> reviews = reviewService.findReviewsByShopId(reviewGetByShopRequestDto);
 
         //then
         assertThat(reviews).hasSize(2);
@@ -179,7 +181,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Member member = createMember("peace");
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
 
         ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
