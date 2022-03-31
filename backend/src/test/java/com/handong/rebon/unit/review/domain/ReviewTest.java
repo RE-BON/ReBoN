@@ -17,8 +17,8 @@ public class ReviewTest {
     @DisplayName("리뷰에 공감한 사람 중에 유저가 있는 경우 true가 나온다.")
     void getTrueEmpathiesInUser() {
         //given
-        Member member1 = createMember(1L,"peace");
-        Member member2 = createMember(2L,"james");
+        Member member1 = createMember(1L, "peace");
+        Member member2 = createMember(2L, "james");
 
         ReviewContent reviewContent = new ReviewContent("맛있어요", "족발 추천");
 
@@ -42,9 +42,9 @@ public class ReviewTest {
     @DisplayName("리뷰에 공감한 사람 중에 유저가 없는 경우 false가 나온다.")
     void getFalseEmpathiesNotInUser() {
         //given
-        Member member1 = createMember(1L,"peace");
-        Member member2 = createMember(2L,"james");
-        Member member3 = createMember(3L,"curry");
+        Member member1 = createMember(1L, "peace");
+        Member member2 = createMember(2L, "james");
+        Member member3 = createMember(3L, "curry");
 
         ReviewContent reviewContent = new ReviewContent("맛있어요", "족발 추천");
 
@@ -62,7 +62,6 @@ public class ReviewTest {
 
         //then
         assertThat(isMemberLiked).isEqualTo(false);
-
     }
 
     private Member createMember(Long id, String memberName) {
@@ -71,5 +70,4 @@ public class ReviewTest {
                      .profile(new Profile(memberName))
                      .build();
     }
-
 }
