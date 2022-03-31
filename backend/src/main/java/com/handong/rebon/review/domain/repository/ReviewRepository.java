@@ -12,13 +12,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select r from Review r " +
-            "join fetch r.member join fetch r.shop " +
             "where r.reviewContent.content like :keyword or r.reviewContent.tip like :keyword")
     Page<Review> findAllByReviewContentAndTipContaining(@Param("keyword") String keyword, Pageable pageable);
 
-    @Query("select r from Review r join fetch r.member join fetch r.shop where r.member = :member")
-    Page<Review> findAllByMemberId(@Param("member") Member member, Pageable pageable);
+    Page<Review> findAllByMember(Member member, Pageable pageable);
 
-    @Query("select r from Review r join fetch r.member join fetch r.shop where r.shop = :shop")
-    Page<Review> findAllByShopId(@Param("shop") Shop shop, Pageable pageable);
+    Page<Review> findAllByShop(Shop shop, Pageable pageable);
 }

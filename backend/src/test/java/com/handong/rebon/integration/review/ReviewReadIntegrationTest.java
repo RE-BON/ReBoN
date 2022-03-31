@@ -120,7 +120,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
                                                                                              .build();
 
         //when
-        List<ReviewGetByMemberResponseDto> reviews = reviewService.findReviewsByMemberId(reviewGetByMemberRequestDto);
+        List<ReviewGetByMemberResponseDto> reviews = reviewService.findReviewsByMember(reviewGetByMemberRequestDto);
 
         //then
         assertThat(reviews).hasSize(1);
@@ -166,7 +166,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
                                                                                        .build();
 
         //when
-        List<ReviewGetByShopResponseDto> reviews = reviewService.findReviewsByShopId(reviewGetByShopRequestDto);
+        List<ReviewGetByShopResponseDto> reviews = reviewService.findReviewsByShop(reviewGetByShopRequestDto);
 
         //then
         assertThat(reviews).hasSize(2);

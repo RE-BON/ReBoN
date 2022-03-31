@@ -46,7 +46,7 @@ public class ReviewService {
     private final MemberRepository memberRepository;
     private final ShopRepository shopRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
         //TODO 멤버 찾아오기
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
@@ -71,7 +71,7 @@ public class ReviewService {
         return savedReview.getId();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<AdminReviewResponseDto> search(AdminReviewGetRequestDto adminReviewGetRequestDto) {
         String keyword = adminReviewGetRequestDto.getKeyword();
         Pageable pageable = adminReviewGetRequestDto.getPageable();
@@ -89,20 +89,20 @@ public class ReviewService {
         return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
     }
 
-    @Transactional
-    public List<ReviewGetByMemberResponseDto> findReviewsByMemberId(ReviewGetByMemberRequestDto reviewGetByMemberRequestDto) {
+    @Transactional(readOnly = true)
+    public List<ReviewGetByMemberResponseDto> findReviewsByMember(ReviewGetByMemberRequestDto reviewGetByMemberRequestDto) {
         Long memberId = reviewGetByMemberRequestDto.getMemberId();
         Pageable pageable = reviewGetByMemberRequestDto.getPageable();
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByMemberId(member, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByMember(member, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByMemberResponseDtos(reviews);
     }
 
-    @Transactional
-    public List<ReviewGetByShopResponseDto> findReviewsByShopId(ReviewGetByShopRequestDto reviewGetByShopRequestDto) {
+    @Transactional(readOnly = true)
+    public List<ReviewGetByShopResponseDto> findReviewsByShop(ReviewGetByShopRequestDto reviewGetByShopRequestDto) {
         Long shopId = reviewGetByShopRequestDto.getShopId();
         Long memberId = reviewGetByShopRequestDto.getMemberId();
         Pageable pageable = reviewGetByShopRequestDto.getPageable();
@@ -111,7 +111,7 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByShopId(shop, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
