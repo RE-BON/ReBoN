@@ -1,20 +1,22 @@
 package com.handong.rebon.review.application;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
+import com.handong.rebon.exception.shop.ShopNotFoundException;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
-import com.handong.rebon.review.application.dto.response.ReviewResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -22,10 +24,12 @@ import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
@@ -39,8 +43,9 @@ public class ReviewService {
     private final ShopService shopService;
     private final ReviewImageRepository reviewImageRepository;
     private final MemberRepository memberRepository;
+    private final ShopRepository shopRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
         //TODO 멤버 찾아오기
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
@@ -70,41 +75,43 @@ public class ReviewService {
         String keyword = adminReviewGetRequestDto.getKeyword();
         Pageable pageable = adminReviewGetRequestDto.getPageable();
 
-        List<Review> reviews = new ArrayList<>();
 
-        if (keyword == null) {
-            reviews = reviewRepository.findAll(pageable).toList();
+        if (StringUtils.hasText(keyword)) {
+
+            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(makeContainingKeyword(keyword), pageable);
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
 
-        reviews.addAll(reviewRepository.findAllByReviewContentContaining(makeContainingKeyword(keyword), pageable));
+        List<Review> reviews = reviewRepository.findAll(pageable).getContent();
 
         return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
     }
 
     @Transactional
-    public List<ReviewResponseDto> findByMemberId(ReviewRequestDto reviewRequestDto) {
-        Long memberId = reviewRequestDto.getMemberId();
-        Pageable pageable = reviewRequestDto.getPageable();
-
-        List<Review> reviews = reviewRepository.findAllByMemberId(memberId, pageable);
+    public List<ReviewGetByMemberResponseDto> findReviewsByMemberId(ReviewGetByMemberRequestDto reviewGetByMemberRequestDto) {
+        Long memberId = reviewGetByMemberRequestDto.getMemberId();
+        Pageable pageable = reviewGetByMemberRequestDto.getPageable();
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        return ReviewDtoAssembler.reviewResponseDtos(reviews, member);
+        List<Review> reviews = reviewRepository.findAllByMemberId(member, pageable);
+
+        return ReviewDtoAssembler.reviewGetByMemberResponseDtos(reviews);
     }
 
     @Transactional
-    public List<ReviewResponseDto> findByShopId(ReviewRequestDto reviewRequestDto) {
-        Long shopId = reviewRequestDto.getShopId();
-        Long memberId = reviewRequestDto.getMemberId();
-        Pageable pageable = reviewRequestDto.getPageable();
+    public List<ReviewGetByShopResponseDto> findReviewsByShopId(ReviewGetByShopRequestDto reviewGetByShopRequestDto) {
+        Long shopId = reviewGetByShopRequestDto.getShopId();
+        Long memberId = reviewGetByShopRequestDto.getMemberId();
+        Pageable pageable = reviewGetByShopRequestDto.getPageable();
 
-        List<Review> reviews = reviewRepository.findAllByShopId(shopId, pageable);
+        Shop shop = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        return ReviewDtoAssembler.reviewResponseDtos(reviews, member);
+        List<Review> reviews = reviewRepository.findAllByShopId(shop, pageable);
+
+        return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
 
     @Transactional
@@ -127,6 +134,10 @@ public class ReviewService {
     }
 
     private String makeContainingKeyword(String keyword) {
-        return "%" + keyword + "%";
+        StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append("%");
+        stringbuilder.append(keyword);
+        stringbuilder.append("%");
+        return stringbuilder.toString();
     }
 }
