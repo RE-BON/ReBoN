@@ -2,6 +2,7 @@ package com.handong.rebon.shop.application.adapter;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -30,5 +31,10 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
                       .shopImages(shopImages)
                       .shopScore(new ShopScore(0.0, 0))
                       .build();
+    }
+
+    @Override
+    public ShopResponseDto convertToShopResponseDto(Shop shop) {
+        return ShopResponseDto.from(shop);
     }
 }

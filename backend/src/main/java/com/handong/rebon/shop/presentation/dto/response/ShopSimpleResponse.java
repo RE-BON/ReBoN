@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
+import com.handong.rebon.shop.presentation.dto.response.tag.ShopTagResponse;
 
 import lombok.AccessLevel;
 import lombok.Builder;

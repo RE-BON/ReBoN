@@ -2,6 +2,8 @@ package com.handong.rebon.shop.domain.type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
+import com.handong.rebon.shop.domain.menu.MenuGroup;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -44,5 +47,10 @@ public class Restaurant extends Shop {
     public void addMenu(List<Menu> menus) {
         this.menus.addAll(menus);
         menus.forEach(menu -> menu.belongShop(this));
+    }
+
+    public Map<MenuGroup, List<Menu>> getMenuGroupByMenuGroup() {
+        return menus.stream()
+                    .collect(Collectors.groupingBy(Menu::getMenuGroup));
     }
 }

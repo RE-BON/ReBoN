@@ -1,4 +1,4 @@
-package com.handong.rebon.shop.application.dto.response;
+package com.handong.rebon.shop.application.dto.response.tag;
 
 import com.handong.rebon.tag.domain.Tag;
 
