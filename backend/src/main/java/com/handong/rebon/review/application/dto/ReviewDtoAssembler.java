@@ -68,6 +68,7 @@ public class ReviewDtoAssembler {
                                      .tip(review.getTip())
                                      .star(review.getStar())
                                      .empathyCount(review.getEmpathyCount())
+                                     .images(review.getImageUrls())
                                      .build();
     }
 }

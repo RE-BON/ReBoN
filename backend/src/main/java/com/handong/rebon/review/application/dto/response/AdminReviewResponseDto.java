@@ -1,5 +1,7 @@
 package com.handong.rebon.review.application.dto.response;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,6 +13,7 @@ public class AdminReviewResponseDto {
     private String shopName;
     private String content;
     private String tip;
+    private List<String> images;
     private int star;
     private int empathyCount;
 }
