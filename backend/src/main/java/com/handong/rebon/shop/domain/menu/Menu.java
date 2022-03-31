@@ -2,6 +2,7 @@ package com.handong.rebon.shop.domain.menu;
 
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.shop.domain.Shop;
 
 import lombok.Getter;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Menu {
+public class Menu extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -37,5 +37,10 @@ public class TagService {
     public List<Tag> findAll(List<Long> tags) {
         return tagRepository.findAll();
     }
+
+    public Tag findById(Long id) {
+        return tagRepository.findById(id)
+                            .orElseThrow(IllegalArgumentException::new);
+    }
 }
 
