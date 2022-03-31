@@ -10,9 +10,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @Embeddable
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Location {
     private String address;
     private String longitude;
     private String latitude;
+
+    public Location() {
+        this("", "", "");
+    }
 }
