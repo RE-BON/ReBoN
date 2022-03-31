@@ -28,7 +28,7 @@ public class ReviewImages {
 
     public List<String> getUrls() {
         return reviewImages.stream()
-                           .map(reviewImage -> reviewImage.getUrl())
+                           .map(ReviewImage::getUrl)
                            .collect(Collectors.toList());
     }
 }
