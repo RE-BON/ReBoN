@@ -66,15 +66,11 @@ public class Review extends BaseEntity {
         return shop.getShopName();
     }
 
-    public String getTitle() {
-        return reviewContent.getTitle();
-    }
-
     public String getTip() {
         return reviewContent.getTip();
     }
 
-    public double getStar() {
+    public int getStar() {
         return reviewScore.getStar();
     }
 

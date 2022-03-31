@@ -4,7 +4,6 @@ import java.util.Objects;
 import javax.persistence.Embeddable;
 
 import com.handong.rebon.exception.review.ReviewContentFormatException;
-import com.handong.rebon.exception.review.ReviewTitleFormatException;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,25 +12,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class ReviewContent {
-    private String title;
     private String content;
     private String tip;
 
-    public ReviewContent(String title, String content) {
-        this(title, content, "");
+    public ReviewContent(String content) {
+        this(content, "");
     }
 
-    public ReviewContent(String title, String content, String tip) {
-        validateTitleAndContent(title, content);
-        this.title = title;
+    public ReviewContent(String content, String tip) {
+        validateTitleAndContent(content);
         this.content = content;
         this.tip = tip;
     }
 
-    private void validateTitleAndContent(String title, String content) {
-        if (validatesData(title)) {
-            throw new ReviewTitleFormatException();
-        }
+    private void validateTitleAndContent(String content) {
         if (validatesData(content)) {
             throw new ReviewContentFormatException();
         }
