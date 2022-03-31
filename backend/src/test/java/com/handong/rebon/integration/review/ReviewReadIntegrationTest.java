@@ -103,7 +103,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         ReviewContent reviewContent1 = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore1 = new ReviewScore(5, 0);
 
-        ReviewContent reviewContent2 = new ReviewContent( "여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
+        ReviewContent reviewContent2 = new ReviewContent("여긴 막국수죠", "족발이랑 막국수랑 시켜드세요");
         ReviewScore reviewScore2 = new ReviewScore(4, 0);
 
         ReviewRequest reviewRequest1 = createReviewRequest(reviewContent1, reviewScore1);
@@ -116,8 +116,8 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
 
         ReviewGetByMemberRequestDto reviewGetByMemberRequestDto = ReviewGetByMemberRequestDto.builder()
-                                                                                  .memberId(member1.getId())
-                                                                                  .build();
+                                                                                             .memberId(member1.getId())
+                                                                                             .build();
 
         //when
         List<ReviewGetByMemberResponseDto> reviews = reviewService.findReviewsByMemberId(reviewGetByMemberRequestDto);
@@ -161,9 +161,9 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto3);
 
         ReviewGetByShopRequestDto reviewGetByShopRequestDto = ReviewGetByShopRequestDto.builder()
-                                                                              .shopId(shop1.getId())
-                                                                              .memberId(member.getId())
-                                                                              .build();
+                                                                                       .shopId(shop1.getId())
+                                                                                       .memberId(member.getId())
+                                                                                       .build();
 
         //when
         List<ReviewGetByShopResponseDto> reviews = reviewService.findReviewsByShopId(reviewGetByShopRequestDto);

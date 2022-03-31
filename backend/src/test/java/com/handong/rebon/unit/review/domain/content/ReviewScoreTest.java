@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ReviewScoreTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {0,-1})
+    @ValueSource(ints = {0, -1})
     @DisplayName("review star에는 0 또는 음수가 들어갈 수 없다.")
     public void reviewStarNegativeException(int star) {
         //given
@@ -24,7 +24,7 @@ class ReviewScoreTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {6,7})
+    @ValueSource(ints = {6, 7})
     @DisplayName("review star는 5점을 넘을 수 없다.")
     public void reviewStarExcessFiveException(int star) {
         //given
