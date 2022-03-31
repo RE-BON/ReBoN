@@ -13,9 +13,13 @@ import com.handong.rebon.shop.presentation.dto.response.image.ShopImageResponse;
 import com.handong.rebon.shop.presentation.dto.response.menu.MenuGroupResponse;
 import com.handong.rebon.shop.presentation.dto.response.tag.ShopTagResponse;
 
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Builder
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopResponse {
     private Long id;
     private String name;
@@ -29,6 +33,35 @@ public class ShopResponse {
     private String longitude;
     private String latitude;
     private List<ShopImageResponse> images;
+
+    @Builder
+    public ShopResponse(
+            Long id,
+            String name,
+            double star,
+            List<ShopTagResponse> tags,
+            String phone,
+            List<ShopCategoryResponse> subCategories,
+            String businessHour,
+            List<MenuGroupResponse> menus,
+            String address,
+            String longitude,
+            String latitude,
+            List<ShopImageResponse> images
+    ) {
+        this.id = id;
+        this.name = name;
+        this.star = star;
+        this.tags = tags;
+        this.phone = phone;
+        this.subCategories = subCategories;
+        this.businessHour = businessHour;
+        this.menus = menus;
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.images = images;
+    }
 
     public static ShopResponse from(ShopResponseDto dto) {
         return ShopResponse.builder()

@@ -5,6 +5,12 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.shop.application.dto.response.menu.MenuGroupResponseDto;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MenuGroupResponse {
     private String name;
     private List<MenuResponse> menus;

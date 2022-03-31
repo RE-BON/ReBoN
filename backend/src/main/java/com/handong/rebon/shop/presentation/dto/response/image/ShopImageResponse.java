@@ -2,6 +2,12 @@ package com.handong.rebon.shop.presentation.dto.response.image;
 
 import com.handong.rebon.shop.application.dto.response.image.ShopImageResponseDto;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopImageResponse {
     private String url;
     private boolean isMain;

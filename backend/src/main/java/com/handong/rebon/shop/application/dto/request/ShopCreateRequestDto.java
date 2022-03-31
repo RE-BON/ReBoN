@@ -26,6 +26,5 @@ public class ShopCreateRequestDto {
     private String latitude;
     private List<MultipartFile> images;
     private List<Long> tags;
-    //    private List<MenuGroupRequest> menus;
     private List<MenuGroupRequestDto> menus;
 }
