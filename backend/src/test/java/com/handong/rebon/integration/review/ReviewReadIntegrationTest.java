@@ -120,7 +120,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
                                                                                              .build();
 
         //when
-        List<ReviewGetByMemberResponseDto> reviews = reviewService.findReviewsByMember(reviewGetByMemberRequestDto);
+        List<ReviewGetByMemberResponseDto> reviews = reviewService.findAllByMember(reviewGetByMemberRequestDto);
 
         //then
         assertThat(reviews).hasSize(1);
@@ -135,7 +135,6 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         Member member = createMember("peace");
         Shop shop1 = createShop("토시래");
         Shop shop2 = createShop("팜스발리");
-
 
         ReviewContent reviewContent1 = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore1 = new ReviewScore(5, 0);
@@ -166,7 +165,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
                                                                                        .build();
 
         //when
-        List<ReviewGetByShopResponseDto> reviews = reviewService.findReviewsByShop(reviewGetByShopRequestDto);
+        List<ReviewGetByShopResponseDto> reviews = reviewService.findAllByShop(reviewGetByShopRequestDto);
 
         //then
         assertThat(reviews).hasSize(2);
