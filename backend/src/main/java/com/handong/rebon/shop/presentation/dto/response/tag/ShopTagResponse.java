@@ -1,6 +1,6 @@
-package com.handong.rebon.shop.presentation.dto.response;
+package com.handong.rebon.shop.presentation.dto.response.tag;
 
-import com.handong.rebon.shop.application.dto.response.ShopTagResponseDto;
+import com.handong.rebon.shop.application.dto.response.tag.ShopTagResponseDto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

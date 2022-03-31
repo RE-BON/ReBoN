@@ -67,6 +67,17 @@ include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantIn
 ==== Response
 include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-response.adoc[]
 
+=== 단일 Shop 상세 조회
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-response.adoc[]
 
 == Review API
 `구현 후 추가 예정`

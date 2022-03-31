@@ -8,8 +8,10 @@ import javax.persistence.OneToMany;
 
 import com.handong.rebon.shop.domain.Shop;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @Embeddable
 public class ShopImages {

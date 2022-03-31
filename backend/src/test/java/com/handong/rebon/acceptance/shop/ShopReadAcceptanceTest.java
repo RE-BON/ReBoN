@@ -115,7 +115,20 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(result).hasSize(2);
+        assertThat(result).hasSize(3);
+    }
+
+    @Test
+    @DisplayName("카페 단일 조회")
+    void showCafeDetail() {
+        // given
+        Long shopId = shops.get("티타").getId();
+
+        // when
+        ExtractableResponse<Response> response = 단일_가게_조회_요청(shopId);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
     private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
@@ -127,6 +140,18 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
                           .queryParam("subCategories", subs)
                           .when()
                           .get("/api/shops")
+                          .then()
+                          .log().all()
+                          .extract();
+    }
+
+    private ExtractableResponse<Response> 단일_가게_조회_요청(Long shopId) {
+        return RestAssured.given(super.spec)
+                          .log().all()
+                          .contentType(APPLICATION_JSON_VALUE)
+                          .pathParam("id", shopId)
+                          .when()
+                          .get("/api/shops/{id}")
                           .then()
                           .log().all()
                           .extract();
@@ -205,6 +230,13 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
                 Collections.singletonList(categories.get("개인카페")),
                 Arrays.asList(tags.get("포항"), tags.get("양덕")),
                 new ShopImages(Collections.singletonList(new ShopImage("url5", true)))
+        ));
+        shops.put("티타", adminShopRegister.CafeRegisterWithMenu(
+                "티타",
+                categories.get("카페"),
+                Collections.singletonList(categories.get("개인카페")),
+                Arrays.asList(tags.get("포항"), tags.get("양덕")),
+                new ShopImages(Collections.singletonList(new ShopImage("url6", true)))
         ));
     }
 }

@@ -1,16 +1,19 @@
 package com.handong.rebon.shop.application.adapter;
 
 import java.util.List;
+import java.util.Map;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.MenuGroupService;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
+import com.handong.rebon.shop.domain.menu.MenuGroup;
 import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.stereotype.Component;
@@ -39,6 +42,13 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
         List<Menu> menus = menuGroupService.createMenu(restaurant, data.getMenus());
         restaurant.addMenu(menus);
         return restaurant;
+    }
+
+    @Override
+    public ShopResponseDto convertToShopResponseDto(Shop shop) {
+        Restaurant restaurant = (Restaurant) shop;
+        Map<MenuGroup, List<Menu>> menuGroups = restaurant.getMenuGroupByMenuGroup();
+        return ShopResponseDto.of(shop, menuGroups);
     }
 
 }
