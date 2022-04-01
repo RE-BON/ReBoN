@@ -1,6 +1,6 @@
 package com.handong.rebon.integration.category;
 
-import com.handong.rebon.category.application.dto.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CategoryCreateIntegrationTest extends CategoryIntegrationTest{
     @Test
     @DisplayName("최상단 카테고리 생성한다.")
-    public void createCategory() {
+    public void 카테고리_생성() {
         //given
         String categoryRequestName = "테스트숙소카테고리";
 
@@ -27,7 +27,7 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest{
 
     @Test
     @DisplayName("부모있는 카테고리를 생성한다.")
-    public void createCategoryWithParent() {
+    public void 카테고리_생성_부모() {
         //given
         String parentName = "테스트식당";
         String createdName = "테스트한식";
