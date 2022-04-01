@@ -38,7 +38,7 @@ public class Member {
     }
 
     public boolean isSame(Member member) {
-        return id == member.getId();
+        return id == member.id;
     }
 
     public void addEmpathy(Empathy empathy) {
