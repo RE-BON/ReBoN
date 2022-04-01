@@ -1,23 +1,14 @@
 package com.handong.rebon.integration.category;
 
-import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryNoParentException;
+import javax.transaction.Transactional;
+
 import com.handong.rebon.category.application.CategoryService;
-import com.handong.rebon.category.application.dto.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.transaction.Transactional;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -28,5 +19,17 @@ public class CategoryIntegrationTest {
     @Autowired
     protected CategoryRepository categoryRepository;
 
+    public Category createCategory(String categoryName){
+        Long id = categoryService.create(categoryName);
+        return categoryRepository.getById(id);
+    }
 
+    public Category createCategoryWithParent(Long parentId, String categoryName){
+        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
+                                                                  .parentId(parentId)
+                                                                  .name(categoryName)
+                                                                  .build();
+        Long id = categoryService.create(categoryRequestDto);
+        return categoryRepository.getById(id);
+    }
 }
