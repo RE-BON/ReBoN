@@ -6,6 +6,8 @@ import { faCircleUser, faShareNodes, faEllipsisVertical } from '@fortawesome/fre
 import { faHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
 import { MoreVertical, Trash, Edit } from 'react-feather';
+import ReviewDropdown from './ReviewDropdown';
+import ReviewModal from './ReviewModal';
 
 // const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 //   <Link
@@ -86,7 +88,8 @@ export default function Review() {
         </div>
         <div className="review-user">
           <div className="review-list-icon">
-            <FontAwesomeIcon icon={faEllipsisVertical} size="1x" className="review-list-icon" color="#BDBDBD" onClick={() => ActionMenu()} />
+            {/* <ReviewDropdown /> */}
+            <ReviewModal />
           </div>
           <div className="review-user-name">홍길동</div>
           <div className="review-user-time">10분전</div>
@@ -110,7 +113,9 @@ export default function Review() {
         </div>
         <div className="review-user">
           <div className="review-list-icon">
-            <FontAwesomeIcon icon={faEllipsisVertical} size="1x" className="review-list-icon" color="#BDBDBD" onClick={ActionMenu} />
+            {/* <FontAwesomeIcon icon={faEllipsisVertical} size="1x" className="review-list-icon" color="#BDBDBD" onClick={ActionMenu} /> */}
+            {/* <ReviewDropdown /> */}
+            <ReviewModal />
           </div>
           <div className="review-user-name">홍길동</div>
           <div className="review-user-time">10분전</div>

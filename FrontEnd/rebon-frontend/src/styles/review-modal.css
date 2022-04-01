@@ -1,0 +1,39 @@
+.review-modal-wrapper {
+}
+.review-modal-close-wrapper {
+  text-align: end;
+}
+.review-report-cause {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+.review-report-cause-wrapper {
+  /* display: block; */
+}
+.review-report-cause-list {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 1rem;
+}
+.review-report-radio {
+  display: inline;
+  margin-right: 1rem;
+  border: 1px solid #d8d8d8;
+  width: 20px;
+}
+.review-report-radio-content {
+  display: inline;
+}
+.review-modal-report-button-wrapper {
+  text-align: center;
+}
+.review-modal-report-button {
+  width: 7rem;
+  height: 2rem;
+  /* padding: 2px 13px; */
+  margin-top: 2rem;
+  align-items: center;
+  border-radius: 5px;
+}
