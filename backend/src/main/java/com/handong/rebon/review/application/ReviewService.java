@@ -133,7 +133,6 @@ public class ReviewService {
         return new ReviewImages(Arrays.asList(url1, url2));
     }
 
-
     public ShopRepository getShopRepository() {
         return shopRepository;
     }
