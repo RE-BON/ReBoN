@@ -36,7 +36,7 @@ public class ShopService {
     public Long create(ShopRequestDto shopRequestDto) {
         // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopRequestDto.getCategoryId());
-        List<Category> subCategories = categoryService.findSubCategoriesById(shopRequestDto.getSubCategories());
+        List<Category> subCategories = categoryService.findSubCategoryByIds(shopRequestDto.getSubCategories());
 
         // TODO 태그 가져오기
         List<Tag> tags = tagService.findAll(shopRequestDto.getTags());

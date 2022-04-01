@@ -59,7 +59,7 @@ public class CategoryService {
                                  .orElseThrow(CategoryIdException::new);
     }
 
-    public List<Category> findSubCategoriesById(List<Long> subCategories) {
+    public List<Category> findSubCategoryByIds(List<Long> subCategories) {
         return categoryRepository.findAllById(subCategories);
     }
 }
