@@ -1,17 +1,13 @@
-package com.handong.rebon.review.presentation.dto.response;
+package com.handong.rebon.review.application.dto.response;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-public class ReviewResponse {
+public class ReviewGetByShopResponseDto {
     private Long id;
     private String authorName;
     private String shopName;

@@ -2,14 +2,17 @@ package com.handong.rebon.review.domain.content;
 
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.Review;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ReviewImage {
+public class ReviewImage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
