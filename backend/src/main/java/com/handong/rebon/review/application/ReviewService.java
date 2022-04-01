@@ -3,7 +3,6 @@ package com.handong.rebon.review.application;
 import java.util.Arrays;
 import java.util.List;
 
-import com.handong.rebon.exception.member.MemberForbiddenException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
@@ -66,12 +65,7 @@ public class ReviewService {
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
         Member member = memberService.findById(memberId);
 
-        if (review.canDelete(member)) {
-            review.delete();
-            return;
-        }
-
-        throw new MemberForbiddenException();
+        review.delete(member);
     }
 
     //TODO 이미지 저장 기능

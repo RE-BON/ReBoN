@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
+import com.handong.rebon.exception.member.MemberForbiddenException;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -48,12 +49,15 @@ public class Review extends BaseEntity {
         this.reviewImages.connectReviewToReviewImage(this);
     }
 
-    public boolean canDelete(Member member) {
-        return this.member.isSame(member) || member.isAdmin();
+    public void delete(Member member) {
+        validatesAuthority(member);
+        deleteContent();
     }
 
-    public void delete() {
-        deleteContent();
+    private void validatesAuthority(Member member) {
+        if(!(member.isAdmin() || this.member.isSame(member))) {
+            throw new MemberForbiddenException();
+        }
     }
 
     public String getContent() {

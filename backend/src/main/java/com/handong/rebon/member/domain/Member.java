@@ -43,14 +43,11 @@ public class Member extends BaseEntity {
     }
 
     public boolean isSame(Member member) {
-        return this.id == member.getId();
+        return this.id == member.id;
     }
 
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    public String getNickName() {
-        return profile.getNickName();
-    }
 }
