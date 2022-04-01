@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.exception.category.CategoryExistException;
+import com.handong.rebon.exception.category.CategoryIdException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.category.application.dto.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
@@ -49,14 +53,13 @@ public class CategoryService {
             throw new CategoryExistException();
         }
     }
-    // Shop 에서 사용하는 기능, Read 기능 구현 시 수정 예정
+
     public Category findById(Long categoryId) {
-        return categoryRepository.findById(categoryId).get();
+        return categoryRepository.findById(categoryId)
+                                 .orElseThrow(CategoryIdException::new);
     }
 
-    public List<Category> findAll(List<Long> subCategories) {
-        return subCategories.stream()
-                            .map(t -> categoryRepository.findById(t).get())
-                            .collect(Collectors.toList());
+    public List<Category> findSubCategoriesById(List<Long> subCategories) {
+        return categoryRepository.findAllById(subCategories);
     }
 }
