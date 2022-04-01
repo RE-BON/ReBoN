@@ -68,7 +68,7 @@ public class Review extends BaseEntity {
     }
 
     public String getShopName() {
-        return shop.getShopName();
+        return shop.getName();
     }
 
     public String getTip() {

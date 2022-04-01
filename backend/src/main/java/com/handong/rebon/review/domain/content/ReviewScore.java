@@ -21,7 +21,7 @@ public class ReviewScore {
         this.empathyCount = empathyCount;
     }
 
-    private void validatesRangeOfValues(double star, int likeCount) {
+    private void validatesRangeOfValues(int star, int likeCount) {
         if (star <= 0 || star > 5) {
             throw new ReviewStarException();
         }

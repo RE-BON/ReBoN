@@ -40,11 +40,11 @@ import lombok.RequiredArgsConstructor;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final ShopRepository shopRepository;
     private final MemberService memberService;
     private final ShopService shopService;
     private final ReviewImageRepository reviewImageRepository;
     private final MemberRepository memberRepository;
-    private final ShopRepository shopRepository;
 
     @Transactional
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
@@ -52,7 +52,7 @@ public class ReviewService {
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
 
         //TODO shop 찾아오기
-        Shop shop = shopService.findById(reviewCreateRequestDto.getShopId());
+        Shop shop = shopRepository.findById(reviewCreateRequestDto.getShopId()).orElseThrow();
 
         //TODO 이미지 저장
         ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImages());
@@ -65,7 +65,6 @@ public class ReviewService {
                               .build();
 
         review.addReviewImages(reviewImages);
-
         Review savedReview = reviewRepository.save(review);
 
         return savedReview.getId();
@@ -135,4 +134,7 @@ public class ReviewService {
     }
 
 
+    public ShopRepository getShopRepository() {
+        return shopRepository;
+    }
 }

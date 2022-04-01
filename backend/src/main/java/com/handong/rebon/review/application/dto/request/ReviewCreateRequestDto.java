@@ -15,7 +15,6 @@ import lombok.Getter;
 public class ReviewCreateRequestDto {
     private Long memberId;
     private Long shopId;
-    private String title;
     private String content;
     private String tip;
     private List<MultipartFile> images;

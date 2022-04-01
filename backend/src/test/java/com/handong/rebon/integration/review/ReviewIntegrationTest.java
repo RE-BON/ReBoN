@@ -57,6 +57,7 @@ class ReviewIntegrationTest {
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
+
         Long id = reviewService.create(reviewCreateRequestDto);
         Review review = reviewRepository.findById(id).get();
 

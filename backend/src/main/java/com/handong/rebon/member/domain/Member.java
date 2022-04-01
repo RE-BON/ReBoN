@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.handong.rebon.review.domain.empathy.Empathy;
-import com.handong.rebon.shop.domain.like.Like;
+import com.handong.rebon.shop.domain.like.Likes;
 
 import lombok.*;
 
@@ -27,11 +27,14 @@ public class Member {
 
     @Builder.Default
     @OneToMany(mappedBy = "member")
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "member")
     private List<Empathy> empathies = new ArrayList<>();
+
+    private boolean isAgreed;
+    private boolean isDeleted;
 
     public Member(Profile profile) {
         this.profile = profile;

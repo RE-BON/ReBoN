@@ -170,7 +170,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         //then
         assertThat(reviews).hasSize(2);
         assertThat(reviews).extracting("shopName")
-                           .contains(shop1.getShopName());
+                           .contains(shop1.getName());
     }
 
     @Test

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class Profile {
     private String nickName;
     private String image;
+    private String email;
 
     public Profile(String nickName) {
         this.nickName = nickName;

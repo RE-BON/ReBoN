@@ -34,7 +34,7 @@ class ReviewScoreTest {
     }
 
     @Test
-    @DisplayName("review likeCount에는 음수가 들어갈 수 없다.")
+    @DisplayName("review empathyCount에는 음수가 들어갈 수 없다.")
     public void reviewLikeCountNegativeException() {
         //given
         //when, then

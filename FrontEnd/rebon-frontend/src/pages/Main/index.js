@@ -8,6 +8,7 @@ import '../../styles/main.css';
 
 import MainCard from './MainCard';
 import BestCard from './BestCard';
+import Divider from './Divider';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,7 +48,18 @@ export default function Main() {
     <div className="tabber-wrapper">
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs className="box" value={value} onChange={handleChange} aria-label="basic tabs example" centered>
+          <Tabs
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: 'black',
+              },
+            }}
+            className="box"
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+            centered
+          >
             <Tab label="식당" {...a11yProps(0)} />
             <Tab label="카페" {...a11yProps(1)} />
             <Tab label="숙소" {...a11yProps(2)} />
@@ -56,13 +68,13 @@ export default function Main() {
         <TabPanel className="TabPanel" value={value} index={0}>
           <div className="category-wrapper">
             <div class="select">
-              <input type="radio" id="select-01" name="shop" />
+              <input type="radio" id="select-01" name="restaurant" />
               <label for="select-01">한식</label>
-              <input type="radio" id="select-02" name="shop" />
+              <input type="radio" id="select-02" name="restaurant" />
               <label for="select-02">일식</label>
-              <input type="radio" id="select-03" name="shop" />
+              <input type="radio" id="select-03" name="restaurant" />
               <label for="select-03">중식</label>
-              <input type="radio" id="select-04" name="shop" />
+              <input type="radio" id="select-04" name="restaurant" />
               <label for="select-04">양식</label>
             </div>
           </div>
@@ -72,15 +84,7 @@ export default function Main() {
             <BestCard />
             <BestCard />
           </div>
-          <div className="divider">
-            <div className="searchTitle">'칠포해수욕장'식당</div>
-            <select className="filter" name="filter">
-              <option value="korean" selected>
-                별점순
-              </option>
-              <option value="english">거리순</option>
-            </select>
-          </div>
+          <Divider />
 
           <div className="mainCard-wrapper">
             <MainCard />
@@ -100,15 +104,7 @@ export default function Main() {
             <BestCard />
             <BestCard />
           </div>
-          <div className="divider">
-            <div className="searchTitle">'칠포해수욕장'식당</div>
-            <select className="filter" name="filter">
-              <option value="korean" selected>
-                별점순
-              </option>
-              <option value="english">거리순</option>
-            </select>
-          </div>
+          <Divider />
 
           <div className="mainCard-wrapper">
             <MainCard />
@@ -122,22 +118,25 @@ export default function Main() {
         </TabPanel>
 
         <TabPanel className="TabPanel" value={value} index={2}>
+          <div className="category-wrapper">
+            <div class="select">
+              <input type="radio" id="select-01" name="accommodation" />
+              <label for="select-01">호텔</label>
+              <input type="radio" id="select-02" name="accommodation" />
+              <label for="select-02">모텔</label>
+              <input type="radio" id="select-03" name="accommodation" />
+              <label for="select-03">펜션</label>
+              <input type="radio" id="select-04" name="accommodation" />
+              <label for="select-04">풀빌라</label>
+            </div>
+          </div>
           <div className="best-wrapper">
             <BestCard />
             <BestCard />
             <BestCard />
             <BestCard />
           </div>
-          <div className="divider">
-            <div className="searchTitle">'칠포해수욕장'식당</div>
-            <select className="filter" name="filter">
-              <option value="korean" selected>
-                별점순
-              </option>
-              <option value="english">거리순</option>
-            </select>
-          </div>
-
+          <Divider />
           <div className="mainCard-wrapper">
             <MainCard />
             <MainCard />

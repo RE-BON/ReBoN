@@ -20,12 +20,12 @@ public class ReviewContent {
     }
 
     public ReviewContent(String content, String tip) {
-        validateTitleAndContent(content);
+        validateContent(content);
         this.content = content;
         this.tip = tip;
     }
 
-    private void validateTitleAndContent(String content) {
+    private void validateContent(String content) {
         if (validatesData(content)) {
             throw new ReviewContentFormatException();
         }

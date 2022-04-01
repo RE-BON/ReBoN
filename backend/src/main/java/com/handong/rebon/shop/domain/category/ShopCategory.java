@@ -2,11 +2,13 @@ package com.handong.rebon.shop.domain.category;
 
 import javax.persistence.*;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.domain.Shop;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @Entity
 public class ShopCategory {

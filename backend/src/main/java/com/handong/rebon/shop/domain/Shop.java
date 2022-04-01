@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.*;
 
-import com.handong.rebon.category.Category;
+import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.like.Like;
+import com.handong.rebon.shop.domain.like.Likes;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.tag.domain.Tag;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn
-public abstract class Shop {
+public abstract class Shop extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +36,7 @@ public abstract class Shop {
     private Category category;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private final List<ShopCategory> shopCategories = new ArrayList<>();
+    private List<ShopCategory> shopCategories = new ArrayList<>();
 
     @Embedded
     private ShopContent shopContent;
@@ -50,7 +51,7 @@ public abstract class Shop {
     private ShopScore shopScore;
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private List<ShopTag> shopTags = new ArrayList<>();
@@ -92,7 +93,15 @@ public abstract class Shop {
         this.shopCategories.addAll(shopCategories);
     }
 
-    public String getShopName() {
+    public String getMainImage() {
+        return shopImages.mainImage();
+    }
+
+    public String getName() {
         return shopContent.getName();
+    }
+
+    public double getStar() {
+        return shopScore.getStar();
     }
 }
