@@ -34,6 +34,9 @@ public class Category {
     @Embedded
     private Categories children;
 
+    public List<Category> getChildren(){
+        return children.getCategories();
+    }
 
     public Category(String name) {
         this.validatesBlankName(name);

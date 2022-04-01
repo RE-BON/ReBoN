@@ -3,10 +3,11 @@ package com.handong.rebon.category.application;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryIdException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
-import com.handong.rebon.category.application.dto.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 
@@ -62,4 +63,12 @@ public class CategoryService {
     public List<Category> findSubCategoryByIds(List<Long> subCategories) {
         return categoryRepository.findAllById(subCategories);
     }
+
+    public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
+        return categoryRepository.findRootCategories()
+                                 .stream()
+                                 .map(RootCategoryResponseDto::new)
+                                 .collect(Collectors.toList());
+    }
+
 }
