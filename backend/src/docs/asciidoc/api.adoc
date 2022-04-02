@@ -1,0 +1,83 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:docinfo: shared-head
+
+= RE-BON API Docs
+
+== Common
+
+=== Exception
+
+|===
+| 상태 코드 | 설명
+
+| 400 | `잘못된 요청`
+| 401 | `권한 없음`
+| 500 | `서버 에러`
+|===
+
+```json
+{
+  "message": "에러 상세 내용"
+}
+```
+
+=== Pagination & Sorting
+|===
+| 값 | 타입 | 필수 | 설명
+
+| page | Integer | false | 원하는 페이지
+| size | Integer | false | 한 페이지에 보여줄 데이터 수
+| sort | String | false | 정렬 기준
+|===
+```
+ex) 1페이지 데이터 10개 생성일 오름차순 정렬
+https://localhost:8080/api/shops?page=0&size=10&sort=createdAt,asc
+```
+
+== Member API
+`구현 후 추가 예정`
+
+
+== Tag API
+`구현 후 추가 예정`
+
+
+== Category API
+`구현 후 추가 예정`
+
+
+== Shop API
+
+=== Shop 리스트 조회(지역, 카테고리 별)
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| tag | Long | true | 위치 태그 id 값
+| category | Long | true | 최상위 카테고리 id 값
+| subCategories | Long | false | 최상위 카테고리에 속한 하위 카테고리의 id값. 여러개 보낼 수 있음(`ex. subCategories=5&subCategories=7`)
+|===
+include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-response.adoc[]
+
+=== 단일 Shop 상세 조회
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-response.adoc[]
+
+== Review API
+`구현 후 추가 예정`

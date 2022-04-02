@@ -2,6 +2,7 @@ package com.handong.rebon.category.application;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.exception.category.CategoryExistException;
@@ -15,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service

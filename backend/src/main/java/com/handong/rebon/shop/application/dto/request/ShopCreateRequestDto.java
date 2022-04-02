@@ -1,8 +1,8 @@
-package com.handong.rebon.shop.application.dto;
+package com.handong.rebon.shop.application.dto.request;
 
 import java.util.List;
 
-import com.handong.rebon.shop.presentation.dto.request.MenuGroupRequest;
+import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopRequestDto {
+public class ShopCreateRequestDto {
     private Long categoryId;
     private List<Long> subCategories;
     private String name;
@@ -26,5 +26,5 @@ public class ShopRequestDto {
     private String latitude;
     private List<MultipartFile> images;
     private List<Long> tags;
-    private List<MenuGroupRequest> menus;
+    private List<MenuGroupRequestDto> menus;
 }

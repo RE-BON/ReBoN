@@ -40,6 +40,7 @@ public class Review extends BaseEntity {
     @Embedded
     private ReviewScore reviewScore;
 
+    @Builder.Default
     @OneToMany(mappedBy = "review")
     private List<Empathy> empathies = new ArrayList<>();
 
@@ -48,8 +49,42 @@ public class Review extends BaseEntity {
         this.reviewImages.connectReviewToReviewImage(this);
     }
 
+    public boolean isMemberLiked(Member member) {
+        return empathies.stream()
+                        .anyMatch(empathy -> empathy.isSameMember(member));
+    }
+
+    public void addEmpathy(Empathy empathy) {
+        empathies.add(empathy);
+        empathy.belongTo(this);
+    }
+
     public String getContent() {
         return reviewContent.getContent();
+    }
+
+    public String getAuthorName() {
+        return member.getNickName();
+    }
+
+    public String getShopName() {
+        return shop.getName();
+    }
+
+    public String getTip() {
+        return reviewContent.getTip();
+    }
+
+    public int getStar() {
+        return reviewScore.getStar();
+    }
+
+    public int getEmpathyCount() {
+        return reviewScore.getEmpathyCount();
+    }
+
+    public List<String> getImageUrls() {
+        return reviewImages.getUrls();
     }
 
 }

@@ -16,8 +16,8 @@ import lombok.Getter;
 public abstract class BaseEntity {
 
     @CreatedDate
-    LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 }

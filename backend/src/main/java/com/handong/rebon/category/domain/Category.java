@@ -39,8 +39,13 @@ public class Category {
     }
 
     public Category(String name) {
+        this(name, null);
+    }
+
+    public Category(String name, Category parent) {
         this.validatesBlankName(name);
         this.name = name;
+        this.parent = parent;
         this.children = new Categories();
     }
 

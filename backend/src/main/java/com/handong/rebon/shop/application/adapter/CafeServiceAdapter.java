@@ -1,16 +1,19 @@
 package com.handong.rebon.shop.application.adapter;
 
 import java.util.List;
+import java.util.Map;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.MenuGroupService;
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
+import com.handong.rebon.shop.domain.menu.MenuGroup;
 import com.handong.rebon.shop.domain.type.Cafe;
 
 import org.springframework.stereotype.Component;
@@ -28,7 +31,7 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public Shop create(ShopImages shopImages, ShopRequestDto data) {
+    public Shop create(ShopImages shopImages, ShopCreateRequestDto data) {
         Cafe cafe = Cafe.builder()
                         .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
                         .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
@@ -39,5 +42,12 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
         List<Menu> menus = menuGroupService.createMenu(cafe, data.getMenus());
         cafe.addMenu(menus);
         return cafe;
+    }
+
+    @Override
+    public ShopResponseDto convertToShopResponseDto(Shop shop) {
+        Cafe cafe = (Cafe) shop;
+        Map<MenuGroup, List<Menu>> menuGroups = cafe.getMenuGroupByMenuGroup();
+        return ShopResponseDto.of(shop, menuGroups);
     }
 }

@@ -11,9 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReviewRequest {
-    private String title;
     private String content;
     private String tip;
     private List<MultipartFile> images = new ArrayList<>();
-    private double star;
+    private int star;
 }

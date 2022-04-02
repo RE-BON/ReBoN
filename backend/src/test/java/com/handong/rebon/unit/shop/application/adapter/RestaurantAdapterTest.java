@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.MenuGroupService;
 import com.handong.rebon.shop.application.adapter.RestaurantServiceAdapter;
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.type.Restaurant;
@@ -64,9 +64,9 @@ class RestaurantAdapterTest {
         // given
         RestaurantServiceAdapter adapter = new RestaurantServiceAdapter(menuGroupService);
         ShopImages shopImages = new ShopImages();
-        ShopRequestDto data = ShopRequestDto.builder()
-                                            .name("팜스발리")
-                                            .build();
+        ShopCreateRequestDto data = ShopCreateRequestDto.builder()
+                                                        .name("팜스발리")
+                                                        .build();
         given(menuGroupService.createMenu(any(), any())).willReturn(new ArrayList<>());
 
         // when
