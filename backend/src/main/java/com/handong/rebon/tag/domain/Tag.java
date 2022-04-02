@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.tag.TagNameException;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Tag {
+public class Tag extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +38,9 @@ public class Tag {
         if (name.isBlank()) {
             throw new TagNameException();
         }
+    }
+
+    public String getTag() {
+        return name;
     }
 }

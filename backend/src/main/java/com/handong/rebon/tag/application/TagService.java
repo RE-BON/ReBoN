@@ -33,10 +33,14 @@ public class TagService {
         }
     }
 
-    // TODO temp
     public List<Tag> findAll(List<Long> tags) {
         return tagRepository.findAll();
     }
+
+    public List<Tag> findTags() {
+        return tagRepository.findAll();
+    }
+
 
     public Tag findById(Long id) {
         return tagRepository.findById(id)
