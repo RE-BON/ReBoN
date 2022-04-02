@@ -25,7 +25,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
     void deleteByAuthor() {
         //given
         Member member = createMember("peace", false);
-        Shop shop = createShop();
+        Shop shop = createShop("토시래");
 
         ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
@@ -55,7 +55,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         //given
         Member member = createMember("peace", false);
         Member admin = createMember("admin", true);
-        Shop shop = createShop();
+        Shop shop = createShop("토시래");
 
         ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
@@ -84,7 +84,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         //given
         Member member = createMember("peace", false);
         Member curry = createMember("curry", false);
-        Shop shop = createShop();
+        Shop shop = createShop("토시래");
 
         ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);

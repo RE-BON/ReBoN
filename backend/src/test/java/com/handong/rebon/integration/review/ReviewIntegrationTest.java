@@ -44,8 +44,8 @@ class ReviewIntegrationTest extends IntegrationTest {
     @DisplayName("리뷰 생성")
     void create() {
         //given
-        Member member = createMember();
-        Shop shop = createShop();
+        Member member = createMember("peace");
+        Shop shop = createShop("토시래");
 
         ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
@@ -67,6 +67,7 @@ class ReviewIntegrationTest extends IntegrationTest {
 
     }
 
+
     public ReviewRequest createReviewRequest(ReviewContent reviewContent, ReviewScore reviewScore) {
         ReviewRequest reviewRequest = new ReviewRequest();
 
@@ -78,14 +79,13 @@ class ReviewIntegrationTest extends IntegrationTest {
         return reviewRequest;
     }
 
-    public Shop createShop() {
-
-        Shop shop = new Restaurant(null, null, new ShopContent("토시래", "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
+    protected Shop createShop(String shopName) {
+        Shop shop = new Restaurant(null, null, new ShopContent(shopName, "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
         return shopRepository.save(shop);
     }
 
-    public Member createMember() {
-        Member member = new Member(new Profile("peace"));
+    protected Member createMember(String memberName) {
+        Member member = new Member(new Profile(memberName));
         return memberRepository.save(member);
     }
 }

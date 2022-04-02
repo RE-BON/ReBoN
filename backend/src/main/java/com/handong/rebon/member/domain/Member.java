@@ -50,4 +50,13 @@ public class Member extends BaseEntity {
         return isAdmin;
     }
 
+    public void addEmpathy(Empathy empathy) {
+        empathies.add(empathy);
+        empathy.belongTo(this);
+    }
+
+    public String getNickName() {
+        return profile.getNickName();
+    }
+
 }
