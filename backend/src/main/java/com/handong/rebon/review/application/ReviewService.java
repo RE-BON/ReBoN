@@ -84,12 +84,14 @@ public class ReviewService {
 
         if (StringUtils.hasText(keyword)) {
             String containingKeyword = StringUtil.makeContainingKeyword(keyword);
-            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(containingKeyword, pageable)
+            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContainingAndIsDeletedFalse(
+                                                           containingKeyword,
+                                                           pageable)
                                                    .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
 
-        List<Review> reviews = reviewRepository.findAll(pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByIsDeletedFalse(pageable).getContent();
 
         return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
     }
@@ -101,7 +103,7 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByMember(member, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByMemberAndIsDeletedFalse(member, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByMemberResponseDtos(reviews);
     }
@@ -116,14 +118,14 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByShopAndIsDeletedFalse(shop, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
+        Review review = reviewRepository.findByIdAndIsDeletedFalse(reviewId)
                                         .orElseThrow(ReviewNotFoundException::new);
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
