@@ -10,10 +10,7 @@ import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
-import com.handong.rebon.review.application.dto.request.AdminReviewGetRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
+import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
@@ -22,7 +19,6 @@ import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
-import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.util.StringUtil;
@@ -42,7 +38,6 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
     private final MemberService memberService;
-    private final ShopService shopService;
     private final ReviewImageRepository reviewImageRepository;
     private final MemberRepository memberRepository;
 
@@ -68,6 +63,18 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
 
         return savedReview.getId();
+    }
+
+
+    @Transactional
+    public void delete(ReviewDeleteRequestDto reviewDeleteRequestDto) {
+        Long reviewId = reviewDeleteRequestDto.getReviewId();
+        Long memberId = reviewDeleteRequestDto.getMemberId();
+
+        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        Member member = memberService.findById(memberId);
+
+        review.delete(member);
     }
 
     @Transactional(readOnly = true)
