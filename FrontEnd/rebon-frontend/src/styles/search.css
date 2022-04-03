@@ -13,10 +13,13 @@
 }
 
 .search-content .title {
+  margin-left: -15px;
+  width: 100%;
   font-weight: 500;
   font-size: 150%;
   line-height: 1.2em;
   margin-bottom: 10%;
+  border: none;
 }
 
 .search-content span {
