@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,8 +24,7 @@ public class TagReadIntegrationTest extends TagIntegrationTest{
     @DisplayName("id에 따라 태그를 조회할 수 있다.")
     public void findTagById(){
         //given
-        createTag("북구");
-        Tag createdTag= createTag("양덕");
+        Tag createdTag= createTag("환호");
         //when
         Tag tagId = tagService.findById(createdTag.getId());
         //then
@@ -31,12 +32,17 @@ public class TagReadIntegrationTest extends TagIntegrationTest{
     }
 
     @Test
-    @DisplayName("존재하지 않는 id의 태그를 요청하면 예외가 발생한다.")
-    public void findTagByWrongId() {
+    @DisplayName("모든 태그를 조회할 수 있다.")
+    public void findAllTags(){
         //given
-        Long requestTagId = -1L;
-        //when, then
-        assertThatThrownBy(() -> tagService.findById(requestTagId))
-                .isInstanceOf(TagIdException.class);
+        String tagName = "장량";
+
+        List<Tag> allTags = tagService.findTags();
+
+        Tag tags = allTags.get(0);
+        assertThat(tags.getName()).isEqualTo(tagName);
+        //when
+        //then
     }
+
 }
