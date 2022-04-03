@@ -6,6 +6,7 @@ import Post from './pages/Post';
 import Footprint from './pages/Footprint';
 import Mypage from './pages/Mypage';
 import Bookmark from './pages/Mypage/Bookmark';
+import Join from './pages/Join';
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
         <Route path="/footprint" element={<Footprint />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/bookmark" element={<Bookmark />} />
+        <Route path="/join" element={<Join />} />
       </Routes>
     </BrowserRouter>
   );
