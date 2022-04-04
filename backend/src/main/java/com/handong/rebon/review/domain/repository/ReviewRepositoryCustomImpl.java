@@ -24,14 +24,12 @@ public class ReviewRepositoryCustomImpl extends QuerydslRepositorySupport implem
     }
 
     @Override
-    public Page<Review> findAllByReviewContentAndTipContainingAndIsDeletedFalse(String keyword, Pageable pageable) {
+    public Page<Review> searchReviewByKeywordApplyPage(String keyword, Pageable pageable) {
         JPAQuery<Review> query = queryFactory.select(review)
                                              .from(review)
-                                             .where(review.isDeleted.eq(false)
-                                                                    .and(
-                                                                            (review.reviewContent.content.like(keyword))
-                                                                                    .or(review.reviewContent.tip.like(keyword))
-                                                                    ));
+                                             .where((review.reviewContent.content.like(keyword))
+                                                     .or(review.reviewContent.tip.like(keyword))
+                                             );
 
 
         JPQLQuery<Review> pageableQuery = getQuerydsl().applyPagination(pageable, query);

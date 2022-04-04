@@ -84,14 +84,14 @@ public class ReviewService {
 
         if (StringUtils.hasText(keyword)) {
             String containingKeyword = StringUtil.makeContainingKeyword(keyword);
-            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContainingAndIsDeletedFalse(
+            List<Review> reviews = reviewRepository.searchReviewByKeywordApplyPage(
                                                            containingKeyword,
                                                            pageable)
                                                    .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
 
-        List<Review> reviews = reviewRepository.findAllByIsDeletedFalse(pageable).getContent();
+        List<Review> reviews = reviewRepository.findAll(pageable).getContent();
 
         return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
     }
@@ -103,7 +103,7 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByMemberAndIsDeletedFalse(member, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByMember(member, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByMemberResponseDtos(reviews);
     }
@@ -118,15 +118,17 @@ public class ReviewService {
 
         Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
 
-        List<Review> reviews = reviewRepository.findAllByShopAndIsDeletedFalse(shop, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
 
         return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findByIdAndIsDeletedFalse(reviewId)
+        Review review = reviewRepository.findById(reviewId)
                                         .orElseThrow(ReviewNotFoundException::new);
+
+        System.out.println(review.isDeleted());
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
@@ -142,7 +144,4 @@ public class ReviewService {
         return new ReviewImages(Arrays.asList(url1, url2));
     }
 
-    public ShopRepository getShopRepository() {
-        return shopRepository;
-    }
 }

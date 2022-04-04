@@ -6,5 +6,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ReviewRepositoryCustom {
-    Page<Review> findAllByReviewContentAndTipContainingAndIsDeletedFalse(String keyword, Pageable pageable);
+    Page<Review> searchReviewByKeywordApplyPage(String keyword, Pageable pageable);
 }
