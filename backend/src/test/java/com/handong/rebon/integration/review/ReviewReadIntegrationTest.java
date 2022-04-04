@@ -2,7 +2,6 @@ package com.handong.rebon.integration.review;
 
 import java.util.List;
 
-import com.handong.rebon.exception.review.ReviewNotFoundException;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
@@ -18,8 +17,6 @@ import org.springframework.data.domain.PageRequest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import org.assertj.core.api.Assertions;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,9 +51,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
         Long review3Id = reviewService.create(reviewCreateRequestDto3);
 
-        ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member.getId(), review3Id);
-        reviewService.delete(reviewDeleteRequestDto);
-
+        deleteReview(member, review3Id);
         AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto("나쁜", PageRequest.of(0, 10));
 
         //when
@@ -99,8 +94,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
         Long review3Id = reviewService.create(reviewCreateRequestDto3);
 
-        ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member.getId(), review3Id);
-        reviewService.delete(reviewDeleteRequestDto);
+        deleteReview(member, review3Id);
 
         AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto(null, PageRequest.of(0, 10));
 
@@ -143,8 +137,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
         Long review3Id = reviewService.create(reviewCreateRequestDto3);
 
-        ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member1.getId(), review3Id);
-        reviewService.delete(reviewDeleteRequestDto);
+        deleteReview(member1, review3Id);
 
         ReviewGetByMemberRequestDto reviewGetByMemberRequestDto = ReviewGetByMemberRequestDto.builder()
                                                                                              .memberId(member1.getId())
@@ -190,8 +183,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.create(reviewCreateRequestDto2);
         Long review3Id = reviewService.create(reviewCreateRequestDto3);
 
-        ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member.getId(), review3Id);
-        reviewService.delete(reviewDeleteRequestDto);
+        deleteReview(member, review3Id);
 
         ReviewGetByShopRequestDto reviewGetByShopRequestDto = ReviewGetByShopRequestDto.builder()
                                                                                        .shopId(shop1.getId())
@@ -232,26 +224,8 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
                           .isEqualTo(reviewContent.getTip());
     }
 
-    @Test
-    @DisplayName("삭제된 리뷰를 요청하면 exception이 발생한다.")
-    void getDeletedReviewException() {
-        //given
-        Member member = createMember("peace");
-        Shop shop = createShop("토시래");
-
-        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
-        ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
-
-        Long reviewId = reviewService.create(reviewCreateRequestDto);
-
+    public void deleteReview(Member member, Long reviewId) {
         ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member.getId(), reviewId);
         reviewService.delete(reviewDeleteRequestDto);
-
-        //when,then
-        Assertions.assertThatThrownBy(() -> reviewService.findByReviewId(reviewId))
-                  .isInstanceOf(ReviewNotFoundException.class);
     }
 }
