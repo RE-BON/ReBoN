@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-public class TagCreateIntegrationTest extends TagIntegrationTest{
+public class TagCreateIntegrationTest extends TagIntegrationTest {
 
     @Autowired
     TagService tagService;

@@ -5,10 +5,8 @@ import java.util.List;
 import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -44,7 +42,7 @@ public class TagService {
 
     public Tag findById(Long id) {
         return tagRepository.findById(id)
-                            .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 }
 
