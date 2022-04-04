@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
-import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
+import com.handong.rebon.category.application.dto.response.RootCategoryResponse;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryIdException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
@@ -64,10 +64,10 @@ public class CategoryService {
         return categoryRepository.findAllById(subCategories);
     }
 
-    public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
+    public List<RootCategoryResponse> findRootCategoriesAndChildren() {
         return categoryRepository.findRootCategories()
                                  .stream()
-                                 .map(RootCategoryResponseDto::new)
+                                 .map(RootCategoryResponse::new)
                                  .collect(Collectors.toList());
     }
 

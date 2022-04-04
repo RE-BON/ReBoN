@@ -3,7 +3,7 @@ package com.handong.rebon.integration.category;
 import java.util.Arrays;
 import java.util.List;
 
-import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
+import com.handong.rebon.category.application.dto.response.RootCategoryResponse;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryIdException;
 
@@ -77,7 +77,7 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         createCategoryWithParent(parentId3, "모텔");
         createCategory("기타");
         //when
-        List<RootCategoryResponseDto> rootCategories = categoryService.findRootCategoriesAndChildren();
+        List<RootCategoryResponse> rootCategories = categoryService.findRootCategoriesAndChildren();
         //then
         assertThat(rootCategories).hasSize(4)
                                   .extracting("name")

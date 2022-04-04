@@ -8,12 +8,12 @@ import com.handong.rebon.category.domain.Category;
 import lombok.Getter;
 
 @Getter
-public class RootCategoryResponseDto {
+public class RootCategoryResponse {
     private Long id;
     private String name;
     private List<ChildCategoryDto> children;
 
-    public RootCategoryResponseDto(Category category) {
+    public RootCategoryResponse(Category category) {
         this.id = category.getId();
         this.name = category.getName();
         this.children = category.getChildren()
