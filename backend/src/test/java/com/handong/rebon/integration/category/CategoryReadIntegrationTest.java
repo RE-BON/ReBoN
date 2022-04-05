@@ -3,7 +3,7 @@ package com.handong.rebon.integration.category;
 import java.util.Arrays;
 import java.util.List;
 
-import com.handong.rebon.category.application.dto.response.RootCategoryResponse;
+import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryIdException;
 
@@ -48,8 +48,6 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
                 createCategoryWithParent(parentId, "양식").getId(),
                 createCategoryWithParent(parentId, "중식").getId()
         );
-        createCategory("프렌차이즈");
-        createCategory("퓨전한식");
         //when
         List<Category> subCategories = categoryService.findSubCategoryByIds(subCategoryIds);
 
@@ -77,17 +75,17 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         createCategoryWithParent(parentId3, "모텔");
         createCategory("기타");
         //when
-        List<RootCategoryResponse> rootCategories = categoryService.findRootCategoriesAndChildren();
+        List<RootCategoryResponseDto> rootCategories = categoryService.findRootCategoriesAndChildren();
         //then
         assertThat(rootCategories).hasSize(4)
                                   .extracting("name")
                                   .contains("식당", "카페", "숙소", "기타");
         assertThat(rootCategories.get(0).getChildren()).extracting("name")
-                                                       .contains("한식", "양식", "중식", "프렌차이즈", "퓨전한식");
+                                                       .containsOnly("한식", "양식", "중식", "프렌차이즈", "퓨전한식");
         assertThat(rootCategories.get(1).getChildren()).extracting("name")
-                                                       .contains("프렌차이즈", "전통카페");
+                                                       .containsOnly("프렌차이즈", "전통카페");
         assertThat(rootCategories.get(2).getChildren()).extracting("name")
-                                                       .contains("호텔", "펜션", "모텔");
+                                                       .containsOnly("호텔", "펜션", "모텔");
     }
 
 }

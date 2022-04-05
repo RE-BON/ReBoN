@@ -39,7 +39,24 @@ public class CategoryReadAcceptanceTest extends AcceptanceTest {
         //given when
         ExtractableResponse<Response> response = 루트_카테고리_조회_요청();
         //then
+
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        Assertions.assertThat(response.body().jsonPath().getList("name"))
+                  .hasSize(3)
+                  .containsOnly("식당", "숙소", "카페");
+
+        // 질문을 위해 남겨둡니다.
+//        Assertions.assertThat(response.body().jsonPath().getList("children.name[0]"))
+//                .hasSize(5)
+//                .containsOnly("한식", "분식", "일식", "양식", "퓨전한식");
+//        Assertions.assertThat(response.body().jsonPath().getList("children.name[1]"))
+//                  .hasSize(3)
+//                  .containsOnly("호텔", "모텔", "펜션");
+//
+//        Assertions.assertThat(response.body().jsonPath().getList("children.name[2]"))
+//                  .hasSize(3)
+//                  .containsOnly("프랜차이즈", "개인카페", "전통카페");
+
     }
 
     private ExtractableResponse<Response> 루트_카테고리_조회_요청() {
