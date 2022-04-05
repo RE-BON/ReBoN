@@ -6,9 +6,11 @@ import lombok.Getter;
 
 @Getter
 public class ChildCategoryDto {
+
     private Long id;
     private String name;
-    public ChildCategoryDto(Category category){
+
+    public ChildCategoryDto(Category category) {
         this.id = category.getId();
         this.name = category.getName();
     }
