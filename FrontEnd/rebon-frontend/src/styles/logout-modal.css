@@ -1,0 +1,37 @@
+.logout-wrapper {
+  text-align: center;
+  padding: 0 3%;
+}
+
+.logout-wrapper .close {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  padding: 1% 4%;
+  margin-left: 90%;
+  color: black;
+  font-size: 25px;
+}
+
+.logout-image {
+  margin: 0 auto;
+  width: 140px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.logout-notice {
+  margin-top: 10%;
+  text-align: center;
+  text-align: ceter;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logout-button {
+  color: white;
+  background-color: black;
+  margin-top: 15%;
+  padding: 2% 5%;
+  border-radius: 5px;
+}

@@ -124,6 +124,7 @@
   background-color: white;
   border-radius: 50px;
   text-align: center;
+  font-weight: bold;
 }
 
 .post-button-finish {
@@ -133,4 +134,5 @@
   background-color: #ff6b6c;
   border-radius: 50px;
   text-align: center;
+  font-weight: bold;
 }

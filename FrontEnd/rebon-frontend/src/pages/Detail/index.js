@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import Review from './Review';
+import Header from '../../components/Header';
 import '../../styles/slick.css';
 import '../../styles/slick-theme.css';
 import '../../styles/detail.css';
@@ -33,6 +34,7 @@ export default function Detail() {
 
   return (
     <div className="detail-wrapper">
+      <Header />
       <Slider {...settings}>
         <div className="detail-image-wrapper">
           <img className="detail-main-image" alt="review-image" src="image/detail.png" />
