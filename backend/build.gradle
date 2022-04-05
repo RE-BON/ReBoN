@@ -55,6 +55,14 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+processResources.dependsOn('copySecret')
+
+task copySecret(type: Copy) {
+    from './security'
+    include '*.yml'
+    into './src/main/resources'
+}
+
 def querydslDir = "$buildDir/generated/querydsl"
 
 querydsl {
