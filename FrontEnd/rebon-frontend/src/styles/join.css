@@ -4,9 +4,40 @@
   height: 100vh;
   align-items: center;
   margin: auto;
+  background-color: #f5f5f5;
 }
 
 .join-title {
   margin-bottom: 25px;
   font-size: 24px;
+}
+
+.centerBox {
+  background-color: white;
+  padding: 60px 90px;
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.join-bottom-btn {
+  background-color: #ff6b6c;
+  width: 378px;
+  height: 52.48px;
+  border-radius: 0;
+  margin-top: 20px;
+  margin-left: 0;
+  border-radius: 10px;
+}
+
+.divider {
+  margin: 22px;
+  background-color: #8f9396;
+}
+.subtitle {
+  color: #797d81;
+  font-size: 16px;
+}
+
+.ReBON {
+  color: #ff6b6c;
 }
