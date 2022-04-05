@@ -52,9 +52,6 @@ https://localhost:8080/api/shops?page=0&size=10&sort=createdAt,asc
 Root Category 와 그 자식 카테고리들의 배열
 
 ==== Request
-|===
-| 값 | 타입 | 필수 | 설명
-|===
 
 
 include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-request.adoc[]

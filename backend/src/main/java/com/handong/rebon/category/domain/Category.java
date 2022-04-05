@@ -34,10 +34,6 @@ public class Category {
     @Embedded
     private Categories children;
 
-    public List<Category> getChildren(){
-        return children.getCategories();
-    }
-
     public Category(String name) {
         this(name, null);
     }
@@ -68,5 +64,9 @@ public class Category {
 
     public boolean isSameName(String name) {
         return this.name.equals(name);
+    }
+
+    public List<Category> getChildren() {
+        return children.getCategories();
     }
 }
