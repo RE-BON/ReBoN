@@ -1,11 +1,13 @@
 package com.handong.rebon.acceptance.category;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
 import com.handong.rebon.acceptance.admin.AdminCategoryRegister;
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.category.presentation.dto.response.RootCategoryResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +17,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryReadAcceptanceTest extends AcceptanceTest {
     @Autowired
@@ -38,24 +41,14 @@ public class CategoryReadAcceptanceTest extends AcceptanceTest {
     public void getAllRootAndChildrent() {
         //given when
         ExtractableResponse<Response> response = 루트_카테고리_조회_요청();
+        List<RootCategoryResponse> result = response.as(new TypeRef<>() {});
         //then
 
-        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        Assertions.assertThat(response.body().jsonPath().getList("name"))
-                  .hasSize(3)
-                  .containsOnly("식당", "숙소", "카페");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
 
-        // 질문을 위해 남겨둡니다.
-//        Assertions.assertThat(response.body().jsonPath().getList("children.name[0]"))
-//                .hasSize(5)
-//                .containsOnly("한식", "분식", "일식", "양식", "퓨전한식");
-//        Assertions.assertThat(response.body().jsonPath().getList("children.name[1]"))
-//                  .hasSize(3)
-//                  .containsOnly("호텔", "모텔", "펜션");
-//
-//        Assertions.assertThat(response.body().jsonPath().getList("children.name[2]"))
-//                  .hasSize(3)
-//                  .containsOnly("프랜차이즈", "개인카페", "전통카페");
+        assertThat(result)
+                .extracting("name")
+                .contains("식당", "숙소", "카페");
 
     }
 
