@@ -13,6 +13,7 @@ import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final ShopRepository shopRepository;
     private final MemberService memberService;
     private final ShopService shopService;
     private final ReviewImageRepository reviewImageRepository;
@@ -35,7 +37,7 @@ public class ReviewService {
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
 
         //TODO shop 찾아오기
-        Shop shop = shopService.findById(reviewCreateRequestDto.getShopId());
+        Shop shop = shopRepository.findById(reviewCreateRequestDto.getShopId()).orElseThrow();
 
         //TODO 이미지 저장
         ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImages());
@@ -48,7 +50,6 @@ public class ReviewService {
                               .build();
 
         review.addReviewImages(reviewImages);
-
         Review savedReview = reviewRepository.save(review);
 
         return savedReview.getId();

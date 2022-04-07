@@ -1,9 +1,9 @@
 package com.handong.rebon.member.domain;
 
+import javax.persistence.Embeddable;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
 
 @Getter
 @NoArgsConstructor
@@ -11,6 +11,7 @@ import javax.persistence.Embeddable;
 public class Profile {
     private String nickName;
     private String image;
+    private String email;
 
     public Profile(String nickName) {
         this.nickName = nickName;

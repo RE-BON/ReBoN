@@ -13,7 +13,6 @@ public class ReviewAssembler {
         return ReviewCreateRequestDto.builder()
                                      .memberId(memberId)
                                      .shopId(shopId)
-                                     .title(reviewRequest.getTitle())
                                      .content(reviewRequest.getContent())
                                      .tip(reviewRequest.getTip())
                                      .star(reviewRequest.getStar())

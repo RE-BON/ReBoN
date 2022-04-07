@@ -50,18 +50,18 @@ class ReviewIntegrationTest {
         Member member = createMember();
         Shop shop = createShop();
 
-        ReviewContent reviewContent = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
+        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
 
         ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
+
         Long id = reviewService.create(reviewCreateRequestDto);
         Review review = reviewRepository.findById(id).get();
 
         //then
-        assertThat(review.getReviewContent().getTitle()).isEqualTo(reviewContent.getTitle());
         assertThat(review.getReviewContent().getContent()).isEqualTo(reviewContent.getContent());
         assertThat(review.getReviewContent().getTip()).isEqualTo(reviewContent.getTip());
         assertThat(review.getReviewScore().getStar()).isEqualTo(reviewScore.getStar());
@@ -73,7 +73,6 @@ class ReviewIntegrationTest {
     private ReviewRequest createReviewRequest(ReviewContent reviewContent, ReviewScore reviewScore) {
         ReviewRequest reviewRequest = new ReviewRequest();
 
-        reviewRequest.setTitle(reviewContent.getTitle());
         reviewRequest.setContent(reviewContent.getContent());
         reviewRequest.setTip(reviewContent.getTip());
         reviewRequest.setStar(reviewScore.getStar());
