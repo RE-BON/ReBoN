@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/Header';
 import Star from './Star';
+import PostModal from './PostModal';
 
 export default function Post() {
   return (
@@ -36,7 +37,9 @@ export default function Post() {
         </div>
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
-          <div className="post-button-finish">작성완료</div>
+          <div className="post-button-finish">
+            <PostModal />
+          </div>
         </div>
       </div>
     </>
