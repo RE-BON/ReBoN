@@ -13,10 +13,24 @@
   font-size: 1rem;
 }
 .review-share-wrapper,
-.review-like-wrapper,
+.review-like-wrapper {
+  float: right;
+  margin-left: 30px;
+}
+
 .review-write-wrapper {
   float: right;
   margin-left: 30px;
+  border-radius: 5px;
+  background-color: #ff6b6c;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+.review-write-icon {
+  margin-right: 10px;
+  color: white;
 }
 .review-icon {
   margin-right: 10px;
@@ -24,8 +38,8 @@
 }
 .review-write-button {
   color: white;
-  background-color: black;
-  border-radius: 5px;
+  /* background-color: black;
+  border-radius: 5px; */
   font-size: 0.8rem;
   padding-left: 7px;
   padding-right: 7px;
@@ -114,6 +128,9 @@
   border-radius: 5px;
   margin-right: 3%;
   margin-left: 2%;
+  color: #ff6b6c;
+  background-color: #ffeded;
+  border: 1px solid #ff6b6c;
 }
 .review-tip-content {
   font-size: 14px;

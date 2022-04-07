@@ -72,12 +72,12 @@ export default function ReviewModal() {
             {' '}
             {/* <Edit size="18px" className="dropdown-item-icon" /> 활동내역 보기 */}
             <div onClick={toggleModal}>
-              <AlertOctagon size="18px" className="dropdown-item-icon" /> <p>신고하기</p>
+              <AlertOctagon size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">신고하기</p>
             </div>
           </Dropdown.Item>
           <Dropdown.Item eventKey="2">
             {' '}
-            <X size="18px" className="dropdown-item-icon" /> 닫기
+            <X size="18px" className="dropdown-item-icon" /> <p className="review-modal-close">닫기</p>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -94,7 +94,9 @@ export default function ReviewModal() {
         <div className="review-modal-wrapper">
           <div className="review-modal-close-wrapper">
             <button onClick={toggleModal} className="review-modal-close">
-              <FontAwesomeIcon icon={faXmark} />
+              {/* <span style="font-size: 48px; color: Dodgerblue;"> */}
+              <FontAwesomeIcon icon={faXmark} className="review-modal-close-button" color="black" />
+              {/* </span> */}
             </button>
           </div>
 

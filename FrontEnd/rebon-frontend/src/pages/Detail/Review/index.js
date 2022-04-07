@@ -60,7 +60,7 @@ export default function Review() {
         <h4 className="review-name">리뷰</h4>
         <div className="review-num">(12)</div>
         <div className="review-write-wrapper">
-          <FontAwesomeIcon icon={faPenToSquare} className="review-icon" size="1x" />
+          <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
           <span className="review-write-button">리뷰쓰기</span>
         </div>
         <div className="review-like-wrapper">
