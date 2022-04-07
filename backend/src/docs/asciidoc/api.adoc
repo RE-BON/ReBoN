@@ -48,8 +48,15 @@ https://localhost:8080/api/shops?page=0&size=10&sort=createdAt,asc
 
 
 == Category API
-`구현 후 추가 예정`
+=== 모든 Category 상세 조회
+Root Category 와 그 자식 카테고리들의 배열
 
+==== Request
+
+
+include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-request.adoc[]
+==== Response
+include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-response.adoc[]
 
 == Shop API
 

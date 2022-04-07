@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class ShopService {
+
     private final CategoryService categoryService;
     private final TagService tagService;
     private final ShopAdapterService shopAdapterService;
@@ -42,7 +43,7 @@ public class ShopService {
     public Long create(ShopCreateRequestDto shopCreateRequestDto) {
         // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopCreateRequestDto.getCategoryId());
-        List<Category> subCategories = categoryService.findAll(shopCreateRequestDto.getSubCategories());
+        List<Category> subCategories = categoryService.findSubCategoryByIds(shopCreateRequestDto.getSubCategories());
 
         // TODO 태그 가져오기
         List<Tag> tags = tagService.findAll(shopCreateRequestDto.getTags());
@@ -78,7 +79,7 @@ public class ShopService {
 
         // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopSearchDto.getCategory());
-        List<Category> subs = categoryService.findAll(shopSearchDto.getSubCategories());
+        List<Category> subs = categoryService.findSubCategoryByIds(shopSearchDto.getSubCategories());
 
         ShopSearchCondition shopSearchCondition = new ShopSearchCondition(tag, category, subs);
 

@@ -1,21 +1,23 @@
 package com.handong.rebon.category.application;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 
-import com.handong.rebon.category.application.dto.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
+import com.handong.rebon.exception.category.CategoryIdException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
@@ -52,14 +54,20 @@ public class CategoryService {
         }
     }
 
-    // Shop 에서 사용하는 기능, Read 기능 구현 시 수정 예정
+    @Transactional(readOnly = true)
     public Category findById(Long categoryId) {
-        return categoryRepository.findById(categoryId).get();
+        return categoryRepository.findById(categoryId)
+                                 .orElseThrow(CategoryIdException::new);
     }
 
-    public List<Category> findAll(List<Long> subCategories) {
-        return subCategories.stream()
-                            .map(t -> categoryRepository.findById(t).get())
-                            .collect(Collectors.toList());
+    @Transactional(readOnly = true)
+    public List<Category> findSubCategoryByIds(List<Long> subCategories) {
+        return categoryRepository.findAllById(subCategories);
+    }
+
+    @Transactional(readOnly = true)
+    public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
+        List<Category> categories = categoryRepository.findRootCategories();
+        return CategoryDtoAssembler.rootCategoryResponseDtos(categories);
     }
 }
