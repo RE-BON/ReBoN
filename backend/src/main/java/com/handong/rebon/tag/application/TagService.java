@@ -42,5 +42,10 @@ public class TagService {
         return tagRepository.findById(id)
                             .orElseThrow(IllegalArgumentException::new);
     }
+
+    // TODO temp
+    public List<Tag> findAll() {
+        return tagRepository.findAll();
+    }
 }
 

@@ -62,4 +62,13 @@ public class CategoryService {
                             .map(t -> categoryRepository.findById(t).get())
                             .collect(Collectors.toList());
     }
+
+    // Temp
+    public List<Category> findAllParent() {
+        return categoryRepository.findRootCategories();
+    }
+
+    public List<Category> findAllSub() {
+        return categoryRepository.findAllSub();
+    }
 }

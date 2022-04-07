@@ -1,5 +1,6 @@
 package com.handong.rebon.shop.presentation.dto.request;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,20 +18,29 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ShopRequest {
+    private final static int DEFAULT_MENU_SIZE = 3;
+
     private Long categoryId;
-    private List<Long> subCategories;
+    private List<Long> subCategories = new ArrayList<>();
     private String name;
     private String businessHour;
     private String phone;
     private String address;
-    private String longitude;
     private String latitude;
-    private List<MultipartFile> images;
+    private String longitude;
+    private List<MultipartFile> images = new ArrayList<>();
     private List<Long> tags;
-    private List<MenuGroupRequest> menus;
+    private List<MenuGroupRequest> menus = new ArrayList<>();
+
+    public ShopRequest(int menuGroupSize) {
+        for (int i = 0; i < menuGroupSize; i++) {
+            menus.add(new MenuGroupRequest(DEFAULT_MENU_SIZE));
+        }
+    }
 
     public ShopCreateRequestDto toDto() {
         List<MenuGroupRequestDto> menuGroupRequestDtos = menus.stream()
+                                                              .filter(menuGroup -> !menuGroup.getName().isBlank())
                                                               .map(this::toDto)
                                                               .collect(Collectors.toList());
 
@@ -41,8 +51,8 @@ public class ShopRequest {
                                    .businessHour(businessHour)
                                    .phone(phone)
                                    .address(address)
-                                   .longitude(longitude)
                                    .latitude(latitude)
+                                   .longitude(longitude)
                                    .images(images)
                                    .tags(tags)
                                    .menus(menuGroupRequestDtos)
@@ -53,6 +63,7 @@ public class ShopRequest {
         List<MenuRequestDto> menuRequestDtos = menuGroupRequest
                 .getMenus()
                 .stream()
+                .filter(menu -> !menu.getName().isBlank())
                 .map(menuRequest -> new MenuRequestDto(menuRequest.getName(), menuRequest.getPrice()))
                 .collect(Collectors.toList());
         return new MenuGroupRequestDto(menuGroupRequest.getName(), menuRequestDtos);
