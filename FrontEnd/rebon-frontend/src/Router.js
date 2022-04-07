@@ -7,6 +7,7 @@ import Footprint from './pages/Footprint';
 import Mypage from './pages/Mypage';
 import Bookmark from './pages/Mypage/Bookmark';
 import Join from './pages/Join';
+import Register from './pages/Join/Register';
 import Logout from './pages/Logout';
 
 function Router() {
@@ -21,6 +22,7 @@ function Router() {
         <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/bookmark" element={<Bookmark />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/join/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
