@@ -94,9 +94,7 @@ export default function ReviewModal() {
         <div className="review-modal-wrapper">
           <div className="review-modal-close-wrapper">
             <button onClick={toggleModal} className="review-modal-close">
-              {/* <span style="font-size: 48px; color: Dodgerblue;"> */}
               <FontAwesomeIcon icon={faXmark} className="review-modal-close-button" color="black" />
-              {/* </span> */}
             </button>
           </div>
 
