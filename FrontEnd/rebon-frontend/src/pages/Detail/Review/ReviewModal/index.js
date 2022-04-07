@@ -72,7 +72,7 @@ export default function ReviewModal() {
             {' '}
             {/* <Edit size="18px" className="dropdown-item-icon" /> 활동내역 보기 */}
             <div onClick={toggleModal}>
-              <AlertOctagon size="18px" className="dropdown-item-icon" /> 신고하기
+              <AlertOctagon size="18px" className="dropdown-item-icon" /> <p>신고하기</p>
             </div>
           </Dropdown.Item>
           <Dropdown.Item eventKey="2">
