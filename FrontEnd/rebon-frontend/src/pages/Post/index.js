@@ -18,12 +18,12 @@ export default function Post() {
 
         <div className="post-tip">
           <div className="post-tip-box">나만의 꿀팁</div>
-          <input placeholder=" ''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+          <input placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
         </div>
         <div className="post-tip-count">1/500</div>
 
         <div className="post-review">
-          <textarea rows="6" placeholder="'마라도 횟집'에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
+          <textarea rows="6" placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
           <div className="post-review-count">1/1000</div>
         </div>
 
