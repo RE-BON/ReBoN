@@ -3,10 +3,13 @@ package com.handong.rebon.category.application;
 import java.util.List;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
+import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
+import com.handong.rebon.common.BaseEntity;
+import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryIdException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
@@ -33,12 +36,12 @@ public class CategoryService {
     }
 
     @Transactional
-    public Long create(CategoryRequestDto categoryRequestDto) {
+    public Long create(CategoryCreateRequestDto categoryCreateRequestDto) {
 
-        Category parent = categoryRepository.findById(categoryRequestDto.getParentId())
+        Category parent = categoryRepository.findById(categoryCreateRequestDto.getParentId())
                                             .orElseThrow(CategoryNoParentException::new);
 
-        String categoryName = categoryRequestDto.getName();
+        String categoryName = categoryCreateRequestDto.getName();
 
         Category newCategory = new Category(categoryName);
 
@@ -69,5 +72,14 @@ public class CategoryService {
     public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
         List<Category> categories = categoryRepository.findRootCategories();
         return CategoryDtoAssembler.rootCategoryResponseDtos(categories);
+    }
+
+    @Transactional
+    public void delete(CategoryRequestDto categoryRequestDto){
+        Category category = categoryRepository.findById(categoryRequestDto.getId())
+                                              .orElseThrow(CategoryIdException::new);
+        if(category.isDeleted()) throw new CategoryAlreadyDeletedException();
+        category.getChildren().forEach(BaseEntity::deleteContent);
+        category.deleteContent();
     }
 }
