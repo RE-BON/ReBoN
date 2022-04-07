@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../../components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import '../../styles/logout.css';
 export default function Logout() {
   return (
@@ -17,8 +18,12 @@ export default function Logout() {
         </div>
 
         <div className="button">
-          <div className="button-login">로그인</div>
-          <div className="button-join">회원가입</div>
+          <Link to="/login" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <div className="button-login">로그인</div>
+          </Link>
+          <Link to="/join" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <div className="button-join">회원가입</div>
+          </Link>
         </div>
       </div>
     </>

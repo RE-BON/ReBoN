@@ -11,7 +11,7 @@
 
 .edit-info {
   width: 50%;
-  margin-left: 25%;
+  margin-left: 13%;
 }
 
 .edit-info-icon {
@@ -28,12 +28,12 @@
 
 .icon-camera {
   z-index: 1;
-  margin-top: -30px;
-  margin-left: 60px;
+  margin-top: -25px;
+  margin-left: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 33%;
+  width: 35%;
   padding: 7% 0;
   border-radius: 50%;
   border: 2px solid white;
@@ -101,7 +101,7 @@
 }
 .edit-info-marketing {
   margin-top: 25px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
 }
 .edit-info-notice {
@@ -144,7 +144,7 @@
 }
 
 .edit-info-submit {
-  margin-top: 15%;
+  margin-top: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
