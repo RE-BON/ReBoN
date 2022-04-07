@@ -6,7 +6,6 @@ import lombok.Getter;
 
 @Getter
 public class ChildCategoryDto {
-
     private Long id;
     private String name;
 

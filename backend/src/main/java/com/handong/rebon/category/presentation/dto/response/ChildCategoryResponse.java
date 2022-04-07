@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ChildCategoryResponse {
-
     private Long id;
     private String name;
 

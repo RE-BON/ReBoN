@@ -15,7 +15,10 @@ import lombok.NoArgsConstructor;
 public class CategoryAssembler {
     public static List<RootCategoryResponse> rootCategoryResponses(List<RootCategoryResponseDto> rootCategories) {
         return rootCategories.stream()
-                             .map(rootCategory -> new RootCategoryResponse(rootCategory.getId(), rootCategory.getName(), childCategoryResponses(rootCategory.getChildren())))
+                             .map(rootCategory -> new RootCategoryResponse(
+                                     rootCategory.getId(),
+                                     rootCategory.getName(),
+                                     childCategoryResponses(rootCategory.getChildren())))
                              .collect(Collectors.toList());
     }
 
