@@ -1,5 +1,6 @@
 package com.handong.rebon.integration.review;
 
+import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
@@ -19,36 +20,32 @@ import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Transactional
-class ReviewIntegrationTest {
+class ReviewIntegrationTest extends IntegrationTest {
 
     @Autowired
-    private ReviewService reviewService;
+    public ReviewService reviewService;
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    public ReviewRepository reviewRepository;
 
     @Autowired
-    private MemberRepository memberRepository;
+    public MemberRepository memberRepository;
 
     @Autowired
-    private ShopRepository shopRepository;
+    public ShopRepository shopRepository;
 
     @Test
     @DisplayName("리뷰 생성")
     void create() {
         //given
-        Member member = createMember();
-        Shop shop = createShop();
+        Member member = createMember("peace");
+        Shop shop = createShop("토시래");
 
         ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
         ReviewScore reviewScore = new ReviewScore(5, 0);
@@ -70,7 +67,8 @@ class ReviewIntegrationTest {
 
     }
 
-    private ReviewRequest createReviewRequest(ReviewContent reviewContent, ReviewScore reviewScore) {
+
+    public ReviewRequest createReviewRequest(ReviewContent reviewContent, ReviewScore reviewScore) {
         ReviewRequest reviewRequest = new ReviewRequest();
 
         reviewRequest.setContent(reviewContent.getContent());
@@ -81,14 +79,13 @@ class ReviewIntegrationTest {
         return reviewRequest;
     }
 
-    private Shop createShop() {
-
-        Shop shop = new Restaurant(null, null, new ShopContent("토시래", "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
+    protected Shop createShop(String shopName) {
+        Shop shop = new Restaurant(null, null, new ShopContent(shopName, "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
         return shopRepository.save(shop);
     }
 
-    private Member createMember() {
-        Member member = new Member(new Profile("peace"));
+    protected Member createMember(String memberName) {
+        Member member = new Member(new Profile(memberName));
         return memberRepository.save(member);
     }
 }

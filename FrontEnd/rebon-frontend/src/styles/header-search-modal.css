@@ -5,14 +5,12 @@ li {
   list-style: none;
 }
 button {
-  width: 25px;
-  height: 25px;
   border: 0;
   outline: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   margin-left: 10px;
-  border-radius: 50%;
+  font-size: 20px;
 }
 
 .modal-wrapper {
@@ -27,15 +25,20 @@ button {
 }
 
 .modal-wrapper .search-list {
-  margin: auto;
   width: 90%;
+  padding-left: 10px;
 }
 
 .search-list li {
   padding: 10px 0;
-  border-radius: 5px;
+  border-radius: 10px;
   color: rgba(0, 0, 0, 0.5);
-  font-weight: bolder;
+  padding-left: 10px;
+}
+
+.search-list li:hover {
+  color: #ff6c6c;
+  background-color: #ffeded;
 }
 
 .modal-wrapper .tag-list {
@@ -45,7 +48,6 @@ button {
 }
 
 .modal-wrapper .tag-list div {
-  color: rgba(0, 0, 0, 0.3);
   grid-column: 1 / 5;
   margin-bottom: 10px;
 }
@@ -55,7 +57,14 @@ button {
   padding: 5px 10px;
   margin: 10px;
   float: left;
-  border: 1px solid black;
+  border: 1px solid #bfbfbf;
+  color: #bfbfbf;
   border-radius: 50px;
+  font-weight: bolder;
+}
+
+.modal-wrapper .tag-list li:hover {
+  color: #ff6c6c;
+  border: 1px solid #ff6c6c;
   font-weight: bolder;
 }

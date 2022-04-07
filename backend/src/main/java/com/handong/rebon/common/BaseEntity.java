@@ -20,4 +20,10 @@ public abstract class BaseEntity {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    private boolean isDeleted;
+
+    public void deleteContent() {
+        isDeleted = true;
+    }
 }

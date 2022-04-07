@@ -1,4 +1,4 @@
-package com.handong.rebon.category.application.dto;
+package com.handong.rebon.category.application.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
