@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -53,7 +54,11 @@ export default function LogoutModal() {
             <LogoutIcon fontSize="large" />
           </div>
           <div className="logout-notice">로그아웃 하시겠습니까?</div>
-          <button className="logout-button">확인</button>
+          <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <button className="logout-button" onClick={toggleModal}>
+              확인
+            </button>
+          </Link>
         </div>
       </StyledModal>
     </ModalProvider>

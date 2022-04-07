@@ -10,8 +10,8 @@ import Bookmark from './Bookmark';
 import Footprint from './Footprint';
 import Edit from './Edit';
 import Header from '../../components/Header';
-import Withdrawal from './Withdrawal';
 import LogoutModal from './LogoutModal';
+import Withdrawal from './Withdrawal';
 import '../../styles/mypage.css';
 
 export default function Mypage() {

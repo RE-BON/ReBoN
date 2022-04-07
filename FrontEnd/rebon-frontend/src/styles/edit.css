@@ -11,7 +11,7 @@
 
 .edit-info {
   width: 50%;
-  margin-left: 13%;
+  margin-left: 25%;
 }
 
 .edit-info-icon {
@@ -101,7 +101,7 @@
 }
 .edit-info-marketing {
   margin-top: 25px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
 }
 .edit-info-notice {
@@ -144,7 +144,7 @@
 }
 
 .edit-info-submit {
-  margin-top: 20%;
+  margin-top: 15%;
   display: flex;
   justify-content: space-between;
   align-items: center;
