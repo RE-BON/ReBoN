@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import LogoutIcon from '@mui/icons-material/Logout';
-import '../../../styles/logout-modal.css';
-export default function LogoutModal() {
+import '../../../styles/post-modal.css';
+export default function PostModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -35,7 +33,7 @@ export default function LogoutModal() {
 
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
-      <div onClick={toggleModal}>로그아웃</div>
+      <div onClick={toggleModal}>작성완료</div>
 
       <StyledModal
         isOpen={isOpen}
@@ -46,19 +44,12 @@ export default function LogoutModal() {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <div className="logout-wrapper">
+        <div className="modal-wrapper">
           <button className="close" onClick={toggleModal}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          <div className="logout-icon">
-            <LogoutIcon fontSize="large" />
-          </div>
-          <div className="logout-notice">로그아웃 하시겠습니까?</div>
-          <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
-            <button className="logout-button" onClick={toggleModal}>
-              확인
-            </button>
-          </Link>
+          <img className="modal-image" alt="review-image" src="image/reviewLogo.png" />
+          <div className="modal-notice">리뷰가 등록되었습니다.</div>
         </div>
       </StyledModal>
     </ModalProvider>
@@ -66,8 +57,8 @@ export default function LogoutModal() {
 }
 
 const StyledModal = Modal.styled`
-  width: 23rem;
-  height: 20rem;
+  width: 21rem;
+  height: 16rem;
   padding : 20px;
   border-radius:20px;
   background-color: white;

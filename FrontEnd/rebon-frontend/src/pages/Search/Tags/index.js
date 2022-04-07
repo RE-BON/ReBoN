@@ -3,7 +3,7 @@ import '../../../styles/search-tags.css';
 export default function Tags() {
   return (
     <ul className="tags-wrapper">
-      <div>추천 태그</div>
+      <div>추천 태그로 검색해보세요.</div>
       {api.map((item) => (
         <li>{item}</li>
       ))}

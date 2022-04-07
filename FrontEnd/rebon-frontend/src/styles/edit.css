@@ -21,22 +21,22 @@
   margin-bottom: 7%;
 }
 
-.icon-profile {
+.icon-user {
+  z-index: -1;
   position: relative;
-  margin-bottom: 10px;
 }
 
 .icon-camera {
-  position: absolute;
+  z-index: 1;
+  margin-top: -25px;
+  margin-left: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 35%;
-  height: 35%;
+  padding: 7% 0;
   border-radius: 50%;
   border: 2px solid white;
-  right: -1px;
-  bottom: -1px;
   background-color: #ff6b6c;
   font-size: 10px;
 }
@@ -99,25 +99,47 @@
   font-size: 13px;
   font-weight: bold;
 }
-
-.edit-info-notice {
+.edit-info-marketing {
   margin-top: 25px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.edit-info-notice {
+  margin-top: 10px;
   font-size: 10px;
 }
 
 .edit-info-agree {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 15px;
-  padding: 9px 14px;
+  padding: 9px 0;
   background-color: #f5f5f5;
   font-size: 13px;
 }
 
 .agree-button {
-  padding: 0 4px;
+  font-size: 10px;
+  padding: 0 3px;
+  margin-right: 5px;
   border-radius: 50%;
   border: 1px solid #c4c4c4;
   background-color: white;
-  margin-right: 15px;
+  color: white;
+}
+
+.empty {
+  width: 13px;
+}
+
+.disagree-button {
+  font-size: 10px;
+  padding: 0 3px;
+  margin-right: 5px;
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  background-color: white;
   color: white;
 }
 
