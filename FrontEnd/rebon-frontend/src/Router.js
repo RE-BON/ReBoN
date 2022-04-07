@@ -8,6 +8,7 @@ import Mypage from './pages/Mypage';
 import Bookmark from './pages/Mypage/Bookmark';
 import Join from './pages/Join';
 import Register from './pages/Join/Register';
+import Logout from './pages/Logout';
 
 function Router() {
   return (
@@ -18,10 +19,11 @@ function Router() {
         <Route path="/main" element={<Main />} />
         <Route path="/post" element={<Post />} />
         <Route path="/footprint" element={<Footprint />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/bookmark" element={<Bookmark />} />
         <Route path="/join" element={<Join />} />
         <Route path="/join/register" element={<Register />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

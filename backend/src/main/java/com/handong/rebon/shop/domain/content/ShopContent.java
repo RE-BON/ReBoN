@@ -17,6 +17,10 @@ public class ShopContent {
     private String businessHour;
     private String phone;
 
+    public ShopContent(String name) {
+        this(name, "", "");
+    }
+
     @Builder
     public ShopContent(String name, String businessHour, String phone) {
         validatesBlankName(name);
