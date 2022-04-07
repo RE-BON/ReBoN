@@ -1,5 +1,6 @@
 package com.handong.rebon.integration.tag;
 
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,10 +33,10 @@ public class TagReadIntegrationTest extends TagIntegrationTest {
         Long tagId = tagService.createTag(tagName);
 
         //when
-        List<Tag> allTags = tagService.findTags();
+        List<TagResponseDto> allTags = tagService.findTags();
 
         //then
-        Tag tags = allTags.get(0);
+        TagResponseDto tags = allTags.get(0);
         assertThat(tags.getName()).isEqualTo(tagName);
     }
 }

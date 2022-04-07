@@ -3,6 +3,8 @@ package com.handong.rebon.tag.application;
 import java.util.List;
 
 import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.tag.application.dto.TagDtoAssembler;
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 import org.springframework.stereotype.Service;
@@ -35,8 +37,9 @@ public class TagService {
         return tagRepository.findAll();
     }
 
-    public List<Tag> findTags() {
-        return tagRepository.findAll();
+    public List<TagResponseDto> findTags() {
+        List<Tag> tags = tagRepository.findAll();
+        return TagDtoAssembler.tagResponseDtos(tags);
     }
 
 
