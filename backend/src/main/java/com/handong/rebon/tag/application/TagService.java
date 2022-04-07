@@ -3,6 +3,7 @@ package com.handong.rebon.tag.application;
 import java.util.List;
 
 import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.exception.tag.TagIdException;
 import com.handong.rebon.tag.application.dto.TagDtoAssembler;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
@@ -37,15 +38,14 @@ public class TagService {
         return tagRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<TagResponseDto> findTags() {
-        List<Tag> tags = tagRepository.findAll();
-        return TagDtoAssembler.tagResponseDtos(tags);
+        return TagDtoAssembler.tagResponseDtos(tagRepository.findAll());
     }
-
 
     public Tag findById(Long id) {
         return tagRepository.findById(id)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(TagIdException::new);
     }
 }
 

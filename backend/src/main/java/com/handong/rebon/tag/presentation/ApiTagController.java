@@ -24,7 +24,7 @@ public class ApiTagController {
     @GetMapping("/tags")
     public ResponseEntity<List<TagResponse>> getTags() {
         List<TagResponseDto> tagDtos = tagService.findTags();
-        List<TagResponse> responses = TagAssembler.rootCategoryResponses(tagDtos);
+        List<TagResponse> responses = TagAssembler.tagResponse(tagDtos);
         return ResponseEntity.ok(responses);
     }
 }

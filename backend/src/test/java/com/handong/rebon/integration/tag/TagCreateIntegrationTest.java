@@ -7,15 +7,10 @@ import com.handong.rebon.tag.domain.repository.TagRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
-@Transactional
 public class TagCreateIntegrationTest extends TagIntegrationTest {
 
     @Autowired
@@ -39,8 +34,8 @@ public class TagCreateIntegrationTest extends TagIntegrationTest {
     }
 
     @Test
-    @DisplayName("태그 이름이 중복되면 생성할 수 없다.")
-    void createExistTag() {
+    @DisplayName("태그 이름이 중복되면 예외가 발생한다.")
+    void createExistTagWithException() {
         // given
         String tagName = "장성동";
 

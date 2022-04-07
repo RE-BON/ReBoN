@@ -44,14 +44,7 @@ https://localhost:8080/api/shops?page=0&size=10&sort=createdAt,asc
 
 
 == Tag API
-==== Request
-|===
-| 값 | 타입 | 필수 | 설명
-
-| id | Long | true | 조회하고자 하는 태그의 id 값
-| name | String | true | 조회하고자 하는 태그의 이름 값
-|===
-
+`구현 후 추가 예정`
 
 == Category API
 `구현 후 추가 예정`

@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TagAssembler {
 
-    public static List<TagResponse> rootCategoryResponses(List<TagResponseDto> rootCategories) {
-        return rootCategories.stream()
-                .map(rootCategory -> new TagResponse(rootCategory.getId(), rootCategory.getName()))
+    public static List<TagResponse> tagResponse(List<TagResponseDto> tags) {
+        return tags.stream()
+                .map(tag -> new TagResponse(tag.getId(), tag.getName()))
                 .collect(Collectors.toList());
     }
 }
