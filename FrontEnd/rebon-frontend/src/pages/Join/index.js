@@ -9,9 +9,9 @@ export default function Join() {
       <div className="centerBox">
         <div class="join-title">
           빠르고 쉽게
-          <br /> <span className="ReBON">ReBON</span>에 로그인 하세요!
+          <br /> <span className="ReBON">ReBON</span>에 가입하세요!
           <br />
-          <span className="subtitle">오늘도 다양한 리뷰들이 기다리고 있어요.</span>
+          <span className="subtitle">오늘도 다양한 리뷰들이 기다리고 있어요:)</span>
         </div>
         <SNSButtons />
         <hr className="divider" />
