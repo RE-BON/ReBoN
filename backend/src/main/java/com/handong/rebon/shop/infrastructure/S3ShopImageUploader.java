@@ -12,6 +12,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.handong.rebon.common.ImageUploader;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
+@Profile("!test")
 public class S3ShopImageUploader implements ImageUploader {
     private final AmazonS3 amazonS3;
 

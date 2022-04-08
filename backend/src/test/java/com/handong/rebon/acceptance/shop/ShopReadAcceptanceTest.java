@@ -1,5 +1,6 @@
 package com.handong.rebon.acceptance.shop;
 
+import java.io.IOException;
 import java.util.*;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
@@ -43,7 +44,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     private Map<String, Shop> shops = new HashMap<>();
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         tags = adminTagRegister.register("포항", "영일대", "한동대", "양덕");
         categories = adminCategoryRegister.registerMain("식당", "숙소", "카페");
         categories.putAll(adminCategoryRegister.registerSubs(categories.get("식당"), "한식", "분식", "일식", "양식"));
@@ -158,7 +159,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     }
 
 
-    private void initShops() {
+    private void initShops() throws IOException {
         shops.clear();
         initRestaurant();
         initCafe();
@@ -209,7 +210,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         ));
     }
 
-    private void initCafe() {
+    private void initCafe() throws IOException {
         shops.put("이디야", adminShopRegister.simpleRegister(
                 "이디야",
                 categories.get("카페"),
@@ -235,8 +236,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
                 "티타",
                 categories.get("카페"),
                 Collections.singletonList(categories.get("개인카페")),
-                Arrays.asList(tags.get("포항"), tags.get("양덕")),
-                new ShopImages(Collections.singletonList(new ShopImage("url6", true)))
+                Arrays.asList(tags.get("포항"), tags.get("양덕"))
         ));
     }
 }
