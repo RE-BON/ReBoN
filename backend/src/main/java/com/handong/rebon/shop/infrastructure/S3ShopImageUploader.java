@@ -43,6 +43,6 @@ public class S3ShopImageUploader implements ImageUploader {
     private String getFileName(MultipartFile file) {
         String now = LocalDateTime.now()
                                   .format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        return String.format("%s-%s", file.getOriginalFilename(), now);
+        return String.format("%s-%s", now, file.getOriginalFilename());
     }
 }

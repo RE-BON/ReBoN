@@ -2,6 +2,9 @@ package com.handong.rebon.tag.application.dto;
 
 import com.handong.rebon.tag.domain.Tag;
 
+import lombok.Getter;
+
+@Getter
 public class TagResponseDto {
     private Long id;
     private String name;
