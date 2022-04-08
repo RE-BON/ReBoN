@@ -3,7 +3,9 @@ package com.handong.rebon.category.application;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.category.application.dto.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
@@ -15,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
@@ -54,6 +56,12 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
+    public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
+        List<Category> categories = categoryRepository.findRootCategories();
+        return CategoryDtoAssembler.rootCategoryResponseDtos(categories);
+    }
+
+    @Transactional(readOnly = true)
     public Category findById(Long categoryId) {
         return categoryRepository.findById(categoryId)
                                  .orElseThrow(NoSuchCategoryException::new);
@@ -64,14 +72,5 @@ public class CategoryService {
         return subCategories.stream()
                             .map(this::findById)
                             .collect(Collectors.toList());
-    }
-
-    // temp 카테고리 기능 머지 후 변경할 메서드
-    public List<Category> findAllParent() {
-        return categoryRepository.findRootCategories();
-    }
-
-    public List<Category> findAllSub() {
-        return categoryRepository.findAllSub();
     }
 }

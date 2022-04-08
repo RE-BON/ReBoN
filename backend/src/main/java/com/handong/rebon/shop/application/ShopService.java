@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class ShopService {
+
     private final CategoryService categoryService;
     private final TagService tagService;
     private final ShopAdapterService shopAdapterService;
@@ -40,8 +41,8 @@ public class ShopService {
     @Transactional
     public Long create(ShopCreateRequestDto shopCreateRequestDto) throws IOException {
         Category category = categoryService.findById(shopCreateRequestDto.getCategoryId());
-        List<Category> subCategories = categoryService.findAllContainIds(shopCreateRequestDto.getSubCategories());
 
+        List<Category> subCategories = categoryService.findAllContainIds(shopCreateRequestDto.getSubCategories());
         List<Tag> tags = tagService.findAllContainIds(shopCreateRequestDto.getTags());
 
         ShopImages shopImages = saveImages(shopCreateRequestDto.getImages());

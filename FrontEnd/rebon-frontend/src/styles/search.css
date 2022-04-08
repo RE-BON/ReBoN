@@ -3,7 +3,7 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  margin: 0 auto;
+  margin: -4% auto;
   padding-top: 15%;
 }
 
@@ -13,22 +13,26 @@
 }
 
 .search-content .title {
-  font-weight: 500;
+  margin-left: -15px;
+  width: 100%;
+  font-weight: bold;
   font-size: 150%;
   line-height: 1.2em;
   margin-bottom: 10%;
+  border: none;
 }
 
 .search-content span {
   font-weight: bolder;
+  color: #ff6c6c;
 }
 
 .search-content .input-bar {
   width: 95%;
-  height: 15%;
+  height: 20%;
   margin-bottom: 10%;
   border-radius: 50px;
-  border: 1px solid black;
+  border: 1px solid #c4c4c4;
 }
 
 .search-content .input-bar input {

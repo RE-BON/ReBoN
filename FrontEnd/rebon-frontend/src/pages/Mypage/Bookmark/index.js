@@ -42,54 +42,57 @@ export default function Bookmark() {
     setValue(newValue);
   };
   return (
-    <div className="bookmark-wrapper">
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs className="box" value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-            <Tab label="식당" {...a11yProps(0)} />
-            <Tab label="카페" {...a11yProps(1)} />
-            <Tab label="숙소" {...a11yProps(2)} />
-          </Tabs>
+    <>
+      <div className="bookmark-title">찜목록</div>
+      <div className="bookmark-wrapper">
+        <Box sx={{ width: '100%' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs className="box" value={value} onChange={handleChange} aria-label="basic tabs example" centered>
+              <Tab label="식당" {...a11yProps(0)} />
+              <Tab label="카페" {...a11yProps(1)} />
+              <Tab label="숙소" {...a11yProps(2)} />
+            </Tabs>
+          </Box>
+          <TabPanel className="TabPanel" value={value} index={0}>
+            <div className="category-wrapper"></div>
+            <div className="best-wrapper"></div>
+
+            <div className="mainCard-wrapper">
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+            </div>
+          </TabPanel>
+
+          <TabPanel className="TabPanel" value={value} index={1}>
+            <div className="mainCard-wrapper">
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+            </div>
+          </TabPanel>
+
+          <TabPanel className="TabPanel" value={value} index={2}>
+            <div className="mainCard-wrapper">
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+              <MainCard />
+            </div>
+          </TabPanel>
         </Box>
-        <TabPanel className="TabPanel" value={value} index={0}>
-          <div className="category-wrapper"></div>
-          <div className="best-wrapper"></div>
-
-          <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-          </div>
-        </TabPanel>
-
-        <TabPanel className="TabPanel" value={value} index={1}>
-          <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-          </div>
-        </TabPanel>
-
-        <TabPanel className="TabPanel" value={value} index={2}>
-          <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-          </div>
-        </TabPanel>
-      </Box>
-    </div>
+      </div>
+    </>
   );
 }

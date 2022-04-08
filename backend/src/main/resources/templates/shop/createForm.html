@@ -11,31 +11,29 @@
         <form class="needs-validation col-sm-10" th:action="@{/admin/shops}" th:object="${shopRequest}" method="post"
               novalidate
               enctype="multipart/form-data">
+
             <div class="form-group">
-                <label for="category">최상위 카테고리</label>
+                <label for="category">카테고리</label>
+                <hr>
                 <select id="category" th:field="*{categoryId}" class="form-select" aria-describedby="categoryHelp">
                     <option value="">==카테고리 선택==</option>
                     <option th:each="category : ${categories}" th:value="${category.id}"
                             th:text="${category.name}"></option>
                 </select>
-                <small id="categoryHelp" class="form-text text-muted">
-                    가게의 최상위 카테고리를 선택해주세요.
-                </small>
-            </div>
 
-            <br>
-
-            <div class="form-group">
-                <label for="sub-category">서브 카테고리</label>
-                <div id="sub-category" th:each="sub : ${subCategories}" class="form-check">
-                    <input type="checkbox" th:field="*{subCategories}" th:value="${sub.id}"
-                           class="form-check-input" aria-describedby="subCategoryHelp">
-                    <label th:for="${#ids.prev('subCategories')}" th:text="${sub.name}"
-                           class="form-check-label"></label>
+                <div th:each="category, itemStat : ${categories}">
+                    <div id="sub-category" th:each="sub, subStat : ${categories[__${itemStat.index}__].children}"
+                         class="form-check">
+                        <input type="checkbox" th:field="*{subCategories}"
+                               th:value="${categories[__${itemStat.index}__].children[__${subStat.index}__].id}"
+                               class="form-check-input" aria-describedby="subCategoryHelp">
+                        <label th:for="${#ids.prev('subCategories')}"
+                               th:text="${categories[__${itemStat.index}__].children[__${subStat.index}__].name}"
+                               class="form-check-label"></label>
+                    </div>
+                    <hr>
                 </div>
-                <small id="subCategoryHelp" class="form-text text-muted">
-                    가게의 서브 카테고리를 선택해주세요(중복가능)
-                </small>
+                <br>
             </div>
 
             <br>
@@ -45,7 +43,7 @@
                 <div id="tags" th:each="tag : ${tags}" class="form-check">
                     <input type="checkbox" th:field="*{tags}" th:value="${tag.id}"
                            class="form-check-input" aria-describedby="tagsHelp">
-                    <label th:for="${#ids.prev('subCategories')}" th:text="${tag.name}"
+                    <label th:for="${#ids.prev('tags')}" th:text="${tag.name}"
                            class="form-check-label"></label>
                 </div>
                 <small id="tagsHelp" class="form-text text-muted">
@@ -145,9 +143,7 @@
                     </div>
                     <hr>
                 </div>
-
                 <br>
-
             </div>
 
             <div class="form-group">

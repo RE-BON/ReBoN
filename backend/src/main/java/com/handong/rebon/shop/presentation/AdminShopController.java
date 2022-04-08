@@ -1,8 +1,11 @@
 package com.handong.rebon.shop.presentation;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
+import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
+import com.handong.rebon.category.presentation.dto.CategoryAssembler;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.presentation.dto.request.ShopRequest;
 import com.handong.rebon.tag.application.TagService;
@@ -28,8 +31,9 @@ public class AdminShopController {
     @GetMapping("/shops/new")
     public String createForm(Model model) {
         model.addAttribute("tags", tagService.findAll());
-        model.addAttribute("categories", categoryService.findAllParent());
-        model.addAttribute("subCategories", categoryService.findAllSub());
+
+        List<RootCategoryResponseDto> categories = categoryService.findRootCategoriesAndChildren();
+        model.addAttribute("categories", CategoryAssembler.rootCategoryResponses(categories));
 
         ShopRequest shopRequest = new ShopRequest(DEFAULT_MENU_GROUP_SIZE);
         model.addAttribute("shopRequest", shopRequest);

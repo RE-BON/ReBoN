@@ -14,7 +14,7 @@ export default function Search() {
         </div>
 
         <div className="input-bar">
-          <input />
+          <input placeholder="가고싶은 지역을 입력해주세요." />
           <FontAwesomeIcon icon={faSearch} className="search" />
         </div>
 
