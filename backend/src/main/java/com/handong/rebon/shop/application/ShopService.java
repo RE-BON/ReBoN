@@ -39,14 +39,11 @@ public class ShopService {
 
     @Transactional
     public Long create(ShopCreateRequestDto shopCreateRequestDto) throws IOException {
-        // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopCreateRequestDto.getCategoryId());
-        List<Category> subCategories = categoryService.findAll(shopCreateRequestDto.getSubCategories());
+        List<Category> subCategories = categoryService.findAllContainIds(shopCreateRequestDto.getSubCategories());
 
-        // TODO 태그 가져오기
-        List<Tag> tags = tagService.findAll(shopCreateRequestDto.getTags());
+        List<Tag> tags = tagService.findAllContainIds(shopCreateRequestDto.getTags());
 
-        // TODO 이미지 저장
         ShopImages shopImages = saveImages(shopCreateRequestDto.getImages());
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
@@ -69,19 +66,18 @@ public class ShopService {
 
     @Transactional(readOnly = true)
     public List<ShopSimpleResponseDto> search(ShopSearchDto shopSearchDto) {
-        // TODO 태그 가져오기
         Tag tag = tagService.findById(shopSearchDto.getTag());
 
-        // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopSearchDto.getCategory());
-        List<Category> subs = categoryService.findAll(shopSearchDto.getSubCategories());
+        List<Category> subs = categoryService.findAllContainIds(shopSearchDto.getSubCategories());
 
         ShopSearchCondition shopSearchCondition = new ShopSearchCondition(tag, category, subs);
 
         Page<Shop> results =
                 shopRepository.searchShopByConditionApplyPage(shopSearchCondition, shopSearchDto.getPageable());
 
-        return results.stream().map(ShopSimpleResponseDto::from)
+        return results.stream()
+                      .map(ShopSimpleResponseDto::from)
                       .collect(Collectors.toList());
     }
 

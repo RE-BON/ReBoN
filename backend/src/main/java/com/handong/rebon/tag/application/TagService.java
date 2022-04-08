@@ -1,8 +1,11 @@
 package com.handong.rebon.tag.application;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.handong.rebon.exception.tag.NoSuchTagException;
 import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.tag.application.dto.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 
@@ -33,19 +36,25 @@ public class TagService {
         }
     }
 
-    // TODO temp
-    public List<Tag> findAll(List<Long> tags) {
-        return tagRepository.findAll();
-    }
-
+    @Transactional(readOnly = true)
     public Tag findById(Long id) {
         return tagRepository.findById(id)
-                            .orElseThrow(IllegalArgumentException::new);
+                            .orElseThrow(NoSuchTagException::new);
     }
 
-    // TODO temp
-    public List<Tag> findAll() {
-        return tagRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<Tag> findAllContainIds(List<Long> tags) {
+        return tags.stream()
+                   .map(this::findById)
+                   .collect(Collectors.toList());
+    }
+
+    // temp 태그 조회 기능 머지되면 변경할 메서드
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> findAll() {
+        return tagRepository.findAll().stream()
+                            .map(TagResponseDto::of)
+                            .collect(Collectors.toList());
     }
 }
 
