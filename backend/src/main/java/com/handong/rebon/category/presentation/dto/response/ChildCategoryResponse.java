@@ -4,15 +4,17 @@ import com.handong.rebon.category.application.dto.response.ChildCategoryDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class ChildCategoryResponse {
     private Long id;
     private String name;
 
     public ChildCategoryResponse(ChildCategoryDto childCategory) {
-        id = childCategory.getId();
-        name = childCategory.getName();
+        this.id = childCategory.getId();
+        this.name = childCategory.getName();
     }
 }

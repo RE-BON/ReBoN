@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CategoryCreateIntegrationTest extends CategoryIntegrationTest{
+public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
     @Test
     @DisplayName("최상단 카테고리 생성한다.")
     public void 카테고리_생성() {

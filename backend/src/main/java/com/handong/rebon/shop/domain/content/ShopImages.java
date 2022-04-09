@@ -24,6 +24,14 @@ public class ShopImages {
         this.shopImages.addAll(shopImages);
     }
 
+    public static ShopImages of(List<ShopImage> shopImages) {
+        ShopImage image = shopImages.stream()
+                                    .findFirst()
+                                    .orElseGet(() -> new ShopImage(DEFAULT_IMAGE_URL));
+        image.specifyMain();
+        return new ShopImages(shopImages);
+    }
+
     public void belongTo(Shop shop) {
         shopImages.forEach(image -> image.belongTo(shop));
     }

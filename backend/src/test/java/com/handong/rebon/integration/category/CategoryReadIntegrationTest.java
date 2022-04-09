@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.exception.category.CategoryIdException;
+import com.handong.rebon.exception.category.NoSuchCategoryException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,10 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         createCategory("중식");
         createCategory("양식");
         Category createdCategory = createCategory("한식");
+
         //when
         Category categoryId = categoryService.findById(createdCategory.getId());
+
         //then
         assertThat(categoryId).isEqualTo(createdCategory);
     }
@@ -33,9 +35,10 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
     public void findCategoryByWrongId() {
         //given
         Long requestCategoryId = -1L;
+
         //when, then
         assertThatThrownBy(() -> categoryService.findById(requestCategoryId))
-                .isInstanceOf(CategoryIdException.class);
+                .isInstanceOf(NoSuchCategoryException.class);
     }
 
     @Test
@@ -48,8 +51,9 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
                 createCategoryWithParent(parentId, "양식").getId(),
                 createCategoryWithParent(parentId, "중식").getId()
         );
+
         //when
-        List<Category> subCategories = categoryService.findSubCategoryByIds(subCategoryIds);
+        List<Category> subCategories = categoryService.findAllContainIds(subCategoryIds);
 
         //then
         assertThat(subCategories).extracting("name")
@@ -74,8 +78,10 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         createCategoryWithParent(parentId3, "펜션");
         createCategoryWithParent(parentId3, "모텔");
         createCategory("기타");
+
         //when
         List<RootCategoryResponseDto> rootCategories = categoryService.findRootCategoriesAndChildren();
+
         //then
         assertThat(rootCategories).hasSize(4)
                                   .extracting("name")

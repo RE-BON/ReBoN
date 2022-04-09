@@ -1,6 +1,7 @@
 package com.handong.rebon.category.application;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
@@ -8,8 +9,8 @@ import com.handong.rebon.category.application.dto.response.RootCategoryResponseD
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryIdException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
+import com.handong.rebon.exception.category.NoSuchCategoryException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,19 +56,21 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Category findById(Long categoryId) {
-        return categoryRepository.findById(categoryId)
-                                 .orElseThrow(CategoryIdException::new);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Category> findSubCategoryByIds(List<Long> subCategories) {
-        return categoryRepository.findAllById(subCategories);
-    }
-
-    @Transactional(readOnly = true)
     public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
         List<Category> categories = categoryRepository.findRootCategories();
         return CategoryDtoAssembler.rootCategoryResponseDtos(categories);
+    }
+
+    @Transactional(readOnly = true)
+    public Category findById(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                                 .orElseThrow(NoSuchCategoryException::new);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Category> findAllContainIds(List<Long> subCategories) {
+        return subCategories.stream()
+                            .map(this::findById)
+                            .collect(Collectors.toList());
     }
 }

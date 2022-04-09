@@ -1,11 +1,11 @@
 package com.handong.rebon.shop.application;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.common.ImageUploader;
 import com.handong.rebon.exception.shop.NoSuchShopException;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
@@ -16,7 +16,6 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.ShopSearchCondition;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.tag.application.TagService;
 import com.handong.rebon.tag.domain.Tag;
@@ -36,19 +35,15 @@ public class ShopService {
     private final TagService tagService;
     private final ShopAdapterService shopAdapterService;
     private final ShopRepository shopRepository;
-
-    private final ShopImageRepository shopImageRepository;
+    private final ImageUploader imageUploader;
 
     @Transactional
     public Long create(ShopCreateRequestDto shopCreateRequestDto) {
-        // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopCreateRequestDto.getCategoryId());
-        List<Category> subCategories = categoryService.findSubCategoryByIds(shopCreateRequestDto.getSubCategories());
 
-        // TODO 태그 가져오기
-        List<Tag> tags = tagService.findAll(shopCreateRequestDto.getTags());
+        List<Category> subCategories = categoryService.findAllContainIds(shopCreateRequestDto.getSubCategories());
+        List<Tag> tags = tagService.findAllContainIds(shopCreateRequestDto.getTags());
 
-        // TODO 이미지 저장
         ShopImages shopImages = saveImages(shopCreateRequestDto.getImages());
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
@@ -61,32 +56,28 @@ public class ShopService {
         return savedShop.getId();
     }
 
-    // TODO 이미지 저장 기능 구현(따로 서비스로 분리해도 될듯?)
     private ShopImages saveImages(List<MultipartFile> images) {
-        ShopImage url1 = new ShopImage("url1", true);
-        ShopImage url2 = new ShopImage("url2");
-
-        shopImageRepository.save(url1);
-        shopImageRepository.save(url2);
-
-        return new ShopImages(Arrays.asList(url1, url2));
+        List<String> urls = imageUploader.saveAll(images);
+        List<ShopImage> shopImages = urls.stream()
+                                         .map(ShopImage::new)
+                                         .collect(Collectors.toList());
+        return ShopImages.of(shopImages);
     }
 
     @Transactional(readOnly = true)
     public List<ShopSimpleResponseDto> search(ShopSearchDto shopSearchDto) {
-        // TODO 태그 가져오기
         Tag tag = tagService.findById(shopSearchDto.getTag());
 
-        // TODO 카테고리 가져오기
         Category category = categoryService.findById(shopSearchDto.getCategory());
-        List<Category> subs = categoryService.findSubCategoryByIds(shopSearchDto.getSubCategories());
+        List<Category> subs = categoryService.findAllContainIds(shopSearchDto.getSubCategories());
 
         ShopSearchCondition shopSearchCondition = new ShopSearchCondition(tag, category, subs);
 
         Page<Shop> results =
                 shopRepository.searchShopByConditionApplyPage(shopSearchCondition, shopSearchDto.getPageable());
 
-        return results.stream().map(ShopSimpleResponseDto::from)
+        return results.stream()
+                      .map(ShopSimpleResponseDto::from)
                       .collect(Collectors.toList());
     }
 
