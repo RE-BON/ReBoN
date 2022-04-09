@@ -1,6 +1,5 @@
 package com.handong.rebon.shop.application;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +38,7 @@ public class ShopService {
     private final ImageUploader imageUploader;
 
     @Transactional
-    public Long create(ShopCreateRequestDto shopCreateRequestDto) throws IOException {
+    public Long create(ShopCreateRequestDto shopCreateRequestDto) {
         Category category = categoryService.findById(shopCreateRequestDto.getCategoryId());
 
         List<Category> subCategories = categoryService.findAllContainIds(shopCreateRequestDto.getSubCategories());
@@ -57,7 +56,7 @@ public class ShopService {
         return savedShop.getId();
     }
 
-    private ShopImages saveImages(List<MultipartFile> images) throws IOException {
+    private ShopImages saveImages(List<MultipartFile> images) {
         List<String> urls = imageUploader.saveAll(images);
         List<ShopImage> shopImages = urls.stream()
                                          .map(ShopImage::new)

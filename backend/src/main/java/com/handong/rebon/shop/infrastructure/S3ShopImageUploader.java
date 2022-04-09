@@ -10,6 +10,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.handong.rebon.common.ImageUploader;
+import com.handong.rebon.exception.infrastructure.ImageSaveException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -28,7 +29,15 @@ public class S3ShopImageUploader implements ImageUploader {
     private String bucket;
 
     @Override
-    public List<String> saveAll(List<MultipartFile> multipartFiles) throws IOException {
+    public List<String> saveAll(List<MultipartFile> multipartFiles) {
+        try {
+            return saveEachImage(multipartFiles);
+        } catch (IOException e) {
+            throw new ImageSaveException();
+        }
+    }
+
+    private List<String> saveEachImage(List<MultipartFile> multipartFiles) throws IOException {
         List<String> urls = new ArrayList<>();
         for (MultipartFile file : multipartFiles) {
             String fileName = getFileName(file);
@@ -36,7 +45,6 @@ public class S3ShopImageUploader implements ImageUploader {
                     .withCannedAcl(CannedAccessControlList.PublicRead));
             urls.add(amazonS3.getUrl(bucket, fileName).toString());
         }
-
         return urls;
     }
 
