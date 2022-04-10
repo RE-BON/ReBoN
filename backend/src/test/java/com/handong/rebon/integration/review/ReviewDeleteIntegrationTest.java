@@ -6,8 +6,6 @@ import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
 import com.handong.rebon.review.domain.Review;
-import com.handong.rebon.review.domain.content.ReviewContent;
-import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.shop.domain.Shop;

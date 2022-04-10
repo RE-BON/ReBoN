@@ -2,15 +2,11 @@ package com.handong.rebon.integration.review;
 
 import java.util.List;
 
-import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
-import com.handong.rebon.review.domain.Review;
-import com.handong.rebon.review.domain.content.ReviewContent;
-import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.shop.domain.Shop;
@@ -185,29 +181,6 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         assertThat(review).extracting("tip")
                           .isEqualTo(reviewRequest.getTip());
     }
-
-    /*
-    @Test
-    @DisplayName("삭제된 리뷰를 요청하면 exception이 난다.")
-    void getDeletedReviewException() {
-        //given
-        Member member = createMember("peace");
-        Shop shop = createShop("토시래");
-
-        BaseEntity.builder()
-        Review review = Review.builder()
-                             .reviewScore(new ReviewScore(5, 0))
-                             .reviewContent(new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요"))
-                             .member(member)
-                             .shop(shop)
-
-                             .build();
-
-
-        //when
-
-        //then
-    }*/
 
     public void deleteReview(Member member, Long reviewId) {
         ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member.getId(), reviewId);
