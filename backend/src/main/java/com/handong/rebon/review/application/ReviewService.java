@@ -128,8 +128,6 @@ public class ReviewService {
         Review review = reviewRepository.findById(reviewId)
                                         .orElseThrow(ReviewNotFoundException::new);
 
-        System.out.println(review.isDeleted());
-
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
 

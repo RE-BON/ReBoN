@@ -47,10 +47,7 @@ class ReviewIntegrationTest extends IntegrationTest {
         Member member = createMember("peace");
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
@@ -59,21 +56,21 @@ class ReviewIntegrationTest extends IntegrationTest {
         Review review = reviewRepository.findById(id).get();
 
         //then
-        assertThat(review.getReviewContent().getContent()).isEqualTo(reviewContent.getContent());
-        assertThat(review.getReviewContent().getTip()).isEqualTo(reviewContent.getTip());
-        assertThat(review.getReviewScore().getStar()).isEqualTo(reviewScore.getStar());
+        assertThat(review.getReviewContent().getContent()).isEqualTo(reviewRequest.getContent());
+        assertThat(review.getReviewContent().getTip()).isEqualTo(reviewRequest.getTip());
+        assertThat(review.getReviewScore().getStar()).isEqualTo(reviewRequest.getStar());
         assertThat(review.getMember().getProfile().getNickName()).isEqualTo(member.getProfile().getNickName());
         assertThat(review.getShop().getShopContent().getName()).isEqualTo(shop.getShopContent().getName());
 
     }
 
 
-    public ReviewRequest createReviewRequest(ReviewContent reviewContent, ReviewScore reviewScore) {
+    public ReviewRequest createReviewRequest(String content, String tip, int star) {
         ReviewRequest reviewRequest = new ReviewRequest();
 
-        reviewRequest.setContent(reviewContent.getContent());
-        reviewRequest.setTip(reviewContent.getTip());
-        reviewRequest.setStar(reviewScore.getStar());
+        reviewRequest.setContent(content);
+        reviewRequest.setTip(tip);
+        reviewRequest.setStar(star);
         //reviewRequest.setImages();  TODO 이미지 저장 후 구현
 
         return reviewRequest;
