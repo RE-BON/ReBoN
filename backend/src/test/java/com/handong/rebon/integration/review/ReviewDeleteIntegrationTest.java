@@ -6,8 +6,6 @@ import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
 import com.handong.rebon.review.domain.Review;
-import com.handong.rebon.review.domain.content.ReviewContent;
-import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.shop.domain.Shop;
@@ -27,10 +25,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         Member member = createMember("peace", false);
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         Long id = reviewService.create(reviewCreateRequestDto);
@@ -44,7 +39,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
 
         //then
         assertThat(deletedReview)
-                .extracting("isDeleted")
+                .extracting("deleted")
                 .isEqualTo(true);
 
     }
@@ -57,10 +52,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         Member admin = createMember("admin", true);
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         Long id = reviewService.create(reviewCreateRequestDto);
@@ -74,7 +66,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
 
         //then
         assertThat(deletedReview)
-                .extracting("isDeleted")
+                .extracting("deleted")
                 .isEqualTo(true);
     }
 
@@ -86,10 +78,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         Member curry = createMember("curry", false);
         Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent = new ReviewContent("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         Long id = reviewService.create(reviewCreateRequestDto);

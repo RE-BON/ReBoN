@@ -14,11 +14,13 @@ import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.Shop;
 
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Where(clause = "deleted = false")
 @Entity
 public class Review extends BaseEntity {
 
