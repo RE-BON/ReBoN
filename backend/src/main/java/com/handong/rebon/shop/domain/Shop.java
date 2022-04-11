@@ -20,12 +20,16 @@ import com.handong.rebon.tag.domain.Tag;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn
+@SQLDelete(sql = "UPDATE shop SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public abstract class Shop extends BaseEntity {
 
     @Id
@@ -62,8 +66,10 @@ public abstract class Shop extends BaseEntity {
             ShopContent shopContent,
             ShopImages shopImages,
             Location location,
-            ShopScore shopScore
+            ShopScore shopScore,
+            boolean deleted
     ) {
+        super(deleted);
         this.id = id;
         this.category = category;
         this.shopContent = shopContent;

@@ -45,7 +45,7 @@ class ReviewIntegrationTest extends IntegrationTest {
         Member member = createMember("peace");
         Shop shop = createShop("토시래");
 
-        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
@@ -62,7 +62,6 @@ class ReviewIntegrationTest extends IntegrationTest {
 
     }
 
-
     public ReviewRequest createReviewRequest(String content, String tip, int star) {
         ReviewRequest reviewRequest = new ReviewRequest();
 
@@ -75,7 +74,14 @@ class ReviewIntegrationTest extends IntegrationTest {
     }
 
     protected Shop createShop(String shopName) {
-        Shop shop = new Restaurant(null, null, new ShopContent(shopName, "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
+        Shop shop = new Restaurant(
+                null,
+                null,
+                new ShopContent(shopName, "12:00-23:00", "010-1234-1212"),
+                new ShopImages(),
+                null,
+                new ShopScore(0.0, 0), false
+        );
         return shopRepository.save(shop);
     }
 

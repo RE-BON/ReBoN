@@ -21,7 +21,7 @@ public class IntegrationTest {
     private DatabaseCleaner cleaner;
 
     @BeforeEach
-    void setUp() {
+    void init() {
         cleaner.execute();
     }
 }

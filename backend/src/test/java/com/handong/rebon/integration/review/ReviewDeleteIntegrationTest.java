@@ -25,7 +25,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         Member member = createMember("peace", false);
         Shop shop = createShop("토시래");
 
-        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         Long id = reviewService.create(reviewCreateRequestDto);
@@ -52,7 +52,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
         Member admin = createMember("admin", true);
         Shop shop = createShop("토시래");
 
-        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         Long id = reviewService.create(reviewCreateRequestDto);
