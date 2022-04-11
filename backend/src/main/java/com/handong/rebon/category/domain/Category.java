@@ -13,11 +13,13 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@Where(clause = "deleted=false")
 public class Category extends BaseEntity {
 
     @Id
@@ -65,6 +67,19 @@ public class Category extends BaseEntity {
 
     public boolean isSameName(String name) {
         return this.name.equals(name);
+    }
+
+    public void deleteChildCategory(Category category) {
+        this.children.deleteChild(category);
+        category.parent = null;
+    }
+
+    public void delete() {
+        if (parent != null) {
+            parent.deleteChildCategory(this);
+            parent = null;
+        }
+        deleteContent();
     }
 
     public List<Category> getChildren() {

@@ -80,6 +80,6 @@ public class CategoryService {
                                               .orElseThrow(CategoryIdException::new);
         if(category.isDeleted()) throw new CategoryAlreadyDeletedException();
         category.getChildren().forEach(BaseEntity::deleteContent);
-        category.deleteContent();
+        category.delete();
     }
 }

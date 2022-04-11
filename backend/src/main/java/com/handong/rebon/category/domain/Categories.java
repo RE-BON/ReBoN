@@ -23,4 +23,8 @@ public class Categories {
     private void checkDuplicateCategory(Category category) {
         this.categories.forEach(child -> child.validateSame(category));
     }
+
+    public void deleteChild(Category category){
+        this.categories.remove(category);
+    }
 }
