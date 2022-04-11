@@ -21,4 +21,9 @@ public abstract class BaseEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    private boolean deleted = Boolean.FALSE;
+
+    public void deleteContent() {
+        deleted = true;
+    }
 }

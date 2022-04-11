@@ -1,12 +1,17 @@
+.footprint-title {
+  margin: 8% 5% 5% 5%;
+  border-bottom: 2px solid black;
+  font-size: 15px;
+  padding: 0 0 2% 5%;
+  font-weight: bolder;
+}
+
 .footprint-wrapper {
-  margin-top: 5%;
-  margin-left: 20%;
-  width: 60%;
-}
-.footprint-name {
-  margin-left: 5%;
+  margin-left: 6%;
   width: 90%;
+  font-size: 13px;
 }
+
 .footprint-bold-hr {
   /* background-color: blue;
   height: 90px; */

@@ -46,4 +46,8 @@ public class ShopImage extends BaseEntity {
     public boolean isMain() {
         return this.isMain;
     }
+
+    public void specifyMain() {
+        this.isMain = true;
+    }
 }

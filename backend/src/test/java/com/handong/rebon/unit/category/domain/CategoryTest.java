@@ -33,7 +33,7 @@ public class CategoryTest {
         // when
         parentCategory.addChildCategory(childCategory);
         parentCategory.addChildCategory(childCategory2);
-        List<Category> childCategoires = parentCategory.getChildren().getCategories();
+        List<Category> childCategoires = parentCategory.getChildren();
         // then
         assertThat(parentCategory).extracting("name")
                                   .isEqualTo("식당");
