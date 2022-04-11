@@ -1,11 +1,12 @@
 package com.handong.rebon.integration.tag;
 
+import javax.transaction.Transactional;
+
 import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.tag.application.TagService;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.DisplayName;
@@ -17,36 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TagIntegrationTest extends IntegrationTest {
 
     @Autowired
-    TagService tagService;
+    protected TagService tagService;
 
     @Autowired
-    TagRepository tagRepository;
+    protected TagRepository tagRepository;
 
-    @Test
-    @DisplayName("태그를 생성한다.")
-    void createTag() {
-        // given
-        String tagName = "남구";
-
-        // when
+    public Tag createTag(String tagName) {
         Long id = tagService.createTag(tagName);
-        Tag newTag = tagRepository.getById(id);
-
-        // then
-        assertThat(newTag).extracting("name").isEqualTo(tagName);
-    }
-
-    @Test
-    @DisplayName("태그 이름이 중복되면 생성할 수 없다.")
-    void createExistTag() {
-        // given
-        String tagName = "장성동";
-
-        // when
-        tagService.createTag(tagName);
-        TagExistException exception = assertThrows(TagExistException.class, () -> tagService.createTag(tagName));
-
-        //then
-        assertThat(exception.getMessage()).isEqualTo("이미 존재하는 태그 입니다.");
+        return tagRepository.getById(id);
     }
 }

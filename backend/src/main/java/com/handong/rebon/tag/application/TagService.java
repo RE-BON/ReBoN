@@ -5,13 +5,14 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.exception.tag.NoSuchTagException;
 import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.exception.tag.TagIdException;
+import com.handong.rebon.tag.application.dto.TagDtoAssembler;
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.application.dto.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -35,6 +36,19 @@ public class TagService {
             throw new TagExistException();
         }
     }
+
+    public List<Tag> findAll(List<Long> tags) {
+        return tagRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> findTags() {
+        return TagDtoAssembler.tagResponseDtos(tagRepository.findAll());
+    }
+
+    public Tag findById(Long id) {
+        return tagRepository.findById(id)
+                .orElseThrow(TagIdException::new);
 
     @Transactional(readOnly = true)
     public Tag findById(Long id) {
