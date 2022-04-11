@@ -1,6 +1,5 @@
 package com.handong.rebon.shop.presentation;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
@@ -12,9 +11,7 @@ import com.handong.rebon.tag.application.TagService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,8 +38,14 @@ public class AdminShopController {
     }
 
     @PostMapping("/shops")
-    public String registerOne(ShopRequest shopRequest) throws IOException {
+    public String registerOne(ShopRequest shopRequest) {
         shopService.create(shopRequest.toDto());
+        return "home";
+    }
+
+    @DeleteMapping("/shops/{id}")
+    public String delete(@PathVariable Long id) {
+        shopService.delete(id);
         return "home";
     }
 }
