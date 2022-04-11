@@ -8,7 +8,6 @@ import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Transactional
 public class TagIntegrationTest extends IntegrationTest {
 
     @Autowired
