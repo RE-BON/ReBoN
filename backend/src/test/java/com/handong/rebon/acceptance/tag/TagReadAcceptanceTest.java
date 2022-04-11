@@ -3,6 +3,7 @@ package com.handong.rebon.acceptance.tag;
 import com.handong.rebon.acceptance.AcceptanceTest;
 import com.handong.rebon.acceptance.admin.AdminTagRegister;
 import com.handong.rebon.tag.domain.Tag;
+import com.handong.rebon.tag.presentation.dto.response.TagResponse;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ public class TagReadAcceptanceTest extends AcceptanceTest {
 
     @BeforeEach
     void setUp() {
-        tags = adminTagRegister.register("북구", "남구");
+        tags = adminTagRegister.register("북구", "남구", "흥해읍", "양덕동");
     }
 
     @Test
@@ -35,16 +36,16 @@ public class TagReadAcceptanceTest extends AcceptanceTest {
     public void getAllTags() {
         //given when
         ExtractableResponse<Response> response = 태그_조회_요청();
-        List<Tag> result = response.as(new TypeRef<>() {
+        List<TagResponse> result = response.as(new TypeRef<>() {
         });
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
 
         assertThat(result)
-                .hasSize(2)
+                .hasSize(4)
                 .extracting("name")
-                .contains("북구", "남구");
+                .contains("북구", "남구", "흥해읍", "양덕동");
     }
 
     private ExtractableResponse<Response> 태그_조회_요청() {

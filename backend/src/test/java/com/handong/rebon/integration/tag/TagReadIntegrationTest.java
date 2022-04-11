@@ -23,7 +23,6 @@ public class TagReadIntegrationTest extends TagIntegrationTest {
         assertThat(tagId).isEqualTo(createdTag);
     }
 
-
     @Test
     @DisplayName("존재하지 않는 id의 태그를 요청하면 예외가 발생한다.")
     public void findTagByWrongId() {

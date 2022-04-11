@@ -39,8 +39,4 @@ public class Tag extends BaseEntity {
             throw new TagNameException();
         }
     }
-
-    public String getTag() {
-        return name;
-    }
 }
