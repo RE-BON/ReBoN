@@ -1,75 +1,74 @@
 package com.handong.rebon.integration.category;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
-import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest{
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
+
     @Test
     @DisplayName("자식 카테고리를 삭제한다.")
-    public void 자식_카테고리_삭제(){
-        //given
+    public void 자식_카테고리_삭제() {
 
+        //given
         String parentName = "식당";
-        String createdName = "테스트한식";
-        Long parentId = categoryService.create(parentName);
-
-//        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
-//                                                                                    .parentId(parentId)
-//                                                                                    .name(createdName)
-//                                                                                    .build();
-        //when
-//        Long id = categoryService.create(categoryCreateRequestDto);
-//        categoryService.delete(parentId);
-
-        Category category = categoryRepository.findById(parentId).orElseThrow();
-        System.out.println(category.getName());
-        System.out.println(category.isDeleted());
-//        System.out.println(category.getChildren().get(0).getName());
-//        System.out.println(category.getChildren().get(0).isDeleted());
+        String childName = "한식";
+        Category parent = createCategory(parentName);
+        Category child = createCategoryWithParent(parent.getId(), childName);
 
         //when
+        categoryService.delete(new CategoryRequestDto(child.getId()));
 
         //then
+        assertThat(child).extracting("deleted")
+                         .isEqualTo(true);
+        assertThat(child).extracting("parent")
+                         .isNull();
+        assertThat(parent.getChildren()).doesNotContain(child);
     }
 
     @Test
-    @DisplayName("루트 카테고리를 삭제한다.")
-    public void 루트_카테고리_삭제(){
-        //given
+    @DisplayName("루트 카테고리를 삭제하면 자식 카테고리들까지 모두 삭제된다.")
+    public void 루트_카테고리_삭제() {
 
+        //given
+        String parentName = "식당";
+        Category parent = createCategory(parentName);
+        createCategoryWithParent(parent.getId(), "한식");
+        createCategoryWithParent(parent.getId(), "중식");
+        createCategoryWithParent(parent.getId(), "양식");
 
         //when
+        categoryService.delete(new CategoryRequestDto(parent.getId()));
 
         //then
+        assertThat(parent).extracting("deleted")
+                          .isEqualTo(true);
+        assertThat(parent.getChildren()).extracting("deleted")
+                                        .containsOnly(true);
     }
 
     @Test
-    @DisplayName("이미 삭제된 카테고리 일 경우 예외 발생")
-    public void 삭제된_카테고리_삭제(){
+    @DisplayName("이미 삭제된 카테고리를 삭제요청 할 경우 예외 발생")
+    public void 삭제된_카테고리_삭제() {
+
         //given
+        String parentName = "식당";
+        Category parent = createCategory(parentName);
+        Category child = createCategoryWithParent(parent.getId(), "한식");
+        CategoryRequestDto requestDto = new CategoryRequestDto(child.getId());
+        categoryService.delete(requestDto);
 
+        //when, then
+        assertThatThrownBy(()->categoryService.delete(requestDto))
+                .isInstanceOf(CategoryAlreadyDeletedException.class);
 
-        //when
-
-        //then
     }
 
-    @Test
-    @DisplayName("존재하지 않는 카테고리 삭제시 예외 발생")
-    public void 존재하지않는_카테고리_삭제(){
-        //given
-
-
-        //when
-
-        //then
-    }
 }
