@@ -15,6 +15,7 @@ import Withdrawal from './Withdrawal';
 import '../../styles/mypage.css';
 
 export default function Mypage() {
+  const userName = localStorage.getItem('userName');
   return (
     <div className="my-wrapper">
       <Header />
@@ -24,7 +25,7 @@ export default function Mypage() {
             <div className="sideMenu-intro">
               안녕하세요.
               <br />
-              <span className="name">홍길동</span>님{' '}
+              <span className="name">{userName}</span>님{' '}
               <Link to="">
                 <ImCog color="black" size="18" />
               </Link>
