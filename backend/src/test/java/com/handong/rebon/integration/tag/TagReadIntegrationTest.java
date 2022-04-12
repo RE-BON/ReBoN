@@ -1,14 +1,14 @@
 package com.handong.rebon.integration.tag;
 
-import com.handong.rebon.exception.tag.TagIdException;
+import java.util.List;
+
+import com.handong.rebon.exception.tag.NoSuchTagException;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TagReadIntegrationTest extends TagIntegrationTest {
@@ -30,7 +30,7 @@ public class TagReadIntegrationTest extends TagIntegrationTest {
         Long requestTagId = -1L;
         //when, then
         assertThatThrownBy(() -> tagService.findById(requestTagId))
-                .isInstanceOf(TagIdException.class);
+                .isInstanceOf(NoSuchTagException.class);
     }
 
     @Test

@@ -34,15 +34,15 @@ public class ShopRepositoryCustomImpl extends QuerydslRepositorySupport implemen
     @Override
     public Page<Shop> searchShopByConditionApplyPage(ShopSearchCondition condition, Pageable pageable) {
         JPAQuery<Shop> query = queryFactory.select(shop)
-                                           .from(shop)
-                                           .where(categoryEq(condition.getCategory())
-                                                   .and(tagEq(condition.getTag()))
-                                                   .and(containsSubCategories(condition.getSubs()))
-                                                   .and(isMainImage()))
-                                           .leftJoin(shop.shopTags, shopTag)
-                                           .leftJoin(shop.shopCategories, shopCategory)
-                                           .leftJoin(shop.shopImages.shopImages, shopImage)
-                                           .distinct();
+                .from(shop)
+                .where(categoryEq(condition.getCategory())
+                        .and(tagEq(condition.getTag()))
+                        .and(containsSubCategories(condition.getSubs()))
+                        .and(isMainImage()))
+                .leftJoin(shop.shopTags, shopTag)
+                .leftJoin(shop.shopCategories, shopCategory)
+                .leftJoin(shop.shopImages.shopImages, shopImage)
+                .distinct();
 
         JPQLQuery<Shop> pageableQuery = getQuerydsl().applyPagination(pageable, query);
         QueryResults<Shop> fetchResults = pageableQuery.fetchResults();
