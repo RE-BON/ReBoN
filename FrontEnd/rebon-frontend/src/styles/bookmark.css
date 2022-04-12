@@ -1,5 +1,11 @@
 .bookmark-wrapper {
-  width: 100%;
+  width: 163%;
+  margin-left: -30%;
+  margin-top: -5%;
   display: flex;
   justify-content: center;
+}
+
+.box {
+  color: black;
 }

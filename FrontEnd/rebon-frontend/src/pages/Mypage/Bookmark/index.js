@@ -46,7 +46,7 @@ export default function Bookmark() {
       <div className="bookmark-title">찜목록</div>
       <div className="bookmark-wrapper">
         <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ borderBottom: 2, borderColor: 'black', width: '55.5%', marginLeft: '21.5%' }}>
             <Tabs className="box" value={value} onChange={handleChange} aria-label="basic tabs example" centered>
               <Tab label="식당" {...a11yProps(0)} />
               <Tab label="카페" {...a11yProps(1)} />
@@ -59,6 +59,7 @@ export default function Bookmark() {
 
             <div className="mainCard-wrapper">
               <MainCard />
+              <span>♡</span>
               <MainCard />
               <MainCard />
               <MainCard />
