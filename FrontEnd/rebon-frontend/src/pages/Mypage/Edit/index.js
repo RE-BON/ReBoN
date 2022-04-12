@@ -4,11 +4,6 @@ import { faCircleUser, faXmark, faCamera, faCheck } from '@fortawesome/free-soli
 import { useState } from 'react';
 
 export default function Edit() {
-  const [bgColor, setbgColor] = useState('white');
-  const ChnageBgColor = (e) => {
-    setbgColor(bgColor === 'white' ? '#ff6b6c' : 'white');
-  };
-
   const userName = localStorage.getItem('userName');
   const [name, setName] = useState(userName);
   const onChangeName = (e) => {
@@ -58,17 +53,18 @@ export default function Edit() {
         <div className="edit-info-marketing">마케팅 수신 동의</div>
         <div className="edit-info-notice ">이메일 수신에 동의하시면 Rebon 주식회사가 제공하는 서비스의 업데이트 및 이벤트 소식을 받을 수 있습니다.</div>
 
-        <div className="edit-info-agree " onClick={ChnageBgColor}>
-          <span className="agree-button" style={{ backgroundColor: bgColor }}>
-            <FontAwesomeIcon icon={faCheck} size="1x" />
-          </span>
-          <span>동의합니다.</span>
-          <span className="empty"> </span>
-          <span className="disagree-button" style={{ backgroundColor: bgColor }}>
-            <FontAwesomeIcon icon={faCheck} size="1x" />
-          </span>
-
-          <span>동의하지 않습니다.</span>
+        <div class="select">
+          <input type="radio" id="select" name="shop" />
+          <label for="select">
+            <FontAwesomeIcon icon={faCheck} />
+          </label>
+          동의 합니다.
+          <span className="empty"></span>
+          <input type="radio" id="select2" name="shop" />
+          <label for="select2">
+            <FontAwesomeIcon icon={faCheck} />
+          </label>
+          동의하지 않습니다.
         </div>
 
         <div className="edit-info-submit">

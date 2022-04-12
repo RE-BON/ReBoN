@@ -18,8 +18,8 @@
   border: solid 1px #000000;
 }
 .footprint-light-hr {
-  border: 1px solid #d8d8d8;
-  margin-left: 2%;
+  border-bottom: 1px solid #d8d8d8;
+  margin: 5% 2% 4% 2%;
   width: 96%;
 }
 .footprint-content {
@@ -30,14 +30,15 @@
   float: right;
 }
 .footprint-remove-button {
-  color: white;
-  background-color: black;
+  color: #ff6b6c;
+  background-color: #ffeded;
   border-radius: 1000px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   padding-left: 7px;
   padding-right: 7px;
   padding-top: 2px;
   padding-bottom: 2px;
+  font-weight: 600;
 }
 .footprint-name {
   display: inline;
@@ -46,16 +47,16 @@
 }
 .footprint-user-name {
   display: inline;
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-right: 1%;
+  margin-right: 2%;
 }
 .footprint-rating {
   display: inline;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
-  color: #898c8f;
-  margin-right: 1%;
+  color: rgba(255, 174, 0, 0.938);
+  margin-left: 2%;
 }
 .footprint-date {
   display: inline;
@@ -66,35 +67,37 @@
 .footprint-tip-wrapper {
   box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
   height: 4vh;
-  margin-left: 1%;
   border-radius: 10px;
   margin-top: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
   display: inline-block;
-  position: relative;
+  align-items: center;
   width: 98%;
   height: 35px;
   line-height: 30px;
 }
 .footprint-tip-name {
-  background-color: #c4c4c4;
+  background-color: #ffeded;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 0.5rem;
   font-weight: bold;
-  border-radius: 5px;
-  margin-right: 2%;
+  border-radius: 10px;
+  margin-right: 3%;
   margin-left: 1%;
+  border: 1px solid #ff6b6c;
+  color: #ff6b6c;
 }
 .footprint-tip-content {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
   padding-top: 10px;
+  font-weight: 600;
 }
 .footprint-post {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 .footprint-image-wrapper {
   display: grid;
@@ -102,6 +105,7 @@
 }
 .footprint-image {
   width: 98%;
-  height: 135px;
+  height: 130px;
+  margin-top: 13%;
   margin-right: 2%;
 }

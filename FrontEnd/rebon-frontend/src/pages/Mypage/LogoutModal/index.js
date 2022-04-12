@@ -33,6 +33,9 @@ export default function LogoutModal() {
     transition: all 0.3s ease-in-out;
   `;
 
+  function Logout(e) {
+    window.localStorage.setItem('Login', false);
+  }
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
       <div onClick={toggleModal}>로그아웃</div>
@@ -55,7 +58,7 @@ export default function LogoutModal() {
           </div>
           <div className="logout-notice">로그아웃 하시겠습니까?</div>
           <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
-            <button className="logout-button" onClick={toggleModal}>
+            <button className="logout-button" onClick={Logout}>
               확인
             </button>
           </Link>
