@@ -14,8 +14,8 @@ import com.handong.rebon.shop.domain.type.Cafe;
 import com.handong.rebon.shop.domain.type.Lodging;
 import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.tag.domain.Tag;
-
 import com.handong.rebon.tag.domain.repository.TagRepository;
+
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;

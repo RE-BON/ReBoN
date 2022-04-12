@@ -45,7 +45,7 @@ class ReviewIntegrationTest extends IntegrationTest {
         Member member = createMember("peace");
         Shop shop = createShop("토시래");
 
-        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요",5);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when

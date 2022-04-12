@@ -1,18 +1,19 @@
 package com.handong.rebon.tag.application;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.handong.rebon.exception.tag.NoSuchTagException;
-import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.tag.application.dto.TagDtoAssembler;
-
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
@@ -45,14 +46,14 @@ public class TagService {
     @Transactional(readOnly = true)
     public Tag findById(Long id) {
         return tagRepository.findById(id)
-                .orElseThrow(NoSuchTagException::new);
+                            .orElseThrow(NoSuchTagException::new);
     }
 
     @Transactional(readOnly = true)
     public List<Tag> findAllContainIds(List<Long> tags) {
         return tags.stream()
-                .map(this::findById)
-                .collect(Collectors.toList());
+                   .map(this::findById)
+                   .collect(Collectors.toList());
     }
 }
 
