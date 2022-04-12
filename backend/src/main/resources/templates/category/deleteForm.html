@@ -13,10 +13,10 @@
         <h1>Category 삭제</h1>
     </div>
     <div class="row justify-content-center">
-        <form class="needs-validation col-sm-10" th:action="@{/admin/remove-categories}"
+        <form class="needs-validation col-sm-10" th:action="@{/admin/categories}"
               th:object="${request}" method="post"
               novalidate  enctype="multipart/form-data">
-<!--            <input type="hidden" name="_method" value = "delete">-->
+            <input type="hidden" name="_method" value = "delete">
             <input placeholder="삭제할 카테고리 id" th:name="categoryId">
             <button type="submit">삭제</button>
         </form>

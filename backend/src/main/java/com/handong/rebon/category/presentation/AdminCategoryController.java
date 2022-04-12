@@ -12,6 +12,7 @@ import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,7 @@ public class AdminCategoryController {
         return "home";
     }
 
-    @PostMapping("/remove-categories")
+    @DeleteMapping("/categories")
     public String deleteCategory(CategoryRequest request) {
 
         CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryRequestDto(request);
