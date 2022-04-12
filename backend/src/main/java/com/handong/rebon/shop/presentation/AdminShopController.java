@@ -1,20 +1,20 @@
 package com.handong.rebon.shop.presentation;
 
-import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.CategoryAssembler;
 import com.handong.rebon.shop.application.ShopService;
+import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.presentation.dto.request.ShopRequest;
 import com.handong.rebon.tag.application.TagService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,8 +41,15 @@ public class AdminShopController {
     }
 
     @PostMapping("/shops")
-    public String registerOne(ShopRequest shopRequest) throws IOException {
-        shopService.create(shopRequest.toDto());
-        return "home";
+    public String registerOne(ShopRequest shopRequest) {
+        Long id = shopService.create(shopRequest.toDto());
+        return "redirect:/admin/shops/" + URLEncoder.encode(String.valueOf(id), StandardCharsets.UTF_8);
+    }
+
+    @GetMapping("/shops/{id}")
+    public String viewShop(@PathVariable Long id, Model model) {
+        ShopResponseDto shopResponseDto = shopService.findById(id);
+        model.addAttribute("shop", shopResponseDto);
+        return "shop/detail";
     }
 }
