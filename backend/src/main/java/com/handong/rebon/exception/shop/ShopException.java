@@ -1,7 +1,6 @@
 package com.handong.rebon.exception.shop;
 
 import com.handong.rebon.exception.RebonException;
-
 import org.springframework.http.HttpStatus;
 
 public abstract class ShopException extends RebonException {

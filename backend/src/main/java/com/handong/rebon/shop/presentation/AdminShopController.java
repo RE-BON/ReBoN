@@ -27,7 +27,7 @@ public class AdminShopController {
 
     @GetMapping("/shops/new")
     public String createForm(Model model) {
-        model.addAttribute("tags", tagService.findAll());
+        model.addAttribute("tags", tagService.findTags());
 
         List<RootCategoryResponseDto> categories = categoryService.findRootCategoriesAndChildren();
         model.addAttribute("categories", CategoryAssembler.rootCategoryResponses(categories));
