@@ -6,6 +6,12 @@
   justify-content: center;
 }
 
-.box {
-  color: black;
+.bookmark-wrapper .MuiTab-root {
+  z-index: 0;
+}
+
+.bookmark-wrapper .Mui-selected {
+  color: #ff6b6c !important;
+  font-weight: bold;
+  z-index: -1;
 }
