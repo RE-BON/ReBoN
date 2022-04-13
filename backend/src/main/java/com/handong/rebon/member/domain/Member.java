@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.like.Likes;
@@ -21,8 +22,6 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String oauthId;
-
     @Embedded
     private Profile profile;
 
@@ -36,7 +35,17 @@ public class Member extends BaseEntity {
 
     private boolean isAgreed;
 
-    private boolean isAdmin;
+    private boolean isAdmin = Boolean.FALSE;
+
+    @Enumerated(EnumType.STRING)
+    private OauthProvider oauthProvider;
+
+    public Member(String email, String nickname, boolean isAgreed, OauthProvider oauthProvider) {
+        this.oauthProvider = oauthProvider;
+        this.isAgreed = isAgreed;
+        this.profile = new Profile(email, nickname);
+
+    }
 
     public Member(Profile profile) {
         this.profile = profile;
@@ -53,6 +62,11 @@ public class Member extends BaseEntity {
     public void addEmpathy(Empathy empathy) {
         empathies.add(empathy);
         empathy.belongTo(this);
+    }
+    
+    public String getRole() {
+        if(isAdmin) return "ROLE_ADMIN";
+        return "ROLE_USER";
     }
 
     public String getNickName() {
