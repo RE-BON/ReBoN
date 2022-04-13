@@ -25,7 +25,7 @@ public class TagCreateIntegrationTest extends TagIntegrationTest {
         // given
         String tagName = "남구";
 
-        // whens
+        // when
         Long id = tagService.createTag(tagName);
         Tag newTag = tagRepository.getById(id);
 

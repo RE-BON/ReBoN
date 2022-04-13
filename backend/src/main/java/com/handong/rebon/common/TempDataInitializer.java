@@ -18,12 +18,14 @@ import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
+@Profile("!test")
 public class TempDataInitializer implements ApplicationRunner {
 
     private final TagRepository tagRepository;
