@@ -30,7 +30,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
@@ -69,6 +70,14 @@ sourceSets {
 
 configurations {
     querydsl.extendsFrom compileClasspath
+}
+
+processResources.dependsOn('copySecret')
+
+task copySecret(type: Copy) {
+    from './security'
+    include '*.yml'
+    into './src/main/resources'
 }
 
 compileQuerydsl {
