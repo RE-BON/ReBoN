@@ -44,7 +44,6 @@ public class Member extends BaseEntity {
         this.oauthProvider = oauthProvider;
         this.isAgreed = isAgreed;
         this.profile = new Profile(email, nickname);
-
     }
 
     public Member(Profile profile) {
@@ -63,7 +62,7 @@ public class Member extends BaseEntity {
         empathies.add(empathy);
         empathy.belongTo(this);
     }
-    
+
     public String getRole() {
         if(isAdmin) return "ROLE_ADMIN";
         return "ROLE_USER";
