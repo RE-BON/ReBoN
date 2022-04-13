@@ -1,22 +1,25 @@
 package com.handong.rebon.acceptance.tag;
 
-import com.handong.rebon.acceptance.AcceptanceTest;
-import com.handong.rebon.acceptance.admin.AdminTagRegister;
-import com.handong.rebon.tag.domain.Tag;
-import com.handong.rebon.tag.presentation.dto.response.TagResponse;
-import io.restassured.RestAssured;
-import io.restassured.common.mapper.TypeRef;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
-import org.springframework.http.HttpStatus;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.handong.rebon.acceptance.AcceptanceTest;
+import com.handong.rebon.common.admin.AdminTagRegister;
+import com.handong.rebon.tag.domain.Tag;
+import com.handong.rebon.tag.presentation.dto.response.TagResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,11 +53,11 @@ public class TagReadAcceptanceTest extends AcceptanceTest {
 
     private ExtractableResponse<Response> 태그_조회_요청() {
         return RestAssured.given(super.spec)
-                .log().all()
-                .when()
-                .get("/api/tags")
-                .then()
-                .log().all()
-                .extract();
+                          .log().all()
+                          .when()
+                          .get("/api/tags")
+                          .then()
+                          .log().all()
+                          .extract();
     }
 }

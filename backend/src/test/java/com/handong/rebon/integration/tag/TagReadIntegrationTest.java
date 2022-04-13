@@ -5,11 +5,12 @@ import java.util.List;
 import com.handong.rebon.exception.tag.NoSuchTagException;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TagReadIntegrationTest extends TagIntegrationTest {
     @Test
@@ -46,7 +47,7 @@ public class TagReadIntegrationTest extends TagIntegrationTest {
 
         //then
         assertThat(allTags).hasSize(3)
-                .extracting("name")
-                .contains("장량", "환호", "환여");
+                           .extracting("name")
+                           .contains("장량", "환호", "환여");
     }
 }

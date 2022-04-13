@@ -35,7 +35,7 @@ public class ApiShopController {
 
     @GetMapping("/shops/{id}")
     public ResponseEntity<ShopResponse> searchShop(@PathVariable Long id) {
-        ShopResponseDto shopResponseDto = shopService.findById(id);
+        ShopResponseDto shopResponseDto = shopService.findOneById(id);
         return ResponseEntity.ok(ShopResponse.from(shopResponseDto));
     }
 }
