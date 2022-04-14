@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ShopResponse {
     private Long id;
+    private ShopCategoryResponse category;
     private String name;
     private double star;
     private List<ShopTagResponse> tags;
@@ -37,6 +38,7 @@ public class ShopResponse {
     @Builder
     public ShopResponse(
             Long id,
+            ShopCategoryResponse category,
             String name,
             double star,
             List<ShopTagResponse> tags,
@@ -50,6 +52,7 @@ public class ShopResponse {
             List<ShopImageResponse> images
     ) {
         this.id = id;
+        this.category = category;
         this.name = name;
         this.star = star;
         this.tags = tags;
@@ -66,6 +69,7 @@ public class ShopResponse {
     public static ShopResponse from(ShopResponseDto dto) {
         return ShopResponse.builder()
                            .id(dto.getId())
+                           .category(ShopCategoryResponse.from(dto.getCategory()))
                            .name(dto.getName())
                            .star(dto.getStar())
                            .tags(convertToShopTagResponse(dto.getTags()))

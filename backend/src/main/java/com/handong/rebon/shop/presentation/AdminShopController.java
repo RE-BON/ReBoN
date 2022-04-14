@@ -1,11 +1,14 @@
 package com.handong.rebon.shop.presentation;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.CategoryAssembler;
 import com.handong.rebon.shop.application.ShopService;
+import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.presentation.dto.request.ShopRequest;
 import com.handong.rebon.tag.application.TagService;
 
@@ -39,8 +42,15 @@ public class AdminShopController {
 
     @PostMapping("/shops")
     public String registerOne(ShopRequest shopRequest) {
-        shopService.create(shopRequest.toDto());
-        return "home";
+        Long id = shopService.create(shopRequest.toDto());
+        return "redirect:/admin/shops/" + URLEncoder.encode(String.valueOf(id), StandardCharsets.UTF_8);
+    }
+
+    @GetMapping("/shops/{id}")
+    public String viewShop(@PathVariable Long id, Model model) {
+        ShopResponseDto shopResponseDto = shopService.findOneById(id);
+        model.addAttribute("shop", shopResponseDto);
+        return "shop/detail";
     }
 
     @DeleteMapping("/shops/{id}")
