@@ -1,13 +1,14 @@
 package com.handong.rebon.acceptance.shop;
 
-import java.io.IOException;
 import java.util.*;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
-import com.handong.rebon.acceptance.admin.AdminCategoryRegister;
-import com.handong.rebon.acceptance.admin.AdminShopRegister;
-import com.handong.rebon.acceptance.admin.AdminTagRegister;
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.common.admin.AdminCategoryRegister;
+import com.handong.rebon.common.admin.AdminShopRegister;
+import com.handong.rebon.common.admin.AdminTagRegister;
+import com.handong.rebon.exception.ExceptionResponse;
+import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -22,6 +23,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
@@ -44,7 +46,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     private Map<String, Shop> shops = new HashMap<>();
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         tags = adminTagRegister.register("포항", "영일대", "한동대", "양덕");
         categories = adminCategoryRegister.registerMain("식당", "숙소", "카페");
         categories.putAll(adminCategoryRegister.registerSubs(categories.get("식당"), "한식", "분식", "일식", "양식"));
@@ -132,6 +134,40 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
+    @Test
+    @DisplayName("삭제되지 않은 카페 리스트 조회")
+    void findAllDeletedFalse() {
+        // given
+        Category 카페 = categories.get("카페");
+        Tag 양덕 = tags.get("양덕");
+        adminShopRegister.delete(shops.get("티타"));
+
+        // when
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList());
+        List<ShopSimpleResponseDto> result = response.as(new TypeRef<>() {});
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).extracting("name")
+                          .doesNotContain("티타");
+    }
+
+    @Test
+    @DisplayName("삭제된 카페 조회")
+    void findDeleteCafe() {
+        // given
+        Shop shop = shops.get("티타");
+        adminShopRegister.delete(shop);
+
+        // when
+        ExtractableResponse<Response> response = 단일_가게_조회_요청(shop.getId());
+        ExceptionResponse result = response.as(new TypeRef<>() {});
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat(result.getMessage()).isEqualTo("존재하지 않는 가게입니다.");
+    }
+
     private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
         return RestAssured.given(super.spec)
                           .log().all()
@@ -159,7 +195,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     }
 
 
-    private void initShops() throws IOException {
+    private void initShops() {
         shops.clear();
         initRestaurant();
         initCafe();
@@ -210,7 +246,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         ));
     }
 
-    private void initCafe() throws IOException {
+    private void initCafe() {
         shops.put("이디야", adminShopRegister.simpleRegister(
                 "이디야",
                 categories.get("카페"),

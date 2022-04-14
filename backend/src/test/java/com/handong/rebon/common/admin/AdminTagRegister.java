@@ -1,4 +1,4 @@
-package com.handong.rebon.acceptance.admin;
+package com.handong.rebon.common.admin;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.handong.rebon.acceptance.admin;
+package com.handong.rebon.common.admin;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -52,7 +51,7 @@ public class AdminShopRegister {
         return shopRepository.save(shop);
     }
 
-    public Shop CafeRegisterWithMenu(String name, Category parent, List<Category> subs, List<Tag> tags) throws IOException {
+    public Shop CafeRegisterWithMenu(String name, Category parent, List<Category> subs, List<Tag> tags) {
         List<Long> subIds = subs.stream()
                                 .map(Category::getId)
                                 .collect(Collectors.toList());
@@ -103,5 +102,9 @@ public class AdminShopRegister {
                 new MenuGroupRequestDto("커피류", coffee),
                 new MenuGroupRequestDto("디저트류", dessert)
         );
+    }
+
+    public void delete(Shop shop) {
+        shopService.delete(shop.getId());
     }
 }

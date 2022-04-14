@@ -82,11 +82,20 @@ public class ShopService {
     }
 
     @Transactional(readOnly = true)
-    public ShopResponseDto findById(Long id) {
-        Shop shop = shopRepository.findById(id)
-                                  .orElseThrow(NoSuchShopException::new);
-
+    public ShopResponseDto findOneById(Long id) {
+        Shop shop = findById(id);
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(shop.getCategory());
         return adapter.convertToShopResponseDto(shop);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Shop shop = findById(id);
+        shopRepository.delete(shop);
+    }
+
+    private Shop findById(Long id) {
+        return shopRepository.findById(id)
+                             .orElseThrow(NoSuchShopException::new);
     }
 }

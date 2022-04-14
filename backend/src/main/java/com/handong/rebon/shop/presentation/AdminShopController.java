@@ -14,10 +14,7 @@ import com.handong.rebon.tag.application.TagService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,8 +48,14 @@ public class AdminShopController {
 
     @GetMapping("/shops/{id}")
     public String viewShop(@PathVariable Long id, Model model) {
-        ShopResponseDto shopResponseDto = shopService.findById(id);
+        ShopResponseDto shopResponseDto = shopService.findOneById(id);
         model.addAttribute("shop", shopResponseDto);
         return "shop/detail";
+    }
+
+    @DeleteMapping("/shops/{id}")
+    public String delete(@PathVariable Long id) {
+        shopService.delete(id);
+        return "home";
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
-import com.handong.rebon.acceptance.admin.AdminTagRegister;
+import com.handong.rebon.common.admin.AdminTagRegister;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.presentation.dto.response.TagResponse;
 
