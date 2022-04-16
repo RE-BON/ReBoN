@@ -27,7 +27,8 @@ import io.restassured.response.Response;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-class ShopReadAcceptanceTest extends AcceptanceTest {
+class
+ShopReadAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private AdminTagRegister adminTagRegister;
