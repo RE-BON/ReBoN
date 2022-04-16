@@ -35,6 +35,7 @@ public class Member extends BaseEntity {
 
     private boolean isAgreed;
 
+    @Builder.Default
     private boolean isAdmin = Boolean.FALSE;
 
     @Enumerated(EnumType.STRING)
@@ -61,11 +62,6 @@ public class Member extends BaseEntity {
     public void addEmpathy(Empathy empathy) {
         empathies.add(empathy);
         empathy.belongTo(this);
-    }
-
-    public String getRole() {
-        if(isAdmin) return "ROLE_ADMIN";
-        return "ROLE_USER";
     }
 
     public String getNickName() {
