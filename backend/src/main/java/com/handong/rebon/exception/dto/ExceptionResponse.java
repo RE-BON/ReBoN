@@ -1,4 +1,4 @@
-package com.handong.rebon.exception;
+package com.handong.rebon.exception.dto;
 
 public class ExceptionResponse {
     private final String message;
