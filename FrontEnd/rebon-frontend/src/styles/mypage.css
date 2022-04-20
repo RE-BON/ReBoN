@@ -78,12 +78,8 @@
   font-size: 13px;
 }
 
-/*link 컴포넌트 클릭하면 색상 바뀌어진다*/
-.tab-style {
-}
-
 .tab-click-active {
-  color: #ef5c89;
+  color: #ff6b6c;
 }
 
 .tab-click-stay {

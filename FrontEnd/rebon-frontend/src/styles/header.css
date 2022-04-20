@@ -41,7 +41,12 @@
 }
 
 .header-logon-icon {
+  text-align: end;
   margin-left: 5%;
+}
+
+.header-logon-icon img {
+  width: 40%;
 }
 
 .header-logon span {

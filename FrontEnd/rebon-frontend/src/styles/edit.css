@@ -1,6 +1,6 @@
 .edit-title {
   margin: 8% 5%;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   font-size: 15px;
 }
 
@@ -33,12 +33,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  padding: 7% 0;
-  border-radius: 50%;
-  border: 2px solid white;
-  background-color: #ff6b6c;
-  font-size: 10px;
 }
 
 .edit-info-title {
@@ -132,10 +126,6 @@
   border-radius: 50%;
   border: 1px solid #ff6b6c;
   background-color: white;
-  color: white;
-}
-.select input[type='radio'] + label {
-  background-color: #fff;
   color: white;
 }
 .select input[type='radio']:checked + label {

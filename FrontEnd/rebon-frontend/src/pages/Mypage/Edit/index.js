@@ -25,10 +25,10 @@ export default function Edit() {
         <div className="edit-info-icon">
           <div>
             <span className="icon-user">
-              <FontAwesomeIcon icon={faCircleUser} size="5x" color="#c4c4c4" />
+              <img src="image/user.png" />
             </span>
             <span className="icon-camera">
-              <FontAwesomeIcon icon={faCamera} size="1x" color="white" />
+              <img src="image/camera.png" />
             </span>
           </div>
         </div>

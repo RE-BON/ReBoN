@@ -46,7 +46,7 @@ export default function Bookmark() {
       <div className="bookmark-title">찜목록</div>
       <div className="bookmark-wrapper">
         <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 2, width: '55.5%', marginLeft: '21.5%' }}>
+          <Box sx={{ borderBottom: 1, width: '55.5%', marginLeft: '21.5%' }}>
             <Tabs
               className="box"
               value={value}
@@ -74,7 +74,6 @@ export default function Bookmark() {
 
             <div className="mainCard-wrapper">
               <BookmarkCard />
-              <span>♡</span>
               <BookmarkCard />
               <BookmarkCard />
               <BookmarkCard />

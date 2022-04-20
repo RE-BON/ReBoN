@@ -6,6 +6,14 @@
   justify-content: center;
 }
 
+.bookmark-title {
+  margin: 8% 5% 5% 5%;
+  border-bottom: 1px solid black;
+  font-size: 15px;
+  padding: 0 0 2% 5%;
+  font-weight: bolder;
+}
+
 .bookmark-wrapper .MuiTab-root {
   z-index: 0;
 }
