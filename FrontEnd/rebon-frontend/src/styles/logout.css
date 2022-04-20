@@ -9,10 +9,12 @@
   margin: 15px auto;
   width: 120px;
   height: 120px;
-  color: #ff6b6c;
   background: rgba(255, 107, 108, 0.1);
   border-radius: 50%;
-  font-size: 40px;
+}
+
+.login-icon img {
+  width: 35%;
 }
 
 .login-notice {

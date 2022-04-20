@@ -19,13 +19,17 @@
   margin: 15px auto;
   width: 99px;
   height: 99px;
-  color: #ff6b6c;
   background: rgba(255, 107, 108, 0.1);
   border-radius: 50%;
 }
 
+.logout-icon img {
+  width: 40px;
+}
+
 .logout-notice {
-  margin-top: 23px;
+  margin-top: 30px;
+  margin-bottom: 40px;
   text-align: center;
   text-align: ceter;
   font-size: 15px;
@@ -33,10 +37,9 @@
 }
 
 .logout-button {
-  width: 110px;
-  color: white;
-  background-color: #ff6b6c;
-  margin-top: 4%;
-  padding: 2% 5%;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100px;
+  color: #ff6b6c;
   border-radius: 35px;
 }

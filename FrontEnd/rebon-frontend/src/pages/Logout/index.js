@@ -11,7 +11,7 @@ export default function Logout() {
       <Header />
       <div className="login-wrapper">
         <div className="login-icon">
-          <FontAwesomeIcon icon={faArrowRightToBracket} />
+          <img src="image/login.png" />
         </div>
         <div className="login-notice">
           로그인이 필요한 서비스 입니다.

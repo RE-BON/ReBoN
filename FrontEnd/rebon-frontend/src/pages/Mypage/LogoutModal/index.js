@@ -30,7 +30,7 @@ export default function LogoutModal() {
 
   const StyledModal = Modal.styled`
   width: 23rem;
-  height: 20rem;
+  height: 21rem;
   padding : 20px;
   border-radius:20px;
   background-color: white;
@@ -62,12 +62,12 @@ export default function LogoutModal() {
           <div className="logout-wrapper">
             <button className="close" onClick={toggleModal}>
               <FontAwesomeIcon icon={faXmark} />
-              {console.log(1)}
             </button>
             <div className="logout-icon">
-              <LogoutIcon fontSize="large" />
+              <img src="image/logout.png" />
             </div>
             <div className="logout-notice">로그아웃 하시겠습니까?</div>
+            <hr />
             <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
               <button className="logout-button" onClick={Logout}>
                 확인
