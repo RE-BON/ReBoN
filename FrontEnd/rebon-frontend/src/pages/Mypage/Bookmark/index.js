@@ -1,4 +1,4 @@
-import MainCard from '../../Main/MainCard';
+import BookmarkCard from './BookmarkCard';
 import '../../../styles/bookmark.css';
 
 import React from 'react';
@@ -46,8 +46,23 @@ export default function Bookmark() {
       <div className="bookmark-title">찜목록</div>
       <div className="bookmark-wrapper">
         <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs className="box" value={value} onChange={handleChange} aria-label="basic tabs example" centered>
+          <Box sx={{ borderBottom: 1, width: '55.5%', marginLeft: '21.5%' }}>
+            <Tabs
+              className="box"
+              value={value}
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: '#ff6b6c',
+                  marginLeft: '1.7em',
+                  width: '2.3em',
+                  bottom: '25%',
+                  zIndex: '-1',
+                },
+              }}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              centered
+            >
               <Tab label="식당" {...a11yProps(0)} />
               <Tab label="카페" {...a11yProps(1)} />
               <Tab label="숙소" {...a11yProps(2)} />
@@ -58,37 +73,37 @@ export default function Bookmark() {
             <div className="best-wrapper"></div>
 
             <div className="mainCard-wrapper">
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
             </div>
           </TabPanel>
 
           <TabPanel className="TabPanel" value={value} index={1}>
             <div className="mainCard-wrapper">
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
             </div>
           </TabPanel>
 
           <TabPanel className="TabPanel" value={value} index={2}>
             <div className="mainCard-wrapper">
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
-              <MainCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
+              <BookmarkCard />
             </div>
           </TabPanel>
         </Box>

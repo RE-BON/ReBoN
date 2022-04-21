@@ -1,6 +1,5 @@
 import '../../../styles/post-star.css';
 import React, { useState } from 'react';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 export default function Star() {
   const [pharase, setPharase] = useState(null);
   let state = pharase;

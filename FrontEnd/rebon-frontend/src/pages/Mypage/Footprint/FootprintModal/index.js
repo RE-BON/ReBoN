@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import '../../../styles/logout-modal.css';
-export default function LogoutModal() {
+import '../../../../styles/footprint-modal.css';
+
+export default function FootprintModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -29,7 +29,7 @@ export default function LogoutModal() {
 
   const StyledModal = Modal.styled`
   width: 23rem;
-  height: 21rem;
+  height: 10rem;
   padding : 20px;
   border-radius:20px;
   background-color: white;
@@ -41,13 +41,13 @@ export default function LogoutModal() {
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;
   `;
-  function Logout(e) {
-    window.localStorage.setItem('Login', false);
-  }
+
   return (
-    <div className="logout-modal-wrapper">
+    <div className="footprint-modal-wrapper">
       <ModalProvider backgroundComponent={FadingBackground}>
-        <div onClick={toggleModal}>로그아웃</div>
+        <div className="footprint-modal" onClick={toggleModal}>
+          리뷰삭제
+        </div>
 
         <StyledModal
           isOpen={isOpen}
@@ -58,20 +58,19 @@ export default function LogoutModal() {
           opacity={opacity}
           backgroundProps={{ opacity }}
         >
-          <div className="logout-wrapper">
-            <button className="close" onClick={toggleModal}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
-            <div className="logout-icon">
-              <img src="../../../../image/logout.png" alt="logout-img" />
-            </div>
-            <div className="logout-notice">로그아웃 하시겠습니까?</div>
-            <hr />
-            <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <button className="logout-button" onClick={Logout}>
-                확인
+          <div className="footprint-modal-content">
+            <div className="footprint-modal-delete">
+              <button onClick={toggleModal}>
+                <img src="../../../../image/trash.png" alt="trash-img" />
               </button>
-            </Link>
+              삭제하기
+            </div>
+            <div className="footprint-modal-close">
+              <button onClick={toggleModal}>
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+              닫기
+            </div>
           </div>
         </StyledModal>
       </ModalProvider>

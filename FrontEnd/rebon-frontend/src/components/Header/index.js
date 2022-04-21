@@ -8,6 +8,7 @@ export default function Header() {
   function Login(e) {
     setIsLogin(true);
   }
+
   return (
     <div className="header-wrapper">
       <header>
@@ -18,7 +19,7 @@ export default function Header() {
               <SearchModal />
             </div>
             <div className="header-logon-icon">
-              <FontAwesomeIcon icon={faCircleUser} size="2x" color="#BDBDBD" />
+              <img src="image/user.png" />
             </div>
             <span>홍길동</span>
           </div>

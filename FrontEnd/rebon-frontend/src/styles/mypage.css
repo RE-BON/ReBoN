@@ -19,7 +19,7 @@
 }
 
 .sideMenu-wrapper {
-  background-color: #f5f5f5;
+  background-color: transparent;
   height: 100vh;
 }
 
@@ -42,6 +42,7 @@
 }
 
 .sidebtn-wrapper {
+  /*환경설정, 발자국, 찜*/
   position: relative;
   background-color: white;
   margin-bottom: 15px;
@@ -75,4 +76,12 @@
   position: absolute;
   bottom: 20%;
   font-size: 13px;
+}
+
+.tab-click-active {
+  color: #ff6b6c;
+}
+
+.tab-click-stay {
+  color: gray;
 }
