@@ -13,46 +13,49 @@ button {
   font-size: 20px;
 }
 
-.modal-wrapper {
+.header-modal-wrapper {
   display: grid;
-  grid-template-rows: repeat(3, 80px);
+  grid-template-rows: repeat(3, 33%);
 }
 
-.modal-wrapper-search {
+.header-modal-wrapper-search {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.modal-wrapper .search-list {
-  width: 90%;
-  padding-left: 10px;
+.header-search-bar-wrapper {
 }
 
-.search-list li {
+.header-modal-wrapper .header-search-list {
+  width: 90%;
+  padding-left: 3%;
+}
+
+.header-search-list li {
   padding: 10px 0;
   border-radius: 10px;
   color: rgba(0, 0, 0, 0.5);
   padding-left: 10px;
 }
 
-.search-list li:hover {
+.header-search-list li:hover {
   color: #ff6c6c;
   background-color: #ffeded;
 }
 
-.modal-wrapper .tag-list {
+.header-modal-wrapper .tag-list {
   font-size: 15px;
   padding: 0 5px;
   margin-top: 60px;
 }
 
-.modal-wrapper .tag-list div {
+.header-tag-list div {
   grid-column: 1 / 5;
   margin-bottom: 10px;
 }
 
-.modal-wrapper .tag-list li {
+.header-tag-list li {
   width: fit-content;
   padding: 5px 10px;
   margin: 10px;
@@ -63,7 +66,7 @@ button {
   font-weight: bolder;
 }
 
-.modal-wrapper .tag-list li:hover {
+.header-tag-list li:hover {
   color: #ff6c6c;
   border: 1px solid #ff6c6c;
   font-weight: bolder;

@@ -1,4 +1,5 @@
 import React from 'react';
+import FootprintModal from './FootprintModal';
 import '../../../styles/footprint.css';
 
 export default function Footprint() {
@@ -8,7 +9,7 @@ export default function Footprint() {
       <div className="footprint-wrapper">
         <div className="footprint-content">
           <div className="footprint-remove-wrapper">
-            <span className="footprint-remove-button">리뷰삭제</span>
+            <FootprintModal />
           </div>
           <div className="footprint-user">
             <span className="footprint-user-name">파파야리프</span>
@@ -28,7 +29,7 @@ export default function Footprint() {
 
         <div className="footprint-content">
           <div className="footprint-remove-wrapper">
-            <span className="footprint-remove-button">리뷰삭제</span>
+            <FootprintModal />
           </div>
           <div className="footprint-user">
             <span className="footprint-user-name">파파야리프</span>

@@ -1,6 +1,6 @@
 import '../../../styles/edit.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faXmark, faCamera, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 export default function Edit() {
@@ -25,10 +25,10 @@ export default function Edit() {
         <div className="edit-info-icon">
           <div>
             <span className="icon-user">
-              <img src="image/user.png" />
+              <img src="image/user.png" alt="user-img" />
             </span>
             <span className="icon-camera">
-              <img src="image/camera.png" />
+              <img src="image/camera.png" alt="camera-img" />
             </span>
           </div>
         </div>

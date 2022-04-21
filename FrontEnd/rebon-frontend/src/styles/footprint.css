@@ -28,18 +28,9 @@
 }
 .footprint-remove-wrapper {
   float: right;
+  margin-right: 3%;
 }
-.footprint-remove-button {
-  color: #ff6b6c;
-  background-color: #ffeded;
-  border-radius: 1000px;
-  font-size: 0.7rem;
-  padding-left: 7px;
-  padding-right: 7px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-weight: 600;
-}
+
 .footprint-name {
   display: inline;
   font-size: 1.3rem;

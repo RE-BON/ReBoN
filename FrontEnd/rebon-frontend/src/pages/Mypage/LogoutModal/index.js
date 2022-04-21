@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import LogoutIcon from '@mui/icons-material/Logout';
 import '../../../styles/logout-modal.css';
 export default function LogoutModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +63,7 @@ export default function LogoutModal() {
               <FontAwesomeIcon icon={faXmark} />
             </button>
             <div className="logout-icon">
-              <img src="image/logout.png" />
+              <img src="../../../../image/logout.png" alt="logout-img" />
             </div>
             <div className="logout-notice">로그아웃 하시겠습니까?</div>
             <hr />
