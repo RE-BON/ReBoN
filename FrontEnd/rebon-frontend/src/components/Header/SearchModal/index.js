@@ -50,14 +50,10 @@ export default function SearchModal() {
       >
         <div className="header-modal-wrapper">
           <div className="header-modal-wrapper-search">
-            <div className="search-bar-wrapper">
-              <input placeholder="가고 싶은 지역을 입력해주세요" />
+            <div className="header-search-bar-wrapper">
               <FontAwesomeIcon icon={faSearch} className="search" />
+              <input placeholder="가고 싶은 지역을 입력해주세요" />
             </div>
-
-            <button onClick={toggleModal}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
           </div>
 
           <ul className="header-search-list">
@@ -89,7 +85,7 @@ export default function SearchModal() {
 
 const StyledModal = Modal.styled`
   width: 100%;
-  height: 30rem;
+  height: 28rem;
   padding : 1% 20%;
   border-radius:20px;
   background-color: white;

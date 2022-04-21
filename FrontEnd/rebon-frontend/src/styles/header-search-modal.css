@@ -25,11 +25,27 @@ button {
 }
 
 .header-search-bar-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 100px;
+  padding: 1% 2%;
+  background-color: white;
+  border: 1px solid #ff6c6c;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.header-search-bar-wrapper input {
+  padding-left: 10px;
+  border: none;
+  background-color: transparent;
+  width: 100%;
 }
 
 .header-modal-wrapper .header-search-list {
   width: 90%;
-  padding-left: 3%;
+  padding-left: 37px;
+  margin-top: -20px;
 }
 
 .header-search-list li {
@@ -42,6 +58,7 @@ button {
 .header-search-list li:hover {
   color: #ff6c6c;
   background-color: #ffeded;
+  border: 0;
 }
 
 .header-modal-wrapper .tag-list {
