@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.MenuGroupService;
-import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
@@ -31,7 +31,7 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public Shop create(ShopImages shopImages, ShopCreateRequestDto data) {
+    public Shop create(ShopImages shopImages, ShopRequestDto data) {
         Restaurant restaurant = Restaurant.builder()
                                           .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
                                           .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
@@ -49,6 +49,26 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
         Restaurant restaurant = (Restaurant) shop;
         Map<MenuGroup, List<Menu>> menuGroups = restaurant.getMenuGroupByMenuGroup();
         return ShopResponseDto.of(shop, menuGroups);
+    }
+
+    @Override
+    public void update(Shop shop, ShopRequestDto shopRequestDto) {
+        ShopContent content = new ShopContent(
+                shopRequestDto.getName(),
+                shopRequestDto.getBusinessHour(),
+                shopRequestDto.getPhone()
+        );
+
+        Location location = new Location(
+                shopRequestDto.getAddress(),
+                shopRequestDto.getLongitude(),
+                shopRequestDto.getLatitude()
+        );
+
+        Restaurant restaurant = (Restaurant) shop;
+        restaurant.update(content, location);
+
+        menuGroupService.update(restaurant, shopRequestDto.getMenus());
     }
 
 }

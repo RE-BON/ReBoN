@@ -8,9 +8,11 @@ import java.util.List;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.handong.rebon.common.ImageUploader;
 import com.handong.rebon.exception.infrastructure.ImageSaveException;
+import com.handong.rebon.shop.domain.content.ShopImage;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -35,6 +37,14 @@ public class S3ShopImageUploader implements ImageUploader {
         } catch (IOException e) {
             throw new ImageSaveException();
         }
+    }
+
+    @Override
+    public void removeAll(List<ShopImage> shopImages) {
+        shopImages.stream()
+                  .map(ShopImage::getUrl)
+                  .map(url -> new DeleteObjectRequest(bucket, url))
+                  .forEach(amazonS3::deleteObject);
     }
 
     private List<String> saveEachImage(List<MultipartFile> multipartFiles) throws IOException {

@@ -58,4 +58,10 @@ public class AdminShopController {
         shopService.delete(id);
         return "home";
     }
+
+    @PutMapping("/shops/{id}")
+    public String update(@PathVariable Long id, ShopRequest shopRequest) {
+        shopService.update(id, shopRequest.toDto());
+        return "redirect:/admin/shops/" + URLEncoder.encode(String.valueOf(id), StandardCharsets.UTF_8);
+    }
 }

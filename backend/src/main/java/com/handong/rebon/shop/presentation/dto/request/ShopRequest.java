@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 import com.handong.rebon.shop.application.dto.request.menu.MenuRequestDto;
 
@@ -38,25 +38,25 @@ public class ShopRequest {
         }
     }
 
-    public ShopCreateRequestDto toDto() {
+    public ShopRequestDto toDto() {
         List<MenuGroupRequestDto> menuGroupRequestDtos = menus.stream()
                                                               .filter(menuGroup -> !menuGroup.getName().isBlank())
                                                               .map(this::toDto)
                                                               .collect(Collectors.toList());
 
-        return ShopCreateRequestDto.builder()
-                                   .categoryId(categoryId)
-                                   .subCategories(subCategories)
-                                   .name(name)
-                                   .businessHour(businessHour)
-                                   .phone(phone)
-                                   .address(address)
-                                   .latitude(latitude)
-                                   .longitude(longitude)
-                                   .images(images)
-                                   .tags(tags)
-                                   .menus(menuGroupRequestDtos)
-                                   .build();
+        return ShopRequestDto.builder()
+                             .categoryId(categoryId)
+                             .subCategories(subCategories)
+                             .name(name)
+                             .businessHour(businessHour)
+                             .phone(phone)
+                             .address(address)
+                             .latitude(latitude)
+                             .longitude(longitude)
+                             .images(images)
+                             .tags(tags)
+                             .menus(menuGroupRequestDtos)
+                             .build();
     }
 
     private MenuGroupRequestDto toDto(MenuGroupRequest menuGroupRequest) {

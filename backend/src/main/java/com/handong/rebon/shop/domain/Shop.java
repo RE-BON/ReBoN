@@ -99,6 +99,11 @@ public abstract class Shop extends BaseEntity {
         this.shopCategories.addAll(shopCategories);
     }
 
+    public void update(ShopContent content, Location location) {
+        this.shopContent = content;
+        this.location = location;
+    }
+
     public String getMainImage() {
         return shopImages.mainImage();
     }
