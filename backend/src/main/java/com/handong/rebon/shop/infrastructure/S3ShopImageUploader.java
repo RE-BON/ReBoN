@@ -13,6 +13,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.handong.rebon.common.ImageUploader;
 import com.handong.rebon.exception.infrastructure.ImageSaveException;
 import com.handong.rebon.shop.domain.content.ShopImage;
+import com.handong.rebon.shop.domain.content.ShopImages;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -40,9 +41,12 @@ public class S3ShopImageUploader implements ImageUploader {
     }
 
     @Override
-    public void removeAll(List<ShopImage> shopImages) {
-        shopImages.stream()
+    public void removeAll(ShopImages shopImages) {
+        shopImages.getShopImages()
+                  .stream()
                   .map(ShopImage::getUrl)
+                  .map(url -> url.replace("https://rebon-bucket.s3.ap-northeast-2.amazonaws.com/", ""))
+                  .peek(System.out::println)
                   .map(url -> new DeleteObjectRequest(bucket, url))
                   .forEach(amazonS3::deleteObject);
     }

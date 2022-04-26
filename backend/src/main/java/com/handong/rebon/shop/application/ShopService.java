@@ -14,10 +14,9 @@ import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.ShopSearchCondition;
-import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.location.Location;
+import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.tag.application.TagService;
 import com.handong.rebon.tag.domain.Tag;
@@ -38,6 +37,7 @@ public class ShopService {
     private final ShopAdapterService shopAdapterService;
     private final ShopRepository shopRepository;
     private final ImageUploader imageUploader;
+    private final ShopImageRepository shopImageRepository;
 
     @Transactional
     public Long create(ShopRequestDto shopRequestDto) {
@@ -102,13 +102,19 @@ public class ShopService {
     }
 
     @Transactional
-    public void update(Long id, ShopRequestDto shopRequestDto) {
+    public Long update(Long id, ShopRequestDto shopRequestDto) {
         Shop shop = findById(id);
         Category category = categoryService.findById(shopRequestDto.getCategoryId());
+
+        if (!shop.sameCategory(category)) {
+            delete(id);
+            return create(shopRequestDto);
+        }
+
         List<Category> subCategories = categoryService.findAllContainIds(shopRequestDto.getSubCategories());
         List<Tag> tags = tagService.findAllContainIds(shopRequestDto.getTags());
 
-        ShopImages shopImages = changeImages(shop.getShopImages(), shopRequestDto);
+        ShopImages shopImages = changeImages(shop, shopRequestDto);
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
         adapter.update(shop, shopRequestDto);
@@ -116,10 +122,13 @@ public class ShopService {
         shop.updateCategories(category, subCategories);
         shop.updateTags(tags);
         shop.updateImage(shopImages);
+
+        return shop.getId();
     }
 
-    private ShopImages changeImages(ShopImages shopImages, ShopRequestDto shopRequestDto) {
-        imageUploader.removeAll(shopImages.getShopImages());
+    private ShopImages changeImages(Shop shop, ShopRequestDto shopRequestDto) {
+        imageUploader.removeAll(shop.getShopImages());
+        shopImageRepository.deleteById(shop.getId());
         return saveImages(shopRequestDto.getImages());
     }
 }

@@ -59,9 +59,15 @@ public class AdminShopController {
         return "home";
     }
 
+    @GetMapping("/shops/{id}/update")
+    public String updateForm(@PathVariable Long id, Model model) {
+        // TODO ...
+        return "shop/createForm";
+    }
+
     @PutMapping("/shops/{id}")
     public String update(@PathVariable Long id, ShopRequest shopRequest) {
-        shopService.update(id, shopRequest.toDto());
-        return "redirect:/admin/shops/" + URLEncoder.encode(String.valueOf(id), StandardCharsets.UTF_8);
+        Long updatedShopId = shopService.update(id, shopRequest.toDto());
+        return "redirect:/admin/shops/" + URLEncoder.encode(String.valueOf(updatedShopId), StandardCharsets.UTF_8);
     }
 }

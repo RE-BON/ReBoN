@@ -65,10 +65,13 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
                 shopRequestDto.getLatitude()
         );
 
+        Shop s = (Shop) shop;
+
         Restaurant restaurant = (Restaurant) shop;
         restaurant.update(content, location);
 
-        menuGroupService.update(restaurant, shopRequestDto.getMenus());
+        List<Menu> menu = menuGroupService.createMenu(restaurant, shopRequestDto.getMenus());
+        restaurant.updateMenu(menu);
     }
 
 }

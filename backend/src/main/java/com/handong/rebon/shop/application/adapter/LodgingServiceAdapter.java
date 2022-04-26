@@ -37,4 +37,21 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
     public ShopResponseDto convertToShopResponseDto(Shop shop) {
         return ShopResponseDto.from(shop);
     }
+
+    @Override
+    public void update(Shop shop, ShopRequestDto shopRequestDto) {
+        ShopContent content = new ShopContent(
+                shopRequestDto.getName(),
+                shopRequestDto.getBusinessHour(),
+                shopRequestDto.getPhone()
+        );
+
+        Location location = new Location(
+                shopRequestDto.getAddress(),
+                shopRequestDto.getLongitude(),
+                shopRequestDto.getLatitude()
+        );
+
+        shop.update(content, location);
+    }
 }

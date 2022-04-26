@@ -32,7 +32,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @OnDelete(action = OnDeleteAction.CASCADE)
 public class Cafe extends Shop {
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Menu> menus = new ArrayList<>();
 
     @Builder
@@ -56,5 +56,10 @@ public class Cafe extends Shop {
     public Map<MenuGroup, List<Menu>> getMenuGroupByMenuGroup() {
         return menus.stream()
                     .collect(Collectors.groupingBy(Menu::getMenuGroup));
+    }
+
+    public void updateMenu(List<Menu> menus) {
+        this.menus.clear();
+        addMenu(menus);
     }
 }

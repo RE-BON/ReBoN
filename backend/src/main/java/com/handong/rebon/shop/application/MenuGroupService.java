@@ -9,7 +9,6 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.menu.Menu;
 import com.handong.rebon.shop.domain.menu.MenuGroup;
 import com.handong.rebon.shop.domain.repository.MenuGroupRepository;
-import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.stereotype.Service;
 
@@ -39,19 +38,5 @@ public class MenuGroupService {
             menus.add(menu);
             menuGroup.addMenu(menu);
         }
-    }
-
-    public void update(Shop shop, List<MenuGroupRequestDto> newMenus) {
-        List<Menu> menus = new ArrayList<>();
-        for (MenuGroupRequestDto menuGroupRequest : newMenus) {
-            MenuGroup menuGroup = new MenuGroup(menuGroupRequest.getName());
-            menuGroup.belongTo(shop);
-
-            createMenuBelongToMenuGroup(menus, menuGroupRequest, menuGroup);
-
-            menuGroupRepository.save(menuGroup);
-        }
-
-//        restaurant.updateMenu(menus);
     }
 }
