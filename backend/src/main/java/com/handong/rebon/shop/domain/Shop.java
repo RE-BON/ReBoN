@@ -39,7 +39,7 @@ public abstract class Shop extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ShopCategory> shopCategories = new ArrayList<>();
 
     @Embedded
@@ -57,7 +57,7 @@ public abstract class Shop extends BaseEntity {
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
     private List<Likes> likes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ShopTag> shopTags = new ArrayList<>();
 
     public Shop(
@@ -97,6 +97,30 @@ public abstract class Shop extends BaseEntity {
                                                          .collect(Collectors.toList());
 
         this.shopCategories.addAll(shopCategories);
+    }
+
+    public void update(ShopContent content, Location location) {
+        this.shopContent = content;
+        this.location = location;
+    }
+
+    public void updateCategories(Category category, List<Category> subCategories) {
+        this.shopCategories.clear();
+        addCategories(category, subCategories);
+    }
+
+    public void updateTags(List<Tag> tags) {
+        this.shopTags.clear();
+        addTags(tags);
+    }
+
+    public void updateImage(ShopImages shopImages) {
+        this.shopImages = shopImages;
+        shopImages.belongTo(this);
+    }
+
+    public boolean sameCategory(Category category) {
+        return this.category.equals(category);
     }
 
     public String getMainImage() {

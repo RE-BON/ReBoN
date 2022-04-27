@@ -10,7 +10,7 @@ import com.handong.rebon.common.factory.ImageFactory;
 import com.handong.rebon.shop.application.ShopAdapterService;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
-import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 import com.handong.rebon.shop.application.dto.request.menu.MenuRequestDto;
 import com.handong.rebon.shop.domain.Shop;
@@ -37,13 +37,13 @@ public class AdminShopRegister {
     private ShopAdapterService shopAdapterService;
 
     public Shop simpleRegister(String name, Category parent, List<Category> subs, List<Tag> tags, ShopImages shopImages) {
-        ShopCreateRequestDto shopCreateRequestDto = ShopCreateRequestDto.builder()
-                                                                        .name(name)
-                                                                        .menus(Collections.emptyList())
-                                                                        .build();
+        ShopRequestDto shopRequestDto = ShopRequestDto.builder()
+                                                      .name(name)
+                                                      .menus(Collections.emptyList())
+                                                      .build();
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(parent);
-        Shop shop = adapter.create(shopImages, shopCreateRequestDto);
+        Shop shop = adapter.create(shopImages, shopRequestDto);
 
         shop.addCategories(parent, subs);
         shop.addTags(tags);
@@ -60,21 +60,21 @@ public class AdminShopRegister {
                                 .map(Tag::getId)
                                 .collect(Collectors.toList());
 
-        ShopCreateRequestDto shopCreateRequestDto = ShopCreateRequestDto.builder()
-                                                                        .categoryId(parent.getId())
-                                                                        .subCategories(subIds)
-                                                                        .tags(tagIds)
-                                                                        .name(name)
-                                                                        .businessHour("10:00 - 20:00")
-                                                                        .phone("010-1234-5678")
-                                                                        .address("경상북도 포항시 OO")
-                                                                        .latitude("41.40338")
-                                                                        .longitude("2.17403")
-                                                                        .images(basicImage())
-                                                                        .menus(basicCafeMenu())
-                                                                        .build();
+        ShopRequestDto shopRequestDto = ShopRequestDto.builder()
+                                                      .categoryId(parent.getId())
+                                                      .subCategories(subIds)
+                                                      .tags(tagIds)
+                                                      .name(name)
+                                                      .businessHour("10:00 - 20:00")
+                                                      .phone("010-1234-5678")
+                                                      .address("경상북도 포항시 OO")
+                                                      .latitude("41.40338")
+                                                      .longitude("2.17403")
+                                                      .images(basicImage())
+                                                      .menus(basicCafeMenu())
+                                                      .build();
 
-        Long id = shopService.create(shopCreateRequestDto);
+        Long id = shopService.create(shopRequestDto);
         return shopRepository.getById(id);
     }
 

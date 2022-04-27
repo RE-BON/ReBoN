@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopCreateRequestDto {
+public class ShopRequestDto {
     private Long categoryId;
     private List<Long> subCategories;
     private String name;

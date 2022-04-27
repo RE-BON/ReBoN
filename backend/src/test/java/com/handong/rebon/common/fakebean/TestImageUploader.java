@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.common.ImageUploader;
+import com.handong.rebon.shop.domain.content.ShopImages;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,5 +15,9 @@ public class TestImageUploader implements ImageUploader {
         return multipartFiles.stream()
                              .map(MultipartFile::getOriginalFilename)
                              .collect(Collectors.toList());
+    }
+
+    @Override
+    public void removeAll(ShopImages shopImages) {
     }
 }
