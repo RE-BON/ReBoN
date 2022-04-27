@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
 import com.handong.rebon.auth.infrastructure.GoogleRequester;
-import com.handong.rebon.exception.oauth.ErrorResponseToGetAccessTokenException;
+import com.handong.rebon.exception.oauth.GetAccessTokenException;
 
 import org.springframework.http.MediaType;
 
@@ -88,8 +88,7 @@ public class GoogleRequesterTest {
 
         //when,then
         assertThatThrownBy(() -> googleRequester.getUserInfoByCode("code"))
-                .isInstanceOf(ErrorResponseToGetAccessTokenException.class);
-
+                .isInstanceOf(GetAccessTokenException.class);
 
     }
 

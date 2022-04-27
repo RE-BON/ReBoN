@@ -4,7 +4,7 @@ import com.handong.rebon.auth.application.AuthService;
 import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
-import com.handong.rebon.auth.infrastructure.JwtUtils;
+import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.auth.infrastructure.OauthHandler;
 import com.handong.rebon.exception.oauth.NoSuchOAuthMemberException;
 import com.handong.rebon.integration.IntegrationTest;
@@ -38,7 +38,7 @@ public class AuthIntegrationTest extends IntegrationTest {
     AuthService authService;
 
     @MockBean
-    JwtUtils jwtUtils;
+    JwtProvider jwtProvider;
 
     @Test
     @DisplayName("동일한 이메일, 다른 제공자일 경우 exception이 발생한다.")
