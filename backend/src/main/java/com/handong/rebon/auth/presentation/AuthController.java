@@ -3,7 +3,7 @@ package com.handong.rebon.auth.presentation;
 import com.handong.rebon.auth.application.AuthService;
 import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
 import com.handong.rebon.auth.application.dto.response.LoginResponseDto;
-import com.handong.rebon.auth.infrastructure.JwtUtils;
+import com.handong.rebon.auth.presentation.dto.response.TokenResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,10 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("/auth/{oauthProvider}/login/token")
-    public ResponseEntity login(@PathVariable String oauthProvider, @RequestParam String code) {
-        LoginResponseDto response = authService.login(new LoginRequestDto(oauthProvider, code));
-        String bearerToken = JwtUtils.makeBearerType(response.getToken());
+    public ResponseEntity<TokenResponse> login(@PathVariable String oauthProvider, @RequestParam String code) {
+        LoginResponseDto loginResponseDto = authService.login(new LoginRequestDto(oauthProvider, code));
 
-        return ResponseEntity.ok()
-                             .header("Authorization", bearerToken)
-                             .build();
+        return ResponseEntity.ok(TokenResponse.from(loginResponseDto));
+
     }
 }
