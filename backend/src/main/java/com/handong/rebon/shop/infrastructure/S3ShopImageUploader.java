@@ -46,7 +46,6 @@ public class S3ShopImageUploader implements ImageUploader {
                   .stream()
                   .map(ShopImage::getUrl)
                   .map(url -> url.replace("https://rebon-bucket.s3.ap-northeast-2.amazonaws.com/", ""))
-                  .peek(System.out::println)
                   .map(url -> new DeleteObjectRequest(bucket, url))
                   .forEach(amazonS3::deleteObject);
     }

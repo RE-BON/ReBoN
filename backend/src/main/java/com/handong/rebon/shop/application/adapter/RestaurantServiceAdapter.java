@@ -53,23 +53,7 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
 
     @Override
     public void update(Shop shop, ShopRequestDto shopRequestDto) {
-        ShopContent content = new ShopContent(
-                shopRequestDto.getName(),
-                shopRequestDto.getBusinessHour(),
-                shopRequestDto.getPhone()
-        );
-
-        Location location = new Location(
-                shopRequestDto.getAddress(),
-                shopRequestDto.getLongitude(),
-                shopRequestDto.getLatitude()
-        );
-
-        Shop s = (Shop) shop;
-
         Restaurant restaurant = (Restaurant) shop;
-        restaurant.update(content, location);
-
         List<Menu> menu = menuGroupService.createMenu(restaurant, shopRequestDto.getMenus());
         restaurant.updateMenu(menu);
     }
