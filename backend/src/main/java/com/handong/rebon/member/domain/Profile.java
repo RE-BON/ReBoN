@@ -25,8 +25,4 @@ public class Profile {
         this.email = email;
         this.nickName = nickName;
     }
-
-    public void updateEmail(String email) {
-        this.email = email;
-    }
 }

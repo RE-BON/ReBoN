@@ -47,10 +47,6 @@ public class Member extends BaseEntity {
         this.profile = new Profile(email, nickname);
     }
 
-    public Member(Profile profile) {
-        this.profile = profile;
-    }
-
     public boolean isSame(Member member) {
         return this.id == member.id;
     }
