@@ -25,8 +25,8 @@ oauth2:
       redirect-uri: http://localhost:8080/admin
   provider:
     google:
-      token-uri: https://www.googleapis.com/oauth2/v4/token
-      user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+      token-uri: http://localhost:8888/token
+      user-info-uri: http://localhost:8888/user-info
 jwt:
   secret-key: test
   expired-time: 86400000
