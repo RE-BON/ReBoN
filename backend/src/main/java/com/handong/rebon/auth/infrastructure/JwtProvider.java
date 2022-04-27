@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Component
-public class JwtUtils {
+public class JwtProvider {
 
     @Value("${jwt.secret-key}")
     private String secretKey;
@@ -36,12 +36,5 @@ public class JwtUtils {
                    .signWith(SignatureAlgorithm.HS256, secretKey)
                    .compact();
 
-    }
-
-    public static String makeBearerType(String token) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Bearer ");
-        stringBuilder.append(token);
-        return stringBuilder.toString();
     }
 }
