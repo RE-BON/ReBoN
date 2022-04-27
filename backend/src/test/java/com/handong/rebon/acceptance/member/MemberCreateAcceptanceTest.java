@@ -28,18 +28,18 @@ public class MemberCreateAcceptanceTest extends AcceptanceTest {
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(response.header("Authorization")).isNotNull();
+        assertThat(response.body()).isNotNull();
     }
 
-    private ExtractableResponse<Response> saveMember(MemberCreateRequest memberCreateRequest){
+    private ExtractableResponse<Response> saveMember(MemberCreateRequest memberCreateRequest) {
         return RestAssured.given(super.spec)
-                .log().all()
-                .contentType(APPLICATION_JSON_VALUE)
-                .body(memberCreateRequest)
-                .when()
-                .post("/api/members")
-                .then()
-                .log().all()
-                .extract();
+                          .log().all()
+                          .contentType(APPLICATION_JSON_VALUE)
+                          .body(memberCreateRequest)
+                          .when()
+                          .post("/api/members")
+                          .then()
+                          .log().all()
+                          .extract();
     }
 }
