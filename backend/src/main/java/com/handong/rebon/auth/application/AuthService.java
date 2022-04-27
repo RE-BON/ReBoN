@@ -4,7 +4,7 @@ import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
 import com.handong.rebon.auth.application.dto.response.LoginResponseDto;
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
-import com.handong.rebon.auth.infrastructure.JwtUtils;
+import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.auth.infrastructure.OauthHandler;
 import com.handong.rebon.exception.oauth.NoSuchOAuthMemberException;
 import com.handong.rebon.member.domain.Member;
@@ -20,19 +20,18 @@ import lombok.RequiredArgsConstructor;
 public class AuthService {
     private final MemberRepository memberRepository;
     private final OauthHandler oauthHandler;
-    private final JwtUtils jwtUtils;
+    private final JwtProvider jwtProvider;
 
     @Transactional(readOnly = true)
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         OauthProvider oauthProvider = OauthProvider.ignoreCase(loginRequestDto.getOauthProvider());
-        OauthUserInfo userInfoFromCode = oauthHandler.getUserInfoFromCode(oauthProvider, loginRequestDto.getCode());
-        String email = userInfoFromCode.getEmail();
+        OauthUserInfo userInfo = oauthHandler.getUserInfoFromCode(oauthProvider, loginRequestDto.getCode());
+        String email = userInfo.getEmail();
 
-        Member member = memberRepository.findByEmail(email, oauthProvider)
+        Member member = memberRepository.findByEmailAndOauthProvider(email, oauthProvider)
                                         .orElseThrow(() -> new NoSuchOAuthMemberException(email));
 
-        String token = jwtUtils.createToken(member.getId());
-
+        String token = jwtProvider.createToken(member.getId());
         LoginResponseDto response = new LoginResponseDto(token);
 
         return response;
