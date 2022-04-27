@@ -14,7 +14,7 @@ public class MemberTest {
     @DisplayName("멤버가 다르면, false를 반환한다.")
     void isNotSameMember() {
         //given
-        Member peace = creatMember(1L,"peace");
+        Member peace = creatMember(1L, "peace");
         Member james = creatMember(2L, "james");
 
         //when
@@ -28,7 +28,7 @@ public class MemberTest {
     @DisplayName("멤버가 같으면, true를 반환한다.")
     void SameMember() {
         //given
-        Member peace = creatMember(1L,"peace");
+        Member peace = creatMember(1L, "peace");
 
         //when
         boolean isSameMember = peace.isSame(peace);
