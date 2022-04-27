@@ -1,4 +1,3 @@
 [submodule "backend/security"]
 	path = backend/security
 	url = https://github.com/RE-BON/security.git
-	branch = be/feature/signup
