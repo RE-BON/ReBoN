@@ -8,11 +8,9 @@ import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
-import com.handong.rebon.common.BaseEntity;
-import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryNotFoundException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
+import com.handong.rebon.exception.category.CategoryNotFoundException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +35,9 @@ public class CategoryService {
 
     @Transactional
     public Long create(CategoryCreateRequestDto categoryCreateRequestDto) {
-
+        if (categoryCreateRequestDto.getParentId() == null) {
+            return this.create(categoryCreateRequestDto.getName());
+        }
         Category parent = categoryRepository.findById(categoryCreateRequestDto.getParentId())
                                             .orElseThrow(CategoryNoParentException::new);
 
@@ -75,10 +75,8 @@ public class CategoryService {
     }
 
     @Transactional
-    public void delete(CategoryRequestDto categoryRequestDto){
+    public void delete(CategoryRequestDto categoryRequestDto) {
         Category category = this.findById(categoryRequestDto.getId());
-        if(category.isDeleted()) throw new CategoryAlreadyDeletedException();
-        category.getChildren().forEach(BaseEntity::deleteContent);
         category.delete();
     }
 }

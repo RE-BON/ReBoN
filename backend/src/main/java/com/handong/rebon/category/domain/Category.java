@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
+import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
 import com.handong.rebon.shop.domain.category.ShopCategory;
@@ -69,16 +70,11 @@ public class Category extends BaseEntity {
         return this.name.equals(name);
     }
 
-    public void deleteChildCategory(Category category) {
-        this.children.deleteChild(category);
-        category.parent = null;
-    }
-
     public void delete() {
-        if (parent != null) {
-            parent.deleteChildCategory(this);
-            parent = null;
+        if (isDeleted()) {
+            throw new CategoryAlreadyDeletedException();
         }
+        this.children.getCategories().forEach(BaseEntity::deleteContent);
         deleteContent();
     }
 
