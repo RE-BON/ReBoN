@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     boolean existsByName(String name);
-    
+
     @Query("select c from Category c where c.parent is null")
     List<Category> findRootCategories();
 }

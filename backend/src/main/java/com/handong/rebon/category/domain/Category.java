@@ -74,7 +74,7 @@ public class Category extends BaseEntity {
         if (isDeleted()) {
             throw new CategoryAlreadyDeletedException();
         }
-        this.children.getCategories().forEach(BaseEntity::deleteContent);
+        this.getChildren().forEach(BaseEntity::deleteContent);
         deleteContent();
     }
 
