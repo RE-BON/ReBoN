@@ -1,10 +1,19 @@
 package com.handong.rebon.integration.category;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
+import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.domain.content.ShopContent;
+import com.handong.rebon.shop.domain.content.ShopImages;
+import com.handong.rebon.shop.domain.content.ShopScore;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
+import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +26,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private ShopRepository shopRepository;
 
     @Test
     @DisplayName("자식 카테고리를 삭제한다.")
@@ -99,5 +111,55 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         //when, then
         assertThatThrownBy(() -> categoryService.findById(requestDto.getId()))
                 .isInstanceOf(CategoryNotFoundException.class);
+    }
+
+    @Test
+    @DisplayName("루트 카테고리를 삭제할 경우, 해당 카테고리에 포함된 모든 Shop을 삭제한다.")
+    public void 루트_카테고리_상점_삭제() {
+
+        //given
+        Category rootCategory = createCategory("식당");
+        List<Category> subCategories = Arrays.asList(
+                createCategory("한식"),
+                createCategory("분식")
+        );
+        ShopContent content = ShopContent.builder()
+                                         .name("팜스발리")
+                                         .build();
+        ShopContent content2 = ShopContent.builder()
+                                          .name("맘스키친")
+                                          .build();
+
+        Restaurant restaurant1 = Restaurant.builder()
+                                           .shopContent(content)
+                                           .shopScore(new ShopScore())
+                                           .shopImages(new ShopImages())
+                                           .build();
+        Restaurant restaurant2 = Restaurant.builder()
+                                           .shopContent(content2)
+                                           .shopScore(new ShopScore())
+                                           .shopImages(new ShopImages())
+                                           .build();
+        restaurant1.addCategories(rootCategory, subCategories);
+        restaurant2.addCategories(rootCategory, subCategories);
+        Restaurant savedRestaurant1 = shopRepository.save(restaurant1);
+        Restaurant savedRestaurant2 = shopRepository.save(restaurant2);
+        boolean beforeDelete1 = savedRestaurant1.isDeleted();
+        boolean beforeDelete2 = savedRestaurant2.isDeleted();
+        shopRepository.save(restaurant2);
+        CategoryRequestDto requestDto = new CategoryRequestDto(rootCategory.getId());
+        //when
+        categoryService.delete(requestDto);
+        Optional<Shop> deletedRestaurant1 = shopRepository.findById(savedRestaurant1.getId());
+        Optional<Shop> deletedRestaurant2 = shopRepository.findById(savedRestaurant2.getId());
+        entityManager.flush();
+        entityManager.clear();
+        Optional<Category> deletedCategory = categoryRepository.findById(rootCategory.getId());
+        //then
+        assertThat(beforeDelete1).isFalse();
+        assertThat(beforeDelete2).isFalse();
+        assertThat(deletedRestaurant1).isEmpty();
+        assertThat(deletedRestaurant2).isEmpty();
+        assertThat(deletedCategory).isEmpty();
     }
 }
