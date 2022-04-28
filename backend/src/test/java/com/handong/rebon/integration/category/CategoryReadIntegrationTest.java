@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
     @Autowired
     private EntityManager entityManager;
+
     @Test
     @DisplayName("id에 따라 카테고리를 조회할 수 있다.")
     public void findCategoryById() {
@@ -80,6 +81,7 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         Long parentId3 = createCategory("숙소").getId();
         createCategoryWithParent(parentId3, "호텔");
         createCategoryWithParent(parentId3, "펜션");
+        createCategoryWithParent(parentId3, "모텔");
         createCategory("기타");
 
         //when
@@ -96,5 +98,4 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         assertThat(rootCategories.get(2).getChildren()).extracting("name")
                                                        .containsOnly("호텔", "펜션", "모텔");
     }
-
 }

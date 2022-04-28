@@ -28,7 +28,7 @@ public class AdminCategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/categories/new")
-    public String categoryCreateForm(Model model){
+    public String categoryCreateForm(Model model) {
 
         List<RootCategoryResponseDto> rootCategorieDtos = categoryService.findRootCategoriesAndChildren();
         List<RootCategoryResponse> responses = CategoryAssembler.rootCategoryResponses(rootCategorieDtos);
@@ -38,7 +38,7 @@ public class AdminCategoryController {
     }
 
     @GetMapping("/categories/remove")
-    public String categoryDeleteForm(Model model){
+    public String categoryDeleteForm(Model model) {
 
         List<RootCategoryResponseDto> rootCategorieDtos = categoryService.findRootCategoriesAndChildren();
         List<RootCategoryResponse> responses = CategoryAssembler.rootCategoryResponses(rootCategorieDtos);
@@ -48,7 +48,7 @@ public class AdminCategoryController {
     }
 
     @PostMapping("/categories")
-    public String createCategory(CategoryCreateRequest categoryRequest){
+    public String createCategory(CategoryCreateRequest categoryRequest) {
 
         CategoryCreateRequestDto categoryCreateRequestDto = CategoryAssembler.categoryCreateRequestDto(categoryRequest);
         categoryService.create(categoryCreateRequestDto);

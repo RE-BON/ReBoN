@@ -1,12 +1,9 @@
 package com.handong.rebon.integration.category;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
-import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +95,7 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         categoryService.delete(requestDto);
         entityManager.flush();
         entityManager.clear();
+
         //when, then
         assertThatThrownBy(() -> categoryService.findById(requestDto.getId()))
                 .isInstanceOf(CategoryNotFoundException.class);

@@ -73,7 +73,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public Category findById(Long categoryId) {
         return categoryRepository.findById(categoryId)
-                                 .orElseThrow(NoSuchCategoryException::new);
+                                 .orElseThrow(CategoryNotFoundException::new);
     }
 
     @Transactional(readOnly = true)

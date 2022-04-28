@@ -16,12 +16,12 @@ public class CategoryIntegrationTest extends IntegrationTest {
     @Autowired
     protected CategoryRepository categoryRepository;
 
-    public Category createCategory(String categoryName){
+    public Category createCategory(String categoryName) {
         Long id = categoryService.create(categoryName);
         return categoryRepository.getById(id);
     }
 
-    public Category createCategoryWithParent(Long parentId, String categoryName){
+    public Category createCategoryWithParent(Long parentId, String categoryName) {
         CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
                                                                                     .parentId(parentId)
                                                                                     .name(categoryName)
