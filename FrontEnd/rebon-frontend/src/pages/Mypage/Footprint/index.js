@@ -1,9 +1,6 @@
 import React from 'react';
+import FootprintModal from './FootprintModal';
 import '../../../styles/footprint.css';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faShareNodes, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { faHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 
 export default function Footprint() {
   return (
@@ -12,12 +9,12 @@ export default function Footprint() {
       <div className="footprint-wrapper">
         <div className="footprint-content">
           <div className="footprint-remove-wrapper">
-            <span className="footprint-remove-button">리뷰삭제</span>
+            <FootprintModal />
           </div>
           <div className="footprint-user">
             <span className="footprint-user-name">파파야리프</span>
-            <span className="footprint-rating">4.0</span>
             <span className="footprint-date">2022.03.14</span>
+            <span className="footprint-rating">★★★★</span>
             <div className="footprint-tip-wrapper">
               <span className="footprint-tip-name">나만의 꿀팁</span>
               <span className="footprint-tip-content">2층 창가자리 추천이요!</span>
@@ -28,16 +25,16 @@ export default function Footprint() {
             </div>
           </div>
         </div>
-        <hr className="footprint-light-hr" />
+        <div className="footprint-light-hr" />
 
         <div className="footprint-content">
           <div className="footprint-remove-wrapper">
-            <span className="footprint-remove-button">리뷰삭제</span>
+            <FootprintModal />
           </div>
           <div className="footprint-user">
             <span className="footprint-user-name">파파야리프</span>
-            <span className="footprint-rating">4.0</span>
             <span className="footprint-date">2022.03.14</span>
+            <span className="footprint-rating">★★★★</span>
             <div className="footprint-tip-wrapper">
               <span className="footprint-tip-name">나만의 꿀팁</span>
               <span className="footprint-tip-content">2층 창가자리 추천이요!</span>
@@ -48,13 +45,13 @@ export default function Footprint() {
             </div>
           </div>
           <div className="footprint-image-wrapper">
-            <img className="footprint-image" alt="footprint-image" src="image/detail.png" />
-            <img className="footprint-image" alt="footprint-image" src="image/detail.png" />
-            <img className="footprint-image" alt="footprint-image" src="image/detail.png" />
-            <img className="footprint-image" alt="footprint-image" src="image/detail.png" />
+            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
           </div>
         </div>
-        <hr className="footprint-light-hr" />
+        <div className="footprint-light-hr" />
       </div>
     </>
   );

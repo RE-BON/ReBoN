@@ -1,7 +1,7 @@
 package com.handong.rebon.shop.application.adapter;
 
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
@@ -24,7 +24,7 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public Shop create(ShopImages shopImages, ShopCreateRequestDto data) {
+    public Shop create(ShopImages shopImages, ShopRequestDto data) {
         return Lodging.builder()
                       .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
                       .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
@@ -36,5 +36,9 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
     @Override
     public ShopResponseDto convertToShopResponseDto(Shop shop) {
         return ShopResponseDto.from(shop);
+    }
+
+    @Override
+    public void update(Shop shop, ShopRequestDto shopRequestDto) {
     }
 }

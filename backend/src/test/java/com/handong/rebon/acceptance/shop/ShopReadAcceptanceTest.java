@@ -3,10 +3,12 @@ package com.handong.rebon.acceptance.shop;
 import java.util.*;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
-import com.handong.rebon.acceptance.admin.AdminCategoryRegister;
-import com.handong.rebon.acceptance.admin.AdminShopRegister;
-import com.handong.rebon.acceptance.admin.AdminTagRegister;
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.common.admin.AdminCategoryRegister;
+import com.handong.rebon.common.admin.AdminShopRegister;
+import com.handong.rebon.common.admin.AdminTagRegister;
+import com.handong.rebon.exception.ExceptionResponse;
+import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
@@ -131,6 +134,40 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
+    @Test
+    @DisplayName("삭제되지 않은 카페 리스트 조회")
+    void findAllDeletedFalse() {
+        // given
+        Category 카페 = categories.get("카페");
+        Tag 양덕 = tags.get("양덕");
+        adminShopRegister.delete(shops.get("티타"));
+
+        // when
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList());
+        List<ShopSimpleResponseDto> result = response.as(new TypeRef<>() {});
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).extracting("name")
+                          .doesNotContain("티타");
+    }
+
+    @Test
+    @DisplayName("삭제된 카페 조회")
+    void findDeleteCafe() {
+        // given
+        Shop shop = shops.get("티타");
+        adminShopRegister.delete(shop);
+
+        // when
+        ExtractableResponse<Response> response = 단일_가게_조회_요청(shop.getId());
+        ExceptionResponse result = response.as(new TypeRef<>() {});
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        assertThat(result.getMessage()).isEqualTo("존재하지 않는 가게입니다.");
+    }
+
     private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
         return RestAssured.given(super.spec)
                           .log().all()
@@ -235,8 +272,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
                 "티타",
                 categories.get("카페"),
                 Collections.singletonList(categories.get("개인카페")),
-                Arrays.asList(tags.get("포항"), tags.get("양덕")),
-                new ShopImages(Collections.singletonList(new ShopImage("url6", true)))
+                Arrays.asList(tags.get("포항"), tags.get("양덕"))
         ));
     }
 }

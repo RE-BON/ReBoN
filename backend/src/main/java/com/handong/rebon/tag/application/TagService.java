@@ -1,8 +1,12 @@
 package com.handong.rebon.tag.application;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.handong.rebon.exception.tag.NoSuchTagException;
 import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.tag.application.dto.TagDtoAssembler;
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 
@@ -33,14 +37,23 @@ public class TagService {
         }
     }
 
-    // TODO temp
-    public List<Tag> findAll(List<Long> tags) {
-        return tagRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> findTags() {
+        return TagDtoAssembler.tagResponseDtos(tagRepository.findAll());
     }
 
+
+    @Transactional(readOnly = true)
     public Tag findById(Long id) {
         return tagRepository.findById(id)
-                            .orElseThrow(IllegalArgumentException::new);
+                            .orElseThrow(NoSuchTagException::new);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Tag> findAllContainIds(List<Long> tags) {
+        return tags.stream()
+                   .map(this::findById)
+                   .collect(Collectors.toList());
     }
 }
 

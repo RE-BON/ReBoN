@@ -84,7 +84,9 @@ public class ReviewService {
 
         if (StringUtils.hasText(keyword)) {
             String containingKeyword = StringUtil.makeContainingKeyword(keyword);
-            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(containingKeyword, pageable)
+            List<Review> reviews = reviewRepository.searchReviewByKeywordApplyPage(
+                    containingKeyword,
+                    pageable)
                                                    .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }
@@ -140,7 +142,4 @@ public class ReviewService {
         return new ReviewImages(Arrays.asList(url1, url2));
     }
 
-    public ShopRepository getShopRepository() {
-        return shopRepository;
-    }
 }

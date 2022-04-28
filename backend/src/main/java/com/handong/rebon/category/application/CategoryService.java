@@ -1,6 +1,7 @@
 package com.handong.rebon.category.application;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
 import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
@@ -57,15 +58,10 @@ public class CategoryService {
         }
     }
 
-    @Transactional(readOnly = true)
-    public Category findById(Long categoryId) {
-        return categoryRepository.findById(categoryId)
-                                 .orElseThrow(CategoryNotFoundException::new);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Category> findSubCategoryByIds(List<Long> subCategories) {
-        return categoryRepository.findAllById(subCategories);
+    @Transactional
+    public void delete(CategoryRequestDto categoryRequestDto) {
+        Category category = this.findById(categoryRequestDto.getId());
+        category.delete();
     }
 
     @Transactional(readOnly = true)
@@ -74,9 +70,16 @@ public class CategoryService {
         return CategoryDtoAssembler.rootCategoryResponseDtos(categories);
     }
 
-    @Transactional
-    public void delete(CategoryRequestDto categoryRequestDto) {
-        Category category = this.findById(categoryRequestDto.getId());
-        category.delete();
+    @Transactional(readOnly = true)
+    public Category findById(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                                 .orElseThrow(NoSuchCategoryException::new);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Category> findAllContainIds(List<Long> subCategories) {
+        return subCategories.stream()
+                            .map(this::findById)
+                            .collect(Collectors.toList());
     }
 }

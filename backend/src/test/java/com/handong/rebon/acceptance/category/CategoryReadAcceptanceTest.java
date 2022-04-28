@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
-import com.handong.rebon.acceptance.admin.AdminCategoryRegister;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.presentation.dto.response.RootCategoryResponse;
+import com.handong.rebon.common.admin.AdminCategoryRegister;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

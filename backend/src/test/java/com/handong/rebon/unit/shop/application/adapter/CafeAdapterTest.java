@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.MenuGroupService;
 import com.handong.rebon.shop.application.adapter.CafeServiceAdapter;
-import com.handong.rebon.shop.application.dto.request.ShopCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.type.Cafe;
@@ -64,9 +64,9 @@ class CafeAdapterTest {
         // given
         CafeServiceAdapter adapter = new CafeServiceAdapter(menuGroupService);
         ShopImages shopImages = new ShopImages();
-        ShopCreateRequestDto data = ShopCreateRequestDto.builder()
-                                                        .name("스타벅스")
-                                                        .build();
+        ShopRequestDto data = ShopRequestDto.builder()
+                                            .name("스타벅스")
+                                            .build();
         given(menuGroupService.createMenu(any(), any())).willReturn(new ArrayList<>());
 
         // when

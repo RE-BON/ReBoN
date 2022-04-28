@@ -9,6 +9,7 @@ import com.handong.rebon.integration.IntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CategoryIntegrationTest extends IntegrationTest {
+
     @Autowired
     protected CategoryService categoryService;
 

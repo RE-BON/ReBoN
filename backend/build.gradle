@@ -34,6 +34,8 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 
+    implementation 'org.springframework.cloud:spring-cloud-aws-core:2.2.6.RELEASE'
+
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
@@ -53,6 +55,14 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+processResources.dependsOn('copySecret')
+
+task copySecret(type: Copy) {
+    from './security'
+    include '*.yml'
+    into './src/main/resources'
 }
 
 def querydslDir = "$buildDir/generated/querydsl"

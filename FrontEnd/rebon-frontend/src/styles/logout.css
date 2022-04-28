@@ -1,0 +1,49 @@
+.login-wrapper {
+  padding-top: 10%;
+}
+
+.login-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px auto;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 107, 108, 0.1);
+  border-radius: 50%;
+}
+
+.login-icon img {
+  width: 35%;
+}
+
+.login-notice {
+  padding-top: 15px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.login-notice div {
+  padding-top: 8px;
+  font-size: 15px;
+}
+
+.button {
+  text-align: center;
+  margin-top: 40px;
+  color: #ff6b6c;
+}
+
+.button-login {
+  margin: 10px auto;
+  padding: 5px 10px;
+  width: 20%;
+  border: 1px solid #ff6b6c;
+  border-radius: 7px;
+}
+
+.button-join {
+  margin: 0 auto;
+  padding: 5px 10px;
+  width: 20%;
+}
