@@ -2,10 +2,8 @@ package com.handong.rebon.integration.category;
 
 import java.util.Arrays;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 
-import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
@@ -80,11 +78,6 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         createCategoryWithParent(parentId3, "펜션");
         Category test = createCategoryWithParent(parentId3, "모텔");
         createCategory("기타");
-        entityManager.flush();
-        entityManager.clear();
-        categoryService.delete(new CategoryRequestDto(test.getId()));
-        entityManager.flush();
-        entityManager.clear();
         //when
         List<RootCategoryResponseDto> rootCategories = categoryService.findRootCategoriesAndChildren();
         //then

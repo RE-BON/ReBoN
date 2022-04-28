@@ -44,7 +44,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
 
         //then
         assertThat(deletedReview)
-                .extracting("isDeleted")
+                .extracting("deleted")
                 .isEqualTo(true);
 
     }
@@ -74,7 +74,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
 
         //then
         assertThat(deletedReview)
-                .extracting("isDeleted")
+                .extracting("deleted")
                 .isEqualTo(true);
     }
 
