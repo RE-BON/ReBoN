@@ -12,6 +12,8 @@ import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
+import com.handong.rebon.shop.domain.category.ShopCategory;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ShopRepository shopRepository;
 
     @Transactional
     public Long create(String categoryName) {
@@ -61,7 +64,18 @@ public class CategoryService {
     @Transactional
     public void delete(CategoryRequestDto categoryRequestDto) {
         Category category = this.findById(categoryRequestDto.getId());
+        if (category.getParent() == null) {
+            List<ShopCategory> shopCategories = category.getShopCategories();
+            this.deleteAllShopOfCategory(shopCategories);
+        }
         category.delete();
+    }
+
+    @Transactional
+    public void deleteAllShopOfCategory(List<ShopCategory> shopCategories) {
+        shopCategories.forEach(shopCategory -> {
+            shopRepository.delete(shopCategory.getShop());
+        });
     }
 
     @Transactional(readOnly = true)

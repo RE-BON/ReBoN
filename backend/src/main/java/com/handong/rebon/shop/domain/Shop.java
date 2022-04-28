@@ -92,6 +92,7 @@ public abstract class Shop extends BaseEntity {
 
     public void addCategories(Category parent, List<Category> subCategories) {
         this.category = parent;
+        parent.getShopCategories().add(new ShopCategory(this, parent));
         List<ShopCategory> shopCategories = subCategories.stream()
                                                          .map(category -> new ShopCategory(this, category))
                                                          .collect(Collectors.toList());
