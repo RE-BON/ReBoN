@@ -75,15 +75,17 @@ public class Category extends BaseEntity {
         if (isDeleted()) {
             throw new CategoryAlreadyDeletedException();
         }
-        if (Objects.isNull(this.parent)) {
-            deleteShopsOfRootCategory();
-        }
+
+        deleteShopCategory(Objects.isNull(this.parent));
+
         this.children.delete();
         deleteContent();
     }
 
-    public void deleteShopsOfRootCategory() {
-        this.shopCategories.forEach(ShopCategory::delete);
+    public void deleteShopCategory(boolean isRootCategory) {
+        this.shopCategories.forEach(shopCategory -> {
+            shopCategory.delete(isRootCategory);
+        });
     }
 
     public List<Category> getChildren() {
