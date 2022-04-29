@@ -1,6 +1,7 @@
 package com.handong.rebon.category.application;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
@@ -10,10 +11,7 @@ import com.handong.rebon.category.application.dto.response.RootCategoryResponseD
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryNoParentException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
-import com.handong.rebon.shop.domain.category.ShopCategory;
-import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final ShopRepository shopRepository;
 
     @Transactional
     public Long create(String categoryName) {
@@ -39,11 +36,10 @@ public class CategoryService {
 
     @Transactional
     public Long create(CategoryCreateRequestDto categoryCreateRequestDto) {
-        if (categoryCreateRequestDto.getParentId() == null) {
+        if (Objects.isNull(categoryCreateRequestDto.getParentId())) {
             return this.create(categoryCreateRequestDto.getName());
         }
-        Category parent = categoryRepository.findById(categoryCreateRequestDto.getParentId())
-                                            .orElseThrow(CategoryNoParentException::new);
+        Category parent = this.findById(categoryCreateRequestDto.getParentId());
 
         String categoryName = categoryCreateRequestDto.getName();
 
@@ -64,18 +60,7 @@ public class CategoryService {
     @Transactional
     public void delete(CategoryRequestDto categoryRequestDto) {
         Category category = this.findById(categoryRequestDto.getId());
-        if (category.getParent() == null) {
-            List<ShopCategory> shopCategories = category.getShopCategories();
-            this.deleteAllShopOfCategory(shopCategories);
-        }
         category.delete();
-    }
-
-    @Transactional
-    public void deleteAllShopOfCategory(List<ShopCategory> shopCategories) {
-        shopCategories.forEach(shopCategory -> {
-            shopRepository.delete(shopCategory.getShop());
-        });
     }
 
     @Transactional(readOnly = true)

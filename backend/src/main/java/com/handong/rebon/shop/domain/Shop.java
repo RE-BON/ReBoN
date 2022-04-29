@@ -92,7 +92,9 @@ public abstract class Shop extends BaseEntity {
 
     public void addCategories(Category parent, List<Category> subCategories) {
         this.category = parent;
+        // message 를 보내야하나?
         parent.getShopCategories().add(new ShopCategory(this, parent));
+
         List<ShopCategory> shopCategories = subCategories.stream()
                                                          .map(category -> new ShopCategory(this, category))
                                                          .collect(Collectors.toList());
@@ -118,6 +120,10 @@ public abstract class Shop extends BaseEntity {
     public void updateImage(ShopImages shopImages) {
         this.shopImages = shopImages;
         shopImages.belongTo(this);
+    }
+
+    public void delete(){
+        this.deleteContent();
     }
 
     public boolean sameCategory(Category category) {

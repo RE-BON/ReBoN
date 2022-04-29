@@ -2,6 +2,7 @@ package com.handong.rebon.category.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
@@ -74,8 +75,15 @@ public class Category extends BaseEntity {
         if (isDeleted()) {
             throw new CategoryAlreadyDeletedException();
         }
-        this.getChildren().forEach(BaseEntity::deleteContent);
+        if (Objects.isNull(this.parent)) {
+            deleteShopsOfRootCategory();
+        }
+        this.children.delete();
         deleteContent();
+    }
+
+    public void deleteShopsOfRootCategory() {
+        this.shopCategories.forEach(ShopCategory::delete);
     }
 
     public List<Category> getChildren() {
