@@ -1,6 +1,7 @@
 package com.handong.rebon.member.application;
 
-import com.handong.rebon.auth.domain.OauthProvider;
+import java.util.Locale;
+
 import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
@@ -27,7 +28,7 @@ public class MemberService {
 
     @Transactional
     public MemberCreateResponseDto save(MemberCreateRequestDto memberCreateDto) {
-        OauthProvider oauthProvider = OauthProvider.ignoreCase(memberCreateDto.getOauthProvider());
+        String oauthProvider = memberCreateDto.getOauthProvider();
         String email = memberCreateDto.getEmail();
         String nickname = memberCreateDto.getNickname();
         boolean isAgreed = memberCreateDto.isAgreed();

@@ -1,15 +1,18 @@
 package com.handong.rebon.auth.domain;
 
-import java.util.Locale;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public enum OauthProvider {
-    GOOGLE, NAVER, KAKAO;
+@Getter
+@RequiredArgsConstructor
+public class OauthProvider {
+    private final String clientId;
+    private final String clientSecret;
+    private final String redirectUrl;
+    private final String tokenUrl;
+    private final String userInfoUrl;
 
-    public boolean isSameAs(OauthProvider oauthProvider) {
-        return this.equals(oauthProvider);
-    }
-
-    public static OauthProvider ignoreCase(String oauthProvider) {
-        return OauthProvider.valueOf(oauthProvider.toUpperCase(Locale.ROOT));
+    public OauthProvider(OauthProperties.User user, OauthProperties.Provider provider) {
+        this(user.getClientId(), user.getClientSecret(), user.getRedirectUri(), provider.getTokenUri(), provider.getUserInfoUri());
     }
 }
