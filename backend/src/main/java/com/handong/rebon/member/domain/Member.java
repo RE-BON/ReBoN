@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.like.Likes;
@@ -38,10 +37,9 @@ public class Member extends BaseEntity {
     @Builder.Default
     private boolean isAdmin = Boolean.FALSE;
 
-    @Enumerated(EnumType.STRING)
-    private OauthProvider oauthProvider;
+    private String oauthProvider;
 
-    public Member(String email, String nickname, boolean isAgreed, OauthProvider oauthProvider) {
+    public Member(String email, String nickname, boolean isAgreed, String oauthProvider) {
         this.oauthProvider = oauthProvider;
         this.isAgreed = isAgreed;
         this.profile = new Profile(email, nickname);

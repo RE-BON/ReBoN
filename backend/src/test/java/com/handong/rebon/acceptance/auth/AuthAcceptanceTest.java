@@ -3,7 +3,6 @@ package com.handong.rebon.acceptance.auth;
 import java.util.Map;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
-import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 
 import org.springframework.http.HttpStatus;
@@ -70,13 +69,12 @@ public class AuthAcceptanceTest extends AcceptanceTest {
     @DisplayName("Google 로그인으로 요청이 오면 토큰을 발급한다.")
     void loginByGoogleOauth() {
         //given
-        OauthProvider google = OauthProvider.GOOGLE;
         String testNickname = "test";
         saveMember(new MemberCreateRequest(TEST_EMAIL, testNickname, "GOOGLE", true));
         String authorizationCode = "test-code";
 
         //when
-        ExtractableResponse<Response> response = login(google.name(), authorizationCode);
+        ExtractableResponse<Response> response = login("google", authorizationCode);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
@@ -87,11 +85,10 @@ public class AuthAcceptanceTest extends AcceptanceTest {
     @DisplayName("미가입 로그인 요청시 401에러와 email을 반환 받는다")
     void loginByNotRegisteredMemberGetNotFound() {
         //given
-        OauthProvider google = OauthProvider.GOOGLE;
         String authorizationCode = "test-code";
 
         //when
-        ExtractableResponse<Response> response = login(google.name(), authorizationCode);
+        ExtractableResponse<Response> response = login("google", authorizationCode);
         Map<String, Object> responseBody = response.body().as(new TypeRef<>() {});
 
         //then
@@ -110,7 +107,6 @@ public class AuthAcceptanceTest extends AcceptanceTest {
                 .log().all()
                 .extract();
     }
-
 
     private ExtractableResponse<Response> saveMember(MemberCreateRequest memberCreateRequest) {
         return RestAssured.given(super.spec)

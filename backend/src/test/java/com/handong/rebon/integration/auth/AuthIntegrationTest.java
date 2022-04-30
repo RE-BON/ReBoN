@@ -2,7 +2,6 @@ package com.handong.rebon.integration.auth;
 
 import com.handong.rebon.auth.application.AuthService;
 import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
-import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
 import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.auth.infrastructure.OauthHandler;
@@ -47,7 +46,7 @@ public class AuthIntegrationTest extends IntegrationTest {
         String code = "test-code";
         String email = "test@gmail.com";
         String registeredProvider = "google";
-        OauthProvider invalidProvider = OauthProvider.ignoreCase("naver");
+        String invalidProvider = "naver";
         OauthUserInfo mockOauthUserInfo = mock(OauthUserInfo.class);
 
         given(oauthHandler.getUserInfoFromCode(invalidProvider, code))
@@ -59,7 +58,6 @@ public class AuthIntegrationTest extends IntegrationTest {
         //when,then
         Assertions.assertThatThrownBy(() -> authService.login(new LoginRequestDto("naver", code)))
                   .isInstanceOf(NoSuchOAuthMemberException.class);
-
     }
 
 }

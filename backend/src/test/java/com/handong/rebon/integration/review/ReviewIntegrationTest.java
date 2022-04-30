@@ -1,6 +1,5 @@
 package com.handong.rebon.integration.review;
 
-import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
@@ -85,7 +84,7 @@ class ReviewIntegrationTest extends IntegrationTest {
     }
 
     protected Member createMember(String memberName) {
-        Member member = new Member("test@test.com", memberName, true, OauthProvider.GOOGLE);
+        Member member = new Member("test@test.com", memberName, true, "google");
         return memberRepository.save(member);
     }
 }
