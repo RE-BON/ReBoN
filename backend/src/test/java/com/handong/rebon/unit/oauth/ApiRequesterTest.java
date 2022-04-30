@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
-import com.handong.rebon.auth.infrastructure.GoogleRequester;
+import com.handong.rebon.auth.infrastructure.ApiRequester;
 import com.handong.rebon.exception.oauth.GetAccessTokenException;
 
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class GoogleRequesterTest {
+public class ApiRequesterTest {
 
     public static final String TEST_EMAIL = "handong@gmail.com";
 
@@ -45,17 +45,6 @@ public class GoogleRequesterTest {
             "}";
 
     @Test
-    @DisplayName("들어온 oauth 제공자가 자신이면 true를 반환한다.")
-    void supports() {
-        //given
-        GoogleRequester googleRequester = new GoogleRequester();
-
-        //when, then
-        assertThat(googleRequester.supports(OauthProvider.GOOGLE)).isTrue();
-        assertThat(googleRequester.supports(OauthProvider.NAVER)).isFalse();
-    }
-
-    @Test
     @DisplayName("서버에 요청을 보내 authorization code로부터 유저의 정보를 가져온다.")
     void getUserInfoByCode() throws IOException {
         //given
@@ -64,16 +53,15 @@ public class GoogleRequesterTest {
         setUpResponse(mockWebServer, GOOGLE_TOKEN_RESPONSE);
         setUpResponse(mockWebServer, USER_INFO_RESPONSE);
 
-        GoogleRequester googleRequester = makeGoogleRequester(mockWebServer);
+        OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
 
         //when
-        OauthUserInfo userInfo = googleRequester.getUserInfoByCode("code");
+        OauthUserInfo userInfo = OauthUserInfo.from(ApiRequester.getUserInfo("code", oauthProvider));
         String email = userInfo.getEmail();
 
         //then
         assertThat(email).isEqualTo(TEST_EMAIL);
         mockWebServer.shutdown();
-
     }
 
     @Test
@@ -84,17 +72,16 @@ public class GoogleRequesterTest {
         mockWebServer.start();
         setUpResponse(mockWebServer, ERROR_RESPONSE);
 
-        GoogleRequester googleRequester = makeGoogleRequester(mockWebServer);
+        OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
 
         //when,then
-        assertThatThrownBy(() -> googleRequester.getUserInfoByCode("code"))
+        assertThatThrownBy(() -> ApiRequester.getUserInfo("code", oauthProvider))
                 .isInstanceOf(GetAccessTokenException.class);
-
     }
 
     @NotNull
-    private GoogleRequester makeGoogleRequester(MockWebServer mockWebServer) {
-        return new GoogleRequester(
+    private OauthProvider makeOauthProvider(MockWebServer mockWebServer) {
+        return new OauthProvider(
                 "clientId",
                 "secretId",
                 "redirectUri",
