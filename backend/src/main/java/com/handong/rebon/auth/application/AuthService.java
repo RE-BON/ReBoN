@@ -1,8 +1,9 @@
 package com.handong.rebon.auth.application;
 
+import java.util.Locale;
+
 import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
 import com.handong.rebon.auth.application.dto.response.LoginResponseDto;
-import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
 import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.auth.infrastructure.OauthHandler;
@@ -24,11 +25,11 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
-        OauthProvider oauthProvider = OauthProvider.ignoreCase(loginRequestDto.getOauthProvider());
+        String oauthProvider = loginRequestDto.getOauthProvider();
         OauthUserInfo userInfo = oauthHandler.getUserInfoFromCode(oauthProvider, loginRequestDto.getCode());
         String email = userInfo.getEmail();
 
-        Member member = memberRepository.findByEmailAndOauthProvider(email, oauthProvider)
+        Member member = memberRepository.findByProfileEmailAndOauthProvider(email, oauthProvider)
                                         .orElseThrow(() -> new NoSuchOAuthMemberException(email));
 
         String token = jwtProvider.createToken(member.getId());
