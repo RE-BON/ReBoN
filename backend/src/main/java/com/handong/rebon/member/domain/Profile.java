@@ -17,10 +17,6 @@ public class Profile {
     private String image;
     private String email;
 
-    public Profile(String nickName) {
-        this.nickName = nickName;
-    }
-
     public Profile(String email, String nickName) {
         this.email = email;
         this.nickName = nickName;

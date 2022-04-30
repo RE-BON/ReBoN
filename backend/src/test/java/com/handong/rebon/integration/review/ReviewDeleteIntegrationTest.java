@@ -105,7 +105,7 @@ public class ReviewDeleteIntegrationTest extends ReviewIntegrationTest {
 
     public Member createMember(String name, boolean isAdmin) {
         Member member = Member.builder()
-                              .profile(new Profile(name))
+                              .profile(new Profile("test@gmail.com", name))
                               .isAdmin(isAdmin)
                               .build();
 

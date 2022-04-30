@@ -67,7 +67,7 @@ public class ReviewTest {
     private Member createMember(Long id, String memberName) {
         return Member.builder()
                      .id(id)
-                     .profile(new Profile(memberName))
+                     .profile(new Profile("test@gmail.com", memberName))
                      .build();
     }
 }
