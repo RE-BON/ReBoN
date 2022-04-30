@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
+import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.exception.oauth.GetAccessTokenException;
 import com.handong.rebon.exception.oauth.UnableToGetTokenResponseException;
 
@@ -19,29 +20,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApiRequester {
 
-    public static Map<String, Object> getUserInfo(
-            String code,
-            String tokenUri,
-            String clientId,
-            String secretId,
-            String redirectUri,
-            String userInfoUri
-    ) {
-        String token = getToken(code, tokenUri, clientId, secretId, redirectUri);
-        return getUserInfoByToken(token, userInfoUri);
+    public static Map<String, Object> getUserInfo(String code, OauthProvider oauthProvider) {
+        String token = getToken(code, oauthProvider);
+        return getUserInfoByToken(token, oauthProvider.getUserInfoUrl());
     }
 
-    private static String getToken(String code, String tokenUri, String clientId, String secretId, String redirectUri) {
+    private static String getToken(String code, OauthProvider oauthProvider) {
         Map<String, Object> responseBody = WebClient.create()
                                                     .post()
-                                                    .uri(tokenUri)
+                                                    .uri(oauthProvider.getTokenUrl())
                                                     .headers(header -> {
-                                                        header.setBasicAuth(clientId, secretId);
+                                                        header.setBasicAuth(oauthProvider.getClientId(), oauthProvider.getClientSecret());
                                                         header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                                                         header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
                                                         header.setAcceptCharset(Collections.singletonList(StandardCharsets.UTF_8));
                                                     })
-                                                    .bodyValue(tokenRequest(code, redirectUri))
+                                                    .bodyValue(tokenRequest(code, oauthProvider.getRedirectUrl()))
                                                     .retrieve()
                                                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                                                     })
