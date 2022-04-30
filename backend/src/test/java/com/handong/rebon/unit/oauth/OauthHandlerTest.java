@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
+import com.handong.rebon.auth.infrastructure.ApiRequester;
 import com.handong.rebon.auth.infrastructure.OauthHandler;
 import com.handong.rebon.exception.oauth.UnsupportedOauthProviderException;
 
@@ -50,7 +51,7 @@ public class OauthHandlerTest {
 
         Map<String, OauthProvider> oauthProviders = setUpProviders(mockWebServer);
 
-        OauthHandler oauthHandler = new OauthHandler(oauthProviders);
+        OauthHandler oauthHandler = new OauthHandler(oauthProviders, new ApiRequester());
 
         //when
         OauthUserInfo userInfo = oauthHandler.getUserInfoFromCode("google", "code");
@@ -69,7 +70,7 @@ public class OauthHandlerTest {
 
         Map<String, OauthProvider> oauthProviders = setUpProviders(mockWebServer);
 
-        OauthHandler oauthHandler = new OauthHandler(oauthProviders);
+        OauthHandler oauthHandler = new OauthHandler(oauthProviders, new ApiRequester());
 
         //when,then
         assertThatThrownBy(() -> oauthHandler.getUserInfoFromCode("naver", "code"))

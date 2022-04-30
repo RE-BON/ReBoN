@@ -54,9 +54,9 @@ public class ApiRequesterTest {
         setUpResponse(mockWebServer, USER_INFO_RESPONSE);
 
         OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
-
+        ApiRequester apiRequester = new ApiRequester();
         //when
-        OauthUserInfo userInfo = OauthUserInfo.from(ApiRequester.getUserInfo("code", oauthProvider));
+        OauthUserInfo userInfo = OauthUserInfo.from(apiRequester.getUserInfo("code", oauthProvider));
         String email = userInfo.getEmail();
 
         //then
@@ -73,9 +73,10 @@ public class ApiRequesterTest {
         setUpResponse(mockWebServer, ERROR_RESPONSE);
 
         OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
+        ApiRequester apiRequester = new ApiRequester();
 
         //when,then
-        assertThatThrownBy(() -> ApiRequester.getUserInfo("code", oauthProvider))
+        assertThatThrownBy(() -> apiRequester.getUserInfo("code", oauthProvider))
                 .isInstanceOf(GetAccessTokenException.class);
     }
 

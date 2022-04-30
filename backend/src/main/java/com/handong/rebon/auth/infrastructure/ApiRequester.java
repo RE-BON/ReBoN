@@ -14,18 +14,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApiRequester {
 
-    public static Map<String, Object> getUserInfo(String code, OauthProvider oauthProvider) {
+    public Map<String, Object> getUserInfo(String code, OauthProvider oauthProvider) {
         String token = getToken(code, oauthProvider);
         return getUserInfoByToken(token, oauthProvider.getUserInfoUrl());
     }
 
-    private static String getToken(String code, OauthProvider oauthProvider) {
+    private String getToken(String code, OauthProvider oauthProvider) {
         Map<String, Object> responseBody = WebClient.create()
                                                     .post()
                                                     .uri(oauthProvider.getTokenUrl())
@@ -47,7 +43,7 @@ public class ApiRequester {
         return responseBody.get("access_token").toString();
     }
 
-    private static MultiValueMap<String, String> tokenRequest(String code, String redirectUri) {
+    private MultiValueMap<String, String> tokenRequest(String code, String redirectUri) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("code", code);
         formData.add("grant_type", "authorization_code");
@@ -55,7 +51,7 @@ public class ApiRequester {
         return formData;
     }
 
-    private static void validateResponseBody(Map<String, Object> responseBody) {
+    private void validateResponseBody(Map<String, Object> responseBody) {
         if (!responseBody.containsKey("access_token")) {
             throw new GetAccessTokenException();
         }

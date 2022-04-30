@@ -11,10 +11,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OauthHandler {
     private final Map<String, OauthProvider> oauthProviders;
+    private final ApiRequester apiRequester;
 
     public OauthUserInfo getUserInfoFromCode(String oauthProvider, String code) {
         OauthProvider oauth = getOauthProvider(oauthProvider);
-        return OauthUserInfo.from(ApiRequester.getUserInfo(code, oauth));
+        return OauthUserInfo.from(apiRequester.getUserInfo(code, oauth));
     }
 
     private OauthProvider getOauthProvider(String oauthProvider) {

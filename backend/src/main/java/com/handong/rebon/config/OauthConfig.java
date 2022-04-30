@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.handong.rebon.auth.domain.OauthProperties;
 import com.handong.rebon.auth.domain.OauthProvider;
+import com.handong.rebon.auth.infrastructure.ApiRequester;
 import com.handong.rebon.auth.infrastructure.OauthHandler;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,6 +23,6 @@ public class OauthConfig {
     @Bean
     public OauthHandler oauthHandler() {
         Map<String, OauthProvider> providers = properties.getOauthProviders();
-        return new OauthHandler(providers);
+        return new OauthHandler(providers, new ApiRequester());
     }
 }
