@@ -9,9 +9,11 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @MappedSuperclass
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
@@ -21,9 +23,13 @@ public abstract class BaseEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    private boolean isDeleted;
+    private boolean deleted = Boolean.FALSE;
+
+    protected BaseEntity(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public void deleteContent() {
-        isDeleted = true;
+        deleted = true;
     }
 }

@@ -65,4 +65,8 @@ public class Category {
     public boolean isSameName(String name) {
         return this.name.equals(name);
     }
+
+    public List<Category> getChildren() {
+        return children.getCategories();
+    }
 }

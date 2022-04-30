@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,44 +27,54 @@ export default function LogoutModal() {
     });
   }
 
-  const FadingBackground = styled(BaseModalBackground)`
-    opacity: ${(props) => props.opacity};
-    transition: all 0.3s ease-in-out;
-  `;
-
-  return (
-    <ModalProvider backgroundComponent={FadingBackground}>
-      <div onClick={toggleModal}>로그아웃</div>
-
-      <StyledModal
-        isOpen={isOpen}
-        afterOpen={afterOpen}
-        beforeClose={beforeClose}
-        onBackgroundClick={toggleModal}
-        onEscapeKeydown={toggleModal}
-        opacity={opacity}
-        backgroundProps={{ opacity }}
-      >
-        <div className="logout-wrapper">
-          <button className="close" onClick={toggleModal}>
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-          <div className="logout-image">
-            <image alt="logout-image" src="image/detail.png" />
-          </div>
-          <div className="logout-notice">로그아웃 하시겠습니까?</div>
-          <button className="logout-button">확인</button>
-        </div>
-      </StyledModal>
-    </ModalProvider>
-  );
-}
-
-const StyledModal = Modal.styled`
-  width: 25rem;
-  height: 20rem;
+  const StyledModal = Modal.styled`
+  width: 23rem;
+  height: 21rem;
   padding : 20px;
   border-radius:20px;
   background-color: white;
   opacity: ${(props) => props.opacity};
-  transition : all 0.3s ease-in-out;`;
+  transition : all 0.3s ease-in-out;
+  `;
+
+  const FadingBackground = styled(BaseModalBackground)`
+    opacity: ${(props) => props.opacity};
+    transition: all 0.3s ease-in-out;
+  `;
+  function Logout(e) {
+    window.localStorage.setItem('Login', false);
+  }
+  return (
+    <div className="logout-modal-wrapper">
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <div onClick={toggleModal}>로그아웃</div>
+
+        <StyledModal
+          isOpen={isOpen}
+          afterOpen={afterOpen}
+          beforeClose={beforeClose}
+          onBackgroundClick={toggleModal}
+          onEscapeKeydown={toggleModal}
+          opacity={opacity}
+          backgroundProps={{ opacity }}
+        >
+          <div className="logout-wrapper">
+            <button className="close" onClick={toggleModal}>
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+            <div className="logout-icon">
+              <img src="../../../../image/logout.png" alt="logout-img" />
+            </div>
+            <div className="logout-notice">로그아웃 하시겠습니까?</div>
+            <hr />
+            <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <button className="logout-button" onClick={Logout}>
+                확인
+              </button>
+            </Link>
+          </div>
+        </StyledModal>
+      </ModalProvider>
+    </div>
+  );
+}

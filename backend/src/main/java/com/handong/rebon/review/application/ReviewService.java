@@ -84,7 +84,9 @@ public class ReviewService {
 
         if (StringUtils.hasText(keyword)) {
             String containingKeyword = StringUtil.makeContainingKeyword(keyword);
-            List<Review> reviews = reviewRepository.findAllByReviewContentAndTipContaining(containingKeyword, pageable)
+            List<Review> reviews = reviewRepository.searchReviewByKeywordApplyPage(
+                    containingKeyword,
+                    pageable)
                                                    .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }

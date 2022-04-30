@@ -27,6 +27,7 @@ import lombok.Getter;
 @Builder
 public class ShopResponseDto {
     private Long id;
+    private ShopCategoryResponseDto category;
     private String name;
     private double star;
     private List<ShopTagResponseDto> tags;
@@ -48,6 +49,7 @@ public class ShopResponseDto {
         Location location = shop.getLocation();
         return ShopResponseDto.builder()
                               .id(shop.getId())
+                              .category(ShopCategoryResponseDto.from(shop.getCategory()))
                               .name(shop.getName())
                               .star(shop.getStar())
                               .tags(convertToShopTagResponseDto(shop.getShopTags()))

@@ -86,12 +86,24 @@ include::{snippets}/AuthAcceptanceTest/loginByNotRegisteredMemberGetNotFound/htt
 include::{snippets}/AuthAcceptanceTest/loginByNotRegisteredMemberGetNotFound/http-response.adoc[]
 
 == Tag API
-`구현 후 추가 예정`
 
+=== Tag 리스트 조회
+==== Request
+include::{snippets}/TagReadAcceptanceTest/getAllTags/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagReadAcceptanceTest/getAllTags/http-response.adoc[]
 
 == Category API
-`구현 후 추가 예정`
+=== 모든 Category 상세 조회
+Root Category 와 그 자식 카테고리들의 배열
 
+==== Request
+
+
+include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-request.adoc[]
+==== Response
+include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-response.adoc[]
 
 == Shop API
 

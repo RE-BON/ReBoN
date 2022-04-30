@@ -25,7 +25,7 @@ public class MenuGroup extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
 
-    @OneToMany(mappedBy = "menuGroup", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "menuGroup", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> menus = new ArrayList<>();
 
     public MenuGroup(String name) {

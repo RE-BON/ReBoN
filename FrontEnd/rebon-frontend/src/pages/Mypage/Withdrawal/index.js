@@ -1,18 +1,13 @@
-import '../../../styles/withdrawal.css';
-
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import '../../../styles/withdrawal.css';
 
 export default function Withdrawal() {
   const [bgColor, setbgColor] = useState('white');
   const ChnageBgColor = (e) => {
     setbgColor(bgColor === 'white' ? '#ff6b6c' : 'white');
-  };
-
-  const [btnBgColor, setBtnBgColor] = useState('#c4c4c4');
-  const ChnageBtnBgColor = (e) => {
-    setBtnBgColor(btnBgColor === '#c4c4c4' ? '#ff6b6c' : '#c4c4c4');
   };
 
   return (
@@ -34,9 +29,9 @@ export default function Withdrawal() {
             </span>
             <span>위 사항을 모두 확인했고, 회원탈퇴에 동의합니다.</span>
           </div>
-          <div className="withdrawal-submit" onClick={ChnageBtnBgColor} style={{ backgroundColor: btnBgColor }}>
-            회원 탈퇴
-          </div>
+          <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <div className="withdrawal-submit">회원 탈퇴</div>
+          </Link>
         </div>
       </div>
     </>
