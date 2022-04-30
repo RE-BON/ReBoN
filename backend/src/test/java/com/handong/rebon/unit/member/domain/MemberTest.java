@@ -40,7 +40,7 @@ public class MemberTest {
     private Member creatMember(Long id, String nickname) {
         return Member.builder()
                      .id(id)
-                     .profile(new Profile(nickname))
+                     .profile(new Profile("test@gmail.com", nickname))
                      .build();
     }
 }

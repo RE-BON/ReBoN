@@ -21,8 +21,6 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String oauthId;
-
     @Embedded
     private Profile profile;
 
@@ -36,10 +34,15 @@ public class Member extends BaseEntity {
 
     private boolean isAgreed;
 
-    private boolean isAdmin;
+    @Builder.Default
+    private boolean isAdmin = Boolean.FALSE;
 
-    public Member(Profile profile) {
-        this.profile = profile;
+    private String oauthProvider;
+
+    public Member(String email, String nickname, boolean isAgreed, String oauthProvider) {
+        this.oauthProvider = oauthProvider;
+        this.isAgreed = isAgreed;
+        this.profile = new Profile(email, nickname);
     }
 
     public boolean isSame(Member member) {

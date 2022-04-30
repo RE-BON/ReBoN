@@ -7,7 +7,7 @@ import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.admin.AdminCategoryRegister;
 import com.handong.rebon.common.admin.AdminShopRegister;
 import com.handong.rebon.common.admin.AdminTagRegister;
-import com.handong.rebon.exception.ExceptionResponse;
+import com.handong.rebon.exception.dto.ExceptionResponse;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImage;

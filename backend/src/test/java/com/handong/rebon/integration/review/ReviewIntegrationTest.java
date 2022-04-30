@@ -2,7 +2,6 @@ package com.handong.rebon.integration.review;
 
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
@@ -86,7 +85,7 @@ class ReviewIntegrationTest extends IntegrationTest {
     }
 
     protected Member createMember(String memberName) {
-        Member member = new Member(new Profile(memberName));
+        Member member = new Member("test@test.com", memberName, true, "google");
         return memberRepository.save(member);
     }
 }
