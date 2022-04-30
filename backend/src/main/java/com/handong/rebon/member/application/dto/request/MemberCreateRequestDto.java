@@ -1,13 +1,30 @@
 package com.handong.rebon.member.application.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import java.util.Locale;
 
-@Getter
+import lombok.AllArgsConstructor;
+
+
 @AllArgsConstructor
 public class MemberCreateRequestDto {
     private String email;
     private String oauthProvider;
     private String nickname;
     private boolean agreed;
+
+    public String getOauthProvider() {
+        return oauthProvider.toLowerCase(Locale.ROOT);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public boolean isAgreed() {
+        return agreed;
+    }
 }
