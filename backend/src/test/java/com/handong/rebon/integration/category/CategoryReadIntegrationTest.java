@@ -2,13 +2,10 @@ package com.handong.rebon.integration.category;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
-    @Autowired
-    private EntityManager entityManager;
 
     @Test
     @DisplayName("id에 따라 카테고리를 조회할 수 있다.")
