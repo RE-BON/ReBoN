@@ -35,4 +35,8 @@ public class ShopCategory extends BaseEntity {
             this.shop.delete();
         }
     }
+
+    public void addCategory(){
+        this.category.addShopCategory(this);
+    }
 }

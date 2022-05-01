@@ -88,6 +88,10 @@ public class Category extends BaseEntity {
         });
     }
 
+    public void addShopCategory(ShopCategory shopCategory){
+        this.shopCategories.add(shopCategory);
+    }
+
     public List<Category> getChildren() {
         return children.getCategories();
     }

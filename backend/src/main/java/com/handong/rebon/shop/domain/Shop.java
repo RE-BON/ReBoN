@@ -92,13 +92,11 @@ public abstract class Shop extends BaseEntity {
 
     public void addCategories(Category parent, List<Category> subCategories) {
         this.category = parent;
-        // message 를 보내야하나?
-        parent.getShopCategories().add(new ShopCategory(this, parent));
-
+        parent.addShopCategory(new ShopCategory(this, parent));
         List<ShopCategory> shopCategories = subCategories.stream()
                                                          .map(category -> new ShopCategory(this, category))
                                                          .collect(Collectors.toList());
-
+        shopCategories.forEach(ShopCategory::addCategory);
         this.shopCategories.addAll(shopCategories);
     }
 
