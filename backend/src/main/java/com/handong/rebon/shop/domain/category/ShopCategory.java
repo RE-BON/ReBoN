@@ -36,7 +36,7 @@ public class ShopCategory extends BaseEntity {
         }
     }
 
-    public void addCategory(){
+    public void addCategory() {
         this.category.addShopCategory(this);
     }
 }
