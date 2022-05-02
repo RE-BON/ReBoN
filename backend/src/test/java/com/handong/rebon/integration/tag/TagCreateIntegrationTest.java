@@ -7,10 +7,13 @@ import com.handong.rebon.tag.domain.repository.TagRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+//@WebAppConfiguration
+//@ContextConfiguration()
 public class TagCreateIntegrationTest extends TagIntegrationTest {
 
     @Autowired

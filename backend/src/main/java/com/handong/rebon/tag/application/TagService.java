@@ -1,6 +1,9 @@
 package com.handong.rebon.tag.application;
 
 import com.handong.rebon.exception.tag.NoSuchTagException;
+import com.handong.rebon.shop.application.ShopService;
+import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.tag.application.dto.TagDtoAssembler;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 public class TagService {
 
     private final TagRepository tagRepository;
+    private final ShopService shopService;
 
     @Transactional
     public Long createTag(String tagName) {
@@ -58,7 +62,7 @@ public class TagService {
     @Transactional
     public void deleteTag(Long id) {
         Tag tag = findById(id);
-        tag.deleteContent();
+        tag.deleteTag();
     }
 }
 

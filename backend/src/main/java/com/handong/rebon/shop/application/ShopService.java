@@ -59,8 +59,8 @@ public class ShopService {
     private ShopImages saveImages(List<MultipartFile> images) {
         List<String> urls = imageUploader.saveAll(images);
         List<ShopImage> shopImages = urls.stream()
-                                         .map(ShopImage::new)
-                                         .collect(Collectors.toList());
+                .map(ShopImage::new)
+                .collect(Collectors.toList());
         return ShopImages.of(shopImages);
     }
 
@@ -77,14 +77,14 @@ public class ShopService {
                 shopRepository.searchShopByConditionApplyPage(shopSearchCondition, shopSearchDto.getPageable());
 
         return results.stream()
-                      .map(ShopSimpleResponseDto::from)
-                      .collect(Collectors.toList());
+                .map(ShopSimpleResponseDto::from)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public ShopResponseDto findById(Long id) {
         Shop shop = shopRepository.findById(id)
-                                  .orElseThrow(NoSuchShopException::new);
+                .orElseThrow(NoSuchShopException::new);
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(shop.getCategory());
         return adapter.convertToShopResponseDto(shop);

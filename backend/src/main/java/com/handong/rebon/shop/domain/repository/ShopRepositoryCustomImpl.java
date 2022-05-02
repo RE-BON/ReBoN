@@ -4,11 +4,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.shop.domain.QShop;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.ShopSearchCondition;
+import com.handong.rebon.tag.domain.QTag;
 import com.handong.rebon.tag.domain.Tag;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;

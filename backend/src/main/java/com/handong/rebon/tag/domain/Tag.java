@@ -41,4 +41,15 @@ public class Tag extends BaseEntity {
             throw new TagNameException();
         }
     }
+
+    public void deleteTag(){
+        deleteShopTag();
+        deleteContent();
+    }
+
+    public void deleteShopTag(){
+        this.shopTags.forEach(shopTag -> {
+            shopTag.deleteShopTag();
+        });
+    }
 }
