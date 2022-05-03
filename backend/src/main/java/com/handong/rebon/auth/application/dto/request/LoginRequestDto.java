@@ -3,7 +3,6 @@ package com.handong.rebon.auth.application.dto.request;
 import java.util.Locale;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
 public class LoginRequestDto {

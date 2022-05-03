@@ -1,7 +1,5 @@
 package com.handong.rebon.member.application;
 
-import java.util.Locale;
-
 import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;

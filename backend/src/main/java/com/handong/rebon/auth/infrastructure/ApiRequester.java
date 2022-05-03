@@ -26,12 +26,11 @@ public class ApiRequester {
                                                     .post()
                                                     .uri(oauthProvider.getTokenUrl())
                                                     .headers(header -> {
-                                                        header.setBasicAuth(oauthProvider.getClientId(), oauthProvider.getClientSecret());
                                                         header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                                                         header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
                                                         header.setAcceptCharset(Collections.singletonList(StandardCharsets.UTF_8));
                                                     })
-                                                    .bodyValue(tokenRequest(code, oauthProvider.getRedirectUrl()))
+                                                    .bodyValue(tokenRequest(code, oauthProvider))
                                                     .retrieve()
                                                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                                                     })
@@ -43,11 +42,13 @@ public class ApiRequester {
         return responseBody.get("access_token").toString();
     }
 
-    private MultiValueMap<String, String> tokenRequest(String code, String redirectUri) {
+    private MultiValueMap<String, String> tokenRequest(String code, OauthProvider oauthProvider) {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("code", code);
         formData.add("grant_type", "authorization_code");
-        formData.add("redirect_uri", redirectUri);
+        formData.add("redirect_uri", oauthProvider.getRedirectUrl());
+        formData.add("client_id", oauthProvider.getClientId());
+        formData.add("client_secret", oauthProvider.getClientSecret());
         return formData;
     }
 

@@ -63,10 +63,14 @@ include::{snippets}/MemberCreateAcceptanceTest/saveMember/http-response.adoc[]
 | code | String | true | Authorization server에서 authorization code를 받은 후 전송
 |===
 
-include::{snippets}/AuthAcceptanceTest/loginByGoogleOauth/http-request.adoc[]
+include::{snippets}/AuthAcceptanceTest/loginByOauth/http-request.adoc[]
 
 ==== Response
-include::{snippets}/AuthAcceptanceTest/loginByGoogleOauth/http-response.adoc[]
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+
+include::{snippets}/AuthAcceptanceTest/loginByOauth/http-response.adoc[]
 
 === 회원 가입이 되어 있지 않은 경우, login 요청
 ==== Request
@@ -85,6 +89,20 @@ include::{snippets}/AuthAcceptanceTest/loginByNotRegisteredMemberGetNotFound/htt
 |===
 include::{snippets}/AuthAcceptanceTest/loginByNotRegisteredMemberGetNotFound/http-response.adoc[]
 
+=== 지원하지 않은 oauth provider로 login 요청시
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| oauthProvider | String | true | google, naver, kakao 로그인 요청된 sns로 보내야됨(소문자 가능)
+| code | String | true | Authorization server에서 authorization code를 받은 후 전송
+|===
+include::{snippets}/AuthAcceptanceTest/loginByNotSupportedProviderGetBadRequest/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/AuthAcceptanceTest/loginByNotSupportedProviderGetBadRequest/http-response.adoc[]
 == Tag API
 
 === Tag 리스트 조회

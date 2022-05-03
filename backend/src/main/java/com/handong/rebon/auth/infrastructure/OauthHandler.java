@@ -2,6 +2,7 @@ package com.handong.rebon.auth.infrastructure;
 
 import java.util.Map;
 
+import com.handong.rebon.auth.domain.OauthAttributes;
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.auth.domain.OauthUserInfo;
 import com.handong.rebon.exception.oauth.UnsupportedOauthProviderException;
@@ -15,7 +16,8 @@ public class OauthHandler {
 
     public OauthUserInfo getUserInfoFromCode(String oauthProvider, String code) {
         OauthProvider oauth = getOauthProvider(oauthProvider);
-        return OauthUserInfo.from(apiRequester.getUserInfo(code, oauth));
+        Map<String, Object> attributes = apiRequester.getUserInfo(code, oauth);
+        return OauthAttributes.extract(oauthProvider, attributes);
     }
 
     private OauthProvider getOauthProvider(String oauthProvider) {

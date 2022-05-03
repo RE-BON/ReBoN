@@ -42,7 +42,6 @@ public class OauthHandlerTest {
             "    \"locale\": \"ko\"\n" +
             "}";
 
-
     @Test
     @DisplayName("올바른 provider가 제공되면, 유저 정보를 얻을 수 있다.")
     void getUserInfoByOauthProvider() throws IOException {

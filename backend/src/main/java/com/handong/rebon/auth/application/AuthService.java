@@ -1,7 +1,5 @@
 package com.handong.rebon.auth.application;
 
-import java.util.Locale;
-
 import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
 import com.handong.rebon.auth.application.dto.response.LoginResponseDto;
 import com.handong.rebon.auth.domain.OauthUserInfo;
