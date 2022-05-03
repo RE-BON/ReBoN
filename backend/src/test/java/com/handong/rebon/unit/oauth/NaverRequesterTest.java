@@ -14,7 +14,7 @@ import okhttp3.mockwebserver.MockWebServer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NaverRequesterTest extends ApiRequesterTest{
+public class NaverRequesterTest extends ApiRequesterTest {
 
     private static final String NAVER_TOKEN_RESPONSE = "{\n" +
             "    \"access_token\": \"ACCESS_TOKEN\",\n" +
@@ -28,7 +28,6 @@ public class NaverRequesterTest extends ApiRequesterTest{
             "    \"email\": \"" + TEST_EMAIL + "\" \n" +
             "}\n}";
 
-
     @Test
     @DisplayName("서버에 요청을 보내 authorization code로부터 유저의 정보를 가져온다.")
     void getUserInfoByCode() throws IOException {
@@ -41,7 +40,7 @@ public class NaverRequesterTest extends ApiRequesterTest{
         OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
         ApiRequester apiRequester = new ApiRequester();
         //when
-        OauthUserInfo userInfo = OauthAttributes.extract("naver",apiRequester.getUserInfo("code", oauthProvider));
+        OauthUserInfo userInfo = OauthAttributes.extract("naver", apiRequester.getUserInfo("code", oauthProvider));
         String email = userInfo.getEmail();
 
         //then

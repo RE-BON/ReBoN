@@ -16,7 +16,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class GoogleRequesterTest extends ApiRequesterTest{
+public class GoogleRequesterTest extends ApiRequesterTest {
 
     private static final String ERROR_RESPONSE = "{\n" +
             "   \"error\": \"BAD_REQUEST\",\n" +
@@ -50,7 +50,7 @@ public class GoogleRequesterTest extends ApiRequesterTest{
         OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
         ApiRequester apiRequester = new ApiRequester();
         //when
-        OauthUserInfo userInfo = OauthAttributes.extract("google",apiRequester.getUserInfo("code", oauthProvider));
+        OauthUserInfo userInfo = OauthAttributes.extract("google", apiRequester.getUserInfo("code", oauthProvider));
         String email = userInfo.getEmail();
 
         //then

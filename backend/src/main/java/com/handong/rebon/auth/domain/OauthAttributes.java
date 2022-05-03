@@ -9,16 +9,16 @@ public enum OauthAttributes {
         public OauthUserInfo of(Map<String, Object> attributes) {
             Map<String, Object> response = (Map<String, Object>) attributes.get("response");
             return OauthUserInfo.builder()
-                              .email((String) response.get("email"))
-                              .build();
+                                .email((String) response.get("email"))
+                                .build();
         }
     },
     GOOGLE("google") {
         @Override
         public OauthUserInfo of(Map<String, Object> attributes) {
             return OauthUserInfo.builder()
-                              .email((String) attributes.get("email"))
-                              .build();
+                                .email((String) attributes.get("email"))
+                                .build();
         }
     },
     KAKAO("kakao") {

@@ -42,7 +42,7 @@ public class KakaoRequesterTest extends ApiRequesterTest {
         OauthProvider oauthProvider = makeOauthProvider(mockWebServer);
         ApiRequester apiRequester = new ApiRequester();
         //when
-        OauthUserInfo userInfo = OauthAttributes.extract("kakao",apiRequester.getUserInfo("code", oauthProvider));
+        OauthUserInfo userInfo = OauthAttributes.extract("kakao", apiRequester.getUserInfo("code", oauthProvider));
         String email = userInfo.getEmail();
 
         //then
