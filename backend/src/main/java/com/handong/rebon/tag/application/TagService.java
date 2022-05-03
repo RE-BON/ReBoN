@@ -46,14 +46,20 @@ public class TagService {
     @Transactional(readOnly = true)
     public Tag findById(Long id) {
         return tagRepository.findById(id)
-                            .orElseThrow(NoSuchTagException::new);
+                .orElseThrow(NoSuchTagException::new);
     }
 
     @Transactional(readOnly = true)
     public List<Tag> findAllContainIds(List<Long> tags) {
         return tags.stream()
-                   .map(this::findById)
-                   .collect(Collectors.toList());
+                .map(this::findById)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteTag(Long id) {
+        Tag tag = findById(id);
+        tag.deleteTag();
     }
 }
 

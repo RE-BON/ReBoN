@@ -2,6 +2,7 @@ package com.handong.rebon.shop.domain.tag;
 
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.tag.domain.Tag;
 
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ShopTag {
+public class ShopTag extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +28,9 @@ public class ShopTag {
     public ShopTag(Shop shop, Tag tag) {
         this.shop = shop;
         this.tag = tag;
+    }
+
+    public void deleteShopTag(){
+        this.deleteContent();
     }
 }

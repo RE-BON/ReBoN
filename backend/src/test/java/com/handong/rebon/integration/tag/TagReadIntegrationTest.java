@@ -47,7 +47,7 @@ public class TagReadIntegrationTest extends TagIntegrationTest {
 
         //then
         assertThat(allTags).hasSize(3)
-                           .extracting("name")
-                           .contains("장량", "환호", "환여");
+                .extracting("name")
+                .contains("장량", "환호", "환여");
     }
 }
