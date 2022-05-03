@@ -96,6 +96,20 @@ public class AuthAcceptanceTest extends AcceptanceTest {
         assertThat(responseBody.get("email")).isEqualTo(TEST_EMAIL);
     }
 
+    @Test
+    @DisplayName("지원하지 않는 provider로 요청시 400에러를 반환한다.")
+    void loginByNotSupportedProviderGetBadRequest() {
+        //given
+        String authorizationCode = "test-code";
+
+        //when
+        ExtractableResponse<Response> response = login("github", authorizationCode);
+        Map<String, Object> responseBody = response.body().as(new TypeRef<>() {});
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
     private ExtractableResponse<Response> login(String oauthProvider, String code) {
         return RestAssured
                 .given(super.spec)
