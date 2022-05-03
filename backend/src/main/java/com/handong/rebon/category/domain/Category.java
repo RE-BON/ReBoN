@@ -75,8 +75,8 @@ public class Category extends BaseEntity {
         if (isDeleted()) {
             throw new CategoryAlreadyDeletedException();
         }
-
-        deleteShopCategory(Objects.isNull(this.parent));
+        boolean isParentCategory = Objects.isNull(this.parent);
+        deleteShopCategory(isParentCategory);
 
         this.children.delete();
         deleteContent();

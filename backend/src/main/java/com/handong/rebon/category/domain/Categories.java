@@ -27,6 +27,6 @@ public class Categories {
     }
 
     public void delete(){
-        this.categories.forEach(BaseEntity::deleteContent);
+        this.categories.forEach(Category::delete);
     }
 }

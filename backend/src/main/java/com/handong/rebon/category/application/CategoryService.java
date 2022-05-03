@@ -24,6 +24,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    @Transactional
     public Long create(String categoryName) {
         checkCategoryExist(categoryName);
 
@@ -38,8 +39,7 @@ public class CategoryService {
         if (Objects.isNull(categoryCreateRequestDto.getParentId())) {
             return this.create(categoryCreateRequestDto.getName());
         }
-        Category parent = categoryRepository.findById(categoryCreateRequestDto.getParentId())
-                                            .orElseThrow(CategoryNotFoundException::new);
+        Category parent = this.findById(categoryCreateRequestDto.getParentId());
 
         String categoryName = categoryCreateRequestDto.getName();
 
@@ -59,8 +59,7 @@ public class CategoryService {
 
     @Transactional
     public void delete(CategoryRequestDto categoryRequestDto) {
-        Category category = categoryRepository.findById(categoryRequestDto.getId())
-                                              .orElseThrow(CategoryNotFoundException::new);
+        Category category = this.findById(categoryRequestDto.getId());
         category.delete();
     }
 
