@@ -11,6 +11,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
@@ -40,7 +42,7 @@ public class AuthAcceptanceTest extends AcceptanceTest {
                 .when(
                         request()
                                 .withMethod("POST")
-                                .withPath("/token")
+                                .withPath("/google/token")
                 )
                 .respond(
                         response()
@@ -51,12 +53,70 @@ public class AuthAcceptanceTest extends AcceptanceTest {
                 .when(
                         request()
                                 .withMethod("GET")
-                                .withPath("/user-info")
+                                .withPath("/google/user-info")
                 )
                 .respond(
                         response()
                                 .withHeader(new Header("Content-Type", "application/json"))
                                 .withBody("{\"email\": " + " \"" + TEST_EMAIL + "\"}")
+                );
+        new MockServerClient("localhost", 8888)
+                .when(
+                        request()
+                                .withMethod("POST")
+                                .withPath("/naver/token")
+                )
+                .respond(
+                        response()
+                                .withHeader(new Header("Content-Type", "application/json"))
+                                .withBody("{ \"access_token\": \"test_token\"}")
+                );
+        new MockServerClient("localhost", 8888)
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/naver/user-info")
+                )
+                .respond(
+                        response()
+                                .withHeader(new Header("Content-Type", "application/json"))
+                                .withBody(
+                                        "{ " +
+                                                "\"response\": " +
+                                                "{\n" +
+                                                "    \"id\": \"167302919239299\",\n" +
+                                                "    \"email\": \"" + TEST_EMAIL + "\" \n" +
+                                                "}" +
+                                                "\n}"
+                                )
+                );
+        new MockServerClient("localhost", 8888)
+                .when(
+                        request()
+                                .withMethod("POST")
+                                .withPath("/kakao/token")
+                )
+                .respond(
+                        response()
+                                .withHeader(new Header("Content-Type", "application/json"))
+                                .withBody("{ \"access_token\": \"test_token\"}")
+                );
+        new MockServerClient("localhost", 8888)
+                .when(
+                        request()
+                                .withMethod("GET")
+                                .withPath("/kakao/user-info")
+                )
+                .respond(
+                        response()
+                                .withHeader(new Header("Content-Type", "application/json"))
+                                .withBody(
+                                        "{\n" +
+                                                "    \"id\": \"167302919239299\",\n" +
+                                                "    \"kakao_account\":{\n" +
+                                                "       \"email\": \"" + TEST_EMAIL + "\" \n } \n" +
+                                                "}"
+                                )
                 );
     }
 
@@ -65,30 +125,32 @@ public class AuthAcceptanceTest extends AcceptanceTest {
         mockServer.stop();
     }
 
-    @Test
-    @DisplayName("Google 로그인으로 요청이 오면 토큰을 발급한다.")
-    void loginByGoogleOauth() {
+    @ParameterizedTest
+    @ValueSource(strings = {"google", "kakao", "naver"})
+    @DisplayName("oauth 로그인으로 요청이 오면 토큰을 발급한다.")
+    void loginByOauth(String oauthProvider) {
         //given
         String testNickname = "test";
-        saveMember(new MemberCreateRequest(TEST_EMAIL, testNickname, "GOOGLE", true));
+        saveMember(new MemberCreateRequest(TEST_EMAIL, testNickname, oauthProvider, true));
         String authorizationCode = "test-code";
 
         //when
-        ExtractableResponse<Response> response = login("google", authorizationCode);
+        ExtractableResponse<Response> response = login(oauthProvider, authorizationCode);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.body()).isNotNull();
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"google", "kakao", "naver"})
     @DisplayName("미가입 로그인 요청시 401에러와 email을 반환 받는다")
-    void loginByNotRegisteredMemberGetNotFound() {
+    void loginByNotRegisteredMemberGetNotFound(String oauthProvider) {
         //given
         String authorizationCode = "test-code";
 
         //when
-        ExtractableResponse<Response> response = login("google", authorizationCode);
+        ExtractableResponse<Response> response = login(oauthProvider, authorizationCode);
         Map<String, Object> responseBody = response.body().as(new TypeRef<>() {});
 
         //then
@@ -104,7 +166,6 @@ public class AuthAcceptanceTest extends AcceptanceTest {
 
         //when
         ExtractableResponse<Response> response = login("github", authorizationCode);
-        Map<String, Object> responseBody = response.body().as(new TypeRef<>() {});
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());

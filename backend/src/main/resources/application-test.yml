@@ -33,14 +33,14 @@ oauth2:
       redirect-uri: http://localhost:8080/admin
   provider:
     google:
-      token-uri: http://localhost:8888/token
-      user-info-uri: http://localhost:8888/user-info
+      token-uri: http://localhost:8888/google/token
+      user-info-uri: http://localhost:8888/google/user-info
     naver:
-      token-uri: http://localhost:8888/token
-      user-info-uri: http://localhost:8888/user-info
+      token-uri: http://localhost:8888/naver/token
+      user-info-uri: http://localhost:8888/naver/user-info
     kakao:
-      token-uri: http://localhost:8888/token
-      user-info-uri: http://localhost:8888/user-info
+      token-uri: http://localhost:8888/kakao/token
+      user-info-uri: http://localhost:8888/kakao/user-info
 jwt:
   secret-key: test
   expired-time: 86400000
