@@ -23,8 +23,22 @@ oauth2:
       client-id: test-client-id
       client-secret: test-client-secret
       redirect-uri: http://localhost:8080/admin
+    naver:
+      client-id: test-client-id
+      client-secret: test-client-secret
+      redirect-uri: http://localhost:8080/admin
+    kakao:
+      client-id: test-client-id
+      client-secret: test-client-secret
+      redirect-uri: http://localhost:8080/admin
   provider:
     google:
+      token-uri: http://localhost:8888/token
+      user-info-uri: http://localhost:8888/user-info
+    naver:
+      token-uri: http://localhost:8888/token
+      user-info-uri: http://localhost:8888/user-info
+    kakao:
       token-uri: http://localhost:8888/token
       user-info-uri: http://localhost:8888/user-info
 jwt:
