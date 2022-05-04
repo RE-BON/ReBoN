@@ -47,7 +47,7 @@ public class MemberService {
     @Transactional(readOnly = true)
     public void checkNicknameDuplicate(String nickname) {
         boolean isDuplicated = memberRepository.existsByProfileNickname(nickname);
-        if(isDuplicated) {
+        if (isDuplicated) {
             throw new NicknameDuplicateException();
         }
     }
