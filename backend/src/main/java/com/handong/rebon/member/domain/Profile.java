@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Embeddable
 public class Profile {
-    private String nickName;
+    private String nickname;
     private String image;
     private String email;
 
-    public Profile(String email, String nickName) {
+    public Profile(String email, String nickname) {
         this.email = email;
-        this.nickName = nickName;
+        this.nickname = nickname;
     }
 }

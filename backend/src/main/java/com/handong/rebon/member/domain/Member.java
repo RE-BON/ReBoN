@@ -59,7 +59,7 @@ public class Member extends BaseEntity {
     }
 
     public String getNickName() {
-        return profile.getNickName();
+        return profile.getNickname();
     }
 
 }
