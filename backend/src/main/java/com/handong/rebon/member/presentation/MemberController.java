@@ -24,11 +24,17 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity<MemberCreateResponse> create(@RequestBody MemberCreateRequest memberCreateRequest) {
-
         MemberCreateResponseDto response = memberService.save(MemberAssembler.toMemberCreateDto(memberCreateRequest));
         URI location = URI.create("/api/members/" + response.getMemberId());
 
         return ResponseEntity.created(location)
                              .body(MemberCreateResponse.from(response));
+    }
+
+    @PostMapping("/members/nickname/duplicate") //TODO 어떤 uri가 맞을지 얘기
+    public ResponseEntity<Void> nicknameDuplicateCheck(@RequestBody String nickname) {
+        memberService.checkNicknameDuplicate(nickname);
+        return ResponseEntity.ok()
+                             .build();
     }
 }

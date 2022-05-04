@@ -2,6 +2,7 @@ package com.handong.rebon.member.application;
 
 import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.exception.member.MemberNotFoundException;
+import com.handong.rebon.exception.member.NicknameDuplicateException;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
 import com.handong.rebon.member.domain.Member;
@@ -41,5 +42,13 @@ public class MemberService {
         MemberCreateResponseDto response = new MemberCreateResponseDto(token, memberId);
 
         return response;
+    }
+
+    @Transactional(readOnly = true)
+    public void checkNicknameDuplicate(String nickname) {
+        boolean isDuplicated = memberRepository.existsByProfileNickname(nickname);
+        if(isDuplicated) {
+            throw new NicknameDuplicateException();
+        }
     }
 }
