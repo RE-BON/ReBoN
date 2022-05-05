@@ -3,6 +3,7 @@ package com.handong.rebon.acceptance.auth;
 import java.util.Map;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
+import com.handong.rebon.acceptance.member.MemberCreateAcceptanceTest;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import org.mockserver.client.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.Header;
 
+import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
@@ -131,7 +133,7 @@ public class AuthAcceptanceTest extends AcceptanceTest {
     void loginByOauth(String oauthProvider) {
         //given
         String testNickname = "test";
-        saveMember(new MemberCreateRequest(TEST_EMAIL, testNickname, oauthProvider, true));
+        MemberCreateAcceptanceTest.saveMember(new MemberCreateRequest(TEST_EMAIL, testNickname, oauthProvider, true));
         String authorizationCode = "test-code";
 
         //when
@@ -171,9 +173,9 @@ public class AuthAcceptanceTest extends AcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
-    private ExtractableResponse<Response> login(String oauthProvider, String code) {
+    public static ExtractableResponse<Response> login(String oauthProvider, String code) {
         return RestAssured
-                .given(super.spec)
+                .given(getRequestSpecification())
                 .log().all()
                 .contentType(APPLICATION_JSON_VALUE)
                 .when()
@@ -181,17 +183,5 @@ public class AuthAcceptanceTest extends AcceptanceTest {
                 .then()
                 .log().all()
                 .extract();
-    }
-
-    private ExtractableResponse<Response> saveMember(MemberCreateRequest memberCreateRequest) {
-        return RestAssured.given(super.spec)
-                          .log().all()
-                          .contentType(APPLICATION_JSON_VALUE)
-                          .body(memberCreateRequest)
-                          .when()
-                          .post("/api/members")
-                          .then()
-                          .log().all()
-                          .extract();
     }
 }

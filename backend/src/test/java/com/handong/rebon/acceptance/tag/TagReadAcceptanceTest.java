@@ -21,6 +21,7 @@ import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
+import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TagReadAcceptanceTest extends AcceptanceTest {
@@ -52,7 +53,7 @@ public class TagReadAcceptanceTest extends AcceptanceTest {
     }
 
     private ExtractableResponse<Response> 태그_조회_요청() {
-        return RestAssured.given(super.spec)
+        return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .when()
                           .get("/api/tags")
