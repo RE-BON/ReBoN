@@ -31,7 +31,7 @@ public class MemberController {
                              .body(MemberCreateResponse.from(response));
     }
 
-    @PostMapping("/members/nickname/duplicate") //TODO 어떤 uri가 맞을지 얘기
+    @PostMapping("/members/nickname/check-duplicate")
     public ResponseEntity<Void> nicknameDuplicateCheck(@RequestBody String nickname) {
         memberService.checkNicknameDuplicate(nickname);
         return ResponseEntity.ok()
