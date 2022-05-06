@@ -56,7 +56,7 @@ class ReviewIntegrationTest extends IntegrationTest {
         assertThat(review.getReviewContent().getContent()).isEqualTo(reviewRequest.getContent());
         assertThat(review.getReviewContent().getTip()).isEqualTo(reviewRequest.getTip());
         assertThat(review.getReviewScore().getStar()).isEqualTo(reviewRequest.getStar());
-        assertThat(review.getMember().getProfile().getNickName()).isEqualTo(member.getProfile().getNickName());
+        assertThat(review.getMember().getProfile().getNickname()).isEqualTo(member.getProfile().getNickname());
         assertThat(review.getShop().getShopContent().getName()).isEqualTo(shop.getShopContent().getName());
 
     }

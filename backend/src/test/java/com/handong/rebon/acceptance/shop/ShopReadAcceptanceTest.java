@@ -27,6 +27,7 @@ import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
+import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -169,7 +170,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     }
 
     private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
-        return RestAssured.given(super.spec)
+        return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)
                           .queryParam("tag", tag)
@@ -183,7 +184,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
     }
 
     private ExtractableResponse<Response> 단일_가게_조회_요청(Long shopId) {
-        return RestAssured.given(super.spec)
+        return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)
                           .pathParam("id", shopId)
