@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
+import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.exception.tag.TagNameException;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 
@@ -42,14 +43,14 @@ public class Tag extends BaseEntity {
         }
     }
 
-    public void deleteTag() {
+    public void delete() {
         deleteShopTag();
-        deleteContent();
+        this.deleteContent();
     }
 
-    public void deleteShopTag() {
+    public void deleteShopTag(){
         this.shopTags.forEach(shopTag -> {
-            shopTag.deleteShopTag();
+            shopTag.delete();
         });
     }
 }

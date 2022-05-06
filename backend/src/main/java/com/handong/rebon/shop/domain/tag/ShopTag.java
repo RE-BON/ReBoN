@@ -3,16 +3,19 @@ package com.handong.rebon.shop.domain.tag;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
+import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.tag.domain.Tag;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Where(clause = "deleted = false")
 public class ShopTag extends BaseEntity {
 
     @Id
@@ -30,7 +33,10 @@ public class ShopTag extends BaseEntity {
         this.tag = tag;
     }
 
-    public void deleteShopTag(){
+    public void delete(){
+        if (this.getShop().getShopTags().size() == 1) {
+            throw new ShopTagNumberException();
+        }
         this.deleteContent();
     }
 }
