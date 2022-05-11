@@ -15,6 +15,7 @@ import com.handong.rebon.shop.domain.type.Lodging;
 import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
+import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -25,8 +26,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component
 public class TempDataInitializer implements ApplicationRunner {
-
     private final TagRepository tagRepository;
+    private final TagSearchRepository tagSearchRepository;
     private final CategoryRepository categoryRepository;
     private final ShopRepository shopRepository;
 
@@ -52,6 +53,7 @@ public class TempDataInitializer implements ApplicationRunner {
         this.tags.put(영일대.getName(), 영일대);
 
         tagRepository.saveAll(tags.values());
+        tagSearchRepository.saveAll(tags.values());
     }
 
     private void initCategories() {

@@ -8,16 +8,19 @@ import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.tag.TagNameException;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Document(indexName = "tags")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Tag extends BaseEntity {
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
