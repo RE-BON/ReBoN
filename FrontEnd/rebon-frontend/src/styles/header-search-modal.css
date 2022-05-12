@@ -61,10 +61,10 @@ button {
   border: 0;
 }
 
-.header-modal-wrapper .tag-list {
+.header-modal-wrapper .header-tag-list {
   font-size: 15px;
   padding: 0 5px;
-  margin-top: 60px;
+  margin-top: 37px;
 }
 
 .header-tag-list div {
