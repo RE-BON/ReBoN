@@ -8,6 +8,10 @@
   color: rgba(0, 0, 0, 0.4);
 }
 
+.search-bar-wrapper img {
+  width: 24px;
+}
+
 .search-bar-wrapper .search {
   color: rgba(0, 0, 0, 0.8);
 }

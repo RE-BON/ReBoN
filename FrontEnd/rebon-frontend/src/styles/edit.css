@@ -55,7 +55,7 @@
 }
 
 .name-input {
-  width: 100%;
+  width: 78%;
   margin-left: 5px;
   padding: 3%;
   background-color: transparent;
@@ -69,11 +69,11 @@
 }
 
 .name-button {
-  padding: 0 5px;
-  background-color: #c4c4c4;
-  border-radius: 50%;
-  margin-right: 3%;
-  font-size: 9px;
+  padding: 3px;
+  background-color: #ffeeee;
+  color: #ff6b6c;
+  border-radius: 7px;
+  margin-right: 1%;
   font-weight: bold;
 }
 

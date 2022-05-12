@@ -36,15 +36,13 @@ export default function Edit() {
         <div className="edit-info-title">닉네임</div>
         <div className="edit-info-name">
           <input className="name-input" value={name} placeholder="한글로 공백없이 입력해주세요." onChange={onChangeName}></input>
-          <div className="name-button">
-            <FontAwesomeIcon
-              icon={faXmark}
-              onClick={() => {
-                setName('');
-              }}
-              size="1x"
-              color="white"
-            />
+          <div
+            className="name-button"
+            onClick={() => {
+              setName('');
+            }}
+          >
+            중복확인
           </div>
         </div>
 

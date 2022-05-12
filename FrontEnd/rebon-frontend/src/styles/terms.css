@@ -1,0 +1,116 @@
+.terms-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  margin: auto;
+  background-color: #f5f5f5;
+}
+
+.terms-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.termsBox {
+  background-color: white;
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.terms-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 40px;
+}
+
+.nickname-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.nickname-input {
+  width: 100%;
+  margin-left: 5px;
+  padding: 3%;
+  background-color: transparent;
+  border: 0;
+}
+
+.nickname-btn {
+  width: 30%;
+  padding: 1.5% 1%;
+  background-color: #ffeeee;
+  color: #ff6b6c;
+  border-radius: 5px;
+  margin-right: 2%;
+  font-size: 7px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.nickname-count {
+  text-align: end;
+  font-size: 10px;
+  margin-right: 2%;
+  margin-top: 2%;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.agreement-contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*시작하기 버튼*/
+.terms-btn {
+  background-color: #b3b3b3;
+  color: white;
+  width: 200px;
+  height: 52.48px;
+  border-radius: 0;
+  margin-top: 30px;
+  margin-left: 0;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.terms-btn:hover {
+  background-color: #ff6b6c;
+}
+
+/* checkBox 버튼*/
+.agreement-select {
+  display: flex;
+  align-items: center;
+}
+.agreement-select input[type='checkbox'] {
+  display: none;
+}
+.agreement-select input[type='checkbox'] + label {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 17px;
+  width: 17px;
+  display: flex;
+  align-items: center;
+  padding: 0 1%;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: white;
+  color: white;
+  margin-right: 10px;
+}
+.agreement-select input[type='checkbox']:checked + label {
+  background-color: #ff6b6c;
+  color: #fff;
+}
