@@ -4,11 +4,8 @@ import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,9 +20,11 @@ import lombok.NoArgsConstructor;
 public abstract class BaseEntity {
 
     @CreatedDate
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime updatedAt;
 
     private boolean deleted = Boolean.FALSE;
