@@ -22,7 +22,12 @@ public class MemberCreateAcceptanceTest extends AcceptanceTest {
     @DisplayName("회원 가입을 한다.")
     void saveMember() {
         //given
-        MemberCreateRequest memberCreateRequest = new MemberCreateRequest("test@gmail.com", "test", "google", true);
+        MemberCreateRequest memberCreateRequest = new MemberCreateRequest(
+                TEST_EMAIL,
+                TEST_NICKNAME,
+                TEST_OAUTH_PROVIDER,
+                true
+        );
 
         //when
         ExtractableResponse<Response> response = saveMember(memberCreateRequest);
