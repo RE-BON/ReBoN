@@ -1,13 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/terms-modal.css';
 
-export default function privacyModal() {
+export default function PrivacyModal() {
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="terms-modal-wrapper">
       <div className="terms-modal-box">
         <div className="terms-modal-title">
-          <FontAwesomeIcon icon={faAngleLeft} size="1x" />
+          <FontAwesomeIcon icon={faAngleLeft} onClick={goBack} size="1x" />
           서비스 이용약관
           <FontAwesomeIcon icon={faXmark} size="1x" />
         </div>

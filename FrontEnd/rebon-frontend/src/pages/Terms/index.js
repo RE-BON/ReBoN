@@ -39,10 +39,10 @@ export default function Terms() {
             <div className="agreement-select">
               <input type="checkbox" id="agreement-select1" name="marcketing" />
               <label for="agreement-select1">
-                <FontAwesomeIcon icon={faCheck} />
+                <FontAwesomeIcon />
               </label>
               서비스 이용약관(필수)
-              <Link to="/termsModal" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link to="/termsModal" style={{ marginLeft: '1em', color: 'inherit', textDecoration: 'none' }}>
                 <IoIosArrowForward />
               </Link>
             </div>
@@ -64,7 +64,7 @@ export default function Terms() {
                 <FontAwesomeIcon icon={faCheck} />
               </label>
               마케팅 수신동의(선택)
-              <Link to="/termsModal" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link to="/termsModal" style={{ marginLeft: '1em', color: 'inherit', textDecoration: 'none' }}>
                 <IoIosArrowForward />
               </Link>
             </div>
