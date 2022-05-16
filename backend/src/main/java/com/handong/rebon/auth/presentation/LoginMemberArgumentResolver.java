@@ -1,4 +1,4 @@
-package com.handong.rebon.auth.infrastructure;
+package com.handong.rebon.auth.presentation;
 
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +8,7 @@ import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.util.AuthorizationExtractor;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -15,6 +16,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import lombok.RequiredArgsConstructor;
 
+@Component
 @RequiredArgsConstructor
 public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolver {
     private final AuthService authService;
