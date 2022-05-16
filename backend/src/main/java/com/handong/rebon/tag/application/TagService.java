@@ -10,6 +10,7 @@ import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 import com.handong.rebon.tag.domain.repository.TagSearchRepository;
+import com.handong.rebon.util.StringUtil;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -60,7 +61,7 @@ public class TagService {
 
     @Transactional(readOnly = true)
     public List<TagResponseDto> searchByKeyword(String keyword, Pageable pageable) {
-        return tagSearchRepository.searchByKeyword(keyword, pageable)
+        return tagSearchRepository.searchByKeyword(StringUtil.trim(keyword), pageable)
                                   .stream()
                                   .map(TagResponseDto::from)
                                   .collect(Collectors.toList());

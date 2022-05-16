@@ -12,4 +12,8 @@ public class StringUtil {
         stringbuilder.append("%");
         return stringbuilder.toString();
     }
+
+    public static String trim(String keyword) {
+        return keyword.strip();
+    }
 }
