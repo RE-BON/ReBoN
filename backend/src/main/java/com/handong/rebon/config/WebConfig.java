@@ -2,9 +2,8 @@ package com.handong.rebon.config;
 
 import java.util.List;
 
-import com.handong.rebon.auth.application.AuthService;
-import com.handong.rebon.auth.infrastructure.LoginInterceptor;
-import com.handong.rebon.auth.infrastructure.LoginMemberArgumentResolver;
+import com.handong.rebon.auth.presentation.LoginInterceptor;
+import com.handong.rebon.auth.presentation.LoginMemberArgumentResolver;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -17,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
-    private final AuthService authService;
+    private final LoginMemberArgumentResolver loginMemberArgumentResolver;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -26,6 +25,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new LoginMemberArgumentResolver(authService));
+        resolvers.add(loginMemberArgumentResolver);
     }
 }
