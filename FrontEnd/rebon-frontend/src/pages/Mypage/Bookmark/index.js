@@ -42,7 +42,7 @@ export default function Bookmark() {
     setValue(newValue);
   };
   return (
-    <>
+    <div className="bookmark-container">
       <div className="bookmark-title">찜목록</div>
       <div className="bookmark-wrapper">
         <Box sx={{ width: '100%' }}>
@@ -108,6 +108,6 @@ export default function Bookmark() {
           </TabPanel>
         </Box>
       </div>
-    </>
+    </div>
   );
 }

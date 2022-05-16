@@ -4,7 +4,7 @@ import '../../../styles/footprint.css';
 
 export default function Footprint() {
   return (
-    <>
+    <div className="footprint-container">
       <div className="footprint-title">발자국</div>
       <div className="footprint-wrapper">
         <div className="footprint-content">
@@ -53,6 +53,6 @@ export default function Footprint() {
         </div>
         <div className="footprint-light-hr" />
       </div>
-    </>
+    </div>
   );
 }

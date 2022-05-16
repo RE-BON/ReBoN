@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 import '../../../../styles/footprint-modal.css';
 
 export default function FootprintModal() {
@@ -37,6 +38,26 @@ export default function FootprintModal() {
   transition : all 0.3s ease-in-out;
   `;
 
+  // const DeleteModal = Modal.styled`
+  // width: 23rem;
+  // height: 30rem;
+  // padding : 20px;
+  // border-radius:20px;
+  // background-color: white;
+  // opacity: ${(props) => props.opacity};
+  // transition : all 0.3s ease-in-out;
+  // `;
+
+  // const ConfilrmModal = Modal.styled`
+  // width: 23rem;
+  // height: 10rem;
+  // padding : 20px;
+  // border-radius:20px;
+  // background-color: white;
+  // opacity: ${(props) => props.opacity};
+  // transition : all 0.3s ease-in-out;
+  // `;
+
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;
@@ -65,6 +86,7 @@ export default function FootprintModal() {
               </button>
               삭제하기
             </div>
+
             <div className="footprint-modal-close">
               <button onClick={toggleModal}>
                 <FontAwesomeIcon icon={faXmark} />
