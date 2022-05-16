@@ -16,7 +16,7 @@ export default function Edit() {
   };
 
   return (
-    <div>
+    <div className="edit-container">
       <div className="edit-title">
         <div>회원정보 수정</div>
       </div>
