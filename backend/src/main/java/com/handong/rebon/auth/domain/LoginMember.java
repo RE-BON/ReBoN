@@ -6,5 +6,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class LoginMember {
-    Long id;
+    private Long id;
 }
