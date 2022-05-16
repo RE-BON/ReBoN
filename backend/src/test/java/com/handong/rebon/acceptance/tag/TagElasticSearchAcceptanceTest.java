@@ -90,7 +90,7 @@ public class TagElasticSearchAcceptanceTest {
     @DisplayName("자동완성 - 해당 문자를 포함하는 글자를 포함하는 태그 목록 반환하기")
     void autoComplete() {
         // given
-        String keyword = "ㅎ";
+        String keyword = "ㄱㅜ";
 
         // when
         ExtractableResponse<Response> response = 자동완성_요청(keyword);
