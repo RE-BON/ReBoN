@@ -85,16 +85,16 @@ public abstract class Shop extends BaseEntity {
             throw new ShopTagNumberException();
         }
         List<ShopTag> shopTags = tags.stream()
-                                     .map(tag -> new ShopTag(this, tag))
-                                     .collect(Collectors.toList());
+                .map(tag -> new ShopTag(this, tag))
+                .collect(Collectors.toList());
         this.shopTags.addAll(shopTags);
     }
 
     public void addCategories(Category parent, List<Category> subCategories) {
         this.category = parent;
         List<ShopCategory> shopCategories = subCategories.stream()
-                                                         .map(category -> new ShopCategory(this, category))
-                                                         .collect(Collectors.toList());
+                .map(category -> new ShopCategory(this, category))
+                .collect(Collectors.toList());
 
         this.shopCategories.addAll(shopCategories);
     }
@@ -109,5 +109,11 @@ public abstract class Shop extends BaseEntity {
 
     public double getStar() {
         return shopScore.getStar();
+    }
+
+    public void deleteShopTag() {
+        if(this.shopTags.size() == 1){
+            throw new ShopTagNumberException();
+        }
     }
 }

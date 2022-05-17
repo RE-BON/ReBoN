@@ -7,9 +7,12 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.tag.domain.Tag;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import javax.persistence.EntityManager;
@@ -92,7 +95,7 @@ public class TagDeleteIntegrationTest extends TagIntegrationTest {
 
         //given
         Tag createdTag = createTag("창포");
-        List<Tag> createdShopTags = Arrays.asList(createdTag);
+        List<Tag> createdShopTags = List.of(createdTag);
 
         ShopContent content = ShopContent.builder()
                                          .name("팜스발리")
@@ -110,7 +113,8 @@ public class TagDeleteIntegrationTest extends TagIntegrationTest {
         entityManager.clear();
 
         //when
-        ShopTagNumberException exception = assertThrows(ShopTagNumberException.class, () -> tagService.delete(createdTag.getId()));
+        ShopTagNumberException exception = assertThrows(ShopTagNumberException.class, () -> tagService.delete(createdTag
+                .getId()));
 
         //then
         assertThat(exception.getMessage()).isEqualTo("하나 이상의 태그가 필요합니다.");

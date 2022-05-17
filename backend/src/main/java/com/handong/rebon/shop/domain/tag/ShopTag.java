@@ -3,7 +3,6 @@ package com.handong.rebon.shop.domain.tag;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
-import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.tag.domain.Tag;
 
@@ -33,10 +32,8 @@ public class ShopTag extends BaseEntity {
         this.tag = tag;
     }
 
-    public void delete(){
-        if (this.getShop().getShopTags().size() == 1) {
-            throw new ShopTagNumberException();
-        }
+    public void delete() {
+        this.shop.deleteShopTag();
         this.deleteContent();
     }
 }
