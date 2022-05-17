@@ -61,7 +61,7 @@ public class TagService {
 
     @Transactional(readOnly = true)
     public List<TagResponseDto> searchByKeyword(String keyword, Pageable pageable) {
-        return tagSearchRepository.searchByKeyword(StringUtil.trim(keyword), pageable)
+        return tagSearchRepository.searchByKeyword(keyword.strip(), pageable)
                                   .stream()
                                   .map(TagResponseDto::from)
                                   .collect(Collectors.toList());
