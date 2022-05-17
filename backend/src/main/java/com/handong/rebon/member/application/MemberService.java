@@ -37,7 +37,7 @@ public class MemberService {
         Member savedMember = memberRepository.save(member);
         Long memberId = savedMember.getId();
 
-        String token = jwtProvider.createToken(memberId);
+        String token = jwtProvider.createToken(String.valueOf(memberId));
 
         MemberCreateResponseDto response = new MemberCreateResponseDto(token, memberId);
 

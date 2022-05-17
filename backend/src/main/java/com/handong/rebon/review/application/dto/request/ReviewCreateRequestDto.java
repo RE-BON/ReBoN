@@ -7,11 +7,13 @@ import com.handong.rebon.review.domain.content.ReviewScore;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@AllArgsConstructor
 public class ReviewCreateRequestDto {
     private Long memberId;
     private Long shopId;
