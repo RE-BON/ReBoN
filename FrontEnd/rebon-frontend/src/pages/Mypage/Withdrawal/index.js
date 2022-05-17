@@ -11,9 +11,9 @@ export default function Withdrawal() {
   };
 
   return (
-    <>
+    <div className="withdrawal-container">
       <div className="title">회원탈퇴</div>
-      <div className="withdrawal-Wrapper">
+      <div className="withdrawal-wrapper">
         <div className="withdrawal-notice">회원탈퇴 유의사항</div>
         <div className="withdrawal-notice-describe">
           지금까지 ReBoN을 이용해주셔서 대단히 감사합니다. 회원 탈퇴를 위해 아래 사항을 확인해주시기 바랍니다.
@@ -34,6 +34,6 @@ export default function Withdrawal() {
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }

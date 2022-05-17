@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 import SearchBar from './SearchBar';
 import '../../../styles/header-search-modal.css';
 
@@ -51,8 +49,8 @@ export default function SearchModal() {
         <div className="header-modal-wrapper">
           <div className="header-modal-wrapper-search">
             <div className="header-search-bar-wrapper">
-              <FontAwesomeIcon icon={faSearch} className="search" />
-              <input placeholder="가고 싶은 지역을 입력해주세요" />
+              <img src="../../../../image/search-icon.png" alt="header-search-icon" />
+              <input placeholder="가고 싶은 지역을 입력해주세요." />
             </div>
           </div>
 
@@ -63,17 +61,9 @@ export default function SearchModal() {
           </ul>
 
           <ul className="header-tag-list">
-            <hr />
-            <div>추천 태그</div>
+            <div>추천 태그로 검색해보세요.</div>
             <li> 영일대</li>
             <li>양덕</li>
-            <li>구룡포</li>
-            <li>칠포해수욕장</li>
-            <li>영일대</li>
-            <li>양덕</li>
-            <li>구룡포</li>
-            <li>칠포해수욕장</li>
-
             <li>구룡포</li>
             <li>칠포해수욕장</li>
           </ul>
@@ -84,8 +74,10 @@ export default function SearchModal() {
 }
 
 const StyledModal = Modal.styled`
+position:absolute;
+top: -1%;
   width: 100%;
-  height: 28rem;
+  height: 24rem;
   padding : 1% 20%;
   border-radius:20px;
   background-color: white;

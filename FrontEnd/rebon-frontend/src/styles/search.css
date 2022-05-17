@@ -18,7 +18,7 @@
   font-weight: bold;
   font-size: 150%;
   line-height: 1.2em;
-  margin-bottom: 10%;
+  margin-bottom: 8%;
   border: none;
 }
 
@@ -29,8 +29,8 @@
 
 .search-content .input-bar {
   width: 95%;
-  height: 20%;
-  margin-bottom: 10%;
+  padding: 1em 0;
+  margin-bottom: 8%;
   border-radius: 50px;
   border: 1px solid #c4c4c4;
 }

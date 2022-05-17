@@ -1,4 +1,4 @@
-.modal-wrapper {
+.post-modal-wrapper {
   text-align: center;
   padding: 0 3%;
 }
@@ -13,11 +13,12 @@
   font-size: 25px;
 }
 
-.modal-image {
-  margin: -50px auto;
+.post-modal-image {
+  margin-top: -2%;
   width: 110px;
 }
 
-.modal-notice {
+.post-modal-notice {
+  margin-top: 5%;
   color: black;
 }

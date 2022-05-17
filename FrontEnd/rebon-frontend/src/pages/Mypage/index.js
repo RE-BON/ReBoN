@@ -17,7 +17,6 @@ import '../../styles/mypage.css';
 
 export default function Mypage() {
   const userName = localStorage.getItem('userName');
-
   const [clickedTab, setClickedTab] = useState(1);
 
   return (
@@ -79,7 +78,7 @@ export default function Mypage() {
                 <LogoutModal />
               </div>
               <Link to="withdrawal" onClick={() => setClickedTab(4)} style={{ color: 'inherit', textDecoration: 'none' }}>
-                <div className={clickedTab === 4 ? 'tab-click-active' : 'tab-click-stay'}>회원탈퇴</div>
+                <div>회원탈퇴</div>
               </Link>
             </Row>
           </div>
