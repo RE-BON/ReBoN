@@ -33,7 +33,7 @@ public class ShopTag extends BaseEntity {
     }
 
     public void delete() {
-        this.shop.deleteShopTag();
+        this.shop.validateOnlyShopTag();
         this.deleteContent();
     }
 }

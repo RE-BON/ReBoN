@@ -111,7 +111,7 @@ public abstract class Shop extends BaseEntity {
         return shopScore.getStar();
     }
 
-    public void deleteShopTag() {
+    public void validateOnlyShopTag() {
         if (this.shopTags.size() == 1) {
             throw new ShopTagNumberException();
         }
