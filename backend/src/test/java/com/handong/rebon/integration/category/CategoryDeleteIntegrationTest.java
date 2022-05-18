@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
@@ -70,6 +69,8 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         entityManager.flush();
         entityManager.clear();
         //then
+
+
         assertThatThrownBy(() -> categoryService.findById(parent.getId()))
                 .isInstanceOf(CategoryNotFoundException.class);
         assertThatThrownBy(() -> categoryService.findById(child.getId()))
@@ -89,7 +90,7 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
 
         //when, then
         assertThatThrownBy(() -> categoryService.delete(requestDto))
-                .isInstanceOf(CategoryAlreadyDeletedException.class);
+                .isInstanceOf(CategoryNotFoundException.class);
 
     }
 
