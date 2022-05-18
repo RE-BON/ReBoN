@@ -29,13 +29,6 @@ public class ShopCategory extends BaseEntity {
         this.category = category;
     }
 
-    public void delete(boolean isRootCategory) {
-        this.deleteContent();
-        if (isRootCategory) {
-            this.shop.delete();
-        }
-    }
-
     public void addCategory() {
         this.category.addShopCategory(this);
     }

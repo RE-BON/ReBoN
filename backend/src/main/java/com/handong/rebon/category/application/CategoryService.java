@@ -12,6 +12,8 @@ import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
+import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ShopRepository shopRepository;
 
     @Transactional
     public Long create(String categoryName) {
@@ -59,7 +62,14 @@ public class CategoryService {
 
     @Transactional
     public void delete(CategoryRequestDto categoryRequestDto) {
-        Category category = this.findById(categoryRequestDto.getId());
+        Category category = categoryRepository.findCategoryWithChildren(categoryRequestDto.getId())
+                                              .orElseThrow(CategoryNotFoundException::new);
+        if (category.isParentCategory()) {
+            List<Shop> shops = shopRepository.findShopsByCategoryId(category.getId());
+            shopRepository.deleteAll(shops);
+            // ToDo 좋은 성능을 위해 deleteAllInBatch 를 사용하고 싶지만 참조무결성 오류 발생
+            // shopRepository.deleteAllInBatch(shops);
+        }
         category.delete();
     }
 
