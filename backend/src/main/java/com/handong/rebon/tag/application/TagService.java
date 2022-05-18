@@ -55,5 +55,11 @@ public class TagService {
                    .map(this::findById)
                    .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Tag tag = findById(id);
+        tag.delete();
+    }
 }
 
