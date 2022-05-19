@@ -25,7 +25,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static com.handong.rebon.acceptance.AcceptanceUtils.setRequestSpecification;
-import static com.handong.rebon.acceptance.member.MemberCreateAcceptanceTest.saveMember;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
