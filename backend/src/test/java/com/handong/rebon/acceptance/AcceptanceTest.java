@@ -34,6 +34,11 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 public class AcceptanceTest {
 
+    public static final String TEST_EMAIL = "handong@gmail.com";
+    public static final String TEST_OAUTH_PROVIDER = "google";
+    public static final String TEST_CODE = "test-code";
+    public static final String TEST_NICKNAME = "test";
+
     @LocalServerPort
     private int port;
 

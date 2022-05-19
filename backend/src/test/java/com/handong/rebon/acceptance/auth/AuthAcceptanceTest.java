@@ -32,8 +32,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class AuthAcceptanceTest extends AcceptanceTest {
 
-    public static final String TEST_EMAIL = "handong@gmail.com";
-
     private ClientAndServer mockServer;
 
     @BeforeEach
@@ -132,12 +130,16 @@ public class AuthAcceptanceTest extends AcceptanceTest {
     @DisplayName("oauth 로그인으로 요청이 오면 토큰을 발급한다.")
     void loginByOauth(String oauthProvider) {
         //given
-        String testNickname = "test";
-        MemberCreateAcceptanceTest.saveMember(new MemberCreateRequest(TEST_EMAIL, testNickname, oauthProvider, true));
-        String authorizationCode = "test-code";
+        MemberCreateAcceptanceTest.saveMember(
+                new MemberCreateRequest(
+                        TEST_EMAIL,
+                        TEST_NICKNAME,
+                        oauthProvider,
+                        true
+                ));
 
         //when
-        ExtractableResponse<Response> response = login(oauthProvider, authorizationCode);
+        ExtractableResponse<Response> response = login(oauthProvider);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
@@ -149,10 +151,8 @@ public class AuthAcceptanceTest extends AcceptanceTest {
     @DisplayName("미가입 로그인 요청시 401에러와 email을 반환 받는다")
     void loginByNotRegisteredMemberGetNotFound(String oauthProvider) {
         //given
-        String authorizationCode = "test-code";
-
         //when
-        ExtractableResponse<Response> response = login(oauthProvider, authorizationCode);
+        ExtractableResponse<Response> response = login(oauthProvider);
         Map<String, Object> responseBody = response.body().as(new TypeRef<>() {});
 
         //then
@@ -164,22 +164,20 @@ public class AuthAcceptanceTest extends AcceptanceTest {
     @DisplayName("지원하지 않는 provider로 요청시 400에러를 반환한다.")
     void loginByNotSupportedProviderGetBadRequest() {
         //given
-        String authorizationCode = "test-code";
-
         //when
-        ExtractableResponse<Response> response = login("github", authorizationCode);
+        ExtractableResponse<Response> response = login("github");
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
-    public static ExtractableResponse<Response> login(String oauthProvider, String code) {
+    public static ExtractableResponse<Response> login(String oauthProvider) {
         return RestAssured
                 .given(getRequestSpecification())
                 .log().all()
                 .contentType(APPLICATION_JSON_VALUE)
                 .when()
-                .get("/api/auth/" + oauthProvider + "/login/token?code=" + code)
+                .get("/api/auth/" + oauthProvider + "/login/token?code=" + TEST_CODE)
                 .then()
                 .log().all()
                 .extract();

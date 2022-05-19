@@ -44,12 +44,12 @@ export default function PostModal() {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <div className="modal-wrapper">
+        <div className="post-modal-wrapper">
           <button className="close" onClick={toggleModal}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          <img className="modal-image" alt="review-image" src="image/reviewLogo.png" />
-          <div className="modal-notice">리뷰가 등록되었습니다.</div>
+          <img className="post-modal-image" alt="review-image" src="image/reviewLogo.png" />
+          <div className="post-modal-notice">리뷰가 등록되었습니다.</div>
         </div>
       </StyledModal>
     </ModalProvider>

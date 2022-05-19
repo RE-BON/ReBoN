@@ -16,6 +16,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 @Document(indexName = "tags")
 @Setting(settingPath = "/elasticsearch/settings/settings.json")
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Where(clause = "deleted = false")
 public class Tag extends BaseEntity {
 
     @Id
@@ -45,5 +47,14 @@ public class Tag extends BaseEntity {
         if (name.isBlank()) {
             throw new TagNameException();
         }
+    }
+
+    public void delete() {
+        deleteShopTag();
+        this.deleteContent();
+    }
+
+    public void deleteShopTag() {
+        this.shopTags.forEach(ShopTag::delete);
     }
 }

@@ -10,7 +10,6 @@ import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 import com.handong.rebon.tag.domain.repository.TagSearchRepository;
-import com.handong.rebon.util.StringUtil;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -57,6 +56,12 @@ public class TagService {
         return tags.stream()
                    .map(this::findById)
                    .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Tag tag = findById(id);
+        tag.delete();
     }
 
     @Transactional(readOnly = true)
