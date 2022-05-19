@@ -184,4 +184,35 @@ include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-request.adoc[]
 include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-response.adoc[]
 
 == Review API
-`구현 후 추가 예정`
+=== 리뷰 생성 로그인이 된 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| shopId | Long | true | Path variable로 리뷰 쓰는 가게 보내주기
+| content | String | true | 리뷰 내용
+| tip | String | false | 팁 내용
+| star | int | true | 리뷰 점수
+| images | List<MultipartFile> | false | 리뷰 사진들
+|===
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-response.adoc[]
+
+=== 리뷰 생성 로그인이 되지 않은 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| shopId | Long | true | Path variable로 리뷰 쓰는 가게 보내주기
+| content | String | true | 리뷰 내용
+| tip | String | false | 팁 내용
+| star | int | true | 리뷰 점수
+| images | List<MultipartFile> | false | 리뷰 사진들
+|===
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-response.adoc[]
