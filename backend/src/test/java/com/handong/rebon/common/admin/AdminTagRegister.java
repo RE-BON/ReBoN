@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
+import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,12 +21,16 @@ public class AdminTagRegister {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private TagSearchRepository tagSearchRepository;
+
     public Map<String, Tag> register(String... names) {
         List<Tag> tags = new ArrayList<>();
         for (String name : names) {
             tags.add(new Tag(name));
         }
         tagRepository.saveAll(tags);
+        tagSearchRepository.saveAll(tags);
         return tags.stream()
                    .collect(Collectors.toMap(Tag::getName, Function.identity()));
     }
