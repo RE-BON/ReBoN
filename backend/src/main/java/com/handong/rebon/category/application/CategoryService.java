@@ -67,8 +67,6 @@ public class CategoryService {
         if (category.isParentCategory()) {
             List<Shop> shops = shopRepository.findShopsByCategoryId(category.getId());
             shopRepository.deleteAll(shops);
-            // ToDo 좋은 성능을 위해 deleteAllInBatch 를 사용하고 싶지만 참조무결성 오류 발생
-            // shopRepository.deleteAllInBatch(shops);
         }
         category.delete();
     }

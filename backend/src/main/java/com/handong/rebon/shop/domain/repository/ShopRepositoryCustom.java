@@ -8,4 +8,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface ShopRepositoryCustom {
     Page<Shop> searchShopByConditionApplyPage(ShopSearchCondition condition, Pageable pageable);
+
 }

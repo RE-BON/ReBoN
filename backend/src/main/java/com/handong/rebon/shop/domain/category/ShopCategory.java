@@ -8,10 +8,12 @@ import com.handong.rebon.shop.domain.Shop;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@SQLDelete(sql = "UPDATE shop_category SET deleted = true WHERE id = ?")
 public class ShopCategory extends BaseEntity {
 
     @Id

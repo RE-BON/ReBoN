@@ -15,6 +15,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
@@ -22,6 +23,7 @@ import org.hibernate.annotations.Where;
 @AllArgsConstructor
 @Getter
 @Where(clause = "deleted=false")
+@SQLDelete(sql = "UPDATE category SET deleted = true WHERE id = ?")
 public class Category extends BaseEntity {
 
     @Id
