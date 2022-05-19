@@ -19,7 +19,6 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final JwtProvider jwtProvider;
 
-    //Review 메서드가 잘 돌아가는지 확인을 위해 임시로 만든 메서드
     @Transactional(readOnly = true)
     public Member findById(Long id) {
         return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);

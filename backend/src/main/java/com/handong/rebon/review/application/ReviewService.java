@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
+import com.handong.rebon.exception.shop.NoSuchShopException;
 import com.handong.rebon.exception.shop.ShopNotFoundException;
-import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
@@ -37,17 +37,13 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
-    private final MemberService memberService;
     private final ReviewImageRepository reviewImageRepository;
     private final MemberRepository memberRepository;
 
     @Transactional
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
-        //TODO 멤버 찾아오기
-        Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
-
-        //TODO shop 찾아오기
-        Shop shop = shopRepository.findById(reviewCreateRequestDto.getShopId()).orElseThrow();
+        Member member = getMember(reviewCreateRequestDto.getMemberId());
+        Shop shop = getShop(reviewCreateRequestDto.getShopId());
 
         //TODO 이미지 저장
         ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImages());
@@ -65,14 +61,13 @@ public class ReviewService {
         return savedReview.getId();
     }
 
-
     @Transactional
     public void delete(ReviewDeleteRequestDto reviewDeleteRequestDto) {
         Long reviewId = reviewDeleteRequestDto.getReviewId();
         Long memberId = reviewDeleteRequestDto.getMemberId();
 
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
-        Member member = memberService.findById(memberId);
+        Member member = getMember(memberId);
 
         review.delete(member);
     }
@@ -140,6 +135,16 @@ public class ReviewService {
         reviewImageRepository.save(url2);
 
         return new ReviewImages(Arrays.asList(url1, url2));
+    }
+
+    private Member getMember(Long memberId) {
+        return memberRepository.findById(memberId)
+                               .orElseThrow(MemberNotFoundException::new);
+    }
+
+    private Shop getShop(Long shopId) {
+        return shopRepository.findById(shopId)
+                             .orElseThrow(NoSuchShopException::new);
     }
 
 }
