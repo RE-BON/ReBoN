@@ -1,5 +1,6 @@
 package com.handong.rebon.controller.auth;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -104,7 +105,7 @@ public class AuthorizationInterceptorTest extends ControllerTest {
     }
 
     private void saveReview(Long memberId, Shop shop) {
-        ReviewCreateRequestDto reviewCreateRequestDto = new ReviewCreateRequestDto(memberId, shop.getId(), "테스트 컨텐트", "테스트 팁", null, 4);
+        ReviewCreateRequestDto reviewCreateRequestDto = new ReviewCreateRequestDto(memberId, shop.getId(), "테스트 컨텐트", "테스트 팁", new ArrayList<>(), 4);
         reviewService.create(reviewCreateRequestDto);
     }
 

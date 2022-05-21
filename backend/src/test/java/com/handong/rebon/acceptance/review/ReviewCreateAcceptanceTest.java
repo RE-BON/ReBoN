@@ -28,7 +28,7 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
         //given
         ExtractableResponse<Response> registerResponse = 회원가입();
         String token = extractedToken(registerResponse);
-        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", null, 5);
+        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", 5);
         Shop shop = shops.get("팜스발리");
         String bearerToken = "Bearer " + token;
 
@@ -44,7 +44,7 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
     @DisplayName("로그인이 되어있지 않은 상태에서 리뷰를 작성하지 못한다.")
     void createReviewWithoutLogin() {
         //given
-        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "족발은 필수로 시키자", null, 5);
+        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "족발은 필수로 시키자", 5);
         Shop shop = shops.get("팜스발리");
 
         //when
