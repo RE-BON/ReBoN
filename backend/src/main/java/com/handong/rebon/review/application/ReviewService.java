@@ -125,7 +125,6 @@ public class ReviewService {
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
 
-    //TODO 이미지 저장 기능
     private ReviewImages saveImages(List<String> imageUrls) {
         List<ReviewImage> reviewImages = imageUrls.stream()
                                                   .map(ReviewImage::new)

@@ -98,7 +98,7 @@ public class ShopService {
         shopRepository.delete(shop);
     }
 
-    private Shop findById(Long id) {
+    public Shop findById(Long id) {
         return shopRepository.findById(id)
                              .orElseThrow(NoSuchShopException::new);
     }
