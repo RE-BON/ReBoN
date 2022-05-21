@@ -1,5 +1,7 @@
 package com.handong.rebon.acceptance.review;
 
+import java.util.Objects;
+
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.shop.domain.Shop;
 
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import org.assertj.core.api.Assertions;
 
@@ -23,9 +26,11 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
     @DisplayName("로그인이 되어 있는 상태에서 리뷰를 작성한다.")
     void createReviewWithLogin() {
         //given
+        ExtractableResponse<Response> registerResponse = 회원가입();
+        String token = extractedToken(registerResponse);
         ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", null, 5);
         Shop shop = shops.get("팜스발리");
-        String bearerToken = "Bearer " + getToken();
+        String bearerToken = "Bearer " + token;
 
         //when
         ExtractableResponse<Response> response = saveReview(reviewRequest, shop.getId(), bearerToken);
@@ -43,29 +48,19 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
         Shop shop = shops.get("팜스발리");
 
         //when
-        ExtractableResponse<Response> response = saveReviewWithoutToken(reviewRequest, shop.getId());
+        ExtractableResponse<Response> response = saveReview(reviewRequest, shop.getId(), null);
 
         //then
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    private ExtractableResponse<Response> saveReviewWithoutToken(ReviewRequest reviewRequest, Long shopId) {
-        return RestAssured.given(getRequestSpecification())
-                          .log().all()
-                          .contentType(APPLICATION_JSON_VALUE)
-                          .body(reviewRequest)
-                          .when()
-                          .post("/api/shops/" + shopId + "/reviews")
-                          .then()
-                          .log().all()
-                          .extract();
-    }
-
     private ExtractableResponse<Response> saveReview(ReviewRequest reviewRequest, Long shopId, String token) {
-        return RestAssured.given(getRequestSpecification())
-                          .log().all()
-                          .header("Authorization", token)
-                          .contentType(APPLICATION_JSON_VALUE)
+        RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
+                                                      .log().all();
+        if (!Objects.isNull(token)) {
+            requestSpec.header("Authorization", token);
+        }
+        return requestSpec.contentType(APPLICATION_JSON_VALUE)
                           .body(reviewRequest)
                           .when()
                           .post("/api/shops/" + shopId + "/reviews")

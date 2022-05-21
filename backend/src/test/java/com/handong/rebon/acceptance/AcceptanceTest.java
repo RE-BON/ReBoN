@@ -39,7 +39,6 @@ public class AcceptanceTest {
     public static final String TEST_OAUTH_PROVIDER = "google";
     public static final String TEST_CODE = "test-code";
     public static final String TEST_NICKNAME = "test";
-    public String token;
 
     @LocalServerPort
     private int port;
@@ -59,16 +58,14 @@ public class AcceptanceTest {
                 .build();
         setRequestSpecification(spec);
         cleaner.execute();
-        ExtractableResponse<Response> memberResponse = saveMember();
-        token = extractedToken(memberResponse);
     }
 
-    private String extractedToken(ExtractableResponse<Response> memberResponse) {
+    public static String extractedToken(ExtractableResponse<Response> memberResponse) {
         MemberCreateResponse memberCreateResponse = memberResponse.body().as(MemberCreateResponse.class);
         return memberCreateResponse.getToken();
     }
 
-    private ExtractableResponse<Response> saveMember() {
+    public static ExtractableResponse<Response> 회원가입() {
         MemberCreateRequest memberCreateRequest = new MemberCreateRequest(
                 "test@gmail.com",
                 "test",
@@ -79,7 +76,4 @@ public class AcceptanceTest {
         return memberResponse;
     }
 
-    public String getToken() {
-        return token;
-    }
 }
