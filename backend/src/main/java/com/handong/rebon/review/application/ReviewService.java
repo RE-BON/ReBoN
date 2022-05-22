@@ -38,7 +38,6 @@ public class ReviewService {
     private final ShopRepository shopRepository;
     private final MemberService memberService;
     private final ReviewImageRepository reviewImageRepository;
-    private final MemberRepository memberRepository;
     private final ShopService shopService;
 
     @Transactional
@@ -125,10 +124,14 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                                        .orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
+    }
+
+    private Review findOneById(Long id) {
+        return reviewRepository.findById(id)
+                               .orElseThrow(ReviewNotFoundException::new);
     }
 
     //TODO 이미지 저장 기능
