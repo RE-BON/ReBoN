@@ -71,7 +71,7 @@ public class ReviewService {
         Long reviewId = reviewDeleteRequestDto.getReviewId();
         Long memberId = reviewDeleteRequestDto.getMemberId();
 
-        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
         Member member = memberService.findById(memberId);
 
         review.delete(member);
@@ -125,10 +125,14 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                                        .orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
+    }
+
+    private Review findOneById(Long reviewId) {
+        return reviewRepository.findById(reviewId)
+                        .orElseThrow(ReviewNotFoundException::new);
     }
 
     //TODO 이미지 저장 기능
