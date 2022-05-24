@@ -56,6 +56,10 @@ public class ShopRepositoryCustomImpl extends QuerydslRepositorySupport implemen
             return null;
         }
         LocalTime now = LocalTime.now();
+        return isBusinessHour(now);
+    }
+
+    private BooleanExpression isBusinessHour(LocalTime now) {
         return shop.shopContent.start.loe(now)
                                      .and(shop.shopContent.end.goe(now));
     }
