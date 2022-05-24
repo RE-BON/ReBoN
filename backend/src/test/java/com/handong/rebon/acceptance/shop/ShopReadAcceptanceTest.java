@@ -31,7 +31,7 @@ import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecificati
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-class ShopReadAcceptanceTest extends AcceptanceTest {
+public class ShopReadAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private AdminTagRegister adminTagRegister;
@@ -169,7 +169,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         assertThat(result.getMessage()).isEqualTo("존재하지 않는 가게입니다.");
     }
 
-    private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
+    public static ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)

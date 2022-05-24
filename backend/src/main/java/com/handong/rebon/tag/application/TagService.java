@@ -71,4 +71,12 @@ public class TagService {
                                   .map(TagResponseDto::from)
                                   .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> findTopTags() {
+        List<Tag> tags = tagRepository.findTop8ByOrderByCountDesc();
+        return tags.stream()
+                   .map(TagResponseDto::from)
+                   .collect(Collectors.toList());
+    }
 }

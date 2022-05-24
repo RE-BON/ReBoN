@@ -68,9 +68,10 @@ public class ShopService {
         return ShopImages.of(shopImages);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public List<ShopSimpleResponseDto> search(ShopSearchDto shopSearchDto) {
         Tag tag = tagService.findById(shopSearchDto.getTag());
+        tag.countUp();
 
         Category category = categoryService.findById(shopSearchDto.getCategory());
         List<Category> subs = categoryService.findAllContainIds(shopSearchDto.getSubCategories());

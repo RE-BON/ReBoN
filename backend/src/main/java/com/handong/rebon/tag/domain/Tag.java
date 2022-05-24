@@ -38,6 +38,8 @@ public class Tag extends BaseEntity {
     @OneToMany(mappedBy = "tag")
     private List<ShopTag> shopTags = new ArrayList<>();
 
+    private int count;
+
     public Tag(String name) {
         this.validateBlankName(name);
         this.name = name;
@@ -56,5 +58,9 @@ public class Tag extends BaseEntity {
 
     public void deleteShopTag() {
         this.shopTags.forEach(ShopTag::delete);
+    }
+
+    public void countUp() {
+        this.count++;
     }
 }
