@@ -1,7 +1,10 @@
 package com.handong.rebon.acceptance;
 
+import com.handong.rebon.acceptance.member.MemberCreateAcceptanceTest;
 import com.handong.rebon.config.InfrastructureTestConfig;
 import com.handong.rebon.config.NotUseElasticSearchConfig;
+import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
+import com.handong.rebon.member.presentation.dto.response.MemberCreateResponse;
 import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 import com.handong.rebon.util.DatabaseCleaner;
 
@@ -21,6 +24,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static com.handong.rebon.acceptance.AcceptanceUtils.setRequestSpecification;
@@ -63,5 +68,21 @@ public class AcceptanceTest {
                 .build();
         setRequestSpecification(spec);
         cleaner.execute();
+    }
+
+    public static String extractedToken(ExtractableResponse<Response> memberResponse) {
+        MemberCreateResponse memberCreateResponse = memberResponse.body().as(MemberCreateResponse.class);
+        return memberCreateResponse.getToken();
+    }
+
+    public static ExtractableResponse<Response> 회원가입() {
+        MemberCreateRequest memberCreateRequest = new MemberCreateRequest(
+                "test@gmail.com",
+                "test",
+                TEST_OAUTH_PROVIDER,
+                true
+        );
+        ExtractableResponse<Response> memberResponse = MemberCreateAcceptanceTest.saveMember(memberCreateRequest);
+        return memberResponse;
     }
 }
