@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.exception.category.NoSuchCategoryException;
+import com.handong.rebon.exception.category.CategoryNotFoundException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
 
         //when, then
         assertThatThrownBy(() -> categoryService.findById(requestCategoryId))
-                .isInstanceOf(NoSuchCategoryException.class);
+                .isInstanceOf(CategoryNotFoundException.class);
     }
 
     @Test
@@ -93,5 +93,4 @@ public class CategoryReadIntegrationTest extends CategoryIntegrationTest {
         assertThat(rootCategories.get(2).getChildren()).extracting("name")
                                                        .containsOnly("호텔", "펜션", "모텔");
     }
-
 }

@@ -3,6 +3,7 @@ package com.handong.rebon.unit.category.domain;
 import java.util.List;
 
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
 
@@ -80,5 +81,44 @@ public class CategoryTest {
         assertThatThrownBy(() -> parentCategory.addChildCategory(childCategory2))
                 .isInstanceOf(CategoryExistException.class);
 
+    }
+
+    @Test
+    @DisplayName("카테고리를 삭제할 수 있다.")
+    public void deleteCategory() {
+        // given
+        Category category = new Category("식당");
+        // when
+        category.delete();
+        // then
+        assertThat(category).extracting("deleted").isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("부모 카테고리를 삭제하면 모든 자식 카테고리가 삭제된다.")
+    public void deleteParentCategory() {
+        // given
+        Category parentCategory = new Category("식당");
+        Category childCategory = new Category("프렌차이즈");
+        Category childCategory2 = new Category("중식");
+        parentCategory.addChildCategory(childCategory);
+        parentCategory.addChildCategory(childCategory2);
+        // when
+        parentCategory.delete();
+        // then
+        assertThat(parentCategory).extracting("deleted").isEqualTo(true);
+        assertThat(childCategory).extracting("deleted").isEqualTo(true);
+        assertThat(childCategory2).extracting("deleted").isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("이미 삭제한 카테고리를 다시 삭제할 수 없다.")
+    public void deleteAgain() {
+        // given
+        Category category = new Category("식당");
+        category.delete();
+        // when, then
+        assertThatThrownBy(category::delete)
+                .isInstanceOf(CategoryAlreadyDeletedException.class);
     }
 }
