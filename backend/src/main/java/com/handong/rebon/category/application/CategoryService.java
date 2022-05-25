@@ -65,7 +65,7 @@ public class CategoryService {
         Category category = categoryRepository.findCategoryWithChildren(categoryRequestDto.getId())
                                               .orElseThrow(CategoryNotFoundException::new);
         if (category.isParentCategory()) {
-            List<Shop> shops = shopRepository.findShopsByCategoryId(category.getId());
+            List<Shop> shops = shopRepository.findByCategory(category);
             shopRepository.deleteAll(shops);
         }
         category.delete();
