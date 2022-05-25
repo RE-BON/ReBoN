@@ -92,6 +92,10 @@ public class Category extends BaseEntity {
         this.shopCategories.add(shopCategory);
     }
 
+    public void updateCategoryName(String name){
+        this.name = name;
+    }
+
     public List<Category> getChildren() {
         return children.getCategories();
     }

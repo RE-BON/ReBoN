@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
@@ -37,11 +37,11 @@ public class CategoryService {
     }
 
     @Transactional
-    public Long create(CategoryCreateRequestDto categoryCreateRequestDto) {
-        if (Objects.isNull(categoryCreateRequestDto.getParentId())) {
+    public Long create(CategoryRequestDto categoryCreateRequestDto) {
+        if (Objects.isNull(categoryCreateRequestDto.getId())) {
             return this.create(categoryCreateRequestDto.getName());
         }
-        Category parent = this.findById(categoryCreateRequestDto.getParentId());
+        Category parent = this.findById(categoryCreateRequestDto.getId());
 
         String categoryName = categoryCreateRequestDto.getName();
 
@@ -87,5 +87,11 @@ public class CategoryService {
         return subCategories.stream()
                             .map(this::findById)
                             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void update(CategoryRequestDto categoryRequestDto){
+        Category category = this.findById(categoryRequestDto.getId());
+        category.updateCategoryName(categoryRequestDto.getName());
     }
 }
