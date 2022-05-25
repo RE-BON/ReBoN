@@ -8,6 +8,7 @@ import com.handong.rebon.config.InfrastructureTestConfig;
 import com.handong.rebon.config.NotUseElasticSearchConfig;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.review.application.ReviewService;
+import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.tag.application.TagService;
 import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 import com.handong.rebon.util.DatabaseCleaner;
@@ -44,6 +45,9 @@ public class ControllerTest {
 
     @Autowired
     protected CategoryService categoryService;
+
+    @Autowired
+    protected ShopService shopService;
 
     @Autowired
     protected TagService tagService;
