@@ -121,4 +121,18 @@ public class CategoryTest {
         assertThatThrownBy(category::delete)
                 .isInstanceOf(CategoryAlreadyDeletedException.class);
     }
+
+    @Test
+    @DisplayName("카테고리를 수정할 수 있다.")
+    public void 카테고리_수정() {
+        // given
+        Category category = new Category("식당");
+
+        // when
+        category.updateCategoryName("카페");
+
+        // then
+        assertThat(category).extracting("name")
+                            .isEqualTo("카페");
+    }
 }
