@@ -9,7 +9,9 @@ import com.handong.rebon.tag.application.dto.TagDtoAssembler;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
+import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class TagService {
-
     private final TagRepository tagRepository;
+    private final TagSearchRepository tagSearchRepository;
 
     @Transactional
     public Long createTag(String tagName) {
@@ -28,6 +30,7 @@ public class TagService {
         Tag newTag = new Tag(tagName);
 
         Tag savedTag = tagRepository.save(newTag);
+        tagSearchRepository.save(newTag);
         return savedTag.getId();
     }
 
@@ -42,7 +45,6 @@ public class TagService {
         return TagDtoAssembler.tagResponseDtos(tagRepository.findAll());
     }
 
-
     @Transactional(readOnly = true)
     public Tag findById(Long id) {
         return tagRepository.findById(id)
@@ -55,5 +57,18 @@ public class TagService {
                    .map(this::findById)
                    .collect(Collectors.toList());
     }
-}
 
+    @Transactional
+    public void delete(Long id) {
+        Tag tag = findById(id);
+        tag.delete();
+    }
+
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> searchByKeyword(String keyword, Pageable pageable) {
+        return tagSearchRepository.searchByKeyword(keyword.strip(), pageable)
+                                  .stream()
+                                  .map(TagResponseDto::from)
+                                  .collect(Collectors.toList());
+    }
+}

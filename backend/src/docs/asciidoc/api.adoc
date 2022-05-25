@@ -137,12 +137,32 @@ include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-resp
 
 == Tag API
 
-=== Tag 리스트 조회
+=== 전체 Tag 리스트 조회
 ==== Request
 include::{snippets}/TagReadAcceptanceTest/getAllTags/http-request.adoc[]
 
 ==== Response
 include::{snippets}/TagReadAcceptanceTest/getAllTags/http-response.adoc[]
+
+=== Tag 검색 자동 완성
+
+*keyword = "ㄱㅜ" 인 예시이다.*
+
+==== Request
+include::{snippets}/TagElasticSearchAcceptanceTest/autoComplete/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagElasticSearchAcceptanceTest/autoComplete/http-response.adoc[]
+
+=== Tag 초성 검색
+
+*keyword = "ㅎㄷㄷ" 인 예시이다.*
+
+==== Request
+include::{snippets}/TagElasticSearchAcceptanceTest/chosungSearch/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagElasticSearchAcceptanceTest/chosungSearch/http-response.adoc[]
 
 == Category API
 === 모든 Category 상세 조회
