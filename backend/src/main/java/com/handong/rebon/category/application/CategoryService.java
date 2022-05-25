@@ -46,7 +46,6 @@ public class CategoryService {
         String categoryName = categoryCreateRequestDto.getName();
 
         Category newCategory = new Category(categoryName);
-
         parent.addChildCategory(newCategory);
         Category savedCategory = categoryRepository.save(newCategory);
 
@@ -55,6 +54,12 @@ public class CategoryService {
 
     private void checkCategoryExist(String name) {
         if (categoryRepository.existsByName(name)) {
+            throw new CategoryExistException();
+        }
+    }
+
+    private void checkChildCategoryExist(Long parentId, String name) {
+        if (categoryRepository.existsByParentAndName(parentId, name)) {
             throw new CategoryExistException();
         }
     }
@@ -90,8 +95,14 @@ public class CategoryService {
     }
 
     @Transactional
-    public void update(CategoryRequestDto categoryRequestDto){
+    public void update(CategoryRequestDto categoryRequestDto) {
         Category category = this.findById(categoryRequestDto.getId());
+        if (category.isParentCategory()) {
+            checkCategoryExist(categoryRequestDto.getName());
+            category.updateCategoryName(categoryRequestDto.getName());
+            return;
+        }
+        checkChildCategoryExist(category.getParent().getId(), categoryRequestDto.getName());
         category.updateCategoryName(categoryRequestDto.getName());
     }
 }
