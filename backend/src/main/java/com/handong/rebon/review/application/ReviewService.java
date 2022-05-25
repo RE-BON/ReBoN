@@ -1,7 +1,7 @@
 package com.handong.rebon.review.application;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
@@ -17,8 +17,8 @@ import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponse
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
-import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
+import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.util.StringUtil;
@@ -27,7 +27,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,20 +36,16 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
-    private final MemberService memberService;
-    private final ReviewImageRepository reviewImageRepository;
+    private final ShopService shopService;
     private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @Transactional
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
-        //TODO 멤버 찾아오기
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
+        Shop shop = shopService.findById(reviewCreateRequestDto.getShopId());
 
-        //TODO shop 찾아오기
-        Shop shop = shopRepository.findById(reviewCreateRequestDto.getShopId()).orElseThrow();
-
-        //TODO 이미지 저장
-        ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImages());
+        ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImageUrls());
 
         Review review = Review.builder()
                               .member(member)
@@ -64,7 +59,6 @@ public class ReviewService {
 
         return savedReview.getId();
     }
-
 
     @Transactional
     public void delete(ReviewDeleteRequestDto reviewDeleteRequestDto) {
@@ -131,15 +125,10 @@ public class ReviewService {
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
 
-    //TODO 이미지 저장 기능
-    private ReviewImages saveImages(List<MultipartFile> images) {
-        ReviewImage url1 = new ReviewImage("url1");
-        ReviewImage url2 = new ReviewImage("url2");
-
-        reviewImageRepository.save(url1);
-        reviewImageRepository.save(url2);
-
-        return new ReviewImages(Arrays.asList(url1, url2));
+    private ReviewImages saveImages(List<String> imageUrls) {
+        List<ReviewImage> reviewImages = imageUrls.stream()
+                                                  .map(ReviewImage::new)
+                                                  .collect(Collectors.toList());
+        return new ReviewImages(reviewImages);
     }
-
 }
