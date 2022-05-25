@@ -15,7 +15,7 @@ import lombok.Setter;
 public class ReviewRequest {
     private String content;
     private String tip;
-    private List<String> images = new ArrayList<>();
+    private List<String> imageUrls = new ArrayList<>();
     private int star;
 
     public ReviewRequest(String content, String tip, int star) {
