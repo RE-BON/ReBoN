@@ -19,5 +19,12 @@ spring:
         enabled: true
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
+      springframework:
+        data:
+          elasticsearch:
+            client:
+              WIRE: TRACE

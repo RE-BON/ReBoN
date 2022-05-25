@@ -10,11 +10,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE shop_tag SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class ShopTag extends BaseEntity {
 
     @Id
@@ -30,5 +32,10 @@ public class ShopTag extends BaseEntity {
     public ShopTag(Shop shop, Tag tag) {
         this.shop = shop;
         this.tag = tag;
+    }
+
+    public void delete() {
+        this.shop.validateOnlyShopTag();
+        this.deleteContent();
     }
 }

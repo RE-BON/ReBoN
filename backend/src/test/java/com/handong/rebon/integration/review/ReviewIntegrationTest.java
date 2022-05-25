@@ -1,8 +1,9 @@
 package com.handong.rebon.integration.review;
 
+import java.util.ArrayList;
+
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
@@ -57,18 +58,19 @@ class ReviewIntegrationTest extends IntegrationTest {
         assertThat(review.getReviewContent().getContent()).isEqualTo(reviewRequest.getContent());
         assertThat(review.getReviewContent().getTip()).isEqualTo(reviewRequest.getTip());
         assertThat(review.getReviewScore().getStar()).isEqualTo(reviewRequest.getStar());
-        assertThat(review.getMember().getProfile().getNickName()).isEqualTo(member.getProfile().getNickName());
+        assertThat(review.getMember().getProfile().getNickname()).isEqualTo(member.getProfile().getNickname());
         assertThat(review.getShop().getShopContent().getName()).isEqualTo(shop.getShopContent().getName());
 
     }
 
     public ReviewRequest createReviewRequest(String content, String tip, int star) {
         ReviewRequest reviewRequest = new ReviewRequest();
+        ArrayList<String> imageUrls = new ArrayList<>();
 
         reviewRequest.setContent(content);
         reviewRequest.setTip(tip);
         reviewRequest.setStar(star);
-        //reviewRequest.setImages();  TODO 이미지 저장 후 구현
+        reviewRequest.setImageUrls(imageUrls);
 
         return reviewRequest;
     }
@@ -86,7 +88,7 @@ class ReviewIntegrationTest extends IntegrationTest {
     }
 
     protected Member createMember(String memberName) {
-        Member member = new Member(new Profile(memberName));
+        Member member = new Member("test@test.com", memberName, true, "google");
         return memberRepository.save(member);
     }
 }

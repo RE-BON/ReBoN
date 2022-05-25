@@ -21,6 +21,7 @@ import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
+import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryReadAcceptanceTest extends AcceptanceTest {
@@ -53,7 +54,7 @@ public class CategoryReadAcceptanceTest extends AcceptanceTest {
     }
 
     private ExtractableResponse<Response> 루트_카테고리_조회_요청() {
-        return RestAssured.given(super.spec)
+        return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .when()
                           .get("/api/categories")
