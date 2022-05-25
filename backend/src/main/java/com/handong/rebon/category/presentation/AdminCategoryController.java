@@ -4,19 +4,14 @@ import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
-import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.CategoryAssembler;
-import com.handong.rebon.category.presentation.dto.request.CategoryCreateRequest;
 import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
 import com.handong.rebon.category.presentation.dto.response.RootCategoryResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,22 +41,20 @@ public class AdminCategoryController {
 
         return "category/deleteForm";
     }
+    // ToDo PathVariable 로 바꾼 후 관리자 페이지는 update 페이지 만들 때 일괄적으로 구현할 예정
+    @PostMapping("/categories/{id}")
+    public String createCategory(@PathVariable Long id, CategoryRequest categoryRequest) {
 
-    @PostMapping("/categories")
-    public String createCategory(CategoryCreateRequest categoryRequest) {
-
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryAssembler.categoryCreateRequestDto(categoryRequest);
+        CategoryCreateRequestDto categoryCreateRequestDto = CategoryAssembler.categoryCreateRequestDto(id ,categoryRequest);
         categoryService.create(categoryCreateRequestDto);
 
         return "home";
     }
 
-    @DeleteMapping("/categories")
-    public String deleteCategory(CategoryRequest request) {
-
-        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryRequestDto(request);
-        categoryService.delete(categoryRequestDto);
-
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        categoryService.delete(id);
         return "home";
     }
+
 }

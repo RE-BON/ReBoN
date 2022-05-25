@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
 import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
-import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
@@ -61,8 +60,8 @@ public class CategoryService {
     }
 
     @Transactional
-    public void delete(CategoryRequestDto categoryRequestDto) {
-        Category category = categoryRepository.findCategoryWithChildren(categoryRequestDto.getId())
+    public void delete(Long categoryId) {
+        Category category = categoryRepository.findCategoryWithChildren(categoryId)
                                               .orElseThrow(CategoryNotFoundException::new);
         if (category.isParentCategory()) {
             List<Shop> shops = shopRepository.findByCategory(category);

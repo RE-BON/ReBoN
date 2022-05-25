@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 
-import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 import com.handong.rebon.shop.domain.Shop;
@@ -41,7 +40,7 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         Category parent = createCategory(parentName);
         Category child = createCategoryWithParent(parent.getId(), childName);
         createCategoryWithParent(parent.getId(), childName2);
-        categoryService.delete(new CategoryRequestDto(child.getId()));
+        categoryService.delete(child.getId());
         entityManager.flush();
         entityManager.clear();
         //then
@@ -65,7 +64,7 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         createCategoryWithParent(parent.getId(), "양식");
 
         //when
-        categoryService.delete(new CategoryRequestDto(parent.getId()));
+        categoryService.delete(parent.getId());
         entityManager.flush();
         entityManager.clear();
         //then
@@ -85,11 +84,10 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         String parentName = "식당";
         Category parent = createCategory(parentName);
         Category child = createCategoryWithParent(parent.getId(), "한식");
-        CategoryRequestDto requestDto = new CategoryRequestDto(child.getId());
-        categoryService.delete(requestDto);
+        categoryService.delete(child.getId());
 
         //when, then
-        assertThatThrownBy(() -> categoryService.delete(requestDto))
+        assertThatThrownBy(() -> categoryService.delete(child.getId()))
                 .isInstanceOf(CategoryNotFoundException.class);
 
     }
@@ -102,13 +100,12 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         String parentName = "식당";
         Category parent = createCategory(parentName);
         Category child = createCategoryWithParent(parent.getId(), "한식");
-        CategoryRequestDto requestDto = new CategoryRequestDto(child.getId());
-        categoryService.delete(requestDto);
+        categoryService.delete(child.getId());
         entityManager.flush();
         entityManager.clear();
 
         //when, then
-        assertThatThrownBy(() -> categoryService.findById(requestDto.getId()))
+        assertThatThrownBy(() -> categoryService.findById(child.getId()))
                 .isInstanceOf(CategoryNotFoundException.class);
     }
 
@@ -134,7 +131,7 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         restaurant1.addCategories(rootCategory, subCategories);
         shopRepository.save(restaurant1);
         //when
-        categoryService.delete(new CategoryRequestDto(category.getId()));
+        categoryService.delete(category.getId());
         //then
         assertThat(category.isDeleted()).isEqualTo(true);
         assertThat(category.getShopCategories()).extracting("deleted")
@@ -174,9 +171,9 @@ public class CategoryDeleteIntegrationTest extends CategoryIntegrationTest {
         Restaurant savedRestaurant2 = shopRepository.save(restaurant2);
         boolean beforeDelete1 = savedRestaurant1.isDeleted();
         boolean beforeDelete2 = savedRestaurant2.isDeleted();
-        CategoryRequestDto requestDto = new CategoryRequestDto(rootCategory.getId());
+
         //when
-        categoryService.delete(requestDto);
+        categoryService.delete(rootCategory.getId());
         entityManager.flush();
         entityManager.clear();
         Optional<Shop> deletedRestaurant1 = shopRepository.findById(savedRestaurant1.getId());
