@@ -3,7 +3,7 @@ package com.handong.rebon.category.presentation;
 import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.CategoryAssembler;
 import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
@@ -45,8 +45,8 @@ public class AdminCategoryController {
     @PostMapping("/categories/{id}")
     public String createCategory(@PathVariable Long id, CategoryRequest categoryRequest) {
 
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryAssembler.categoryCreateRequestDto(id ,categoryRequest);
-        categoryService.create(categoryCreateRequestDto);
+        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryCreateRequestDto(id ,categoryRequest);
+        categoryService.create(categoryRequestDto);
 
         return "home";
     }
@@ -54,6 +54,15 @@ public class AdminCategoryController {
     @DeleteMapping("/categories/{id}")
     public String deleteCategory(@PathVariable Long id) {
         categoryService.delete(id);
+        return "home";
+    }
+
+    @PutMapping("/categories/{id}")
+    public String updateCategory(@PathVariable Long id, CategoryRequest categoryRequest) {
+        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryCreateRequestDto(id ,categoryRequest);
+
+        categoryService.update(categoryRequestDto);
+
         return "home";
     }
 

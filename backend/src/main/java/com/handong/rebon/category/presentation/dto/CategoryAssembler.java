@@ -3,7 +3,7 @@ package com.handong.rebon.category.presentation.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.ChildCategoryDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
@@ -30,7 +30,7 @@ public class CategoryAssembler {
                               .collect(Collectors.toList());
     }
 
-    public static CategoryCreateRequestDto categoryCreateRequestDto(Long id, CategoryRequest request){
-        return new CategoryCreateRequestDto(id, request.getName());
+    public static CategoryRequestDto categoryCreateRequestDto(Long id, CategoryRequest request){
+        return new CategoryRequestDto(id, request.getName());
     }
 }
