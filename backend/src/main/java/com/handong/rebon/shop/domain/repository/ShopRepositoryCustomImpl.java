@@ -1,5 +1,6 @@
 package com.handong.rebon.shop.domain.repository;
 
+import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -38,7 +39,8 @@ public class ShopRepositoryCustomImpl extends QuerydslRepositorySupport implemen
                                            .where(categoryEq(condition.getCategory())
                                                    .and(tagEq(condition.getTag()))
                                                    .and(containsSubCategories(condition.getSubs()))
-                                                   .and(isMainImage()))
+                                                   .and(isMainImage())
+                                                   .and(isOpen(condition.isOpen())))
                                            .leftJoin(shop.shopTags, shopTag)
                                            .leftJoin(shop.shopCategories, shopCategory)
                                            .leftJoin(shop.shopImages.shopImages, shopImage)
@@ -47,6 +49,19 @@ public class ShopRepositoryCustomImpl extends QuerydslRepositorySupport implemen
         JPQLQuery<Shop> pageableQuery = getQuerydsl().applyPagination(pageable, query);
         QueryResults<Shop> fetchResults = pageableQuery.fetchResults();
         return new PageImpl<>(fetchResults.getResults(), pageable, fetchResults.getTotal());
+    }
+
+    private BooleanExpression isOpen(boolean open) {
+        if (!open) {
+            return null;
+        }
+        LocalTime now = LocalTime.now();
+        return isBusinessHour(now);
+    }
+
+    private BooleanExpression isBusinessHour(LocalTime now) {
+        return shop.shopContent.start.loe(now)
+                                     .and(shop.shopContent.end.goe(now));
     }
 
     private BooleanExpression categoryEq(Category category) {

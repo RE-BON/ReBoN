@@ -80,7 +80,7 @@ public class ShopService {
         Category category = categoryService.findById(shopSearchDto.getCategory());
         List<Category> subs = categoryService.findAllContainIds(shopSearchDto.getSubCategories());
 
-        ShopSearchCondition shopSearchCondition = new ShopSearchCondition(tag, category, subs);
+        ShopSearchCondition shopSearchCondition = new ShopSearchCondition(tag, category, subs, shopSearchDto.isOpen());
 
         Page<Shop> results =
                 shopRepository.searchShopByConditionApplyPage(shopSearchCondition, shopSearchDto.getPageable());
@@ -103,7 +103,7 @@ public class ShopService {
         shopRepository.delete(shop);
     }
 
-    private Shop findById(Long id) {
+    public Shop findById(Long id) {
         return shopRepository.findById(id)
                              .orElseThrow(NoSuchShopException::new);
     }
@@ -148,7 +148,8 @@ public class ShopService {
     private void updateContent(ShopRequestDto shopRequestDto, Shop shop) {
         ShopContent content = new ShopContent(
                 shopRequestDto.getName(),
-                shopRequestDto.getBusinessHour(),
+                shopRequestDto.getStart(),
+                shopRequestDto.getEnd(),
                 shopRequestDto.getPhone()
         );
 

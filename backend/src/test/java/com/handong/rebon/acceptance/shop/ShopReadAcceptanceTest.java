@@ -1,5 +1,6 @@
 package com.handong.rebon.acceptance.shop;
 
+import java.time.LocalTime;
 import java.util.*;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
@@ -63,7 +64,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         Category 식당 = categories.get("식당");
 
         // when
-        ExtractableResponse<Response> response = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Collections.emptyList());
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Collections.emptyList(), false);
         List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
 
         // then
@@ -80,7 +81,8 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         Category 양식 = categories.get("양식");
 
         // when
-        ExtractableResponse<Response> response = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Collections.singletonList(양식.getId()));
+        ExtractableResponse<Response> response
+                = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Collections.singletonList(양식.getId()), false);
         List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
 
         // then
@@ -98,7 +100,8 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         Category 양식 = categories.get("양식");
 
         // when
-        ExtractableResponse<Response> response = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Arrays.asList(분식.getId(), 양식.getId()));
+        ExtractableResponse<Response> response
+                = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Arrays.asList(분식.getId(), 양식.getId()), false);
         List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
 
         // then
@@ -114,7 +117,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         Category 카페 = categories.get("카페");
 
         // when
-        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList());
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList(), false);
         List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
 
         // then
@@ -144,7 +147,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         adminShopRegister.delete(shops.get("티타"));
 
         // when
-        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList());
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList(), false);
         List<ShopSimpleResponseDto> result = response.as(new TypeRef<>() {});
 
         // then
@@ -169,13 +172,47 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         assertThat(result.getMessage()).isEqualTo("존재하지 않는 가게입니다.");
     }
 
-    private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs) {
+    @Test
+    @DisplayName("영업중인 가게 조회")
+    void searchOpenShops() {
+        // given
+        Tag 양덕 = tags.get("양덕");
+        Category 카페 = categories.get("카페");
+
+        adminShopRegister.CafeRegisterWithMenu(
+                "카페1",
+                categories.get("카페"),
+                Collections.singletonList(categories.get("개인카페")),
+                Arrays.asList(tags.get("포항"), tags.get("양덕")),
+                LocalTime.MIN,
+                LocalTime.MAX
+        );
+        adminShopRegister.CafeRegisterWithMenu(
+                "카페2",
+                categories.get("카페"),
+                Collections.singletonList(categories.get("개인카페")),
+                Arrays.asList(tags.get("포항"), tags.get("양덕")),
+                LocalTime.MIN,
+                LocalTime.MAX
+        );
+
+        // when
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청(양덕.getId(), 카페.getId(), Collections.emptyList(), true);
+        List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).hasSize(2);
+    }
+
+    private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)
                           .queryParam("tag", tag)
                           .queryParam("category", category)
                           .queryParam("subCategories", subs)
+                          .queryParam("open", open)
                           .when()
                           .get("/api/shops")
                           .then()
@@ -273,7 +310,9 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
                 "티타",
                 categories.get("카페"),
                 Collections.singletonList(categories.get("개인카페")),
-                Arrays.asList(tags.get("포항"), tags.get("양덕"))
+                Arrays.asList(tags.get("포항"), tags.get("양덕")),
+                null,
+                null
         ));
     }
 }

@@ -1,5 +1,6 @@
 package com.handong.rebon.acceptance.shop;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -60,7 +61,9 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
                 "티타",
                 categories.get("카페"),
                 Collections.singletonList(categories.get("개인카페")),
-                Arrays.asList(tags.get("포항"), tags.get("양덕"))
+                Arrays.asList(tags.get("포항"), tags.get("양덕")),
+                LocalTime.MIN,
+                LocalTime.MAX
         ));
     }
 

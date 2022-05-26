@@ -1,13 +1,16 @@
 package com.handong.rebon.review.presentation;
 
+import java.net.URI;
 import java.util.List;
 
 import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
+import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
+import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewResponse;
@@ -25,17 +28,18 @@ public class ApiReviewController {
 
     @RequiredLogin
     @PostMapping("/shops/{shopId}/reviews")
-    public ReviewResponse create(
-            //member TODO 유저 구현 후,
+    public ResponseEntity<Void> create(
+            @Login LoginMember loginMember,
             @PathVariable Long shopId,
             @RequestBody ReviewRequest reviewRequest
     ) {
-        /*
-        ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(, shopId, reviewRequest);//TODO user 구현 후 userId 구현해야됨
-        ReviewResponseDto reviewResponseDto = reviewService.create(reviewCreateRequestDto);
-        ReviewAssembler.reviewResponse(reviewResponseDto);
-        */
-        return new ReviewResponse();
+
+        ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(loginMember.getId(), shopId, reviewRequest);
+        Long reviewId = reviewService.create(reviewCreateRequestDto);
+        URI location = URI.create("/api/reviews/" + reviewId);
+
+        return ResponseEntity.created(location)
+                             .build();
     }
 
     @RequiredLogin

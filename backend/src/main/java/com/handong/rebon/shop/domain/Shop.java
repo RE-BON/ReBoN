@@ -96,7 +96,7 @@ public abstract class Shop extends BaseEntity {
         List<ShopCategory> shopCategories = subCategories.stream()
                                                          .map(category -> new ShopCategory(this, category))
                                                          .collect(Collectors.toList());
-
+        shopCategories.forEach(ShopCategory::addCategory);
         this.shopCategories.addAll(shopCategories);
     }
 
