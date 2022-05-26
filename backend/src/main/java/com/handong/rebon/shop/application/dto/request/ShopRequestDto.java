@@ -1,5 +1,6 @@
 package com.handong.rebon.shop.application.dto.request;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
@@ -19,7 +20,8 @@ public class ShopRequestDto {
     private Long categoryId;
     private List<Long> subCategories;
     private String name;
-    private String businessHour;
+    private LocalTime start;
+    private LocalTime end;
     private String phone;
     private String address;
     private String longitude;

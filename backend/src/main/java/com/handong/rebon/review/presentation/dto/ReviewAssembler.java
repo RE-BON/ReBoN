@@ -16,7 +16,7 @@ public class ReviewAssembler {
                                      .content(reviewRequest.getContent())
                                      .tip(reviewRequest.getTip())
                                      .star(reviewRequest.getStar())
-                                     .images(reviewRequest.getImages())
+                                     .imageUrls(reviewRequest.getImageUrls())
                                      .build();
 
     }

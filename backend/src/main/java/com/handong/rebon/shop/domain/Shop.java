@@ -8,6 +8,7 @@ import javax.persistence.*;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
+import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -54,7 +55,7 @@ public abstract class Shop extends BaseEntity {
     @Embedded
     private ShopScore shopScore;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Likes> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
@@ -95,7 +96,7 @@ public abstract class Shop extends BaseEntity {
         List<ShopCategory> shopCategories = subCategories.stream()
                                                          .map(category -> new ShopCategory(this, category))
                                                          .collect(Collectors.toList());
-
+        shopCategories.forEach(ShopCategory::addCategory);
         this.shopCategories.addAll(shopCategories);
     }
 
@@ -119,8 +120,24 @@ public abstract class Shop extends BaseEntity {
         shopImages.belongTo(this);
     }
 
+    public void like(Member member) {
+        Likes like = new Likes(member, this);
+        this.likes.add(like);
+        member.likeShop(like);
+    }
+
+    public void unlike(Member member) {
+        Likes like = new Likes(member, this);
+        this.likes.remove(like);
+        member.unLike(like);
+    }
+
     public boolean sameCategory(Category category) {
         return this.category.equals(category);
+    }
+
+    public int getLikeCount() {
+        return this.likes.size();
     }
 
     public String getMainImage() {

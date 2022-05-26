@@ -80,16 +80,16 @@ public class TagReadAcceptanceTest extends AcceptanceTest {
         Category 식당 = categories.get("식당");
         Category 한식 = categories.get("한식");
 
-        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(남구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(남구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(남구.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(흥해읍.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(흥해읍.getId(), 식당.getId(), List.of(한식.getId()));
-        가게_리스트_조회_요청(양덕동.getId(), 식당.getId(), List.of(한식.getId()));
+        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(북구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(남구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(남구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(남구.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(흥해읍.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(흥해읍.getId(), 식당.getId(), List.of(한식.getId()), false);
+        가게_리스트_조회_요청(양덕동.getId(), 식당.getId(), List.of(한식.getId()), false);
 
         // when
         ExtractableResponse<Response> response = 인기_태그_조회();

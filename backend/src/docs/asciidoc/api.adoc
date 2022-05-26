@@ -193,6 +193,7 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 | tag | Long | true | 위치 태그 id 값
 | category | Long | true | 최상위 카테고리 id 값
 | subCategories | Long | false | 최상위 카테고리에 속한 하위 카테고리의 id값. 여러개 보낼 수 있음(`ex. subCategories=5&subCategories=7`)
+| open | boolean | true | 영업중 여부 (false = 전체 가게 조회, true = 현재 시간에 운영중인 가게만 조회)
 |===
 include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
 
@@ -211,5 +212,60 @@ include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-request.adoc[]
 ==== Response
 include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-response.adoc[]
 
+=== Shop 좋아요 기능
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopLikeAcceptanceTest/likeShop/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/likeShop/http-response.adoc[]
+
+=== Shop 좋아요 취소 기능
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-response.adoc[]
+
 == Review API
-`구현 후 추가 예정`
+=== 리뷰 생성 로그인이 된 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| shopId | Long | true | Path variable로 리뷰 쓰는 가게 보내주기
+| content | String | true | 리뷰 내용
+| tip | String | false | 팁 내용
+| star | int | true | 리뷰 점수
+| images | List<MultipartFile> | false | 리뷰 사진들
+|===
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-response.adoc[]
+
+=== 리뷰 생성 로그인이 되지 않은 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| shopId | Long | true | Path variable로 리뷰 쓰는 가게 보내주기
+| content | String | true | 리뷰 내용
+| tip | String | false | 팁 내용
+| star | int | true | 리뷰 점수
+| images | List<MultipartFile> | false | 리뷰 사진들
+|===
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-response.adoc[]
