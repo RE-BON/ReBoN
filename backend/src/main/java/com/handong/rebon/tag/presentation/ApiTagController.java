@@ -40,4 +40,11 @@ public class ApiTagController {
                                              .collect(Collectors.toList());
         return ResponseEntity.ok(result);
     }
+
+    @GetMapping("/tags/top")
+    public ResponseEntity<List<TagResponse>> topTags() {
+        List<TagResponseDto> tagDtos = tagService.findTopTags();
+        List<TagResponse> responses = TagAssembler.tagResponses(tagDtos);
+        return ResponseEntity.ok(responses);
+    }
 }

@@ -32,7 +32,7 @@ import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecificati
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-class ShopReadAcceptanceTest extends AcceptanceTest {
+public class ShopReadAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private AdminTagRegister adminTagRegister;
@@ -205,7 +205,7 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         assertThat(result).hasSize(2);
     }
 
-    private ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open) {
+    public static ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)

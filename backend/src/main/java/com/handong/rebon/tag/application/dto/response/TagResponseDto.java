@@ -10,8 +10,9 @@ import lombok.Getter;
 public class TagResponseDto {
     private Long id;
     private String name;
+    private int count;
 
     public static TagResponseDto from(Tag tag) {
-        return new TagResponseDto(tag.getId(), tag.getName());
+        return new TagResponseDto(tag.getId(), tag.getName(), tag.getCount());
     }
 }

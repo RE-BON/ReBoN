@@ -164,6 +164,14 @@ include::{snippets}/TagElasticSearchAcceptanceTest/chosungSearch/http-request.ad
 ==== Response
 include::{snippets}/TagElasticSearchAcceptanceTest/chosungSearch/http-response.adoc[]
 
+=== 인기 검색어 상위 8개 조회 api
+
+==== Request
+include::{snippets}/TagReadAcceptanceTest/getTopTags/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagReadAcceptanceTest/getTopTags/http-response.adoc[]
+
 == Category API
 === 모든 Category 상세 조회
 Root Category 와 그 자식 카테고리들의 배열
