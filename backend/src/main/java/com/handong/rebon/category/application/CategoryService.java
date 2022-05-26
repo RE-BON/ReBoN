@@ -104,7 +104,9 @@ public class CategoryService {
             category.updateCategoryName(categoryUpdateRequestDto.getName());
             return;
         }
-        if(categoryUpdateRequestDto.isParentIdNull()){
+
+
+        if (Objects.isNull(categoryUpdateRequestDto.getParentId())) {
             throw new CategoryIdNullException();
         }
         checkChildCategoryExist(category.getParent(), categoryUpdateRequestDto.getName());
