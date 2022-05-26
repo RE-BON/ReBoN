@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryUpdateRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.CategoryAssembler;
 import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
@@ -42,11 +43,10 @@ public class AdminCategoryController {
         return "category/deleteForm";
     }
 
-    // ToDo PathVariable 로 바꾼 후 관리자 페이지는 update 페이지 만들 때 일괄적으로 구현할 예정
-    @PostMapping("/categories/{id}")
-    public String createCategory(@PathVariable Long id, CategoryRequest categoryRequest) {
+    @PostMapping("/categories")
+    public String createCategory(CategoryRequest createRequest) {
 
-        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryCreateRequestDto(id, categoryRequest);
+        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryRequestDto(createRequest);
         categoryService.create(categoryRequestDto);
 
         return "home";
@@ -60,9 +60,9 @@ public class AdminCategoryController {
 
     @PutMapping("/categories/{id}")
     public String updateCategory(@PathVariable Long id, CategoryRequest categoryRequest) {
-        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryCreateRequestDto(id, categoryRequest);
+        CategoryUpdateRequestDto categoryUpdateRequestDto = CategoryAssembler.categoryUpdateRequestDto(id, categoryRequest);
 
-        categoryService.update(categoryRequestDto);
+        categoryService.update(categoryUpdateRequestDto);
 
         return "home";
     }

@@ -22,6 +22,10 @@ public class Categories {
         this.categories.add(category);
     }
 
+    public void removeChild(Category category){
+        this.categories.remove(category);
+    }
+
     private void checkDuplicateCategory(Category category) {
         this.categories.forEach(child -> child.validateSame(category));
     }

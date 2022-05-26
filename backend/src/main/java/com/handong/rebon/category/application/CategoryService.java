@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryUpdateRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
+import com.handong.rebon.exception.category.CategoryIdNullException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
@@ -37,13 +39,13 @@ public class CategoryService {
     }
 
     @Transactional
-    public Long create(CategoryRequestDto categoryCreateRequestDto) {
-        if (Objects.isNull(categoryCreateRequestDto.getId())) {
-            return this.create(categoryCreateRequestDto.getName());
+    public Long create(CategoryRequestDto categoryRequestDto) {
+        if (Objects.isNull(categoryRequestDto.getId())) {
+            return this.create(categoryRequestDto.getName());
         }
-        Category parent = this.findById(categoryCreateRequestDto.getId());
+        Category parent = this.findById(categoryRequestDto.getId());
 
-        String categoryName = categoryCreateRequestDto.getName();
+        String categoryName = categoryRequestDto.getName();
 
         Category newCategory = new Category(categoryName);
         parent.addChildCategory(newCategory);
@@ -95,14 +97,18 @@ public class CategoryService {
     }
 
     @Transactional
-    public void update(CategoryRequestDto categoryRequestDto) {
-        Category category = this.findById(categoryRequestDto.getId());
+    public void update(CategoryUpdateRequestDto categoryUpdateRequestDto) {
+        Category category = this.findById(categoryUpdateRequestDto.getId());
         if (category.isParentCategory()) {
-            checkCategoryExist(categoryRequestDto.getName());
-            category.updateCategoryName(categoryRequestDto.getName());
+            checkCategoryExist(categoryUpdateRequestDto.getName());
+            category.updateCategoryName(categoryUpdateRequestDto.getName());
             return;
         }
-        checkChildCategoryExist(category.getParent(), categoryRequestDto.getName());
-        category.updateCategoryName(categoryRequestDto.getName());
+        if(categoryUpdateRequestDto.isParentIdNull()){
+            throw new CategoryIdNullException();
+        }
+        checkChildCategoryExist(category.getParent(), categoryUpdateRequestDto.getName());
+        Category parentCategory = this.findById(categoryUpdateRequestDto.getParentId());
+        category.update(parentCategory, categoryUpdateRequestDto.getName());
     }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryUpdateRequestDto;
 import com.handong.rebon.category.application.dto.response.ChildCategoryDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
@@ -30,7 +31,11 @@ public class CategoryAssembler {
                               .collect(Collectors.toList());
     }
 
-    public static CategoryRequestDto categoryCreateRequestDto(Long id, CategoryRequest request){
-        return new CategoryRequestDto(id, request.getName());
+    public static CategoryUpdateRequestDto categoryUpdateRequestDto(Long id, CategoryRequest request){
+        return new CategoryUpdateRequestDto(id, request.getParentId(), request.getName());
+    }
+
+    public static CategoryRequestDto categoryRequestDto(CategoryRequest categoryRequest){
+        return new CategoryRequestDto(categoryRequest.getParentId(), categoryRequest.getName());
     }
 }
