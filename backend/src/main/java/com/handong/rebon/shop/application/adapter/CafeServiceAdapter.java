@@ -33,7 +33,7 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
     @Override
     public Shop create(ShopImages shopImages, ShopRequestDto data) {
         Cafe cafe = Cafe.builder()
-                        .shopContent(new ShopContent(data.getName(), data.getBusinessHour(), data.getPhone()))
+                        .shopContent(new ShopContent(data.getName(), data.getStart(), data.getEnd(), data.getPhone()))
                         .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
                         .shopImages(shopImages)
                         .shopScore(new ShopScore(0.0, 0))

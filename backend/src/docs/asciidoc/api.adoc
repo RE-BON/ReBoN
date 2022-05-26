@@ -185,6 +185,7 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 | tag | Long | true | 위치 태그 id 값
 | category | Long | true | 최상위 카테고리 id 값
 | subCategories | Long | false | 최상위 카테고리에 속한 하위 카테고리의 id값. 여러개 보낼 수 있음(`ex. subCategories=5&subCategories=7`)
+| open | boolean | true | 영업중 여부 (false = 전체 가게 조회, true = 현재 시간에 운영중인 가게만 조회)
 |===
 include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
 

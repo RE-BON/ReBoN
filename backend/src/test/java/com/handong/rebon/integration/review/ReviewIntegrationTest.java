@@ -1,5 +1,6 @@
 package com.handong.rebon.integration.review;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import com.handong.rebon.integration.IntegrationTest;
@@ -79,7 +80,7 @@ class ReviewIntegrationTest extends IntegrationTest {
         Shop shop = new Restaurant(
                 null,
                 null,
-                new ShopContent(shopName, "12:00-23:00", "010-1234-1212"),
+                new ShopContent(shopName, LocalTime.of(12, 0), LocalTime.of(23, 0), "010-1234-1212"),
                 new ShopImages(),
                 null,
                 new ShopScore(0.0, 0), false
