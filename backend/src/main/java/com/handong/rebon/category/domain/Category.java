@@ -63,7 +63,7 @@ public class Category extends BaseEntity {
         category.parent = this;
     }
 
-    public void removeChildCategory(Category category){
+    public void removeChildCategory(Category category) {
         this.children.removeChild(category);
     }
 
@@ -96,14 +96,14 @@ public class Category extends BaseEntity {
         this.shopCategories.add(shopCategory);
     }
 
-    public void update(Category parent, String name){
+    public void update(Category parent, String name) {
         updateCategoryName(name);
         this.parent.removeChildCategory(this);
         this.parent = parent;
         this.parent.addChildCategory(this);
     }
 
-    public void updateCategoryName(String name){
+    public void updateCategoryName(String name) {
         validatesBlankName(name);
         this.name = name;
     }

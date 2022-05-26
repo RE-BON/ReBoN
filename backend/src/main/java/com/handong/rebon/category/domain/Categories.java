@@ -6,8 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 
-import com.handong.rebon.common.BaseEntity;
-
 import lombok.Getter;
 
 @Embeddable
@@ -22,7 +20,7 @@ public class Categories {
         this.categories.add(category);
     }
 
-    public void removeChild(Category category){
+    public void removeChild(Category category) {
         this.categories.remove(category);
     }
 
@@ -30,7 +28,7 @@ public class Categories {
         this.categories.forEach(child -> child.validateSame(category));
     }
 
-    public void delete(){
+    public void delete() {
         this.categories.forEach(Category::delete);
     }
 }
