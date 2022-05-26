@@ -7,9 +7,13 @@ import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.ImageUploader;
 import com.handong.rebon.exception.shop.NoSuchShopException;
+import com.handong.rebon.member.application.MemberService;
+import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
+import com.handong.rebon.shop.application.dto.request.ShopLikeRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
+import com.handong.rebon.shop.application.dto.response.ShopLikeResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
@@ -37,6 +41,7 @@ public class ShopService {
     private final CategoryService categoryService;
     private final TagService tagService;
     private final ShopAdapterService shopAdapterService;
+    private final MemberService memberService;
     private final ShopRepository shopRepository;
     private final ImageUploader imageUploader;
     private final ShopImageRepository shopImageRepository;
@@ -122,6 +127,22 @@ public class ShopService {
         adapter.update(shop, shopRequestDto);
 
         return shop.getId();
+    }
+
+    @Transactional
+    public ShopLikeResponseDto like(ShopLikeRequestDto shopLikeRequestDto) {
+        Member member = memberService.findById(shopLikeRequestDto.getUserId());
+        Shop shop = findById(shopLikeRequestDto.getShopId());
+        shop.like(member);
+        return new ShopLikeResponseDto(shop.getLikeCount(), true);
+    }
+
+    @Transactional
+    public ShopLikeResponseDto unlike(ShopLikeRequestDto shopLikeRequestDto) {
+        Member member = memberService.findById(shopLikeRequestDto.getUserId());
+        Shop shop = findById(shopLikeRequestDto.getShopId());
+        shop.unlike(member);
+        return new ShopLikeResponseDto(shop.getLikeCount(), false);
     }
 
     private void updateContent(ShopRequestDto shopRequestDto, Shop shop) {

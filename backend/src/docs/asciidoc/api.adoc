@@ -204,6 +204,30 @@ include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-request.adoc[]
 ==== Response
 include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-response.adoc[]
 
+=== Shop 좋아요 기능
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopLikeAcceptanceTest/likeShop/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/likeShop/http-response.adoc[]
+
+=== Shop 좋아요 취소 기능
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-response.adoc[]
+
 == Review API
 === 리뷰 생성 로그인이 된 경우
 ==== Request
