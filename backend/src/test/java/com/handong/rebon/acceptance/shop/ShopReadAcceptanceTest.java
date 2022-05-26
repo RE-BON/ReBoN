@@ -179,22 +179,21 @@ class ShopReadAcceptanceTest extends AcceptanceTest {
         Tag 양덕 = tags.get("양덕");
         Category 카페 = categories.get("카페");
 
-        LocalTime now = LocalTime.now();
         adminShopRegister.CafeRegisterWithMenu(
                 "카페1",
                 categories.get("카페"),
                 Collections.singletonList(categories.get("개인카페")),
                 Arrays.asList(tags.get("포항"), tags.get("양덕")),
-                now.minusHours(1),
-                now.plusHours(1)
+                LocalTime.MIN,
+                LocalTime.MAX
         );
         adminShopRegister.CafeRegisterWithMenu(
                 "카페2",
                 categories.get("카페"),
                 Collections.singletonList(categories.get("개인카페")),
                 Arrays.asList(tags.get("포항"), tags.get("양덕")),
-                now.minusHours(1),
-                now.plusHours(1)
+                LocalTime.MIN,
+                LocalTime.MAX
         );
 
         // when
