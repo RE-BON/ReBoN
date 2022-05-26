@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface CategoryRepository extends JpaRepository<Category, Long>, CategoryRepositoryCustom {
+public interface CategoryRepository extends JpaRepository<Category, Long>{
 
     boolean existsByName(String name);
 
@@ -20,4 +20,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long>, Categ
             "join fetch c.children " +
             "where c.id = :categoryId ")
     Optional<Category> findCategoryWithChildren(@Param("categoryId") Long categoryId);
+
+    boolean existsByParentAndName(Category category, String name);
 }

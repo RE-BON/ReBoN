@@ -58,8 +58,8 @@ public class CategoryService {
         }
     }
 
-    private void checkChildCategoryExist(Long parentId, String name) {
-        if (categoryRepository.existsByParentAndName(parentId, name)) {
+    private void checkChildCategoryExist(Category parent, String name) {
+        if (categoryRepository.existsByParentAndName(parent, name)) {
             throw new CategoryExistException();
         }
     }
@@ -102,7 +102,7 @@ public class CategoryService {
             category.updateCategoryName(categoryRequestDto.getName());
             return;
         }
-        checkChildCategoryExist(category.getParent().getId(), categoryRequestDto.getName());
+        checkChildCategoryExist(category.getParent(), categoryRequestDto.getName());
         category.updateCategoryName(categoryRequestDto.getName());
     }
 }
