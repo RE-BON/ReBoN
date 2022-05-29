@@ -2,8 +2,11 @@ package com.handong.rebon.category.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
+import com.handong.rebon.common.BaseEntity;
+import com.handong.rebon.exception.category.CategoryAlreadyDeletedException;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNameException;
 import com.handong.rebon.shop.domain.category.ShopCategory;
@@ -12,12 +15,16 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-public class Category {
+@Where(clause = "deleted=false")
+@SQLDelete(sql = "UPDATE category SET deleted = true WHERE id = ?")
+public class Category extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +71,25 @@ public class Category {
 
     public boolean isSameName(String name) {
         return this.name.equals(name);
+    }
+
+    public void delete() {
+        if (isDeleted()) {
+            throw new CategoryAlreadyDeletedException();
+        }
+        if (isParentCategory()) {
+            this.children.delete();
+        }
+        this.shopCategories.forEach(BaseEntity::deleteContent);
+        this.deleteContent();
+    }
+
+    public boolean isParentCategory() {
+        return Objects.isNull(this.parent);
+    }
+
+    public void addShopCategory(ShopCategory shopCategory) {
+        this.shopCategories.add(shopCategory);
     }
 
     public List<Category> getChildren() {
