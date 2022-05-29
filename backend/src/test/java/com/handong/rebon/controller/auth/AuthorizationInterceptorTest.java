@@ -1,22 +1,20 @@
 package com.handong.rebon.controller.auth;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.handong.rebon.auth.application.dto.response.LoginResponseDto;
 import com.handong.rebon.auth.domain.LoginMember;
-import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.common.factory.ImageFactory;
 import com.handong.rebon.controller.ControllerTest;
 import com.handong.rebon.exception.authorization.InvalidTokenException;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.content.ShopImage;
-import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.tag.domain.Tag;
 
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -90,11 +88,21 @@ public class AuthorizationInterceptorTest extends ControllerTest {
         Long memberId = saveMember();
         given(authService.findMemberByToken(any())).willReturn(new LoginMember(memberId));
         Long categoryId = categoryService.create("식당");
-        Category restaurant = categoryService.findById(categoryId);
+        Long subCategoryId = categoryService.create("베트남식");
         Long tagId = tagService.createTag("포항");
-        Tag tag = tagService.findById(tagId);
-        Shop shop = saveShop(restaurant, tag);
+
+        ShopRequestDto shopRequestDto = ShopRequestDto.builder()
+                                                      .categoryId(categoryId)
+                                                      .subCategories(List.of(subCategoryId))
+                                                      .tags(List.of(tagId))
+                                                      .images(List.of(ImageFactory.createFakeImage("정면사진")))
+                                                      .menus(List.of(new MenuGroupRequestDto("피자메뉴", List.of())))
+                                                      .name("팜스발리")
+                                                      .build();
+        Long shopId = shopService.create(shopRequestDto);
+        Shop shop = shopService.findById(shopId);
         saveReview(memberId, shop);
+
         //when
         WebTestClient.ResponseSpec response = webTestClient.get()
                                                            .uri("/api/shops/" + shop.getId() + "/reviews")
@@ -107,17 +115,6 @@ public class AuthorizationInterceptorTest extends ControllerTest {
     private void saveReview(Long memberId, Shop shop) {
         ReviewCreateRequestDto reviewCreateRequestDto = new ReviewCreateRequestDto(memberId, shop.getId(), "테스트 컨텐트", "테스트 팁", new ArrayList<>(), 4);
         reviewService.create(reviewCreateRequestDto);
-    }
-
-    private Shop saveShop(Category restaurant, Tag tag) {
-        Shop shop = adminShopRegister.simpleRegister(
-                "팜스발리",
-                restaurant,
-                List.of(restaurant),
-                List.of(tag),
-                new ShopImages(Collections.singletonList(new ShopImage("url1", true)))
-        );
-        return shop;
     }
 
     private Long saveMember() {
