@@ -28,7 +28,7 @@ public class ReviewDeleteAcceptanceTest extends ReviewAcceptanceTest {
     @DisplayName("로그인이 되어 있는 상태에서 review를 지울 수 있다.")
     void deleteReviewWithLogin() {
         //given
-        String bearerToken = getBearerToken();
+        String bearerToken = getBearerToken("test@gmail.com", "test");
 
         ExtractableResponse<Response> reviewSaveResponse = saveTestReview(bearerToken);
         Long reviewId = getReviewId(reviewSaveResponse);
@@ -40,17 +40,18 @@ public class ReviewDeleteAcceptanceTest extends ReviewAcceptanceTest {
     }
 
     @Test
-    @DisplayName("로그인이 되지 않은 상태에서 review를 지울 수 없다.")
-    void deleteReviewWithoutLogin() {
+    @DisplayName("자신이 쓰지 않은 리뷰를 삭제할 수 없다.")
+    void cannotDeleteWithNotOwner() {
         //given
-        String bearerToken = getBearerToken();
+        String savedReviewBearerToken = getBearerToken("test1@gmail.com", "test1");
+        String notOwnerBearerToken = getBearerToken("test2@gmail.com", "test2");
 
-        ExtractableResponse<Response> reviewSaveResponse = saveTestReview(bearerToken);
+        ExtractableResponse<Response> reviewSaveResponse = saveTestReview(savedReviewBearerToken);
         Long reviewId = getReviewId(reviewSaveResponse);
         //when
-        ExtractableResponse<Response> response = deleteReview(reviewId, null);
+        ExtractableResponse<Response> response = deleteReview(reviewId, notOwnerBearerToken);
         //then
-        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+        Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.FORBIDDEN.value());
 
     }
 
@@ -83,8 +84,8 @@ public class ReviewDeleteAcceptanceTest extends ReviewAcceptanceTest {
     }
 
     @NotNull
-    private String getBearerToken() {
-        ExtractableResponse<Response> registerResponse = 회원가입();
+    private String getBearerToken(String email, String nickname) {
+        ExtractableResponse<Response> registerResponse = 회원가입(email, nickname);
         String token = extractedToken(registerResponse);
         String bearerToken = "Bearer " + token;
         return bearerToken;
