@@ -77,11 +77,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     @Test
     @DisplayName("로그인이 되어 있지 않은 상태에서 내가 쓴 리뷰를 가져올 수 없다.")
     void getReviewByMemberWithoutLogin() {
-        //given
-        String bearerToken = getBearerToken();
-        makeTestReview(bearerToken);
-
-        //when
+        //given//when
         ExtractableResponse<Response> response = getReviewByMember(null);
 
         //then
