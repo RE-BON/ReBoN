@@ -5,9 +5,13 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Getter
 public class ReviewGetByMemberResponse {
