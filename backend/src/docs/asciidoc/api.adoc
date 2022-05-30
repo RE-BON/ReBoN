@@ -250,14 +250,15 @@ include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithLogin/http-reques
 ==== Response
 include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithLogin/http-response.adoc[]
 
-=== 리뷰 삭제 로그인되지 않은 경우
+=== 다른 사람이 작성한 리뷰를 삭제하려는 경우
 ==== Request
 
 |===
 | 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
 | reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
 |===
-include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithoutLogin/http-request.adoc[]
+include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-request.adoc[]
 
 ==== Response
-include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithoutLogin/http-response.adoc[]
+include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]
