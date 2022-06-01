@@ -1,5 +1,6 @@
 package com.handong.rebon.integration.shop;
 
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -96,7 +97,9 @@ class ShopIntegrationTest extends IntegrationTest {
                 "스타벅스",
                 categories.get("카페"),
                 List.of(categories.get("프랜차이즈")),
-                List.of(tags.get("포항"))
+                List.of(tags.get("포항")),
+                null,
+                null
         );
 
         Long savedShopId = shop.getId();
@@ -119,7 +122,9 @@ class ShopIntegrationTest extends IntegrationTest {
                 "스타벅스",
                 categories.get("카페"),
                 List.of(categories.get("프랜차이즈")),
-                List.of(tags.get("포항"))
+                List.of(tags.get("포항")),
+                null,
+                null
         );
 
         ShopRequestDto shopRequestDto = getShopCreateRequestDto(
@@ -154,7 +159,9 @@ class ShopIntegrationTest extends IntegrationTest {
                 "스타벅스",
                 categories.get("카페"),
                 List.of(categories.get("프랜차이즈")),
-                List.of(tags.get("포항"))
+                List.of(tags.get("포항")),
+                null,
+                null
         );
 
         ShopRequestDto shopRequestDto = getShopCreateRequestDto(
@@ -190,7 +197,8 @@ class ShopIntegrationTest extends IntegrationTest {
                              .categoryId(category.getId())
                              .subCategories(subIds)
                              .name("팜스발리")
-                             .businessHour("10:00 ~ 22:00")
+                             .start(LocalTime.of(10, 0))
+                             .end(LocalTime.of(22, 0))
                              .phone("010-1234-5678")
                              .address("경상북도 포항")
                              .longitude("129.389762")

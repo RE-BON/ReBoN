@@ -5,9 +5,13 @@ import java.util.stream.Collectors;
 
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Getter
 public class ReviewGetByShopResponse {
@@ -19,7 +23,7 @@ public class ReviewGetByShopResponse {
     private int star;
     private int empathyCount;
     private List<String> images;
-    private boolean isLiked;
+    private boolean liked;
 
     public static List<ReviewGetByShopResponse> convert(List<ReviewGetByShopResponseDto> responses) {
         return responses.stream()
@@ -37,7 +41,7 @@ public class ReviewGetByShopResponse {
                                       .star(response.getStar())
                                       .empathyCount(response.getEmpathyCount())
                                       .images(response.getImages())
-                                      .isLiked(response.isLiked())
+                                      .liked(response.isLiked())
                                       .build();
     }
 }

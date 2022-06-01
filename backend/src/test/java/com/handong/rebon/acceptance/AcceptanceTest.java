@@ -85,5 +85,4 @@ public class AcceptanceTest {
         ExtractableResponse<Response> memberResponse = MemberCreateAcceptanceTest.saveMember(memberCreateRequest);
         return memberResponse;
     }
-
 }
