@@ -3,9 +3,7 @@ package com.handong.rebon.review.application;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
-import com.handong.rebon.exception.shop.ShopNotFoundException;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
@@ -35,9 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ShopRepository shopRepository;
     private final ShopService shopService;
-    private final MemberRepository memberRepository;
     private final MemberService memberService;
 
     @Transactional
@@ -95,7 +91,7 @@ public class ReviewService {
         Long memberId = reviewGetByMemberRequestDto.getMemberId();
         Pageable pageable = reviewGetByMemberRequestDto.getPageable();
 
-        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        Member member = memberService.findById(memberId);
 
         List<Review> reviews = reviewRepository.findAllByMember(member, pageable).getContent();
 
@@ -108,9 +104,9 @@ public class ReviewService {
         Long memberId = reviewGetByShopRequestDto.getMemberId();
         Pageable pageable = reviewGetByShopRequestDto.getPageable();
 
-        Shop shop = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
+        Shop shop = shopService.findById(shopId);
 
-        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        Member member = memberService.findById(memberId);
 
         List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
 
@@ -119,10 +115,14 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                                        .orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
+    }
+
+    private Review findOneById(Long id) {
+        return reviewRepository.findById(id)
+                               .orElseThrow(ReviewNotFoundException::new);
     }
 
     private ReviewImages saveImages(List<String> imageUrls) {

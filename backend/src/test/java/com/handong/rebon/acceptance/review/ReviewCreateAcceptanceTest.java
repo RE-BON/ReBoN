@@ -54,7 +54,7 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    private ExtractableResponse<Response> saveReview(ReviewRequest reviewRequest, Long shopId, String token) {
+    public static ExtractableResponse<Response> saveReview(ReviewRequest reviewRequest, Long shopId, String token) {
         RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
                                                       .log().all();
         if (!Objects.isNull(token)) {
