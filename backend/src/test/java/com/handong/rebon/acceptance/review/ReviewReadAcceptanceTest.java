@@ -114,7 +114,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
 
     @NotNull
     private String getBearerToken() {
-        ExtractableResponse<Response> registerResponse = 회원가입();
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
         String token = extractedToken(registerResponse);
         String bearerToken = "Bearer " + token;
         return bearerToken;

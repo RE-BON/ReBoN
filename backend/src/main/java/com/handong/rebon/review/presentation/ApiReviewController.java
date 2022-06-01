@@ -8,6 +8,7 @@ import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
@@ -78,5 +79,18 @@ public class ApiReviewController {
         List<ReviewGetByMemberResponseDto> reviews = reviewService.findAllByMember(reviewRequestDto);
 
         return ResponseEntity.ok(ReviewGetByMemberResponse.convert(reviews));
+    }
+
+    @RequiredLogin
+    @DeleteMapping("/reviews/{reviewId}")
+    public ResponseEntity<Void> delete(
+            @Login LoginMember loginMember,
+            @PathVariable Long reviewId
+    ) {
+        ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(loginMember.getId(), reviewId);
+        reviewService.delete(reviewDeleteRequestDto);
+
+        return ResponseEntity.ok()
+                             .build();
     }
 }

@@ -237,7 +237,9 @@ include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-request.adoc[]
 include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-response.adoc[]
 
 == Review API
+
 === 리뷰 생성 로그인이 된 경우
+
 ==== Request
 
 |===
@@ -252,9 +254,11 @@ include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-response.adoc[]
 include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-request.adoc[]
 
 ==== Response
+
 include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-response.adoc[]
 
 === 리뷰 생성 로그인이 되지 않은 경우
+
 ==== Request
 
 |===
@@ -268,34 +272,41 @@ include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-respon
 include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-request.adoc[]
 
 ==== Response
+
 include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-response.adoc[]
 
 === 가게 리뷰 조회 로그인이 된 경우
+
 ==== Request
 
 |===
-| 값 | 타입 | 필수 | 설명
 | token | String | true | Authorization header에 bearer type으로 jwt 보내주기
 | shopId | Long | true | Path variable로 리뷰 조회 가게 보내주기
 |===
+
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithLogin/http-request.adoc[]
 
 ==== Response
+
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithLogin/http-response.adoc[]
 
 === 가게 리뷰 조회 로그인이 되지 않은 경우
+
 ==== Request
 
 |===
 | 값 | 타입 | 필수 | 설명
 | shopId | Long | true | Path variable로 리뷰 조회 가게 보내주기
 |===
+
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithoutLogin/http-request.adoc[]
 
 ==== Response
+
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithoutLogin/http-response.adoc[]
 
 === 내가 쓴 리뷰 조회 로그인이 된 경우
+
 ==== Request
 
 |===
@@ -308,6 +319,7 @@ include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithLogin/http-req
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithLogin/http-response.adoc[]
 
 === 내가 쓴 리뷰 조회 로그인이 되지 않은 경우
+
 ==== Request
 
 |===
@@ -317,3 +329,31 @@ include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithoutLogin/http-
 
 ==== Response
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithoutLogin/http-response.adoc[]
+
+
+=== 리뷰 삭제 로그인이 된 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+|===
+include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithLogin/http-response.adoc[]
+
+=== 다른 사람의 리뷰를 삭제하려는 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+|===
+include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]

@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
@@ -18,7 +17,6 @@ import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.util.StringUtil;
 
 import org.springframework.data.domain.Pageable;
@@ -61,7 +59,7 @@ public class ReviewService {
         Long reviewId = reviewDeleteRequestDto.getReviewId();
         Long memberId = reviewDeleteRequestDto.getMemberId();
 
-        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
         Member member = memberService.findById(memberId);
 
         review.delete(member);

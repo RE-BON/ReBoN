@@ -71,7 +71,7 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
     @DisplayName("가게 좋아요")
     void likeShop() {
         // given
-        ExtractableResponse<Response> registerResponse = 회원가입();
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
         String token = extractedToken(registerResponse);
         Shop shop = shops.get("티타");
 
@@ -89,7 +89,7 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
     @DisplayName("가게 좋아요 취소")
     void unlikeShop() {
         // given
-        ExtractableResponse<Response> registerResponse = 회원가입();
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
         String token = extractedToken(registerResponse);
         Shop shop = shops.get("티타");
 

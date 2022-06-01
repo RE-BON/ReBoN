@@ -47,10 +47,10 @@ public class ControllerTest {
     protected CategoryService categoryService;
 
     @Autowired
-    protected ShopService shopService;
+    protected TagService tagService;
 
     @Autowired
-    protected TagService tagService;
+    protected ShopService shopService;
 
     @Autowired
     protected AdminShopRegister adminShopRegister;
