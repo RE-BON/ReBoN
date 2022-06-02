@@ -4,7 +4,6 @@ import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewContent;
-import com.handong.rebon.review.domain.empathy.Empathy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,11 +25,7 @@ public class ReviewTest {
                               .reviewContent(reviewContent)
                               .member(member1)
                               .build();
-
-        Empathy empathy = new Empathy();
-        review.addEmpathy(empathy);
-        member2.addEmpathy(empathy);
-
+        review.empathize(member2);
         //when
         boolean isMemberLiked = review.isMemberLiked(member2);
 
@@ -53,9 +48,7 @@ public class ReviewTest {
                               .member(member1)
                               .build();
 
-        Empathy empathy = new Empathy();
-        review.addEmpathy(empathy);
-        member2.addEmpathy(empathy);
+        review.empathize(member2);
 
         //when
         boolean isMemberLiked = review.isMemberLiked(member3);
