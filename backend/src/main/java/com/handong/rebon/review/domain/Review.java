@@ -68,9 +68,20 @@ public class Review extends BaseEntity {
                         .anyMatch(empathy -> empathy.isSameMember(member));
     }
 
-    public void addEmpathy(Empathy empathy) {
-        empathies.add(empathy);
-        empathy.belongTo(this);
+    public void empathize(Member member) {
+        Empathy empathy = new Empathy(member, this);
+        this.empathies.add(empathy);
+        member.empathizeReview(empathy);
+    }
+
+    public void unEmpathize(Member member) {
+        Empathy empathy = new Empathy(member, this);
+        this.empathies.remove(empathy);
+        member.unEmpathizeReview(empathy);
+    }
+
+    public int getEmpathizeCount() {
+        return this.empathies.size();
     }
 
     public String getContent() {

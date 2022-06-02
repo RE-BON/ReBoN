@@ -12,6 +12,7 @@ import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewEmpathizeResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.domain.Review;
@@ -65,7 +66,7 @@ public class ReviewService {
         Long reviewId = reviewDeleteRequestDto.getReviewId();
         Long memberId = reviewDeleteRequestDto.getMemberId();
 
-        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        Review review = this.findById(reviewId);
         Member member = memberService.findById(memberId);
 
         review.delete(member);
@@ -119,8 +120,7 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                                        .orElseThrow(ReviewNotFoundException::new);
+        Review review = this.findById(reviewId);
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
@@ -130,5 +130,25 @@ public class ReviewService {
                                                   .map(ReviewImage::new)
                                                   .collect(Collectors.toList());
         return new ReviewImages(reviewImages);
+    }
+
+    @Transactional
+    public ReviewEmpathizeResponseDto empathize(ReviewEmpathizeRequestDto reviewEmpathizeRequestDto){
+        Member member = memberService.findById(reviewEmpathizeRequestDto.getUserId());
+        Review review = this.findById(reviewEmpathizeRequestDto.getReviewId());
+        review.empathize(member);
+        return new ReviewEmpathizeResponseDto(review.getEmpathizeCount(), true);
+    }
+
+    @Transactional
+    public ReviewEmpathizeResponseDto unEmpathize(ReviewEmpathizeRequestDto reviewEmpathizeRequestDto){
+        Member member = memberService.findById(reviewEmpathizeRequestDto.getUserId());
+        Review review = this.findById(reviewEmpathizeRequestDto.getReviewId());
+        review.unEmpathize(member);
+        return new ReviewEmpathizeResponseDto(review.getEmpathizeCount(), false);
+    }
+
+    private Review findById(Long reviewId){
+        return reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
     }
 }

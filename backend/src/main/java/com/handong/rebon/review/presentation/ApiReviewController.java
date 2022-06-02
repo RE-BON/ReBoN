@@ -8,10 +8,13 @@ import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewEmpathizeRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
+import com.handong.rebon.review.application.dto.response.ReviewEmpathizeResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
+import com.handong.rebon.review.presentation.dto.response.ReviewEmpathizeResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewResponse;
 
@@ -71,5 +74,25 @@ public class ApiReviewController {
         List<ReviewResponseDto> reviews = reviewService.findByMemberId(reviewRequestDto);
         */
         return new ReviewResponse();
+    }
+
+    @RequiredLogin
+    @PostMapping("/{reviewId}/empathize")
+    public ResponseEntity<Object> empathize(
+            @Login LoginMember loginMember, @PathVariable Long reviewId
+    ) {
+        ReviewEmpathizeRequestDto empathizeRequestDto = new ReviewEmpathizeRequestDto(loginMember.getId(), reviewId);
+        ReviewEmpathizeResponseDto reviewEmpathizeResponseDto = reviewService.empathize(empathizeRequestDto);
+        return ResponseEntity.ok(ReviewEmpathizeResponse.from(reviewEmpathizeResponseDto));
+    }
+
+    @RequiredLogin
+    @PostMapping("/{reviewId}/unempathize")
+    public ResponseEntity<Object> unempathize(
+            @Login LoginMember loginMember, @PathVariable Long reviewId
+    ) {
+        ReviewEmpathizeRequestDto empathizeRequestDto = new ReviewEmpathizeRequestDto(loginMember.getId(), reviewId);
+        ReviewEmpathizeResponseDto reviewEmpathizeResponseDto = reviewService.unEmpathize(empathizeRequestDto);
+        return ResponseEntity.ok(ReviewEmpathizeResponse.from(reviewEmpathizeResponseDto));
     }
 }

@@ -2,6 +2,7 @@ package com.handong.rebon.member.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
@@ -46,16 +47,19 @@ public class Member extends BaseEntity {
     }
 
     public boolean isSame(Member member) {
-        return this.id == member.id;
+        return Objects.equals(this.id, member.id);
     }
 
     public boolean isAdmin() {
         return isAdmin;
     }
 
-    public void addEmpathy(Empathy empathy) {
+    public void empathizeReview(Empathy empathy) {
         empathies.add(empathy);
-        empathy.belongTo(this);
+    }
+
+    public void unEmpathizeReview(Empathy empathy){
+        empathies.remove(empathy);
     }
 
     public String getNickName() {
