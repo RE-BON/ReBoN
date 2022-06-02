@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
+import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.like.Likes;
 
 import lombok.*;
@@ -26,7 +27,7 @@ public class Member extends BaseEntity {
     private Profile profile;
 
     @Builder.Default
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Likes> likes = new ArrayList<>();
 
     @Builder.Default
@@ -62,8 +63,15 @@ public class Member extends BaseEntity {
         empathies.remove(empathy);
     }
 
+    public void likeShop(Likes likes) {
+        this.likes.add(likes);
+    }
+
+    public void unLike(Likes like) {
+        this.likes.remove(like);
+    }
+
     public String getNickName() {
         return profile.getNickname();
     }
-
 }

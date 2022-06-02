@@ -75,15 +75,14 @@ public class AcceptanceTest {
         return memberCreateResponse.getToken();
     }
 
-    public static ExtractableResponse<Response> 회원가입() {
+    public static ExtractableResponse<Response> 회원가입(String email, String nickname) {
         MemberCreateRequest memberCreateRequest = new MemberCreateRequest(
-                "test@gmail.com",
-                "test",
+                email,
+                nickname,
                 TEST_OAUTH_PROVIDER,
                 true
         );
         ExtractableResponse<Response> memberResponse = MemberCreateAcceptanceTest.saveMember(memberCreateRequest);
         return memberResponse;
     }
-
 }

@@ -26,7 +26,7 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
     @DisplayName("로그인이 되어 있는 상태에서 리뷰를 작성한다.")
     void createReviewWithLogin() {
         //given
-        ExtractableResponse<Response> registerResponse = 회원가입();
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
         String token = extractedToken(registerResponse);
         ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", 5);
         Shop shop = shops.get("팜스발리");
@@ -54,7 +54,7 @@ public class ReviewCreateAcceptanceTest extends ReviewAcceptanceTest {
         Assertions.assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    private ExtractableResponse<Response> saveReview(ReviewRequest reviewRequest, Long shopId, String token) {
+    public static ExtractableResponse<Response> saveReview(ReviewRequest reviewRequest, Long shopId, String token) {
         RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
                                                       .log().all();
         if (!Objects.isNull(token)) {

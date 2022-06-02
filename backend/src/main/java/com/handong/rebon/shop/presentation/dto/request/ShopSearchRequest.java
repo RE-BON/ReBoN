@@ -17,12 +17,14 @@ import lombok.Setter;
 public class ShopSearchRequest {
     private Long tag;
     private Long category;
+    private boolean open;
     private List<Long> subCategories = new ArrayList<>();
 
     public ShopSearchDto toDto(Pageable pageable) {
         return ShopSearchDto.builder()
                             .tag(tag)
                             .category(category)
+                            .isOpen(open)
                             .subCategories(subCategories)
                             .pageable(pageable)
                             .build();
