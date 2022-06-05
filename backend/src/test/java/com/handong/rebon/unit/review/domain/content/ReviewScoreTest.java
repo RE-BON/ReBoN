@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ReviewScoreTest {
@@ -39,6 +40,40 @@ class ReviewScoreTest {
         //given
         //when, then
         assertThatThrownBy(() -> new ReviewScore(1, -1))
+                .isInstanceOf(ReviewLikeCountException.class);
+    }
+
+    @Test
+    @DisplayName("empathyCount를 증가시킬 수 있다.")
+    public void increaseEmpathyCount() {
+        //given
+        ReviewScore reviewScore = new ReviewScore(1, 0);
+        //when
+        reviewScore.increaseEmpathyCount();
+        //then
+        assertThat(reviewScore).extracting("empathyCount")
+                               .isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("empathyCount를 감소시킬 수 있다.")
+    public void increaseEmpathyException() {
+        //given
+        ReviewScore reviewScore = new ReviewScore(1, 1);
+        //when
+        reviewScore.decreaseEmpathyCount();
+        //then
+        assertThat(reviewScore).extracting("empathyCount")
+                               .isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("empathyCount를 감소시킬 때 음수가 된다면 예외 발생")
+    public void decreaseEmpathyCountException() {
+        //given
+        ReviewScore reviewScore = new ReviewScore(1, 0);
+        //when, then
+        assertThatThrownBy(reviewScore::decreaseEmpathyCount)
                 .isInstanceOf(ReviewLikeCountException.class);
     }
 }
