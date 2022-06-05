@@ -13,23 +13,11 @@
         <h1>태그 등록</h1>
     </div>
     <div class="row justify-content-center">
-        <form class="needs-validation col-sm-10" th:action="@{/admin/tags/new}"  th:object="${tagRequest}" method="post"
+        <form class="needs-validation col-sm-10" th:action="@{/admin/tags}"  method="post"
               novalidate  enctype="multipart/form-data">
-            <input placeholder="등록할 태그 이름" th:name="name">
+            <input placeholder="등록할 태그 이름" th:name="tagName">
             <button type="submit">등록</button>
         </form>
-    </div>
-
-    <div class="jumbotron">
-        <h1>태그 목록</h1>
-    </div>
-    <div th:each="tag : ${tags}">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm ."  th:text="${tag.id}"></div>
-                <div class="col-sm" th:text="${tag.name}"></div>
-            </div>
-        </div>
     </div>
 
     <div th:replace="fragments/footer :: footer"></div>

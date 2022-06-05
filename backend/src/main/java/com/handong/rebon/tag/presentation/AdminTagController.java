@@ -1,8 +1,15 @@
 package com.handong.rebon.tag.presentation;
-import com.handong.rebon.tag.application.TagService;
+
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import com.handong.rebon.tag.application.TagService;
+import com.handong.rebon.tag.presentation.dto.response.TagResponse;
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
+import com.handong.rebon.tag.presentation.dto.TagAssembler;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,15 +19,28 @@ import lombok.RequiredArgsConstructor;
 public class AdminTagController {
     private final TagService tagService;
 
-    @PostMapping("/tags/new")
-    public String create(@PathVariable String tagName) {
-        Long id = tagService.createTag(tagName);
+    @GetMapping("/tags/new")
+    public String createForm(Model model) {
         return "tag/createForm";
     }
 
-    @DeleteMapping("/tags/delete")
+    @PostMapping("/tags")
+    public String create(@RequestParam(value = "tagName") String tagName) {
+        Long id = tagService.createTag(tagName);
+        return "redirect:/admin/tags/view";
+    }
+
+    @GetMapping("/tags/view")
+    public String view(Model model) {
+        List<TagResponseDto> tagDtos = tagService.findTags();
+        List<TagResponse> responses = TagAssembler.tagResponses(tagDtos);
+        model.addAttribute("tags", responses);
+        return "tag/viewForm";
+    }
+
+    @GetMapping("/tags/delete/{id}")
     public String delete(@PathVariable Long id) {
         tagService.delete(id);
-        return "tag/deleteForm";
+        return "redirect:/admin/tags/view";
     }
 }
