@@ -132,19 +132,19 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewEmpathizeResponseDto empathize(ReviewEmpathizeRequestDto reviewEmpathizeRequestDto){
+    public ReviewEmpathizeResponseDto empathize(ReviewEmpathizeRequestDto reviewEmpathizeRequestDto) {
         Member member = memberService.findById(reviewEmpathizeRequestDto.getUserId());
         Review review = this.findOneById(reviewEmpathizeRequestDto.getReviewId());
         review.empathize(member);
-        return new ReviewEmpathizeResponseDto(review.getEmpathizeCount(), true);
+        return new ReviewEmpathizeResponseDto(review.getEmpathyCount(), true);
     }
 
     @Transactional
-    public ReviewEmpathizeResponseDto unEmpathize(ReviewEmpathizeRequestDto reviewEmpathizeRequestDto){
+    public ReviewEmpathizeResponseDto unEmpathize(ReviewEmpathizeRequestDto reviewEmpathizeRequestDto) {
         Member member = memberService.findById(reviewEmpathizeRequestDto.getUserId());
         Review review = this.findOneById(reviewEmpathizeRequestDto.getReviewId());
         review.unEmpathize(member);
-        return new ReviewEmpathizeResponseDto(review.getEmpathizeCount(), false);
+        return new ReviewEmpathizeResponseDto(review.getEmpathyCount(), false);
     }
 
 }

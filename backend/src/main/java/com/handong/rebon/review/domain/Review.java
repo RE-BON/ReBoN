@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.member.MemberForbiddenException;
+import com.handong.rebon.exception.review.ReviewEmpathyExistException;
+import com.handong.rebon.exception.review.ReviewEmpathyNotExistException;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -70,18 +72,24 @@ public class Review extends BaseEntity {
 
     public void empathize(Member member) {
         Empathy empathy = new Empathy(member, this);
+        if (isEmpathyExist(empathy))
+            throw new ReviewEmpathyExistException();
         this.empathies.add(empathy);
+        this.reviewScore.increaseEmpathyCount();
         member.empathizeReview(empathy);
     }
 
     public void unEmpathize(Member member) {
         Empathy empathy = new Empathy(member, this);
+        if (!isEmpathyExist(empathy))
+            throw new ReviewEmpathyNotExistException();
         this.empathies.remove(empathy);
+        this.reviewScore.decreaseEmpathyCount();
         member.unEmpathizeReview(empathy);
     }
 
-    public int getEmpathizeCount() {
-        return this.empathies.size();
+    private boolean isEmpathyExist(Empathy empathy) {
+        return this.empathies.contains(empathy);
     }
 
     public String getContent() {
