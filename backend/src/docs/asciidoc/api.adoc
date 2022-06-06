@@ -357,3 +357,26 @@ include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-req
 
 ==== Response
 include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]
+
+=== Review 공감 기능
+==== Request (Path Variable)
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Long | true | 공감하고자 하는 리뷰의 id 값
+|===
+include::{snippets}/ReviewEmpathyAcceptanceTest/empathizeReview/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewEmpathyAcceptanceTest/empathizeReview/http-response.adoc[]
+
+=== Review 공감 취소 기능
+==== Request (Path Variable)
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 공감을 취소하고자 하는 리뷰의 id 값
+|===
+include::{snippets}/ReviewEmpathyAcceptanceTest/unEmpathizeReview/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewEmpathyAcceptanceTest/unEmpathizeReview/http-response.adoc[]
