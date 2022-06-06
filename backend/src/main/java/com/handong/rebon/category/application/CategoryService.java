@@ -11,7 +11,7 @@ import com.handong.rebon.category.application.dto.response.RootCategoryResponseD
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryIdNullException;
+import com.handong.rebon.exception.category.CategoryParentIdNullException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
@@ -105,9 +105,8 @@ public class CategoryService {
             return;
         }
 
-
         if (Objects.isNull(categoryUpdateRequestDto.getParentId())) {
-            throw new CategoryIdNullException();
+            throw new CategoryParentIdNullException();
         }
         checkChildCategoryExist(category.getParent(), categoryUpdateRequestDto.getName());
         Category parentCategory = this.findById(categoryUpdateRequestDto.getParentId());

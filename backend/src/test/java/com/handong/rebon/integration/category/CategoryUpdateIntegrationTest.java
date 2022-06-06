@@ -3,7 +3,7 @@ package com.handong.rebon.integration.category;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.request.CategoryUpdateRequestDto;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryIdNullException;
+import com.handong.rebon.exception.category.CategoryParentIdNullException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -111,6 +111,6 @@ public class CategoryUpdateIntegrationTest extends CategoryIntegrationTest {
 
         //when, then
         assertThatThrownBy(() -> categoryService.update(new CategoryUpdateRequestDto(categoryId, null, "양식")))
-                .isInstanceOf(CategoryIdNullException.class);
+                .isInstanceOf(CategoryParentIdNullException.class);
     }
 }
