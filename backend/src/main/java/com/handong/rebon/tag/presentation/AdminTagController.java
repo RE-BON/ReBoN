@@ -20,13 +20,13 @@ public class AdminTagController {
     private final TagService tagService;
 
     @GetMapping("/tags/new")
-    public String createForm(Model model) {
+    public String createForm() {
         return "tag/createForm";
     }
 
     @PostMapping("/tags")
     public String create(@RequestParam(value = "tagName") String tagName) {
-        Long id = tagService.createTag(tagName);
+        tagService.createTag(tagName);
         return "redirect:/admin/tags/view";
     }
 
