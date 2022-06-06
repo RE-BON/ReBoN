@@ -46,7 +46,7 @@ public class Review extends BaseEntity {
     private ReviewScore reviewScore;
 
     @Builder.Default
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Empathy> empathies = new ArrayList<>();
 
     public void addReviewImages(ReviewImages reviewImages) {

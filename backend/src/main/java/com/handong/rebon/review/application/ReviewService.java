@@ -119,7 +119,7 @@ public class ReviewService {
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
 
-    private Review findOneById(Long id) {
+    public Review findOneById(Long id) {
         return reviewRepository.findById(id)
                                .orElseThrow(ReviewNotFoundException::new);
     }
