@@ -13,10 +13,18 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
-  profiles:
-    include: prod
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
-
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
+      springframework:
+        data:
+          elasticsearch:
+            client:
+              WIRE: TRACE

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="jumbotron">
+        <h1>Category 삭제</h1>
+    </div>
+    <div class="row justify-content-center">
+        <form class="needs-validation col-sm-10" th:action="@{/admin/categories}"
+              th:object="${request}" method="post"
+              novalidate  enctype="multipart/form-data">
+            <input type="hidden" name="_method" value = "delete">
+            <input placeholder="삭제할 카테고리 id" th:name="categoryId">
+            <button type="submit">삭제</button>
+        </form>
+    </div>
+    <h2>카테고리 목록</h2>
+    <div th:each="category : ${categories}">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm ."  th:text="${category.id}"></div>
+                <div class="col-sm" th:text="${category.name}"></div>
+            </div>
+        </div>
+        <div th:if="${category.children}">
+            <div th:each="child : ${category.children}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm"  th:text="${child.id}"></div>
+                        <div class="col-sm" th:text="${child.name}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>
+

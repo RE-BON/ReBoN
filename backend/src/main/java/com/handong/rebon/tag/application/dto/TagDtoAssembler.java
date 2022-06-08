@@ -15,7 +15,7 @@ public class TagDtoAssembler {
 
     public static List<TagResponseDto> tagResponseDtos(List<Tag> tags) {
         return tags.stream()
-                   .map(tag -> new TagResponseDto(tag.getId(), tag.getName()))
+                   .map(tag -> new TagResponseDto(tag.getId(), tag.getName(), tag.getCount()))
                    .collect(Collectors.toList());
     }
 }

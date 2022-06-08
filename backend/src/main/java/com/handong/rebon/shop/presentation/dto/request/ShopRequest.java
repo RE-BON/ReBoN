@@ -1,5 +1,6 @@
 package com.handong.rebon.shop.presentation.dto.request;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 import com.handong.rebon.shop.application.dto.request.menu.MenuRequestDto;
+import com.handong.rebon.util.StringUtil;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,12 +45,14 @@ public class ShopRequest {
                                                               .filter(menuGroup -> !menuGroup.getName().isBlank())
                                                               .map(this::toDto)
                                                               .collect(Collectors.toList());
+        LocalTime[] businessHour = StringUtil.getTime(this.businessHour);
 
         return ShopRequestDto.builder()
                              .categoryId(categoryId)
                              .subCategories(subCategories)
                              .name(name)
-                             .businessHour(businessHour)
+                             .start(businessHour[0])
+                             .end(businessHour[1])
                              .phone(phone)
                              .address(address)
                              .latitude(latitude)

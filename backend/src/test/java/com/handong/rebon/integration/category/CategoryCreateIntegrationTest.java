@@ -1,14 +1,15 @@
 package com.handong.rebon.integration.category;
 
-import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryNoParentException;
+import com.handong.rebon.exception.category.CategoryNotFoundException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
@@ -33,12 +34,12 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
         String createdName = "테스트한식";
         Long parentId = categoryService.create(parentName);
 
-        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
-                                                                  .parentId(parentId)
-                                                                  .name(createdName)
-                                                                  .build();
+        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
+                                                                                    .parentId(parentId)
+                                                                                    .name(createdName)
+                                                                                    .build();
         //when
-        Long id = categoryService.create(categoryRequestDto);
+        Long id = categoryService.create(categoryCreateRequestDto);
         Category createdCategory = categoryRepository.getById(id);
         //then
         assertThat(createdCategory.getParent().getName()).isEqualTo(parentName);
@@ -50,15 +51,13 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
     public void createCategoryWithParentException() {
         //given
         long parentId = -1;
-        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
-                                                                  .parentId(parentId)
-                                                                  .name("테스트한식")
-                                                                  .build();
-        //when
-        CategoryNoParentException exception = assertThrows(CategoryNoParentException.class, () -> categoryService.create(categoryRequestDto));
-        //then
-        assertThat(exception.getMessage()).isEqualTo("저장하려는 카테고리의 부모 카테고리가 존재하지 않습니다.");
-
+        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
+                                                                                    .parentId(parentId)
+                                                                                    .name("테스트한식")
+                                                                                    .build();
+        //when, then
+        assertThatThrownBy(() -> categoryService.create(categoryCreateRequestDto))
+                .isInstanceOf(CategoryNotFoundException.class);
     }
 
     @Test
@@ -82,14 +81,14 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
         String parentName = "테스트식당";
         String createdName = "테스트한식";
         Long parentId = categoryService.create(parentName);
-        CategoryRequestDto categoryRequestDto = CategoryRequestDto.builder()
-                                                                  .parentId(parentId)
-                                                                  .name(createdName)
-                                                                  .build();
-        categoryService.create(categoryRequestDto);
+        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
+                                                                                    .parentId(parentId)
+                                                                                    .name(createdName)
+                                                                                    .build();
+        categoryService.create(categoryCreateRequestDto);
 
         //when
-        CategoryExistException exception = assertThrows(CategoryExistException.class, () -> categoryService.create(categoryRequestDto));
+        CategoryExistException exception = assertThrows(CategoryExistException.class, () -> categoryService.create(categoryCreateRequestDto));
 
         //then
         assertThat(exception.getMessage()).isEqualTo("이미 존재하는 이름의 Category 입니다.");

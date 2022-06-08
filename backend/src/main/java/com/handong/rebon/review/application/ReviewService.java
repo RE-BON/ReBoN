@@ -1,14 +1,11 @@
 package com.handong.rebon.review.application;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.review.ReviewNotFoundException;
-import com.handong.rebon.exception.shop.ShopNotFoundException;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
 import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
@@ -17,17 +14,15 @@ import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponse
 import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
-import com.handong.rebon.review.domain.repository.ReviewImageRepository;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
+import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.util.StringUtil;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,21 +31,15 @@ import lombok.RequiredArgsConstructor;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ShopRepository shopRepository;
+    private final ShopService shopService;
     private final MemberService memberService;
-    private final ReviewImageRepository reviewImageRepository;
-    private final MemberRepository memberRepository;
 
     @Transactional
     public Long create(ReviewCreateRequestDto reviewCreateRequestDto) {
-        //TODO 멤버 찾아오기
         Member member = memberService.findById(reviewCreateRequestDto.getMemberId());
+        Shop shop = shopService.findById(reviewCreateRequestDto.getShopId());
 
-        //TODO shop 찾아오기
-        Shop shop = shopRepository.findById(reviewCreateRequestDto.getShopId()).orElseThrow();
-
-        //TODO 이미지 저장
-        ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImages());
+        ReviewImages reviewImages = saveImages(reviewCreateRequestDto.getImageUrls());
 
         Review review = Review.builder()
                               .member(member)
@@ -65,13 +54,12 @@ public class ReviewService {
         return savedReview.getId();
     }
 
-
     @Transactional
     public void delete(ReviewDeleteRequestDto reviewDeleteRequestDto) {
         Long reviewId = reviewDeleteRequestDto.getReviewId();
         Long memberId = reviewDeleteRequestDto.getMemberId();
 
-        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
         Member member = memberService.findById(memberId);
 
         review.delete(member);
@@ -101,7 +89,7 @@ public class ReviewService {
         Long memberId = reviewGetByMemberRequestDto.getMemberId();
         Pageable pageable = reviewGetByMemberRequestDto.getPageable();
 
-        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        Member member = memberService.findById(memberId);
 
         List<Review> reviews = reviewRepository.findAllByMember(member, pageable).getContent();
 
@@ -114,9 +102,9 @@ public class ReviewService {
         Long memberId = reviewGetByShopRequestDto.getMemberId();
         Pageable pageable = reviewGetByShopRequestDto.getPageable();
 
-        Shop shop = shopRepository.findById(shopId).orElseThrow(ShopNotFoundException::new);
+        Shop shop = shopService.findById(shopId);
 
-        Member member = memberRepository.findById(memberId).orElseThrow(MemberNotFoundException::new);
+        Member member = memberService.findById(memberId);
 
         List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
 
@@ -125,21 +113,20 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public AdminReviewResponseDto findByReviewId(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                                        .orElseThrow(ReviewNotFoundException::new);
+        Review review = findOneById(reviewId);
 
         return ReviewDtoAssembler.adminReviewResponseDto(review);
     }
 
-    //TODO 이미지 저장 기능
-    private ReviewImages saveImages(List<MultipartFile> images) {
-        ReviewImage url1 = new ReviewImage("url1");
-        ReviewImage url2 = new ReviewImage("url2");
-
-        reviewImageRepository.save(url1);
-        reviewImageRepository.save(url2);
-
-        return new ReviewImages(Arrays.asList(url1, url2));
+    private Review findOneById(Long id) {
+        return reviewRepository.findById(id)
+                               .orElseThrow(ReviewNotFoundException::new);
     }
 
+    private ReviewImages saveImages(List<String> imageUrls) {
+        List<ReviewImage> reviewImages = imageUrls.stream()
+                                                  .map(ReviewImage::new)
+                                                  .collect(Collectors.toList());
+        return new ReviewImages(reviewImages);
+    }
 }

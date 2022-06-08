@@ -86,7 +86,7 @@ class ShopRepositoryCustomImplTest {
     void allKoreanRestaurantInPohang() {
         // given
         Pageable pageable = PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "shopScore.star"));
-        ShopSearchCondition condition = new ShopSearchCondition(포항, 식당, Collections.singletonList(한식));
+        ShopSearchCondition condition = new ShopSearchCondition(포항, 식당, Collections.singletonList(한식), true);
 
         // when
         Page<Shop> result = shopRepository.searchShopByConditionApplyPage(condition, pageable);
@@ -109,7 +109,7 @@ class ShopRepositoryCustomImplTest {
     void allFranchiseOrPersonalCafeInYangdeok() {
         // given
         Pageable pageable = PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "shopScore.star"));
-        ShopSearchCondition condition = new ShopSearchCondition(양덕, 카페, Arrays.asList(프랜차이즈, 개인카페));
+        ShopSearchCondition condition = new ShopSearchCondition(양덕, 카페, Arrays.asList(프랜차이즈, 개인카페), true);
 
         // when
         Page<Shop> result = shopRepository.searchShopByConditionApplyPage(condition, pageable);

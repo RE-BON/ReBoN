@@ -1,16 +1,19 @@
 package com.handong.rebon.category.application;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
+import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
-import com.handong.rebon.exception.category.CategoryNoParentException;
-import com.handong.rebon.exception.category.NoSuchCategoryException;
+import com.handong.rebon.exception.category.CategoryNotFoundException;
+import com.handong.rebon.shop.domain.Shop;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ShopRepository shopRepository;
 
     @Transactional
     public Long create(String categoryName) {
@@ -34,12 +38,13 @@ public class CategoryService {
     }
 
     @Transactional
-    public Long create(CategoryRequestDto categoryRequestDto) {
+    public Long create(CategoryCreateRequestDto categoryCreateRequestDto) {
+        if (Objects.isNull(categoryCreateRequestDto.getParentId())) {
+            return this.create(categoryCreateRequestDto.getName());
+        }
+        Category parent = this.findById(categoryCreateRequestDto.getParentId());
 
-        Category parent = categoryRepository.findById(categoryRequestDto.getParentId())
-                                            .orElseThrow(CategoryNoParentException::new);
-
-        String categoryName = categoryRequestDto.getName();
+        String categoryName = categoryCreateRequestDto.getName();
 
         Category newCategory = new Category(categoryName);
 
@@ -55,6 +60,17 @@ public class CategoryService {
         }
     }
 
+    @Transactional
+    public void delete(CategoryRequestDto categoryRequestDto) {
+        Category category = categoryRepository.findCategoryWithChildren(categoryRequestDto.getId())
+                                              .orElseThrow(CategoryNotFoundException::new);
+        if (category.isParentCategory()) {
+            List<Shop> shops = shopRepository.findByCategory(category);
+            shopRepository.deleteAll(shops);
+        }
+        category.delete();
+    }
+
     @Transactional(readOnly = true)
     public List<RootCategoryResponseDto> findRootCategoriesAndChildren() {
         List<Category> categories = categoryRepository.findRootCategories();
@@ -64,7 +80,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public Category findById(Long categoryId) {
         return categoryRepository.findById(categoryId)
-                                 .orElseThrow(NoSuchCategoryException::new);
+                                 .orElseThrow(CategoryNotFoundException::new);
     }
 
     @Transactional(readOnly = true)

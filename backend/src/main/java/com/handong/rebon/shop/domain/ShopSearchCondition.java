@@ -13,14 +13,16 @@ public class ShopSearchCondition {
     private Tag tag;
     private Category category;
     private List<Category> subs;
+    private boolean isOpen;
 
     public ShopSearchCondition(Tag tag, Category category) {
-        this(tag, category, Collections.emptyList());
+        this(tag, category, Collections.emptyList(), true);
     }
 
-    public ShopSearchCondition(Tag tag, Category category, List<Category> subs) {
+    public ShopSearchCondition(Tag tag, Category category, List<Category> subs, boolean isOpen) {
         this.tag = tag;
         this.category = category;
         this.subs = subs;
+        this.isOpen = isOpen;
     }
 }
