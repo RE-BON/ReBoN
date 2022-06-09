@@ -14,13 +14,15 @@ import lombok.NoArgsConstructor;
 public class ShopSearchDto {
     private Long tag;
     private Long category;
+    private boolean isOpen;
     private List<Long> subCategories;
     private Pageable pageable;
 
     @Builder
-    public ShopSearchDto(Long tag, Long category, List<Long> subCategories, Pageable pageable) {
+    public ShopSearchDto(Long tag, Long category, boolean isOpen, List<Long> subCategories, Pageable pageable) {
         this.tag = tag;
         this.category = category;
+        this.isOpen = isOpen;
         this.subCategories = subCategories;
         this.pageable = pageable;
     }

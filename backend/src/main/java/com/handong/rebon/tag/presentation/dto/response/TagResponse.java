@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 public class TagResponse {
     private Long id;
     private String name;
+    private int count;
 
     public static TagResponse from(TagResponseDto tagResponseDto) {
-        return new TagResponse(tagResponseDto.getId(), tagResponseDto.getName());
+        return new TagResponse(tagResponseDto.getId(), tagResponseDto.getName(), tagResponseDto.getCount());
     }
 }

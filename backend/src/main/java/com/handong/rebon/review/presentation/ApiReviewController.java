@@ -8,13 +8,18 @@ import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
+import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
 import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
+import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
+import com.handong.rebon.review.presentation.dto.response.ReviewGetByMemberResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
-import com.handong.rebon.review.presentation.dto.response.ReviewResponse;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,14 +51,15 @@ public class ApiReviewController {
     @GetMapping("/shops/{shopId}/reviews")
     public ResponseEntity<List<ReviewGetByShopResponse>> getReviewsByShop(
             @Login LoginMember loginMember,
-            @PathVariable Long shopId
+            @PathVariable Long shopId,
+            @PageableDefault Pageable pageable
     ) {
-        // TODO 유저 구현 후 user id 넘기기
-
         ReviewGetByShopRequestDto reviewGetByShopRequestDto = ReviewGetByShopRequestDto.builder()
                                                                                        .shopId(shopId)
                                                                                        .memberId(loginMember.getId())
+                                                                                       .pageable(pageable)
                                                                                        .build();
+
         List<ReviewGetByShopResponseDto> reviews = reviewService.findAllByShop(reviewGetByShopRequestDto);
 
         return ResponseEntity.ok(ReviewGetByShopResponse.convert(reviews));
@@ -61,15 +67,30 @@ public class ApiReviewController {
 
     @RequiredLogin
     @GetMapping("/my-reviews") // TODO api 정하기
-    public ReviewResponse getReviewsByMember(
-            //member TODO 유저 구현후
+    public ResponseEntity<List<ReviewGetByMemberResponse>> getReviewsByMember(
+            @Login LoginMember loginMember,
+            @PageableDefault Pageable pageable
     ) {
-        /* // TODO 유저 구현후
-        ReviewRequestDto reviewRequestDto = ReviewRequestDto.builder()
-                                                            .memberId(memberId)
-                                                            .build();
-        List<ReviewResponseDto> reviews = reviewService.findByMemberId(reviewRequestDto);
-        */
-        return new ReviewResponse();
+
+        ReviewGetByMemberRequestDto reviewRequestDto = ReviewGetByMemberRequestDto.builder()
+                                                                                  .memberId(loginMember.getId())
+                                                                                  .pageable(pageable)
+                                                                                  .build();
+        List<ReviewGetByMemberResponseDto> reviews = reviewService.findAllByMember(reviewRequestDto);
+
+        return ResponseEntity.ok(ReviewGetByMemberResponse.convert(reviews));
+    }
+
+    @RequiredLogin
+    @DeleteMapping("/reviews/{reviewId}")
+    public ResponseEntity<Void> delete(
+            @Login LoginMember loginMember,
+            @PathVariable Long reviewId
+    ) {
+        ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(loginMember.getId(), reviewId);
+        reviewService.delete(reviewDeleteRequestDto);
+
+        return ResponseEntity.ok()
+                             .build();
     }
 }

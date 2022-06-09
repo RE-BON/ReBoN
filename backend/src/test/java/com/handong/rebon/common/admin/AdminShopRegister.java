@@ -1,5 +1,6 @@
 package com.handong.rebon.common.admin;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +52,14 @@ public class AdminShopRegister {
         return shopRepository.save(shop);
     }
 
-    public Shop CafeRegisterWithMenu(String name, Category parent, List<Category> subs, List<Tag> tags) {
+    public Shop CafeRegisterWithMenu(
+            String name,
+            Category parent,
+            List<Category> subs,
+            List<Tag> tags,
+            LocalTime start,
+            LocalTime end
+    ) {
         List<Long> subIds = subs.stream()
                                 .map(Category::getId)
                                 .collect(Collectors.toList());
@@ -65,7 +73,8 @@ public class AdminShopRegister {
                                                       .subCategories(subIds)
                                                       .tags(tagIds)
                                                       .name(name)
-                                                      .businessHour("10:00 - 20:00")
+                                                      .start(start)
+                                                      .end(end)
                                                       .phone("010-1234-5678")
                                                       .address("경상북도 포항시 OO")
                                                       .latitude("41.40338")
