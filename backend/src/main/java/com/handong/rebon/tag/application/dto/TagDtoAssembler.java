@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TagDtoAssembler {
+
     public static List<TagResponseDto> tagResponseDtos(List<Tag> tags) {
         return tags.stream()
                    .map(tag -> new TagResponseDto(tag.getId(), tag.getName(), tag.getCount()))

@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
+import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.like.Likes;
 
 import lombok.*;

@@ -51,7 +51,7 @@ public class Tag extends BaseEntity {
         }
     }
 
-    public void update(String name){
+    public void update(String name) {
         this.validateBlankName(name);
         this.name = name;
     }
