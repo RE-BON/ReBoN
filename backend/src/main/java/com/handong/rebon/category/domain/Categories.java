@@ -6,8 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
 
-import com.handong.rebon.common.BaseEntity;
-
 import lombok.Getter;
 
 @Embeddable

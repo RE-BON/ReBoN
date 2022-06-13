@@ -64,6 +64,13 @@ public class TagService {
         tag.delete();
     }
 
+    @Transactional
+    public void update(Long id, String tagName){
+        validateDuplicateTag(tagName);
+        Tag tag = findById(id);
+        tag.update(tagName);
+    }
+
     @Transactional(readOnly = true)
     public List<TagResponseDto> searchByKeyword(String keyword, Pageable pageable) {
         return tagSearchRepository.searchByKeyword(keyword.strip(), pageable)
