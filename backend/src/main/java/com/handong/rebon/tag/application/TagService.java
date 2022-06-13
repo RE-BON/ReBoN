@@ -65,7 +65,7 @@ public class TagService {
     }
 
     @Transactional
-    public void update(Long id, String tagName){
+    public void update(Long id, String tagName) {
         validateDuplicateTag(tagName);
         Tag tag = findById(id);
         tag.update(tagName);
