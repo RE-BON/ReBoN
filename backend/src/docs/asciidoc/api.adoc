@@ -267,7 +267,7 @@ include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-respon
 | content | String | true | 리뷰 내용
 | tip | String | false | 팁 내용
 | star | int | true | 리뷰 점수
-| images | List<MultipartFile> | false | 리뷰 사진들
+| images | List<String> | false | 리뷰 사진들
 |===
 include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-request.adoc[]
 
@@ -357,3 +357,56 @@ include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-req
 
 ==== Response
 include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]
+
+=== 내가 쓴 리뷰를 수정하려는 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | http body에 null이거나 blank면 안됨.
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5 의 값
+|===
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByReviewAuthor/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByReviewAuthor/http-response.adoc[]
+
+
+=== 다른 사람이 쓴 리뷰를 수정하려는 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | 소유자가 아닌 다른 사람의 token
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | http body에 null이거나 blank면 안됨.
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5 의 값
+|===
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByNotReviewAuthor/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByNotReviewAuthor/http-response.adoc[]
+
+=== content가 empty content인 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | 소유자가 아닌 다른 사람의 token
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | empty 값
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5 의 값
+|===
+
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByEmptyReviewContent/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByEmptyReviewContent/http-response.adoc[]
