@@ -7,10 +7,7 @@ import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
-import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
+import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
@@ -89,6 +86,20 @@ public class ApiReviewController {
     ) {
         ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(loginMember.getId(), reviewId);
         reviewService.delete(reviewDeleteRequestDto);
+
+        return ResponseEntity.ok()
+                             .build();
+    }
+
+    @RequiredLogin
+    @PutMapping("/reviews/{reviewId}")
+    public ResponseEntity<Void> update(
+            @Login LoginMember loginMember,
+            @PathVariable Long reviewId,
+            @RequestBody ReviewRequest reviewRequest
+    ) {
+        ReviewUpdateRequestDto reviewUpdateRequestDto = ReviewAssembler.reviewUpdateRequestDto(loginMember.getId(), reviewId, reviewRequest);
+        reviewService.update(reviewUpdateRequestDto);
 
         return ResponseEntity.ok()
                              .build();
