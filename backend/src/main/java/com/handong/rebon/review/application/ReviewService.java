@@ -62,11 +62,15 @@ public class ReviewService {
 
         Review review = findOneById(reviewId);
         Member member = memberService.findById(memberId);
+
+        ReviewImages reviewImages = saveImages(reviewUpdateRequestDto.getImageUrls());
+
         review.update(
                 member,
                 reviewUpdateRequestDto.getContent(),
                 reviewUpdateRequestDto.getTip(),
-                reviewUpdateRequestDto.getStar());
+                reviewUpdateRequestDto.getStar(),
+                reviewImages);
     }
 
     @Transactional

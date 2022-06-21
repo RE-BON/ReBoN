@@ -73,8 +73,9 @@ public class Review extends BaseEntity {
         empathy.belongTo(this);
     }
 
-    public void update(Member member, String content, String tip, int star) {
+    public void update(Member member, String content, String tip, int star, ReviewImages reviewImages) {
         validatesAuthority(member);
+        addReviewImages(reviewImages);
         reviewContent = new ReviewContent(content, tip);
         reviewScore = new ReviewScore(star, reviewScore.getEmpathyCount());
     }
