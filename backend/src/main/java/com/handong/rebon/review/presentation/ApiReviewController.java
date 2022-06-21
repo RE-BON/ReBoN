@@ -92,7 +92,7 @@ public class ApiReviewController {
     }
 
     @RequiredLogin
-    @PutMapping("/reviews/{reviewId}")
+    @PatchMapping("/reviews/{reviewId}")
     public ResponseEntity<Void> update(
             @Login LoginMember loginMember,
             @PathVariable Long reviewId,
