@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -89,6 +91,28 @@ public class ReviewUpdateAcceptanceTest extends ReviewAcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, 6})
+    @DisplayName("리뷰 수정 내용 중, score가 0보다 작거나 같거나 5보다 크면 수정할 수 없다. ")
+    void reviewUpdateByBelowZeroExcessFive(int score) {
+        //given
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+        String bearerToken = "Bearer " + token;
+
+        ExtractableResponse<Response> saveResponse = saveTestReview(bearerToken);
+        Long reviewId = getReviewId(saveResponse);
+
+        ReviewRequest updateReviewRequest = new ReviewRequest("", "굳굳", score);
+
+        //when
+        ExtractableResponse<Response> response = updateReview(updateReviewRequest, reviewId, bearerToken);
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+
     @NotNull
     private Long getReviewId(ExtractableResponse<Response> saveResponse) {
         String[] locations = saveResponse.header("location").split("/");
@@ -112,7 +136,7 @@ public class ReviewUpdateAcceptanceTest extends ReviewAcceptanceTest {
         return requestSpec.contentType(APPLICATION_JSON_VALUE)
                           .body(reviewRequest)
                           .when()
-                          .put("/api/reviews/" + reviewId)
+                          .patch("/api/reviews/" + reviewId)
                           .then()
                           .log().all()
                           .extract();
