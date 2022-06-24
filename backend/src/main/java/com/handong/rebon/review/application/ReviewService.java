@@ -11,7 +11,9 @@ import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
+import com.handong.rebon.review.application.dto.response.TipGetResponseDto;
 import com.handong.rebon.review.domain.Review;
+import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImage;
 import com.handong.rebon.review.domain.content.ReviewImages;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
@@ -80,8 +82,25 @@ public class ReviewService {
         }
 
         List<Review> reviews = reviewRepository.findAll(pageable).getContent();
+        System.out.println("%%%%%%%%%%%");
+        System.out.println( reviewRepository.findAll(pageable));
+        System.out.println("###########");
+        System.out.println( reviewRepository.findAll(pageable).getContent());
 
         return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
+    }
+
+//    @Transactional(readOnly = true)
+//    public List<TipGetResponseDto>  findexample(Pageable pageable) {
+//        List<Review> reviews = reviewRepository.findAll(pageable).getContent();
+//
+//        return ReviewDtoAssembler.tipGetResponseDtos(reviews);
+//    }
+//
+    @Transactional(readOnly = true)
+    public List<TipGetResponseDto> findTips(){
+        List<Review> reviews = reviewRepository.findReviewByReviewContent();
+        return ReviewDtoAssembler.tipGetResponseDtos(reviews);
     }
 
     @Transactional(readOnly = true)

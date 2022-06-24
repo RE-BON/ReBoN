@@ -7,6 +7,7 @@ import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
+import com.handong.rebon.review.application.dto.response.TipGetResponseDto;
 import com.handong.rebon.review.domain.Review;
 
 import lombok.AccessLevel;
@@ -71,4 +72,26 @@ public class ReviewDtoAssembler {
                                      .images(review.getImageUrls())
                                      .build();
     }
+
+    public static List<TipGetResponseDto> tipGetResponseDtos(List<Review> reviews) {
+        return reviews.stream()
+                      .map(ReviewDtoAssembler::tipGetResponseDto)
+                      .collect(Collectors.toList());
+    }
+
+    public static TipGetResponseDto tipGetResponseDto(Review review) {
+        return TipGetResponseDto.builder()
+                                     .id(review.getId())
+                                     .authorName(review.getAuthorName())
+                                     .shopName(review.getShopName())
+                                     .tip(review.getTip())
+                                     .build();
+    }
+
+
+//    public static List<TagResponseDto> tagResponseDtos(List<Tag> tags) {
+//        return tags.stream()
+//                   .map(tag -> new TagResponseDto(tag.getId(), tag.getName(), tag.getCount()))
+//                   .collect(Collectors.toList());
+//    }
 }

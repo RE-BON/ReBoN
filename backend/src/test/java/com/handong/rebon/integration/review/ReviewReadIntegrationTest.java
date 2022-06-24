@@ -186,4 +186,37 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         ReviewDeleteRequestDto reviewDeleteRequestDto = new ReviewDeleteRequestDto(member.getId(), reviewId);
         reviewService.delete(reviewDeleteRequestDto);
     }
+
+    @Test
+    @DisplayName("나만의 꿀팁만 가져온다.")
+    public void getOnlyTips() {
+        //given
+        Member member = createMember("peace");
+        Shop shop = createShop("토시래");
+
+        ReviewRequest reviewRequest1 = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
+        ReviewCreateRequestDto reviewCreateRequestDto1 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest1);
+
+        ReviewRequest reviewRequest2 = createReviewRequest("여긴 막국수죠", "족발이랑 막국수랑 시켜드세요", 4);
+        ReviewCreateRequestDto reviewCreateRequestDto2 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest2);
+
+        ReviewRequest reviewRequest3 = createReviewRequest("수육 맛없어요", "수육엔 김치죠", 1);
+        ReviewCreateRequestDto reviewCreateRequestDto3 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest3);
+
+        reviewService.create(reviewCreateRequestDto1);
+        reviewService.create(reviewCreateRequestDto2);
+        Long review3Id = reviewService.create(reviewCreateRequestDto3);
+
+        deleteReview(member, review3Id);
+
+        AdminReviewGetRequestDto adminReviewGetRequestDto = new AdminReviewGetRequestDto(null, PageRequest.of(0, 10));
+
+        //when
+        List<AdminReviewResponseDto> reviews = reviewService.findTips();
+
+        //then
+        assertThat(reviews).hasSize(2);
+        assertThat(reviews).extracting("authorName")
+                           .contains(member.getNickName());
+    }
 }

@@ -48,6 +48,8 @@ public class AuthIntegrationTest extends IntegrationTest {
         String registeredProvider = "google";
         String invalidProvider = "naver";
         OauthUserInfo mockOauthUserInfo = mock(OauthUserInfo.class);
+        System.out.println("========");
+        System.out.println(mockOauthUserInfo);
 
         given(oauthHandler.getUserInfoFromCode(invalidProvider, code))
                 .willReturn(mockOauthUserInfo);
