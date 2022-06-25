@@ -1,6 +1,5 @@
 package com.handong.rebon.review.application.dto.request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.handong.rebon.review.domain.content.ReviewContent;

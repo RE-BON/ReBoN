@@ -2,14 +2,14 @@ package com.handong.rebon.tag.presentation;
 
 import java.util.List;
 
+import com.handong.rebon.tag.application.TagService;
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
+import com.handong.rebon.tag.presentation.dto.TagAssembler;
+import com.handong.rebon.tag.presentation.dto.response.TagResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import com.handong.rebon.tag.application.TagService;
-import com.handong.rebon.tag.presentation.dto.response.TagResponse;
-import com.handong.rebon.tag.application.dto.response.TagResponseDto;
-import com.handong.rebon.tag.presentation.dto.TagAssembler;
 
 import lombok.RequiredArgsConstructor;
 

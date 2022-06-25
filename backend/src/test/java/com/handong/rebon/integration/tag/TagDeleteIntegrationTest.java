@@ -1,24 +1,23 @@
 package com.handong.rebon.integration.tag;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import javax.persistence.EntityManager;
+
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
+import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.tag.domain.Tag;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.handong.rebon.shop.domain.repository.ShopRepository;
-
-import javax.persistence.EntityManager;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

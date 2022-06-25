@@ -4,8 +4,6 @@ import java.util.Enumeration;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
-import com.handong.rebon.exception.authorization.AuthorizationHeaderException;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
