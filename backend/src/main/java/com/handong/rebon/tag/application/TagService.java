@@ -69,7 +69,7 @@ public class TagService {
     public void update(TagUpdateRequestDto tagUpdateRequestDto) {
         Tag tag = findById(tagUpdateRequestDto.getId());
 
-        if(!(tag.isSameName(tagUpdateRequestDto.getName()))){
+        if (!(tag.isSameName(tagUpdateRequestDto.getName()))) {
             validateDuplicateTag(tagUpdateRequestDto.getName());
         }
 
