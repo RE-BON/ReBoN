@@ -34,7 +34,6 @@ public class MemberReadIntegrationTest extends IntegrationTest {
         String email = "test@gmail.com";
         String registeredProvider = "google";
         String nickName ="test";
-        OauthUserInfo mockOauthUserInfo = mock(OauthUserInfo.class);
 
         MemberCreateResponseDto memberCreateResponseDto = memberService.save(new MemberCreateRequestDto(email, registeredProvider, nickName, true));
 

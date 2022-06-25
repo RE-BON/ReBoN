@@ -1,16 +1,25 @@
 package com.handong.rebon.acceptance.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
+import com.handong.rebon.common.admin.AdminShopRegister;
+import com.handong.rebon.member.application.MemberService;
+import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
+import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
+import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
 import com.handong.rebon.shop.domain.Shop;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,64 +36,40 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 public class MemberReadAcceptanceTest extends AcceptanceTest {
+    @Autowired
+    private MemberService memberService;
+
+    private Map<String, Member> members = new HashMap<>();
+
+    @BeforeEach
+    void setUp() {
+        String code = "test-code";
+        String email = "test@gmail.com";
+        String registeredProvider = "google";
+        String nickName ="test";
+        memberService.save(new MemberCreateRequestDto(email, registeredProvider, nickName, true));
+    }
+
     @Test
-    @DisplayName("로그인이 되어 있는 상태에서 내 정보를 조회할 수 있다.")
-    void getReviewByShopWithLogin() {
+    @DisplayName("내 정보를 조회할 수 있다.")
+    void findMemberInfo(){
         //given
-        String bearerToken = getBearerToken();
-        Shop shop = makeTestReview(bearerToken);
+        Long memberId = members.get("test@gmail.com").getId(); //현재 로그인 된 사람의 아이디로 어떻게 바꿀까
 
-        //when
-        ExtractableResponse<Response> response = getMemberInfo(shop.getId(), bearerToken);
-        List<ReviewGetByShopResponse> result = response.jsonPath().getList(".", ReviewGetByShopResponse.class);
+        // when
+        ExtractableResponse<Response> response = getMemberInfo(memberId);
 
-        //then
+        // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(result).hasSize(1);
-
     }
 
-    @Test
-    @DisplayName("로그인이 되어 있지 않은 상태에서 내 정보를 조회할 수 없다.")
-    void getReviewByShopWithoutLogin() {
-        //given
-        String bearerToken = getBearerToken();
-        Shop shop = makeTestReview(bearerToken);
-
-        //when
-        ExtractableResponse<Response> response = getReviewByShop(shop.getId(), null);
-
-        //then
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
-    }
-
-    public ExtractableResponse<Response> getMemberInfo(Long memberId, String token) {
-        RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
-                                                      .log().all();
-        if (!Objects.isNull(token)) {
-            requestSpec.header("Authorization", token);
-        }
-        return requestSpec.contentType(APPLICATION_JSON_VALUE)
+    public ExtractableResponse<Response> getMemberInfo(Long memberId) {
+        return RestAssured.given(getRequestSpecification())
+                .contentType(APPLICATION_JSON_VALUE)
                           .when()
                           .get("/api/member/" + memberId)
                           .then()
                           .log().all()
                           .extract();
-    }
-
-    @NotNull
-    private String getBearerToken() {
-        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
-        String token = extractedToken(registerResponse);
-        String bearerToken = "Bearer " + token;
-        return bearerToken;
-    }
-
-    @NotNull
-    private Shop makeTestReview(String bearerToken) {
-        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", 5);
-        Shop shop = shops.get("팜스발리");
-        saveReview(reviewRequest, shop.getId(), bearerToken);
-        return shop;
     }
 }
