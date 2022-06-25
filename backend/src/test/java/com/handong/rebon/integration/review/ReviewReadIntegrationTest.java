@@ -218,8 +218,8 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
 
         //then
         assertThat(tips).hasSize(1);
-        assertThat(tips).extracting("shopName")
-                        .contains(shop1.getName());
+        assertThat(tips).extracting("content")
+                        .contains(reviewRequest1.getContent());
         assertThat(tips).extracting("tip")
                         .contains(reviewRequest1.getTip());
     }

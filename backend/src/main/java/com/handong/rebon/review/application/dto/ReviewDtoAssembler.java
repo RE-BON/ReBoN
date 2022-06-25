@@ -83,7 +83,6 @@ public class ReviewDtoAssembler {
         return TipGetByShopResponseDto.builder()
                                       .id(review.getId())
                                       .authorName(review.getAuthorName())
-                                      .shopName(review.getShopName())
                                       .content(review.getContent())
                                       .tip(review.getTip())
                                       .star(review.getStar())

@@ -30,7 +30,6 @@ public class TipGetByShopResponse {
         return TipGetByShopResponse.builder()
                                    .id(response.getId())
                                    .authorName(response.getAuthorName())
-                                   .shopName(response.getShopName())
                                    .tip(response.getTip())
                                    .build();
     }

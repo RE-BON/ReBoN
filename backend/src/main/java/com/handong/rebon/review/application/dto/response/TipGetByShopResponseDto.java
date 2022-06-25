@@ -8,14 +8,8 @@ import lombok.Getter;
 @Builder
 @Getter
 public class TipGetByShopResponseDto {
-//    private Long id;
-//    private String authorName;
-//    private String shopName;
-//    private String tip;
-
     private Long id;
     private String authorName;
-    private String shopName;
     private String content;
     private String tip;
     private int star;
