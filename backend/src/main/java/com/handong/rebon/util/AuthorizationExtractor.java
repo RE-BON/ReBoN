@@ -22,6 +22,6 @@ public class AuthorizationExtractor {
                 return value.split(" ")[1];
             }
         }
-        throw new AuthorizationHeaderException();
+        return "";
     }
 }
