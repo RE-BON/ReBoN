@@ -112,14 +112,26 @@ public class ReviewService {
         return ReviewDtoAssembler.reviewGetByShopResponseDtos(reviews, member);
     }
 
+//    @Transactional(readOnly = true)
+//    public List<TipGetByShopResponseDto> findAllByShopContainTips(TipGetByShopRequestDto tipGetByShopRequestDto) {
+//        Long shopId = tipGetByShopRequestDto.getShopId();
+//        Pageable pageable = tipGetByShopRequestDto.getPageable();
+//
+//        Shop shop = shopService.findById(shopId);
+//
+//        List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
+//
+//        return ReviewDtoAssembler.tipGetByShopResponseDtos(reviews);
+//    }
+
     @Transactional(readOnly = true)
-    public List<TipGetByShopResponseDto> findTipsByShop(TipGetByShopRequestDto tipGetByShopRequestDto) {
+    public List<TipGetByShopResponseDto> findAllByShopContainTips(TipGetByShopRequestDto tipGetByShopRequestDto) {
         Long shopId = tipGetByShopRequestDto.getShopId();
         Pageable pageable = tipGetByShopRequestDto.getPageable();
 
         Shop shop = shopService.findById(shopId);
 
-        List<Review> reviews = reviewRepository.findAllByShop(shop, pageable).getContent();
+        List<Review> reviews = reviewRepository.findAllByShopContainTips(shop, pageable, shopId).getContent();
 
         return ReviewDtoAssembler.tipGetByShopResponseDtos(reviews);
     }

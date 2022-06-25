@@ -64,19 +64,36 @@ public class ApiReviewController {
         return ResponseEntity.ok(ReviewGetByShopResponse.convert(reviews));
     }
 
+//    @RequiredLogin
+//    @GetMapping("/shops/{shopId}/review/tips")
+//    public ResponseEntity<List<TipGetByShopResponse>> getTipsByShop(
+//            @PathVariable Long shopId,
+//            @PageableDefault Pageable pageable
+//    ) {
+//
+//        TipGetByShopRequestDto tipGetByShopRequestDto = TipGetByShopRequestDto.builder()
+//                                                                                    .shopId(shopId)
+//                                                                                    .pageable(pageable)
+//                                                                                    .build();
+//
+//        List<TipGetByShopResponseDto> reviews = reviewService.findTipsByShop(tipGetByShopRequestDto);
+//
+//        return ResponseEntity.ok(TipGetByShopResponse.convert(reviews));
+//    }
+
     @RequiredLogin
-    @GetMapping("/shops/{shopId}/tips")
+    @GetMapping("/shops/{shopId}/review/tips")
     public ResponseEntity<List<TipGetByShopResponse>> getTipsByShop(
             @PathVariable Long shopId,
             @PageableDefault Pageable pageable
     ) {
 
         TipGetByShopRequestDto tipGetByShopRequestDto = TipGetByShopRequestDto.builder()
-                                                                                    .shopId(shopId)
-                                                                                    .pageable(pageable)
-                                                                                    .build();
+                                                                              .shopId(shopId)
+                                                                              .pageable(pageable)
+                                                                              .build();
 
-        List<TipGetByShopResponseDto> reviews = reviewService.findTipsByShop(tipGetByShopRequestDto);
+        List<TipGetByShopResponseDto> reviews = reviewService.findAllByShopContainTips(tipGetByShopRequestDto);
 
         return ResponseEntity.ok(TipGetByShopResponse.convert(reviews));
     }

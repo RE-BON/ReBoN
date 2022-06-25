@@ -167,7 +167,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
         }
         return requestSpec.contentType(APPLICATION_JSON_VALUE)
                           .when()
-                          .get("/api/shops/" + shopId + "/tips")
+                          .get("/api/shops/" + shopId + "/review/tips")
                           .then()
                           .log().all()
                           .extract();

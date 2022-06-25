@@ -79,12 +79,25 @@ public class ReviewDtoAssembler {
                       .collect(Collectors.toList());
     }
 
+//    public static TipGetByShopResponseDto tipGetByShopResponseDto(Review review) {
+//        return TipGetByShopResponseDto.builder()
+//                                      .id(review.getId())
+//                                      .authorName(review.getAuthorName())
+//                                      .shopName(review.getShopName())
+//                                      .tip(review.getTip())
+//                                      .build();
+//    }
+
     public static TipGetByShopResponseDto tipGetByShopResponseDto(Review review) {
         return TipGetByShopResponseDto.builder()
                                       .id(review.getId())
                                       .authorName(review.getAuthorName())
                                       .shopName(review.getShopName())
+                                      .content(review.getContent())
                                       .tip(review.getTip())
+                                      .star(review.getStar())
+                                      .empathyCount(review.getEmpathyCount())
+                                      .images(review.getImageUrls())
                                       .build();
     }
 }
