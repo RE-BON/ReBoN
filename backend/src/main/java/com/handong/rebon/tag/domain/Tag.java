@@ -7,6 +7,7 @@ import javax.persistence.*;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.tag.TagNameException;
 import com.handong.rebon.shop.domain.tag.ShopTag;
+import com.handong.rebon.tag.application.dto.request.TagUpdateRequestDto;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Mapping;
@@ -67,5 +68,9 @@ public class Tag extends BaseEntity {
 
     public void countUp() {
         this.count++;
+    }
+
+    public boolean isSameName(String tagName){
+        return this.name.equals(tagName);
     }
 }

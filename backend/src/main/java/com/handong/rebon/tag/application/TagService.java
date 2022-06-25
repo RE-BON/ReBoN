@@ -68,9 +68,11 @@ public class TagService {
     @Transactional
     public void update(TagUpdateRequestDto tagUpdateRequestDto) {
         Tag tag = findById(tagUpdateRequestDto.getId());
-        if (!(tag.getName().equals(tagUpdateRequestDto.getName()))) {
+
+        if(!(tag.isSameName(tagUpdateRequestDto.getName()))){
             validateDuplicateTag(tagUpdateRequestDto.getName());
         }
+
         tag.update(tagUpdateRequestDto.getName());
     }
 
