@@ -143,7 +143,6 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(result).hasSize(1);
-
     }
 
     @Test
