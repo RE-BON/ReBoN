@@ -15,5 +15,4 @@ public class TipGetByShopResponseDto {
     private int star;
     private int empathyCount;
     private List<String> images;
-    private boolean isLiked;
 }

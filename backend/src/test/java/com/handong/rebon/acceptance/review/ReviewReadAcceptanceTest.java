@@ -130,14 +130,14 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     }
 
     @Test
-    @DisplayName("로그인이 되어 있는 상태에서 나만의 꿀팁만 가져올 수 있다.")
-    void getTipByShopWithLogin() {
+    @DisplayName("로그인이 되어 있는 상태에서 나만의 꿀팁이 있는 리뷰를 가져올 수 있다.")
+    void getReviewByShopContainTipWithLogin() {
         //given
         String bearerToken = getBearerToken();
         Shop shop = makeTestReview(bearerToken);
 
         //when
-        ExtractableResponse<Response> response = getTipByShop(shop.getId(), bearerToken);
+        ExtractableResponse<Response> response = getReviewByShopContaintip(shop.getId(), bearerToken);
         List<TipGetByShopResponse> result = response.jsonPath().getList(".", TipGetByShopResponse.class);
 
         //then
@@ -146,20 +146,20 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     }
 
     @Test
-    @DisplayName("로그인이 되어 있지 않은 상태에서 나만의 꿀팁을 가져올 수 없다.")
-    void getTipByShopWithoutLogin() {
+    @DisplayName("로그인이 되어 있지 않은 상태에서 나만의 꿀팁이 있는 리뷰를 가져올 수 있다.")
+    void getReviewByShopContainTipWithoutLogin() {
         //given
         String bearerToken = getBearerToken();
         Shop shop = makeTestReview(bearerToken);
 
         //when
-        ExtractableResponse<Response> response = getTipByShop(shop.getId(), null);
+        ExtractableResponse<Response> response = getReviewByShopContaintip(shop.getId(), null);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    public ExtractableResponse<Response> getTipByShop(Long shopId, String token) {
+    public ExtractableResponse<Response> getReviewByShopContaintip(Long shopId, String token) {
         RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
                                                       .log().all();
         if (!Objects.isNull(token)) {

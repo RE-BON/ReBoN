@@ -17,8 +17,11 @@ import lombok.NoArgsConstructor;
 public class TipGetByShopResponse {
     private Long id;
     private String authorName;
-    private String shopName;
+    private String content;
     private String tip;
+    private int star;
+    private int empathyCount;
+    private List<String> images;
 
     public static List<TipGetByShopResponse> convert(List<TipGetByShopResponseDto> responses) {
         return responses.stream()
@@ -30,7 +33,11 @@ public class TipGetByShopResponse {
         return TipGetByShopResponse.builder()
                                    .id(response.getId())
                                    .authorName(response.getAuthorName())
+                                   .content(response.getContent())
                                    .tip(response.getTip())
+                                   .star(response.getStar())
+                                   .empathyCount(response.getEmpathyCount())
+                                   .images(response.getImages())
                                    .build();
     }
 }
