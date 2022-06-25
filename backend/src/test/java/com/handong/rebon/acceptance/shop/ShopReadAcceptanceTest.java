@@ -27,8 +27,10 @@ import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
+import static com.handong.rebon.acceptance.shop.ShopLikeAcceptanceTest.가게_좋아요;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -94,14 +96,18 @@ public class ShopReadAcceptanceTest extends AcceptanceTest {
     @DisplayName("포항에 있는 모든 분식이나 양식 식당 조회하기")
     void searchSchoolFoodOrWesternRestaurantInPohang() {
         // given
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+        Shop shop = shops.get("팜스발리");
         Tag 포항 = tags.get("포항");
         Category 식당 = categories.get("식당");
         Category 분식 = categories.get("분식");
         Category 양식 = categories.get("양식");
 
         // when
+        가게_좋아요(token, shop);
         ExtractableResponse<Response> response
-                = 가게_리스트_조회_요청(포항.getId(), 식당.getId(), Arrays.asList(분식.getId(), 양식.getId()), false);
+                = 로그인_유저_가게_리스트_조회_요청(token, 포항.getId(), 식당.getId(), Arrays.asList(분식.getId(), 양식.getId()), false);
         List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
 
         // then
@@ -205,19 +211,31 @@ public class ShopReadAcceptanceTest extends AcceptanceTest {
         assertThat(result).hasSize(2);
     }
 
+    public static ExtractableResponse<Response> 로그인_유저_가게_리스트_조회_요청(String token, Long tag, Long category, List<Long> subs, boolean open) {
+        RequestSpecification specification = RestAssured.given(getRequestSpecification())
+                                                        .log().all()
+                                                        .header("Authorization", "Bearer " + token);
+        return 가게_리스트_조회_요청(tag, category, subs, open, specification);
+    }
+
     public static ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open) {
-        return RestAssured.given(getRequestSpecification())
-                          .log().all()
-                          .contentType(APPLICATION_JSON_VALUE)
-                          .queryParam("tag", tag)
-                          .queryParam("category", category)
-                          .queryParam("subCategories", subs)
-                          .queryParam("open", open)
-                          .when()
-                          .get("/api/shops")
-                          .then()
-                          .log().all()
-                          .extract();
+        RequestSpecification specification = RestAssured.given(getRequestSpecification())
+                                                        .log().all();
+        return 가게_리스트_조회_요청(tag, category, subs, open, specification);
+    }
+
+    private static ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open, RequestSpecification specification) {
+        return specification
+                .contentType(APPLICATION_JSON_VALUE)
+                .queryParam("tag", tag)
+                .queryParam("category", category)
+                .queryParam("subCategories", subs)
+                .queryParam("open", open)
+                .when()
+                .get("/api/shops")
+                .then()
+                .log().all()
+                .extract();
     }
 
     private ExtractableResponse<Response> 단일_가게_조회_요청(Long shopId) {
