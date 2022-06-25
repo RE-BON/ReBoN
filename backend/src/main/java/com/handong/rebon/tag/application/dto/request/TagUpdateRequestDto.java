@@ -8,6 +8,4 @@ import lombok.Getter;
 public class TagUpdateRequestDto {
     private Long id;
     private String name;
-
-
 }

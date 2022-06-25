@@ -70,7 +70,7 @@ public class Tag extends BaseEntity {
         this.count++;
     }
 
-    public boolean isSameName(String tagName){
+    public boolean isSameName(String tagName) {
         return this.name.equals(tagName);
     }
 }
