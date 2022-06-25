@@ -54,6 +54,25 @@ public class ReviewService {
         return savedReview.getId();
     }
 
+
+    @Transactional
+    public void update(ReviewUpdateRequestDto reviewUpdateRequestDto) {
+        Long reviewId = reviewUpdateRequestDto.getReviewId();
+        Long memberId = reviewUpdateRequestDto.getMemberId();
+
+        Review review = findOneById(reviewId);
+        Member member = memberService.findById(memberId);
+
+        ReviewImages reviewImages = saveImages(reviewUpdateRequestDto.getImageUrls());
+
+        review.update(
+                member,
+                reviewUpdateRequestDto.getContent(),
+                reviewUpdateRequestDto.getTip(),
+                reviewUpdateRequestDto.getStar(),
+                reviewImages);
+    }
+
     @Transactional
     public void delete(ReviewDeleteRequestDto reviewDeleteRequestDto) {
         Long reviewId = reviewDeleteRequestDto.getReviewId();

@@ -32,11 +32,11 @@ public class CategoryAssembler {
                               .collect(Collectors.toList());
     }
 
-    public static CategoryRequestDto categoryRequestDto(CategoryRequest request){
+    public static CategoryRequestDto categoryRequestDto(CategoryRequest request) {
         return new CategoryRequestDto(request.getCategoryId());
     }
 
-    public static CategoryCreateRequestDto categoryCreateRequestDto(CategoryCreateRequest request){
+    public static CategoryCreateRequestDto categoryCreateRequestDto(CategoryCreateRequest request) {
         return new CategoryCreateRequestDto(request.getParentId(), request.getName());
     }
 }
