@@ -12,6 +12,9 @@ import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto
 import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
+import com.handong.rebon.review.application.dto.ReviewDtoAssembler;
+import com.handong.rebon.review.application.dto.response.AdminReviewResponseDto;
+import com.handong.rebon.review.domain.Review;
 import com.handong.rebon.tag.application.dto.TagDtoAssembler;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
@@ -60,14 +63,14 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberReadResponseDto> findInfos(){
-        return MemberDtoAssembler.memberReadResponseDtos(memberRepository.findAll());
+    public MemberReadResponseDto findByMemberId(Long id) {
+        Member member = findById(id);
+
+        return MemberDtoAssembler.memberReadResponseDto(member);
     }
 
-    @Transactional(readOnly = true)
-    public Member findById(Long id) {
-        return memberRepository.findById(id)
-                            .orElseThrow(MemberNotFoundException::new);
-    }
-
+//    @Transactional(readOnly = true)
+//    public List<MemberReadResponseDto> findInfos(){
+//        return MemberDtoAssembler.memberReadResponseDtos(memberRepository.findAll());
+//    }
 }

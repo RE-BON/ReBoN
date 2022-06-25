@@ -8,12 +8,14 @@ import com.handong.rebon.exception.oauth.NoSuchOAuthMemberException;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
+import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
 import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.Assertions;
 
@@ -31,13 +33,20 @@ public class MemberReadIntegrationTest extends IntegrationTest {
         String code = "test-code";
         String email = "test@gmail.com";
         String registeredProvider = "google";
+        String nickName ="test";
         OauthUserInfo mockOauthUserInfo = mock(OauthUserInfo.class);
 
-        memberService.save(new MemberCreateRequestDto(email, registeredProvider, "test", true));
+        MemberCreateResponseDto memberCreateResponseDto = memberService.save(new MemberCreateRequestDto(email, registeredProvider, nickName, true));
 
         //when
-        List<MemberReadResponseDto> allInfos = memberService.findInfos();
+        MemberReadResponseDto member = memberService.findByMemberId(memberCreateResponseDto.getMemberId());
 
         //then
+        assertThat(member).extracting("email")
+                          .isEqualTo(email);
+        assertThat(member).extracting("nickName")
+                          .isEqualTo(nickName);
+        assertThat(member).extracting("isAgreed")
+                          .isEqualTo(true);
     }
 }
