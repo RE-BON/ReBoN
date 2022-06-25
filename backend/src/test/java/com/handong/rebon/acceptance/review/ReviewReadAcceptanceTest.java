@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByMemberResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
+import com.handong.rebon.review.presentation.dto.response.TipGetByShopResponse;
 import com.handong.rebon.shop.domain.Shop;
 
 import org.springframework.http.HttpStatus;
@@ -126,5 +127,50 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
         Shop shop = shops.get("팜스발리");
         saveReview(reviewRequest, shop.getId(), bearerToken);
         return shop;
+    }
+
+    @Test
+    @DisplayName("로그인이 되어 있는 상태에서 나만의 꿀팁만 가져올 수 있다.")
+    void getTipByShopWithLogin() {
+        //given
+        String bearerToken = getBearerToken();
+        Shop shop = makeTestReview(bearerToken);
+
+        //when
+        ExtractableResponse<Response> response = getTipByShop(shop.getId(), bearerToken);
+        List<TipGetByShopResponse> result = response.jsonPath().getList(".", TipGetByShopResponse.class);
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).hasSize(1);
+
+    }
+
+    @Test
+    @DisplayName("로그인이 되어 있지 않은 상태에서 나만의 꿀팁을 가져올 수 없다.")
+    void getTipByShopWithoutLogin() {
+        //given
+        String bearerToken = getBearerToken();
+        Shop shop = makeTestReview(bearerToken);
+
+        //when
+        ExtractableResponse<Response> response = getTipByShop(shop.getId(), null);
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+    }
+
+    public ExtractableResponse<Response> getTipByShop(Long shopId, String token) {
+        RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
+                                                      .log().all();
+        if (!Objects.isNull(token)) {
+            requestSpec.header("Authorization", token);
+        }
+        return requestSpec.contentType(APPLICATION_JSON_VALUE)
+                          .when()
+                          .get("/api/shops/" + shopId + "/tips")
+                          .then()
+                          .log().all()
+                          .extract();
     }
 }

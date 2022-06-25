@@ -73,7 +73,9 @@ public class Review extends BaseEntity {
         empathy.belongTo(this);
     }
 
-    public String getContent() { return reviewContent.getContent(); }
+    public String getContent() {
+        return reviewContent.getContent();
+    }
 
     public String getAuthorName() {
         return member.getNickName();
@@ -83,7 +85,9 @@ public class Review extends BaseEntity {
         return shop.getName();
     }
 
-    public String getTip() { return reviewContent.getTip(); }
+    public String getTip() {
+        return reviewContent.getTip();
+    }
 
     public int getStar() {
         return reviewScore.getStar();
@@ -96,5 +100,4 @@ public class Review extends BaseEntity {
     public List<String> getImageUrls() {
         return reviewImages.getUrls();
     }
-
 }

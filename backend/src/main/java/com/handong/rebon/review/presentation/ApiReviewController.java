@@ -7,16 +7,15 @@ import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
-import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
+import com.handong.rebon.review.application.dto.request.*;
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
+import com.handong.rebon.review.application.dto.response.TipGetByShopResponseDto;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByMemberResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
+import com.handong.rebon.review.presentation.dto.response.TipGetByShopResponse;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -63,6 +62,23 @@ public class ApiReviewController {
         List<ReviewGetByShopResponseDto> reviews = reviewService.findAllByShop(reviewGetByShopRequestDto);
 
         return ResponseEntity.ok(ReviewGetByShopResponse.convert(reviews));
+    }
+
+    @RequiredLogin
+    @GetMapping("/shops/{shopId}/tips")
+    public ResponseEntity<List<TipGetByShopResponse>> getTipsByShop(
+            @PathVariable Long shopId,
+            @PageableDefault Pageable pageable
+    ) {
+
+        TipGetByShopRequestDto tipGetByShopRequestDto = TipGetByShopRequestDto.builder()
+                                                                                    .shopId(shopId)
+                                                                                    .pageable(pageable)
+                                                                                    .build();
+
+        List<TipGetByShopResponseDto> reviews = reviewService.findTipsByShop(tipGetByShopRequestDto);
+
+        return ResponseEntity.ok(TipGetByShopResponse.convert(reviews));
     }
 
     @RequiredLogin

@@ -357,3 +357,17 @@ include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-req
 
 ==== Response
 include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]
+
+=== 나만의 꿀팁 조회
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+|===
+include::{snippets}/ReviewReadAcceptanceTest/getTipByShopWithLogin/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/ReviewReadAcceptanceTest/getTipByShopWithLogin/http-response.adoc[]

@@ -28,5 +28,4 @@ public class ReviewCreateRequestDto {
     public ReviewScore getReviewScore() {
         return new ReviewScore(star, 0);
     }
-
 }
