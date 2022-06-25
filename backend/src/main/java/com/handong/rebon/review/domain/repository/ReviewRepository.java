@@ -15,9 +15,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRep
 
     Page<Review> findAllByShop(Shop shop, Pageable pageable);
 
-//    @Query("select r from Review r where r.reviewContent.tip is not null")
-//    @Query("select r from Review r where r.reviewContent.tip is null")
     @Query("select r from Review r " +
-            "where LENGTH(r.reviewContent.tip) > 1 and r.shop.id = :shopId ")
+            "where r.reviewContent.tip is not null and r.shop.id = :shopId ")
     Page<Review> findAllByShopContainTips(Shop shop, Pageable pageable, @Param("shopId") Long shopId);
 }

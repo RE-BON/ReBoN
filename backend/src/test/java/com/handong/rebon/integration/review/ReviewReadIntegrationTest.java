@@ -188,44 +188,6 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         reviewService.delete(reviewDeleteRequestDto);
     }
 
-//    @Test
-//    @DisplayName("토시래 나만의 꿀팁만 가져온다.")
-//    public void getTipByShop() {
-//        //given
-//        Member member = createMember("peace");
-//        Shop shop1 = createShop("토시래");
-//        Shop shop2 = createShop("팜스발리");
-//
-//        ReviewRequest reviewRequest1 = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
-//        ReviewCreateRequestDto reviewCreateRequestDto1 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop1.getId(), reviewRequest1);
-//
-//        ReviewRequest reviewRequest2 = createReviewRequest("피자 맛이 좋아요", "치킨이랑 피자 시켜드세요", 4);
-//        ReviewCreateRequestDto reviewCreateRequestDto2 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop2.getId(), reviewRequest2);
-//
-//        ReviewRequest reviewRequest3 = createReviewRequest("토시래 족발 굳", "앞족발 시켜드세요", 5);
-//        ReviewCreateRequestDto reviewCreateRequestDto3 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop1.getId(), reviewRequest3);
-//
-//        reviewService.create(reviewCreateRequestDto1);
-//        reviewService.create(reviewCreateRequestDto2);
-//        Long review3Id = reviewService.create(reviewCreateRequestDto3);
-//
-//        deleteReview(member, review3Id);
-//
-//        TipGetByShopRequestDto tipGetByShopRequestDto = TipGetByShopRequestDto.builder()
-//                                                                              .shopId(shop1.getId())
-//                                                                              .build();
-//
-//        //when
-//        List<TipGetByShopResponseDto> tips = reviewService.findTipsByShop(tipGetByShopRequestDto);
-//
-//        //then
-//        assertThat(tips).hasSize(1);
-//        assertThat(tips).extracting("shopName")
-//                        .contains(shop1.getName());
-//        assertThat(tips).extracting("tip")
-//                        .contains(reviewRequest1.getTip());
-//    }
-
     @Test
     @DisplayName("나만의 꿀팁을 포함하는 리뷰만 조회한다.")
     public void getTipByShop() {
@@ -240,7 +202,7 @@ public class ReviewReadIntegrationTest extends ReviewIntegrationTest {
         ReviewRequest reviewRequest2 = createReviewRequest("피자 맛이 좋아요", "치킨이랑 피자 시켜드세요", 4);
         ReviewCreateRequestDto reviewCreateRequestDto2 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop2.getId(), reviewRequest2);
 
-        ReviewRequest reviewRequest3 = createReviewRequest("토시래 족발 굳", "",5);
+        ReviewRequest reviewRequest3 = createReviewRequest("토시래 족발 굳", null, 5);
         ReviewCreateRequestDto reviewCreateRequestDto3 = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop1.getId(), reviewRequest3);
 
         reviewService.create(reviewCreateRequestDto1);
