@@ -34,7 +34,12 @@
 }
 .review-icon {
   margin-right: 10px;
-  color: #262626;
+  color: #000000;
+}
+.review-like-icon {
+  color: #ff6b6c;
+  margin-right: 10px;
+  margin-top: 3px;
 }
 .review-write-button {
   color: white;
@@ -56,10 +61,32 @@
   width: 60%;
   display: block;
 }
-.review-order {
-  margin-left: 20%;
-  width: 60%;
+.review-top-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-left: 55%;
+  width: 25%;
   text-align: end;
+  padding-left: 8%;
+  margin-bottom: 2%;
+}
+.review-toggle {
+  /* margin-left: 60%; */
+  /* border: 1px solid red; */
+}
+.review-toggle-label {
+  font-size: 13px;
+  color: #898c8f;
+  /* border: 1px solid blue; */
+  text-align: start;
+  margin-left: -11px;
+  margin-right: 5px;
+  margin-top: 4px;
+}
+.review-order {
+  /* margin-left: 20%; */
+  /* width: 60%; */
+  /* text-align: end; */
   margin-bottom: 3%;
 }
 .review-select {
@@ -69,6 +96,7 @@
   font-size: 14px;
   font-weight: normal;
 }
+
 .review-order .review-select option {
   color: red;
   font-size: 5rem;
@@ -95,14 +123,29 @@
   background-color: transparent;
   border: none;
 }
+.review-user-name-star {
+  display: grid;
+  grid-template-columns: 3fr 5fr;
+}
 .review-user-name {
   color: #262626;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 .review-user-time {
   color: #5f686f;
   font-size: 0.5rem;
+}
+.review-star-wrapper {
+  display: inline;
+}
+.review-star-point {
+  font-size: 10px;
+  color: #fedb04;
+}
+.review-star {
+  font-size: 10px;
+  color: #e9e9ea;
 }
 .review-tip-wrapper {
   box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
@@ -141,10 +184,19 @@
   font-size: 0.9rem;
 }
 .review-like-button {
-  color: #5f686f;
-  font-size: 0.5rem;
-  font-weight: bold;
+  /* font-size: 0.5rem; */
   margin-top: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  width: 7%;
+  border: 1px solid #d8d8d8;
+  border-radius: 17.5px;
+}
+.review-like-num {
+  font-size: 14px;
+  color: #5f686f;
+  margin-left: -5px;
+  /* margin-right: -15px; */
 }
 .review-image-wrapper {
   margin-top: 2%;
