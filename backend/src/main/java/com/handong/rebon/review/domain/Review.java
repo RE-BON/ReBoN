@@ -72,8 +72,9 @@ public class Review extends BaseEntity {
 
     public void empathize(Member member) {
         Empathy empathy = new Empathy(member, this);
-        if (isEmpathyExist(empathy))
+        if (isEmpathyExist(empathy)){
             throw new ReviewEmpathyExistException();
+        }
         this.empathies.add(empathy);
         this.reviewScore.increaseEmpathyCount();
         member.empathizeReview(empathy);
@@ -81,8 +82,9 @@ public class Review extends BaseEntity {
 
     public void unEmpathize(Member member) {
         Empathy empathy = new Empathy(member, this);
-        if (!isEmpathyExist(empathy))
+        if (!isEmpathyExist(empathy)){
             throw new ReviewEmpathyNotExistException();
+        }
         this.empathies.remove(empathy);
         this.reviewScore.decreaseEmpathyCount();
         member.unEmpathizeReview(empathy);

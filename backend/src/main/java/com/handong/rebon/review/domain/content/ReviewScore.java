@@ -31,13 +31,13 @@ public class ReviewScore {
     }
 
     public void increaseEmpathyCount() {
-        this.empathyCount++;
+        empathyCount++;
     }
 
     public void decreaseEmpathyCount() {
-        if (this.empathyCount <= 0) {
+        if (empathyCount <= 0) {
             throw new ReviewLikeCountException();
         }
-        this.empathyCount--;
+        empathyCount--;
     }
 }
