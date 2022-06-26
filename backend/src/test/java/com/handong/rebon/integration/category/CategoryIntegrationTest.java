@@ -1,7 +1,7 @@
 package com.handong.rebon.integration.category;
 
 import com.handong.rebon.category.application.CategoryService;
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.integration.IntegrationTest;
@@ -22,10 +22,10 @@ public class CategoryIntegrationTest extends IntegrationTest {
     }
 
     public Category createCategoryWithParent(Long parentId, String categoryName) {
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
-                                                                                    .parentId(parentId)
-                                                                                    .name(categoryName)
-                                                                                    .build();
+        CategoryRequestDto categoryCreateRequestDto = CategoryRequestDto.builder()
+                                                                        .id(parentId)
+                                                                        .name(categoryName)
+                                                                        .build();
         Long id = categoryService.create(categoryCreateRequestDto);
         return categoryRepository.getById(id);
     }
