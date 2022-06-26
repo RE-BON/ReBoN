@@ -1,6 +1,5 @@
 package com.handong.rebon.member.presentation.dto.response;
 
-import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
 import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 
 import lombok.AllArgsConstructor;
@@ -19,17 +18,13 @@ public class MemberReadResponse {
     private String nickName;
     private boolean isAgreed;
 
-//    public static MemberReadResponse from(MemberCreateResponseDto memberCreateResponseDto) {
-//        return new MemberReadResponse(memberCreateResponseDto.getToken());
-//    }
-
-    public static MemberReadResponse from(MemberReadResponseDto dto){
+    public static MemberReadResponse from(MemberReadResponseDto dto) {
         return MemberReadResponse.builder()
-                .id(dto.getId())
-                .image(dto.getImage())
-                .email(dto.getEmail())
-                .nickName(dto.getNickName())
-                .isAgreed(dto.isAgreed())
-                .build();
+                                 .id(dto.getId())
+                                 .image(dto.getImage())
+                                 .email(dto.getEmail())
+                                 .nickName(dto.getNickName())
+                                 .isAgreed(dto.isAgreed())
+                                 .build();
     }
 }

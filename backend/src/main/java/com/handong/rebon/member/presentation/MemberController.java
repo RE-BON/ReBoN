@@ -2,11 +2,8 @@ package com.handong.rebon.member.presentation;
 
 import java.net.URI;
 
-import com.handong.rebon.auth.domain.Login;
-import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.member.application.MemberService;
-//import com.handong.rebon.member.application.dto.request.MemberReadRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
 import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.presentation.dto.MemberAssembler;

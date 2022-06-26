@@ -1,10 +1,5 @@
 package com.handong.rebon.integration.member;
 
-import java.util.List;
-
-import com.handong.rebon.auth.application.dto.request.LoginRequestDto;
-import com.handong.rebon.auth.domain.OauthUserInfo;
-import com.handong.rebon.exception.oauth.NoSuchOAuthMemberException;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
@@ -17,11 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.assertj.core.api.Assertions;
-
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 public class MemberReadIntegrationTest extends IntegrationTest {
     @Autowired
