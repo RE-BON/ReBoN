@@ -58,6 +58,11 @@ public class Member extends BaseEntity {
         empathy.belongTo(this);
     }
 
+    public void update(String nickName, boolean isAgreed){
+        profile = new Profile(profile.getEmail(), nickName);
+        this.isAgreed = isAgreed;
+    }
+
     public void likeShop(Likes likes) {
         this.likes.add(likes);
     }

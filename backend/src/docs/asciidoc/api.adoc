@@ -135,6 +135,21 @@ include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-requ
 |===
 include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-response.adoc[]
 
+=== 내 정보 수정하는 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| nickname | String | true | 수정할 nickname
+| agreed | boolean | true | 수정할 마케팅 수신 동의 여부
+|===
+include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithLogin/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithLogin/http-response.adoc[]
+
 == Tag API
 
 === 전체 Tag 리스트 조회
