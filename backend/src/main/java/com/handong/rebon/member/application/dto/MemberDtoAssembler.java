@@ -6,7 +6,6 @@ import com.handong.rebon.member.domain.Member;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberDtoAssembler {
     public static MemberReadResponseDto memberReadResponseDto(Member member) {
