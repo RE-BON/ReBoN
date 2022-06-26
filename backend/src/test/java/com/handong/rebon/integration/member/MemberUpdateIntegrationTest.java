@@ -23,6 +23,7 @@ public class MemberUpdateIntegrationTest extends IntegrationTest {
     @Test
     @DisplayName("내 정보를 수정할 수 있다.")
     void updateMyInfo() {
+
         //given
         Member member = new Member("test@test.com", "test", true, "google");
         Member createdMember = memberRepository.save(member);

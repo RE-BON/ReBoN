@@ -60,5 +60,4 @@ public class MemberService {
 
         member.update(memberUpdateRequestDto.getNickname(), memberUpdateRequestDto.isAgreed());
     }
-
 }
