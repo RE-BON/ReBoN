@@ -6,9 +6,11 @@ import javax.persistence.*;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.shop.domain.Shop;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Likes {
 

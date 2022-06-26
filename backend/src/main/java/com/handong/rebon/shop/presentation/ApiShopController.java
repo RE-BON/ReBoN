@@ -8,10 +8,12 @@ import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.request.ShopLikeRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
+import com.handong.rebon.shop.application.dto.response.LikeShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopLikeResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.presentation.dto.request.ShopSearchRequest;
+import com.handong.rebon.shop.presentation.dto.response.LikeShopResponse;
 import com.handong.rebon.shop.presentation.dto.response.ShopLikeResponse;
 import com.handong.rebon.shop.presentation.dto.response.ShopResponse;
 import com.handong.rebon.shop.presentation.dto.response.ShopSimpleResponse;
@@ -65,5 +67,12 @@ public class ApiShopController {
         ShopLikeRequestDto shopLikeRequestDto = new ShopLikeRequestDto(loginMember.getId(), shopId);
         ShopLikeResponseDto shopLikeResponseDto = shopService.unlike(shopLikeRequestDto);
         return ResponseEntity.ok(ShopLikeResponse.from(shopLikeResponseDto));
+    }
+
+    @RequiredLogin
+    @GetMapping("/shops/likes")
+    public ResponseEntity<List<LikeShopResponse>> getLikeShops(@Login LoginMember loginMember) {
+        List<LikeShopResponseDto> likeShopDtos = shopService.findLikeShops(loginMember.getId());
+        return ResponseEntity.ok(LikeShopResponse.convert(likeShopDtos));
     }
 }
