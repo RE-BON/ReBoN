@@ -1,11 +1,7 @@
 package com.handong.rebon.acceptance.shop;
 
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import javax.persistence.EntityManager;
+import java.util.*;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
 import com.handong.rebon.category.domain.Category;
@@ -13,7 +9,7 @@ import com.handong.rebon.common.admin.AdminCategoryRegister;
 import com.handong.rebon.common.admin.AdminShopRegister;
 import com.handong.rebon.common.admin.AdminTagRegister;
 import com.handong.rebon.shop.domain.Shop;
-import com.handong.rebon.shop.presentation.dto.response.ShopLikeResponse;
+import com.handong.rebon.shop.presentation.dto.response.LikeShopResponse;
 import com.handong.rebon.tag.domain.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +25,12 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
 import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
+import static com.handong.rebon.acceptance.shop.ShopLikeAcceptanceTest.가게_좋아요;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-class ShopLikeAcceptanceTest extends AcceptanceTest {
 
+public class LikeShopReadAcceptanceTest extends AcceptanceTest {
     @Autowired
     private AdminTagRegister adminTagRegister;
 
@@ -42,9 +39,6 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
 
     @Autowired
     private AdminShopRegister adminShopRegister;
-
-    @Autowired
-    private EntityManager entityManager;
 
     private Map<String, Tag> tags = new HashMap<>();
     private Map<String, Category> categories = new HashMap<>();
@@ -65,67 +59,43 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
                 LocalTime.MIN,
                 LocalTime.MAX
         ));
+        shops.put("설빙", adminShopRegister.CafeRegisterWithMenu(
+                "설빙",
+                categories.get("카페"),
+                Collections.singletonList(categories.get("프랜차이즈")),
+                Arrays.asList(tags.get("포항"), tags.get("양덕")),
+                LocalTime.MIN,
+                LocalTime.MAX
+        ));
     }
 
     @Test
-    @DisplayName("가게 좋아요")
-    void likeShop() {
-        // given
+    @DisplayName("내가 찜한 가게 리스트 조회")
+    public void getLikeShops() {
+        //given
         ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
         String token = extractedToken(registerResponse);
-        Shop shop = shops.get("티타");
-
-        // when
-        ExtractableResponse<Response> response = 가게_좋아요(token, shop);
-        ShopLikeResponse result = response.as(new TypeRef<>() {});
-
-        // then
+        가게_좋아요(token, shops.get("티타"));
+        가게_좋아요(token, shops.get("설빙"));
+        //when
+        ExtractableResponse<Response> response = 찜한_가게_조회(token);
+        List<LikeShopResponse> result = response.as(new TypeRef<>() {});
+        //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(result.isLike()).isTrue();
-        assertThat(result.getLikeCount()).isEqualTo(1);
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result).extracting("name")
+                          .containsOnly("티타", "설빙");
+        assertThat(result).extracting("categoryName")
+                          .containsOnly("카페");
     }
 
-    @Test
-    @DisplayName("가게 좋아요 취소")
-    void unlikeShop() {
-        // given
-        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
-        String token = extractedToken(registerResponse);
-        Shop shop = shops.get("티타");
-
-        // when
-        ExtractableResponse<Response> response1 = 가게_좋아요(token, shop);
-        ShopLikeResponse result1 = response1.as(new TypeRef<>() {});
-
-        ExtractableResponse<Response> response2 = 가게_좋아요_취소(token, shop);
-        ShopLikeResponse result2 = response2.as(new TypeRef<>() {});
-
-        // then
-        assertThat(response2.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(result1.getLikeCount()).isEqualTo(1);
-        assertThat(result2.getLikeCount()).isEqualTo(0);
-        assertThat(result2.isLike()).isFalse();
-    }
-
-    public static ExtractableResponse<Response> 가게_좋아요(String token, Shop shop) {
+    private ExtractableResponse<Response> 찜한_가게_조회(String token) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .header("Authorization", "Bearer " + token)
                           .contentType(APPLICATION_JSON_VALUE)
                           .when()
-                          .post("/api/shops/" + shop.getId() + "/like")
-                          .then()
-                          .log().all()
-                          .extract();
-    }
-
-    private ExtractableResponse<Response> 가게_좋아요_취소(String token, Shop shop) {
-        return RestAssured.given(getRequestSpecification())
-                          .log().all()
-                          .header("Authorization", "Bearer " + token)
-                          .contentType(APPLICATION_JSON_VALUE)
-                          .when()
-                          .post("/api/shops/" + shop.getId() + "/unlike")
+                          .get("/api/shops/likes")
                           .then()
                           .log().all()
                           .extract();
