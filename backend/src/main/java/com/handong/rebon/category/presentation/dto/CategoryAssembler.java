@@ -31,11 +31,11 @@ public class CategoryAssembler {
                               .collect(Collectors.toList());
     }
 
-    public static CategoryUpdateRequestDto categoryUpdateRequestDto(Long id, CategoryRequest request){
+    public static CategoryUpdateRequestDto categoryUpdateRequestDto(Long id, CategoryRequest request) {
         return new CategoryUpdateRequestDto(id, request.getParentId(), request.getName());
     }
 
-    public static CategoryRequestDto categoryRequestDto(CategoryRequest categoryRequest){
+    public static CategoryRequestDto categoryRequestDto(CategoryRequest categoryRequest) {
         return new CategoryRequestDto(categoryRequest.getParentId(), categoryRequest.getName());
     }
 }
