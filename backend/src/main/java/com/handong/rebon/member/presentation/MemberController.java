@@ -2,17 +2,20 @@ package com.handong.rebon.member.presentation;
 
 import java.net.URI;
 
+import com.handong.rebon.auth.domain.Login;
+import com.handong.rebon.auth.domain.LoginMember;
+import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.member.application.MemberService;
+//import com.handong.rebon.member.application.dto.request.MemberReadRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
+import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.presentation.dto.MemberAssembler;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 import com.handong.rebon.member.presentation.dto.response.MemberCreateResponse;
+import com.handong.rebon.member.presentation.dto.response.MemberReadResponse;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,5 +39,12 @@ public class MemberController {
         memberService.checkNicknameDuplicate(nickname);
         return ResponseEntity.ok()
                              .build();
+    }
+
+    @RequiredLogin
+    @GetMapping("/members/{memberId}")
+    public ResponseEntity<MemberReadResponse> getMemberInfo(@PathVariable Long memberId) {
+        MemberReadResponseDto memberInfo = memberService.findByMemberId(memberId);
+        return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
     }
 }

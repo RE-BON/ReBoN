@@ -65,12 +65,6 @@ public class MemberService {
     @Transactional(readOnly = true)
     public MemberReadResponseDto findByMemberId(Long id) {
         Member member = findById(id);
-
         return MemberDtoAssembler.memberReadResponseDto(member);
     }
-
-//    @Transactional(readOnly = true)
-//    public List<MemberReadResponseDto> findInfos(){
-//        return MemberDtoAssembler.memberReadResponseDtos(memberRepository.findAll());
-//    }
 }

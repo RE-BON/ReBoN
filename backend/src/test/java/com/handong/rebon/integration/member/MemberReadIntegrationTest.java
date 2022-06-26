@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.Assertions;
@@ -28,12 +29,11 @@ public class MemberReadIntegrationTest extends IntegrationTest {
 
     @Test
     @DisplayName("내 정보를 조회할 수 있다.")
-    public void findMemberInfos(){
+    public void findMemberInfos() {
         //given
-        String code = "test-code";
         String email = "test@gmail.com";
         String registeredProvider = "google";
-        String nickName ="test";
+        String nickName = "test";
 
         MemberCreateResponseDto memberCreateResponseDto = memberService.save(new MemberCreateRequestDto(email, registeredProvider, nickName, true));
 
