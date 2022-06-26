@@ -19,7 +19,6 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/detail" element={<Detail />} />
-        <Route path="/search" element={<Search />} />
         <Route path="/main" element={<Main />} />
         <Route path="/post" element={<Post />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />
@@ -31,6 +30,7 @@ function Router() {
         <Route path="/termsModal" element={<TermsModal />} />
         <Route path="/marketing" element={<TermsMarketing />} />
         <Route path="privacy" element={<TermsPrivacy />} />
+        <Route path="/" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );
