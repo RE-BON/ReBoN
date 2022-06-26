@@ -98,7 +98,7 @@ public class ApiReviewController {
     }
 
     @RequiredLogin
-    @PostMapping("/{reviewId}/empathize")
+    @PostMapping("/reviews/{reviewId}/empathize")
     public ResponseEntity<Object> empathize(
             @Login LoginMember loginMember, @PathVariable Long reviewId
     ) {
@@ -108,7 +108,7 @@ public class ApiReviewController {
     }
 
     @RequiredLogin
-    @PostMapping("/{reviewId}/unempathize")
+    @PostMapping("/reviews/{reviewId}/unempathize")
     public ResponseEntity<Object> unempathize(
             @Login LoginMember loginMember, @PathVariable Long reviewId
     ) {
