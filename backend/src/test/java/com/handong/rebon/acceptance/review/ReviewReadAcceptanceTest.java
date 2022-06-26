@@ -146,7 +146,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     }
 
     @Test
-    @DisplayName("로그인이 되어 있지 않은 상태에서 나만의 꿀팁이 있는 리뷰를 가져올 수 있다.")
+    @DisplayName("로그인이 되어 있지 않은 상태에서 나만의 꿀팁이 있는 리뷰를 가져올 수 없다.")
     void getReviewByShopContainTipWithoutLogin() {
         //given
         String bearerToken = getBearerToken();
