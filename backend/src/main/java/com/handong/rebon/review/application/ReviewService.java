@@ -48,7 +48,9 @@ public class ReviewService {
                               .reviewScore(reviewCreateRequestDto.getReviewScore())
                               .build();
 
-        review.addReviewImages(reviewImages);
+        if (reviewImages != null) {
+            review.addReviewImages(reviewImages);
+        }
         Review savedReview = reviewRepository.save(review);
 
         return savedReview.getId();
@@ -143,6 +145,9 @@ public class ReviewService {
     }
 
     private ReviewImages saveImages(List<String> imageUrls) {
+        if (imageUrls == null) {
+            return null;
+        }
         List<ReviewImage> reviewImages = imageUrls.stream()
                                                   .map(ReviewImage::new)
                                                   .collect(Collectors.toList());
