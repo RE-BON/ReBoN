@@ -1,3 +1,6 @@
+.detail-slider {
+  margin-top: 10%;
+}
 .bookmark-title {
   margin: 8% 5% 5% 5%;
   border-bottom: 1px solid black;
@@ -11,6 +14,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-bottom: 5%;
+}
+.detail-top-content-wrapper {
+  margin-top: 3%;
 }
 .detail-main-image {
   width: 96%;
@@ -29,22 +35,53 @@
 }
 .detail-title-wrapper {
   margin-top: 5%;
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 .detail-shop-name {
   display: inline;
   padding-right: 3%;
   font-weight: bold;
 }
+.detail-shop-icon {
+  width: 35px;
+  margin-right: 3%;
+  display: inline;
+  margin-top: -10px;
+}
+.detail-star-wraper {
+  display: inline;
+}
+.detail-star-point {
+  font-size: 20px;
+  color: #fedb04;
+}
+.detail-star {
+  font-size: 20px;
+  color: #e9e9ea;
+}
 .detail-shop-rating {
   display: inline;
   color: #898c8f;
-  font-weight: bold;
+  /* font-weight: bold; */
+  margin-left: 2%;
+  font-size: 15px;
+}
+.detail-top-info-name,
+.detail-top-info-value {
+  font-size: 14px;
+  color: #898c8f;
+  font: weight 500px;
 }
 .detail-tag-wrapper {
-  margin-top: 1%;
+  margin-top: 3%;
 }
 .detail-tag {
-  border: 1px solid #262626;
+  border: 1px solid #ff6b6c;
   border-radius: 15px;
   margin-top: 2%;
   margin-right: 2%;
@@ -53,6 +90,7 @@
   padding-bottom: 1%;
   padding-left: 1.7%;
   padding-right: 1.7%;
+  color: #898c8f;
 }
 .detail-content-wrapper {
   margin-top: 5%;
@@ -68,10 +106,29 @@
   font-size: 0.9rem;
   font-weight: bold;
 }
+.detail-info-main-value {
+  font-size: 0.9rem;
+  /* font-weight: bold; */
+  display: block;
+  background: #f5f5f5;
+  border-radius: 5px;
+  color: #f3911d;
+  width: 38%;
+  padding-left: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-bottom: 3%;
+}
 .detail-info-value {
+  font-size: 0.9rem;
+  /* display: grid;
+  grid-template-columns: 1fr 3fr; */
+}
+.detail-info-sub-value {
   font-size: 0.9rem;
   display: grid;
   grid-template-columns: 1fr 3fr;
+  margin-bottom: 3%;
 }
 .detail-menu-name {
   font-size: 0.9rem;
