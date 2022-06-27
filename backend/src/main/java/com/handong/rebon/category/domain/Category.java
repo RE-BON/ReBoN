@@ -63,6 +63,10 @@ public class Category extends BaseEntity {
         category.parent = this;
     }
 
+    public void removeChildCategory(Category category) {
+        this.children.removeChild(category);
+    }
+
     public void validateSame(Category category) {
         if (this.isSameName(category.name)) {
             throw new CategoryExistException();
@@ -90,6 +94,17 @@ public class Category extends BaseEntity {
 
     public void addShopCategory(ShopCategory shopCategory) {
         this.shopCategories.add(shopCategory);
+    }
+
+    public void update(Category parent, String name) {
+        updateCategoryName(name);
+        this.parent.removeChildCategory(this);
+        parent.addChildCategory(this);
+    }
+
+    public void updateCategoryName(String name) {
+        validatesBlankName(name);
+        this.name = name;
     }
 
     public List<Category> getChildren() {

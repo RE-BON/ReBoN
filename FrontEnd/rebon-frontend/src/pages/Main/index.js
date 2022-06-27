@@ -10,7 +10,15 @@ import MainCard from './MainCard';
 import BestCard from './BestCard';
 import Divider from './Divider';
 
+//useLocation hook
+import { useLocation } from 'react-router';
+
 function TabPanel(props) {
+  // location 정보 받기
+  const location = useLocation();
+  console.log(location);
+  ///////////////////////////////
+
   const { children, value, index, ...other } = props;
 
   return (
