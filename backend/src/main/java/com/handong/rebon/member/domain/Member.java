@@ -46,7 +46,11 @@ public class Member extends BaseEntity {
     }
 
     public boolean isSame(Member member) {
-        return this.id == member.id;
+        return this.id.equals(member.id);
+    }
+
+    public boolean isSame(Long id) {
+        return this.id.equals(id);
     }
 
     public boolean isAdmin() {

@@ -25,6 +25,7 @@ public class ShopResponse {
     private ShopCategoryResponse category;
     private String name;
     private double star;
+    private boolean like;
     private List<ShopTagResponse> tags;
     private String phone;
     private List<ShopCategoryResponse> subCategories;
@@ -41,6 +42,7 @@ public class ShopResponse {
             ShopCategoryResponse category,
             String name,
             double star,
+            boolean like,
             List<ShopTagResponse> tags,
             String phone,
             List<ShopCategoryResponse> subCategories,
@@ -55,6 +57,7 @@ public class ShopResponse {
         this.category = category;
         this.name = name;
         this.star = star;
+        this.like = like;
         this.tags = tags;
         this.phone = phone;
         this.subCategories = subCategories;
@@ -72,6 +75,7 @@ public class ShopResponse {
                            .category(ShopCategoryResponse.from(dto.getCategory()))
                            .name(dto.getName())
                            .star(dto.getStar())
+                           .like(dto.isLike())
                            .tags(convertToShopTagResponse(dto.getTags()))
                            .phone(dto.getPhone())
                            .subCategories(convertToShopCategoryResponse(dto.getSubCategories()))

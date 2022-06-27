@@ -194,6 +194,7 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 | category | Long | true | 최상위 카테고리 id 값
 | subCategories | Long | false | 최상위 카테고리에 속한 하위 카테고리의 id값. 여러개 보낼 수 있음(`ex. subCategories=5&subCategories=7`)
 | open | boolean | true | 영업중 여부 (false = 전체 가게 조회, true = 현재 시간에 운영중인 가게만 조회)
+| token | String | false | Authorization header에 bearer type으로 jwt 보내주기
 |===
 include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
 
@@ -235,6 +236,18 @@ include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-request.adoc[]
 
 ==== Response
 include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-response.adoc[]
+
+=== 로그인 유저 Shop 좋아요 여부 확인
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Long | true | 조회하고자 하는 가게의 id 값
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+|===
+include::{snippets}/ShopLikeAcceptanceTest/loginMemberLike/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/loginMemberLike/http-response.adoc[]
 
 == Review API
 
