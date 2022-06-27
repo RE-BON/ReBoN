@@ -145,9 +145,6 @@ public class ReviewService {
     }
 
     private ReviewImages saveImages(List<String> imageUrls) {
-        if (imageUrls == null) {
-            return null;
-        }
         List<ReviewImage> reviewImages = imageUrls.stream()
                                                   .map(ReviewImage::new)
                                                   .collect(Collectors.toList());
