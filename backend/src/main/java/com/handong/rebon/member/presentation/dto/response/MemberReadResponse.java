@@ -16,7 +16,7 @@ public class MemberReadResponse {
     private String image;
     private String email;
     private String nickName;
-    private boolean isAgreed;
+    private boolean agreed;
 
     public static MemberReadResponse from(MemberReadResponseDto dto) {
         return MemberReadResponse.builder()
@@ -24,7 +24,7 @@ public class MemberReadResponse {
                                  .image(dto.getImage())
                                  .email(dto.getEmail())
                                  .nickName(dto.getNickName())
-                                 .isAgreed(dto.isAgreed())
+                                 .agreed(dto.isAgreed())
                                  .build();
     }
 }

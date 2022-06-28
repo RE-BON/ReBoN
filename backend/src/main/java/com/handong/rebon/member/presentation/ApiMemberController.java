@@ -2,6 +2,8 @@ package com.handong.rebon.member.presentation;
 
 import java.net.URI;
 
+import com.handong.rebon.auth.domain.Login;
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
@@ -19,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
-public class MemberController {
+public class ApiMemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
@@ -38,10 +40,17 @@ public class MemberController {
                              .build();
     }
 
+//    @RequiredLogin
+//    @GetMapping("/members/{memberId}")
+//    public ResponseEntity<MemberReadResponse> getMemberInfo(@PathVariable Long memberId) {
+//        MemberReadResponseDto memberInfo = memberService.findMemberInfo(memberId);
+//        return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
+//    }
+
     @RequiredLogin
-    @GetMapping("/members/{memberId}")
-    public ResponseEntity<MemberReadResponse> getMemberInfo(@PathVariable Long memberId) {
-        MemberReadResponseDto memberInfo = memberService.findByMemberId(memberId);
+    @GetMapping("/members")
+    public ResponseEntity<MemberReadResponse> getMemberInfo(@Login LoginMember loginMember) {
+        MemberReadResponseDto memberInfo = memberService.findMemberInfo(loginMember.getId());
         return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
     }
 }

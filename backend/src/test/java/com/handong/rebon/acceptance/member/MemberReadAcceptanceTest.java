@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
 import com.handong.rebon.auth.application.AuthService;
-import com.handong.rebon.auth.domain.LoginMember;
+import com.handong.rebon.member.presentation.dto.response.MemberReadResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,13 +34,18 @@ public class MemberReadAcceptanceTest extends AcceptanceTest {
         String token = extractedToken(registerResponse);
         String bearerToken = "Bearer " + token;
 
-        LoginMember loginMember = authService.findMemberByToken(token);
-
         //when
-        ExtractableResponse<Response> response = getMemberInfo(bearerToken, loginMember.getId());
+        ExtractableResponse<Response> response = getMemberInfo(bearerToken);
+        MemberReadResponse result = response.as(MemberReadResponse.class);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).extracting("email")
+                          .isEqualTo("test@gmail.com");
+        assertThat(result).extracting("nickName")
+                          .isEqualTo("test");
+        assertThat(result).extracting("agreed")
+                          .isEqualTo(true);
     }
 
     @Test
@@ -51,16 +56,14 @@ public class MemberReadAcceptanceTest extends AcceptanceTest {
         String token = extractedToken(registerResponse);
         String bearerToken = "Bearer " + token;
 
-        LoginMember loginMember = authService.findMemberByToken(token);
-
         //when
-        ExtractableResponse<Response> response = getMemberInfo(null, loginMember.getId());
+        ExtractableResponse<Response> response = getMemberInfo(null);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    public ExtractableResponse<Response> getMemberInfo(String token, Long memberId) {
+    public ExtractableResponse<Response> getMemberInfo(String token) {
         RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
                                                       .log().all();
         if (!Objects.isNull(token)) {
@@ -68,7 +71,7 @@ public class MemberReadAcceptanceTest extends AcceptanceTest {
         }
         return requestSpec.contentType(APPLICATION_JSON_VALUE)
                           .when()
-                          .get("/api/members/" + memberId)
+                          .get("/api/members")
                           .then()
                           .log().all()
                           .extract();

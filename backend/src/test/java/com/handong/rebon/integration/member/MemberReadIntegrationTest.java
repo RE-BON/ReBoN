@@ -28,7 +28,7 @@ public class MemberReadIntegrationTest extends IntegrationTest {
         MemberCreateResponseDto memberCreateResponseDto = memberService.save(new MemberCreateRequestDto(email, registeredProvider, nickName, true));
 
         //when
-        MemberReadResponseDto member = memberService.findByMemberId(memberCreateResponseDto.getMemberId());
+        MemberReadResponseDto member = memberService.findMemberInfo(memberCreateResponseDto.getMemberId());
 
         //then
         assertThat(member).extracting("email")
