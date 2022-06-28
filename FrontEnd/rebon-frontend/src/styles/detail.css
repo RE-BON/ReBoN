@@ -139,7 +139,13 @@
 .detail-address-wrapper {
   margin-top: 5%;
 }
+.detail-address-value {
+  font-size: 0.9rem;
+}
+.detail-map {
+  margin-top: 3%;
+}
 .detail-map-image {
-  height: 400px;
+  height: 300px;
   width: 600px;
 }
