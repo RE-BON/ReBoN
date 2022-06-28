@@ -3,7 +3,7 @@ import '../../styles/join.css';
 
 import SNSButtons from './LoginButton';
 
-export default function Join() {
+export default function Login() {
   return (
     <div className="join-wrapper">
       <div className="centerBox">
