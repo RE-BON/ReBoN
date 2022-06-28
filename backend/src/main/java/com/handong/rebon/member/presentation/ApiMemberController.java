@@ -2,6 +2,8 @@ package com.handong.rebon.member.presentation;
 
 import java.net.URI;
 
+import com.handong.rebon.auth.domain.Login;
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.application.dto.request.MemberUpdateRequestDto;
@@ -19,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
-public class MemberController {
+public class ApiMemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
@@ -39,12 +41,12 @@ public class MemberController {
     }
 
     @RequiredLogin
-    @PatchMapping("/members/{memberId}")
+    @PatchMapping("/members")
     public ResponseEntity<Void> update(
-            @PathVariable Long memberId,
+            @Login LoginMember loginMember,
             @RequestBody MemberUpdateRequest memberUpdateRequest
     ) {
-        MemberUpdateRequestDto memberUpdateRequestDto = MemberAssembler.memberUpdateRequestDto(memberId, memberUpdateRequest);
+        MemberUpdateRequestDto memberUpdateRequestDto = MemberAssembler.memberUpdateRequestDto(loginMember.getId(), memberUpdateRequest);
         memberService.update(memberUpdateRequestDto);
 
         return ResponseEntity.ok()
