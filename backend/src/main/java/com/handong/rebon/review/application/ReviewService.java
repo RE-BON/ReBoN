@@ -48,9 +48,7 @@ public class ReviewService {
                               .reviewScore(reviewCreateRequestDto.getReviewScore())
                               .build();
 
-        if (reviewImages != null) {
-            review.addReviewImages(reviewImages);
-        }
+        review.addReviewImages(reviewImages);
         Review savedReview = reviewRepository.save(review);
 
         return savedReview.getId();
