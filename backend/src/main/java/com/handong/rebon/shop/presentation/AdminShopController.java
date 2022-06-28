@@ -13,6 +13,7 @@ import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
+import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.presentation.dto.request.ShopRequest;
 import com.handong.rebon.shop.presentation.dto.request.ShopSearchRequest;
 import com.handong.rebon.tag.application.TagService;
@@ -68,8 +69,16 @@ public class AdminShopController {
 
     @GetMapping("/shops/{id}/update")
     public String updateForm(@PathVariable Long id, Model model) {
-        // TODO ...
-        return "shop/createForm";
+        Shop shop = shopService.findById(id);
+        model.addAttribute("shop", shop);
+        model.addAttribute("tags", tagService.findTags());
+
+        List<RootCategoryResponseDto> categories = categoryService.findRootCategoriesAndChildren();
+        model.addAttribute("categories", CategoryAssembler.rootCategoryResponses(categories));
+
+        ShopRequest shopRequest = new ShopRequest(DEFAULT_MENU_GROUP_SIZE);
+        model.addAttribute("shopRequest", shopRequest);
+        return "shop/updateForm";
     }
 
     @PutMapping("/shops/{id}")
