@@ -40,13 +40,6 @@ public class ApiMemberController {
                              .build();
     }
 
-//    @RequiredLogin
-//    @GetMapping("/members/{memberId}")
-//    public ResponseEntity<MemberReadResponse> getMemberInfo(@PathVariable Long memberId) {
-//        MemberReadResponseDto memberInfo = memberService.findMemberInfo(memberId);
-//        return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
-//    }
-
     @RequiredLogin
     @GetMapping("/members")
     public ResponseEntity<MemberReadResponse> getMemberInfo(@Login LoginMember loginMember) {
