@@ -24,6 +24,7 @@
   margin-top: 5%;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 15px;
+  color: #ff6b6c;
 }
 
 .post-tip-box {
@@ -93,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 25% 0;
+  padding: 1em 0;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 20px;
   font-size: 300%;
@@ -124,6 +125,7 @@
   background-color: white;
   border-radius: 50px;
   text-align: center;
+  font-weight: bold;
 }
 
 .post-button-finish {
@@ -133,4 +135,5 @@
   background-color: #ff6b6c;
   border-radius: 50px;
   text-align: center;
+  font-weight: bold;
 }

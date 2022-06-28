@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
 import SearchBar from './SearchBar';
 import '../../../styles/header-search-modal.css';
 
@@ -47,32 +46,24 @@ export default function SearchModal() {
         opacity={opacity}
         backgroundProps={{ opacity }}
       >
-        <div className="modal-wrapper">
-          <div className="modal-wrapper-search">
-            <SearchBar />
-            <button onClick={toggleModal}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
+        <div className="header-modal-wrapper">
+          <div className="header-modal-wrapper-search">
+            <div className="header-search-bar-wrapper">
+              <img src="../../../../image/search-icon.png" alt="header-search-icon" />
+              <input placeholder="가고 싶은 지역을 입력해주세요." />
+            </div>
           </div>
 
-          <ul className="search-list">
+          <ul className="header-search-list">
             <li>장성동</li>
             <li>잔치국수</li>
             <li>장수동</li>
           </ul>
 
-          <ul className="tag-list">
-            <hr />
-            <div>추천 태그</div>
+          <ul className="header-tag-list">
+            <div>추천 태그로 검색해보세요.</div>
             <li> 영일대</li>
             <li>양덕</li>
-            <li>구룡포</li>
-            <li>칠포해수욕장</li>
-            <li>영일대</li>
-            <li>양덕</li>
-            <li>구룡포</li>
-            <li>칠포해수욕장</li>
-
             <li>구룡포</li>
             <li>칠포해수욕장</li>
           </ul>
@@ -83,9 +74,11 @@ export default function SearchModal() {
 }
 
 const StyledModal = Modal.styled`
-  width: 30rem;
-  height: 30rem;
-  padding : 20px;
+position:absolute;
+top: -1%;
+  width: 100%;
+  height: 24rem;
+  padding : 1% 20%;
   border-radius:20px;
   background-color: white;
   opacity: ${(props) => props.opacity};

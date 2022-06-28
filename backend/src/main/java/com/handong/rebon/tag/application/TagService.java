@@ -3,24 +3,92 @@ package com.handong.rebon.tag.application;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.handong.rebon.exception.tag.NoSuchTagException;
+import com.handong.rebon.exception.tag.TagExistException;
+import com.handong.rebon.tag.application.dto.TagDtoAssembler;
+import com.handong.rebon.tag.application.dto.request.TagUpdateRequestDto;
+import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
+import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class TagService {
     private final TagRepository tagRepository;
+    private final TagSearchRepository tagSearchRepository;
 
-    public TagService(TagRepository tagRepository) {
-        this.tagRepository = tagRepository;
+    @Transactional
+    public Long createTag(String tagName) {
+        validateDuplicateTag(tagName);
+
+        Tag newTag = new Tag(tagName);
+
+        Tag savedTag = tagRepository.save(newTag);
+        tagSearchRepository.save(newTag);
+        return savedTag.getId();
     }
 
-    // 태그 담당이 아니라 Shop 메서드가 잘 돌아가는지만 확인하기 위해 임시로 만든것.
-    // 태그 파트랑 머지할 때 삭제하면 될듯
-    public List<Tag> findAll(List<Long> tags) {
+    private void validateDuplicateTag(String name) {
+        if (tagRepository.existsByName(name)) {
+            throw new TagExistException();
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> findTags() {
+        return TagDtoAssembler.tagResponseDtos(tagRepository.findAll());
+    }
+
+    @Transactional(readOnly = true)
+    public Tag findById(Long id) {
+        return tagRepository.findById(id)
+                            .orElseThrow(NoSuchTagException::new);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Tag> findAllContainIds(List<Long> tags) {
         return tags.stream()
-                   .map(t -> tagRepository.findById(t).get())
+                   .map(this::findById)
+                   .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Tag tag = findById(id);
+        tag.delete();
+    }
+
+    @Transactional
+    public void update(TagUpdateRequestDto tagUpdateRequestDto) {
+        Tag tag = findById(tagUpdateRequestDto.getId());
+
+        if (!(tag.isSameName(tagUpdateRequestDto.getName()))) {
+            validateDuplicateTag(tagUpdateRequestDto.getName());
+        }
+
+        tag.update(tagUpdateRequestDto.getName());
+    }
+
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> searchByKeyword(String keyword, Pageable pageable) {
+        return tagSearchRepository.searchByKeyword(keyword.strip(), pageable)
+                                  .stream()
+                                  .map(TagResponseDto::from)
+                                  .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<TagResponseDto> findTopTags() {
+        List<Tag> tags = tagRepository.findTop8ByOrderByCountDesc();
+        return tags.stream()
+                   .map(TagResponseDto::from)
                    .collect(Collectors.toList());
     }
 }

@@ -3,7 +3,7 @@ import '../../../styles/main.css';
 
 export default function Divider() {
   return (
-    <div className="divider">
+    <div className="divider-main">
       <div className="searchTitle">'칠포해수욕장'식당</div>
       <select className="filter" name="filter">
         <option value="star" selected>

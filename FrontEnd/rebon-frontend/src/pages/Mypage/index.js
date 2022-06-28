@@ -1,59 +1,96 @@
-import '../../styles/mypage.css';
-import SideMenu from './SideMenu';
-import '../../styles/myedit.css';
+import { Row, Col } from 'react-bootstrap';
+import { ImCog } from 'react-icons/im';
+import { RiFootprintLine } from 'react-icons/ri';
+import { FiHeart } from 'react-icons/fi';
+import { IoIosArrowForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faXmark, faCamera } from '@fortawesome/free-solid-svg-icons';
+import Bookmark from './Bookmark';
+import Footprint from './Footprint';
+import Edit from './Edit';
 import Header from '../../components/Header';
-export default function MyEdit() {
+import LogoutModal from './LogoutModal';
+import Withdrawal from './Withdrawal';
+import '../../styles/mypage.css';
+
+export default function Mypage() {
+  const userName = localStorage.getItem('userName');
+  const [clickedTab, setClickedTab] = useState(1);
+
   return (
     <div className="my-wrapper">
       <Header />
-      <div className="myedit-wrapper">
-        <div className="myedit-nav">
-          <SideMenu />
+      <div className="mypage-wrapper">
+        <div className="mypage-tab">
+          <div className="sideMenu-wrapper">
+            <div className="sideMenu-intro">
+              안녕하세요.
+              <br />
+              <span className="name">{userName}</span>님{' '}
+              <Link to="" onClick={() => setClickedTab(1)}>
+                <ImCog className={clickedTab === 1 ? 'tab-click-active' : 'tab-click-stay'} color="black" size="18" />
+              </Link>
+            </div>
+
+            <Link to="/mypage/footprint" onClick={() => setClickedTab(2)} style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Row className="sidebtn-wrapper">
+                <Col md={2} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <div className="sidebtn-icon">
+                    {console.log(clickedTab)}
+                    <RiFootprintLine size="24" />
+                  </div>
+                </Col>
+                <Col md={8} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <div className="btn-name">발자국</div>
+                  <div className="sub-txt">리뷰를 확인할 수 있어요.</div>
+                </Col>
+                <Col md={1} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <div>
+                    <IoIosArrowForward />
+                  </div>
+                </Col>
+              </Row>
+            </Link>
+
+            <Link to="/mypage/bookmark" onClick={() => setClickedTab(3)} style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Row className="sidebtn-wrapper">
+                <Col md={2} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <div className="sidebtn-icon">
+                    <FiHeart md={8} size="22" />
+                  </div>
+                </Col>
+                <Col md={8} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <div className="btn-name">찜</div>
+                  <div className="sub-txt">찜한 목록을 확인할 수 있어요.</div>
+                </Col>
+                <Col md={2} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <div>
+                    <IoIosArrowForward />
+                  </div>
+                </Col>
+              </Row>
+            </Link>
+
+            <Row className="sideMenu-bottom">
+              <div className="mb-2">
+                <LogoutModal />
+              </div>
+              <Link to="withdrawal" onClick={() => setClickedTab(4)} style={{ color: 'inherit', textDecoration: 'none' }}>
+                <div>회원탈퇴</div>
+              </Link>
+            </Row>
+          </div>
         </div>
 
-        <div className="myedit-content-wrapper">
-          <div className="myedit-content-title">
-            <div>회원정보 수정</div>
-          </div>
-
-          <div className="myedit-content-info">
-            <div className="myedit-content-info-icon">
-              <div className="icon-profile-icon">
-                <FontAwesomeIcon icon={faCircleUser} size="5x" color="#c4c4c4" />
-                <span className="icon-profile-icon-camera">
-                  <FontAwesomeIcon icon={faCamera} size="1x" color="white" />
-                </span>
-              </div>
-            </div>
-
-            <div className="myedit-content-info-title">이름</div>
-            <div className="myedit-content-info-name">
-              <input type="text" placeholder="한글로 공백 없이 입력해주세요."></input>
-              <div className="name-button">
-                <FontAwesomeIcon icon={faXmark} size="1x" color="white" />
-              </div>
-            </div>
-
-            <div className="myedit-content-info-title ">이메일</div>
-            <div className="myedit-content-info-email">
-              <input type="text" placeholder="ReBon@gmail.com"></input>
-              <div className="email-button">중복확인</div>
-            </div>
-
-            <div className="myedit-content-info-title ">휴대폰 번호</div>
-            <div className="myedit-content-info-phone">
-              <input type="text" placeholder="010-1234-5678"></input>
-              <div className="phone-button">인증번호 요청</div>
-            </div>
-
-            <div className="myedit-content-info-button">
-              <div className="cancel">취소</div>
-              <div className="finished">수정완료</div>
-            </div>
-          </div>
+        <div className="mypage-content">
+          <Routes>
+            <Route path="" element={<Edit />} />
+            <Route path="footprint" element={<Footprint />} />
+            <Route path="bookmark" element={<Bookmark />} />
+            <Route path="withdrawal" element={<Withdrawal />} />
+          </Routes>
         </div>
       </div>
     </div>

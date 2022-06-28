@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div class="jumbotron">
+        <h1>태그 목록</h1>
+    </div>
+    <div th:each="tag : ${tags}" style="margin-bottom:50px">
+        <div class="container">
+            <div class="row" style="display:flex">
+                <span class="col-sm ." th:text="${tag.id}" style="margin-right:30px"></span>
+                <span class="col-sm " th:text="${tag.name}" style="margin-right:30px"></span>
+                <a th:href="@{/admin/tags/delete/{id}(id=${tag.id})}">
+                    <button>삭제</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

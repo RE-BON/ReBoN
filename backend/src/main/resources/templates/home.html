@@ -2,34 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
     <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
     <div class="jumbotron">
         <h1>HELLO SHOP</h1>
         <p class="lead">가게 기능</p>
         <p>
-            <a class="btn btn-lg btn-secondary" href="/admin/shops/">가게 등록</a>
+            <a class="btn btn-lg btn-secondary" href="/admin/shops/new">가게 등록</a>
             <a class="btn btn-lg btn-secondary" href="/admin/shops">가게 목록</a>
         </p>
-        <p class="lead">상품 기능</p>
+        <p class="lead">상품a 기능</p>
         <p>
-            <a class="btn btn-lg btn-dark" href="/admin/categories">카테고리 등록</a>
-            <a class="btn btn-lg btn-dark" href="/admin/categories">카테고리 목록</a>
+            <a class="btn btn-lg btn-dark" href="/admin/categories/new">카테고리 등록</a>
+            <a class="btn btn-lg btn-dark" href="/admin/categories/remove">카테고리 삭제</a>
         </p>
         <p class="lead">주문 기능</p>
         <p>
-            <a class="btn btn-lg btn-info" href="/admin/tags">태크 등록</a>
-            <a class="btn btn-lg btn-info" href="/admin/tags">태그 목록</a>
+            <a class="btn btn-lg btn-info" href="/admin/tags/new">태그 등록</a>
+            <a class="btn btn-lg btn-info" href="/admin/tags/view">태그 목록</a>
         </p>
         <p class="lead">리뷰 기능</p>
         <p>
             <a class="btn btn-lg btn-info" href="/admin/reviews">리뷰 목록</a>
         </p>
     </div>
-    <div th:replace="fragments/footer :: footer" />
+    <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
 </html>

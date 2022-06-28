@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Submodule ###
+/src/main/resources/application-prod.yml
+

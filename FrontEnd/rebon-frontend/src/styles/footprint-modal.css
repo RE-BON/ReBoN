@@ -1,0 +1,27 @@
+.footprint-modal {
+  color: #ff6b6c;
+  background-color: #ffeded;
+  border-radius: 1000px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.footprint-modal-content {
+  padding-top: 15px;
+}
+
+.footprint-modal-delete {
+  margin-bottom: 20px;
+}
+
+.footprint-modal-delete button {
+  padding-right: 15px;
+}
+
+.footprint-modal-close button {
+  padding-right: 20px;
+}

@@ -5,24 +5,23 @@ import java.util.List;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewScore;
 
-import org.springframework.web.multipart.MultipartFile;
-
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@AllArgsConstructor
 public class ReviewCreateRequestDto {
     private Long memberId;
     private Long shopId;
-    private String title;
     private String content;
     private String tip;
-    private List<MultipartFile> images;
-    private double star;
+    private List<String> imageUrls;
+    private int star;
 
     public ReviewContent getReviewContent() {
-        return new ReviewContent(title, content, tip);
+        return new ReviewContent(content, tip);
     }
 
     public ReviewScore getReviewScore() {

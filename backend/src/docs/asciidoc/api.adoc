@@ -1,0 +1,443 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:docinfo: shared-head
+
+= RE-BON API Docs
+
+== Common
+
+=== Exception
+
+|===
+| 상태 코드 | 설명
+
+| 400 | `잘못된 요청`
+| 401 | `권한 없음`
+| 500 | `서버 에러`
+|===
+
+```json
+{
+  "message": "에러 상세 내용"
+}
+```
+
+=== Pagination & Sorting
+|===
+| 값 | 타입 | 필수 | 설명
+
+| page | Integer | false | 원하는 페이지
+| size | Integer | false | 한 페이지에 보여줄 데이터 수
+| sort | String | false | 정렬 기준
+|===
+```
+ex) 1페이지 데이터 10개 생성일 오름차순 정렬
+https://localhost:8080/api/shops?page=0&size=10&sort=createdAt,asc
+```
+
+== Member API
+
+=== 회원가입
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| email | String | true | 서버에서 받은 값을 넣어주기
+| nickname| String | true | nickname은 Unique해야됨으로 validation 검사 필요
+| oauthProvider | String | true | google, naver, kakao 가입 신청한 sns로 보내야됨
+| agreed | boolean | true | 수신 동의 여부.
+|===
+include::{snippets}/MemberCreateAcceptanceTest/saveMember/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/MemberCreateAcceptanceTest/saveMember/http-response.adoc[]
+
+=== 회원 가입이 되어 있는 경우, login 요청
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| oauthProvider | String | true | google, naver, kakao 로그인 요청된 sns로 보내야됨(소문자 가능)
+| code | String | true | Authorization server에서 authorization code를 받은 후 전송
+|===
+
+include::{snippets}/AuthAcceptanceTest/loginByOauth/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+
+include::{snippets}/AuthAcceptanceTest/loginByOauth/http-response.adoc[]
+
+=== 회원 가입이 되어 있지 않은 경우, login 요청
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| oauthProvider | String | true | google, naver, kakao 로그인 요청된 sns로 보내야됨(소문자 가능)
+| code | String | true | Authorization server에서 authorization code를 받은 후 전송
+|===
+
+include::{snippets}/AuthAcceptanceTest/loginByNotRegisteredMemberGetNotFound/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+| email | String | true | 회원 가입이 필요하기 때문에, response body에 요청받은 sns의 email 보냄.
+|===
+include::{snippets}/AuthAcceptanceTest/loginByNotRegisteredMemberGetNotFound/http-response.adoc[]
+
+=== 지원하지 않은 oauth provider로 login 요청시
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| oauthProvider | String | true | google, naver, kakao 로그인 요청된 sns로 보내야됨(소문자 가능)
+| code | String | true | Authorization server에서 authorization code를 받은 후 전송
+|===
+include::{snippets}/AuthAcceptanceTest/loginByNotSupportedProviderGetBadRequest/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/AuthAcceptanceTest/loginByNotSupportedProviderGetBadRequest/http-response.adoc[]
+
+=== 닉네임 중복 확인 요청, 닉네임이 중복되지 않는 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| nickname | String | true | 중복확인 하고 싶은 nickname
+|===
+include::{snippets}/MemberCreateAcceptanceTest/checkDidNotDuplicateNickname/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/MemberCreateAcceptanceTest/checkDidNotDuplicateNickname/http-response.adoc[]
+
+=== 닉네임 중복 확인 요청, 닉네임이 중복되는 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| nickname | String | true | 중복확인 하고 싶은 nickname
+|===
+include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-request.adoc[]
+
+==== Response
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-response.adoc[]
+
+== Tag API
+
+=== 전체 Tag 리스트 조회
+==== Request
+include::{snippets}/TagReadAcceptanceTest/getAllTags/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagReadAcceptanceTest/getAllTags/http-response.adoc[]
+
+=== Tag 검색 자동 완성
+
+*keyword = "ㄱㅜ" 인 예시이다.*
+
+==== Request
+include::{snippets}/TagElasticSearchAcceptanceTest/autoComplete/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagElasticSearchAcceptanceTest/autoComplete/http-response.adoc[]
+
+=== Tag 초성 검색
+
+*keyword = "ㅎㄷㄷ" 인 예시이다.*
+
+==== Request
+include::{snippets}/TagElasticSearchAcceptanceTest/chosungSearch/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagElasticSearchAcceptanceTest/chosungSearch/http-response.adoc[]
+
+=== 인기 검색어 상위 8개 조회 api
+
+==== Request
+include::{snippets}/TagReadAcceptanceTest/getTopTags/http-request.adoc[]
+
+==== Response
+include::{snippets}/TagReadAcceptanceTest/getTopTags/http-response.adoc[]
+
+== Category API
+=== 모든 Category 상세 조회
+Root Category 와 그 자식 카테고리들의 배열
+
+==== Request
+
+
+include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-request.adoc[]
+==== Response
+include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-response.adoc[]
+
+== Shop API
+
+=== Shop 리스트 조회(지역, 카테고리 별)
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| tag | Long | true | 위치 태그 id 값
+| category | Long | true | 최상위 카테고리 id 값
+| subCategories | Long | false | 최상위 카테고리에 속한 하위 카테고리의 id값. 여러개 보낼 수 있음(`ex. subCategories=5&subCategories=7`)
+| open | boolean | true | 영업중 여부 (false = 전체 가게 조회, true = 현재 시간에 운영중인 가게만 조회)
+| token | String | false | Authorization header에 bearer type으로 jwt 보내주기
+|===
+include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-response.adoc[]
+
+=== 단일 Shop 상세 조회
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopReadAcceptanceTest/showCafeDetail/http-response.adoc[]
+
+=== Shop 좋아요 기능
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopLikeAcceptanceTest/likeShop/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/likeShop/http-response.adoc[]
+
+=== Shop 좋아요 취소 기능
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 조회하고자 하는 가게의 id 값
+|===
+include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/unlikeShop/http-response.adoc[]
+
+=== 로그인 유저 Shop 좋아요 여부 확인
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Long | true | 조회하고자 하는 가게의 id 값
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+|===
+include::{snippets}/ShopLikeAcceptanceTest/loginMemberLike/http-request.adoc[]
+
+==== Response
+include::{snippets}/ShopLikeAcceptanceTest/loginMemberLike/http-response.adoc[]
+
+== Review API
+
+=== 리뷰 생성 로그인이 된 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| shopId | Long | true | Path variable로 리뷰 쓰는 가게 보내주기
+| content | String | true | 리뷰 내용
+| tip | String | false | 팁 내용
+| star | int | true | 리뷰 점수
+| images | List<MultipartFile> | false | 리뷰 사진들
+|===
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithLogin/http-response.adoc[]
+
+=== 리뷰 생성 로그인이 되지 않은 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| shopId | Long | true | Path variable로 리뷰 쓰는 가게 보내주기
+| content | String | true | 리뷰 내용
+| tip | String | false | 팁 내용
+| star | int | true | 리뷰 점수
+| images | List<String> | false | 리뷰 사진들
+|===
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/ReviewCreateAcceptanceTest/createReviewWithoutLogin/http-response.adoc[]
+
+=== 가게 리뷰 조회 로그인이 된 경우
+
+==== Request
+
+|===
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| shopId | Long | true | Path variable로 리뷰 조회 가게 보내주기
+|===
+
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithLogin/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithLogin/http-response.adoc[]
+
+=== 가게 리뷰 조회 로그인이 되지 않은 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| shopId | Long | true | Path variable로 리뷰 조회 가게 보내주기
+|===
+
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithoutLogin/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopWithoutLogin/http-response.adoc[]
+
+=== 내가 쓴 리뷰 조회 로그인이 된 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+|===
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithLogin/http-response.adoc[]
+
+=== 내가 쓴 리뷰 조회 로그인이 되지 않은 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+|===
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithoutLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithoutLogin/http-response.adoc[]
+
+
+=== 리뷰 삭제 로그인이 된 경우
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+|===
+include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewDeleteAcceptanceTest/deleteReviewWithLogin/http-response.adoc[]
+
+=== 다른 사람의 리뷰를 삭제하려는 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+|===
+include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]
+
+=== 내가 쓴 리뷰를 수정하려는 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | http body에 null이거나 blank면 안됨.
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5 의 값
+|===
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByReviewAuthor/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByReviewAuthor/http-response.adoc[]
+
+
+=== 다른 사람이 쓴 리뷰를 수정하려는 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | 소유자가 아닌 다른 사람의 token
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | http body에 null이거나 blank면 안됨.
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5 의 값
+|===
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByNotReviewAuthor/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByNotReviewAuthor/http-response.adoc[]
+
+=== content가 empty content인 경우
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | 소유자가 아닌 다른 사람의 token
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | empty 값
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5 의 값
+|===
+
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByEmptyReviewContent/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByEmptyReviewContent/http-response.adoc[]
+
+=== score가 1~5 범위를 벗어났을 때,
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | 소유자가 아닌 다른 사람의 token
+| reviewId | Long | true | Path variable로 삭제할 리뷰 id 보내주기
+| content | String | true | empty가 아닌 값
+| tip | String | true | http body
+| imageUrls | List<String> | false | http body에 리뷰 이미지 URls
+| star | Integer | true | http body에 1 ~ 5의 범위를 벗어난 값
+|===
+
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByBelowZeroExcessFive/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByBelowZeroExcessFive/http-response.adoc[]

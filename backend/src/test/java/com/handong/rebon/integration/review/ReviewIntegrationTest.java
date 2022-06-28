@@ -1,13 +1,14 @@
 package com.handong.rebon.integration.review;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.domain.Member;
-import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.review.domain.Review;
-import com.handong.rebon.review.domain.content.ReviewContent;
-import com.handong.rebon.review.domain.content.ReviewScore;
 import com.handong.rebon.review.domain.repository.ReviewRepository;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
@@ -19,42 +20,34 @@ import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.shop.domain.type.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Transactional
-class ReviewIntegrationTest {
+class ReviewIntegrationTest extends IntegrationTest {
 
     @Autowired
-    private ReviewService reviewService;
+    public ReviewService reviewService;
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    public ReviewRepository reviewRepository;
 
     @Autowired
-    private MemberRepository memberRepository;
+    public MemberRepository memberRepository;
 
     @Autowired
-    private ShopRepository shopRepository;
+    public ShopRepository shopRepository;
 
     @Test
     @DisplayName("리뷰 생성")
     void create() {
         //given
-        Member member = createMember();
-        Shop shop = createShop();
+        Member member = createMember("peace");
+        Shop shop = createShop("토시래");
 
-        ReviewContent reviewContent = new ReviewContent("맛있어요", "족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요");
-        ReviewScore reviewScore = new ReviewScore(5, 0);
-
-        ReviewRequest reviewRequest = createReviewRequest(reviewContent, reviewScore);
+        ReviewRequest reviewRequest = createReviewRequest("족발이 탱탱해요", "족발이랑 쟁반국수랑 시켜드세요", 5);
         ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
 
         //when
@@ -63,35 +56,40 @@ class ReviewIntegrationTest {
         Review review = reviewRepository.findById(id).get();
 
         //then
-        assertThat(review.getReviewContent().getTitle()).isEqualTo(reviewContent.getTitle());
-        assertThat(review.getReviewContent().getContent()).isEqualTo(reviewContent.getContent());
-        assertThat(review.getReviewContent().getTip()).isEqualTo(reviewContent.getTip());
-        assertThat(review.getReviewScore().getStar()).isEqualTo(reviewScore.getStar());
-        assertThat(review.getMember().getProfile().getNickName()).isEqualTo(member.getProfile().getNickName());
+        assertThat(review.getReviewContent().getContent()).isEqualTo(reviewRequest.getContent());
+        assertThat(review.getReviewContent().getTip()).isEqualTo(reviewRequest.getTip());
+        assertThat(review.getReviewScore().getStar()).isEqualTo(reviewRequest.getStar());
+        assertThat(review.getMember().getProfile().getNickname()).isEqualTo(member.getProfile().getNickname());
         assertThat(review.getShop().getShopContent().getName()).isEqualTo(shop.getShopContent().getName());
 
     }
 
-    private ReviewRequest createReviewRequest(ReviewContent reviewContent, ReviewScore reviewScore) {
+    public ReviewRequest createReviewRequest(String content, String tip, int star) {
         ReviewRequest reviewRequest = new ReviewRequest();
+        ArrayList<String> imageUrls = new ArrayList<>();
 
-        reviewRequest.setTitle(reviewContent.getTitle());
-        reviewRequest.setContent(reviewContent.getContent());
-        reviewRequest.setTip(reviewContent.getTip());
-        reviewRequest.setStar(reviewScore.getStar());
-        //reviewRequest.setImages();  TODO 이미지 저장 후 구현
+        reviewRequest.setContent(content);
+        reviewRequest.setTip(tip);
+        reviewRequest.setStar(star);
+        reviewRequest.setImageUrls(imageUrls);
 
         return reviewRequest;
     }
 
-    private Shop createShop() {
-
-        Shop shop = new Restaurant(null, null, new ShopContent("토시래", "12:00-23:00", "010-1234-1212"), new ShopImages(), null, new ShopScore(0.0, 0));
+    protected Shop createShop(String shopName) {
+        Shop shop = new Restaurant(
+                null,
+                null,
+                new ShopContent(shopName, LocalTime.of(12, 0), LocalTime.of(23, 0), "010-1234-1212"),
+                new ShopImages(),
+                null,
+                new ShopScore(0.0, 0), false
+        );
         return shopRepository.save(shop);
     }
 
-    private Member createMember() {
-        Member member = new Member(new Profile("peace"));
+    protected Member createMember(String memberName) {
+        Member member = new Member("test@test.com", memberName, true, "google");
         return memberRepository.save(member);
     }
 }

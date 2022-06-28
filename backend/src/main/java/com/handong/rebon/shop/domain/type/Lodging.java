@@ -13,10 +13,13 @@ import com.handong.rebon.shop.domain.location.Location;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @DiscriminatorValue("L")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class Lodging extends Shop {
 
     @Builder
@@ -26,8 +29,9 @@ public class Lodging extends Shop {
             ShopContent shopContent,
             ShopImages shopImages,
             Location location,
-            ShopScore shopScore
+            ShopScore shopScore,
+            boolean deleted
     ) {
-        super(id, category, shopContent, shopImages, location, shopScore);
+        super(id, category, shopContent, shopImages, location, shopScore, deleted);
     }
 }

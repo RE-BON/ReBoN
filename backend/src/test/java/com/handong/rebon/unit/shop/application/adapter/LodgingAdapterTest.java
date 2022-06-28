@@ -2,7 +2,7 @@ package com.handong.rebon.unit.shop.application.adapter;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.adapter.LodgingServiceAdapter;
-import com.handong.rebon.shop.application.dto.ShopRequestDto;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.type.Lodging;
