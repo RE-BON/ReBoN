@@ -1,5 +1,7 @@
 package com.handong.rebon.integration.review;
 
+import java.util.ArrayList;
+
 import com.handong.rebon.exception.member.MemberForbiddenException;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.Profile;
@@ -36,6 +38,7 @@ public class ReviewUpdateIntegrationTest extends ReviewIntegrationTest {
                                                                               .reviewId(review.getId())
                                                                               .content("족발이 탱탱합니다")
                                                                               .tip("족발이랑 쟁반국수 시켜드세요")
+                                                                              .imageUrls(new ArrayList<>())
                                                                               .star(4)
                                                                               .build();
 
@@ -68,6 +71,7 @@ public class ReviewUpdateIntegrationTest extends ReviewIntegrationTest {
                                                                               .reviewId(review.getId())
                                                                               .content("족발이 탱탱합니다")
                                                                               .tip("족발이랑 쟁반국수 시켜드세요")
+                                                                              .imageUrls(new ArrayList<>())
                                                                               .star(4)
                                                                               .build();
 
@@ -100,6 +104,7 @@ public class ReviewUpdateIntegrationTest extends ReviewIntegrationTest {
                                                                               .reviewId(review.getId())
                                                                               .content("족발이 탱탱합니다")
                                                                               .tip("족발이랑 쟁반국수 시켜드세요")
+                                                                              .imageUrls(new ArrayList<>())
                                                                               .star(4)
                                                                               .build();
 

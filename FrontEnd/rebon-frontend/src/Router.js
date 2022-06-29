@@ -28,6 +28,7 @@ function Router() {
         <Route path="/join" element={<Join />} />
         <Route path="/join/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/termsModal" element={<TermsModal />} />
         <Route path="/marketing" element={<TermsMarketing />} />

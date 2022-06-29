@@ -6,6 +6,7 @@ li {
 }
 
 .tags-wrapper {
+  font-family: 'Pretendard' !important;
   font-size: 90%;
   padding: 0 2%;
 }
