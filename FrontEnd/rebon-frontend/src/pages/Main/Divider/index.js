@@ -12,10 +12,9 @@ export default function Divider() {
   };
   return (
     <div className="divider-main">
-      <div className="searchTitle">'칠포해수욕장'식당</div>
-      <div>
-        <Toggle className="review-toggle" id="cheese-status" defaultChecked={toggleOn} onChange={toggleChange} />
-        <div>현재 영업중</div>
+      <div className='divider-right'>
+        <Toggle className="main-toggle" id="" defaultChecked={toggleOn} onChange={toggleChange} />
+        <span className='main-toggle-label'>현재 영업중</span>
         <select className="filter" name="filter">
           <option value="star" selected>
             별점순

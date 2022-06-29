@@ -97,26 +97,20 @@ export default function Main() {
               <input type="radio" id="select-02" name="restaurant" />
               <label for="select-02">🍣 일식</label>
               <input type="radio" id="select-03" name="restaurant" />
-              <label for="select-03">🍛 중식</label>
+              <label for="select-03">🥟 중식</label>
               <input type="radio" id="select-04" name="restaurant" />
               <label for="select-04">🍝 양식</label>
             </div>
           </div>
+
+          <div className="searchTitle">📍 '한동대'식당</div>
+
           <div className="best-wrapper">
-            <BestCard />
-            <BestCard />
-            <BestCard />
-            <BestCard />
+            <BestCard/>
           </div>
           <Divider />
 
           <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
             <MainCard />
           </div>
         </TabPanel>
@@ -124,19 +118,10 @@ export default function Main() {
         <TabPanel className="TabPanel" value={value} index={1}>
           <div className="best-wrapper">
             <BestCard />
-            <BestCard />
-            <BestCard />
-            <BestCard />
           </div>
           <Divider />
 
           <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
             <MainCard />
           </div>
         </TabPanel>
@@ -156,18 +141,9 @@ export default function Main() {
           </div>
           <div className="best-wrapper">
             <BestCard />
-            <BestCard />
-            <BestCard />
-            <BestCard />
           </div>
           <Divider />
           <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
             <MainCard />
           </div>
         </TabPanel>
