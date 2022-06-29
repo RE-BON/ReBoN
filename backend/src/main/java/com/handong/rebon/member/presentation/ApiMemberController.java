@@ -8,10 +8,12 @@ import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.member.application.MemberService;
 import com.handong.rebon.member.application.dto.request.MemberUpdateRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
+import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.presentation.dto.MemberAssembler;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 import com.handong.rebon.member.presentation.dto.request.MemberUpdateRequest;
 import com.handong.rebon.member.presentation.dto.response.MemberCreateResponse;
+import com.handong.rebon.member.presentation.dto.response.MemberReadResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +53,12 @@ public class ApiMemberController {
 
         return ResponseEntity.ok()
                              .build();
+    }
+
+    @RequiredLogin
+    @GetMapping("/members")
+    public ResponseEntity<MemberReadResponse> getMemberInfo(@Login LoginMember loginMember) {
+        MemberReadResponseDto memberInfo = memberService.findMemberInfo(loginMember.getId());
+        return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
     }
 }

@@ -3,9 +3,11 @@ package com.handong.rebon.member.application;
 import com.handong.rebon.auth.infrastructure.JwtProvider;
 import com.handong.rebon.exception.member.MemberNotFoundException;
 import com.handong.rebon.exception.member.NicknameDuplicateException;
+import com.handong.rebon.member.application.dto.MemberDtoAssembler;
 import com.handong.rebon.member.application.dto.request.MemberCreateRequestDto;
 import com.handong.rebon.member.application.dto.request.MemberUpdateRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
+import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 
@@ -52,10 +54,17 @@ public class MemberService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public MemberReadResponseDto findMemberInfo(Long id) {
+        Member member = findById(id);
+        return MemberDtoAssembler.memberReadResponseDto(member);
+    }
+
     @Transactional
     public void update(MemberUpdateRequestDto memberUpdateRequestDto) {
-        Long memberId = memberUpdateRequestDto.getMemberId();
+        checkNicknameDuplicate(memberUpdateRequestDto.getNickname());
 
+        Long memberId = memberUpdateRequestDto.getMemberId();
         Member member = findById(memberId);
 
         member.update(memberUpdateRequestDto.getNickname(), memberUpdateRequestDto.isAgreed());
