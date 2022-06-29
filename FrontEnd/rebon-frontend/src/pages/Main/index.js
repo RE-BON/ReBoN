@@ -102,16 +102,17 @@ export default function Main() {
               <label for="select-04">🍝 양식</label>
             </div>
           </div>
+          <div className='main-background'>
+            <div className="searchTitle">📍 '한동대'식당</div>
 
-          <div className="searchTitle">📍 '한동대'식당</div>
+            <div className="best-wrapper">
+              <BestCard/>
+            </div>
+            <Divider />
 
-          <div className="best-wrapper">
-            <BestCard/>
-          </div>
-          <Divider />
-
-          <div className="mainCard-wrapper">
-            <MainCard />
+            <div className="mainCard-wrapper">
+              <MainCard />
+            </div>
           </div>
         </TabPanel>
 

@@ -50,12 +50,11 @@ export default function MainCard() {
     <>
     {mainInfo.map((item,idx) => (
     <div className="mainCard">
-      <div className='mainCard-img'>
-      <img class="main-img"
-      src={item.image}/>
-      </div>
+    
+      <img class="main-img" src={item.image}/>
+
       <div className='likeBtn-main'>
-        {like?
+        {item.like?
         <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick}/>:
         <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick}/>
         }
@@ -63,12 +62,12 @@ export default function MainCard() {
       <div className='mainCard-bottom'>
         <div className="titleRow">
           <div className="placeName-main">{item.name}</div>
-          <div className="starNum">4.9</div>
+          <div className="starNum">{item.star}</div>
         </div>
         <div className="">
-          <span className="tag">칠포해수욕장</span>
-          <span className="tag">칠포읍</span>
-          <span className="tag">한식</span>
+          {item.tags.map((tag)=>(
+            <span className="tag">{tag.name}</span>
+          ))}
         </div>
       </div>
     </div>
