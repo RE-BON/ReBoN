@@ -9,7 +9,6 @@ import Join from './pages/Join';
 import Login from './pages/Login';
 import Register from './pages/Join/Register';
 import Logout from './pages/Logout';
-import Login from './pages/Login';
 import Terms from './pages/Terms';
 /*추후변경필요*/
 import TermsMarketing from './pages/Terms/marketingModal';
