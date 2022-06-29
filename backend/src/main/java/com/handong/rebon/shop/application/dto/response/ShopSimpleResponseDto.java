@@ -1,7 +1,6 @@
 package com.handong.rebon.shop.application.dto.response;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.shop.application.dto.response.tag.ShopTagResponseDto;
