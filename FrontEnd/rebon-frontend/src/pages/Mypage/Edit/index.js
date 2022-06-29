@@ -1,14 +1,19 @@
 import '../../../styles/edit.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import axios from 'axios';
+import * as React from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 export default function Edit() {
   const userName = localStorage.getItem('userName');
-  const [name, setName] = useState('');
+  const [alertState, setAlertState] = useState({ display: 'none', check: 'error', message: '' });
+  const [name, setName] = useState(userName);
   const onChangeName = (e) => {
     setName(e.target.value);
+    console.log(name);
   };
 
   const checkNick = () => {
@@ -17,15 +22,17 @@ export default function Edit() {
         nickname: { name },
       })
       .then(function (response) {
-        // response
-        console.log(response);
+        // -- 이 200일 경우
+        setAlertState({ display: 'block', check: 'success', message: '사용 가능한 아이디 입니다' });
       })
       .catch(function (error) {
-        // 오류발생시 실행
+        // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
+        setName(userName);
+        setAlertState({ display: 'block', check: 'error', message: '이미 있는 아이디 입니다' });
+        console.log(alertState.display);
       })
       .then(function () {
         // 항상 실행
-        console.log({ name });
       });
   };
 
@@ -58,14 +65,18 @@ export default function Edit() {
           <div
             className="name-button"
             onClick={() => {
-              setName('test');
               checkNick();
             }}
           >
             중복확인
           </div>
         </div>
-
+        <div style={{ display: alertState.display }}>
+          <Stack sx={{ width: '100%' }} spacing={2}>
+            {/* error 혹은 success */}
+            <Alert severity={alertState.check}>{alertState.message}</Alert>
+          </Stack>
+        </div>
         <div className="edit-info-title ">이메일</div>
         <div className="edit-info-email">duifusi@gmail.com</div>
         <div className="edit-info-marketing">마케팅 수신 동의</div>
