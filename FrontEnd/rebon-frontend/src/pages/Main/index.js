@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -9,15 +9,13 @@ import '../../styles/main.css';
 import MainCard from './MainCard';
 import BestCard from './BestCard';
 import Divider from './Divider';
+import Header from '../../components/Header';
+import axios from 'axios';
 
 //useLocation hook
 import { useLocation } from 'react-router';
 
 function TabPanel(props) {
-  // location 정보 받기
-  const location = useLocation();
-  console.log(location);
-  ///////////////////////////////
 
   const { children, value, index, ...other } = props;
 
@@ -52,14 +50,32 @@ export default function Main() {
     setValue(newValue);
   };
 
+  // location 정보 받기
+  const location = useLocation();
+  console.log(location);
+  ///////////////////////////////
+
+  useEffect(() => {
+    axios
+      .get('http://34.238.48.93:8080/api/shops?tag=1&category=1&subCategories=5&subCategories=7')
+      .then((response) => {
+        console.log("데이터값");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log('error');
+      });
+  },[]);
+
   return (
-    <div className="tabber-wrapper">
+    <div className="main-wrapper">
+      <Header />
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
             TabIndicatorProps={{
               style: {
-                backgroundColor: 'black',
+                backgroundColor: '#ff6b6c',
               },
             }}
             className="box"
@@ -75,15 +91,15 @@ export default function Main() {
         </Box>
         <TabPanel className="TabPanel" value={value} index={0}>
           <div className="category-wrapper">
-            <div class="select">
+            <div class="select-main">
               <input type="radio" id="select-01" name="restaurant" />
-              <label for="select-01">한식</label>
+              <label for="select-01">🍚 한식</label>
               <input type="radio" id="select-02" name="restaurant" />
-              <label for="select-02">일식</label>
+              <label for="select-02">🍣 일식</label>
               <input type="radio" id="select-03" name="restaurant" />
-              <label for="select-03">중식</label>
+              <label for="select-03">🍛 중식</label>
               <input type="radio" id="select-04" name="restaurant" />
-              <label for="select-04">양식</label>
+              <label for="select-04">🍝 양식</label>
             </div>
           </div>
           <div className="best-wrapper">
@@ -127,15 +143,15 @@ export default function Main() {
 
         <TabPanel className="TabPanel" value={value} index={2}>
           <div className="category-wrapper">
-            <div class="select">
+            <div class="select-main">
               <input type="radio" id="select-01" name="accommodation" />
-              <label for="select-01">호텔</label>
+              <label for="select-01">🏨 호텔</label>
               <input type="radio" id="select-02" name="accommodation" />
-              <label for="select-02">모텔</label>
+              <label for="select-02">🏩 모텔</label>
               <input type="radio" id="select-03" name="accommodation" />
-              <label for="select-03">펜션</label>
+              <label for="select-03">🏡 펜션</label>
               <input type="radio" id="select-04" name="accommodation" />
-              <label for="select-04">풀빌라</label>
+              <label for="select-04">🏖 풀빌라</label>
             </div>
           </div>
           <div className="best-wrapper">

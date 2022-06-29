@@ -5,20 +5,22 @@ import Header from '../../components/Header';
 import '../../styles/search.css';
 export default function Search() {
   return (
-    <div className="search-wrapper">
-      <Header />
-      <div className="search-content">
-        <div className="title">
-          가고 싶은 지역을 입력해서 <br />
-          <span>맛집, 숙소</span>를 찾아보세요!
-        </div>
+    <div className="search-background">
+      <div className="search-wrapper">
+        <Header />
+        <div className="search-content">
+          <div className="title">
+            가고 싶은 지역을 입력해서 <br />
+            <span>맛집, 숙소</span>를 찾아보세요!
+          </div>
 
-        <div className="input-bar">
-          <input placeholder="가고싶은 지역을 입력해주세요." />
-          <FontAwesomeIcon icon={faSearch} className="search" />
-        </div>
+          <div className="input-bar">
+            <input placeholder="가고싶은 지역을 입력해주세요." />
+            <FontAwesomeIcon icon={faSearch} className="search" />
+          </div>
 
-        <Tags />
+          <Tags />
+        </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.handong.rebon.exception.tag.NoSuchTagException;
 import com.handong.rebon.exception.tag.TagExistException;
 import com.handong.rebon.tag.application.dto.TagDtoAssembler;
+import com.handong.rebon.tag.application.dto.request.TagUpdateRequestDto;
 import com.handong.rebon.tag.application.dto.response.TagResponseDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
@@ -62,6 +63,17 @@ public class TagService {
     public void delete(Long id) {
         Tag tag = findById(id);
         tag.delete();
+    }
+
+    @Transactional
+    public void update(TagUpdateRequestDto tagUpdateRequestDto) {
+        Tag tag = findById(tagUpdateRequestDto.getId());
+
+        if (!(tag.isSameName(tagUpdateRequestDto.getName()))) {
+            validateDuplicateTag(tagUpdateRequestDto.getName());
+        }
+
+        tag.update(tagUpdateRequestDto.getName());
     }
 
     @Transactional(readOnly = true)

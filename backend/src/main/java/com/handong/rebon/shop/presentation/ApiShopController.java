@@ -31,10 +31,11 @@ public class ApiShopController {
 
     @GetMapping("/shops")
     public ResponseEntity<List<ShopSimpleResponse>> searchShops(
+            @Login LoginMember loginMember,
             @ModelAttribute ShopSearchRequest condition,
             @PageableDefault Pageable pageable
     ) {
-        ShopSearchDto shopSearchDto = condition.toDto(pageable);
+        ShopSearchDto shopSearchDto = condition.toDto(pageable, loginMember);
         List<ShopSimpleResponseDto> responses = shopService.search(shopSearchDto);
         return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
     }
@@ -43,6 +44,13 @@ public class ApiShopController {
     public ResponseEntity<ShopResponse> searchShop(@PathVariable Long id) {
         ShopResponseDto shopResponseDto = shopService.findOneById(id);
         return ResponseEntity.ok(ShopResponse.from(shopResponseDto));
+    }
+
+    @RequiredLogin
+    @GetMapping("/shops/{id}/isLike")
+    public ResponseEntity<Boolean> isLike(@PathVariable Long id, @Login LoginMember loginMember) {
+        boolean isLike = shopService.isLike(id, loginMember);
+        return ResponseEntity.ok(isLike);
     }
 
     @RequiredLogin
