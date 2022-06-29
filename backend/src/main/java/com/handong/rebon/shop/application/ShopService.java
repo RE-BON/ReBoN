@@ -14,7 +14,6 @@ import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.application.dto.request.ShopLikeRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
-import com.handong.rebon.shop.application.dto.response.LikeShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopLikeResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
@@ -23,9 +22,7 @@ import com.handong.rebon.shop.domain.ShopSearchCondition;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.like.Likes;
 import com.handong.rebon.shop.domain.location.Location;
-import com.handong.rebon.shop.domain.repository.LikesRepository;
 import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.tag.application.TagService;
@@ -49,7 +46,6 @@ public class ShopService {
     private final ShopRepository shopRepository;
     private final ImageUploader imageUploader;
     private final ShopImageRepository shopImageRepository;
-    private final LikesRepository likesRepository;
 
     @Transactional
     public Long create(ShopRequestDto shopRequestDto) {
@@ -190,13 +186,17 @@ public class ShopService {
     }
 
     @Transactional(readOnly = true)
-    public List<LikeShopResponseDto> findLikeShops(Long memberId) {
+    public List<ShopSimpleResponseDto> findLikeShops(Long memberId, Long categoryId) {
+
+        Category category = categoryService.findById(categoryId);
         Member member = memberService.findById(memberId);
-        List<Likes> likes = likesRepository.findByMember(member);
-        return likes.stream()
-                    .map(like -> LikeShopResponseDto.from(like.getShop()))
-                    .collect(Collectors.toList());
+
+        return member.getLikes().stream()
+                     .filter(like -> like.getShop().sameCategory(category))
+                     .map(ShopSimpleResponseDto::from)
+                     .collect(Collectors.toList());
     }
+
 
     @Transactional(readOnly = true)
     public boolean isLike(Long id, LoginMember loginMember) {
