@@ -73,7 +73,6 @@ export default function Edit() {
         </div>
         <div style={{ display: alertState.display }}>
           <Stack sx={{ width: '100%' }} spacing={2}>
-            {/* error 혹은 success */}
             <Alert severity={alertState.check}>{alertState.message}</Alert>
           </Stack>
         </div>

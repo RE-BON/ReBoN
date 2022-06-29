@@ -8,6 +8,7 @@ import ReviewDropdown from './pages/Detail/Review/ReviewDropdown';
 import Join from './pages/Join';
 import Register from './pages/Join/Register';
 import Logout from './pages/Logout';
+import Login from './pages/Login';
 import Terms from './pages/Terms';
 /*추후변경필요*/
 import TermsMarketing from './pages/Terms/marketingModal';
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/join" element={<Join />} />
         <Route path="/join/register" element={<Register />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/termsModal" element={<TermsModal />} />
         <Route path="/marketing" element={<TermsMarketing />} />
