@@ -6,18 +6,26 @@
   display: inline;
   font-size: 1.3rem;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
+  margin-right: 1%;
 }
 .review-num {
   display: inline;
   color: #7a7a7a;
   font-size: 1rem;
+  font-family: 'Pretendard' !important;
 }
 .review-share-wrapper,
 .review-like-wrapper {
   float: right;
   margin-left: 30px;
 }
-
+.review-like-wrapper {
+  margin-top: 3px;
+}
+.review-share-wrapper {
+  margin-top: 2px;
+}
 .review-write-wrapper {
   float: right;
   margin-left: 30px;
@@ -50,11 +58,13 @@
   padding-right: 7px;
   padding-top: 2px;
   padding-bottom: 2px;
+  font-family: 'Pretendard' !important;
 }
 .review-like-num,
 .review-share-name {
   color: #262626;
   font-size: 0.8rem;
+  font-family: 'Pretendard' !important;
 }
 .review-content-wrapper {
   margin-left: 20%;
@@ -71,22 +81,19 @@
   margin-bottom: 2%;
 }
 .review-toggle {
-  /* margin-left: 60%; */
-  /* border: 1px solid red; */
+  margin-right: 25%;
+  margin-bottom: 5%;
 }
 .review-toggle-label {
   font-size: 13px;
   color: #898c8f;
-  /* border: 1px solid blue; */
   text-align: start;
-  margin-left: -11px;
+  margin-left: -10px;
   margin-right: 5px;
-  margin-top: 4px;
+  margin-top: 3%;
+  font-family: 'Pretendard' !important;
 }
 .review-order {
-  /* margin-left: 20%; */
-  /* width: 60%; */
-  /* text-align: end; */
   margin-bottom: 3%;
 }
 .review-select {
@@ -95,11 +102,13 @@
   height: 25px;
   font-size: 14px;
   font-weight: normal;
+  font-family: 'Pretendard' !important;
 }
 
 .review-order .review-select option {
   color: red;
   font-size: 5rem;
+  font-family: 'Pretendard' !important;
 }
 .review-content {
   display: grid;
@@ -123,14 +132,14 @@
   background-color: transparent;
   border: none;
 }
-.review-user-name-star {
-  display: grid;
-  grid-template-columns: 3fr 5fr;
-}
 .review-user-name {
   color: #262626;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  display: inline;
+  margin-right: 1%;
+  /* font-family: ; */
+  font-family: 'Pretendard' !important;
 }
 .review-user-time {
   color: #5f686f;
@@ -140,11 +149,11 @@
   display: inline;
 }
 .review-star-point {
-  font-size: 10px;
+  font-size: 0.9rem;
   color: #fedb04;
 }
 .review-star {
-  font-size: 10px;
+  font-size: 0.9rem;
   color: #e9e9ea;
 }
 .review-tip-wrapper {
@@ -174,14 +183,17 @@
   color: #ff6b6c;
   background-color: #ffeded;
   border: 1px solid #ff6b6c;
+  font-family: 'Pretendard' !important;
 }
 .review-tip-content {
   font-size: 14px;
   font-weight: normal;
   padding-top: 10px;
+  font-family: 'Pretendard' !important;
 }
 .review-post {
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
 }
 .review-like-button {
   /* font-size: 0.5rem; */
@@ -191,11 +203,14 @@
   width: 8%;
   border: 1px solid #d8d8d8;
   border-radius: 17.5px;
+  text-align: center;
 }
 .review-like-num {
   font-size: 14px;
   color: #5f686f;
   margin-left: -5px;
+  font-family: 'Pretendard' !important;
+
   /* margin-right: -15px; */
 }
 .review-image-wrapper {
