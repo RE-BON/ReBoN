@@ -76,8 +76,8 @@ export default function SearchModal() {
 
           <ul className="header-tag-list">
             <div>추천 태그로 검색해보세요.</div>
-            {tag.map((item) => (
-              <Link to="/main" state={{ item }}>
+            {tag.slice(0, 10).map((item) => (
+              <Link to={`/main?name=${item.name}`} state={{ item }}>
                 <li>{item.name}</li>
               </Link>
             ))}

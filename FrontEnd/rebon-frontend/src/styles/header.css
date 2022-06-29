@@ -40,7 +40,8 @@
 }
 
 .header-logon-icon img {
-  width: 40%;
+  width: 20%;
+  padding-right: 4px;
 }
 
 .header-logon span {

@@ -29,10 +29,13 @@ export default function Header() {
             <div className="header-logon-modal">
               <SearchModal />
             </div>
-            <div className="header-logon-icon">
-              <img src="image/user.png" />
-            </div>
-            <span>{userName}</span>
+
+            <Link to="/mypage" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <div className="header-logon-icon">
+                <img src="image/user.png" />
+                {userName}
+              </div>
+            </Link>
           </div>
         ) : (
           <div className="header-logoff">

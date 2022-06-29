@@ -11,7 +11,7 @@
 .mypage-tab {
   position: absolute;
   width: 65%;
-  height: 87.5vh;
+  height: 100vh;
   padding-left: 34%;
   background-color: #ffeeee;
 }
@@ -76,7 +76,7 @@
 
 .sideMenu-bottom {
   position: absolute;
-  bottom: 7%;
+  bottom: 15%;
   font-size: 13px;
 }
 
