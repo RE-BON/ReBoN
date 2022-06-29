@@ -21,7 +21,8 @@ export default function Tags() {
     <ul className="tags-wrapper">
       <div>추천 태그로 검색해보세요.</div>
       {tag.map((item) => (
-        <Link to="/main" state={{ item }}>
+        //쿼리스트링으로 이렇게 주는게 맞나요오?
+        <Link to={`/main?name=${item.name}`} state={{ item }}>
           <li>{item.name}</li>
         </Link>
       ))}
