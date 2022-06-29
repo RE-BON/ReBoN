@@ -1,7 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 // import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
@@ -9,13 +8,47 @@ import { Link } from 'react-router-dom';
 import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
 import { MoreVertical, Trash, Edit, AlertOctagon, X } from 'react-feather';
 import { faCircleUser, faShareNodes, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { faHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as regularHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+
 import ReviewDropdown from '../ReviewDropdown';
 import ReviewModal from '../ReviewModal';
 import ReviewStar from '../ReviewStar';
 import '../../../../styles/review.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
+
 export default function ReviewContent({ data, sort }) {
+  const [alllikeData, setAllLikeData] = useState([]);
+  // var ID = parseInt(window.sessionStorage.getItem('id'));
+
+  const onToggle = (reviewID) => {
+    if (alllikeData.includes(reviewID)) {
+      // deleteLike(ID, reviewID);
+    } else {
+      // addLike(ID, reviewID);
+    }
+  };
+
+  const deleteLike = async (userID, reviewID) => {
+    setAllLikeData(alllikeData.filter((item) => item !== reviewID));
+
+    var params = new URLSearchParams();
+    params.append('user_id', userID);
+    params.append('review_id', reviewID);
+    // const response = await axios.post(process.env.REACT_APP_RESTAPI_HOST + 'like/delete', params);
+  };
+
+  const addLike = async (userID, reviewID) => {
+    setAllLikeData((prevState) => [...prevState, reviewID]);
+
+    var params = new URLSearchParams();
+    params.append('user_id', userID);
+    params.append('review_id', reviewID);
+    // const response = await axios.post(process.env.REACT_APP_RESTAPI_HOST + 'like/add', params);
+  };
+
   return (
     <>
       {sort === '1'
@@ -47,7 +80,13 @@ export default function ReviewContent({ data, sort }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <FontAwesomeIcon icon={faHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                    <button className="review-button">
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      ) : (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      )}
+                    </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>
@@ -82,7 +121,13 @@ export default function ReviewContent({ data, sort }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <FontAwesomeIcon icon={faHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                    <button className="review-button">
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      ) : (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      )}
+                    </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>
@@ -117,7 +162,13 @@ export default function ReviewContent({ data, sort }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <FontAwesomeIcon icon={faHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                    <button className="review-button">
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      ) : (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      )}
+                    </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>
@@ -151,7 +202,13 @@ export default function ReviewContent({ data, sort }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <FontAwesomeIcon icon={faHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                    <button className="review-button">
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      ) : (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />
+                      )}
+                    </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>

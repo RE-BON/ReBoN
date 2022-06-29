@@ -24,7 +24,7 @@
   margin-top: 3px;
 }
 .review-share-wrapper {
-  margin-top: 2px;
+  margin-top: -3px;
 }
 .review-write-wrapper {
   float: right;
@@ -220,4 +220,19 @@
   width: 200px;
   height: 150px;
   margin-right: 1%;
+}
+.review-button {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: none !important;
+  margin-left: 1px;
+  padding: 0px;
+  font-size: 0.9rem;
+}
+.btn-primary {
+  color: none !important;
+  background-color: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }

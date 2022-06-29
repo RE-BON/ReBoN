@@ -30,6 +30,7 @@ import Toggle from 'react-toggle';
 // ));
 
 export default function Review() {
+  const { Kakao } = window;
   const [isMenuOpen, setIsMenuOpen] = useState(false); //모달 상태 관리 : 기본값 - 닫힘
   const dimmerRef = useRef(); // useRef를 활용하여 dim처리 해줘야 하는 부분
   const [toggleOn, setToggleOn] = useState(false);
@@ -125,7 +126,32 @@ export default function Review() {
 
     setReviewLike(likeNum);
     setReviewReady(true);
+
+    Kakao.init('58024163a4e32fd01f0150a8e3667109');
   }, []);
+
+  const shareKakao = () => {
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: 'ReBon: ',
+        description: 'Shop 공유',
+        imageUrl: 'urls',
+        link: {
+          mobileWebUrl: '모바일 url!',
+          androidExecParams: 'test',
+        },
+      },
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            mobileWebUrl: '공유할 url!',
+          },
+        },
+      ],
+    });
+  };
 
   // useEffect(() => {
   //   axios
@@ -156,43 +182,6 @@ export default function Review() {
       </Dropdown.Menu>
     </Dropdown>;
     // );
-  };
-
-  const sortChange = (event) => {
-    setSortReady(false);
-    let sortTerm = event.target.value;
-    reviewInfo.sort((a, b) => b.star - a.star);
-    // if (sortTerm === 1) {
-    //   setReviewInfo(
-    //     [...reviewInfo].sort((a, b) => {
-    //       return b.empathyCount - a.empathyCount;
-    //     })
-    //   );
-    // } else if (sortTerm === 2) {
-    //   setReviewInfo(
-    //     [...reviewInfo].sort((a, b) => {
-    //       return b.id < a.id;
-    //     })
-    //   );
-    // } else if (sortTerm === 3) {
-    //   setReviewInfo(
-    //     [...reviewInfo].sort((a, b) => {
-    //       return b.star - a.star;
-    //     })
-    //   );
-    // } else if (sortTerm === 4) {
-    //   setReviewInfo(
-    //     [...reviewInfo].sort((a, b) => {
-    //       return a.star - b.star;
-    //     })
-    //   );
-    // }
-
-    setSortReady(true);
-    if (sortReady) {
-      console.log('######');
-      console.log(reviewInfo);
-    }
   };
 
   const openMenu = () => {
@@ -227,10 +216,10 @@ export default function Review() {
           <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
           <span className="review-like-num">{reviewLike}</span>
         </div>
-        <div className="review-share-wrapper">
+        <button className="review-share-wrapper" onClick={shareKakao}>
           <FontAwesomeIcon icon={faShareNodes} className="review-icon" size="1x" />
           <span className="review-share-name">공유</span>
-        </div>
+        </button>
       </div>
       <hr className="bold-hr" />
       <div className="review-top-wrapper">

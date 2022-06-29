@@ -8,6 +8,7 @@
   padding-right: 7px;
   padding-top: 2px;
   padding-bottom: 2px;
+  font-family: 'Pretendard' !important;
 }
 
 .footprint-modal-content {
@@ -16,6 +17,12 @@
 
 .footprint-modal-delete {
   margin-bottom: 20px;
+  font-family: 'Pretendard' !important;
+}
+
+.footprint-modal-close {
+  margin-bottom: 20px;
+  font-family: 'Pretendard' !important;
 }
 
 .footprint-modal-delete button {
