@@ -53,7 +53,17 @@
                 </span>
         </div>
 
-        <!-- TODO 수정 버튼 -->
+        <div>
+            <a th:href="@{/admin/shops/{id}/update (id=${shop.id})}">
+                수정
+            </a>
+        </div>
+        <form class="needs-validation col-sm-10" th:action="@{/admin/shops/{id} (id=${shop.id})}"
+              method="post"
+              novalidate enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">삭제</button>
+        </form>
     </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
