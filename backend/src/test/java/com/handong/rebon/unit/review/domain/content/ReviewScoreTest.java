@@ -57,7 +57,7 @@ class ReviewScoreTest {
 
     @Test
     @DisplayName("empathyCount를 감소시킬 수 있다.")
-    public void increaseEmpathyException() {
+    public void decreaseEmpathyCount() {
         //given
         ReviewScore reviewScore = new ReviewScore(1, 1);
         //when
