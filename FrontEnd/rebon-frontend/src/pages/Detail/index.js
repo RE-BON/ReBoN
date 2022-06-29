@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import Review from './Review';
+import Map from './Map';
 import Header from '../../components/Header';
 import '../../styles/slick.css';
 import '../../styles/slick-theme.css';
@@ -223,9 +224,12 @@ export default function Detail() {
           <div className="detail-address-wrapper">
             <div className="detail-address-name">주소</div>
             <div className="detail-address-value">
-              {shopInfo.address}
+              {/* {shopInfo.address} */}
+              포항시 북구 흥해읍 한동로 558 한동대학교
               <div className="detail-map">
-                <img className="detail-map-image" alt="detail-map" src="image/detail-map.png" />
+                {/* <img className="detail-map-image" alt="detail-map" src="image/detail-map.png" /> */}
+                {/* <Map searchPlace={shopInfo.address} /> */}
+                <Map searchPlace="포항시 북구 흥해읍 한동로 558 한동대학교" />
               </div>
             </div>
           </div>

@@ -41,6 +41,10 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public LoginMember findMemberByToken(String token) {
+        if (!jwtProvider.isValidToken(token)) {
+            return LoginMember.anonymous();
+        }
+
         String payLoad = jwtProvider.getPayLoad(token);
         Long id = Long.parseLong(payLoad);
         Member member = memberService.findById(id);

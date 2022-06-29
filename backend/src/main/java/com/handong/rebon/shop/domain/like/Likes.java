@@ -29,6 +29,10 @@ public class Likes {
         this.shop = shop;
     }
 
+    public boolean contain(Long id) {
+        return member.isSame(id);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

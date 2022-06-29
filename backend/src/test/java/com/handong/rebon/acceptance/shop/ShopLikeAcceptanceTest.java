@@ -107,6 +107,39 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
         assertThat(result2.isLike()).isFalse();
     }
 
+    @Test
+    @DisplayName("로그인 한 유저가 가게 좋아요를 누른 상황")
+    void loginMemberLike() {
+        // given
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+        Shop shop = shops.get("티타");
+
+        // when
+        가게_좋아요(token, shop);
+        ExtractableResponse<Response> response = 가게_좋아요_여부_확인(token, shop);
+        boolean result = response.as(new TypeRef<>() {});
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    @DisplayName("로그인 한 유저가 가게 좋아요를 누르지 않은 상황")
+    void loginMemberNoLike() {
+        // given
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+        Shop shop = shops.get("티타");
+
+        // when
+        ExtractableResponse<Response> response = 가게_좋아요_여부_확인(token, shop);
+        boolean result = response.as(new TypeRef<>() {});
+
+        // then
+        assertThat(result).isFalse();
+    }
+
     public static ExtractableResponse<Response> 가게_좋아요(String token, Shop shop) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
@@ -126,6 +159,18 @@ class ShopLikeAcceptanceTest extends AcceptanceTest {
                           .contentType(APPLICATION_JSON_VALUE)
                           .when()
                           .post("/api/shops/" + shop.getId() + "/unlike")
+                          .then()
+                          .log().all()
+                          .extract();
+    }
+
+    private ExtractableResponse<Response> 가게_좋아요_여부_확인(String token, Shop shop) {
+        return RestAssured.given(getRequestSpecification())
+                          .log().all()
+                          .header("Authorization", "Bearer " + token)
+                          .contentType(APPLICATION_JSON_VALUE)
+                          .when()
+                          .get("/api/shops/" + shop.getId() + "/isLike")
                           .then()
                           .log().all()
                           .extract();

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div class="jumbotron">
+        <h1>Shop 목록</h1>
+    </div>
+
+    <table class="table table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th>사진</th>
+            <th>가게 이름</th>
+            <th>평점</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${shops}">
+            <td style="width: 100px;">
+                <img style="max-width: 100%" id="imgId" th:src="${item.image}" alt="메인 이미지" th:if="${item.image != null}"/>
+            </td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.star}"></td>
+            <td>
+                <a th:href="@{/admin/shops/{id}(id=${item.id})}">
+                    조회
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

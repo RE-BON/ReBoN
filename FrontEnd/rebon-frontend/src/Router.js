@@ -6,6 +6,7 @@ import Post from './pages/Post';
 import Mypage from './pages/Mypage';
 import ReviewDropdown from './pages/Detail/Review/ReviewDropdown';
 import Join from './pages/Join';
+import Login from './pages/Login';
 import Register from './pages/Join/Register';
 import Logout from './pages/Logout';
 import Terms from './pages/Terms';
@@ -22,6 +23,7 @@ function Router() {
         <Route path="/main" element={<Main />} />
         <Route path="/post" element={<Post />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/join" element={<Join />} />
         <Route path="/join/register" element={<Register />} />
