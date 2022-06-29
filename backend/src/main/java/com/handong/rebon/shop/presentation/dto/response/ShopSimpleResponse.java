@@ -17,14 +17,16 @@ public class ShopSimpleResponse {
     private Long id;
     private String name;
     private double star;
+    private boolean like;
     private List<ShopTagResponse> tags;
     private String image;
 
     @Builder
-    public ShopSimpleResponse(Long id, String name, double star, List<ShopTagResponse> tags, String image) {
+    public ShopSimpleResponse(Long id, String name, double star, boolean like, List<ShopTagResponse> tags, String image) {
         this.id = id;
         this.name = name;
         this.star = star;
+        this.like = like;
         this.tags = tags;
         this.image = image;
     }
@@ -44,6 +46,7 @@ public class ShopSimpleResponse {
                                  .id(dto.getId())
                                  .name(dto.getName())
                                  .star(dto.getStar())
+                                 .like(dto.isLike())
                                  .tags(tags)
                                  .image(dto.getImage())
                                  .build();

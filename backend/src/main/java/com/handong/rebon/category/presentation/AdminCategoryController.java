@@ -3,20 +3,16 @@ package com.handong.rebon.category.presentation;
 import java.util.List;
 
 import com.handong.rebon.category.application.CategoryService;
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryUpdateRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.presentation.dto.CategoryAssembler;
-import com.handong.rebon.category.presentation.dto.request.CategoryCreateRequest;
 import com.handong.rebon.category.presentation.dto.request.CategoryRequest;
 import com.handong.rebon.category.presentation.dto.response.RootCategoryResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,20 +44,27 @@ public class AdminCategoryController {
     }
 
     @PostMapping("/categories")
-    public String createCategory(CategoryCreateRequest categoryRequest) {
+    public String createCategory(CategoryRequest createRequest) {
 
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryAssembler.categoryCreateRequestDto(categoryRequest);
-        categoryService.create(categoryCreateRequestDto);
+        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryRequestDto(createRequest);
+        categoryService.create(categoryRequestDto);
+
+        return "home";
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        categoryService.delete(id);
+        return "home";
+    }
+
+    @PutMapping("/categories/{id}")
+    public String updateCategory(@PathVariable Long id, CategoryRequest categoryRequest) {
+        CategoryUpdateRequestDto categoryUpdateRequestDto = CategoryAssembler.categoryUpdateRequestDto(id, categoryRequest);
+
+        categoryService.update(categoryUpdateRequestDto);
 
         return "home";
     }
 
-    @DeleteMapping("/categories")
-    public String deleteCategory(CategoryRequest request) {
-
-        CategoryRequestDto categoryRequestDto = CategoryAssembler.categoryRequestDto(request);
-        categoryService.delete(categoryRequestDto);
-
-        return "home";
-    }
 }

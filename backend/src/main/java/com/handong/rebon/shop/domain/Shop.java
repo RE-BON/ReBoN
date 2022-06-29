@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.*;
 
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
@@ -156,5 +157,13 @@ public abstract class Shop extends BaseEntity {
         if (this.shopTags.size() == 1) {
             throw new ShopTagNumberException();
         }
+    }
+
+    public boolean containLike(LoginMember loginMember) {
+        if (loginMember.isAnonymous()) {
+            return false;
+        }
+        return likes.stream()
+                    .anyMatch(l -> l.contain(loginMember.getId()));
     }
 }

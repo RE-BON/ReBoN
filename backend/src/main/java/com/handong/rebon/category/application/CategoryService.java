@@ -5,13 +5,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
 import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryUpdateRequestDto;
 import com.handong.rebon.category.application.dto.response.RootCategoryResponseDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
+import com.handong.rebon.exception.category.CategoryParentIdNullException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 
@@ -38,16 +39,15 @@ public class CategoryService {
     }
 
     @Transactional
-    public Long create(CategoryCreateRequestDto categoryCreateRequestDto) {
-        if (Objects.isNull(categoryCreateRequestDto.getParentId())) {
-            return this.create(categoryCreateRequestDto.getName());
+    public Long create(CategoryRequestDto categoryRequestDto) {
+        if (Objects.isNull(categoryRequestDto.getId())) {
+            return this.create(categoryRequestDto.getName());
         }
-        Category parent = this.findById(categoryCreateRequestDto.getParentId());
+        Category parent = this.findById(categoryRequestDto.getId());
 
-        String categoryName = categoryCreateRequestDto.getName();
+        String categoryName = categoryRequestDto.getName();
 
         Category newCategory = new Category(categoryName);
-
         parent.addChildCategory(newCategory);
         Category savedCategory = categoryRepository.save(newCategory);
 
@@ -60,9 +60,15 @@ public class CategoryService {
         }
     }
 
+    private void checkChildCategoryExist(Category parent, String name) {
+        if (categoryRepository.existsByParentAndName(parent, name)) {
+            throw new CategoryExistException();
+        }
+    }
+
     @Transactional
-    public void delete(CategoryRequestDto categoryRequestDto) {
-        Category category = categoryRepository.findCategoryWithChildren(categoryRequestDto.getId())
+    public void delete(Long categoryId) {
+        Category category = categoryRepository.findCategoryWithChildren(categoryId)
                                               .orElseThrow(CategoryNotFoundException::new);
         if (category.isParentCategory()) {
             List<Shop> shops = shopRepository.findByCategory(category);
@@ -88,5 +94,22 @@ public class CategoryService {
         return subCategories.stream()
                             .map(this::findById)
                             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void update(CategoryUpdateRequestDto categoryUpdateRequestDto) {
+        Category category = this.findById(categoryUpdateRequestDto.getId());
+        if (category.isParentCategory()) {
+            checkCategoryExist(categoryUpdateRequestDto.getName());
+            category.updateCategoryName(categoryUpdateRequestDto.getName());
+            return;
+        }
+
+        if (Objects.isNull(categoryUpdateRequestDto.getParentId())) {
+            throw new CategoryParentIdNullException();
+        }
+        checkChildCategoryExist(category.getParent(), categoryUpdateRequestDto.getName());
+        Category parentCategory = this.findById(categoryUpdateRequestDto.getParentId());
+        category.update(parentCategory, categoryUpdateRequestDto.getName());
     }
 }

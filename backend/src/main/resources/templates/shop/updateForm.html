@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div class="jumbotron">
+        <h1>Shop 등록</h1>
+    </div>
+    <div class="row justify-content-center">
+        <form class="needs-validation col-sm-10" th:action="@{/admin/shops/{id} (id=${shop.id})}" th:object="${shopRequest}" method="post"
+              novalidate
+              enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="put">
+
+            <div class="form-group">
+                <label for="category">카테고리</label>
+                <hr>
+                <select id="category" th:field="*{categoryId}" class="form-select" aria-describedby="categoryHelp">
+                    <option value="">==카테고리 선택==</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}"
+                            th:text="${category.name}" th:selected="${category.id == shop.category.id}"></option>
+                </select>
+
+                <div th:each="category, itemStat : ${categories}">
+                    <div id="sub-category" th:each="sub, subStat : ${categories[__${itemStat.index}__].children}"
+                         class="form-check">
+                        <input type="checkbox" th:field="*{subCategories}"
+                               th:value="${categories[__${itemStat.index}__].children[__${subStat.index}__].id}"
+                               class="form-check-input" aria-describedby="subCategoryHelp">
+                        <label th:for="${#ids.prev('subCategories')}"
+                               th:text="${categories[__${itemStat.index}__].children[__${subStat.index}__].name}"
+                               class="form-check-label"></label>
+                    </div>
+                    <hr>
+                </div>
+                <br>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="tags">위치 태그</label>
+                <div id="tags" th:each="tag : ${tags}" class="form-check">
+                    <input type="checkbox" th:field="*{tags}" th:value="${tag.id}"
+                           class="form-check-input" aria-describedby="tagsHelp">
+                    <label th:for="${#ids.prev('tags')}" th:text="${tag.name}"
+                           class="form-check-label"></label>
+                </div>
+                <small id="tagsHelp" class="form-text text-muted">
+                    가게의 위치 태그를 모두 선택해주세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="name">가게 이름</label>
+                <input id="name" type="text" class="form-control"
+                       name="name"
+                       th:value="${shop.name}"
+                       placeholder="가게 이름" aria-describedby="nameHelp">
+                <small id="nameHelp" class="form-text text-muted">
+                    가게 이름을 입력하세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="hour">가게 운영 시간</label>
+                <input id="hour" type="text" class="form-control"
+                       name="businessHour"
+                       th:value="${shop.shopContent.businessHour}"
+                       placeholder="가게 이름" aria-describedby="hourHelp">
+                <small id="hourHelp" class="form-text text-muted">
+                    가게 운영시간을 입력하세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="phone">가게 전화번호</label>
+                <input id="phone" type="text" class="form-control"
+                       name="phone"
+                       th:value="${shop.shopContent.phone}"
+                       placeholder="가게 전화번호" aria-describedby="phoneHelp">
+                <small id="phoneHelp" class="form-text text-muted">
+                    가게 전화번호를 입력하세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="address">가게 주소</label>
+                <input id="address" type="text" class="form-control"
+                       name="address"
+                       th:value="${shop.location.address}"
+                       placeholder="가게 주소" aria-describedby="addressHelp">
+                <small id="addressHelp" class="form-text text-muted">
+                    가게 주소를 입력하세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="latitude">위도</label>
+                <input id="latitude" type="text" class="form-control"
+                       name="latitude"
+                       th:value="${shop.location.latitude}"
+                       placeholder="가게 위도" aria-describedby="latitudeHelp">
+                <small id="latitudeHelp" class="form-text text-muted">
+                    가게 주소의 위도를 입력하세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="longitude">경도</label>
+                <input id="longitude" type="text" class="form-control"
+                       name="longitude"
+                       th:value="${shop.location.longitude}"
+                       placeholder="가게 경도" aria-describedby="longitudeHelp">
+                <small id="longitudeHelp" class="form-text text-muted">
+                    가게 주소의 경도를 입력하세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="images">사진</label>
+                <input id="images" multiple="multiple" type="file" th:field="*{images}" class="form-control"
+                       placeholder="가게 사진" aria-describedby="imagesHelp">
+                <small id="imagesHelp" class="form-text text-muted">
+                    가게 사진을 첨부해주세요.
+                </small>
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label for="menuGroup">메뉴(식당, 카페)</label>
+                <hr>
+                <div id="menuGroup" th:each="menuGroup, itemStat : *{menus}">
+                    <p>메뉴 그룹: <input th:field="*{menus[__${itemStat.index}__].name}" class="form-control"/></p>
+                    <div th:each="menu, menuStat : *{menus[__${itemStat.index}__].menus}">
+                        <p>메뉴 이름: <input th:field="*{menus[__${itemStat.index}__].menus[__${menuStat.index}__].name}"
+                                         class="form-text"/>
+                            가격: <input th:field="*{menus[__${itemStat.index}__].menus[__${menuStat.index}__].price}"
+                                       class="form-text"/></p>
+                    </div>
+                    <hr>
+                </div>
+                <br>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">가게 정보 수정</button>
+            </div>
+
+            <br>
+
+        </form>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

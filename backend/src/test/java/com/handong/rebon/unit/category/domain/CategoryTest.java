@@ -121,4 +121,57 @@ public class CategoryTest {
         assertThatThrownBy(category::delete)
                 .isInstanceOf(CategoryAlreadyDeletedException.class);
     }
+
+    @Test
+    @DisplayName("카테고리의 이름을 수정할 수 있다.")
+    public void 부모_카테고리_수정() {
+        // given
+        Category category = new Category("식당");
+
+        // when
+        category.updateCategoryName("카페");
+
+        // then
+        assertThat(category).extracting("name")
+                            .isEqualTo("카페");
+    }
+
+    @Test
+    @DisplayName("카테고리의 이름을 수정시 공백일 경우 예외 발생.")
+    public void 부모_카테고리_수정_공백() {
+        // given
+        Category category = new Category("식당");
+
+        // when, then
+        assertThatThrownBy(() -> category.updateCategoryName(""))
+                .isInstanceOf(CategoryNameException.class);
+
+    }
+
+    @Test
+    @DisplayName("자식 카테고리의 부모와 이름을 수정할 수 있다.")
+    public void 자식_카테고리_부모_이름_수정() {
+        // given
+        Category parentCategory = new Category("식당");
+        Category childCategory = new Category("한식");
+        parentCategory.addChildCategory(childCategory);
+        Category newParentCategory = new Category("카페");
+
+        // when
+        childCategory.update(newParentCategory, "전통차");
+
+        // then
+        assertThat(childCategory).extracting("parent")
+                                 .isEqualTo(newParentCategory);
+
+        assertThat(parentCategory.getChildren()).extracting("name")
+                                                .doesNotContain("전통차");
+
+        assertThat(newParentCategory.getChildren()).extracting("name")
+                                                   .containsOnly("전통차");
+
+
+        assertThat(childCategory).extracting("name")
+                                 .isEqualTo("전통차");
+    }
 }
