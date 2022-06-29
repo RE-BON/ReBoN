@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div>
+        <div>
+            <form method="get" th:object="${reviewSearchRequest}" class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{keyword}" class="form-control" placeholder="검색 키워드"/>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">검색</button>
+            </form>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>작성자</th> <th>가게 이름</th> <th>내용</th>
+                <th>팁</th> <th>점수</th> <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${reviews}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.authorName}"></td>
+                <td th:text="${item.shopName}"></td>
+                <td th:text="${item.content}"></td>
+                <td th:text="${item.tip}"></td>
+                <td th:text="${item.star}"></td>
+                <a th:href="@{/admin/reviews/delete/{id}(id=${item.id})}">
+                    <button>삭제</button>
+                </a>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>
