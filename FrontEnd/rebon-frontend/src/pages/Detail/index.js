@@ -38,7 +38,7 @@ export default function Detail() {
 
   useEffect(() => {
     axios
-      .get('http://3.34.139.61:8080/api/shops/1')
+      .get('http://3.34.139.61:8080/api/shops/2')
       .then((response) => {
         setShopInfo(response.data);
         console.log(shopInfo);
