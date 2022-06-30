@@ -13,13 +13,13 @@
   margin-top: 5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-bottom: 5%;
+  margin-bottom: 0px;
 }
 .detail-top-content-wrapper {
-  margin-top: 3%;
+  margin-top: 1%;
 }
 .detail-main-image {
-  width: 96%;
+  /* width: 96%; */
 }
 .detail-sub-wrapper {
   margin-top: 5%;
