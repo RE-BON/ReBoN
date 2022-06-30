@@ -31,7 +31,7 @@
     "react-router-dom": "6.2.2",
     "react-scripts": "5.0.0",
     "react-slick": "0.28.1",
-    "react-toggle": "4.1.2",
+    "react-toggle": "^4.1.2",
     "styled-components": "^5.3.5",
     "styled-react-modal": "^3.0.0",
     "web-vitals": "2.1.4"
@@ -40,7 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://rebon --profile=rebon"
   },
   "eslintConfig": {
     "extends": [

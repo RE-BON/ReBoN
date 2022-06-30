@@ -38,7 +38,7 @@ export default function Detail() {
 
   useEffect(() => {
     axios
-      .get('http://34.238.48.93:8080/api/shops/1')
+      .get('http://3.34.139.61:8080/api/shops/1')
       .then((response) => {
         setShopInfo(response.data);
         console.log(shopInfo);
@@ -144,44 +144,43 @@ export default function Detail() {
           <hr></hr>
           <div className="detail-tag-wrapper">
             {/* {shopInfo.tags.length > 0 ? shopInfo.tags.map((tag) => <span className="detail-tag">{tag.name}</span>) : ''} */}
-            <span className="detail-tag">칠포해수욕장</span>
+            {shopInfo.tags ? shopInfo.tags.map((tag) => <span className="detail-tag">{tag.name}</span>) : ''}
+            {/* <span className="detail-tag">칠포해수욕장</span>
             <span className="detail-tag">칠포읍</span>
-            <span className="detail-tag">한식</span>
+            <span className="detail-tag">한식</span> */}
           </div>
           <div className="detail-top-content-wrapper">
             <div className="detail-info-wrapper">
               <div className="detail-top-info-name">전화번호</div>
               <div className="detail-top-info-value">
-                {/* {shopInfo.phone} */}
-                02-777-2254
+                {shopInfo.phone}
+                {/* 02-777-2254 */}
               </div>
             </div>
             <div className="detail-info-wrapper">
               <div className="detail-top-info-name">영업시간</div>
               <div className="detail-top-info-value">
-                {/* {shopInfo.businessHour} */}
-                11:00~22:00
+                {shopInfo.businessHour}
+                {/* 11:00~22:00 */}
               </div>
             </div>
           </div>
         </div>
         <div className="detail-content-wrapper">
-          {/* <div className="detail-info-wrapper">
-            <div className="detail-info-name">전화번호</div>
-            <div className="detail-info-value">{shopInfo.phone}</div>
-          </div> */}
           <div className="detail-info-wrapper">
-            <div className="detail-info-name">업종</div>
-            {/* <div className="detail-info-value">{shopInfo.subCategories.name}</div> */}
+            <div className="detail-info-name-category">업종</div>
+            <div className="detail-info-category">
+              {shopInfo.subCategories ? shopInfo.subCategories.map((sub) => <div className="detail-info-value-category">{sub.name}</div>) : ''}
+            </div>
           </div>
-          {/* <div className="detail-info-wrapper">
+          <div className="detail-info-wrapper">
             <div className="detail-info-name">영업시간</div>
             <div className="detail-info-value">{shopInfo.businessHour}</div>
-          </div> */}
+          </div>
           <div className="detail-info-wrapper">
             <div className="detail-info-name">메뉴</div>
-            {/* <div className="detail-info-value">
-              {shopInfo.menus.length > 0
+            <div className="detail-info-value">
+              {shopInfo.menus
                 ? shopInfo.menus.map((menu) => (
                     <>
                       <div className="detail-info-main-value">{menu.name}</div>
@@ -198,38 +197,37 @@ export default function Detail() {
                     </>
                   ))
                 : ''}
-            </div> */}
-
-            <div className="detail-info-value">
-              <div className="detail-info-main-value">디저트류</div>
-              <div className="detail-info-sub-value">
-                <div className="detail-menu-name">물회</div>
-                <div className="detail-menu-value">12,000원</div>
-                <div className="detail-menu-name">전복죽</div>
-                <div className="detail-menu-value">14,000원</div>
-                <div className="detail-menu-name">매운탕</div>
-                <div className="detail-menu-value">10,000원</div>
-              </div>
-              <div className="detail-info-main-value">디저트류</div>
-              <div className="detail-info-sub-value">
-                <div className="detail-menu-name">물회</div>
-                <div className="detail-menu-value">12,000원</div>
-                <div className="detail-menu-name">전복죽</div>
-                <div className="detail-menu-value">14,000원</div>
-                <div className="detail-menu-name">매운탕</div>
-                <div className="detail-menu-value">10,000원</div>
-              </div>
             </div>
+
+            {/* <div className="detail-info-value">
+              <div className="detail-info-main-value">디저트류</div>
+              <div className="detail-info-sub-value">
+                <div className="detail-menu-name">물회</div>
+                <div className="detail-menu-value">12,000원</div>
+                <div className="detail-menu-name">전복죽</div>
+                <div className="detail-menu-value">14,000원</div>
+                <div className="detail-menu-name">매운탕</div>
+                <div className="detail-menu-value">10,000원</div>
+              </div>
+              <div className="detail-info-main-value">디저트류</div>
+              <div className="detail-info-sub-value">
+                <div className="detail-menu-name">물회</div>
+                <div className="detail-menu-value">12,000원</div>
+                <div className="detail-menu-name">전복죽</div>
+                <div className="detail-menu-value">14,000원</div>
+                <div className="detail-menu-name">매운탕</div>
+                <div className="detail-menu-value">10,000원</div>
+              </div>
+            </div> */}
           </div>
           <div className="detail-address-wrapper">
             <div className="detail-address-name">주소</div>
             <div className="detail-address-value">
-              {/* {shopInfo.address} */}
-              포항시 북구 흥해읍 한동로 558 한동대학교
+              {shopInfo.address}
+              {/* 포항시 북구 흥해읍 한동로 558 한동대학교 */}
               <div className="detail-map">
-                {/* <img className="detail-map-image" alt="detail-map" src="image/detail-map.png" /> */}
-                {/* <Map searchPlace={shopInfo.address} /> */}
-                <Map searchPlace="포항시 북구 흥해읍 한동로 558 한동대학교" />
+                <Map searchPlace={shopInfo.address} />
+                {/* <Map searchPlace="포항시 북구 흥해읍 한동로 558 한동대학교" /> */}
               </div>
             </div>
           </div>

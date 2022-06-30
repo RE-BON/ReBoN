@@ -7,8 +7,8 @@
   font-size: 15px;
   padding: 0 0 2% 5%;
   font-weight: bolder;
+  font-family: 'Pretendard' !important;
 }
-
 .detail-image-wrapper {
   margin-top: 5%;
   display: grid;
@@ -59,10 +59,12 @@
 .detail-star-point {
   font-size: 20px;
   color: #fedb04;
+  font-family: 'Pretendard' !important;
 }
 .detail-star {
   font-size: 20px;
   color: #e9e9ea;
+  font-family: 'Pretendard' !important;
 }
 .detail-shop-rating {
   display: inline;
@@ -70,10 +72,12 @@
   /* font-weight: bold; */
   margin-left: 2%;
   font-size: 15px;
+  font-family: 'Pretendard' !important;
 }
 .detail-top-info-name,
 .detail-top-info-value {
   font-size: 14px;
+  font-family: 'Pretendard' !important;
   color: #898c8f;
   font: weight 500px;
 }
@@ -86,6 +90,7 @@
   margin-top: 2%;
   margin-right: 2%;
   font-size: 0.7rem;
+  font-family: 'Pretendard' !important;
   padding-top: 1%;
   padding-bottom: 1%;
   padding-left: 1.7%;
@@ -94,6 +99,9 @@
 }
 .detail-content-wrapper {
   margin-top: 5%;
+}
+.detail-info-wrapper {
+  margin-bottom: 1%;
 }
 .detail-info-wrapper,
 .detail-address-wrapper {
@@ -104,10 +112,12 @@
 .detail-address-name {
   color: #898c8f;
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
   font-weight: bold;
 }
 .detail-info-main-value {
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
   /* font-weight: bold; */
   display: block;
   background: #f5f5f5;
@@ -119,28 +129,48 @@
   padding-bottom: 1%;
   margin-bottom: 3%;
 }
+.detail-info-name-category {
+  color: #898c8f;
+  font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
+  font-weight: bold;
+}
+.detail-info-category {
+  display: flex;
+}
+.detail-info-value-category {
+  font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
+  /* display: inline; */
+  float: left;
+  margin-right: 3%;
+  /* display: flex; */
+}
 .detail-info-value {
   font-size: 0.9rem;
-  /* display: grid;
-  grid-template-columns: 1fr 3fr; */
+  font-family: 'Pretendard' !important;
 }
 .detail-info-sub-value {
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
   display: grid;
   grid-template-columns: 1fr 3fr;
   margin-bottom: 3%;
 }
 .detail-menu-name {
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
 }
 .detail-menu-value {
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
 }
 .detail-address-wrapper {
   margin-top: 5%;
 }
 .detail-address-value {
   font-size: 0.9rem;
+  font-family: 'Pretendard' !important;
 }
 .detail-map {
   margin-top: 3%;

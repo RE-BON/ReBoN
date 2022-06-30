@@ -1,4 +1,13 @@
+.search-background {
+  position: fixed;
+  background-image: url('../../public/image/search-background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
 .search-wrapper {
+  font-family: 'Pretendard' !important;
   display: flex;
   justify-content: center;
   width: 100vw;
