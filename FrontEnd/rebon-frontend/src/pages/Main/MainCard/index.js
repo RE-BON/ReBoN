@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../../../styles/main.css';
 import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export default function MainCard({ sort }) {
   const [like, setLike] = useState(false);
@@ -36,7 +38,7 @@ export default function MainCard({ sort }) {
     {
       id: 5,
       name: '미스터 피자',
-      star: 3.0,
+      star: 5.0,
       like: false,
       tags: [
         {
@@ -50,79 +52,166 @@ export default function MainCard({ sort }) {
       ],
       image: 'https://cdn.tleaves.co.kr/news/photo/202202/1991_2819_1810.jpg',
     },
+    {
+      id: 6,
+      name: '교촌 치킨',
+      star: 3.0,
+      like: false,
+      tags: [
+        {
+          id: 1,
+          name: '포항',
+        },
+        {
+          id: 4,
+          name: '양덕',
+        },
+      ],
+      image: 'https://t1.daumcdn.net/cfile/tistory/99A07D405A8C32CC1C',
+    },
+    {
+      id: 7,
+      name: '환여 횟집',
+      star: 4.0,
+      like: false,
+      tags: [
+        {
+          id: 1,
+          name: '포항',
+        },
+        {
+          id: 5,
+          name: '환여동',
+        },
+      ],
+      image: 'https://m.yorivery.com/data/goods/21/07/27//1000001108/1000001108_add3_070.jpg',
+    },
+    {
+      id: 8,
+      name: '온센',
+      star: 5.0,
+      like: true,
+      tags: [
+        {
+          id: 1,
+          name: '포항',
+        },
+        {
+          id: 6,
+          name: '영일대',
+        },
+      ],
+      image: 'https://t1.daumcdn.net/cfile/tistory/992153345D78FD301F',
+    },
   ]);
+
+  const StyledLink = styled(Link)`
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    hover: none;
+  `;
 
   return (
     <>
       {sort === 'star'
         ? mainInfo
             .sort((a, b) => b.star - a.star)
-            .map((item, idx) => (
-              <div className="mainCard">
-                <img class="main-img" src={item.image} />
+            .map((item, idx) => {
+              var address = '/detail/' + item.id.toString();
+              return (
+                <div className="mainCard">
+                  <img class="main-img" src={item.image} />
 
-                <div className="likeBtn-main">
-                  {item.like ? <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} /> : <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />}
-                </div>
-                <div className="mainCard-bottom">
-                  <div className="titleRow">
-                    <div className="placeName-main">{item.name}</div>
-                    <div className="starNum">{item.star}</div>
+                  <div className="likeBtn-main">
+                    {item.like ? (
+                      <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} />
+                    ) : (
+                      <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />
+                    )}
                   </div>
-                  <div className="">
-                    {item.tags.map((tag) => (
-                      <span className="tag">{tag.name}</span>
-                    ))}
+                  <div className="mainCard-bottom">
+                    <div className="titleRow">
+                      <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <div className="placeName-main">{item.name}</div>
+                      </Link>
+                      <div className="starNum">{item.star}</div>
+                    </div>
+                    <div className="">
+                      {item.tags.map((tag) => (
+                        <span className="tag">{tag.name}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
         : sort === 'review'
         ? mainInfo
             .sort((a, b) => b.star - a.star)
-            .map((item, idx) => (
-              <div className="mainCard">
-                <img class="main-img" src={item.image} />
+            .map((item, idx) => {
+              var address = '/detail/' + item.id.toString();
+              return (
+                <div className="mainCard">
+                  <img class="main-img" src={item.image} />
 
-                <div className="likeBtn-main">
-                  {item.like ? <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} /> : <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />}
-                </div>
-                <div className="mainCard-bottom">
-                  <div className="titleRow">
-                    <div className="placeName-main">{item.name}</div>
-                    <div className="starNum">{item.star}</div>
+                  <div className="likeBtn-main">
+                    {item.like ? (
+                      <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} />
+                    ) : (
+                      <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />
+                    )}
                   </div>
-                  <div className="">
-                    {item.tags.map((tag) => (
-                      <span className="tag">{tag.name}</span>
-                    ))}
+                  <div className="mainCard-bottom">
+                    <div className="titleRow">
+                      <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <div className="placeName-main">{item.name}</div>
+                      </Link>
+                      <div className="starNum">{item.star}</div>
+                    </div>
+                    <div className="">
+                      {item.tags.map((tag) => (
+                        <span className="tag">{tag.name}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
         : sort === 'recent'
         ? mainInfo
             .sort((a, b) => b.id - a.id)
-            .map((item, idx) => (
-              <div className="mainCard">
-                <img class="main-img" src={item.image} />
+            .map((item, idx) => {
+              var address = '/detail/' + item.id.toString();
+              return (
+                <div className="mainCard">
+                  <img class="main-img" src={item.image} />
 
-                <div className="likeBtn-main">
-                  {item.like ? <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} /> : <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />}
-                </div>
-                <div className="mainCard-bottom">
-                  <div className="titleRow">
-                    <div className="placeName-main">{item.name}</div>
-                    <div className="starNum">{item.star}</div>
+                  <div className="likeBtn-main">
+                    {item.like ? (
+                      <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} />
+                    ) : (
+                      <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />
+                    )}
                   </div>
-                  <div className="">
-                    {item.tags.map((tag) => (
-                      <span className="tag">{tag.name}</span>
-                    ))}
+                  <div className="mainCard-bottom">
+                    <div className="titleRow">
+                      <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <div className="placeName-main">{item.name}</div>
+                      </Link>
+                      <div className="starNum">{item.star}</div>
+                    </div>
+                    <div className="">
+                      {item.tags.map((tag) => (
+                        <span className="tag">{tag.name}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
         : ''}
 
       {/* {mainInfo.map((item,idx) => (
