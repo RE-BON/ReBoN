@@ -39,7 +39,7 @@ export default function Map({ searchPlace }) {
       id="myMap"
       style={{
         width: '500px',
-        height: '500px',
+        height: '300px',
       }}
     ></div>
   );
