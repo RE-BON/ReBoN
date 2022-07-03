@@ -19,7 +19,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/main" element={<Main />} />
         <Route path="/post" element={<Post />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />

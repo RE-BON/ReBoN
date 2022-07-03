@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -46,7 +47,9 @@ export default function PostModal() {
       >
         <div className="post-modal-wrapper">
           <button className="close" onClick={toggleModal}>
-            <FontAwesomeIcon icon={faXmark} />
+            <Link to="/mypage/footprint" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <FontAwesomeIcon icon={faXmark} />
+            </Link>
           </button>
           <img className="post-modal-image" alt="review-image" src="image/reviewLogo.png" />
           <div className="post-modal-notice">리뷰가 등록되었습니다.</div>

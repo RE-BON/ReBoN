@@ -7,7 +7,7 @@ export default function Tags() {
   const [tag, setTags] = useState([]);
   useEffect(() => {
     axios
-      .get('http://34.238.48.93:8080/api/tags')
+      .get('http://3.34.139.61:8080/api/tags')
       .then((response) => {
         setTags(response.data);
         console.log(tag[8]);

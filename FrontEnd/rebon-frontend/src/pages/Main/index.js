@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -16,7 +16,6 @@ import axios from 'axios';
 import { useLocation } from 'react-router';
 
 function TabPanel(props) {
-
   const { children, value, index, ...other } = props;
 
   return (
@@ -59,13 +58,13 @@ export default function Main() {
     axios
       .get('http://34.238.48.93:8080/api/shops?tag=1&category=1&subCategories=5&subCategories=7')
       .then((response) => {
-        console.log("데이터값");
+        console.log('데이터값');
         console.log(response.data);
       })
       .catch((error) => {
         console.log('error');
       });
-  },[]);
+  }, []);
 
   return (
     <div className="main-wrapper">
@@ -97,46 +96,32 @@ export default function Main() {
               <input type="radio" id="select-02" name="restaurant" />
               <label for="select-02">🍣 일식</label>
               <input type="radio" id="select-03" name="restaurant" />
-              <label for="select-03">🍛 중식</label>
+              <label for="select-03">🥟 중식</label>
               <input type="radio" id="select-04" name="restaurant" />
               <label for="select-04">🍝 양식</label>
             </div>
           </div>
-          <div className="best-wrapper">
-            <BestCard />
-            <BestCard />
-            <BestCard />
-            <BestCard />
-          </div>
-          <Divider />
+          <div className="main-background">
+            <div className="searchTitle">📍 '한동대'식당</div>
 
-          <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
+            <div className="best-wrapper">
+              <BestCard />
+            </div>
+            <Divider />
+
+            {/* <div className="mainCard-wrapper">
+              <MainCard />
+            </div> */}
           </div>
         </TabPanel>
 
         <TabPanel className="TabPanel" value={value} index={1}>
           <div className="best-wrapper">
             <BestCard />
-            <BestCard />
-            <BestCard />
-            <BestCard />
           </div>
           <Divider />
 
           <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
             <MainCard />
           </div>
         </TabPanel>
@@ -156,18 +141,9 @@ export default function Main() {
           </div>
           <div className="best-wrapper">
             <BestCard />
-            <BestCard />
-            <BestCard />
-            <BestCard />
           </div>
           <Divider />
           <div className="mainCard-wrapper">
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
-            <MainCard />
             <MainCard />
           </div>
         </TabPanel>
