@@ -135,7 +135,19 @@ include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-requ
 |===
 include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-response.adoc[]
 
-=== 내 정보 수정하는 경우
+
+=== 내 정보 조회
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Lone | true | 조회하고자 하는 사용자의 id 값
+|===
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfo/http-request.adoc[]
+
+==== Response
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfo/http-request.adoc[]
+
+=== 내 정보 수정
 ==== Request
 |===
 | 값 | 타입 | 필수 | 설명
@@ -145,9 +157,6 @@ include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-resp
 include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithLogin/http-request.adoc[]
 
 ==== Response
-|===
-| 값 | 타입 | 필수 | 설명
-|===
 include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithLogin/http-response.adoc[]
 
 == Tag API
