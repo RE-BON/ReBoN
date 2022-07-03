@@ -1,7 +1,10 @@
-/* @import url(cssscreen.css) screen;
-@import url(csspprint.css) print; */
-
 @media (max-width: 767px) {
+  .review-wrapper {
+    margin-bottom: 5%;
+  }
+  #myMap {
+    z-index: 0 !important;
+  }
   .detail-phone-icon {
     color: #ff6b6c;
   }
@@ -73,14 +76,12 @@
     position: relative;
   }
   .detail-title-wrapper {
-    /* margin-top: 5%; */
     box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.05);
     border-radius: 15px;
     padding-left: 10%;
     padding-right: 10%;
     padding-top: 7%;
     padding-bottom: 3%;
-    z-index: 2;
     background-color: white;
     text-align: center;
   }
@@ -242,6 +243,9 @@
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+  #myMap {
+    z-index: 0 !important;
+  }
   .detail-slider {
     margin-top: 10%;
   }
@@ -258,7 +262,7 @@
   }
   .detail-image-wrapper {
     margin-top: 2%;
-    height: 27vh;
+    height: 27.5vh;
   }
   .detail-top-content-wrapper {
     margin-top: 3%;
@@ -347,7 +351,6 @@
   .detail-shop-rating {
     display: inline;
     color: #898c8f;
-    /* font-weight: bold; */
     margin-left: 2%;
     font-size: 15px;
     font-family: 'Pretendard' !important;
@@ -357,9 +360,6 @@
     display: grid;
     grid-template-columns: 1fr 4fr;
   }
-  /* .detail-top-info-value {
-    font-family: 'Pretendard' !important;
-  } */
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;
@@ -468,6 +468,9 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
+  #myMap {
+    z-index: 0 !important;
+  }
   .detail-slider {
     margin-top: 10%;
   }
@@ -486,7 +489,6 @@
     margin-top: 2%;
     height: 40vh;
     margin-left: 1%;
-    /* margin-right: 2%; */
   }
   .detail-top-content-wrapper {
     margin-top: 3%;
@@ -561,7 +563,6 @@
   .detail-shop-rating {
     display: inline;
     color: #898c8f;
-    /* font-weight: bold; */
     margin-left: 2%;
     font-size: 15px;
     font-family: 'Pretendard' !important;
@@ -571,9 +572,6 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
-  /* .detail-top-info-value {
-    font-family: 'Pretendard' !important;
-  } */
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;
@@ -687,6 +685,9 @@
 }
 
 @media (min-width: 1200px) {
+  #myMap {
+    z-index: 0 !important;
+  }
   .detail-slider {
     margin-top: 10%;
   }
@@ -718,6 +719,8 @@
     grid-template-columns: 1fr 1fr;
     margin-top: 2%;
     height: 45vh;
+    margin-left: 1%;
+    width: 98%;
   }
   .detail-sub-column-wrapper {
     margin-left: 1%;
@@ -777,7 +780,6 @@
   .detail-shop-rating {
     display: inline;
     color: #898c8f;
-    /* font-weight: bold; */
     margin-left: 2%;
     font-size: 15px;
     font-family: 'Pretendard' !important;
@@ -787,9 +789,6 @@
     display: grid;
     grid-template-columns: 1fr 6fr;
   }
-  /* .detail-top-info-value {
-    font-family: 'Pretendard' !important;
-  } */
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;

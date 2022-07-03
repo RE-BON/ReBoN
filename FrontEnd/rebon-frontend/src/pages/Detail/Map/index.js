@@ -42,6 +42,7 @@ export default function Map({ searchPlace, isMobile }) {
           style={{
             width: '100%',
             height: '150px',
+            // overflow: 'visible !important',
           }}
         ></div>
       ) : isMobile === '2' ? (

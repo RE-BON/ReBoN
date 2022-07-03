@@ -10,6 +10,7 @@ import ReviewDropdown from './ReviewDropdown';
 import ReviewModal from './ReviewModal';
 import ReviewContent from './ReviewContent';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 // import 'react-toggle/style.css';
 import '../../../styles/toggle.css';
@@ -40,6 +41,9 @@ export default function Review() {
   const [reviewReady, setReviewReady] = useState(false);
   const [sortReady, setSortReady] = useState(true);
   const [sort, setSort] = useState(1);
+  const isMobile = useMediaQuery({
+    query: '(max-width:767px)',
+  });
   const [review, setReview] = useState([
     {
       id: 1,
@@ -202,64 +206,95 @@ export default function Review() {
   };
 
   return (
-    <div className="review-wrapper">
-      <div className="review-title-wrapper">
-        <h4 className="review-name">리뷰</h4>
-        <div className="review-num">({reviewInfo.length})</div>
-        <div className="review-write-wrapper">
-          <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
-          <Link to="../post" style={{ textDecoration: 'none' }}>
-            <span className="review-write-button">리뷰쓰기</span>
-          </Link>
+    <>
+      <div className="review-wrapper">
+        {isMobile ? (
+          <>
+            <div className="review-title-wrapper">
+              <h4 className="review-name">리뷰</h4> <div className="review-num">({reviewInfo.length})</div>
+            </div>
+          </>
+        ) : (
+          <div className="review-title-wrapper">
+            <h4 className="review-name">리뷰</h4>
+            <div className="review-num">({reviewInfo.length})</div>
+            <div className="review-write-wrapper">
+              <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
+              <Link to="../post" style={{ textDecoration: 'none' }}>
+                <span className="review-write-button">리뷰쓰기</span>
+              </Link>
+            </div>
+            <div className="review-like-wrapper">
+              <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
+              <span className="review-like-num">{reviewLike}</span>
+            </div>
+            <button className="review-share-wrapper" onClick={shareKakao}>
+              <FontAwesomeIcon icon={faShareNodes} className="review-icon" size="1x" />
+              <span className="review-share-name">공유</span>
+            </button>
+          </div>
+        )}
+        <hr className="bold-hr" />
+        <div className="review-top-wrapper">
+          <div className="review-toggle-wrapper">
+            <Toggle className="review-toggle" id="cheese-status" defaultChecked={toggleOn} onChange={toggleChange} />
+            <div className="review-toggle-label">나만의 꿀팁</div>
+          </div>
+          <div className="review-order">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              className="review-select"
+              // onChange={sortChange}
+              onChange={(e) => {
+                setSort(e.target.value);
+              }}
+            >
+              <option selected value="1" className="review-select-option">
+                좋아요순
+              </option>
+              <option value="2">최신순</option>
+              <option value="3">평점높은순</option>
+              <option value="4">평점낮은순</option>
+            </select>
+          </div>
         </div>
-        <div className="review-like-wrapper">
-          <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
-          <span className="review-like-num">{reviewLike}</span>
-        </div>
-        <button className="review-share-wrapper" onClick={shareKakao}>
-          <FontAwesomeIcon icon={faShareNodes} className="review-icon" size="1x" />
-          <span className="review-share-name">공유</span>
-        </button>
-      </div>
-      <hr className="bold-hr" />
-      <div className="review-top-wrapper">
-        <Toggle className="review-toggle" id="cheese-status" defaultChecked={toggleOn} onChange={toggleChange} />
-        <div className="review-toggle-label">나만의 꿀팁</div>
-        <div className="review-order">
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            className="review-select"
-            // onChange={sortChange}
-            onChange={(e) => {
-              setSort(e.target.value);
-            }}
-          >
-            <option selected value="1" className="review-select-option">
-              좋아요순
-            </option>
-            <option value="2">최신순</option>
-            <option value="3">평점높은순</option>
-            <option value="4">평점낮은순</option>
-          </select>
-        </div>
-      </div>
 
-      {ready && reviewReady && sortReady ? (
-        !toggleOn ? (
-          reviewInfo.length > 0 && sortReady ? (
-            <ReviewContent data={reviewInfo} sort={sort} />
+        {ready && reviewReady && sortReady ? (
+          !toggleOn ? (
+            reviewInfo.length > 0 && sortReady ? (
+              <ReviewContent data={reviewInfo} sort={sort} />
+            ) : (
+              ''
+            )
+          ) : reviewTip.length > 0 && sortReady ? (
+            <ReviewContent data={reviewTip} sort={sort} />
           ) : (
             ''
           )
-        ) : reviewTip.length > 0 && sortReady ? (
-          <ReviewContent data={reviewTip} sort={sort} />
         ) : (
           ''
-        )
-      ) : (
-        ''
-      )}
-    </div>
+        )}
+        {isMobile ? (
+          <div className="review-footer-sticky">
+            <button className="review-share-wrapper" onClick={shareKakao}>
+              <FontAwesomeIcon icon={faShareNodes} className="review-icon" size="1x" />
+            </button>
+            {/* <div className="review-footer-line"></div> */}
+            <button className="review-like-wrapper">
+              <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
+            </button>
+            <div className="review-write-wrapper">
+              <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
+              <Link to="../post" style={{ textDecoration: 'none' }}>
+                <span className="review-write-button">리뷰쓰기</span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+      </div>
+    </>
   );
 }
