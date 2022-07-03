@@ -1,7 +1,6 @@
 * {
   font-family: 'Pretendard' !important;
 }
-
 @media (max-width: 767px) {
   .mb-my-wrapper {
     padding-top: 5em;
@@ -10,7 +9,7 @@
   }
   .mb-sideMenu-intro {
     height: 13vh;
-    background-image: url('/public/image/mypage-background.png');
+    background-image: url('../../public/image/mypage-background.png');
     background-repeat: no-repeat;
     background-size: 100vw 12vh;
     width: 100vw;
