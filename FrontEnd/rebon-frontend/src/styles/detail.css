@@ -2,6 +2,9 @@
 @import url(csspprint.css) print; */
 
 @media (max-width: 767px) {
+  .detail-phone-icon {
+    color: #ff6b6c;
+  }
   .detail-slider {
     margin-top: 15%;
     z-index: 1;
@@ -116,13 +119,15 @@
     font-family: 'Pretendard' !important;
   }
   .detail-top-info-value {
-    font-family: 'Pretendard' !important;
+    text-align: start;
+    padding-left: 10%;
   }
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;
     color: #898c8f;
     font: weight 500px;
+    font-family: 'Pretendard' !important;
   }
   .detail-tag-wrapper {
     margin-top: 3%;
@@ -152,9 +157,9 @@
     margin-bottom: 2%;
     text-align: center;
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    width: 90%;
-    margin-left: 5%;
+    grid-template-columns: 2fr 5fr;
+    width: 96%;
+    margin-left: 2%;
   }
   .detail-info-wrapper {
     margin-bottom: 2%;
@@ -240,6 +245,9 @@
   .detail-slider {
     margin-top: 10%;
   }
+  .detail-phone-icon {
+    color: #ff6b6c;
+  }
   .bookmark-title {
     margin: 8% 5% 5% 5%;
     border-bottom: 1px solid black;
@@ -250,12 +258,11 @@
   }
   .detail-image-wrapper {
     margin-top: 2%;
-    height: 20vh;
+    height: 27vh;
   }
   .detail-top-content-wrapper {
     margin-top: 3%;
   }
-
   .detail-main-image {
     width: 100%;
     height: 100%;
@@ -265,12 +272,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 2%;
-    height: 20vh;
+    height: 27vh;
   }
   .detail-sub-first-column-wrapper {
     display: grid;
     grid-template-rows: 1fr 1fr;
-    height: 20vh;
+    height: 27vh;
     width: 48%;
     float: left;
     margin-right: 1%;
@@ -279,7 +286,7 @@
     margin-left: 1%;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    height: 20vh;
+    height: 27vh;
     width: 48%;
     float: left;
   }
@@ -348,16 +355,17 @@
   .detail-info-top-wrapper {
     margin-bottom: 2%;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 4fr;
   }
-  .detail-top-info-value {
+  /* .detail-top-info-value {
     font-family: 'Pretendard' !important;
-  }
+  } */
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;
     color: #898c8f;
     font: weight 500px;
+    font-family: 'Pretendard' !important;
   }
   .detail-tag-wrapper {
     margin-top: 3%;
@@ -463,6 +471,9 @@
   .detail-slider {
     margin-top: 10%;
   }
+  .detail-phone-icon {
+    color: #ff6b6c;
+  }
   .bookmark-title {
     margin: 8% 5% 5% 5%;
     border-bottom: 1px solid black;
@@ -473,7 +484,9 @@
   }
   .detail-image-wrapper {
     margin-top: 2%;
-    height: 44vh;
+    height: 40vh;
+    margin-left: 1%;
+    /* margin-right: 2%; */
   }
   .detail-top-content-wrapper {
     margin-top: 3%;
@@ -487,13 +500,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 2%;
-    height: 44vh;
+    height: 40vh;
+    margin-left: 1%;
   }
   .detail-sub-column-wrapper {
     margin-left: 1%;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    height: 44vh;
+    height: 40vh;
     width: 48%;
     float: left;
   }
@@ -557,14 +571,15 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
-  .detail-top-info-value {
+  /* .detail-top-info-value {
     font-family: 'Pretendard' !important;
-  }
+  } */
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;
     color: #898c8f;
     font: weight 500px;
+    font-family: 'Pretendard' !important;
   }
   .detail-tag-wrapper {
     margin-top: 3%;
@@ -675,6 +690,9 @@
   .detail-slider {
     margin-top: 10%;
   }
+  .detail-phone-icon {
+    color: #ff6b6c;
+  }
   .bookmark-title {
     margin: 8% 5% 5% 5%;
     border-bottom: 1px solid black;
@@ -685,10 +703,10 @@
   }
   .detail-image-wrapper {
     margin-top: 2%;
-    height: 44vh;
+    height: 45vh;
   }
   .detail-top-content-wrapper {
-    margin-top: 3%;
+    margin-top: 4%;
   }
   .detail-main-image {
     width: 100%;
@@ -699,13 +717,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 2%;
-    height: 44vh;
+    height: 45vh;
   }
   .detail-sub-column-wrapper {
     margin-left: 1%;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    height: 44vh;
+    height: 45vh;
     width: 48%;
     float: left;
   }
@@ -767,16 +785,17 @@
   .detail-info-top-wrapper {
     margin-bottom: 2%;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 6fr;
   }
-  .detail-top-info-value {
+  /* .detail-top-info-value {
     font-family: 'Pretendard' !important;
-  }
+  } */
   .detail-top-info-name,
   .detail-top-info-value {
     font-size: 14px;
     color: #898c8f;
     font: weight 500px;
+    font-family: 'Pretendard' !important;
   }
   .detail-tag-wrapper {
     margin-top: 3%;

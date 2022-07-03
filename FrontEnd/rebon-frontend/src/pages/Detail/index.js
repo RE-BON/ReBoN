@@ -168,7 +168,8 @@ export default function Detail() {
             <div className="detail-info-top-wrapper">
               <div className="detail-top-info-name">전화번호</div>
               <div className="detail-top-info-value">
-                {shopInfo.phone} ☏{/* 02-777-2254 */}
+                {shopInfo.phone} <span className="detail-phone-icon">☏</span>
+                {/* 02-777-2254 */}
               </div>
             </div>
             <div className="detail-info-top-wrapper">
