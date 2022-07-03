@@ -89,7 +89,6 @@ export default function Detail() {
   return (
     <div className="detail-wrapper">
       <Header />
-      {/* {isMobile} */}
       {isMobile ? <Carousel isMobile="1" imageInfo={shopInfo.image} /> : <Carousel isMobile="0" imageInfo={shopInfo.image} />}
       <div className="detail-shop-wrapper">
         <div className="detail-title-wrapper">
@@ -169,15 +168,11 @@ export default function Detail() {
               <div className="detail-top-info-name">전화번호</div>
               <div className="detail-top-info-value">
                 {shopInfo.phone} <span className="detail-phone-icon">☏</span>
-                {/* 02-777-2254 */}
               </div>
             </div>
             <div className="detail-info-top-wrapper">
               <div className="detail-top-info-name">영업시간</div>
-              <div className="detail-top-info-value">
-                {shopInfo.businessHour}
-                {/* 11:00~22:00 */}
-              </div>
+              <div className="detail-top-info-value">{shopInfo.businessHour}</div>
             </div>
           </div>
         </div>
