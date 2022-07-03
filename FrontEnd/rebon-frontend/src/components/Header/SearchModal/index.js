@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-
 import SearchBar from './SearchBar';
+import axios from 'axios';
 import '../../../styles/header-search-modal.css';
 
 export default function SearchModal() {
@@ -26,6 +27,19 @@ export default function SearchModal() {
       setTimeout(resolve, 300);
     });
   }
+
+  const [tag, setTags] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://3.34.139.61:8080/api/tags')
+      .then((response) => {
+        setTags(response.data);
+        console.log(tag[8]);
+      })
+      .catch((error) => {
+        console.log('error');
+      });
+  }, []);
 
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
@@ -62,10 +76,11 @@ export default function SearchModal() {
 
           <ul className="header-tag-list">
             <div>추천 태그로 검색해보세요.</div>
-            <li> 영일대</li>
-            <li>양덕</li>
-            <li>구룡포</li>
-            <li>칠포해수욕장</li>
+            {tag.slice(0, 10).map((item) => (
+              <Link to={`/main?name=${item.name}`} state={{ item }}>
+                <li>{item.name}</li>
+              </Link>
+            ))}
           </ul>
         </div>
       </StyledModal>

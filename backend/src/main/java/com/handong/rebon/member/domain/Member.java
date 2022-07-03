@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
-import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.like.Likes;
 
 import lombok.*;
@@ -47,7 +46,11 @@ public class Member extends BaseEntity {
     }
 
     public boolean isSame(Member member) {
-        return this.id == member.id;
+        return this.id.equals(member.id);
+    }
+
+    public boolean isSame(Long id) {
+        return this.id.equals(id);
     }
 
     public boolean isAdmin() {
@@ -57,6 +60,11 @@ public class Member extends BaseEntity {
     public void addEmpathy(Empathy empathy) {
         empathies.add(empathy);
         empathy.belongTo(this);
+    }
+
+    public void update(String nickName, boolean isAgreed) {
+        profile = new Profile(profile.getEmail(), nickName);
+        this.isAgreed = isAgreed;
     }
 
     public void likeShop(Likes likes) {

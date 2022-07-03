@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"></head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+    <div class="jumbotron">
+        <h1>Shop 조회 조건 선택</h1>
+    </div>
+    <div class="row justify-content-center">
+        <form class="needs-validation col-sm-10" th:action="@{/admin/shops}" th:object="${shopSearchRequest}" method="get"
+              novalidate
+              enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="category">카테고리</label>
+                <hr>
+                <select id="category" th:field="*{category}" class="form-select" aria-describedby="categoryHelp">
+                    <option value="">==카테고리 선택==</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}"
+                            th:text="${category.name}"></option>
+                </select>
+
+                <div th:each="category, itemStat : ${categories}">
+                    <div id="sub-category" th:each="sub, subStat : ${categories[__${itemStat.index}__].children}"
+                         class="form-check">
+                        <input type="checkbox" th:field="*{subCategories}"
+                               th:value="${categories[__${itemStat.index}__].children[__${subStat.index}__].id}"
+                               class="form-check-input" aria-describedby="subCategoryHelp">
+                        <label th:for="${#ids.prev('subCategories')}"
+                               th:text="${categories[__${itemStat.index}__].children[__${subStat.index}__].name}"
+                               class="form-check-label"></label>
+                    </div>
+                    <hr>
+                </div>
+                <br>
+            </div>
+
+            <div class="form-group">
+                <label for="tag">태그</label>
+                <hr>
+                <select id="tag" th:field="*{tag}" class="form-select" aria-describedby="categoryHelp">
+                    <option value="">==태그 선택==</option>
+                    <option th:each="tag : ${tags}" th:value="${tag.id}"
+                            th:text="${tag.name}"></option>
+                </select>
+
+                <br>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">가게 목록 조회</button>
+            </div>
+
+            <br>
+
+        </form>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</div> <!-- /container -->
+</body>
+</html>

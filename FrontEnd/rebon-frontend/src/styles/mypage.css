@@ -1,89 +1,354 @@
-.my-wrapper {
-  position: fixed;
-  padding-top: 6%;
-  height: 100vh;
+* {
+  font-family: 'Pretendard' !important;
 }
 
-.mypage-wrapper {
-  display: flex;
+@media (max-width: 767px) {
+  .mb-my-wrapper {
+    padding-top: 5em;
+    height: 100vh;
+    width: 100%;
+  }
+  .mb-sideMenu-intro {
+    height: 13vh;
+    background-image: url('/public/image/mypage-background.png');
+    background-repeat: no-repeat;
+    background-size: 100vw 12vh;
+    width: 100vw;
+    padding-top: 20px;
+  }
+  .mb-hello,
+  .mb-name {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .mb-person-wrapper {
+    display: inline;
+    border: 1px solid red;
+  }
+  .mb-name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .mb-mypage-tab {
+    height: 7vh;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 4fr 0.1fr 4fr;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  }
+  .mb-setting-icon {
+    margin-top: -3px;
+    margin-left: 5px;
+  }
+  .tab-click-active,
+  .tab-click-stay {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .tab-click-active {
+    border-bottom: 3px solid #ff6b6c;
+  }
+  .mb-border {
+    border-right: 1px solid #c4c4c4;
+    height: 50%;
+    margin-top: 15px;
+  }
+  .btn-click-active,
+  .btn-click-stay {
+    font-family: 'Pretendard' !important;
+    font-size: 1rem;
+  }
+  .btn-click-active {
+    color: #ff6b6c;
+  }
+  .btn-click-stay {
+    color: black;
+  }
+  .btn-name {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+  .tab-click-stay {
+    color: gray;
+  }
+  .mb-mypage-content {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .my-wrapper {
+    position: fixed;
+    padding-top: 5em;
+    height: 100vh;
+  }
+  .mypage-wrapper {
+    display: flex;
+  }
+
+  .mypage-tab {
+    position: absolute;
+    width: 65%;
+    padding-left: 34%;
+    background-color: #ffeeee;
+  }
+
+  .mypage-content {
+    width: 40%;
+    margin-left: 40%;
+  }
+
+  .sideMenu-wrapper {
+    background-color: transparent;
+    height: 100vh;
+  }
+
+  .sideMenu-intro {
+    padding: 40px 0;
+    font-size: 21px;
+  }
+
+  .side-row {
+    border: 1px solid black;
+  }
+
+  .side-col {
+    border: 1px solid black;
+  }
+
+  .name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .sidebtn-wrapper {
+    /*환경설정, 발자국, 찜*/
+    position: relative;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .sidebtn-icon {
+    display: inline;
+    border: 1px solid #e4e4e4;
+    border-radius: 100px;
+    padding: 7px 5px;
+  }
+
+  .btn-name {
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+
+  .sub-txt {
+    color: #797d81;
+    font-size: 10px;
+  }
+
+  .sideMenu-bottom {
+    position: absolute;
+    bottom: 15%;
+    font-size: 13px;
+  }
+
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+
+  .tab-click-stay {
+    color: gray;
+  }
 }
 
-.mypage-tab {
-  position: absolute;
-  width: 65%;
-  height: 87.5vh;
-  padding-left: 34%;
-  background-color: #ffeeee;
+@media (min-width: 992px) and (max-width: 1199px) {
+  .my-wrapper {
+    position: fixed;
+    padding-top: 5em;
+    height: 100vh;
+  }
+  .mypage-wrapper {
+    display: flex;
+  }
+
+  .mypage-tab {
+    position: absolute;
+    width: 65%;
+    height: 100vh;
+    padding-left: 34%;
+    background-color: #ffeeee;
+  }
+
+  .mypage-content {
+    width: 40%;
+    margin-left: 40%;
+  }
+
+  .sideMenu-wrapper {
+    background-color: transparent;
+    height: 100vh;
+  }
+
+  .sideMenu-intro {
+    padding: 40px 0;
+    font-size: 21px;
+  }
+
+  .side-row {
+    border: 1px solid black;
+  }
+
+  .side-col {
+    border: 1px solid black;
+  }
+
+  .name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .sidebtn-wrapper {
+    /*환경설정, 발자국, 찜*/
+    position: relative;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .sidebtn-icon {
+    display: inline;
+    border: 1px solid #e4e4e4;
+    border-radius: 100px;
+    padding: 7px 5px;
+  }
+
+  .btn-name {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .sub-txt {
+    color: #797d81;
+    font-size: 10px;
+  }
+
+  .sideMenu-bottom {
+    position: absolute;
+    bottom: 15%;
+    font-size: 13px;
+  }
+
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+
+  .tab-click-stay {
+    color: gray;
+  }
 }
 
-.mypage-content {
-  width: 40%;
-  margin-left: 40%;
-}
+@media (min-width: 1200px) {
+  .my-wrapper {
+    position: fixed;
+    padding-top: 5em;
+    height: 100vh;
+  }
+  .mypage-wrapper {
+    display: flex;
+  }
 
-.sideMenu-wrapper {
-  background-color: transparent;
-  height: 100vh;
-}
+  .mypage-tab {
+    position: absolute;
+    width: 65%;
+    height: 100vh;
+    padding-left: 34%;
+    background-color: #ffeeee;
+  }
 
-.sideMenu-intro {
-  padding: 40px 0;
-  font-size: 21px;
-}
+  .mypage-content {
+    width: 40%;
+    margin-left: 40%;
+  }
 
-.side-row {
-  border: 1px solid black;
-}
+  .sideMenu-wrapper {
+    background-color: transparent;
+    height: 100vh;
+  }
 
-.side-col {
-  border: 1px solid black;
-}
+  .sideMenu-intro {
+    padding: 40px 0;
+    font-size: 21px;
+  }
 
-.name {
-  font-weight: bold;
-  text-decoration: underline;
-}
+  .side-row {
+    border: 1px solid black;
+  }
 
-.sidebtn-wrapper {
-  /*환경설정, 발자국, 찜*/
-  position: relative;
-  background-color: white;
-  margin-bottom: 15px;
-  padding: 12px;
-  border-radius: 10px;
-  width: 98%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
+  .side-col {
+    border: 1px solid black;
+  }
 
-.sidebtn-icon {
-  display: inline;
-  border: 1px solid #e4e4e4;
-  border-radius: 100px;
-  padding: 7px 5px;
-}
+  .name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
 
-.btn-name {
-  font-size: 13px;
-  font-weight: bold;
-}
+  .sidebtn-wrapper {
+    /*환경설정, 발자국, 찜*/
+    position: relative;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 
-.sub-txt {
-  color: #797d81;
-  font-size: 10px;
-}
+  .sidebtn-icon {
+    display: inline;
+    border: 1px solid #e4e4e4;
+    border-radius: 100px;
+    padding: 7px 5px;
+  }
 
-.sideMenu-bottom {
-  position: absolute;
-  bottom: 7%;
-  font-size: 13px;
-}
+  .btn-name {
+    font-size: 13px;
+    font-weight: bold;
+  }
 
-.tab-click-active {
-  color: #ff6b6c;
-}
+  .sub-txt {
+    color: #797d81;
+    font-size: 10px;
+  }
 
-.tab-click-stay {
-  color: gray;
+  .sideMenu-bottom {
+    position: absolute;
+    bottom: 15%;
+    font-size: 13px;
+  }
+
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+
+  .tab-click-stay {
+    color: gray;
+  }
 }
