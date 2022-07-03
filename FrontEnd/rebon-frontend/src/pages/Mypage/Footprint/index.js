@@ -2,8 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import FootprintModal from './FootprintModal';
 import '../../../styles/footprint.css';
 import ReviewStar from '../../Detail/Review/ReviewStar';
-
+import { useMediaQuery } from 'react-responsive';
+import ReviewModal from '../../Detail/Review/ReviewModal';
 export default function Footprint() {
+  const isMobile = useMediaQuery({
+    query: '(max-width:767px)',
+  });
   const [footInfo, setFootInfo] = useState([
     {
       id: 1,
@@ -35,44 +39,96 @@ export default function Footprint() {
     },
   ]);
   return (
-    <div className="footprint-container">
-      <div className="footprint-title">발자국</div>
-      <div className="footprint-wrapper">
-        {footInfo.length > 0
-          ? footInfo.map((info) => (
-              <>
-                <div className="footprint-content">
-                  <div className="footprint-remove-wrapper">
-                    <FootprintModal />
-                  </div>
-                  <div className="footprint-user">
-                    <span className="footprint-user-name">{info.shopName}</span>
-                    <span className="footprint-rating">
-                      <ReviewStar star={info.star} />
-                    </span>
-                    {info.tip ? (
-                      <div className="footprint-tip-wrapper">
-                        <span className="footprint-tip-name">나만의 꿀팁</span>
-                        <span className="footprint-tip-content">{info.tip}</span>
+    <>
+      {isMobile ? (
+        <div className="footprint-container">
+          <div className="footprint-wrapper">
+            {footInfo.length > 0
+              ? footInfo.map((info) => (
+                  <>
+                    <div className="footprint-content">
+                      <div className="footprint-user">
+                        <div className="footprint-list-icon">
+                          <FootprintModal />
+                        </div>
+                        <span className="footprint-user-name">{info.shopName}</span>
+                        <span className="footprint-rating">
+                          <ReviewStar star={info.star} />
+                        </span>
+                        {info.tip ? (
+                          <div className="footprint-tip-wrapper">
+                            <span className="footprint-tip-name">나만의 꿀팁</span>
+                            <span className="footprint-tip-content">{info.tip}</span>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <div className="footprint-post">{info.content}</div>
                       </div>
-                    ) : (
-                      ''
-                    )}
+                      <div className="footprint-image-wrapper">
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        </div>
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="footprint-light-hr" />
+                  </>
+                ))
+              : ''}
+          </div>
+        </div>
+      ) : (
+        <div className="footprint-container">
+          <div className="footprint-title">발자국</div>
+          <div className="footprint-wrapper">
+            {footInfo.length > 0
+              ? footInfo.map((info) => (
+                  <>
+                    <div className="footprint-content">
+                      <div className="footprint-remove-wrapper">
+                        <FootprintModal />
+                      </div>
+                      <div className="footprint-user">
+                        <span className="footprint-user-name">{info.shopName}</span>
+                        <span className="footprint-rating">
+                          <ReviewStar star={info.star} />
+                        </span>
+                        {info.tip ? (
+                          <div className="footprint-tip-wrapper">
+                            <span className="footprint-tip-name">나만의 꿀팁</span>
+                            <span className="footprint-tip-content">{info.tip}</span>
+                          </div>
+                        ) : (
+                          ''
+                        )}
 
-                    <div className="footprint-post">{info.content}</div>
-                  </div>
-                  <div className="footprint-image-wrapper">
-                    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                  </div>
-                </div>
-                <div className="footprint-light-hr" />
-              </>
-            ))
-          : ''}
-      </div>
-    </div>
+                        <div className="footprint-post">{info.content}</div>
+                      </div>
+                      <div className="footprint-image-wrapper">
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        </div>
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        </div>
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        </div>
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="footprint-light-hr" />
+                  </>
+                ))
+              : ''}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
+import './../../../../styles/review-modal.css';
+import { Link } from 'react-router-dom';
 
-import '../../../../styles/footprint-modal.css';
-
-export default function FootprintModal() {
+import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
+import { MoreVertical, Trash, Edit, AlertOctagon, X } from 'react-feather';
+export default function ReviewModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
-  const [modalState, setModalState] = useState({ list: 'block', delete: 'none', confirm: 'none' });
+  const [report, setReport] = useState([]);
 
   function toggleModal(e) {
-    setModalState({ list: 'block', delete: 'none', confirm: 'none' });
+    console.log('hihihi');
     setOpacity(0);
     setIsOpen(!isOpen);
   }
@@ -30,14 +33,23 @@ export default function FootprintModal() {
     });
   }
 
-  const StyledModal = Modal.styled`
-  width: 23rem;
-  padding : 20px;
-  border-radius:20px;
-  background-color: white;
-  opacity: ${(props) => props.opacity};
-  transition : all 0.3s ease-in-out;
-  `;
+  const handleClickReport = (e) => {
+    console.log(e.target.value);
+    setReport(e.target.value);
+  };
+
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <Link
+      to=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+    </Link>
+  ));
 
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
@@ -45,74 +57,36 @@ export default function FootprintModal() {
   `;
 
   return (
-    <div className="footprint-modal-wrapper">
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <div className="footprint-modal" onClick={toggleModal}>
-          리뷰삭제
-        </div>
-
-        <StyledModal
-          isOpen={isOpen}
-          afterOpen={afterOpen}
-          beforeClose={beforeClose}
-          onBackgroundClick={toggleModal}
-          onEscapeKeydown={toggleModal}
-          opacity={opacity}
-          backgroundProps={{ opacity }}
-        >
-          <div style={{ display: modalState.list }}>
-            <div className="footprint-modal-delete" onClick={toggleModal}>
-              <button>
-                <img src="../../../../image/edit.png" alt="edit-img" />
-              </button>
-              수정하기
+    <ModalProvider backgroundComponent={FadingBackground}>
+      <Dropdown>
+        <Dropdown.Toggle as={CustomToggle}>
+          <MoreVertical size="15px" className="text-secondary" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu align="end">
+          <Dropdown.Item eventKey="1">
+            <div onClick={toggleModal}>
+              <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
             </div>
-
-            <div
-              className="footprint-modal-delete"
-              onClick={() => {
-                setModalState({ list: 'none', delete: 'block', confirm: 'none' });
-              }}
-            >
-              <button>
-                <img src="../../../../image/trash.png" alt="trash-img" />
-              </button>
-              삭제하기
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="2">
+            <div onClick={toggleModal}>
+              <Trash size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰삭제</p>
             </div>
-
-            <div className="footprint-modal-close" onClick={toggleModal}>
-              <button>
-                <FontAwesomeIcon icon={faXmark} />
-              </button>
-              닫기
-            </div>
-          </div>
-          {/* 위가 visible하지 않은 상태, 삭제하기 클릭하면, 아래를 보여준다 */}
-
-          <div className="footprint-delete-modal" style={{ display: modalState.delete }}>
-            <button>
-              <FontAwesomeIcon icon={faXmark} onClick={toggleModal} />
-            </button>
-            <div className="delete-message">리뷰를삭제하시겠습니까</div>
-            <div
-              className="delete-message-confirm"
-              onClick={() => {
-                setModalState({ list: 'none', delete: 'none', confirm: 'block' });
-              }}
-            >
-              확인
-            </div>
-          </div>
-          {/* 위가 visible하지 않은 상태, 삭제하기 클릭하면, 아래를 보여준다 */}
-
-          <div className="footprint-confirm-modal" style={{ display: modalState.confirm }}>
-            <button>
-              <FontAwesomeIcon icon={faXmark} onClick={toggleModal} />
-            </button>
-            <div className="confirm-message">리뷰가 삭제되었습니다</div>
-          </div>
-        </StyledModal>
-      </ModalProvider>
-    </div>
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="3">
+            <X size="18px" className="dropdown-item-icon" /> <p className="review-modal-close">닫기</p>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </ModalProvider>
   );
 }
+
+const StyledModal = Modal.styled`
+  width: 22rem;
+  height: 23rem;
+  padding : 20px;
+  border-radius:20px;
+  background-color: white;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;
