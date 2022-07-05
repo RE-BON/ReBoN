@@ -96,71 +96,77 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
   };
 
   useLayoutEffect(() => {
-    console.log('main~~');
-    console.log('restCate: ', restCategory);
-    console.log('restData: ', restData);
+    setReady(false);
+
+    // console.log('main~~');
+    // console.log('restCate: ', restCategory);
+    // console.log('restData: ', restData);
+    setRestChecked(0);
+    setReady(true);
   }, []);
 
   return (
     <div className="main-wrapper">
       {/* {ready ? ( */}
       {/* <> */}
-      <Header />
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            TabIndicatorProps={{
-              style: {
-                backgroundColor: '#ff6b6c',
-              },
-            }}
-            className="box"
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            centered
-          >
-            <Tab label="식당" {...a11yProps(0)} />
-            <Tab label="카페" {...a11yProps(1)} />
-            <Tab label="숙소" {...a11yProps(2)} />
-          </Tabs>
-        </Box>
-        <TabPanel className="TabPanel" value={value} index={0}>
-          <div className="category-wrapper">
-            <div class="select-main">
-              {restCategory
-                ? restCategory.map((rest, index) => (
-                    <>
-                      {/* <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => updateRestChecked(index)} /> */}
-                      <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => setRestChecked(index)} />
-                      {/* <label for={index} className={mainSetting.restChecked === index ? 'radio-click-active' : 'radio-click-stay'}> */}
-                      <label for={index} className={restChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
-                        {rest.name}
-                      </label>
-                    </>
-                  ))
-                : restCategory.length}
-            </div>
-          </div>
-          {/* restChecked가 바로 안바뀌는 바람에 처음 restChecked가 0에서 1로 눌러서 바껴야 이 데이터도 바껴지는데, 그렇지 않아서 잘못된 데이터가 들어가고 있음. 
+      {ready ? (
+        <>
+          <Header />
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: '#ff6b6c',
+                  },
+                }}
+                className="box"
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                centered
+              >
+                <Tab label="식당" {...a11yProps(0)} />
+                <Tab label="카페" {...a11yProps(1)} />
+                <Tab label="숙소" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <TabPanel className="TabPanel" value={value} index={0}>
+              <div className="category-wrapper">
+                <div class="select-main">
+                  {restCategory
+                    ? restCategory.map((rest, index) => (
+                        <>
+                          {/* <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => updateRestChecked(index)} /> */}
+                          <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => setRestChecked(index)} />
+                          {/* <label for={index} className={mainSetting.restChecked === index ? 'radio-click-active' : 'radio-click-stay'}> */}
+                          <label for={index} className={restChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
+                            {rest.name}
+                          </label>
+                        </>
+                      ))
+                    : restCategory.length}
+                </div>
+              </div>
+              {/* restChecked가 바로 안바뀌는 바람에 처음 restChecked가 0에서 1로 눌러서 바껴야 이 데이터도 바껴지는데, 그렇지 않아서 잘못된 데이터가 들어가고 있음. 
                   그래서 restChecked가 바로 바뀔 수 있는 방법은 없을까 생각해보기. */}
-          <div className="main-background">
-            <div className="searchTitle">📍{location.state.item.name} 식당</div>
-          </div>
+              <div className="main-background">
+                <div className="searchTitle">📍{location.state.item.name} 식당</div>
+              </div>
 
-          <div className="best-wrapper">
-            {/* <BestCard bestInfo={restData[mainSetting.restChecked]} /> */}
-            <BestCard bestInfo={restData[restChecked]} />
-          </div>
-          {/* <Divider shopInfo={restData[mainSetting.restChecked]} tagId={location.state.item.id} subId={restCategory[mainSetting.restChecked].id} /> */}
-          <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} />
-          <div className="mainCard-wrapper">
-            <MainCard />
-          </div>
-        </TabPanel>
+              <div className="best-wrapper">
+                {/* <BestCard bestInfo={restData[mainSetting.restChecked]} /> */}
+                <BestCard bestInfo={restData[restChecked]} />
+              </div>
+              {/* <Divider shopInfo={restData[mainSetting.restChecked]} tagId={location.state.item.id} subId={restCategory[mainSetting.restChecked].id} /> */}
+              <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} />
+              <div className="mainCard-wrapper">
+                <MainCard />
+              </div>
+            </TabPanel>
 
-        <TabPanel className="TabPanel" value={value} index={1}>
-          {/* <div className="category-wrapper">
+            <TabPanel className="TabPanel" value={value} index={1}>
+              {/* <div className="category-wrapper">
             <div class="select-main">
               {cafeCategory
                 ? cafeCategory.map((cafe, index) => (
@@ -182,10 +188,10 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
           <div className="mainCard-wrapper">
             <MainCard />
           </div> */}
-        </TabPanel>
+            </TabPanel>
 
-        <TabPanel className="TabPanel" value={value} index={2}>
-          {/* <div className="category-wrapper">
+            <TabPanel className="TabPanel" value={value} index={2}>
+              {/* <div className="category-wrapper">
             <div class="select-main">
               {accoCategory
                 ? accoCategory.map((acco, index) => (
@@ -206,12 +212,16 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
           <div className="mainCard-wrapper">
             <MainCard />
           </div> */}
-        </TabPanel>
-      </Box>
-      {/* </> */}
-      {/* ) : (
+            </TabPanel>
+          </Box>
+          {/* </> */}
+          {/* ) : (
         ''
       )} */}
+        </>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
