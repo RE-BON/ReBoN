@@ -135,6 +135,24 @@ public abstract class Shop extends BaseEntity {
         return this.category.equals(category);
     }
 
+    public void validateOnlyShopTag() {
+        if (this.shopTags.size() == 1) {
+            throw new ShopTagNumberException();
+        }
+    }
+
+    public boolean containLike(LoginMember loginMember) {
+        if (loginMember.isAnonymous()) {
+            return false;
+        }
+        return likes.stream()
+                    .anyMatch(l -> l.contain(loginMember.getId()));
+    }
+
+    public void plusReviewCount() {
+        shopScore.plusReviewCount();
+    }
+
     public int getLikeCount() {
         return this.likes.size();
     }
@@ -149,19 +167,5 @@ public abstract class Shop extends BaseEntity {
 
     public double getStar() {
         return shopScore.getStar();
-    }
-
-    public void validateOnlyShopTag() {
-        if (this.shopTags.size() == 1) {
-            throw new ShopTagNumberException();
-        }
-    }
-
-    public boolean containLike(LoginMember loginMember) {
-        if (loginMember.isAnonymous()) {
-            return false;
-        }
-        return likes.stream()
-                    .anyMatch(l -> l.contain(loginMember.getId()));
     }
 }

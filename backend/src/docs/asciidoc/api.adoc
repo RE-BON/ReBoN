@@ -142,10 +142,10 @@ include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-resp
 | 값 | 타입 | 필수 | 설명
 | id | Lone | true | 조회하고자 하는 사용자의 id 값
 |===
-include::{snippets}/MemberReadAcceptanceTest/findMemberInfo/http-request.adoc[]
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfoWithLogin/http-request.adoc[]
 
 ==== Response
-include::{snippets}/MemberReadAcceptanceTest/findMemberInfo/http-request.adoc[]
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfoWithLogin/http-request.adoc[]
 
 === 내 정보 수정
 ==== Request
@@ -220,6 +220,12 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 | open | boolean | true | 영업중 여부 (false = 전체 가게 조회, true = 현재 시간에 운영중인 가게만 조회)
 | token | String | false | Authorization header에 bearer type으로 jwt 보내주기
 |===
+
+==== sorting 조건
+- 별점순: sort=shopScore.star,asc(desc)
+- 리뷰 많은 순: sort=shopScore.reviewCount,asc(desc)
+- 최신순: sort=createdAt,asc(desc)
+
 include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
 
 ==== Response

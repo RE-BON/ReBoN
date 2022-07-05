@@ -28,7 +28,7 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
                       .shopContent(new ShopContent(data.getName(), data.getStart(), data.getEnd(), data.getPhone()))
                       .address(data.getAddress())
                       .shopImages(shopImages)
-                      .shopScore(new ShopScore(0.0, 0))
+                      .shopScore(new ShopScore(0.0, 0, 0))
                       .build();
     }
 

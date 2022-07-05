@@ -36,7 +36,7 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
                                                   .getPhone()))
                                           .address(data.getAddress())
                                           .shopImages(shopImages)
-                                          .shopScore(new ShopScore(0.0, 0))
+                                          .shopScore(new ShopScore(0.0, 0, 0))
                                           .build();
 
         List<Menu> menus = menuGroupService.createMenu(restaurant, data.getMenus());

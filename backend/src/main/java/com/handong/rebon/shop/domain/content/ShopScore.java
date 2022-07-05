@@ -13,8 +13,13 @@ import lombok.NoArgsConstructor;
 public class ShopScore {
     private double star;
     private int likeCount;
+    private int reviewCount;
 
     public ShopScore(double star) {
         this.star = star;
+    }
+
+    public void plusReviewCount() {
+        this.reviewCount++;
     }
 }

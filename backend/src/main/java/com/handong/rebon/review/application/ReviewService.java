@@ -51,6 +51,8 @@ public class ReviewService {
         review.addReviewImages(reviewImages);
         Review savedReview = reviewRepository.save(review);
 
+        shop.plusReviewCount();
+
         return savedReview.getId();
     }
 
