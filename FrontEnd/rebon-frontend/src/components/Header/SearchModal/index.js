@@ -41,6 +41,27 @@ export default function SearchModal() {
       });
   }, []);
 
+  // let word = '';
+  // const [word, setWord] = useState('');
+  // const onChangeWord = (e) => {
+  //   // word = e.target.value;
+  //   setWord(e.target.value);
+  //   console.log(word);
+  // };
+
+  const [keyword, setKeyword] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://3.34.139.61:8080/api/tags/search?keyword=ㅎㄷㄷ`)
+      .then((response) => {
+        setKeyword(response.data);
+        console.log(keyword);
+      })
+      .catch((error) => {
+        console.log('error');
+      });
+  }, []);
+
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;

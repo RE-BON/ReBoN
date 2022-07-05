@@ -1,17 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Tags from './Tags';
+import axios from 'axios';
 import Header from '../../components/Header';
 import '../../styles/search.css';
 export default function Search() {
   //검색창 입력받기
-  const [keyword, setKeyword] = useState('');
+  const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
-    setKeyword(e.target.value);
-    console.log(keyword);
+    setWord(e.target.value);
+    console.log(word);
   };
+
+  const [keyword, setKeyword] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://3.34.139.61:8080/api/tags/search?keyword=${word}`)
+      .then((response) => {
+        setKeyword(response.data);
+        console.log(keyword);
+      })
+      .catch((error) => {
+        console.log('error');
+      });
+  }, [word]);
   return (
     <div className="search-background">
       <div className="search-wrapper">
@@ -24,7 +38,7 @@ export default function Search() {
 
           <div className="input-bar">
             <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} />
-            <Link to={`/main?name=${keyword}`} state={{}} style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to={`/main?name=${word}`} state={{}} style={{ color: 'inherit', textDecoration: 'none' }}>
               <FontAwesomeIcon icon={faSearch} className="search" />
             </Link>
           </div>
