@@ -15,7 +15,6 @@ import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.like.Likes;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.tag.domain.Tag;
 
@@ -50,8 +49,7 @@ public abstract class Shop extends BaseEntity {
     @Embedded
     private ShopImages shopImages;
 
-    @Embedded
-    private Location location;
+    private String address;
 
     @Embedded
     private ShopScore shopScore;
@@ -67,7 +65,7 @@ public abstract class Shop extends BaseEntity {
             Category category,
             ShopContent shopContent,
             ShopImages shopImages,
-            Location location,
+            String address,
             ShopScore shopScore,
             boolean deleted
     ) {
@@ -76,7 +74,7 @@ public abstract class Shop extends BaseEntity {
         this.category = category;
         this.shopContent = shopContent;
         this.shopImages = shopImages;
-        this.location = location;
+        this.address = address;
         this.shopScore = shopScore;
 
         shopImages.belongTo(this);
@@ -101,9 +99,9 @@ public abstract class Shop extends BaseEntity {
         this.shopCategories.addAll(shopCategories);
     }
 
-    public void update(ShopContent content, Location location) {
+    public void update(ShopContent content, String address) {
         this.shopContent = content;
-        this.location = location;
+        this.address = address;
     }
 
     public void updateCategories(Category category, List<Category> subCategories) {
