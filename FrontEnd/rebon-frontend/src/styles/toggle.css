@@ -2,7 +2,8 @@
   touch-action: pan-x;
 
   display: inline-block;
-  position: relative;
+  /* position: relative; */
+  position: absolute;
   cursor: pointer;
   background-color: transparent;
   border: 0;

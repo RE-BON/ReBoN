@@ -58,7 +58,7 @@ export default function ReviewContent({ data, sort }) {
               <div className="review-content">
                 {' '}
                 <div className="review-user-image">
-                  <FontAwesomeIcon icon={faCircleUser} size="5x" color="#BDBDBD" />
+                  <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
                 </div>
                 <div className="review-user">
                   <div className="review-list-icon">
@@ -77,7 +77,6 @@ export default function ReviewContent({ data, sort }) {
                   ) : (
                     ''
                   )}
-
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
                     <button className="review-button">
@@ -99,7 +98,7 @@ export default function ReviewContent({ data, sort }) {
               <div className="review-content">
                 {' '}
                 <div className="review-user-image">
-                  <FontAwesomeIcon icon={faCircleUser} size="5x" color="#BDBDBD" />
+                  <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
                 </div>
                 <div className="review-user">
                   <div className="review-list-icon">
@@ -140,7 +139,7 @@ export default function ReviewContent({ data, sort }) {
               <div className="review-content">
                 {' '}
                 <div className="review-user-image">
-                  <FontAwesomeIcon icon={faCircleUser} size="5x" color="#BDBDBD" />
+                  <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
                 </div>
                 <div className="review-user">
                   <div className="review-list-icon">
@@ -180,7 +179,7 @@ export default function ReviewContent({ data, sort }) {
               <div className="review-content">
                 {' '}
                 <div className="review-user-image">
-                  <FontAwesomeIcon icon={faCircleUser} size="5x" color="#BDBDBD" />
+                  <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
                 </div>
                 <div className="review-user">
                   <div className="review-list-icon">
