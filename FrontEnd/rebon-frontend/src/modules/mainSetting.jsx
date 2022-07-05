@@ -2,19 +2,19 @@ import { observable } from 'mobx';
 
 const mainSetting = observable({
   // state
-  restOption: 777,
-  restData: [],
+  restChecked: 0,
+  accoChecked: 0,
+  cafeChecked: 0,
 
   // action
-  updateRestOption(restOption) {
-    this.restOption = restOption;
+  updateRestChecked(restChecked) {
+    this.restChecked = restChecked;
   },
-  updateRestData(restData) {
-    this.restData = restData;
+  updateAccoChecked(accoChecked) {
+    this.accoChecked = accoChecked;
   },
-  pushRestData(restData) {
-    // this.restData = this.restData + restData;
-    this.restData = restData;
+  updateCafeChecked(cafeChecked) {
+    this.cafeChecked = cafeChecked;
   },
 });
 

@@ -10,10 +10,10 @@ export default function Tags() {
       .get('http://3.34.139.61:8080/api/tags')
       .then((response) => {
         setTags(response.data);
-        console.log(tag[8]);
+        // console.log(tag[8]);
       })
       .catch((error) => {
-        console.log('error');
+        console.log('Tags error');
       });
   }, []);
 

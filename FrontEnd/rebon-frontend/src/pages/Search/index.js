@@ -10,7 +10,7 @@ export default function Search() {
   const [keyword, setKeyword] = useState('');
   const onChangeKeyword = (e) => {
     setKeyword(e.target.value);
-    console.log(keyword);
+    // console.log(keyword);
   };
   return (
     <div className="search-background">
