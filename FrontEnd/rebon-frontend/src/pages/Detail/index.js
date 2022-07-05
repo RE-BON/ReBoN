@@ -24,7 +24,63 @@ function SamplePrevArrow(props) {
 }
 
 export default function Detail() {
-  const [shopInfo, setShopInfo] = useState([]);
+  // const [shopInfo, setShopInfo] = useState();
+  const [shopInfo, setShopInfo] = useState({
+    id: 1,
+    name: '팜스발리',
+    star: 5.0,
+    like: true,
+    businessHour: '08:00~22:00',
+    tags: [
+      {
+        id: 1,
+        name: '포항',
+      },
+      {
+        id: 3,
+        name: '한동대',
+      },
+    ],
+    phone: '010-1234-5678',
+
+    subCategories: [
+      {
+        id: 9,
+        name: '식당',
+      },
+    ],
+    address: '경상북도 포항시 북구 흥해읍 한동로 558',
+    menus: [
+      {
+        name: '피자류',
+        menus: [
+          {
+            name: '김치 불고기',
+            price: 13700,
+          },
+          {
+            name: '고구마',
+            price: 11000,
+          },
+        ],
+      },
+
+      {
+        name: '치킨류',
+        menus: [
+          {
+            name: '허니 치킨',
+            price: 13700,
+          },
+          {
+            name: '후라이드 치킨',
+            price: 11000,
+          },
+        ],
+      },
+    ],
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Supreme_pizza.jpg/800px-Supreme_pizza.jpg',
+  });
   const settings = {
     dots: false,
     infinite: true,
@@ -36,48 +92,51 @@ export default function Detail() {
     prevArrow: <SamplePrevArrow />,
   };
 
-  useEffect(() => {
-    axios
-      .get('http://3.34.139.61:8080/api/shops/1')
-      .then((response) => {
-        setShopInfo(response.data);
-        console.log(shopInfo);
-        console.log(shopInfo.tags);
-      })
-      .catch((error) => {
-        console.log('error');
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('http://3.34.139.61:8080/api/shops/1')
+  //     .then((response) => {
+  //       setShopInfo(response.data);
+  //       console.log(shopInfo);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('error');
+  //     });
+  // }, []);
 
   return (
     <div className="detail-wrapper">
       <Header />
       <Slider {...settings} className="detail-slider">
         <div className="detail-image-wrapper">
-          <img className="detail-main-image" alt="review-image" src="image/detail.png" />
+          {/* <img className="detail-main-image" alt="review-image" src="/image/detail.png" /> */}
+
+          {shopInfo.image ? <img className="detail-main-image" alt="review-image" src={shopInfo.image} width="430px" height="360px" /> : ''}
         </div>
         <div className="detail-sub-wrapper">
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
         </div>
         <div className="detail-image-wrapper">
-          <img className="detail-main-image" alt="review-image" src="image/detail.png" />
+          <img className="detail-main-image" alt="review-image" src="/image/detail.png" />
         </div>
         <div className="detail-sub-wrapper">
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
-          <img className="detail-sub-image" alt="review-image" src="image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+          <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
         </div>
       </Slider>
 
       <div className="detail-shop-wrapper">
         <div className="detail-title-wrapper">
           <div>
-            <img className="detail-shop-icon" alt="shop-image" src="image/shop_icon.png" />
-            <h3 className="detail-shop-name">{shopInfo.name}</h3>
+            <img className="detail-shop-icon" alt="shop-image" src="/image/shop_icon.png" />
+
+            {shopInfo.name ? <h3 className="detail-shop-name">{shopInfo.name}</h3> : ''}
             <div className="detail-star-wraper">
               {shopInfo.star === 0.0 ? (
                 <>

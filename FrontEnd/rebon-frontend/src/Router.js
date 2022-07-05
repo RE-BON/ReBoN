@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Join/Register';
 import Logout from './pages/Logout';
 import Terms from './pages/Terms';
+import Loding from './pages/Login/Loading';
 /*추후변경필요*/
 import TermsMarketing from './pages/Terms/marketingModal';
 import TermsPrivacy from './pages/Terms/privacyModal';
@@ -19,7 +20,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/main" element={<Main />} />
         <Route path="/post" element={<Post />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />
@@ -34,6 +35,7 @@ function Router() {
         <Route path="/marketing" element={<TermsMarketing />} />
         <Route path="privacy" element={<TermsPrivacy />} />
         <Route path="/" element={<Search />} />
+        <Route path="/loading" element={<Loding />} />
       </Routes>
     </BrowserRouter>
   );
