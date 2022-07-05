@@ -11,8 +11,6 @@ import Register from './pages/Join/Register';
 import Logout from './pages/Logout';
 import Terms from './pages/Terms';
 /*추후변경필요*/
-import TermsMarketing from './pages/Terms/marketingModal';
-import TermsPrivacy from './pages/Terms/privacyModal';
 import TermsModal from './pages/Terms/termsModal';
 
 function Router() {
@@ -31,8 +29,6 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/termsModal" element={<TermsModal />} />
-        <Route path="/marketing" element={<TermsMarketing />} />
-        <Route path="privacy" element={<TermsPrivacy />} />
         <Route path="/" element={<Search />} />
       </Routes>
     </BrowserRouter>

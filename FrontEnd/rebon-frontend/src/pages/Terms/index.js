@@ -86,7 +86,7 @@ export default function Terms() {
                 <IoIosArrowForward />
               </Link>
             </div>
-            <Link to="/search">
+            <Link to="/">
               <button className="terms-btn">ReBON 시작하기</button>
             </Link>
           </div>

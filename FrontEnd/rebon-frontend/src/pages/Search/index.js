@@ -38,6 +38,11 @@ export default function Search() {
 
           <div className="input-bar">
             <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} />
+            {keyword.slice(0, 3).map((item) => (
+              <Link to={`/main?name=${item.name}`} state={{ item }}>
+                <li>{item.name}</li>
+              </Link>
+            ))}
             <Link to={`/main?name=${word}`} state={{}} style={{ color: 'inherit', textDecoration: 'none' }}>
               <FontAwesomeIcon icon={faSearch} className="search" />
             </Link>
