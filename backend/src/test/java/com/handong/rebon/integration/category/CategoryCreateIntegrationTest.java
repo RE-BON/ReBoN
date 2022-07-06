@@ -1,6 +1,6 @@
 package com.handong.rebon.integration.category;
 
-import com.handong.rebon.category.application.dto.request.CategoryCreateRequestDto;
+import com.handong.rebon.category.application.dto.request.CategoryRequestDto;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
@@ -34,10 +34,10 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
         String createdName = "테스트한식";
         Long parentId = categoryService.create(parentName);
 
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
-                                                                                    .parentId(parentId)
-                                                                                    .name(createdName)
-                                                                                    .build();
+        CategoryRequestDto categoryCreateRequestDto = CategoryRequestDto.builder()
+                                                                        .id(parentId)
+                                                                        .name(createdName)
+                                                                        .build();
         //when
         Long id = categoryService.create(categoryCreateRequestDto);
         Category createdCategory = categoryRepository.getById(id);
@@ -51,10 +51,10 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
     public void createCategoryWithParentException() {
         //given
         long parentId = -1;
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
-                                                                                    .parentId(parentId)
-                                                                                    .name("테스트한식")
-                                                                                    .build();
+        CategoryRequestDto categoryCreateRequestDto = CategoryRequestDto.builder()
+                                                                        .id(parentId)
+                                                                        .name("테스트한식")
+                                                                        .build();
         //when, then
         assertThatThrownBy(() -> categoryService.create(categoryCreateRequestDto))
                 .isInstanceOf(CategoryNotFoundException.class);
@@ -81,10 +81,10 @@ public class CategoryCreateIntegrationTest extends CategoryIntegrationTest {
         String parentName = "테스트식당";
         String createdName = "테스트한식";
         Long parentId = categoryService.create(parentName);
-        CategoryCreateRequestDto categoryCreateRequestDto = CategoryCreateRequestDto.builder()
-                                                                                    .parentId(parentId)
-                                                                                    .name(createdName)
-                                                                                    .build();
+        CategoryRequestDto categoryCreateRequestDto = CategoryRequestDto.builder()
+                                                                        .id(parentId)
+                                                                        .name(createdName)
+                                                                        .build();
         categoryService.create(categoryCreateRequestDto);
 
         //when

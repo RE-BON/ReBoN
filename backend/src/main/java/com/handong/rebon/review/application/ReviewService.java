@@ -55,6 +55,25 @@ public class ReviewService {
         return savedReview.getId();
     }
 
+
+    @Transactional
+    public void update(ReviewUpdateRequestDto reviewUpdateRequestDto) {
+        Long reviewId = reviewUpdateRequestDto.getReviewId();
+        Long memberId = reviewUpdateRequestDto.getMemberId();
+
+        Review review = findOneById(reviewId);
+        Member member = memberService.findById(memberId);
+
+        ReviewImages reviewImages = saveImages(reviewUpdateRequestDto.getImageUrls());
+
+        review.update(
+                member,
+                reviewUpdateRequestDto.getContent(),
+                reviewUpdateRequestDto.getTip(),
+                reviewUpdateRequestDto.getStar(),
+                reviewImages);
+    }
+
     @Transactional
     public void delete(ReviewDeleteRequestDto reviewDeleteRequestDto) {
         Long reviewId = reviewDeleteRequestDto.getReviewId();
@@ -74,8 +93,8 @@ public class ReviewService {
         if (StringUtils.hasText(keyword)) {
             String containingKeyword = StringUtil.makeContainingKeyword(keyword);
             List<Review> reviews = reviewRepository.searchReviewByKeywordApplyPage(
-                                                           containingKeyword,
-                                                           pageable)
+                    containingKeyword,
+                    pageable)
                                                    .getContent();
             return ReviewDtoAssembler.adminReviewResponseDtos(reviews);
         }

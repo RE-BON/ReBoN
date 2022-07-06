@@ -2,24 +2,28 @@ package com.handong.rebon.member.presentation;
 
 import java.net.URI;
 
+import com.handong.rebon.auth.domain.Login;
+import com.handong.rebon.auth.domain.LoginMember;
+import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.member.application.MemberService;
+import com.handong.rebon.member.application.dto.request.MemberUpdateRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
+import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.presentation.dto.MemberAssembler;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
+import com.handong.rebon.member.presentation.dto.request.MemberUpdateRequest;
 import com.handong.rebon.member.presentation.dto.response.MemberCreateResponse;
+import com.handong.rebon.member.presentation.dto.response.MemberReadResponse;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
-public class MemberController {
+public class ApiMemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
@@ -36,5 +40,25 @@ public class MemberController {
         memberService.checkNicknameDuplicate(nickname);
         return ResponseEntity.ok()
                              .build();
+    }
+
+    @RequiredLogin
+    @PatchMapping("/members")
+    public ResponseEntity<Void> update(
+            @Login LoginMember loginMember,
+            @RequestBody MemberUpdateRequest memberUpdateRequest
+    ) {
+        MemberUpdateRequestDto memberUpdateRequestDto = MemberAssembler.memberUpdateRequestDto(loginMember.getId(), memberUpdateRequest);
+        memberService.update(memberUpdateRequestDto);
+
+        return ResponseEntity.ok()
+                             .build();
+    }
+
+    @RequiredLogin
+    @GetMapping("/members")
+    public ResponseEntity<MemberReadResponse> getMemberInfo(@Login LoginMember loginMember) {
+        MemberReadResponseDto memberInfo = memberService.findMemberInfo(loginMember.getId());
+        return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
     }
 }

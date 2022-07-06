@@ -36,5 +36,4 @@ public class ReviewContent {
                 data.isBlank();
     }
 
-
 }

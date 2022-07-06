@@ -3,6 +3,7 @@ package com.handong.rebon.shop.application;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.category.application.CategoryService;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.ImageUploader;
@@ -87,7 +88,7 @@ public class ShopService {
                 shopRepository.searchShopByConditionApplyPage(shopSearchCondition, shopSearchDto.getPageable());
 
         return results.stream()
-                      .map(ShopSimpleResponseDto::from)
+                      .map(shop -> ShopSimpleResponseDto.of(shop, shopSearchDto.getLoginMember()))
                       .collect(Collectors.toList());
     }
 
@@ -182,5 +183,11 @@ public class ShopService {
         imageUploader.removeAll(shop.getShopImages());
         shopImageRepository.deleteById(shop.getId());
         return saveImages(shopRequestDto.getImages());
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isLike(Long id, LoginMember loginMember) {
+        Shop shop = findById(id);
+        return shop.containLike(loginMember);
     }
 }

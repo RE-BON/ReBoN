@@ -60,4 +60,13 @@ public class JwtProvider {
         return Jwts.parser()
                    .setSigningKey(secretKey);
     }
+
+    public boolean isValidToken(String token) {
+        try {
+            validateToken(token);
+            return true;
+        } catch (InvalidTokenException e) {
+            return false;
+        }
+    }
 }

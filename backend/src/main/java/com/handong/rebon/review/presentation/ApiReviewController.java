@@ -7,11 +7,9 @@ import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
-import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewDeleteRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByMemberRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewEmpathizeRequestDto;
-import com.handong.rebon.review.application.dto.request.ReviewGetByShopRequestDto;
+
+import com.handong.rebon.review.application.dto.request.*;
+
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewEmpathizeResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
@@ -115,5 +113,18 @@ public class ApiReviewController {
         ReviewEmpathizeRequestDto empathizeRequestDto = new ReviewEmpathizeRequestDto(loginMember.getId(), reviewId);
         ReviewEmpathizeResponseDto reviewEmpathizeResponseDto = reviewService.unEmpathize(empathizeRequestDto);
         return ResponseEntity.ok(ReviewEmpathizeResponse.from(reviewEmpathizeResponseDto));
+    }
+    
+    @PatchMapping("/reviews/{reviewId}")
+    public ResponseEntity<Void> update(
+            @Login LoginMember loginMember,
+            @PathVariable Long reviewId,
+            @RequestBody ReviewRequest reviewRequest
+    ) {
+        ReviewUpdateRequestDto reviewUpdateRequestDto = ReviewAssembler.reviewUpdateRequestDto(loginMember.getId(), reviewId, reviewRequest);
+        reviewService.update(reviewUpdateRequestDto);
+
+        return ResponseEntity.ok()
+                             .build();
     }
 }

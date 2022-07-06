@@ -8,14 +8,17 @@
   padding-right: 7px;
   padding-top: 2px;
   padding-bottom: 2px;
-}
-
-.footprint-modal-content {
-  padding-top: 15px;
+  font-family: 'Pretendard' !important;
 }
 
 .footprint-modal-delete {
   margin-bottom: 20px;
+  font-family: 'Pretendard' !important;
+}
+
+.footprint-modal-close {
+  margin-bottom: 20px;
+  font-family: 'Pretendard' !important;
 }
 
 .footprint-modal-delete button {
@@ -24,4 +27,44 @@
 
 .footprint-modal-close button {
   padding-right: 20px;
+}
+
+.footprint-delete-modal {
+  text-align: center;
+}
+
+.footprint-delete-modal button {
+  margin-left: 90%;
+  padding: 0 3%;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.delete-message {
+  font-size: 16px;
+  padding-top: 10%;
+}
+
+.delete-message-confirm {
+  font-size: 16px;
+  margin-top: 12%;
+  padding-top: 4%;
+  border-top: 1px solid #ff6b6c;
+  color: #ff6b6c;
+}
+
+.footprint-confirm-modal {
+  text-align: center;
+}
+
+.footprint-confirm-modal button {
+  margin-left: 90%;
+  padding: 0 3%;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.confirm-message {
+  font-size: 16px;
+  padding-bottom: 5%;
 }

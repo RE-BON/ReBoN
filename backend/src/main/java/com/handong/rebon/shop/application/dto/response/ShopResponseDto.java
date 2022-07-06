@@ -30,6 +30,7 @@ public class ShopResponseDto {
     private ShopCategoryResponseDto category;
     private String name;
     private double star;
+    private boolean like;
     private List<ShopTagResponseDto> tags;
     private String phone;
     private List<ShopCategoryResponseDto> subCategories;

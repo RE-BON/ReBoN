@@ -1,14 +1,15 @@
 .header-wrapper {
+  font-family: 'Pretendard' !important;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 13%;
+  height: 5em;
   width: 100%;
   top: 0;
   z-index: 1;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: white;
+  border-bottom: 1px solid #e9e9ea;
+  font-weight: 200;
 }
 
 .header-wrapper header {
@@ -19,12 +20,6 @@
   width: 100%;
   height: 100%;
   margin: 0% 20%;
-}
-
-.header-logo {
-  width: 20%;
-  height: 60%;
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .header-logon {
@@ -47,7 +42,8 @@
 }
 
 .header-logon-icon img {
-  width: 40%;
+  width: 50%;
+  padding-right: 6px;
 }
 
 .header-logon span {
@@ -62,7 +58,9 @@
   font-weight: 700;
 }
 
-.header-logoff span {
+.header-logoff div {
+  width: 5em;
+  font-size: 1.1em;
   margin-left: 7%;
-  margin-right: 2%;
+  margin-right: 3%;
 }

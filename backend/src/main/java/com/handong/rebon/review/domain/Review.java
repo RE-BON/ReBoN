@@ -94,6 +94,12 @@ public class Review extends BaseEntity {
         return this.empathies.contains(empathy);
     }
 
+    public void update(Member member, String content, String tip, int star, ReviewImages reviewImages) {
+        validatesAuthority(member);
+        reviewContent = new ReviewContent(content, tip);
+        reviewScore = new ReviewScore(star, reviewScore.getEmpathyCount());
+    }
+
     public String getContent() {
         return reviewContent.getContent();
     }

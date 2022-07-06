@@ -20,4 +20,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             "join fetch c.children " +
             "where c.id = :categoryId ")
     Optional<Category> findCategoryWithChildren(@Param("categoryId") Long categoryId);
+
+    boolean existsByParentAndName(Category category, String name);
 }
