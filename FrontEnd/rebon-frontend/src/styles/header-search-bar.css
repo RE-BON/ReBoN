@@ -1,3 +1,24 @@
+@media (max-width: 767px) {
+  .search-bar-wrapper {
+    background-color: transparent;
+  }
+  .search-bar-wrapper input::placeholder {
+    color: transparent;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .search-bar-wrapper {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+@media (min-width: 1200px) {
+  .search-bar-wrapper {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
 .search-bar-wrapper {
   font-family: 'Pretendard' !important;
   display: flex;
@@ -5,7 +26,7 @@
   width: 100%;
   border-radius: 3rem;
   padding: 0.6rem;
-  background-color: rgba(0, 0, 0, 0.05);
+
   color: rgba(0, 0, 0, 0.4);
 }
 

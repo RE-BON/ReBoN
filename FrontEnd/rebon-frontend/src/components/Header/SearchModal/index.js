@@ -79,12 +79,23 @@ export default function SearchModal() {
 }
 
 const StyledModal = Modal.styled`
-position:absolute;
-top: -1%;
+  position:absolute;
+  top: -1%;
   width: 100%;
   padding : 1% 20%;
   border-radius:20px;
   background-color: white;
   opacity: ${(props) => props.opacity};
   transition : all 0.3s ease-in-out;
+  @media (max-width: 767px) {
+    height:100%;
+    padding : 1% 2%; 
+  } 
+  @media (min-width: 768px) and (max-width: 1199px) {
+    padding-bottom :  5vh; 
+  }
+
+  @media (min-width: 1200px) {
+    padding-bottom :  5vh; 
+  }
 `;
