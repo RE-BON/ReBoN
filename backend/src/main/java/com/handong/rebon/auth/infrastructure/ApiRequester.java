@@ -6,13 +6,17 @@ import java.util.Map;
 
 import com.handong.rebon.auth.domain.OauthProvider;
 import com.handong.rebon.exception.oauth.GetAccessTokenException;
-import com.handong.rebon.exception.oauth.UnableToGetTokenResponseException;
+import com.handong.rebon.exception.oauth.GetUserInfoException;
+import com.handong.rebon.exception.oauth.UnableToGetOauthResponseException;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import reactor.core.publisher.Mono;
 
 public class ApiRequester {
 
@@ -32,12 +36,15 @@ public class ApiRequester {
                                                     })
                                                     .bodyValue(tokenRequest(code, oauthProvider))
                                                     .retrieve()
+                                                    .onStatus(HttpStatus::isError, response ->
+                                                            response.bodyToMono(String.class)
+                                                                    .flatMap(error -> Mono.error(new UnableToGetOauthResponseException(error))))
                                                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                                                     })
                                                     .flux()
                                                     .toStream()
                                                     .findFirst()
-                                                    .orElseThrow(UnableToGetTokenResponseException::new);
+                                                    .orElseThrow(GetAccessTokenException::new);
         validateResponseBody(responseBody);
         return responseBody.get("access_token").toString();
     }
@@ -64,12 +71,15 @@ public class ApiRequester {
                                                     .uri(userInfoUri)
                                                     .headers(httpHeaders -> httpHeaders.setBearerAuth(token))
                                                     .retrieve()
+                                                    .onStatus(HttpStatus::isError, response ->
+                                                            response.bodyToMono(String.class)
+                                                                    .flatMap(error -> Mono.error(new UnableToGetOauthResponseException(error))))
                                                     .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                                                     })
                                                     .flux()
                                                     .toStream()
                                                     .findFirst()
-                                                    .orElseThrow(UnableToGetTokenResponseException::new);
+                                                    .orElseThrow(GetUserInfoException::new);
 
         return responseBody;
     }
