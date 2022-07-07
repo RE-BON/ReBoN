@@ -3,28 +3,29 @@ ol,
 ul,
 li {
   list-style: none;
+  font-family: 'Pretendard' !important;
 }
 
 .tags-wrapper {
   font-family: 'Pretendard' !important;
-  font-size: 90%;
-  padding: 0 2%;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
 }
 
 .tags-wrapper div {
-  margin-bottom: 5%;
-  padding-left: 5px;
+  margin: 1rem 0;
+  font-family: 'Pretendard' !important;
 }
 
 .tags-wrapper li {
   width: fit-content;
-  padding: 1.5% 3%;
-  margin: 1.5%;
+  padding: 0.4rem 0.8rem;
+  margin-right: 1rem;
   float: left;
   border: 1px solid #c4c4c4;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.8);
-  border-radius: 50px;
+  border-radius: 10rem;
 }
 
 .tags-wrapper li:hover {
