@@ -1,12 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Tags from './Tags';
-import axios from 'axios';
+import AutoCompletes from './AutoCompletes';
 import Header from '../../components/Header';
 import '../../styles/search.css';
 export default function Search() {
+  const [autoComState, setAutoComState] = useState('none');
+  const onChangeState = () => {
+    setAutoComState('block');
+  };
   //검색창 입력받기
   const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
@@ -14,18 +17,6 @@ export default function Search() {
     console.log(word);
   };
 
-  const [keyword, setKeyword] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`http://3.34.139.61:8080/api/tags/search?keyword=${word}`)
-      .then((response) => {
-        setKeyword(response.data);
-        console.log(keyword);
-      })
-      .catch((error) => {
-        console.log('error');
-      });
-  }, [word]);
   return (
     <div className="search-background">
       <div className="search-wrapper">
@@ -37,17 +28,12 @@ export default function Search() {
           </div>
 
           <div className="input-bar">
-            <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} />
-            {keyword.slice(0, 3).map((item) => (
-              <Link to={`/main?name=${item.name}`} state={{ item }}>
-                <li>{item.name}</li>
-              </Link>
-            ))}
-            <Link to={`/main?name=${word}`} state={{}} style={{ color: 'inherit', textDecoration: 'none' }}>
-              <FontAwesomeIcon icon={faSearch} className="search" />
-            </Link>
+            <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} onClick={onChangeState} />
+            <FontAwesomeIcon icon={faSearch} className="search" />
           </div>
-
+          <div style={{ display: autoComState }}>
+            <AutoCompletes word={word} />
+          </div>
           <Tags />
         </div>
       </div>

@@ -59,7 +59,6 @@ export default function Edit() {
             </span>
           </div>
         </div>
-
         <div className="edit-info-title">닉네임</div>
         <div className="edit-info-name">
           <input className="name-input" value={name} placeholder="한글로 공백없이 입력해주세요." onChange={onChangeName}></input>

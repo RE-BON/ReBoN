@@ -15,8 +15,7 @@ button {
 
 .header-modal-wrapper {
   font-family: 'Pretendard' !important;
-  display: grid;
-  grid-template-rows: repeat(3, 33%);
+  padding-top: 1rem;
 }
 
 .header-modal-wrapper-search {
@@ -37,55 +36,17 @@ button {
 }
 
 .header-search-bar-wrapper input {
-  padding-left: 10px;
+  padding-left: 1rem;
   border: none;
   background-color: transparent;
   width: 100%;
 }
 
-.header-modal-wrapper .header-search-list {
-  width: 90%;
-  padding-left: 37px;
-  margin-top: -20px;
+.header-autoCom {
+  margin-top: 1rem;
+  margin-left: 3rem;
 }
 
-.header-search-list li {
-  padding: 10px 0;
-  border-radius: 10px;
-  color: rgba(0, 0, 0, 0.5);
-  padding-left: 10px;
-}
-
-.header-search-list li:hover {
-  color: #ff6c6c;
-  background-color: #ffeded;
-  border: 0;
-}
-
-.header-modal-wrapper .header-tag-list {
-  font-size: 15px;
-  padding: 0 5px;
-  margin-top: 37px;
-}
-
-.header-tag-list div {
-  grid-column: 1 / 5;
-  margin-bottom: 10px;
-}
-
-.header-tag-list li {
-  width: fit-content;
-  padding: 5px 10px;
-  margin: 10px;
-  float: left;
-  border: 1px solid #bfbfbf;
-  color: #bfbfbf;
-  border-radius: 50px;
-  font-weight: bolder;
-}
-
-.header-tag-list li:hover {
-  color: #ff6c6c;
-  border: 1px solid #ff6c6c;
-  font-weight: bolder;
+.header-tag {
+  height: 10%;
 }
