@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import SearchBar from './SearchBar';
@@ -20,6 +19,7 @@ export default function SearchModal() {
     setTimeout(() => {
       setOpacity(1);
     }, 100);
+    console.log(2222);
   }
 
   function beforeClose() {
@@ -29,8 +29,9 @@ export default function SearchModal() {
     });
   }
 
+  //여기서 계속 새로고침 되는 것이 문젠데..
   const [word, setWord] = useState('');
-  const onChangeWord = (e) => {
+  const onChangeword = (e) => {
     setWord(e.target.value);
   };
 
@@ -38,6 +39,11 @@ export default function SearchModal() {
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;
   `;
+
+  const [autoComState, setAutoComState] = useState('none');
+  const onChangeState = () => {
+    setAutoComState('block');
+  };
 
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
@@ -57,10 +63,10 @@ export default function SearchModal() {
           <div className="header-modal-wrapper-search">
             <div className="header-search-bar-wrapper">
               <img src="../../../../image/search-icon.png" alt="header-search-icon" />
-              <input placeholder="가고 싶은 지역을 입력해주세요." value={word} onChange={onChangeWord} />
+              <input placeholder="가고 싶은 지역을 입력해주세요." value={word} onChange={onChangeword} onClick={onChangeState} />
             </div>
           </div>
-          <div className="header-autoCom">
+          <div className="header-autoCom" style={{ display: autoComState }}>
             <AutoCompletes word={word} />
           </div>
           <div className="header-tag">
@@ -76,7 +82,6 @@ const StyledModal = Modal.styled`
 position:absolute;
 top: -1%;
   width: 100%;
-  height: 24rem;
   padding : 1% 20%;
   border-radius:20px;
   background-color: white;

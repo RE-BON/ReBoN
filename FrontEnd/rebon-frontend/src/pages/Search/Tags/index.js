@@ -22,7 +22,7 @@ export default function Tags() {
       <div>추천 태그로 검색해보세요.</div>
       {tag.slice(0, 10).map((item) => (
         <Link to={`/main?name=${item.name}`} state={{ item }}>
-          <li>{item.name}</li>
+          <li key={item.name.toString()}>{item.name}</li>
         </Link>
       ))}
     </ul>

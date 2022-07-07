@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+
 import Tags from './Tags';
 import AutoCompletes from './AutoCompletes';
 import Header from '../../components/Header';
 import '../../styles/search.css';
+
 export default function Search() {
   const [autoComState, setAutoComState] = useState('none');
   const onChangeState = () => {
@@ -23,8 +25,8 @@ export default function Search() {
         <Header />
         <div className="search-content">
           <div className="title">
-            가고 싶은 지역을 입력해서 <br />
-            <span style={{ fontFamily: 'Jua' }}>맛집, 숙소</span>를 찾아보세요!
+            가고싶은 지역을 입력해서
+            <span style={{ fontFamily: 'Jua' }}> 맛집, 숙소</span>를 찾아보세요!
           </div>
 
           <div className="input-bar">

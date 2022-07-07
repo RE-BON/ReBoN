@@ -15,7 +15,7 @@ button {
 
 .header-modal-wrapper {
   font-family: 'Pretendard' !important;
-  padding-top: 1rem;
+  padding: 1rem 0;
 }
 
 .header-modal-wrapper-search {
@@ -40,6 +40,7 @@ button {
   border: none;
   background-color: transparent;
   width: 100%;
+  font-family: 'Pretendard' !important;
 }
 
 .header-autoCom {

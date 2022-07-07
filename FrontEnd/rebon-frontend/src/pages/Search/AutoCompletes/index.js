@@ -23,7 +23,7 @@ export default function AutoCompletes(props) {
     <ul className="auto-list">
       {keyword.slice(0, 3).map((item) => (
         <Link to={`/main?name=${item.name}`} state={{ item }} style={{ color: 'inherit', textDecoration: 'none' }}>
-          <li>{item.name}</li>
+          <li key={item.name.toString()}>{item.name}</li>
         </Link>
       ))}
     </ul>

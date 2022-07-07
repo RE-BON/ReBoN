@@ -19,7 +19,7 @@ export default function Edit() {
   const checkNick = () => {
     axios
       .post('http://3.34.139.61:8080/api/members/nickname/check-duplicate', {
-        nickname: { name },
+        nickname: name,
       })
       .then(function (response) {
         // -- 이 200일 경우
