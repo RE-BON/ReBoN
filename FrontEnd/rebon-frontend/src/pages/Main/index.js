@@ -102,7 +102,7 @@ export default function Main() {
             </div>
           </div>
           <div className="main-background">
-            <div className="searchTitle">📍 '한동대'식당</div>
+            <div className="searchTitle">📍{location.state.item.name} 식당</div>
 
             <div className="best-wrapper">
               <BestCard />

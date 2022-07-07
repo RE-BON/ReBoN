@@ -22,7 +22,7 @@ export default function Header() {
     <div className="header-wrapper" style={{ backgroundColor: headerState.bgColor, borderBottomColor: headerState.bottomLine }}>
       <header>
         <Link to="/">
-          <img src="./image/logo.png" alt="logo" />
+          <img src="/image/logo.png" alt="logo" className="logo-img" />
         </Link>
         {isLogin ? (
           <div className="header-logon">
@@ -32,10 +32,10 @@ export default function Header() {
 
             <Link to="/mypage" style={{ color: 'inherit', textDecoration: 'none' }}>
               <div className="header-logon-icon">
-                <img src="./image/user.png" alt="user" />
-                {userName}
+                <img src="/image/user.png" alt="user" />
               </div>
             </Link>
+            <span className="header-logon-name">{userName}</span>
           </div>
         ) : (
           <div className="header-logoff">
