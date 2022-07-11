@@ -1,6 +1,9 @@
 package com.handong.rebon.shop.domain.content;
 
+import java.util.List;
 import javax.persistence.Embeddable;
+
+import com.handong.rebon.review.domain.Review;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +24,14 @@ public class ShopScore {
 
     public void plusReviewCount() {
         this.reviewCount++;
+    }
+
+    public void calculateStar(List<Review> reviews) {
+        int total = 0;
+        for (Review review : reviews) {
+            total += review.getStar();
+        }
+
+        star = (double) total / reviewCount;
     }
 }

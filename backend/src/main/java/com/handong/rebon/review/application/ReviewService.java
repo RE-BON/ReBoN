@@ -52,10 +52,10 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
 
         shop.plusReviewCount();
+        shop.calculateStar();
 
         return savedReview.getId();
     }
-
 
     @Transactional
     public void update(ReviewUpdateRequestDto reviewUpdateRequestDto) {

@@ -10,6 +10,9 @@ import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.review.domain.Review;
+import com.handong.rebon.review.domain.content.ReviewScore;
+import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -59,6 +62,9 @@ public abstract class Shop extends BaseEntity {
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ShopTag> shopTags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "shop")
+    private List<Review> reviews = new ArrayList<>();
 
     public Shop(
             Long id,
@@ -151,6 +157,14 @@ public abstract class Shop extends BaseEntity {
 
     public void plusReviewCount() {
         shopScore.plusReviewCount();
+    }
+
+    public void calculateStar() {
+        shopScore.calculateStar(reviews);
+    }
+
+    public int getReviewCount() {
+        return shopScore.getReviewCount();
     }
 
     public int getLikeCount() {
