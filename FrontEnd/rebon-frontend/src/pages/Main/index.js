@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -11,8 +11,11 @@ import BestCard from './BestCard';
 import Divider from './Divider';
 import Header from '../../components/Header';
 import axios from 'axios';
-
-//useLocation hook
+import { toJS } from 'mobx';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { useObserver } from 'mobx-react';
+import indexStore from '../../modules/indexStore';
 import { useLocation } from 'react-router';
 
 function TabPanel(props) {
@@ -42,112 +45,183 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function Main() {
+export default function Main({ restCategory, accoCategory, cafeCategory, restData, accoData, cafeData }) {
   const [value, setValue] = React.useState(0);
+  const [ready, setReady] = useState(false);
+  const [restChecked, setRestChecked] = useState(0);
+  const [accoChecked, setAccoChecked] = useState(0);
+  const [cafeChecked, setCafeChecked] = useState(0);
+
+  const location = useLocation();
+
+  const { mainSetting } = indexStore();
+
+  // const restChecked = observable(0);
+  // const accoChecked = observable(0);
+  // const cafeChecked = observable(0);
+
+  const updateRestChecked = (index) => {
+    console.log('!!!: ', index);
+    mainSetting.updateRestChecked(index);
+    console.log('result is ', mainSetting.restChecked);
+
+    // checkedData = {
+    //   restChecked: index,
+    //   accoChecked: accoChecked,
+    //   cafeChecked: cafeChecked,
+    // };
+  };
+  const updateAccoChecked = (index) => {
+    mainSetting.updateAccoChecked(index);
+
+    // accoChecked = index;
+    // checkedData = {
+    //   restChecked: restChecked,
+    //   accoChecked: index,
+    //   cafeChecked: cafeChecked,
+    // };
+  };
+  const updateCafeChecked = (index) => {
+    mainSetting.updateCafeChecked(index);
+
+    // checkedData = {
+    //   restChecked: restChecked,
+    //   accoChecked: accoChecked,
+    //   cafeChecked: index,
+    // };
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  // location 정보 받기
-  const location = useLocation();
-  console.log(location);
-  ///////////////////////////////
+  useLayoutEffect(() => {
+    setReady(false);
 
-  useEffect(() => {
-    axios
-      .get('http://34.238.48.93:8080/api/shops?tag=1&category=1&subCategories=5&subCategories=7')
-      .then((response) => {
-        console.log('데이터값');
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log('error');
-      });
+    // console.log('main~~');
+    // console.log('restCate: ', restCategory);
+    // console.log('restData: ', restData);
+    setRestChecked(0);
+    setReady(true);
   }, []);
 
   return (
     <div className="main-wrapper">
-      <Header />
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            TabIndicatorProps={{
-              style: {
-                backgroundColor: '#ff6b6c',
-              },
-            }}
-            className="box"
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-            centered
-          >
-            <Tab label="식당" {...a11yProps(0)} />
-            <Tab label="카페" {...a11yProps(1)} />
-            <Tab label="숙소" {...a11yProps(2)} />
-          </Tabs>
-        </Box>
-        <TabPanel className="TabPanel" value={value} index={0}>
-          <div className="category-wrapper">
+      {/* {ready ? ( */}
+      {/* <> */}
+      {ready ? (
+        <>
+          <Header />
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: '#ff6b6c',
+                  },
+                }}
+                className="box"
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                centered
+              >
+                <Tab label="식당" {...a11yProps(0)} />
+                <Tab label="카페" {...a11yProps(1)} />
+                <Tab label="숙소" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <TabPanel className="TabPanel" value={value} index={0}>
+              <div className="category-wrapper">
+                <div class="select-main">
+                  {restCategory
+                    ? restCategory.map((rest, index) => (
+                        <>
+                          {/* <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => updateRestChecked(index)} /> */}
+                          <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => setRestChecked(index)} />
+                          {/* <label for={index} className={mainSetting.restChecked === index ? 'radio-click-active' : 'radio-click-stay'}> */}
+                          <label for={index} className={restChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
+                            {rest.name}
+                          </label>
+                        </>
+                      ))
+                    : restCategory.length}
+                </div>
+              </div>
+              {/* restChecked가 바로 안바뀌는 바람에 처음 restChecked가 0에서 1로 눌러서 바껴야 이 데이터도 바껴지는데, 그렇지 않아서 잘못된 데이터가 들어가고 있음. 
+                  그래서 restChecked가 바로 바뀔 수 있는 방법은 없을까 생각해보기. */}
+              <div className="main-background">
+                <div className="searchTitle">📍{location.state.item.name} 식당</div>
+              </div>
+
+              <div className="best-wrapper">
+                {/* <BestCard bestInfo={restData[mainSetting.restChecked]} /> */}
+                <BestCard bestInfo={restData[restChecked]} />
+              </div>
+              {/* <Divider shopInfo={restData[mainSetting.restChecked]} tagId={location.state.item.id} subId={restCategory[mainSetting.restChecked].id} /> */}
+              <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} />
+              <div className="mainCard-wrapper">
+                <MainCard />
+              </div>
+            </TabPanel>
+
+            <TabPanel className="TabPanel" value={value} index={1}>
+              {/* <div className="category-wrapper">
             <div class="select-main">
-              <input type="radio" id="select-01" name="restaurant" />
-              <label for="select-01">🍚 한식</label>
-              <input type="radio" id="select-02" name="restaurant" />
-              <label for="select-02">🍣 일식</label>
-              <input type="radio" id="select-03" name="restaurant" />
-              <label for="select-03">🥟 중식</label>
-              <input type="radio" id="select-04" name="restaurant" />
-              <label for="select-04">🍝 양식</label>
+              {cafeCategory
+                ? cafeCategory.map((cafe, index) => (
+                    <>
+                      <input type="radio" id={index} value={cafe.id} name="cafe" checked={cafeChecked === index} onClick={() => updateCafeChecked(index)} />
+                      <label for={index} className={cafeChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
+                        {cafe.name}
+                      </label>
+                    </>
+                  ))
+                : ''}
             </div>
           </div>
-          <div className="main-background">
-            <div className="searchTitle">📍{location.state.item.name} 식당</div>
-
-            <div className="best-wrapper">
-              <BestCard />
-            </div>
-            <Divider />
-
-            {/* <div className="mainCard-wrapper">
-              <MainCard />
-            </div> */}
-          </div>
-        </TabPanel>
-
-        <TabPanel className="TabPanel" value={value} index={1}>
           <div className="best-wrapper">
-            <BestCard />
+            <BestCard bestInfo={cafeData[cafeChecked]} />
           </div>
-          <Divider />
+          <Divider shopInfo={cafeData[cafeChecked]} tagId={location.state.item.id} subId={cafeCategory[cafeChecked].id} />
 
           <div className="mainCard-wrapper">
             <MainCard />
-          </div>
-        </TabPanel>
+          </div> */}
+            </TabPanel>
 
-        <TabPanel className="TabPanel" value={value} index={2}>
-          <div className="category-wrapper">
+            <TabPanel className="TabPanel" value={value} index={2}>
+              {/* <div className="category-wrapper">
             <div class="select-main">
-              <input type="radio" id="select-01" name="accommodation" />
-              <label for="select-01">🏨 호텔</label>
-              <input type="radio" id="select-02" name="accommodation" />
-              <label for="select-02">🏩 모텔</label>
-              <input type="radio" id="select-03" name="accommodation" />
-              <label for="select-03">🏡 펜션</label>
-              <input type="radio" id="select-04" name="accommodation" />
-              <label for="select-04">🏖 풀빌라</label>
+              {accoCategory
+                ? accoCategory.map((acco, index) => (
+                    <>
+                      <input type="radio" id={index} value={acco.id} name="accommodation" checked={accoChecked === index} onClick={() => updateAccoChecked(index)} />
+                      <label for={index} className={accoChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
+                        {acco.name}
+                      </label>
+                    </>
+                  ))
+                : ''}
             </div>
           </div>
           <div className="best-wrapper">
-            <BestCard />
+            <BestCard bestInfo={accoData[accoChecked]} />
           </div>
-          <Divider />
+          <Divider shopInfo={accoData[accoChecked]} tagId={location.state.item.id} subId={accoCategory[accoChecked].id} />
           <div className="mainCard-wrapper">
             <MainCard />
-          </div>
-        </TabPanel>
-      </Box>
+          </div> */}
+            </TabPanel>
+          </Box>
+          {/* </> */}
+          {/* ) : (
+        ''
+      )} */}
+        </>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

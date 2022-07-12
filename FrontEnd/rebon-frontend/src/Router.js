@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Detail from './pages/Detail';
 import Main from './pages/Main';
+import MainData from './pages/Main/MainData';
 import Search from './pages/Search';
 import Post from './pages/Post';
 import Mypage from './pages/Mypage';
@@ -18,7 +19,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/main" element={<Main />} />
+        <Route path="/main" element={<MainData />} />
         <Route path="/post" element={<Post />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />
         <Route path="/login" element={<Login />} />

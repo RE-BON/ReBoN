@@ -34,6 +34,17 @@ export default function SearchModal() {
   const onChangeword = (e) => {
     setWord(e.target.value);
   };
+  const [tag, setTags] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://3.34.139.61:8080/api/tags')
+      .then((response) => {
+        setTags(response.data);
+      })
+      .catch((error) => {
+        console.log('Search Modal error');
+      });
+  }, []);
 
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
