@@ -13,6 +13,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
@@ -21,8 +22,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if(isPreflight(request)) {
+            return true;
+        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
-        if (!handlerMethod.hasMethodAnnotation(RequiredLogin.class) || isPreflight(request)) {
+        if (!handlerMethod.hasMethodAnnotation(RequiredLogin.class)) {
             return true;
         }
         String token = AuthorizationExtractor.extractAccessToken(request);

@@ -3,18 +3,23 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Tags from './Tags';
+import AutoCompletes from './AutoCompletes';
 import Header from '../../components/Header';
 import '../../styles/search.css';
-import { SettingsBackupRestoreRounded } from '@material-ui/icons';
 import axios from 'axios';
 
 export default function Search() {
+  const [autoComState, setAutoComState] = useState('none');
+  const onChangeState = () => {
+    setAutoComState('block');
+  };
   //검색창 입력받기
   const [keyword, setKeyword] = useState('');
   const [token,setToken] = useState(window.sessionStorage.getItem("token"));
+  const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
-    setKeyword(e.target.value);
-    console.log(keyword);
+    setWord(e.target.value);
+    console.log(word);
   };
   
 
@@ -42,17 +47,17 @@ export default function Search() {
         <Header />
         <div className="search-content">
           <div className="title">
-            가고 싶은 지역을 입력해서 <br />
-            <span style={{ fontFamily: 'Jua' }}>맛집, 숙소</span>를 찾아보세요!
+            가고싶은 지역을 입력해서
+            <span style={{ fontFamily: 'Jua' }}> 맛집, 숙소</span>를 찾아보세요!
           </div>
 
           <div className="input-bar">
-            <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} />
-            <Link to={`/main?name=${keyword}`} state={{}} style={{ color: 'inherit', textDecoration: 'none' }}>
-              <FontAwesomeIcon icon={faSearch} className="search" />
-            </Link>
+            <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} onClick={onChangeState} />
+            <FontAwesomeIcon icon={faSearch} className="search" />
           </div>
-
+          <div style={{ display: autoComState }}>
+            <AutoCompletes word={word} />
+          </div>
           <Tags />
         </div>
       </div>

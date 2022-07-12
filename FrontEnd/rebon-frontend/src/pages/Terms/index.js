@@ -12,6 +12,24 @@ export default function Terms() {
     setName(e.target.value);
   };
 
+  // const [selectAll, setSelectAll] = useState('white');
+  // const onClickAll = () => {
+  //   $(function ()
+  //     // 1 . #checkAll 클릭
+  //     $('#checkAll').click(function () {
+  //       // 2. #checkAll이 체크되었을 때,
+  //       // chk라는 name을 가진 input태그를 찾아 checked를 true로 정의
+  //       if ($('#checkAll').prop('checked')) {
+  //         $('input[name=agree]').prop('checked', true);
+  //         // 3. #checkAll이 체크되지 않았을 때,
+  //         // chk라는 name을 가진 input태그를 찾아 checked를 false로 정의
+  //       } else {
+  //         $('input[name=agree]').prop('checked', false);
+  //       }
+  //     });
+  //   });
+  // };
+
   return (
     <div className="terms-wrapper">
       <div className="termsBox">
@@ -28,7 +46,7 @@ export default function Terms() {
 
           <div>
             <div className="agreement-select">
-              <input type="checkbox" id="agreement-select" name="marcketing" />
+              <input type="checkbox" id="agreement-select" name="agree" />
               <label for="agreement-select">
                 <FontAwesomeIcon icon={faCheck} />
               </label>
@@ -37,9 +55,9 @@ export default function Terms() {
 
             <hr />
             <div className="agreement-select">
-              <input type="checkbox" id="agreement-select1" name="marcketing" />
+              <input type="checkbox" id="agreement-select1" name="agree" />
               <label for="agreement-select1">
-                <FontAwesomeIcon />
+                <FontAwesomeIcon icon={faCheck} />
               </label>
               서비스 이용약관(필수)
               <Link to="/termsModal" style={{ marginLeft: '1em', color: 'inherit', textDecoration: 'none' }}>
@@ -48,7 +66,7 @@ export default function Terms() {
             </div>
 
             <div className="agreement-select">
-              <input type="checkbox" id="agreement-select2" name="marcketing" />
+              <input type="checkbox" id="agreement-select2" name="agree" />
               <label for="agreement-select2">
                 <FontAwesomeIcon icon={faCheck} />
               </label>
@@ -59,7 +77,7 @@ export default function Terms() {
             </div>
 
             <div className="agreement-select">
-              <input type="checkbox" id="agreement-select3" name="marcketing" />
+              <input type="checkbox" id="agreement-select3" name="agree" />
               <label for="agreement-select3">
                 <FontAwesomeIcon icon={faCheck} />
               </label>
@@ -68,7 +86,7 @@ export default function Terms() {
                 <IoIosArrowForward />
               </Link>
             </div>
-            <Link to="/search">
+            <Link to="/">
               <button className="terms-btn">ReBON 시작하기</button>
             </Link>
           </div>

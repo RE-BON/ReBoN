@@ -33,8 +33,6 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/join/register" element={<Terms />} />
         <Route path="/termsModal" element={<TermsModal />} />
-        <Route path="/marketing" element={<TermsMarketing />} />
-        <Route path="privacy" element={<TermsPrivacy />} />
         <Route path="/" element={<Search />} />
         <Route path="/loading" element={<Loding />} />
       </Routes>
