@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/join.css';
+import { Link } from 'react-router-dom';
 
 import SNSButtons from './LoginButton';
 
@@ -22,7 +23,9 @@ export default function Login() {
           회원이 아니신가요? <br />
           회원가입하고 위치별 맛집, 숙소를 찾아보세요.
         </div>
-        <button className="join-bottom-btn">회원가입</button>
+        <Link to="/join" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <button className="join-bottom-btn">회원가입</button>
+        </Link>
       </div>
     </div>
   );

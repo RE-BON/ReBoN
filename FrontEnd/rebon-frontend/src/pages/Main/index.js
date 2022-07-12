@@ -51,10 +51,11 @@ export default function Main() {
 
   // location 정보 받기
   const location = useLocation();
-  console.log(location);
+  
   ///////////////////////////////
 
   useEffect(() => {
+
     axios
       .get('http://34.238.48.93:8080/api/shops?tag=1&category=1&subCategories=5&subCategories=7')
       .then((response) => {

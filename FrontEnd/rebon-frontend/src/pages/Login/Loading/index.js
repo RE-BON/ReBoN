@@ -38,14 +38,12 @@ export default function Loading(){
             axios
             .get(`http://3.34.139.61:8080/api/auth/naver/login/token?code=${code}`)
             .then((response) => {
-            console.log(response);
+                window.sessionStorage.setItem("token", response.data.token);
+                navigate('/');
             })
             .catch((error) => {
-                console.log('error');
-                console.log(error);
-                console.log(error.response.data.email);
                 if(error.response.data.email != null){
-                    navigate('/join/register',{ state: { email: error.response.data.email} });
+                    navigate('/join/register',{ state: { email: error.response.data.email, oauthProvider:"naver"} });
                 }
             });
         }

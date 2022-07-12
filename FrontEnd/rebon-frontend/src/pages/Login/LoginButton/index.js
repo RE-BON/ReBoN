@@ -7,8 +7,8 @@ import Loading from '../Loading';
 export default function SNSButtons() {
   const [loading, setLoading] = useState(true);
 
-  const googleClientId="66233621795-q2t3h8jvd5qc36n4j6j96ejrclnhu4eq.apps.googleusercontent.com";
-  const naverClientId="LMoG83yi5hLpLfCCg1fa";
+  const googleClientId=process.env.REACT_APP_GOOGLE_LOGIN
+  const naverClientId=process.env.REACT_APP_NAVER_LOGIN;
   const kakaoClientId=process.env.REACT_APP_KAKAO_LOGIN;
   
   const params = new URLSearchParams(window.location.search);
