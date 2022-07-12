@@ -100,6 +100,7 @@
   border-radius: 20px;
   font-size: 300%;
   color: rgba(0, 0, 0, 0.3);
+  width: 9rem;
 }
 
 .post-attach-count {
@@ -137,4 +138,14 @@
   border-radius: 50px;
   text-align: center;
   font-weight: bold;
+}
+
+.previewImg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  width: 9rem;
 }

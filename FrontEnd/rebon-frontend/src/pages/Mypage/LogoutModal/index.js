@@ -43,6 +43,7 @@ export default function LogoutModal() {
   `;
   function Logout(e) {
     window.localStorage.setItem('Login', false);
+    window.sessionStorage.removeItem("token");
   }
   return (
     <div className="logout-modal-wrapper">
@@ -67,7 +68,7 @@ export default function LogoutModal() {
             </div>
             <div className="logout-notice">로그아웃 하시겠습니까?</div>
             <hr />
-            <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
               <button className="logout-button" onClick={Logout}>
                 확인
               </button>

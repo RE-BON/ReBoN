@@ -29,7 +29,7 @@
 
 .centerBox {
   background-color: white;
-  padding: 50px 70px;
+  padding: 4rem 4rem;
   border-radius: 15px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -60,4 +60,18 @@ input[type='text'] {
 
 .checkbox {
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .join-wrapper {
+    background-color: white;
+    padding-top: 4rem;
+  }
+
+  .centerBox {
+    height: 100vh;
+    box-shadow:none !important;
+    padding: 0;
+  }
+
 }
