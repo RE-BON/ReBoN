@@ -22,6 +22,8 @@ export default function MainData() {
   const [restChecked, setRestChecked] = useState(0);
   const [cafeChecked, setCafeChecked] = useState(0);
   const [accoChecked, setAccoChecked] = useState(0);
+  
+  const [restFirstData, setRestFirstData] = useState();
 
   const [ready, setReady] = useState(false);
 
@@ -40,10 +42,11 @@ export default function MainData() {
         var accoShop = [];
         var cafeShop = [];
 
+
         response.data[0].children.map((rest, index) => {
           var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + rest.id + '&open=false';
           axios.get(url).then((response) => {
-            restShop.push(response.data);
+            restShop[rest.id] = response.data;
           });
         });
 
@@ -65,6 +68,14 @@ export default function MainData() {
         setAccoData(accoShop);
         setCafeData(cafeShop);
 
+        console.log("111: ",response.data[0].children);
+        console.log("222: ",response.data[0].children[0].id);
+        console.log("333: ",restShop);
+        console.log("444: ",restShop[0]);
+        console.log("555: ", restShop[response.data[0].children[0].id]);
+
+        setRestFirstData(restShop[response.data[0].children[0].id]);
+
         setReady(true);
       })
       .catch((error) => {
@@ -73,9 +84,9 @@ export default function MainData() {
   }, []);
 
   return (
-    <>{ready ? <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} /> : ''}</>
-    // <>
-    //   <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} />{' '}
-    // </>
-  );
+    <>
+    {ready ? <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} restFirstData={restFirstData}/> : ''}
+    {/* {ready ? <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} /> : ''} */}
+    </>
+    );
 }

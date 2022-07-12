@@ -40,46 +40,74 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function Main({ restCategory, accoCategory, cafeCategory, restData, accoData, cafeData }) {
+export default function Main({ restCategory, accoCategory, cafeCategory, restData, accoData, cafeData, restFirstData }) {
   const [value, setValue] = React.useState(0);
   const [ready, setReady] = useState(false);
-  const [restChecked, setRestChecked] = useState(0);
+  const [restChecked, setRestChecked] = useState(restCategory[0].id);
   const [accoChecked, setAccoChecked] = useState(0);
   const [cafeChecked, setCafeChecked] = useState(0);
 
-  const [myCategory, setMyCategory] = useState([]); 
-  const [myData, setMyData] = useState([]);
+  const [restCategoryList, setRestCategoryList] = useState(); 
+  const [restDataList, setRestDataList] = useState(restData[restCategory[0].id]);
 
   const location = useLocation();
 
-
   useEffect(() => {
-    setMyData({ ...restData[restChecked] });
+    
+    console.log("================");
+    console.log(restFirstData);
+    console.log("now index is ",restChecked);
+    console.log("original Cate: ", restCategory);
+    console.log("original Data: ", restData);
+    console.log("asb", restCategory[0].id);
+    // console.log("original Data[0]: ", restData[0]);
+    // console.log("original Data[1]: ", restData[1]);
+    // console.log("original Data[2]: ", restData[2]);
+    // console.log("original Data[3]: ", restData[3]);
+    // console.log("original Data[4]: ", restData[4]);
+    // console.log("original Data[5]: ", restData[5]);
+    // console.log("original type [5]: ", typeof restData[5]);
+    setRestCategoryList(restCategory[restChecked]);
+    setRestDataList( restData[restChecked] );
+    // console.log("데이터 설정!");
+    // console.log("category: ",restCategory[restChecked]);
+    console.log("data: ",restData[restChecked]);
+
+
+    // for(var i)
+    // if(restData[restChecked].length>0){
+    //   restData[restChecked].map()
+    // }
+    // if(restData[restChecked].length>0){
+    //   for(var i = 0; i < restData[restChecked].length; i++){
+    //     setRestDataList()
+    //   }
+    // }
+    
   }, [restChecked])
 
-  };
  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  useLayoutEffect(() => {
-    setReady(false);
-
-    // console.log('main~~');
-    // console.log('restCate: ', restCategory);
-    // console.log('restData: ', restData);
+  const clickEvent = ()=>{
     setRestChecked(0);
-    setReady(true);
-  }, []);
+    setRestChecked(restCategory[0].id);
+
+  };
+
+  // useLayoutEffect(() => {
+  //   setReady(false);
+  //   setRestChecked(0);
+  //   setReady(true);
+  // }, []);
 
   return (
     <div className="main-wrapper">
-      {/* {ready ? ( */}
-      {/* <> */}
-      {ready ? (
-        <>
+      {/* {ready ? (
+        <> */}
           <Header />
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -106,10 +134,9 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   {restCategory
                     ? restCategory.map((rest, index) => (
                         <>
-                   
-                          {/* <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => setRestChecked(index)} /> */}
+                          <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id)} />
                         
-                          <label for={index} className={restChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
+                          <label for={rest.id} className={restChecked === rest.id ? 'radio-click-active' : 'radio-click-stay'}>
                             {rest.name}
                           </label>
                         </>
@@ -120,21 +147,22 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
               {/* restChecked가 바로 안바뀌는 바람에 처음 restChecked가 0에서 1로 눌러서 바껴야 이 데이터도 바껴지는데, 그렇지 않아서 잘못된 데이터가 들어가고 있음. 
                   그래서 restChecked가 바로 바뀔 수 있는 방법은 없을까 생각해보기. */}
                   
-                <>
+              
                   <div className="main-background">
                     <div className="searchTitle">📍{location.state.item.name} 식당</div>
                   </div>
 
                   <div className="best-wrapper">
   
-                    <BestCard bestInfo={restData[restChecked]} />
+                    <BestCard bestInfo={restDataList} />
+                    {/* {restDataList ? <BestCard bestInfo={restDataList} /> : clickEvent()} */}
                   </div>
             
-                  <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} />
+                  {/* <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} /> */}
+                  {/* <Divider shopInfo={restDataList} tagId={location.state.item.id} subId={restCategoryList.id} /> */}
                   <div className="mainCard-wrapper">
                     <MainCard />
                   </div>
-                </>
             </TabPanel>
 
             <TabPanel className="TabPanel" value={value} index={1}>
@@ -190,10 +218,13 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
           {/* ) : (
         ''
       )} */}
-        </>
+
+
+        {/* </>
       ) : (
         ''
-      )}
+      )} */}
     </div>
   );
-}
+
+      };

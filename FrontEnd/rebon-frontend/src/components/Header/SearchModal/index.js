@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import SearchBar from './SearchBar';
 import Tags from '../../../pages/Search/Tags';
 import AutoCompletes from '../../../pages/Search/AutoCompletes';
 import '../../../styles/header-search-modal.css';
+import axios from 'axios';
+
 
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);

@@ -11,9 +11,15 @@ export default function BestCard({ bestInfo }) {
   // const [location,setLocation] = useState([]);
   // console.log("props값");
   // console.log(props.location.state);
+
+  const [bestList, setBestList] = useState();
   useEffect(() => {
     console.log('bes~~~');
     console.log(bestInfo);
+    console.log(typeof bestInfo);
+    setBestList(bestInfo);
+    // console.log("0000: ",bestInfo[0]);
+    // console.log("1111: ",bestInfo[1]);
     // setLocation(props.location.state);
     // axios
     //   .get('http://34.238.48.93:8080/api/shops?tag=2&category=1&subCategories=5&subCategories=7')
@@ -24,7 +30,7 @@ export default function BestCard({ bestInfo }) {
     //   .catch((error) => {
     //     console.log('error');
     //   });
-  }, []);
+  }, [bestInfo]);
 
   // const [bestInfo, setBestInfo] = useState([
   //   {
@@ -111,12 +117,14 @@ export default function BestCard({ bestInfo }) {
 
   return (
     <>
-      {bestInfo
-        ? bestInfo.map((item, idx) => {
+      {bestList&& bestList.length>0 
+        ? bestList.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
 
             return (
               <div className="bestCard">
+                11111
+                22222
                 {item.image ? (
                   <img class="best-img" src={item.image} />
                 ) : (
@@ -147,7 +155,7 @@ export default function BestCard({ bestInfo }) {
               </div>
             );
           })
-        : ''}
+        : '00000'}
 
       {/* {bestInfo.map((item, idx) => {
         var address = '/detail/' + item.id.toString();

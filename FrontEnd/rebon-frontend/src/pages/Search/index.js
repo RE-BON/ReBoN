@@ -9,6 +9,8 @@ import '../../styles/search.css';
 
 export default function Search() {
   const [autoComState, setAutoComState] = useState('none');
+  const [keyword, setKeyword] = useState();
+
   const onChangeState = () => {
     setAutoComState('block');
   };
