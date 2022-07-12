@@ -15,13 +15,10 @@ export default function Search() {
   //검색창 입력받기
   const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
-<<<<<<< HEAD
     setWord(e.target.value);
     console.log(word);
-=======
     setKeyword(e.target.value);
     // console.log(keyword);
->>>>>>> f28d9729edb6eeb1cacc88504e637df303c43d6e
   };
 
   return (

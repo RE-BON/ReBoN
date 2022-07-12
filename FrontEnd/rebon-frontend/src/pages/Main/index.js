@@ -11,11 +11,6 @@ import BestCard from './BestCard';
 import Divider from './Divider';
 import Header from '../../components/Header';
 import axios from 'axios';
-import { toJS } from 'mobx';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
-import { useObserver } from 'mobx-react';
-import indexStore from '../../modules/indexStore';
 import { useLocation } from 'react-router';
 
 function TabPanel(props) {
@@ -52,44 +47,18 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
   const [accoChecked, setAccoChecked] = useState(0);
   const [cafeChecked, setCafeChecked] = useState(0);
 
+  const [myCategory, setMyCategory] = useState([]); 
+  const [myData, setMyData] = useState([]);
+
   const location = useLocation();
 
-  const { mainSetting } = indexStore();
 
-  // const restChecked = observable(0);
-  // const accoChecked = observable(0);
-  // const cafeChecked = observable(0);
+  useEffect(() => {
+    setMyData({ ...restData[restChecked] });
+  }, [restChecked])
 
-  const updateRestChecked = (index) => {
-    console.log('!!!: ', index);
-    mainSetting.updateRestChecked(index);
-    console.log('result is ', mainSetting.restChecked);
-
-    // checkedData = {
-    //   restChecked: index,
-    //   accoChecked: accoChecked,
-    //   cafeChecked: cafeChecked,
-    // };
   };
-  const updateAccoChecked = (index) => {
-    mainSetting.updateAccoChecked(index);
-
-    // accoChecked = index;
-    // checkedData = {
-    //   restChecked: restChecked,
-    //   accoChecked: index,
-    //   cafeChecked: cafeChecked,
-    // };
-  };
-  const updateCafeChecked = (index) => {
-    mainSetting.updateCafeChecked(index);
-
-    // checkedData = {
-    //   restChecked: restChecked,
-    //   accoChecked: accoChecked,
-    //   cafeChecked: index,
-    // };
-  };
+ 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -137,9 +106,9 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   {restCategory
                     ? restCategory.map((rest, index) => (
                         <>
-                          {/* <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => updateRestChecked(index)} /> */}
-                          <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => setRestChecked(index)} />
-                          {/* <label for={index} className={mainSetting.restChecked === index ? 'radio-click-active' : 'radio-click-stay'}> */}
+                   
+                          {/* <input type="radio" id={index} value={rest.id} name="restaurant" checked={mainSetting.restChecked === index} onClick={() => setRestChecked(index)} /> */}
+                        
                           <label for={index} className={restChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
                             {rest.name}
                           </label>
@@ -150,19 +119,22 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
               </div>
               {/* restChecked가 바로 안바뀌는 바람에 처음 restChecked가 0에서 1로 눌러서 바껴야 이 데이터도 바껴지는데, 그렇지 않아서 잘못된 데이터가 들어가고 있음. 
                   그래서 restChecked가 바로 바뀔 수 있는 방법은 없을까 생각해보기. */}
-              <div className="main-background">
-                <div className="searchTitle">📍{location.state.item.name} 식당</div>
-              </div>
+                  
+                <>
+                  <div className="main-background">
+                    <div className="searchTitle">📍{location.state.item.name} 식당</div>
+                  </div>
 
-              <div className="best-wrapper">
-                {/* <BestCard bestInfo={restData[mainSetting.restChecked]} /> */}
-                <BestCard bestInfo={restData[restChecked]} />
-              </div>
-              {/* <Divider shopInfo={restData[mainSetting.restChecked]} tagId={location.state.item.id} subId={restCategory[mainSetting.restChecked].id} /> */}
-              <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} />
-              <div className="mainCard-wrapper">
-                <MainCard />
-              </div>
+                  <div className="best-wrapper">
+  
+                    <BestCard bestInfo={restData[restChecked]} />
+                  </div>
+            
+                  <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} />
+                  <div className="mainCard-wrapper">
+                    <MainCard />
+                  </div>
+                </>
             </TabPanel>
 
             <TabPanel className="TabPanel" value={value} index={1}>
