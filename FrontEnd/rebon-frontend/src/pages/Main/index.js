@@ -12,6 +12,7 @@ import Divider from './Divider';
 import Header from '../../components/Header';
 import axios from 'axios';
 import { useLocation } from 'react-router';
+import { faClosedCaptioning } from '@fortawesome/free-solid-svg-icons';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,34 +45,34 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
   const [value, setValue] = React.useState(0);
   const [ready, setReady] = useState(false);
   const [restChecked, setRestChecked] = useState(restCategory[0].id);
-  const [accoChecked, setAccoChecked] = useState(0);
-  const [cafeChecked, setCafeChecked] = useState(0);
+  // const [accoChecked, setAccoChecked] = useState(0);
+  // const [cafeChecked, setCafeChecked] = useState(0);
 
   const [restCategoryList, setRestCategoryList] = useState(); 
-  const [restDataList, setRestDataList] = useState(restData[restCategory[0].id]);
+  // const [restDataList, setRestDataList] = useState(restData[restCategory[0].id]);
 
   const location = useLocation();
 
-  useEffect(() => {
-    
-    console.log("================");
-    console.log(restFirstData);
-    console.log("now index is ",restChecked);
-    console.log("original Cate: ", restCategory);
-    console.log("original Data: ", restData);
-    console.log("asb", restCategory[0].id);
-    // console.log("original Data[0]: ", restData[0]);
-    // console.log("original Data[1]: ", restData[1]);
-    // console.log("original Data[2]: ", restData[2]);
-    // console.log("original Data[3]: ", restData[3]);
-    // console.log("original Data[4]: ", restData[4]);
-    // console.log("original Data[5]: ", restData[5]);
-    // console.log("original type [5]: ", typeof restData[5]);
-    setRestCategoryList(restCategory[restChecked]);
-    setRestDataList( restData[restChecked] );
-    // console.log("데이터 설정!");
-    // console.log("category: ",restCategory[restChecked]);
+  const getData = () => {
+    console.log("getData");
+    console.log("total data: ",restData);
     console.log("data: ",restData[restChecked]);
+
+  }
+
+  useEffect(() => {
+    setReady(false);
+    // setRestCategoryList(restCategory[restChecked]);
+    // setRestDataList( restData[restChecked] );
+
+
+    getData();
+
+    // if(restData.length > 1){
+    //   console.log("data: ",restData[restChecked]);
+
+    // }
+   
 
 
     // for(var i)
@@ -83,31 +84,26 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
     //     setRestDataList()
     //   }
     // }
+
+    setReady(true);
     
   }, [restChecked])
 
- 
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const clickEvent = ()=>{
-    setRestChecked(0);
-    setRestChecked(restCategory[0].id);
-
-  };
-
-  // useLayoutEffect(() => {
-  //   setReady(false);
+  // const clickEvent = ()=>{
   //   setRestChecked(0);
-  //   setReady(true);
-  // }, []);
+  //   setRestChecked(restCategory[0].id);
+
+  // };
 
   return (
     <div className="main-wrapper">
-      {/* {ready ? (
-        <> */}
+      {ready ? (
+        <>
           <Header />
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -135,10 +131,13 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                     ? restCategory.map((rest, index) => (
                         <>
                           <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id)} />
-                        
                           <label for={rest.id} className={restChecked === rest.id ? 'radio-click-active' : 'radio-click-stay'}>
                             {rest.name}
                           </label>
+                          {/* <input type="radio" id={index} value={index} name="restaurant" checked={restChecked === index} onClick={() => setRestChecked(index)} />
+                          <label for={index} className={restChecked === index? 'radio-click-active' : 'radio-click-stay'}>
+                            {rest.name}
+                          </label> */}
                         </>
                       ))
                     : restCategory.length}
@@ -154,7 +153,8 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
 
                   <div className="best-wrapper">
   
-                    <BestCard bestInfo={restDataList} />
+                    {/* <BestCard bestInfo={restData[restChecked]} /> */}
+                    <BestCard  restData={restData} checked={restChecked}/>
                     {/* {restDataList ? <BestCard bestInfo={restDataList} /> : clickEvent()} */}
                   </div>
             
@@ -220,10 +220,10 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
       )} */}
 
 
-        {/* </>
+        </>
       ) : (
         ''
-      )} */}
+      )}
     </div>
   );
 

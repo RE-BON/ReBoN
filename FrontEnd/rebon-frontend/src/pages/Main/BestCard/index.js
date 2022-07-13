@@ -7,17 +7,34 @@ import { Link } from 'react-router-dom';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
 
-export default function BestCard({ bestInfo }) {
+export default function BestCard({ restData, checked }) {
   // const [location,setLocation] = useState([]);
   // console.log("props값");
   // console.log(props.location.state);
 
+
+  // {const result = words.filter(word => word.length > 6);}
+
   const [bestList, setBestList] = useState();
   useEffect(() => {
     console.log('bes~~~');
-    console.log(bestInfo);
-    console.log(typeof bestInfo);
-    setBestList(bestInfo);
+    // console.log(bestInfo);
+    // console.log(bestInfo.shop);
+    // console.log(typeof bestInfo);
+    // if(bestInfo){
+    //   setBestList(bestInfo.shop);
+    // }
+
+    const result = restData.filter(data => data.id === checked);
+    setBestList(result[0].shop);
+
+    console.log("restData is ",restData);
+    console.log("checked is ",checked);
+    console.log("result is ",result[0]);
+    console.log("result.shop is ",result[0].shop);
+    // console.log("restData is ",restData);
+
+
     // console.log("0000: ",bestInfo[0]);
     // console.log("1111: ",bestInfo[1]);
     // setLocation(props.location.state);
@@ -30,7 +47,7 @@ export default function BestCard({ bestInfo }) {
     //   .catch((error) => {
     //     console.log('error');
     //   });
-  }, [bestInfo]);
+  }, [checked]);
 
   // const [bestInfo, setBestInfo] = useState([
   //   {
@@ -117,7 +134,7 @@ export default function BestCard({ bestInfo }) {
 
   return (
     <>
-      {bestList&& bestList.length>0 
+      {bestList
         ? bestList.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
 

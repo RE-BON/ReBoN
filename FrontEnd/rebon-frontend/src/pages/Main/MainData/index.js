@@ -29,63 +29,92 @@ export default function MainData() {
 
   const location = useLocation();
 
-  useLayoutEffect(() => {
-    axios
-      .get('http://3.34.139.61:8080/api/categories')
-      .then((response) => {
-        setReady(false);
-        setRestCategory(response.data[0].children);
-        setAccoCategory(response.data[1].children);
-        setCafeCategory(response.data[2].children);
+  const [restShop,setRestShop] = useState([]);
 
-        var restShop = [];
+  const getCategories=async()=>{
+    axios
+    .get('http://3.34.139.61:8080/api/categories')
+    .then((response) => {
+      setReady(false);
+      setRestCategory(response.data[0].children);
+      setAccoCategory(response.data[1].children);
+      setCafeCategory(response.data[2].children);
+    })
+    .catch((error) => {
+      console.log('MainData/Category error');
+    });
+    getShops();
+  }
+
+  const getShops = async() => {
+    console.log("식당 카테고리: ",restCategory);
+  }
+
+  useEffect(() => {
+    getCategories();
+
+    
+
+      // axios
+      // .get('http://3.34.139.61:8080/api/categories')
+      // .then((response) => {
+      //   setReady(false);
+      //   setRestCategory(response.data[0].children);
+      //   setAccoCategory(response.data[1].children);
+      //   setCafeCategory(response.data[2].children);
+      // })
+      // .catch((error) => {
+      //   console.log('MainData/Category error');
+      // });
+
+        // var restShop = [];
         var accoShop = [];
         var cafeShop = [];
 
 
-        response.data[0].children.map((rest, index) => {
-          var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + rest.id + '&open=false';
-          axios.get(url).then((response) => {
-            restShop[rest.id] = response.data;
-          });
-        });
 
-        response.data[1].children.map((acco, index) => {
-          var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=2&subCategories=' + acco.id + '&open=false';
-          axios.get(url).then((response) => {
-            accoShop.push(response.data);
-          });
-        });
 
-        response.data[2].children.map((cafe, index) => {
-          var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=3&subCategories=' + cafe.id + '&open=false';
-          axios.get(url).then((response) => {
-            cafeShop.push(response.data);
-          });
-        });
+        // response.data[0].children.map((rest, index) => {
+        //   var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + rest.id + '&open=false';
+        //   axios.get(url).then((subResponse) => {
+        //     console.log("식당의 세부 카테고리 별 shop: ",subResponse.data);
+        //     setRestShop((restShop) => [...restShop, response.data[index]]);
 
-        setRestData(restShop);
-        setAccoData(accoShop);
-        setCafeData(cafeShop);
+        //   });
+        // });
 
-        console.log("111: ",response.data[0].children);
-        console.log("222: ",response.data[0].children[0].id);
-        console.log("333: ",restShop);
-        console.log("444: ",restShop[0]);
-        console.log("555: ", restShop[response.data[0].children[0].id]);
+        // response.data[1].children.map((acco, index) => {
+        //   var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=2&subCategories=' + acco.id + '&open=false';
+        //   axios.get(url).then((response) => {
+        //     accoShop.push(response.data);
+        //   });
+        // });
 
-        setRestFirstData(restShop[response.data[0].children[0].id]);
+        // response.data[2].children.map((cafe, index) => {
+        //   var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=3&subCategories=' + cafe.id + '&open=false';
+        //   axios.get(url).then((response) => {
+        //     cafeShop.push(response.data);
+        //   });
+        // });
+
+
+        // setRestData(restShop);
+        // setAccoData(accoShop);
+        // setCafeData(cafeShop);
+
+
+  
+
+        // setRestFirstData(restShop[response.data[0].children[0].id]);
 
         setReady(true);
-      })
-      .catch((error) => {
-        console.log('MainData error');
-      });
+
   }, []);
+
 
   return (
     <>
-    {ready ? <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} restFirstData={restFirstData}/> : ''}
+    {/* {ready ? <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} restFirstData={restFirstData}/> : ''} */}
     {/* {ready ? <Main restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} restData={restData} accoData={accoData} cafeData={cafeData} /> : ''} */}
     </>
     );
