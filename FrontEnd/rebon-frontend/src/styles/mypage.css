@@ -3,7 +3,7 @@
 }
 @media (max-width: 767px) {
   .mb-my-wrapper {
-    padding-top: 5em;
+    padding-top: 7vh;
     height: 100vh;
     width: 100%;
   }
@@ -22,7 +22,6 @@
   }
   .mb-person-wrapper {
     display: inline;
-    border: 1px solid red;
   }
   .mb-name {
     font-weight: bold;
@@ -34,6 +33,7 @@
     display: grid;
     grid-template-columns: 4fr 0.1fr 4fr;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+    margin-bottom: 3vh;
   }
   .mb-setting-icon {
     margin-top: -3px;
@@ -88,12 +88,16 @@
   }
   .mypage-wrapper {
     display: flex;
+    align-items: flex-start;
   }
 
   .mypage-tab {
+    padding-top: 1rem;
     position: absolute;
-    width: 65%;
-    padding-left: 34%;
+    padding-left: 4rem;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
     background-color: #ffeeee;
   }
 
@@ -178,19 +182,20 @@
   }
   .mypage-wrapper {
     display: flex;
+    align-items: flex-start;
   }
 
   .mypage-tab {
+    padding-top: 1rem;
     position: absolute;
-    width: 65%;
+    min-width: 25rem;
     height: 100vh;
-    padding-left: 34%;
+    display: flex;
+    justify-content: end;
     background-color: #ffeeee;
   }
 
   .mypage-content {
-    width: 40%;
-    margin-left: 40%;
   }
 
   .sideMenu-wrapper {
@@ -264,24 +269,23 @@
 @media (min-width: 1200px) {
   .my-wrapper {
     position: fixed;
-    padding-top: 5em;
+    padding-top: 7em;
     height: 100vh;
   }
   .mypage-wrapper {
     display: flex;
+    align-items: flex-start;
+    margin-top: -3rem;
   }
 
   .mypage-tab {
+    padding-top: 1rem;
     position: absolute;
-    width: 65%;
+    min-width: 35rem;
     height: 100vh;
-    padding-left: 34%;
+    display: flex;
+    justify-content: end;
     background-color: #ffeeee;
-  }
-
-  .mypage-content {
-    width: 40%;
-    margin-left: 40%;
   }
 
   .sideMenu-wrapper {
@@ -290,7 +294,7 @@
   }
 
   .sideMenu-intro {
-    padding: 40px 0;
+    padding: 3rem 0;
     font-size: 21px;
   }
 
@@ -311,10 +315,10 @@
     /*환경설정, 발자국, 찜*/
     position: relative;
     background-color: white;
-    margin-bottom: 15px;
-    padding: 12px;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
     border-radius: 10px;
-    width: 98%;
+    max-width: 98%;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -325,10 +329,11 @@
     border: 1px solid #e4e4e4;
     border-radius: 100px;
     padding: 7px 5px;
+    margin-right: 1rem;
   }
 
   .btn-name {
-    font-size: 13px;
+    font-size: 0.8rem;
     font-weight: bold;
   }
 
@@ -339,7 +344,7 @@
 
   .sideMenu-bottom {
     position: absolute;
-    bottom: 15%;
+    bottom: 15vh;
     font-size: 13px;
   }
 
