@@ -61,7 +61,7 @@
 }
 
 .best-img {
-  width: 100%;
+  width: 11.6rem;
   height: 280px;
   object-fit: cover;
   border-radius: 20px;
@@ -245,4 +245,8 @@
 .select-main input[type='radio']:checked + label {
   background-color: #333;
   color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+
 }
