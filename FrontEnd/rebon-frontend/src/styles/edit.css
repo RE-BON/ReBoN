@@ -83,7 +83,7 @@
   .edit-container {
     width: 60vw;
     height: 90vh;
-    padding-top: 1rem;
+    padding-top: 3rem;
     margin-left: 35rem;
     padding-right: 15rem;
     overflow-y: scroll;
@@ -112,10 +112,14 @@
   }
 }
 
+.edit-title div {
+  font-family: 'Pretendard' !important;
+  font-weight: 800;
+}
+
 .edit-info {
   width: 60%;
   margin-left: 13%;
-  border: 2px sold green;
 }
 
 .edit-info-icon {
@@ -145,6 +149,7 @@
   font-size: 12px;
   margin-bottom: 1%;
   color: rgba(0, 0, 0, 0.4);
+  font-family: 'Pretendard' !important;
 }
 
 .edit-info-name {
@@ -165,6 +170,7 @@
   background-color: transparent;
   font-weight: bold;
   border: 0;
+  font-family: 'Pretendard' !important;
 }
 
 .edit-input::placeholder {
@@ -183,15 +189,18 @@
   padding: 11px 0 11px 16px;
   font-size: 13px;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 .edit-info-marketing {
   margin-top: 25px;
   font-size: 14px;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 .edit-info-notice {
   margin-top: 10px;
   font-size: 10px;
+  font-family: 'Pretendard' !important;
 }
 
 .empty {
@@ -235,6 +244,11 @@
   align-items: center;
 }
 
+.agree-discribe {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
+}
+
 .cancel {
   width: 44%;
   padding: 4% 0;
@@ -245,6 +259,7 @@
   text-align: center;
   font-size: 1rem;
   margin-bottom: 10px;
+  font-family: 'Pretendard' !important;
 }
 
 .finished {
@@ -256,4 +271,5 @@
   text-align: center;
   font-size: 1rem;
   margin-bottom: 10px;
+  font-family: 'Pretendard' !important;
 }

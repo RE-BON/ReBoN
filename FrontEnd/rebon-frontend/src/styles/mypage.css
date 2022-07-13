@@ -19,6 +19,8 @@
   .mb-name {
     width: 90%;
     margin-left: 5%;
+    font-family: 'Pretendard' !important;
+    font-size: bold;
   }
   .mb-person-wrapper {
     display: inline;
@@ -269,7 +271,7 @@
 @media (min-width: 1200px) {
   .my-wrapper {
     position: fixed;
-    padding-top: 7em;
+    padding-top: 10vh;
     height: 100vh;
   }
   .mypage-wrapper {
@@ -355,4 +357,32 @@
   .tab-click-stay {
     color: gray;
   }
+}
+
+.sideMenu-intro {
+  font-family: 'Pretendard' !important;
+  font-weight: 400;
+}
+
+.name {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
+}
+
+.name-button {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
+}
+
+.btn-name {
+  font-family: 'Pretendard' !important;
+}
+
+.sub-txt {
+  font-family: 'Pretendard' !important;
+}
+
+.withdrawal-click {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
 }

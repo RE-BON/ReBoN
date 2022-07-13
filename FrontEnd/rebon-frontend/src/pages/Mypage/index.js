@@ -119,7 +119,7 @@ export default function Mypage() {
                     <LogoutModal />
                   </div>
                   <Link to="withdrawal" onClick={() => setClickedTab(4)} style={{ color: 'inherit', textDecoration: 'none' }}>
-                    <div>회원탈퇴</div>
+                    <div className="withdrawal-click">회원탈퇴</div>
                   </Link>
                 </Row>
               </div>

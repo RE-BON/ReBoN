@@ -100,11 +100,17 @@
   margin-left: 1vw;
 }
 
+.header-logon-name {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
+}
+
 .header-logon span {
   margin-left: 1%;
 }
 
 .header-logoff {
+  font-family: 'Pretendard' !important;
   display: flex;
   justify-content: right;
   align-items: center;
@@ -113,6 +119,7 @@
 }
 
 .header-logoff div {
+  font-family: 'Pretendard' !important;
   width: 5em;
   font-size: 1.1em;
   margin-left: 7%;
