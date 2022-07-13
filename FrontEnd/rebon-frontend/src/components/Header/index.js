@@ -5,7 +5,7 @@ import SearchModal from './SearchModal';
 export default function Header() {
   const userName = localStorage.getItem('userName');
   //로그인인지 아닌지에 따라 헤더 상태 다름
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   function Login(e) {
     setIsLogin(true);
   }
