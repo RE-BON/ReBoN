@@ -10,6 +10,7 @@ import MainCard from './MainCard';
 import BestCard from './BestCard';
 import Divider from './Divider';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import axios from 'axios';
 
 //useLocation hook
@@ -149,6 +150,7 @@ export default function Main() {
           </div>
         </TabPanel>
       </Box>
+      <Footer />
     </div>
   );
 }

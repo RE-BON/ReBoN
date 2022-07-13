@@ -48,7 +48,9 @@ export default function LogoutModal() {
   return (
     <div className="logout-modal-wrapper">
       <ModalProvider backgroundComponent={FadingBackground}>
-        <div onClick={toggleModal}>로그아웃</div>
+        <div className="logout-modal-click" onClick={toggleModal}>
+          로그아웃
+        </div>
 
         <StyledModal
           isOpen={isOpen}

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Tags from './Tags';
 import AutoCompletes from './AutoCompletes';
-import Header from '../../components/Header';
+import HeaderHome from '../../components/HeaderHome';
 import '../../styles/search.css';
 import axios from 'axios';
 
@@ -44,7 +44,7 @@ export default function Search() {
   return (
     <div className="search-background">
       <div className="search-wrapper">
-        <Header />
+        <HeaderHome />
         <div className="search-content">
           <div className="title">
             가고싶은 지역을 입력해서

@@ -7,6 +7,7 @@ import '../../styles/detail.css';
 import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import Carousel from './Carousel';
+import Footer from '../../components/Footer';
 
 export default function Detail() {
   // const [shopInfo, setShopInfo] = useState();
@@ -222,6 +223,7 @@ export default function Detail() {
         </div>
       </div>
       <Review />
+      <Footer />
     </div>
   );
 }

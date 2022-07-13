@@ -1,79 +1,78 @@
 @media (max-width: 767px) {
-  .header-wrapper {
-    min-height: 7vh;
+  .header-home-wrapper {
+    display: none;
   }
 
-  .header-wrapper header {
-    min-width: 90vw;
-  }
-
-  .header-logon-icon img {
+  .header-home-logon-icon img {
     margin-right: -1rem;
     width: 2rem;
   }
 
-  header .logo-img {
+  header-home .logo-img {
     width: 5rem;
     margin-left: 1rem;
   }
 
-  .header-logon-name {
+  .header-home-logon-name {
     display: none;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-  .header-wrapper {
+  .header-home-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 10vh;
   }
 
-  .header-wrapper header {
+  .header-home-wrapper header {
     min-width: 70vw;
   }
 
-  .header-logon-icon img {
+  .header-home-logon-icon img {
     width: 2.3rem;
   }
 
-  header .logo-img {
+  header-home .logo-img {
     width: 9rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .header-wrapper {
+  .header-home-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 10vh;
   }
 
-  .header-wrapper header {
+  .header-home-wrapper header {
     min-width: 70vw;
   }
 
-  .header-logon-icon img {
+  .header-home-logon-icon img {
     width: 3rem;
     padding-right: 6px;
   }
 
-  header .logo-img {
+  header-home .logo-img {
     width: 10rem;
   }
 }
 
-.header-wrapper {
+.header-home-wrapper {
   font-family: 'Pretendard' !important;
   position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100vw;
   top: 0;
   z-index: 1;
-  background-color: white;
-  border-bottom: 1px solid #e9e9ea;
+  border-bottom: 1px solid #ff6b6c;
+  background-color: 'transparent';
   font-weight: 200;
 }
 
-.header-wrapper header {
+.header-home-wrapper header {
   position: relative;
   display: flex;
   align-items: center;
@@ -81,7 +80,7 @@
   height: 100%;
 }
 
-.header-logon {
+.header-home-logon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,26 +89,26 @@
   font-weight: 700;
 }
 
-.header-logon-modal {
+.header-home-logon-modal {
   width: 60%;
   font-weight: 700;
 }
 
-.header-logon-icon {
+.header-home-logon-icon {
   text-align: end;
   margin-left: 1vw;
 }
 
-.header-logon-name {
+.header-home-logon-name {
   font-family: 'Pretendard' !important;
   font-weight: 700;
 }
 
-.header-logon span {
+.header-home-logon span {
   margin-left: 1%;
 }
 
-.header-logoff {
+.header-home-logoff {
   font-family: 'Pretendard' !important;
   display: flex;
   justify-content: right;
@@ -118,7 +117,7 @@
   font-weight: 700;
 }
 
-.header-logoff div {
+.header-home-logoff div {
   font-family: 'Pretendard' !important;
   width: 5em;
   font-size: 1.1em;
