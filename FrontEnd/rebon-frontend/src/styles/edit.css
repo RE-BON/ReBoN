@@ -8,7 +8,7 @@
     border-radius: 7px;
     margin-right: 1%;
     font-weight: bold;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
   }
 
   .edit-title div {
@@ -17,6 +17,41 @@
 
   .agree-discribe {
     font-size: 0.5rem;
+  }
+
+  /* 취소 & 수정 완료 버튼 */
+  .edit-info-submit {
+    position: absolute;
+    bottom: 0;
+    margin-left: -4rem;
+    width: 107vw;
+    display: flex;
+  }
+
+  .agree-discribe {
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .cancel {
+    width: 50%;
+    color: #ff6b6c;
+    background-color: white;
+    border: 1px solid #ff6b6c;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Pretendard' !important;
+    padding: 1rem 0;
+  }
+
+  .finished {
+    width: 50%;
+    color: white;
+    background-color: #ff6b6c;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Pretendard' !important;
+    padding: 1rem 0;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -48,6 +83,44 @@
     padding: 0 0 2% 5%;
     font-weight: bolder;
   }
+
+  /* 취소 & 수정 완료 버튼 */
+  .edit-info-submit {
+    margin-top: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .agree-discribe {
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .cancel {
+    width: 44%;
+    padding: 4% 0;
+    color: #ff6b6c;
+    background-color: white;
+    border: 1px solid #ff6b6c;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .finished {
+    width: 44%;
+    padding: 4% 0;
+    color: white;
+    background-color: #ff6b6c;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Pretendard' !important;
+  }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .edit-container {
@@ -77,6 +150,44 @@
   .edit-title div {
     padding: 0 0 2% 5%;
     font-weight: bolder;
+  }
+
+  /* 취소 & 수정 완료 버튼 */
+  .edit-info-submit {
+    margin-top: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .agree-discribe {
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .cancel {
+    width: 44%;
+    padding: 4% 0;
+    color: #ff6b6c;
+    background-color: white;
+    border: 1px solid #ff6b6c;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .finished {
+    width: 44%;
+    padding: 4% 0;
+    color: white;
+    background-color: #ff6b6c;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Pretendard' !important;
   }
 }
 @media (min-width: 1200px) {
@@ -109,6 +220,44 @@
   .edit-title div {
     padding: 0 0 2% 5%;
     font-weight: bolder;
+  }
+
+  /* 취소 & 수정 완료 버튼 */
+  .edit-info-submit {
+    margin-top: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .agree-discribe {
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .cancel {
+    width: 44%;
+    padding: 4% 0;
+    color: #ff6b6c;
+    background-color: white;
+    border: 1px solid #ff6b6c;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .finished {
+    width: 44%;
+    padding: 4% 0;
+    color: white;
+    background-color: #ff6b6c;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    font-family: 'Pretendard' !important;
   }
 }
 
@@ -149,6 +298,7 @@
   font-size: 12px;
   margin-bottom: 1%;
   color: rgba(0, 0, 0, 0.4);
+
   font-family: 'Pretendard' !important;
 }
 
@@ -164,7 +314,7 @@
 }
 
 .name-input {
-  width: 78%;
+  width: 67%;
   margin-left: 5px;
   padding: 3%;
   background-color: transparent;
@@ -235,41 +385,4 @@
 .select input[type='radio']:checked + label {
   background-color: #ff6b6c;
   color: #fff;
-}
-/* 취소 & 수정 완료 버튼 */
-.edit-info-submit {
-  margin-top: 20%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.agree-discribe {
-  font-family: 'Pretendard' !important;
-  font-weight: 700;
-}
-
-.cancel {
-  width: 44%;
-  padding: 4% 0;
-  color: #ff6b6c;
-  background-color: white;
-  border: 1px solid #ff6b6c;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  font-family: 'Pretendard' !important;
-}
-
-.finished {
-  width: 44%;
-  padding: 4% 0;
-  color: white;
-  background-color: #ff6b6c;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  font-family: 'Pretendard' !important;
 }
