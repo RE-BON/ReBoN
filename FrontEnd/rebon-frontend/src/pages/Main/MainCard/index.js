@@ -1,16 +1,18 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../styles/main.css';
 import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function MainCard({ sort, mainInfo }) {
+export default function MainCard({ sort, data, checked, open }) {
   const [like, setLike] = useState(false);
+  const [mainInfo, setMainInfo] = useState(null);
 
-  useLayoutEffect(() => {
-    console.log('main!!: ', mainInfo);
-  }, []);
+  useEffect(() => {
+    if (data) setMainInfo(data);
+    else setMainInfo(null);
+  }, [data, checked, open]);
 
   const likeClick = ({ sort }) => {
     if (like) {
@@ -19,95 +21,6 @@ export default function MainCard({ sort, mainInfo }) {
       setLike(true);
     }
   };
-
-  // const [mainInfo, setMainInfo] = useState([
-  //   {
-  //     id: 4,
-  //     name: '인브리즈',
-  //     star: 5.0,
-  //     like: false,
-  //     tags: [
-  //       {
-  //         id: 1,
-  //         name: '포항',
-  //       },
-  //       {
-  //         id: 3,
-  //         name: '한동대',
-  //       },
-  //     ],
-  //     image:
-  //       'https://mblogthumb-phinf.pstatic.net/MjAxODA3MDNfMjAy/MDAxNTMwNjI5NjE1MTk1.cJeJTxszRfHGMw3q3hqSN4LLBS5scVV4lUBWsjEYLgcg.b1MlKG__mr8dVbZq7KGaFVZ3uttt9Ya_RBAJTgR8F9wg.JPEG.netusu/IMG_4822.jpg?type=w800',
-  //   },
-  //   {
-  //     id: 5,
-  //     name: '미스터 피자',
-  //     star: 5.0,
-  //     like: false,
-  //     tags: [
-  //       {
-  //         id: 1,
-  //         name: '포항',
-  //       },
-  //       {
-  //         id: 4,
-  //         name: '양덕',
-  //       },
-  //     ],
-  //     image: 'https://cdn.tleaves.co.kr/news/photo/202202/1991_2819_1810.jpg',
-  //   },
-  //   {
-  //     id: 6,
-  //     name: '교촌 치킨',
-  //     star: 3.0,
-  //     like: false,
-  //     tags: [
-  //       {
-  //         id: 1,
-  //         name: '포항',
-  //       },
-  //       {
-  //         id: 4,
-  //         name: '양덕',
-  //       },
-  //     ],
-  //     image: 'https://t1.daumcdn.net/cfile/tistory/99A07D405A8C32CC1C',
-  //   },
-  //   {
-  //     id: 7,
-  //     name: '환여 횟집',
-  //     star: 4.0,
-  //     like: false,
-  //     tags: [
-  //       {
-  //         id: 1,
-  //         name: '포항',
-  //       },
-  //       {
-  //         id: 5,
-  //         name: '환여동',
-  //       },
-  //     ],
-  //     image: 'https://m.yorivery.com/data/goods/21/07/27//1000001108/1000001108_add3_070.jpg',
-  //   },
-  //   {
-  //     id: 8,
-  //     name: '온센',
-  //     star: 5.0,
-  //     like: true,
-  //     tags: [
-  //       {
-  //         id: 1,
-  //         name: '포항',
-  //       },
-  //       {
-  //         id: 6,
-  //         name: '영일대',
-  //       },
-  //     ],
-  //     image: 'https://t1.daumcdn.net/cfile/tistory/992153345D78FD301F',
-  //   },
-  // ]);
 
   const StyledLink = styled(Link)`
     box-sizing: border-box;
@@ -153,11 +66,11 @@ export default function MainCard({ sort, mainInfo }) {
                         </Link>
                         <div className="starNum">{item.star}</div>
                       </div>
-                      <div className="">
+                      {/* <div className="">
                         {item.tags.map((tag) => (
                           <span className="tag">{tag.name}</span>
                         ))}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 );
@@ -229,10 +142,6 @@ export default function MainCard({ sort, mainInfo }) {
           : ''
         : ''}
       {}
-
-      {/* {mainInfo.map((item,idx) => (
-    
-    ))} */}
     </>
   );
 }

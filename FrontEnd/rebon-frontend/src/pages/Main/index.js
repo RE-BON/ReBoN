@@ -41,64 +41,29 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function Main({ restCategory, accoCategory, cafeCategory, restData, accoData, cafeData, restFirstData }) {
+export default function Main({ restCategory, accoCategory, cafeCategory, restData, accoData, cafeData }) {
   const [value, setValue] = React.useState(0);
   const [ready, setReady] = useState(false);
   const [restChecked, setRestChecked] = useState(restCategory[0].id);
-  // const [accoChecked, setAccoChecked] = useState(0);
-  // const [cafeChecked, setCafeChecked] = useState(0);
-
-  const [restCategoryList, setRestCategoryList] = useState(); 
-  // const [restDataList, setRestDataList] = useState(restData[restCategory[0].id]);
-
+  const [accoChecked, setAccoChecked] = useState(accoCategory[0].id);
+  const [cafeChecked, setCafeChecked] = useState(cafeCategory[0].id);
   const location = useLocation();
 
   const getData = () => {
-    console.log("getData");
-    console.log("total data: ",restData);
-    console.log("data: ",restData[restChecked]);
-
-  }
+    console.log('=======rest 카테고리 : =========== ', restCategory);
+    console.log('=======acco 카테고리 : =========== ', accoCategory);
+    console.log('=======cafe 카테고리 : =========== ', cafeCategory);
+  };
 
   useEffect(() => {
     setReady(false);
-    // setRestCategoryList(restCategory[restChecked]);
-    // setRestDataList( restData[restChecked] );
-
-
     getData();
-
-    // if(restData.length > 1){
-    //   console.log("data: ",restData[restChecked]);
-
-    // }
-   
-
-
-    // for(var i)
-    // if(restData[restChecked].length>0){
-    //   restData[restChecked].map()
-    // }
-    // if(restData[restChecked].length>0){
-    //   for(var i = 0; i < restData[restChecked].length; i++){
-    //     setRestDataList()
-    //   }
-    // }
-
     setReady(true);
-    
-  }, [restChecked])
-
+  }, [restChecked]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // const clickEvent = ()=>{
-  //   setRestChecked(0);
-  //   setRestChecked(restCategory[0].id);
-
-  // };
 
   return (
     <div className="main-wrapper">
@@ -134,97 +99,83 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                           <label for={rest.id} className={restChecked === rest.id ? 'radio-click-active' : 'radio-click-stay'}>
                             {rest.name}
                           </label>
-                          {/* <input type="radio" id={index} value={index} name="restaurant" checked={restChecked === index} onClick={() => setRestChecked(index)} />
-                          <label for={index} className={restChecked === index? 'radio-click-active' : 'radio-click-stay'}>
-                            {rest.name}
-                          </label> */}
                         </>
                       ))
                     : restCategory.length}
                 </div>
               </div>
-              {/* restChecked가 바로 안바뀌는 바람에 처음 restChecked가 0에서 1로 눌러서 바껴야 이 데이터도 바껴지는데, 그렇지 않아서 잘못된 데이터가 들어가고 있음. 
-                  그래서 restChecked가 바로 바뀔 수 있는 방법은 없을까 생각해보기. */}
-                  
-              
-                  <div className="main-background">
-                    <div className="searchTitle">📍{location.state.item.name} 식당</div>
-                  </div>
 
-                  <div className="best-wrapper">
-  
-                    {/* <BestCard bestInfo={restData[restChecked]} /> */}
-                    <BestCard  restData={restData} checked={restChecked}/>
-                    {/* {restDataList ? <BestCard bestInfo={restDataList} /> : clickEvent()} */}
-                  </div>
-            
-                  {/* <Divider shopInfo={restData[restChecked]} tagId={location.state.item.id} subId={restCategory[restChecked].id} /> */}
-                  {/* <Divider shopInfo={restDataList} tagId={location.state.item.id} subId={restCategoryList.id} /> */}
-                  <div className="mainCard-wrapper">
-                    <MainCard />
-                  </div>
+              <div className="main-background">
+                <div className="searchTitle">📍{location.state.item.name} 식당</div>
+              </div>
+
+              <div className="best-wrapper">
+                <BestCard data={restData} checked={restChecked} />
+              </div>
+
+              <Divider data={restData} checked={restChecked} tagId={location.state.item.id} subId={restCategory[0].id} />
             </TabPanel>
-
             <TabPanel className="TabPanel" value={value} index={1}>
-              {/* <div className="category-wrapper">
-            <div class="select-main">
-              {cafeCategory
-                ? cafeCategory.map((cafe, index) => (
-                    <>
-                      <input type="radio" id={index} value={cafe.id} name="cafe" checked={cafeChecked === index} onClick={() => updateCafeChecked(index)} />
-                      <label for={index} className={cafeChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
-                        {cafe.name}
-                      </label>
-                    </>
-                  ))
-                : ''}
-            </div>
-          </div>
-          <div className="best-wrapper">
-            <BestCard bestInfo={cafeData[cafeChecked]} />
-          </div>
-          <Divider shopInfo={cafeData[cafeChecked]} tagId={location.state.item.id} subId={cafeCategory[cafeChecked].id} />
+              <div className="category-wrapper">
+                <div class="select-main">
+                  {cafeCategory
+                    ? cafeCategory.map((cafe, index) => (
+                        <>
+                          <input type="radio" id={cafe.id} value={cafe.id} name="cafe" checked={cafeChecked === cafe.id} onClick={() => setCafeChecked(cafe.id)} />
+                          <label for={cafe.id} className={cafeChecked === cafe.id ? 'radio-click-active' : 'radio-click-stay'}>
+                            {cafe.name}
+                          </label>
+                        </>
+                      ))
+                    : cafeCategory.length}
+                </div>
+              </div>
 
-          <div className="mainCard-wrapper">
-            <MainCard />
-          </div> */}
+              <div className="main-background">
+                <div className="searchTitle">📍{location.state.item.name} 카페</div>
+              </div>
+
+              <div className="best-wrapper">
+                <BestCard data={cafeData} checked={cafeChecked} />
+              </div>
+
+              <Divider data={cafeData} checked={cafeChecked} tagId={location.state.item.id} subId={cafeCategory[0].id} />
             </TabPanel>
-
             <TabPanel className="TabPanel" value={value} index={2}>
-              {/* <div className="category-wrapper">
-            <div class="select-main">
-              {accoCategory
-                ? accoCategory.map((acco, index) => (
-                    <>
-                      <input type="radio" id={index} value={acco.id} name="accommodation" checked={accoChecked === index} onClick={() => updateAccoChecked(index)} />
-                      <label for={index} className={accoChecked === index ? 'radio-click-active' : 'radio-click-stay'}>
-                        {acco.name}
-                      </label>
-                    </>
-                  ))
-                : ''}
-            </div>
-          </div>
-          <div className="best-wrapper">
-            <BestCard bestInfo={accoData[accoChecked]} />
-          </div>
-          <Divider shopInfo={accoData[accoChecked]} tagId={location.state.item.id} subId={accoCategory[accoChecked].id} />
-          <div className="mainCard-wrapper">
-            <MainCard />
-          </div> */}
+              <div className="category-wrapper">
+                <div class="select-main">
+                  {accoCategory
+                    ? accoCategory.map((acco, index) => (
+                        <>
+                          <input type="radio" id={acco.id} value={acco.id} name="accomodation" checked={accoChecked === acco.id} onClick={() => setAccoChecked(acco.id)} />
+                          <label for={acco.id} className={accoChecked === acco.id ? 'radio-click-active' : 'radio-click-stay'}>
+                            {acco.name}
+                          </label>
+                        </>
+                      ))
+                    : accoCategory.length}
+                </div>
+              </div>
+
+              <div className="main-background">
+                <div className="searchTitle">📍{location.state.item.name} 숙소</div>
+              </div>
+
+              <div className="best-wrapper">
+                <BestCard data={accoData} checked={accoChecked} />
+              </div>
+
+              <Divider data={accoData} checked={accoChecked} tagId={location.state.item.id} subId={accoCategory[0].id} />
             </TabPanel>
           </Box>
           {/* </> */}
           {/* ) : (
         ''
       )} */}
-
-
         </>
       ) : (
         ''
       )}
     </div>
   );
-
-      };
+}

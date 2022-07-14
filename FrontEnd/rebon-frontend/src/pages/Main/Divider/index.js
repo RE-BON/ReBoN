@@ -1,29 +1,40 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../styles/main.css';
 import Toggle from 'react-toggle';
 import MainCard from '../MainCard';
 import axios from 'axios';
 
-export default function Divider({ shopInfo, tagId, subId }) {
+export default function Divider({ data, checked, tagId }) {
   const [toggleOn, setToggleOn] = useState(false);
   const [sort, setSort] = useState('star');
-  const [openShopInfo, setOpenShopInfo] = useState();
+  const [shopInfo, setShopInfo] = useState(null);
+  const [openShopInfo, setOpenShopInfo] = useState(null);
   const [ready, setReady] = useState(false);
+  const [subId, setSubId] = useState();
 
-  useLayoutEffect(() => {
-    var url = 'http://3.34.139.61:8080/api/shops?tag=' + tagId + '&category=1&subCategories=' + subId + '&open=true';
+  useEffect(() => {
+    const result = data.filter((d) => d.id === checked);
+    if (data) {
+      const result = data.filter((d) => d.id === checked);
+      setSubId(result[0].id);
 
-    axios
-      .get(url)
-      .then((response) => {
-        console.log('devider:open:,subId is: ', subId, 'tagId is', tagId, 'url is: ', url, ' result is: ', response.data);
-        setOpenShopInfo(response.data);
-        setReady(true);
-      })
-      .catch((error) => {
-        console.log('error');
-      });
-  }, []);
+      //closed Shop Info
+      if (result.length > 0 && result[0].shop.length > 0) setShopInfo(result[0].shop);
+      else setShopInfo(null);
+
+      //open Shop Info
+      var url = 'http://3.34.139.61:8080/api/shops?tag=' + tagId + '&category=1&subCategories=' + result[0].id + '&open=true';
+      axios
+        .get(url)
+        .then((response) => {
+          setOpenShopInfo(response.data);
+          setReady(true);
+        })
+        .catch((error) => {
+          console.log('Divider error');
+        });
+    }
+  }, [checked]);
 
   const toggleChange = (event) => {
     if (toggleOn) setToggleOn(false);
@@ -54,8 +65,7 @@ export default function Divider({ shopInfo, tagId, subId }) {
             </div>
           </div>
           <div className="mainCard-wrapper">
-            {toggleOn ? <MainCard sort={sort} mainInfo={openShopInfo} /> : <MainCard sort={sort} mainInfo={shopInfo} />}
-            {/* <MainCard sort={sort} /> */}
+            {toggleOn ? <MainCard sort="star" data={openShopInfo} checked={checked} open="true" /> : <MainCard sort="star" data={shopInfo} checked={checked} open="false" />}
           </div>
         </>
       ) : (
