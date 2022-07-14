@@ -1,5 +1,6 @@
 .join-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100vh;
   align-items: center;
@@ -12,21 +13,16 @@
   font-size: 24px;
 }
 
-.centerBox {
-  background-color: white;
-  padding: 60px 90px;
-  border-radius: 15px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
 
 .join-bottom-btn {
   background-color: #ff6b6c;
-  width: 378px;
+  width: 25rem;
   height: 52.48px;
   border-radius: 0;
   margin-top: 20px;
   margin-left: 0;
   border-radius: 10px;
+  color:white;
 }
 
 .divider {
@@ -40,5 +36,32 @@
 
 .ReBON {
   color: #ff6b6c;
+}
+
+
+@media screen and (max-width: 500px) {
+  .join-wrapper {
+    background-color: white;
+  }
+
+  .centerBox {
+    padding: 0;
+    box-shadow:none !important;
+  }
+
+  .join-title {
+    margin: 40px 0 20px 0;
+    font-size: 20px;
+  }
+
+  .join-bottom-btn {
+    width: 100%;
+  }
+
+  .logo{
+    display:block !important;
+    margin: 1rem 0;
+  }
+
 }
 

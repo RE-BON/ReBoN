@@ -1,28 +1,20 @@
 import '../../styles/header.css';
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SearchModal from './SearchModal';
 export default function Header() {
-  let headerLocation = useLocation();
   const userName = localStorage.getItem('userName');
   //로그인인지 아닌지에 따라 헤더 상태 다름
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   function Login(e) {
     setIsLogin(true);
   }
 
-  const [headerState, setHeaderState] = useState({ bgColor: 'white', bottomLine: '#E9E9EA' });
-  useEffect(() => {
-    if (headerLocation.pathname === '/') {
-      setHeaderState({ bgColor: 'transparent', bottomLine: '#ff6b6c' });
-    }
-  }, [headerLocation]);
-
   return (
-    <div className="header-wrapper" style={{ backgroundColor: headerState.bgColor, borderBottomColor: headerState.bottomLine }}>
+    <div className="header-wrapper">
       <header>
         <Link to="/">
-          <img src="/image/logo.png" alt="logo" />
+          <img src="/image/logo.png" alt="logo" className="logo-img" />
         </Link>
         {isLogin ? (
           <div className="header-logon">
@@ -32,10 +24,10 @@ export default function Header() {
 
             <Link to="/mypage" style={{ color: 'inherit', textDecoration: 'none' }}>
               <div className="header-logon-icon">
-                <img src="/image/user.png" alt="user" width="100px" />
-                {userName}
+                <img src="/image/user.png" alt="user" />
               </div>
             </Link>
+            <span className="header-logon-name">{userName}</span>
           </div>
         ) : (
           <div className="header-logoff">

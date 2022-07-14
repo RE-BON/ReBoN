@@ -7,12 +7,16 @@ import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
+
 import com.handong.rebon.review.application.dto.request.*;
+
 import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewEmpathizeResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByMemberResponse;
+import com.handong.rebon.review.presentation.dto.response.ReviewEmpathizeResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
 
 import org.springframework.data.domain.Pageable;
@@ -92,6 +96,25 @@ public class ApiReviewController {
     }
 
     @RequiredLogin
+    @PostMapping("/reviews/{reviewId}/empathize")
+    public ResponseEntity<Object> empathize(
+            @Login LoginMember loginMember, @PathVariable Long reviewId
+    ) {
+        ReviewEmpathizeRequestDto empathizeRequestDto = new ReviewEmpathizeRequestDto(loginMember.getId(), reviewId);
+        ReviewEmpathizeResponseDto reviewEmpathizeResponseDto = reviewService.empathize(empathizeRequestDto);
+        return ResponseEntity.ok(ReviewEmpathizeResponse.from(reviewEmpathizeResponseDto));
+    }
+
+    @RequiredLogin
+    @PostMapping("/reviews/{reviewId}/unempathize")
+    public ResponseEntity<Object> unempathize(
+            @Login LoginMember loginMember, @PathVariable Long reviewId
+    ) {
+        ReviewEmpathizeRequestDto empathizeRequestDto = new ReviewEmpathizeRequestDto(loginMember.getId(), reviewId);
+        ReviewEmpathizeResponseDto reviewEmpathizeResponseDto = reviewService.unEmpathize(empathizeRequestDto);
+        return ResponseEntity.ok(ReviewEmpathizeResponse.from(reviewEmpathizeResponseDto));
+    }
+    
     @PatchMapping("/reviews/{reviewId}")
     public ResponseEntity<Void> update(
             @Login LoginMember loginMember,

@@ -19,7 +19,7 @@ export default function Edit() {
   const checkNick = () => {
     axios
       .post('http://3.34.139.61:8080/api/members/nickname/check-duplicate', {
-        nickname: { name },
+        nickname: name,
       })
       .then(function (response) {
         // -- 이 200일 경우
@@ -59,7 +59,6 @@ export default function Edit() {
             </span>
           </div>
         </div>
-
         <div className="edit-info-title">닉네임</div>
         <div className="edit-info-name">
           <input className="name-input" value={name} placeholder="한글로 공백없이 입력해주세요." onChange={onChangeName}></input>
@@ -87,13 +86,15 @@ export default function Edit() {
           <label htmlFor="select">
             <FontAwesomeIcon icon={faCheck} />
           </label>
-          동의 합니다.
+          <span style={{ paddingRight: '0.5rem' }}></span>
+          <span className="agree-discribe">동의 합니다.</span>
           <span className="empty"></span>
           <input type="radio" id="select2" name="marcketing" />
           <label htmlFor="select2">
             <FontAwesomeIcon icon={faCheck} />
           </label>
-          동의하지 않습니다.
+          <span style={{ paddingRight: '0.5rem' }}></span>
+          <span className="agree-discribe">동의하지 않습니다.</span>
         </div>
 
         <div className="edit-info-submit">

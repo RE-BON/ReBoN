@@ -76,14 +76,15 @@ export default function Mypage() {
 
                 <Link to="/mypage/footprint" onClick={() => setClickedTab(2)} style={{ color: 'inherit', textDecoration: 'none' }}>
                   <Row className="sidebtn-wrapper">
-                    <Col md={2} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
+                    <Col md={3} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
                       <div className="sidebtn-icon">
                         {console.log(clickedTab)}
                         <RiFootprintLine size="24" />
                       </div>
                     </Col>
-                    <Col md={8} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
+                    <Col md={7} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
                       <div className="btn-name">발자국</div>
+
                       <div className="sub-txt">리뷰를 확인할 수 있어요.</div>
                     </Col>
                     <Col md={1} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
@@ -96,16 +97,16 @@ export default function Mypage() {
 
                 <Link to="/mypage/bookmark" onClick={() => setClickedTab(3)} style={{ color: 'inherit', textDecoration: 'none' }}>
                   <Row className="sidebtn-wrapper">
-                    <Col md={2} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                    <Col md={3} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
                       <div className="sidebtn-icon">
-                        <FiHeart md={8} size="22" />
+                        <FiHeart md={7} size="22" />
                       </div>
                     </Col>
-                    <Col md={8} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                    <Col md={7} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
                       <div className="btn-name">찜</div>
                       <div className="sub-txt">찜한 목록을 확인할 수 있어요.</div>
                     </Col>
-                    <Col md={2} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                    <Col md={1} className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
                       <div>
                         <IoIosArrowForward />
                       </div>
@@ -118,13 +119,13 @@ export default function Mypage() {
                     <LogoutModal />
                   </div>
                   <Link to="withdrawal" onClick={() => setClickedTab(4)} style={{ color: 'inherit', textDecoration: 'none' }}>
-                    <div>회원탈퇴</div>
+                    <div className="withdrawal-click">회원탈퇴</div>
                   </Link>
                 </Row>
               </div>
             </div>
 
-            <div className="mypage-content">
+            <div>
               <Routes>
                 <Route path="" element={<Edit />} />
                 <Route path="footprint" element={<Footprint />} />

@@ -27,7 +27,7 @@ export default function Withdrawal() {
             <span className="agree-button" style={{ backgroundColor: bgColor }}>
               <FontAwesomeIcon icon={faCheck} size="1x" />
             </span>
-            <span>위 사항을 모두 확인했고, 회원탈퇴에 동의합니다.</span>
+            <span className="agree-describe">위 사항을 모두 확인했고, 회원탈퇴에 동의합니다.</span>
           </div>
           <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
             <div className="withdrawal-submit">회원 탈퇴</div>

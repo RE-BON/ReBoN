@@ -1,0 +1,97 @@
+@media (max-width: 767px) {
+  .footer-wrapper {
+    margin-top: 3vh;
+    background-color: #e5e5e5;
+  }
+
+  .footer-wrapper img {
+    width: 10vw;
+    margin-left: 7vw;
+    margin-top: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-title {
+    padding-bottom: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .footer-title u {
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+    padding-right: 0.5rem;
+  }
+
+  .footer-title span {
+    font-family: 'Pretendard' !important;
+  }
+
+  .footer-contents {
+    margin-left: 7vw;
+    font-family: 'Pretendard' !important;
+    padding-bottom: 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .footer-contents-email {
+    font-family: 'Pretendard' !important;
+  }
+  .footer-contents-num {
+    font-family: 'Pretendard' !important;
+  }
+  .footer-contents-work {
+    font-family: 'Pretendard' !important;
+  }
+  .footer-reserve {
+    font-family: 'Pretendard' !important;
+    color: #a5a9ab;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer-wrapper {
+    margin-top: 5vh;
+    background-color: #e5e5e5;
+  }
+
+  .footer-wrapper img {
+    width: 7vw;
+    margin-left: 15vw;
+    margin-top: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-title {
+    padding-bottom: 1rem;
+  }
+
+  .footer-title u {
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+    padding-right: 0.5rem;
+  }
+
+  .footer-title span {
+    font-family: 'Pretendard' !important;
+  }
+
+  .footer-contents {
+    margin-left: 15vw;
+    font-family: 'Pretendard' !important;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-contents-email {
+    font-family: 'Pretendard' !important;
+  }
+  .footer-contents-num {
+    font-family: 'Pretendard' !important;
+  }
+  .footer-contents-work {
+    font-family: 'Pretendard' !important;
+  }
+  .footer-reserve {
+    font-family: 'Pretendard' !important;
+    color: #a5a9ab;
+  }
+}
