@@ -4,8 +4,35 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/Header';
 import Star from './Star';
 import PostModal from './PostModal';
+import { useState } from 'react';
+import AWS from 'aws-sdk';
 
 export default function Post() {
+  const [imageSrc, setImageSrc] = useState('');
+  const region = "us-east-1";
+  const bucket = "elice-boardgame-project";
+
+  AWS.config.update({
+    region: region,
+    accessKeyId: "AKIAWHWKYOWONYWK7TQK",
+    secretAccessKey: "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",
+});
+
+
+  const preview = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+
+  };
+
+
   return (
     <>
       <Header />
@@ -28,10 +55,15 @@ export default function Post() {
         </div>
 
         <div className="post-attach">
+        <input type="file" id="input-file" accept=".gif, .jpg, .png" hidden onChange={(e) => {
+                        preview(e.target.files[0]);
+                    }}/>
           <div className="post-attach-contents">
-            <div className="post-attach-image">
-              <FontAwesomeIcon icon={faPlus} size="1x" />
-            </div>
+            
+              {imageSrc === ''? <label className="post-attach-image" for="input-file">
+                <FontAwesomeIcon icon={faPlus} size="1x" /></label> :
+                <img className='previewImg' src={imageSrc} />}
+            
             <div className="post-attach-count">1/10</div>
           </div>
         </div>

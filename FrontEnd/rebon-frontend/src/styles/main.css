@@ -61,7 +61,7 @@
 }
 
 .best-img {
-  width: 100%;
+  width: 11.6rem;
   height: 280px;
   object-fit: cover;
   border-radius: 20px;
@@ -253,4 +253,8 @@
 .radio-click-stay {
   background-color: #fff;
   color: #333;
+}
+
+@media screen and (max-width: 500px) {
+
 }

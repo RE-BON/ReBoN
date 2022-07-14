@@ -10,6 +10,7 @@ import MainCard from './MainCard';
 import BestCard from './BestCard';
 import Divider from './Divider';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import axios from 'axios';
 import { useLocation } from 'react-router';
 import { faClosedCaptioning } from '@fortawesome/free-solid-svg-icons';

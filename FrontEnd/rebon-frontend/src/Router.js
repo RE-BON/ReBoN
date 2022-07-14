@@ -9,11 +9,15 @@ import Mypage from './pages/Mypage';
 import ReviewDropdown from './pages/Detail/Review/ReviewDropdown';
 import Join from './pages/Join';
 import Login from './pages/Login';
-import Register from './pages/Join/Register';
+// import Register from './pages/Join/Register';
+import Terms from './pages/Join/Terms';
 import Logout from './pages/Logout';
-import Terms from './pages/Terms';
+// import Terms from './pages/Terms';
+import Loding from './pages/Login/Loading';
 /*추후변경필요*/
-import TermsModal from './pages/Terms/termsModal';
+import TermsMarketing from './pages/Join/Terms/marketingModal';
+import TermsPrivacy from './pages/Join/Terms/privacyModal';
+import TermsModal from './pages/Join/Terms/termsModal';
 
 function Router() {
   return (
@@ -27,12 +31,13 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/join" element={<Join />} />
-        <Route path="/join/register" element={<Register />} />
+        {/* <Route path="/join/register" element={<Register />} /> */}
         <Route path="/logout" element={<Logout />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/terms" element={<Terms />} />
+        <Route path="/join/register" element={<Terms />} />
         <Route path="/termsModal" element={<TermsModal />} />
         <Route path="/" element={<Search />} />
+        <Route path="/loading" element={<Loding />} />
       </Routes>
     </BrowserRouter>
   );

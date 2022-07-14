@@ -1,7 +1,48 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import '../../../styles/register.css';
+import axios from 'axios';
+import { useLocation } from 'react-router';
 
 export default function Register() {
+  const location = useLocation();
+  useEffect(() => {
+    console.log("location 정보");
+    // if(location.state.email !=null){
+    //   console.log(location.state.email);
+    // }
+
+},[]);
+
+  const clickRegister = async() =>{
+
+    await axios({
+      method: 'post',
+      url: "http://3.34.139.61:8080/api/members",
+      data: {
+        "email" : "hagus00@naver.com",
+        "nickname" : "hagus99",
+        "oauthProvider" : "naver",
+        "agreed" : "true"	
+      },
+      dataType: 'application/json'
+    })
+    .then(function (response){
+        console.log(response);
+    })
+    .catch(function (error){
+        console.log(error);
+    });
+
+    // var params = new URLSearchParams();
+    
+    // params.append("email", "hagus00@naver.com");
+    // params.append("nickname", "hagus99");
+    // params.append("oauthProvider", "naver");
+    // params.append("agreed", true);
+    // const response = await axios.post("http://3.34.139.61:8080/api/members", params);
+  }
+  
+
   return (
     <div className="register-wrapper">
       <div className="centerBox">
@@ -23,7 +64,7 @@ export default function Register() {
             <div className="checkbox">
               <input type="checkbox" id="marketing-agree" /> <label for="marketing-agree">마케팅 수신 동의 (선택)</label>
             </div>
-            <button className="start-btn">ReBON 시작하기</button>
+            <button className="start-btn" onClick={clickRegister}>ReBON 시작하기</button>
           </div>
         </div>
       </div>

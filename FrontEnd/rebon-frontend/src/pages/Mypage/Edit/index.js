@@ -86,13 +86,15 @@ export default function Edit() {
           <label htmlFor="select">
             <FontAwesomeIcon icon={faCheck} />
           </label>
-          동의 합니다.
+          <span style={{ paddingRight: '0.5rem' }}></span>
+          <span className="agree-discribe">동의 합니다.</span>
           <span className="empty"></span>
           <input type="radio" id="select2" name="marcketing" />
           <label htmlFor="select2">
             <FontAwesomeIcon icon={faCheck} />
           </label>
-          동의하지 않습니다.
+          <span style={{ paddingRight: '0.5rem' }}></span>
+          <span className="agree-discribe">동의하지 않습니다.</span>
         </div>
 
         <div className="edit-info-submit">
