@@ -8,7 +8,6 @@ import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.shop.domain.type.Cafe;
 import com.handong.rebon.shop.domain.type.Lodging;
@@ -113,7 +112,7 @@ public class TempDataInitializer implements ApplicationRunner {
                                                           new ShopImage("https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg", true)
                                                   )
                                           ))
-                                          .location(new Location())
+                                          .address("포항")
                                           .shopScore(new ShopScore(star))
                                           .build();
         restaurant.addMenu(Collections.emptyList());

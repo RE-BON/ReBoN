@@ -9,6 +9,7 @@ import com.handong.rebon.common.admin.AdminCategoryRegister;
 import com.handong.rebon.common.admin.AdminShopRegister;
 import com.handong.rebon.common.admin.AdminTagRegister;
 import com.handong.rebon.exception.dto.ExceptionResponse;
+import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImage;
@@ -30,6 +31,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static com.handong.rebon.acceptance.AcceptanceUtils.getRequestSpecification;
+import static com.handong.rebon.acceptance.review.ReviewCreateAcceptanceTest.saveReview;
 import static com.handong.rebon.acceptance.shop.ShopLikeAcceptanceTest.가게_좋아요;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -72,6 +74,60 @@ public class ShopReadAcceptanceTest extends AcceptanceTest {
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(result).hasSize(6);
+    }
+
+    @Test
+    @DisplayName("포항에 있는 모든 식당 조회하기 - 리뷰수순")
+    void searchRestaurantInPohangSortReviewCount() {
+        // given
+        Tag 포항 = tags.get("포항");
+        Category 식당 = categories.get("식당");
+
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+
+        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", 5);
+        Shop shop = shops.get("엽기떡볶이");
+        String bearerToken = "Bearer " + token;
+
+        //when
+        saveReview(reviewRequest, shop.getId(), bearerToken);
+
+        // when
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청_sort(포항.getId(), 식당.getId(), Collections.emptyList(), false, "shopScore.reviewCount,desc");
+        List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).hasSize(6);
+        assertThat(result.get(0).getName()).isEqualTo("엽기떡볶이");
+    }
+
+    @Test
+    @DisplayName("포항에 있는 모든 식당 조회하기 - 별점순")
+    void searchRestaurantInPohangSortStar() {
+        // given
+        Tag 포항 = tags.get("포항");
+        Category 식당 = categories.get("식당");
+
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+
+        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", 5);
+        Shop shop = shops.get("엽기떡볶이");
+        String bearerToken = "Bearer " + token;
+
+        //when
+        saveReview(reviewRequest, shop.getId(), bearerToken);
+
+        // when
+        ExtractableResponse<Response> response = 가게_리스트_조회_요청_sort(포항.getId(), 식당.getId(), Collections.emptyList(), false, "shopScore.star,desc");
+        List<ShopSimpleResponse> result = response.jsonPath().getList(".", ShopSimpleResponse.class);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result).hasSize(6);
+        assertThat(result.get(0).getName()).isEqualTo("엽기떡볶이");
     }
 
     @Test
@@ -224,13 +280,24 @@ public class ShopReadAcceptanceTest extends AcceptanceTest {
         return 가게_리스트_조회_요청(tag, category, subs, open, specification);
     }
 
-    private static ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open, RequestSpecification specification) {
+    public static ExtractableResponse<Response> 가게_리스트_조회_요청_sort(Long tag, Long category, List<Long> subs, boolean open, String sort) {
+        RequestSpecification specification = RestAssured.given(getRequestSpecification())
+                                                        .log().all();
+        return 가게_리스트_조회_요청(tag, category, subs, open, specification, sort);
+    }
+
+    private static ExtractableResponse<Response> 가게_리스트_조회_요청(Long tag, Long category, List<Long> subs, boolean open, RequestSpecification specification, String... sort) {
+        String sortCondition = "createdAt,asc";
+        if (sort.length > 0) {
+            sortCondition = sort[0];
+        }
         return specification
                 .contentType(APPLICATION_JSON_VALUE)
                 .queryParam("tag", tag)
                 .queryParam("category", category)
                 .queryParam("subCategories", subs)
                 .queryParam("open", open)
+                .queryParam("sort", sortCondition)
                 .when()
                 .get("/api/shops")
                 .then()
