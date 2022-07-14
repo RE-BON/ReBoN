@@ -10,6 +10,8 @@ import axios from 'axios';
 
 export default function Search() {
   const [autoComState, setAutoComState] = useState('none');
+  const [keyword, setKeyword] = useState();
+
   const onChangeState = () => {
     setAutoComState('block');
   };
@@ -20,6 +22,8 @@ export default function Search() {
   const onChangeKeyword = (e) => {
     setWord(e.target.value);
     console.log(word);
+    setKeyword(e.target.value);
+    // console.log(keyword);
   };
   
 
