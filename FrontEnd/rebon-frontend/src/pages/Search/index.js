@@ -10,14 +10,13 @@ import axios from 'axios';
 
 export default function Search() {
   const [autoComState, setAutoComState] = useState('none');
-  const [keyword, setKeyword] = useState();
 
   const onChangeState = () => {
     setAutoComState('block');
   };
   //검색창 입력받기
   const [keyword, setKeyword] = useState('');
-  const [token,setToken] = useState(window.sessionStorage.getItem("token"));
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
     setWord(e.target.value);
@@ -25,16 +24,15 @@ export default function Search() {
     setKeyword(e.target.value);
     // console.log(keyword);
   };
-  
 
   useEffect(() => {
     const config = {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     };
-    
-    if(token){
+
+    if (token) {
       axios
-        .get('http://3.34.139.61:8080/api/members',config)
+        .get('http://3.34.139.61:8080/api/members', config)
         .then((response) => {
           console.log('로그인 된 유저');
           console.log(response.data);
@@ -43,7 +41,7 @@ export default function Search() {
           console.log('error');
         });
     }
-    }, []);
+  }, []);
 
   return (
     <div className="search-background">
