@@ -1,58 +1,183 @@
-.star-wrapper {
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  padding-bottom: 3%;
+@media (max-width: 767px) {
+  .star-wrapper {
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    padding-bottom: 3%;
+    font-size: 1rem;
+  }
+
+  .star-wrapper-pharases {
+    width: 100%;
+    text-align: center;
+  }
+
+  .star-wrapper-pharases span {
+    color: rgba(0, 0, 0, 0.3);
+    padding: 0.5% 2%;
+    border-radius: 15px;
+    font-weight: bold;
+    border: 1.5px solid rgba(0, 0, 0, 0.3);
+  }
+
+  #myform fieldset {
+    margin-top: -2%;
+    display: inline-block;
+    border: 0;
+  }
+
+  #myform input[type='radio'] {
+    display: none;
+  }
+  #myform label {
+    font-size: 2rem;
+    color: transparent;
+    -webkit-text-stroke: 2px #fedb02;
+
+    stroke: black;
+    margin-left: 2%;
+  }
+
+  #myform label:hover {
+    text-shadow: 0 0 0 #fedb02;
+  }
+  #myform label:hover ~ label {
+    text-shadow: 0 0 0 #fedb02;
+  }
+
+  #myform fieldset {
+    width: 100%;
+    display: inline-block;
+    direction: rtl;
+    border: 0;
+  }
+
+  #myform fieldset legend {
+    text-align: left;
+  }
+
+  #myform input[type='radio']:checked ~ label {
+    text-shadow: 0 0 0 #fedb02;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .star-wrapper {
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    padding-bottom: 3%;
+    font-size: 1rem;
+  }
+
+  .star-wrapper-pharases {
+    width: 100%;
+    text-align: center;
+  }
+
+  .star-wrapper-pharases span {
+    color: rgba(0, 0, 0, 0.3);
+    padding: 0.5% 2%;
+    border-radius: 15px;
+    font-weight: bold;
+    border: 1.5px solid rgba(0, 0, 0, 0.3);
+  }
+
+  #myform fieldset {
+    margin-top: -2%;
+    display: inline-block;
+    border: 0;
+  }
+
+  #myform input[type='radio'] {
+    display: none;
+  }
+  #myform label {
+    font-size: 2rem;
+    color: transparent;
+    -webkit-text-stroke: 2px #fedb02;
+
+    stroke: black;
+    margin-left: 2%;
+  }
+
+  #myform label:hover {
+    text-shadow: 0 0 0 #fedb02;
+  }
+  #myform label:hover ~ label {
+    text-shadow: 0 0 0 #fedb02;
+  }
+
+  #myform fieldset {
+    width: 100%;
+    display: inline-block;
+    direction: rtl;
+    border: 0;
+  }
+
+  #myform fieldset legend {
+    text-align: left;
+  }
+
+  #myform input[type='radio']:checked ~ label {
+    text-shadow: 0 0 0 #fedb02;
+  }
 }
 
-.star-wrapper-pharases {
-  width: 100%;
-  text-align: center;
-}
+@media (min-width: 1200px) {
+  .star-wrapper {
+    background-color: #f5f5f5;
+    border-radius: 20px;
+    padding-bottom: 3%;
+  }
 
-.star-wrapper-pharases span {
-  color: rgba(0, 0, 0, 0.3);
-  padding: 0.5% 2%;
-  border-radius: 15px;
-  font-weight: bold;
-  border: 1.5px solid rgba(0, 0, 0, 0.3);
-}
+  .star-wrapper-pharases {
+    width: 100%;
+    text-align: center;
+  }
 
-#myform fieldset {
-  margin-top: -2%;
-  display: inline-block;
-  border: 0;
-}
+  .star-wrapper-pharases span {
+    color: rgba(0, 0, 0, 0.3);
+    padding: 0.5% 2%;
+    border-radius: 15px;
+    font-weight: bold;
+    border: 1.5px solid rgba(0, 0, 0, 0.3);
+  }
 
-#myform input[type='radio'] {
-  display: none;
-}
-#myform label {
-  font-size: 3em;
-  color: transparent;
-  -webkit-text-stroke: 2px #fedb02;
+  #myform fieldset {
+    margin-top: -2%;
+    display: inline-block;
+    border: 0;
+  }
 
-  stroke: black;
-  margin-left: 2%;
-}
+  #myform input[type='radio'] {
+    display: none;
+  }
+  #myform label {
+    font-size: 3em;
+    color: transparent;
+    -webkit-text-stroke: 2px #fedb02;
 
-#myform label:hover {
-  text-shadow: 0 0 0 #fedb02;
-}
-#myform label:hover ~ label {
-  text-shadow: 0 0 0 #fedb02;
-}
+    stroke: black;
+    margin-left: 2%;
+  }
 
-#myform fieldset {
-  width: 100%;
-  display: inline-block;
-  direction: rtl;
-  border: 0;
-}
+  #myform label:hover {
+    text-shadow: 0 0 0 #fedb02;
+  }
+  #myform label:hover ~ label {
+    text-shadow: 0 0 0 #fedb02;
+  }
 
-#myform fieldset legend {
-  text-align: left;
-}
+  #myform fieldset {
+    width: 100%;
+    display: inline-block;
+    direction: rtl;
+    border: 0;
+  }
 
-#myform input[type='radio']:checked ~ label {
-  text-shadow: 0 0 0 #fedb02;
+  #myform fieldset legend {
+    text-align: left;
+  }
+
+  #myform input[type='radio']:checked ~ label {
+    text-shadow: 0 0 0 #fedb02;
+  }
 }

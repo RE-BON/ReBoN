@@ -61,7 +61,7 @@
 }
 
 .best-img {
-  width: 100%;
+  width: 11.6rem;
   height: 280px;
   object-fit: cover;
   border-radius: 20px;
@@ -238,11 +238,23 @@
   font-weight: bold;
   font-size: 13px;
 }
-.select-main input[type='radio'] + label {
+/* .select-main input[type='radio'] + label {
   background-color: #fff;
   color: #333;
 }
 .select-main input[type='radio']:checked + label {
   background-color: #333;
   color: #fff;
+} */
+.radio-click-active {
+  background-color: #333;
+  color: #fff;
+}
+.radio-click-stay {
+  background-color: #fff;
+  color: #333;
+}
+
+@media screen and (max-width: 500px) {
+
 }

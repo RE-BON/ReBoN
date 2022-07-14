@@ -1,53 +1,67 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Tags from './Tags';
-import axios from 'axios';
-import Header from '../../components/Header';
+import AutoCompletes from './AutoCompletes';
+import HeaderHome from '../../components/HeaderHome';
 import '../../styles/search.css';
+import axios from 'axios';
+
 export default function Search() {
+  const [autoComState, setAutoComState] = useState('none');
+  const [keyword, setKeyword] = useState();
+
+  const onChangeState = () => {
+    setAutoComState('block');
+  };
   //검색창 입력받기
+  const [keyword, setKeyword] = useState('');
+  const [token,setToken] = useState(window.sessionStorage.getItem("token"));
   const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
     setWord(e.target.value);
     console.log(word);
+    setKeyword(e.target.value);
+    // console.log(keyword);
   };
+  
 
-  const [keyword, setKeyword] = useState([]);
   useEffect(() => {
-    axios
-      .get(`http://3.34.139.61:8080/api/tags/search?keyword=${word}`)
-      .then((response) => {
-        setKeyword(response.data);
-        console.log(keyword);
-      })
-      .catch((error) => {
-        console.log('error');
-      });
-  }, [word]);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    
+    if(token){
+      axios
+        .get('http://3.34.139.61:8080/api/members',config)
+        .then((response) => {
+          console.log('로그인 된 유저');
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log('error');
+        });
+    }
+    }, []);
+
   return (
     <div className="search-background">
       <div className="search-wrapper">
-        <Header />
+        <HeaderHome />
         <div className="search-content">
           <div className="title">
-            가고 싶은 지역을 입력해서 <br />
-            <span style={{ fontFamily: 'Jua' }}>맛집, 숙소</span>를 찾아보세요!
+            가고싶은 지역을 입력해서
+            <span style={{ fontFamily: 'Jua' }}> 맛집, 숙소</span>를 찾아보세요!
           </div>
 
           <div className="input-bar">
-            <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} />
-            {keyword.slice(0, 3).map((item) => (
-              <Link to={`/main?name=${item.name}`} state={{ item }}>
-                <li>{item.name}</li>
-              </Link>
-            ))}
-            <Link to={`/main?name=${word}`} state={{}} style={{ color: 'inherit', textDecoration: 'none' }}>
-              <FontAwesomeIcon icon={faSearch} className="search" />
-            </Link>
+            <input placeholder="가고싶은 지역을 입력해주세요." onChange={onChangeKeyword} onClick={onChangeState} />
+            <FontAwesomeIcon icon={faSearch} className="search" />
           </div>
-
+          <div style={{ display: autoComState }}>
+            <AutoCompletes word={word} />
+          </div>
           <Tags />
         </div>
       </div>
