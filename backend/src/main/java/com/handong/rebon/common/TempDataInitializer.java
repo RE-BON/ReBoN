@@ -13,6 +13,8 @@ import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.shop.domain.type.Cafe;
 import com.handong.rebon.shop.domain.type.Lodging;
 import com.handong.rebon.shop.domain.type.Restaurant;
+import com.handong.rebon.shop.infrastructure.NaverShopInserter;
+import com.handong.rebon.shop.infrastructure.dto.NaverShopDto;
 import com.handong.rebon.tag.domain.Tag;
 import com.handong.rebon.tag.domain.repository.TagRepository;
 import com.handong.rebon.tag.domain.repository.TagSearchRepository;
@@ -30,15 +32,19 @@ public class TempDataInitializer implements ApplicationRunner {
     private final TagSearchRepository tagSearchRepository;
     private final CategoryRepository categoryRepository;
     private final ShopRepository shopRepository;
+    private final NaverShopInserter shopInserter;
 
     private Map<String, Tag> tags = new HashMap<>();
     private Map<String, Category> categories = new HashMap<>();
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        initTags();
-        initCategories();
-        initShops();
+        List<NaverShopDto> result = shopInserter.getShops("포항 식당");
+
+
+        //        initTags();
+        //        initCategories();
+        //        initShops();
     }
 
     private void initTags() {
