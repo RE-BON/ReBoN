@@ -26,12 +26,14 @@ import com.handong.rebon.tag.domain.repository.TagSearchRepository;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
+@Profile("prod")
 public class DataInitializer implements ApplicationRunner {
     private final TagRepository tagRepository;
     private final TagSearchRepository tagSearchRepository;

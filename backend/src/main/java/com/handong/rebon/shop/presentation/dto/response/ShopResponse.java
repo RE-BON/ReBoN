@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.category.ShopCategoryResponseDto;
 import com.handong.rebon.shop.application.dto.response.image.ShopImageResponseDto;
-import com.handong.rebon.shop.application.dto.response.menu.MenuGroupResponseDto;
+import com.handong.rebon.shop.application.dto.response.menu.MenuResponseDto;
 import com.handong.rebon.shop.application.dto.response.tag.ShopTagResponseDto;
 import com.handong.rebon.shop.presentation.dto.response.category.ShopCategoryResponse;
 import com.handong.rebon.shop.presentation.dto.response.image.ShopImageResponse;
-import com.handong.rebon.shop.presentation.dto.response.menu.MenuGroupResponse;
+import com.handong.rebon.shop.presentation.dto.response.menu.MenuResponse;
 import com.handong.rebon.shop.presentation.dto.response.tag.ShopTagResponse;
 
 import lombok.AccessLevel;
@@ -30,7 +30,7 @@ public class ShopResponse {
     private String phone;
     private List<ShopCategoryResponse> subCategories;
     private String businessHour;
-    private List<MenuGroupResponse> menus;
+    private List<MenuResponse> menus;
     private String address;
     private String longitude;
     private String latitude;
@@ -47,7 +47,7 @@ public class ShopResponse {
             String phone,
             List<ShopCategoryResponse> subCategories,
             String businessHour,
-            List<MenuGroupResponse> menus,
+            List<MenuResponse> menus,
             String address,
             String longitude,
             String latitude,
@@ -100,9 +100,9 @@ public class ShopResponse {
                             .collect(Collectors.toList());
     }
 
-    private static List<MenuGroupResponse> convertToMenuResponse(List<MenuGroupResponseDto> menus) {
+    private static List<MenuResponse> convertToMenuResponse(List<MenuResponseDto> menus) {
         return menus.stream()
-                    .map(MenuGroupResponse::from)
+                    .map(MenuResponse::from)
                     .collect(Collectors.toList());
     }
 

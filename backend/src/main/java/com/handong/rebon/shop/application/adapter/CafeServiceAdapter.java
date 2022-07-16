@@ -1,10 +1,10 @@
 package com.handong.rebon.shop.application.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.shop.application.MenuGroupService;
+import com.handong.rebon.shop.application.MenuService;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.domain.Shop;
@@ -13,8 +13,8 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
-import com.handong.rebon.shop.domain.menu.MenuGroup;
 import com.handong.rebon.shop.domain.type.Cafe;
+import com.handong.rebon.shop.infrastructure.dto.ShopInfoDto;
 
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Component
 public class CafeServiceAdapter implements ShopServiceAdapter {
-    private final MenuGroupService menuGroupService;
+    private final MenuService menuService;
 
     @Override
     public boolean supports(Category category) {
@@ -39,7 +39,7 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
                         .shopScore(new ShopScore(0.0, 0))
                         .build();
 
-        List<Menu> menus = menuGroupService.createMenu(cafe, data.getMenus());
+        List<Menu> menus = menuService.createMenus(data.getMenus());
         cafe.addMenu(menus);
         return cafe;
     }
@@ -47,14 +47,35 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
     @Override
     public ShopResponseDto convertToShopResponseDto(Shop shop) {
         Cafe cafe = (Cafe) shop;
-        Map<MenuGroup, List<Menu>> menuGroups = cafe.getMenuGroupByMenuGroup();
-        return ShopResponseDto.of(shop, menuGroups);
+        List<Menu> menus = cafe.getMenus();
+        return ShopResponseDto.of(shop, menus);
     }
 
     @Override
     public void update(Shop shop, ShopRequestDto shopRequestDto) {
         Cafe cafe = (Cafe) shop;
-        List<Menu> menu = menuGroupService.createMenu(cafe, shopRequestDto.getMenus());
+        List<Menu> menu = menuService.createMenus(shopRequestDto.getMenus());
         cafe.updateMenu(menu);
+    }
+
+    @Override
+    public Shop createNaverShop(ShopImages shopImages, ShopInfoDto data) {
+        ShopContent content = new ShopContent(data.getName(), data.getBizhourInfo(), data.getTel());
+        Location location = new Location(data.getRoadAddress());
+        ShopScore score = new ShopScore(0.0, 0);
+        Cafe cafe = Cafe.builder()
+                        .shopContent(content)
+                        .location(location)
+                        .shopImages(shopImages)
+                        .shopScore(score)
+                        .naverId(data.getId())
+                        .build();
+
+        List<Menu> menus = new ArrayList<>();
+        if (data.getMenuExist() == 1) {
+            menus = menuService.createMenus(data.getMenuInfo());
+        }
+        cafe.addMenu(menus);
+        return cafe;
     }
 }

@@ -9,6 +9,7 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.type.Lodging;
+import com.handong.rebon.shop.infrastructure.dto.ShopInfoDto;
 
 import org.springframework.stereotype.Component;
 
@@ -40,5 +41,10 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
 
     @Override
     public void update(Shop shop, ShopRequestDto shopRequestDto) {
+    }
+
+    @Override
+    public Shop createNaverShop(ShopImages shopImages, ShopInfoDto shopInfoDto) {
+        return null;
     }
 }

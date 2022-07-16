@@ -107,32 +107,6 @@
             <br>
 
             <div class="form-group">
-                <label for="latitude">위도</label>
-                <input id="latitude" type="text" class="form-control"
-                       name="latitude"
-                       th:value="${shop.location.latitude}"
-                       placeholder="가게 위도" aria-describedby="latitudeHelp">
-                <small id="latitudeHelp" class="form-text text-muted">
-                    가게 주소의 위도를 입력하세요.
-                </small>
-            </div>
-
-            <br>
-
-            <div class="form-group">
-                <label for="longitude">경도</label>
-                <input id="longitude" type="text" class="form-control"
-                       name="longitude"
-                       th:value="${shop.location.longitude}"
-                       placeholder="가게 경도" aria-describedby="longitudeHelp">
-                <small id="longitudeHelp" class="form-text text-muted">
-                    가게 주소의 경도를 입력하세요.
-                </small>
-            </div>
-
-            <br>
-
-            <div class="form-group">
                 <label for="images">사진</label>
                 <input id="images" multiple="multiple" type="file" th:field="*{images}" class="form-control"
                        placeholder="가게 사진" aria-describedby="imagesHelp">
@@ -144,19 +118,14 @@
             <br>
 
             <div class="form-group">
-                <label for="menuGroup">메뉴(식당, 카페)</label>
-                <hr>
-                <div id="menuGroup" th:each="menuGroup, itemStat : *{menus}">
-                    <p>메뉴 그룹: <input th:field="*{menus[__${itemStat.index}__].name}" class="form-control"/></p>
-                    <div th:each="menu, menuStat : *{menus[__${itemStat.index}__].menus}">
-                        <p>메뉴 이름: <input th:field="*{menus[__${itemStat.index}__].menus[__${menuStat.index}__].name}"
-                                         class="form-text"/>
-                            가격: <input th:field="*{menus[__${itemStat.index}__].menus[__${menuStat.index}__].price}"
-                                       class="form-text"/></p>
-                    </div>
-                    <hr>
-                </div>
-                <br>
+                <label for="menus">가게 메뉴</label>
+                <input id="menus" type="text" class="form-control"
+                       name="menus"
+                       th:field="*{menus}"
+                       placeholder="가게 메뉴" aria-describedby="menusHelp">
+                <small id="menusHelp" class="form-text text-muted">
+                    가게 메뉴를 입력하세요.
+                </small>
             </div>
 
             <div class="form-group">

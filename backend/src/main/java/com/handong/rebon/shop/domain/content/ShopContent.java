@@ -23,8 +23,8 @@ public class ShopContent {
         this(name, LocalTime.MIN, LocalTime.MAX, "");
     }
 
-    public ShopContent(String name, String businessHour, String tel) {
-        this(name, tel);
+    public ShopContent(String name, String hour, String tel) {
+        this(name, LocalTime.MIN, LocalTime.MAX, tel);
     }
 
     @Builder
@@ -42,7 +42,7 @@ public class ShopContent {
         }
     }
 
-    public String getBusinessHour() {
+    public String businessHour() {
         StringBuilder sb = new StringBuilder();
         sb.append(start).append(":").append(end);
         return sb.toString();
