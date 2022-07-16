@@ -1,9 +1,14 @@
 package com.handong.rebon.common;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.category.domain.repository.CategoryRepository;
+import com.handong.rebon.shop.application.ShopAdapterService;
+import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
+import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
+import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -27,11 +32,13 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class TempDataInitializer implements ApplicationRunner {
+public class DataInitializer implements ApplicationRunner {
     private final TagRepository tagRepository;
     private final TagSearchRepository tagSearchRepository;
     private final CategoryRepository categoryRepository;
     private final ShopRepository shopRepository;
+
+    private final ShopAdapterService shopAdapterService;
     private final NaverShopInserter shopInserter;
 
     private Map<String, Tag> tags = new HashMap<>();
@@ -39,12 +46,50 @@ public class TempDataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<NaverShopDto> result = shopInserter.getShops("포항 식당");
+        Category 식당 = new Category("식당");
+        Category 카페 = new Category("카페");
+        Category 숙소 = new Category("숙소");
+        categoryRepository.saveAll(List.of(식당, 카페, 숙소));
 
+        List<NaverShopDto> restaurants = shopInserter.getShops(식당, "포항 식당");
+        List<NaverShopDto> cafes = shopInserter.getShops(카페, "포항 카페");
+        List<NaverShopDto> lodgings = shopInserter.getShops(숙소, "포항 숙소");
+
+        List<Shop> shops = getShops(restaurants, cafes, lodgings);
 
         //        initTags();
         //        initCategories();
         //        initShops();
+    }
+
+    private List<Shop> getShops(List<NaverShopDto>... shops) {
+        return Arrays.stream(shops)
+                     .flatMap(Collection::stream)
+                     .map(NaverShopDto::getAllShops)
+                     .flatMap(Collection::stream)
+                     .map(dto -> {
+                         Category category = dto.getMainCategory();
+                         List<Category> subCategories = getSubCategories(dto.getCategory());
+                         List<Tag> tags = getTags(dto.getRoadAddress());
+                         ShopImages shopImages = new ShopImages(List.of(new ShopImage(dto.getThumUrl(), true)));
+
+                         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
+                         Shop shop = adapter.createNaverShop(shopImages, dto);
+
+                         shop.addTags(tags);
+                         shop.addCategories(category, subCategories);
+
+                         return shop;
+                     }).collect(Collectors.toList());
+    }
+
+    private List<Category> getSubCategories(List<String> category) {
+        return null;
+    }
+
+    private List<Tag> getTags(String address) {
+
+        return null;
     }
 
     private void initTags() {

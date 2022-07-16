@@ -2,6 +2,8 @@ package com.handong.rebon.shop.infrastructure.dto;
 
 import java.util.List;
 
+import com.handong.rebon.category.domain.Category;
+
 public class ShopInfoDto {
     private Long id;
     private String name;
@@ -12,6 +14,7 @@ public class ShopInfoDto {
     private String bizhourInfo;
     private int menuExist;
     private String menuInfo;
+    private Category mainCategory;
 
     public ShopInfoDto() {
     }
@@ -72,5 +75,13 @@ public class ShopInfoDto {
 
     public String getMenuInfo() {
         return menuInfo;
+    }
+
+    public void setMainCategory(Category category) {
+        this.mainCategory = category;
+    }
+
+    public Category getMainCategory() {
+        return mainCategory;
     }
 }

@@ -16,4 +16,8 @@ public class Location {
     public Location() {
         this("", "", "");
     }
+
+    public Location(String address) {
+        this.address = address;
+    }
 }

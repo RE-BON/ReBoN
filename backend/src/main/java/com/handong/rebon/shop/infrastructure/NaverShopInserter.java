@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.exception.OpenApiServerException;
 import com.handong.rebon.shop.infrastructure.dto.NaverShopDto;
 
@@ -20,7 +21,7 @@ public class NaverShopInserter {
         this.webClient = webClient;
     }
 
-    public List<NaverShopDto> getShops(String query) {
+    public List<NaverShopDto> getShops(Category category, String query) {
         try {
             int displayCount = 10;
             int pageCount = TOTAL_COUNT / displayCount;
@@ -33,6 +34,9 @@ public class NaverShopInserter {
             }
 
             latch.await();
+
+            results.forEach(dto -> dto.setCategory(category));
+
             return new ArrayList<>(results);
         } catch (InterruptedException e) {
             throw new IllegalArgumentException();

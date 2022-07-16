@@ -43,9 +43,10 @@ public class Cafe extends Shop {
             ShopImages shopImages,
             Location location,
             ShopScore shopScore,
+            Long naverId,
             boolean deleted
     ) {
-        super(id, category, shopContent, shopImages, location, shopScore, deleted);
+        super(id, category, shopContent, shopImages, location, shopScore, naverId, deleted);
     }
 
     public void addMenu(List<Menu> menus) {

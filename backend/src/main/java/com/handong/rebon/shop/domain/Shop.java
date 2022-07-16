@@ -62,6 +62,8 @@ public abstract class Shop extends BaseEntity {
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ShopTag> shopTags = new ArrayList<>();
 
+    private Long naverId;
+
     public Shop(
             Long id,
             Category category,
@@ -69,6 +71,7 @@ public abstract class Shop extends BaseEntity {
             ShopImages shopImages,
             Location location,
             ShopScore shopScore,
+            Long naverId,
             boolean deleted
     ) {
         super(deleted);
@@ -78,6 +81,7 @@ public abstract class Shop extends BaseEntity {
         this.shopImages = shopImages;
         this.location = location;
         this.shopScore = shopScore;
+        this.naverId = naverId;
 
         shopImages.belongTo(this);
     }

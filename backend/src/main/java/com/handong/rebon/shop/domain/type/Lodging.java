@@ -30,8 +30,9 @@ public class Lodging extends Shop {
             ShopImages shopImages,
             Location location,
             ShopScore shopScore,
+            Long naverId,
             boolean deleted
     ) {
-        super(id, category, shopContent, shopImages, location, shopScore, deleted);
+        super(id, category, shopContent, shopImages, location, shopScore, naverId, deleted);
     }
 }

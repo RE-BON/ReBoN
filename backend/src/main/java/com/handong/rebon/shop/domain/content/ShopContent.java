@@ -23,6 +23,10 @@ public class ShopContent {
         this(name, LocalTime.MIN, LocalTime.MAX, "");
     }
 
+    public ShopContent(String name, String businessHour, String tel) {
+        this(name, tel);
+    }
+
     @Builder
     public ShopContent(String name, LocalTime start, LocalTime end, String phone) {
         validatesBlankName(name);
