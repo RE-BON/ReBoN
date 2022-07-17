@@ -23,8 +23,8 @@ public class ShopContent {
         this(name, LocalTime.MIN, LocalTime.MAX, "");
     }
 
-    public ShopContent(String name, String hour, String tel) {
-        this(name, LocalTime.MIN, LocalTime.MAX, tel);
+    public ShopContent(String name, LocalTime[] hours, String phone) {
+        this(name, hours[0], hours[1], phone);
     }
 
     @Builder

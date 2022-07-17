@@ -1,8 +1,13 @@
 package com.handong.rebon.shop.infrastructure.dto;
 
+import java.time.LocalTime;
 import java.util.List;
+import java.util.regex.Matcher;
 
 import com.handong.rebon.category.domain.Category;
+import com.handong.rebon.util.StringUtil;
+
+import static com.handong.rebon.common.DataInitializer.HOUR_PATTERN;
 
 public class ShopInfoDto {
     private Long id;
@@ -39,6 +44,15 @@ public class ShopInfoDto {
         this.bizhourInfo = bizhourInfo;
         this.menuExist = menuExist;
         this.menuInfo = menuInfo;
+    }
+
+    public LocalTime[] getBizhours() {
+        Matcher matcher = HOUR_PATTERN.matcher(bizhourInfo);
+        if (matcher.find()) {
+            String time = matcher.group();
+            return StringUtil.getTime(time);
+        }
+        return new LocalTime[]{LocalTime.MAX, LocalTime.MAX};
     }
 
     public Long getId() {

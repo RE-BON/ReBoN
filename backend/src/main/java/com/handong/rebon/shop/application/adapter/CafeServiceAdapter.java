@@ -60,7 +60,7 @@ public class CafeServiceAdapter implements ShopServiceAdapter {
 
     @Override
     public Shop createNaverShop(ShopImages shopImages, ShopInfoDto data) {
-        ShopContent content = new ShopContent(data.getName(), data.getBizhourInfo(), data.getTel());
+        ShopContent content = new ShopContent(data.getName(), data.getBizhours(), data.getTel());
         Location location = new Location(data.getRoadAddress());
         ShopScore score = new ShopScore(0.0, 0);
         Cafe cafe = Cafe.builder()

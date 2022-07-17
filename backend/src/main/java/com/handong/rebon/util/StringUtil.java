@@ -2,12 +2,14 @@ package com.handong.rebon.util;
 
 import java.time.LocalTime;
 import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StringUtil {
+
     public static String makeContainingKeyword(String keyword) {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("%");
