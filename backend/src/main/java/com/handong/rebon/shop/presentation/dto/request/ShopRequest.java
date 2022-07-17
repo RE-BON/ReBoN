@@ -23,8 +23,6 @@ public class ShopRequest {
     private String businessHour;
     private String phone;
     private String address;
-    private String latitude;
-    private String longitude;
     private List<MultipartFile> images = new ArrayList<>();
     private List<Long> tags;
     private String menus;
@@ -40,8 +38,6 @@ public class ShopRequest {
                              .end(businessHour[1])
                              .phone(phone)
                              .address(address)
-                             .latitude(latitude)
-                             .longitude(longitude)
                              .images(images)
                              .tags(tags)
                              .menus(menus)

@@ -201,8 +201,6 @@ class ShopIntegrationTest extends IntegrationTest {
                              .end(LocalTime.of(22, 0))
                              .phone("010-1234-5678")
                              .address("경상북도 포항")
-                             .longitude("129.389762")
-                             .latitude("36.102440")
                              .tags(tagIds)
                              .images(getImages())
                              .menus(getMenus())

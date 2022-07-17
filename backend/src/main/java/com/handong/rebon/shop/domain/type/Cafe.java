@@ -12,7 +12,6 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
 
 import lombok.AccessLevel;
@@ -38,12 +37,12 @@ public class Cafe extends Shop {
             Category category,
             ShopContent shopContent,
             ShopImages shopImages,
-            Location location,
+            String address,
             ShopScore shopScore,
             Long naverId,
             boolean deleted
     ) {
-        super(id, category, shopContent, shopImages, location, shopScore, naverId, deleted);
+        super(id, category, shopContent, shopImages, address, shopScore, naverId, deleted);
     }
 
     public void addMenu(List<Menu> menus) {

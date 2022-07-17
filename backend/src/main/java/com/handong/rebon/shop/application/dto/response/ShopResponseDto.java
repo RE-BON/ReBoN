@@ -12,7 +12,6 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 
@@ -33,8 +32,6 @@ public class ShopResponseDto {
     private String businessHour;
     private List<MenuResponseDto> menus;
     private String address;
-    private String longitude;
-    private String latitude;
     private List<ShopImageResponseDto> images;
 
     public static ShopResponseDto from(Shop shop) {
@@ -43,7 +40,6 @@ public class ShopResponseDto {
 
     public static ShopResponseDto of(Shop shop, List<Menu> menus) {
         ShopContent shopContent = shop.getShopContent();
-        Location location = shop.getLocation();
         return ShopResponseDto.builder()
                               .id(shop.getId())
                               .category(ShopCategoryResponseDto.from(shop.getCategory()))
@@ -54,9 +50,7 @@ public class ShopResponseDto {
                               .subCategories(convertToShopCategoryResponseDto(shop.getShopCategories()))
                               .businessHour(shopContent.businessHour())
                               .menus(convertToMenuResponseDto(menus))
-                              .address(location.getAddress())
-                              .longitude(location.getLongitude())
-                              .latitude(location.getLatitude())
+                              .address(shop.getAddress())
                               .images(convertToShopImageResponseDto(shop.getShopImages()))
                               .build();
     }
