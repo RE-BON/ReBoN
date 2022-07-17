@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.handong.rebon.shop.domain.menu.Menu;
 
@@ -17,10 +15,13 @@ import lombok.AllArgsConstructor;
 @Service
 public class MenuService {
     private static String MENU_DELIMITER = "|";
-    private static Pattern MENU_PATTERN = Pattern.compile("([^0-9]+.[^0-9]+)([0-9]+,[0-9]+)?");
 
     public List<Menu> createMenus(String menuInfo) {
         List<Menu> menus = new ArrayList<>();
+
+        if (Objects.isNull(menuInfo) || menuInfo.isBlank()) {
+            return menus;
+        }
 
         StringTokenizer st = new StringTokenizer(menuInfo, MENU_DELIMITER);
         while (st.hasMoreTokens()) {
@@ -31,19 +32,19 @@ public class MenuService {
         return menus;
     }
 
-    private void createMenu(List<Menu> menus, String menuInfo) {
-        Matcher matcher = MENU_PATTERN.matcher(menuInfo);
-
-        if (matcher.find()) {
-            String name = matcher.group(1);
-            String priceInfo = matcher.group(2);
-            int price = 0;
-            if (!Objects.isNull(priceInfo)) {
-                price = Integer.parseInt(priceInfo.replaceAll(",", ""));
-            }
-
-            Menu menu = new Menu(name, price);
-            menus.add(menu);
+    private void createMenu(List<Menu> results, String menuInfo) {
+        String[] menus = menuInfo.split(" ");
+        StringBuilder name = new StringBuilder();
+        for (int i = 0; i < menus.length - 1; i++) {
+            name.append(menus[i]).append(" ");
         }
+        String priceInfo = menus[menus.length - 1];
+        int price = 0;
+        if (priceInfo.matches("\\d{1,3}(,\\d{3})*")) {
+            price = Integer.parseInt(priceInfo.replaceAll(",", ""));
+        }
+
+        Menu menu = new Menu(name.toString().strip(), price);
+        results.add(menu);
     }
 }

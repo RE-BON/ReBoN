@@ -14,6 +14,10 @@ public class ResultDto {
         this.place = place;
     }
 
+    public int getTotalCount() {
+        return place.getTotalCount();
+    }
+
     public List<ShopInfoDto> getAllShops() {
         return place.getList();
     }
@@ -22,7 +26,7 @@ public class ResultDto {
         return place;
     }
 
-    public void setCategory(Category category) {
-        this.place.setCategory(category);
+    public void setBasicData(Category category, String query) {
+        this.place.setBasicData(category, query);
     }
 }

@@ -9,6 +9,7 @@ import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.type.Lodging;
+import com.handong.rebon.shop.domain.type.Restaurant;
 import com.handong.rebon.shop.infrastructure.dto.ShopInfoDto;
 
 import org.springframework.stereotype.Component;
@@ -44,7 +45,17 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public Shop createNaverShop(ShopImages shopImages, ShopInfoDto shopInfoDto) {
-        return null;
+    public Shop createNaverShop(ShopImages shopImages, ShopInfoDto data) {
+        ShopContent content = new ShopContent(data.getName(), data.getBizhours(), data.getTel());
+        Location location = new Location(data.getRoadAddress());
+        ShopScore score = new ShopScore(0.0, 0);
+        Lodging lodging = Lodging.builder()
+                                          .shopContent(content)
+                                          .location(location)
+                                          .shopImages(shopImages)
+                                          .shopScore(score)
+                                          .naverId(data.getId())
+                                          .build();
+        return lodging;
     }
 }

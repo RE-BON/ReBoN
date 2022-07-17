@@ -170,4 +170,16 @@ public abstract class Shop extends BaseEntity {
         return likes.stream()
                     .anyMatch(l -> l.contain(loginMember.getId()));
     }
+
+    public List<Tag> getTags() {
+        return shopTags.stream()
+                       .map(ShopTag::getTag)
+                       .collect(Collectors.toList());
+    }
+
+    public List<Category> getSubcategories() {
+        return shopCategories.stream()
+                             .map(ShopCategory::getCategory)
+                             .collect(Collectors.toList());
+    }
 }
