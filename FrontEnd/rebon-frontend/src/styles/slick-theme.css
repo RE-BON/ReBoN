@@ -52,7 +52,7 @@
   .slick-prev {
     /* position: fixed; */
     left: 20px;
-    top: 130px;
+    top: 190px;
     z-index: 5;
   }
   [dir='rtl'] .slick-prev {
@@ -70,7 +70,7 @@
   .slick-next {
     /* right: -50px; */
     right: 20px;
-    top: 130px;
+    top: 190px;
     z-index: 5;
   }
   [dir='rtl'] .slick-next {
