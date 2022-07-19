@@ -79,9 +79,10 @@ public class ApiShopController {
     @GetMapping("/shops/likes")
     public ResponseEntity<List<ShopSimpleResponse>> getLikeShops(
             @Login LoginMember loginMember,
-            @RequestParam Long categoryId
+            @RequestParam Long categoryId,
+            @PageableDefault Pageable pageable
     ) {
-        List<ShopSimpleResponseDto> responses = shopService.findLikeShops(loginMember.getId(), categoryId);
+        List<ShopSimpleResponseDto> responses = shopService.findLikeShops(loginMember.getId(), categoryId, pageable);
         return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
     }
 }
