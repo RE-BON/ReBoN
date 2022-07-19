@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import Star from './Star';
 import PostModal from './PostModal';
 import { useState } from 'react';
+import axios from 'axios';
 import AWS from 'aws-sdk';
 
 export default function Post() {
@@ -33,6 +34,27 @@ export default function Post() {
         resolve();
       };
     });
+  };
+
+  const postSubmit = () => {
+    axios
+      .post('http://3.34.139.61:8080/api/shops/1/reviews', {
+        content: '맛이 좋아요',
+        tip: '필수로 시키자',
+        imageUrls: [],
+        star: 5,
+      })
+      .then(function (response) {
+        // -- 이 200일 경우
+        console.log(111111111111111);
+      })
+      .catch(function (error) {
+        // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
+        console.log(error);
+      })
+      .then(function () {
+        // 항상 실행
+      });
   };
 
   return (
@@ -92,7 +114,7 @@ export default function Post() {
         </div>
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
-          <div className="post-button-finish">
+          <div className="post-button-finish" onClick={postSubmit}>
             <PostModal />
           </div>
         </div>

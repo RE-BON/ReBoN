@@ -2,13 +2,29 @@ import '../../styles/post.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/Header';
 import Star from './Star';
 import ModifyModal from './ModifyModal';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AWS from 'aws-sdk';
 
 export default function Modify() {
+  const [review, setReview] = useState({});
+  useEffect(() => {
+    axios
+      .get('http://3.34.139.61:8080/api/my-reviews')
+      .then((response) => {
+        console.log(1111111111111111);
+        // setReview(response.data);
+        // console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';
   const bucket = 'elice-boardgame-project';
@@ -40,7 +56,14 @@ export default function Modify() {
       {isMobile ? <div></div> : <Header />}
 
       <div className="post-wrapper">
-        {isMobile ? <div className="post-title">리뷰쓰기</div> : <div className="post-title">리뷰쓰기</div>}
+        {isMobile ? (
+          <div className="post-title">
+            <FontAwesomeIcon icon={faArrowLeft} />
+            리뷰쓰기
+          </div>
+        ) : (
+          <div className="post-title">리뷰쓰기</div>
+        )}
 
         <div className="post-star">
           <Star />
