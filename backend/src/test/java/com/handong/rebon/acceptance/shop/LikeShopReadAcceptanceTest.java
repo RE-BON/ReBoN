@@ -67,6 +67,22 @@ public class LikeShopReadAcceptanceTest extends AcceptanceTest {
                 LocalTime.MIN,
                 LocalTime.MAX
         ));
+        shops.put("인브리즈", adminShopRegister.CafeRegisterWithMenu(
+                "인브리즈",
+                categories.get("카페"),
+                Collections.singletonList(categories.get("개인카페")),
+                Arrays.asList(tags.get("포항"), tags.get("한동대")),
+                LocalTime.MIN,
+                LocalTime.MAX
+        ));
+        shops.put("예소드", adminShopRegister.CafeRegisterWithMenu(
+                "예소드",
+                categories.get("카페"),
+                Collections.singletonList(categories.get("개인카페")),
+                Arrays.asList(tags.get("포항"), tags.get("한동대")),
+                LocalTime.MIN,
+                LocalTime.MAX
+        ));
     }
 
     @Test
@@ -79,7 +95,7 @@ public class LikeShopReadAcceptanceTest extends AcceptanceTest {
         가게_좋아요(token, shops.get("설빙"));
         Long categoryId = categories.get("카페").getId();
         //when
-        ExtractableResponse<Response> response = 찜한_가게_조회(token, categoryId);
+        ExtractableResponse<Response> response = 찜한_가게_조회(token, categoryId, 0,2);
         List<ShopSimpleResponse> result = response.as(new TypeRef<>() {});
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
@@ -89,13 +105,36 @@ public class LikeShopReadAcceptanceTest extends AcceptanceTest {
 
     }
 
-    private ExtractableResponse<Response> 찜한_가게_조회(String token, Long categoryId) {
+    @Test
+    @DisplayName("내가 찜한 가게 리스트 다음페이지 조회")
+    public void getLikeShopsWithPaging() {
+        //given
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+        가게_좋아요(token, shops.get("티타"));
+        가게_좋아요(token, shops.get("설빙"));
+        가게_좋아요(token, shops.get("인브리즈"));
+        가게_좋아요(token, shops.get("예소드"));
+        Long categoryId = categories.get("카페").getId();
+        //when
+        ExtractableResponse<Response> response = 찜한_가게_조회(token, categoryId, 1,2);
+        List<ShopSimpleResponse> result = response.as(new TypeRef<>() {});
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result).extracting("name")
+                          .containsOnly("인브리즈", "예소드");
+
+    }
+
+    private ExtractableResponse<Response> 찜한_가게_조회(String token, Long categoryId, int pageNum, int pageSize) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .header("Authorization", "Bearer " + token)
                           .contentType(APPLICATION_JSON_VALUE)
                           .when()
-                          .get("/api/shops/likes?categoryId=" + categoryId)
+                          .get("/api/shops/likes?categoryId=" + categoryId
+                                  + "&page=" + pageNum + "&size=" + pageSize)
                           .then()
                           .log().all()
                           .extract();
