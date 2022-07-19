@@ -3,14 +3,19 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
+import './../../../../styles/review-modal.css';
+import { Link } from 'react-router-dom';
 
-import '../../../../styles/footprint-modal.css';
-
-export default function FootprintModal() {
+import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
+import { MoreVertical, Trash, Edit, AlertOctagon, X } from 'react-feather';
+export default function ReviewModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
+  const [report, setReport] = useState([]);
 
   function toggleModal(e) {
+    console.log('hihihi');
     setOpacity(0);
     setIsOpen(!isOpen);
   }
@@ -28,35 +33,23 @@ export default function FootprintModal() {
     });
   }
 
-  const StyledModal = Modal.styled`
-  width: 23rem;
-  height: 10rem;
-  padding : 20px;
-  border-radius:20px;
-  background-color: white;
-  opacity: ${(props) => props.opacity};
-  transition : all 0.3s ease-in-out;
-  `;
+  const handleClickReport = (e) => {
+    console.log(e.target.value);
+    setReport(e.target.value);
+  };
 
-  // const DeleteModal = Modal.styled`
-  // width: 23rem;
-  // height: 30rem;
-  // padding : 20px;
-  // border-radius:20px;
-  // background-color: white;
-  // opacity: ${(props) => props.opacity};
-  // transition : all 0.3s ease-in-out;
-  // `;
-
-  // const ConfilrmModal = Modal.styled`
-  // width: 23rem;
-  // height: 10rem;
-  // padding : 20px;
-  // border-radius:20px;
-  // background-color: white;
-  // opacity: ${(props) => props.opacity};
-  // transition : all 0.3s ease-in-out;
-  // `;
+  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <Link
+      to=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+    </Link>
+  ));
 
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
@@ -64,38 +57,36 @@ export default function FootprintModal() {
   `;
 
   return (
-    <div className="footprint-modal-wrapper">
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <div className="footprint-modal" onClick={toggleModal}>
-          리뷰삭제
-        </div>
-
-        <StyledModal
-          isOpen={isOpen}
-          afterOpen={afterOpen}
-          beforeClose={beforeClose}
-          onBackgroundClick={toggleModal}
-          onEscapeKeydown={toggleModal}
-          opacity={opacity}
-          backgroundProps={{ opacity }}
-        >
-          <div className="footprint-modal-content">
-            <div className="footprint-modal-delete">
-              <button onClick={toggleModal}>
-                <img src="../../../../image/trash.png" alt="trash-img" />
-              </button>
-              삭제하기
+    <ModalProvider backgroundComponent={FadingBackground}>
+      <Dropdown>
+        <Dropdown.Toggle as={CustomToggle}>
+          <MoreVertical size="15px" className="text-secondary" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu align="end">
+          <Dropdown.Item eventKey="1">
+            <div onClick={toggleModal}>
+              <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
             </div>
-
-            <div className="footprint-modal-close">
-              <button onClick={toggleModal}>
-                <FontAwesomeIcon icon={faXmark} />
-              </button>
-              닫기
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="2">
+            <div onClick={toggleModal}>
+              <Trash size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰삭제</p>
             </div>
-          </div>
-        </StyledModal>
-      </ModalProvider>
-    </div>
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="3">
+            <X size="18px" className="dropdown-item-icon" /> <p className="review-modal-close">닫기</p>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </ModalProvider>
   );
 }
+
+const StyledModal = Modal.styled`
+  width: 22rem;
+  height: 23rem;
+  padding : 20px;
+  border-radius:20px;
+  background-color: white;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;

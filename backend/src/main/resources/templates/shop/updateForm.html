@@ -97,36 +97,10 @@
                 <label for="address">가게 주소</label>
                 <input id="address" type="text" class="form-control"
                        name="address"
-                       th:value="${shop.location.address}"
+                       th:value="${shop.address}"
                        placeholder="가게 주소" aria-describedby="addressHelp">
                 <small id="addressHelp" class="form-text text-muted">
                     가게 주소를 입력하세요.
-                </small>
-            </div>
-
-            <br>
-
-            <div class="form-group">
-                <label for="latitude">위도</label>
-                <input id="latitude" type="text" class="form-control"
-                       name="latitude"
-                       th:value="${shop.location.latitude}"
-                       placeholder="가게 위도" aria-describedby="latitudeHelp">
-                <small id="latitudeHelp" class="form-text text-muted">
-                    가게 주소의 위도를 입력하세요.
-                </small>
-            </div>
-
-            <br>
-
-            <div class="form-group">
-                <label for="longitude">경도</label>
-                <input id="longitude" type="text" class="form-control"
-                       name="longitude"
-                       th:value="${shop.location.longitude}"
-                       placeholder="가게 경도" aria-describedby="longitudeHelp">
-                <small id="longitudeHelp" class="form-text text-muted">
-                    가게 주소의 경도를 입력하세요.
                 </small>
             </div>
 

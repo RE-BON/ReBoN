@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/terms-modal.css';
+import '../../../styles/terms-modal.css';
 
 export default function MarcketingModal() {
   const navigate = useNavigate();

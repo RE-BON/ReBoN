@@ -3,8 +3,11 @@ package com.handong.rebon.integration.review;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import com.handong.rebon.exception.review.ReviewEmpathyExistException;
+import com.handong.rebon.exception.review.ReviewEmpathyNotExistException;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.member.domain.Profile;
 import com.handong.rebon.member.domain.repository.MemberRepository;
 import com.handong.rebon.review.application.ReviewService;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
@@ -25,6 +28,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ReviewIntegrationTest extends IntegrationTest {
 
@@ -64,6 +68,71 @@ class ReviewIntegrationTest extends IntegrationTest {
 
     }
 
+    @Test
+    @DisplayName("리뷰 공감")
+    public void 리뷰_공감() {
+        //given
+        Review review = createReview("Byungwoong", "맘스터치");
+        Member member = createMember("peace");
+        //when
+        review.empathize(member);
+        //then
+        assertThat(review.getEmpathyCount()).isEqualTo(1);
+        assertThat(member.getEmpathies()).hasSize(1);
+        assertThat(review.getEmpathies()).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("중복해서 리뷰를 공감할 시에 예외 발생")
+    public void 리뷰_공감_중복_예외() {
+        //given
+        Review review = createReview("Byungwoong", "맘스터치");
+        Member member = createMember("peace");
+        review.empathize(member);
+        //when, then
+        assertThatThrownBy(() -> review.empathize(member))
+                .isInstanceOf(ReviewEmpathyExistException.class);
+    }
+
+    @Test
+    @DisplayName("리뷰 공감 취소")
+    public void 리뷰_공감_취소() {
+        //given
+        Review review = createReview("Byungwoong", "맘스터치");
+        Member member = createMember("peace");
+        review.empathize(member);
+        //when
+        review.unEmpathize(member);
+        //then
+        assertThat(review.getEmpathyCount()).isEqualTo(0);
+        assertThat(member.getEmpathies()).hasSize(0);
+        assertThat(review.getEmpathies()).hasSize(0);
+    }
+
+    @Test
+    @DisplayName("공감하지 않았는데 리뷰를 공감취소 할 시에 예외 발생")
+    public void 리뷰_취소_예외() {
+        //given
+        Review review = createReview("Byungwoong", "맘스터치");
+        Member member = createMember("peace");
+        //when, then
+        assertThatThrownBy(() -> review.unEmpathize(member))
+                .isInstanceOf(ReviewEmpathyNotExistException.class);
+    }
+
+    @Test
+    @DisplayName("중복해서 리뷰를 공감취소 할 시에 예외 발생")
+    public void 리뷰_공감_취소_예외() {
+        //given
+        Review review = createReview("Byungwoong", "맘스터치");
+        Member member = createMember("peace");
+        review.empathize(member);
+        review.unEmpathize(member);
+        //when, then
+        assertThatThrownBy(() -> review.unEmpathize(member))
+                .isInstanceOf(ReviewEmpathyNotExistException.class);
+    }
+
     public ReviewRequest createReviewRequest(String content, String tip, int star) {
         ReviewRequest reviewRequest = new ReviewRequest();
         ArrayList<String> imageUrls = new ArrayList<>();
@@ -83,13 +152,25 @@ class ReviewIntegrationTest extends IntegrationTest {
                 new ShopContent(shopName, LocalTime.of(12, 0), LocalTime.of(23, 0), "010-1234-1212"),
                 new ShopImages(),
                 null,
-                new ShopScore(0.0, 0), false
+                new ShopScore(0.0, 0, 0), false
         );
         return shopRepository.save(shop);
     }
 
     protected Member createMember(String memberName) {
-        Member member = new Member("test@test.com", memberName, true, "google");
+        Member member = Member.builder().profile(new Profile("test@test.com", memberName))
+                              .isAgreed(true)
+                              .oauthProvider("google")
+                              .build();
         return memberRepository.save(member);
+    }
+
+    protected Review createReview(String memberName, String shopName) {
+        Member member = createMember(memberName);
+        Shop shop = createShop(shopName);
+        ReviewRequest reviewRequest = createReviewRequest("불싸이버거 맛있어요", "야채 많이 달라하면 많이주셔요", 5);
+        ReviewCreateRequestDto reviewCreateRequestDto = ReviewAssembler.reviewCreateRequestDto(member.getId(), shop.getId(), reviewRequest);
+        Long id = reviewService.create(reviewCreateRequestDto);
+        return reviewRepository.findById(id).get();
     }
 }

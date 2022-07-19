@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 const { kakao } = window;
 
-export default function Map({ searchPlace }) {
+export default function Map({ searchPlace, isMobile }) {
   useEffect(() => {
     const container = document.getElementById('myMap');
     const options = {
@@ -35,12 +35,33 @@ export default function Map({ searchPlace }) {
   }, [searchPlace]);
 
   return (
-    <div
-      id="myMap"
-      style={{
-        width: '500px',
-        height: '500px',
-      }}
-    ></div>
+    <>
+      {isMobile === '1' ? (
+        <div
+          id="myMap"
+          style={{
+            width: '100%',
+            height: '150px',
+            // overflow: 'visible !important',
+          }}
+        ></div>
+      ) : isMobile === '2' ? (
+        <div
+          id="myMap"
+          style={{
+            width: '100%',
+            height: '250px',
+          }}
+        ></div>
+      ) : (
+        <div
+          id="myMap"
+          style={{
+            width: '500px',
+            height: '300px',
+          }}
+        ></div>
+      )}
+    </>
   );
 }

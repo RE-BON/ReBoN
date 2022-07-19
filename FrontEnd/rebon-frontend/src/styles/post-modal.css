@@ -3,6 +3,10 @@
   padding: 0 3%;
 }
 
+.post-modal-click {
+  font-family: 'Pretendard' !important;
+}
+
 .close {
   width: 40px;
   height: 40px;

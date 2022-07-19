@@ -1,18 +1,31 @@
-.withdrawal-container {
-  width: 60vw;
-  height: 90vh;
-  margin-left: 65%;
-  padding-right: 20vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
+@media (max-width: 7687x) {
+  .withdrawal-container {
+    padding: 0.1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .withdrawal-container {
+    width: 60vw;
+    height: 90vh;
+    margin-left: 65%;
+    padding-right: 20vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .title {
+    padding: 5vh 0 2% 5%;
+  }
 }
 
 .title {
   margin: 8% 5% 5% 5%;
   border-bottom: 2px solid black;
   font-size: 15px;
-  padding: 0 0 2% 5%;
   font-weight: bolder;
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
 }
 
 .withdrawal-wrapper {
@@ -25,6 +38,11 @@
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 3%;
+  font-family: 'Pretendard' !important;
+}
+
+.withdrawal-notice-describe {
+  font-family: 'Pretendard' !important;
 }
 
 .withdrawal-agree {
@@ -42,6 +60,11 @@
   margin-right: 10px;
 }
 
+.agree-describe {
+  font-family: 'Pretendard' !important;
+  font-weight: 600;
+}
+
 .withdrawal-submit {
   margin: 0 auto;
   margin-top: 18%;
@@ -53,6 +76,7 @@
   text-align: center;
   font-size: 13px;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 
 .withdrawal-submit:hover {

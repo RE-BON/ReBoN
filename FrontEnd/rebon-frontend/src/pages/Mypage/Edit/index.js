@@ -1,31 +1,39 @@
 import '../../../styles/edit.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import axios from 'axios';
+import * as React from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 export default function Edit() {
   const userName = localStorage.getItem('userName');
-  const [name, setName] = useState('');
+  const [alertState, setAlertState] = useState({ display: 'none', check: 'error', message: '' });
+  const [name, setName] = useState(userName);
   const onChangeName = (e) => {
     setName(e.target.value);
+    console.log(name);
   };
 
   const checkNick = () => {
     axios
-      .post('http://34.238.48.93:8080/api/members/nickname/check-duplicate', {
-        nickname: { name },
+      .post('http://3.34.139.61:8080/api/members/nickname/check-duplicate', {
+        nickname: name,
       })
       .then(function (response) {
-        // response
+        // -- 이 200일 경우
         console.log(response);
+        setAlertState({ display: 'block', check: 'success', message: '사용 가능한 아이디 입니다' });
       })
       .catch(function (error) {
-        // 오류발생시 실행
+        // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
+        console.log(error);
+        setName(userName);
+        setAlertState({ display: 'block', check: 'error', message: '이미 있는 아이디 입니다' });
       })
       .then(function () {
         // 항상 실행
-        console.log({ name });
       });
   };
 
@@ -51,21 +59,23 @@ export default function Edit() {
             </span>
           </div>
         </div>
-
         <div className="edit-info-title">닉네임</div>
         <div className="edit-info-name">
           <input className="name-input" value={name} placeholder="한글로 공백없이 입력해주세요." onChange={onChangeName}></input>
           <div
             className="name-button"
             onClick={() => {
-              setName('test');
               checkNick();
             }}
           >
             중복확인
           </div>
         </div>
-
+        <div style={{ display: alertState.display }}>
+          <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity={alertState.check}>{alertState.message}</Alert>
+          </Stack>
+        </div>
         <div className="edit-info-title ">이메일</div>
         <div className="edit-info-email">duifusi@gmail.com</div>
         <div className="edit-info-marketing">마케팅 수신 동의</div>
@@ -76,13 +86,15 @@ export default function Edit() {
           <label htmlFor="select">
             <FontAwesomeIcon icon={faCheck} />
           </label>
-          동의 합니다.
+          <span style={{ paddingRight: '0.5rem' }}></span>
+          <span className="agree-discribe">동의 합니다.</span>
           <span className="empty"></span>
           <input type="radio" id="select2" name="marcketing" />
           <label htmlFor="select2">
             <FontAwesomeIcon icon={faCheck} />
           </label>
-          동의하지 않습니다.
+          <span style={{ paddingRight: '0.5rem' }}></span>
+          <span className="agree-discribe">동의하지 않습니다.</span>
         </div>
 
         <div className="edit-info-submit">

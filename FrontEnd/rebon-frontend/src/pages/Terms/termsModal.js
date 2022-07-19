@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faCheck, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../styles/terms-modal.css';
 
 export default function TermsModal() {
@@ -14,20 +15,15 @@ export default function TermsModal() {
         <div className="terms-modal-title">
           <FontAwesomeIcon icon={faAngleLeft} onClick={goBack} size="1x" />
           서비스 이용약관
-          <FontAwesomeIcon icon={faXmark} size="1x" />
+          <FontAwesomeIcon icon={faXmark} onClick={goBack} size="1x" />
         </div>
         <div class="terms-modal-contents">
-          회전목마(1절) <br /> <br />
-          Umm 내가 슬플 때마다 이 노래가 찾아와 세상이 둥근 것처럼 우린 동글동글 인생은 회전목마 우린 매일 달려가 언제쯤 끝나 난 잘 몰라 (huh, huh, huh)
+          제1장 총칙 제1조(목적) <br /> <br /> ReBON 서비스를 이용해 주셔서 감사합니다. 지역 정보 웹앱 서비스를 제공하는 아래 약관을 읽어주시면 감사드리겠습니다.
           <br /> <br />
-          어머 (어머), 벌써 (벌써) 정신없이 달려왔어 (왔어) Speed up (speed up) 어제로 돌아가는 시곌 보다가 어려워 (어려워) 어른이 되어가는 과정이 uh huh On the road, 24 시간이
-          아까워 uh huh Big noise, everything brand new 어렸을 때처럼 바뀌지 않는 걸 찾아 나섰단 말야 왜냐면 그때가 더 좋았어 난 So let me go back 타임머신 타고 I'll go back 승호가
-          좋았을 때처럼만 내가 슬플 때마다 이 노래가 찾아와 세상이 둥근 것처럼 우리 인생은 회전목마 우린 매일 달려가 언제쯤 끝나 난 잘 몰라 빙빙 돌아가는 회전목마처럼 영원히 계속될
-          것처럼 빙빙 돌아온 우리의 시간처럼 인생은 회전목마 ayy 어머 (어머) 벌써 (벌써) 정신없이 달려왔어 (왔어) Speed up (speed up) 어제로 돌아가는 시곌 보다가 청춘까지 뺏은 현재
-          탓할 곳은 어디 없네 Twenty two 세에게 너무 큰 벽 그게 말로 하고 싶어도 어려웠어 가끔은 어렸을 때로 돌아가 불가능하단 건 나도 잘 알아 그 순간만 고칠 수 있다면 지금의 나는
-          더 나았을까 달려가는 미터기 돈은 올라가 기사님과 어색하게 눈이 맞아 창문을 열어보지만 기분은 좋아지지 않아 그래서 손을 밖으로 쭉 뻗어 쭉 뻗어 흔들리는 택시는 어느새
-          목적지에 도달했다고 해 방 하나 있는 내 집 안의 손에 있던 짐들은 내가 힘들 때마다 이 노래가 찾아와 세상이 둥근 것처럼 우리 인생은 회전목마 우린 계속 달려가 언제쯤 끝날지
-          잘 몰라 빙빙 돌아가는 회전목마처럼 영원히 계속될 것처럼 빙빙 돌아온 우리의 시간처럼 인생은 회전목마 I'm on a TV show You would never even know 사실 얼마나 많이 불안했는지
+          제2조(정의)
+          <br /> <br />이 약관에서 사용하는 용어의 정의는 다음과 같습니다. 1. “회사”라 함은 “콘텐츠” 산업과 관련된 경제활동을 영위하는 자로서 상품 및 용역을 판매하는 자를 말합니다.
+          2. “이용자”라 함은 “회사”의 사이트에 접속하여 이 약관에 따라 “회사”가 제공하는 “콘텐츠” 및 제반서비스를 이용하는 회원 및 비회원을 말합니다. 3. “회원”이라 함은 “회사”와
+          이용계약을 체결하고 “이용자” 아이디(ID)를 부여받은 “이용자”로서 “회사”의 정보를 지속적으로 제공받으며 “회사”가 제공하는 서비스를 지속적으로 이용할 수 있는 자를 말합니다
         </div>
 
         <div class="terms-select">
@@ -37,7 +33,9 @@ export default function TermsModal() {
           </label>
           위 사항을 모두 확인했고, 서비스 이용약관에 동의합니다
         </div>
-        <div className="terms-modal-btn">확인</div>
+        <Link to="/terms">
+          <div className="terms-modal-btn">확인</div>
+        </Link>
       </div>
     </div>
   );

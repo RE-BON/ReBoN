@@ -1,21 +1,120 @@
-.edit-container {
-  width: 60vw;
-  height: 87vh;
-  margin-left: 65%;
-  padding-right: 20vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css');
 
-.edit-title {
-  margin: 8% 5%;
-  border-bottom: 1px solid black;
-  font-size: 15px;
+@media (max-width: 767px) {
+  .name-button {
+    padding: 0.1rem;
+    background-color: #ffeeee;
+    color: #ff6b6c;
+    border-radius: 7px;
+    margin-right: 1%;
+    font-weight: bold;
+    font-size: 0.5rem;
+  }
+
+  .edit-title div {
+    display: none;
+  }
+
+  .agree-discribe {
+    font-size: 0.5rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .edit-container {
+    width: 60vw;
+    height: 90vh;
+    margin-left: 19rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .name-button {
+    padding: 3px;
+    background-color: #ffeeee;
+    color: #ff6b6c;
+    border-radius: 7px;
+    margin-right: 1%;
+    font-weight: bold;
+    padding: 0.1rem;
+    font-size: 0.8rem;
+  }
+
+  .edit-title {
+    margin: 8% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+  }
+
+  .edit-title div {
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .edit-container {
+    width: 60vw;
+    height: 90vh;
+    margin-left: 25rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .name-button {
+    padding: 0.2rem;
+    background-color: #ffeeee;
+    color: #ff6b6c;
+    border-radius: 7px;
+    margin-right: 1%;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .edit-title {
+    margin: 8% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+  }
+
+  .edit-title div {
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+  }
+}
+@media (min-width: 1200px) {
+  .edit-container {
+    width: 60vw;
+    height: 90vh;
+    padding-top: 3rem;
+    margin-left: 35rem;
+    padding-right: 15rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .name-button {
+    padding: 0.2rem;
+    background-color: #ffeeee;
+    color: #ff6b6c;
+    border-radius: 7px;
+    margin-right: 1%;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .edit-title {
+    margin: 8% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+  }
+
+  .edit-title div {
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+  }
 }
 
 .edit-title div {
-  padding: 0 0 2% 5%;
-  font-weight: bolder;
+  font-family: 'Pretendard' !important;
+  font-weight: 800;
 }
 
 .edit-info {
@@ -50,6 +149,7 @@
   font-size: 12px;
   margin-bottom: 1%;
   color: rgba(0, 0, 0, 0.4);
+  font-family: 'Pretendard' !important;
 }
 
 .edit-info-name {
@@ -70,20 +170,12 @@
   background-color: transparent;
   font-weight: bold;
   border: 0;
+  font-family: 'Pretendard' !important;
 }
 
 .edit-input::placeholder {
   font-size: 90%;
   font-weight: lighter;
-}
-
-.name-button {
-  padding: 3px;
-  background-color: #ffeeee;
-  color: #ff6b6c;
-  border-radius: 7px;
-  margin-right: 1%;
-  font-weight: bold;
 }
 
 .edit-info-email {
@@ -97,15 +189,18 @@
   padding: 11px 0 11px 16px;
   font-size: 13px;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 .edit-info-marketing {
   margin-top: 25px;
   font-size: 14px;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 .edit-info-notice {
   margin-top: 10px;
   font-size: 10px;
+  font-family: 'Pretendard' !important;
 }
 
 .empty {
@@ -149,6 +244,11 @@
   align-items: center;
 }
 
+.agree-discribe {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
+}
+
 .cancel {
   width: 44%;
   padding: 4% 0;
@@ -157,9 +257,9 @@
   border: 1px solid #ff6b6c;
   border-radius: 50px;
   text-align: center;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 1rem;
   margin-bottom: 10px;
+  font-family: 'Pretendard' !important;
 }
 
 .finished {
@@ -169,7 +269,7 @@
   background-color: #ff6b6c;
   border-radius: 50px;
   text-align: center;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 1rem;
   margin-bottom: 10px;
+  font-family: 'Pretendard' !important;
 }

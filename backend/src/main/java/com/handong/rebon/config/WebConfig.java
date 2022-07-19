@@ -22,12 +22,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("*");
+                .allowedMethods("*")
+                .allowedOrigins("http://localhost:3000", "http://localhost:8080");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor);
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/api/**");
     }
 
     @Override

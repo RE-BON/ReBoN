@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-
 import SearchBar from './SearchBar';
+import Tags from '../../../pages/Search/Tags';
+import AutoCompletes from '../../../pages/Search/AutoCompletes';
 import '../../../styles/header-search-modal.css';
+import axios from 'axios';
+
 
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +21,7 @@ export default function SearchModal() {
     setTimeout(() => {
       setOpacity(1);
     }, 100);
+    console.log(2222);
   }
 
   function beforeClose() {
@@ -27,10 +31,32 @@ export default function SearchModal() {
     });
   }
 
+  //여기서 계속 새로고침 되는 것이 문젠데..
+  const [word, setWord] = useState('');
+  const onChangeword = (e) => {
+    setWord(e.target.value);
+  };
+  const [tag, setTags] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://3.34.139.61:8080/api/tags')
+      .then((response) => {
+        setTags(response.data);
+      })
+      .catch((error) => {
+        console.log('Search Modal error');
+      });
+  }, []);
+
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;
   `;
+
+  const [autoComState, setAutoComState] = useState('none');
+  const onChangeState = () => {
+    setAutoComState('block');
+  };
 
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
@@ -50,23 +76,15 @@ export default function SearchModal() {
           <div className="header-modal-wrapper-search">
             <div className="header-search-bar-wrapper">
               <img src="../../../../image/search-icon.png" alt="header-search-icon" />
-              <input placeholder="가고 싶은 지역을 입력해주세요." />
+              <input placeholder="가고 싶은 지역을 입력해주세요." value={word} onChange={onChangeword} onClick={onChangeState} />
             </div>
           </div>
-
-          <ul className="header-search-list">
-            <li>장성동</li>
-            <li>잔치국수</li>
-            <li>장수동</li>
-          </ul>
-
-          <ul className="header-tag-list">
-            <div>추천 태그로 검색해보세요.</div>
-            <li> 영일대</li>
-            <li>양덕</li>
-            <li>구룡포</li>
-            <li>칠포해수욕장</li>
-          </ul>
+          <div className="header-autoCom" style={{ display: autoComState }}>
+            <AutoCompletes word={word} />
+          </div>
+          <div className="header-tag">
+            <Tags />
+          </div>
         </div>
       </StyledModal>
     </ModalProvider>
@@ -74,12 +92,23 @@ export default function SearchModal() {
 }
 
 const StyledModal = Modal.styled`
-position:absolute;
-top: -1%;
+  position:absolute;
+  top: -1%;
   width: 100%;
-  height: 24rem;
   padding : 1% 20%;
   border-radius:20px;
   background-color: white;
   opacity: ${(props) => props.opacity};
-  transition : all 0.3s ease-in-out;`;
+  transition : all 0.3s ease-in-out;
+  @media (max-width: 767px) {
+    height:100%;
+    padding : 1% 2%; 
+  } 
+  @media (min-width: 768px) and (max-width: 1199px) {
+    padding-bottom :  5vh; 
+  }
+
+  @media (min-width: 1200px) {
+    padding-bottom :  5vh; 
+  }
+`;

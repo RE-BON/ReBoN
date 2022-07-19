@@ -1,0 +1,18 @@
+.auto-list {
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.05); */
+}
+
+.auto-list li {
+  width: 95%;
+  margin-left: -7%;
+  padding: 0.4rem 0;
+  border-radius: 10px;
+  color: rgba(0, 0, 0, 0.5);
+  padding-left: 1rem;
+}
+
+.auto-list li:hover {
+  color: #ff6c6c;
+  background-color: #ffeded;
+  border: 0;
+}

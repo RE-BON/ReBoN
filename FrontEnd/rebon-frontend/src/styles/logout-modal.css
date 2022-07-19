@@ -3,6 +3,11 @@
   padding: 0 3%;
 }
 
+.logout-modal-click {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
+}
+
 .logout-wrapper .close {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
@@ -34,6 +39,7 @@
   text-align: ceter;
   font-size: 15px;
   font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 
 .logout-button {
@@ -42,4 +48,6 @@
   width: 100px;
   color: #ff6b6c;
   border-radius: 35px;
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
 }

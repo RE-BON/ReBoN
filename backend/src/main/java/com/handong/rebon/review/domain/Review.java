@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.member.MemberForbiddenException;
+import com.handong.rebon.exception.review.ReviewEmpathyExistException;
+import com.handong.rebon.exception.review.ReviewEmpathyNotExistException;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.content.ReviewContent;
 import com.handong.rebon.review.domain.content.ReviewImages;
@@ -44,7 +46,7 @@ public class Review extends BaseEntity {
     private ReviewScore reviewScore;
 
     @Builder.Default
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Empathy> empathies = new ArrayList<>();
 
     public void addReviewImages(ReviewImages reviewImages) {
@@ -68,14 +70,32 @@ public class Review extends BaseEntity {
                         .anyMatch(empathy -> empathy.isSameMember(member));
     }
 
-    public void addEmpathy(Empathy empathy) {
-        empathies.add(empathy);
-        empathy.belongTo(this);
+    public void empathize(Member member) {
+        Empathy empathy = new Empathy(member, this);
+        if (isEmpathyExist(empathy)) {
+            throw new ReviewEmpathyExistException();
+        }
+        this.empathies.add(empathy);
+        this.reviewScore.increaseEmpathyCount();
+        member.empathizeReview(empathy);
+    }
+
+    public void unEmpathize(Member member) {
+        Empathy empathy = new Empathy(member, this);
+        if (!isEmpathyExist(empathy)) {
+            throw new ReviewEmpathyNotExistException();
+        }
+        this.empathies.remove(empathy);
+        this.reviewScore.decreaseEmpathyCount();
+        member.unEmpathizeReview(empathy);
+    }
+
+    private boolean isEmpathyExist(Empathy empathy) {
+        return this.empathies.contains(empathy);
     }
 
     public void update(Member member, String content, String tip, int star, ReviewImages reviewImages) {
         validatesAuthority(member);
-        addReviewImages(reviewImages);
         reviewContent = new ReviewContent(content, tip);
         reviewScore = new ReviewScore(star, reviewScore.getEmpathyCount());
     }
