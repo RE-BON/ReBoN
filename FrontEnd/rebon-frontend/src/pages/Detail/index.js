@@ -8,9 +8,12 @@ import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import Carousel from './Carousel';
 import Footer from '../../components/Footer';
+import { useLocation } from 'react-router';
 
 export default function Detail() {
   // const [shopInfo, setShopInfo] = useState();
+  const location = useLocation();
+  const [shopNum, setShopNum] = useState();
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
@@ -74,18 +77,19 @@ export default function Detail() {
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Supreme_pizza.jpg/800px-Supreme_pizza.jpg',
   });
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://3.34.139.61:8080/api/shops/1')
-  //     .then((response) => {
-  //       setShopInfo(response.data);
-  //       console.log(shopInfo);
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log('error');
-  //     });
-  // }, []);
+  useEffect(() => {
+    setShopNum(Number(location.pathname.slice(8)));
+    // axios
+    //   .get('http://3.34.139.61:8080/api/shops/' + location.pathname.slice(8))
+    //   .then((response) => {
+    //     setShopInfo(response.data);
+    //     console.log(shopInfo);
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log('error');
+    //   });
+  }, []);
 
   return (
     <div className="detail-wrapper">
@@ -222,7 +226,7 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      <Review />
+      <Review shopName={shopInfo.name} shopImage={shopInfo.image} shopId={location.pathname.slice(8)} />
       <Footer />
     </div>
   );
