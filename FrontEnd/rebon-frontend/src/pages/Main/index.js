@@ -48,12 +48,13 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
   const [restChecked, setRestChecked] = useState(restCategory[0].id);
   const [accoChecked, setAccoChecked] = useState(accoCategory[0].id);
   const [cafeChecked, setCafeChecked] = useState(cafeCategory[0].id);
+  const [restResult, setRestResult] = useState(restData.filter((d) => d.id === restCategory[0].id));
   const location = useLocation();
 
   const getData = () => {
-    console.log('=======rest 카테고리 : =========== ', restCategory);
-    console.log('=======acco 카테고리 : =========== ', accoCategory);
-    console.log('=======cafe 카테고리 : =========== ', cafeCategory);
+    // console.log('=======rest 카테고리 : =========== ', restCategory);
+    // console.log('=======acco 카테고리 : =========== ', accoCategory);
+    // console.log('=======cafe 카테고리 : =========== ', cafeCategory);
   };
 
   useEffect(() => {
@@ -96,6 +97,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   {restCategory
                     ? restCategory.map((rest, index) => (
                         <>
+                          {/* <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id), setRestResult(restData.filter((d) => d.id === rest.id))} /> */}
                           <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id)} />
                           <label for={rest.id} className={restChecked === rest.id ? 'radio-click-active' : 'radio-click-stay'}>
                             {rest.name}
@@ -111,10 +113,12 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
               </div>
 
               <div className="best-wrapper">
+                {/* <BestCard data={restData} checked={restChecked}  result={restResult}/> */}
                 <BestCard data={restData} checked={restChecked} />
               </div>
 
-              <Divider data={restData} checked={restChecked} tagId={location.state.item.id} subId={restCategory[0].id} />
+              {/* <Divider data={restData} checked={restChecked} tagId={location.state.item.id} subId={restChecked} /> */}
+              <Divider data={restData} tagId={location.state.item.id} cateId={1} checked={restChecked} />
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={1}>
               <div className="category-wrapper">
