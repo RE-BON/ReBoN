@@ -73,6 +73,11 @@
   font-weight: 200;
 }
 
+.header-wrapper-normal {
+  background-color: white;
+  border-bottom: 1px solid #e9e9ea;
+}
+
 .header-wrapper header {
   position: relative;
   display: flex;

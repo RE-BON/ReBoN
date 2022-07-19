@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Tags from './Tags';
 import AutoCompletes from './AutoCompletes';
-import HeaderHome from '../../components/HeaderHome';
+import Header from '../../components/Header';
 import '../../styles/search.css';
+import '../../styles/header.css';
 import axios from 'axios';
 
 export default function Search() {
@@ -38,11 +38,10 @@ export default function Search() {
       axios
         .get('http://3.34.139.61:8080/api/members', config)
         .then((response) => {
-          console.log('로그인 된 유저');
           console.log(response.data);
         })
         .catch((error) => {
-          console.log('error');
+          console.log('error!!');
         });
     }
   }, []);
@@ -50,7 +49,7 @@ export default function Search() {
   return (
     <div className="search-background">
       <div className="search-wrapper">
-        <HeaderHome />
+        <Header />
         <div className="search-content">
           <div className="title">
             가고싶은 지역을 입력해서{isMobile ? <div></div> : null}
