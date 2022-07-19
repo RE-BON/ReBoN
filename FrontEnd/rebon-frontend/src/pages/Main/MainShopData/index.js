@@ -18,7 +18,7 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
     var cafeArr = [];
 
     restCategory.map((data, index) => {
-      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false';
+      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
       axios.get(url).then((response) => {
         const restState = { id: data.id, shop: response.data };
         restArr.push(restState);
@@ -27,7 +27,7 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
     setRestData(restArr);
 
     accoCategory.map((data, index) => {
-      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false';
+      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
       axios.get(url).then((response) => {
         const accoState = { id: data.id, shop: response.data };
         accoArr.push(accoState);
@@ -36,7 +36,7 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
     setAccoData(accoArr);
 
     cafeCategory.map((data, index) => {
-      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false';
+      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
       axios.get(url).then((response) => {
         const cafeState = { id: data.id, shop: response.data };
         cafeArr.push(cafeState);
