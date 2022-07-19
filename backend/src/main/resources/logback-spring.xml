@@ -3,25 +3,20 @@
 <configuration>
     <timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
     <property name="LOG_PATTERN"
-              value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg%n"/>
+              value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %magenta([traceId=%X{traceId}]) %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg%n"/>
 
     <springProfile name="!prod">
-        <include resource="console-appender.xml"/>
+        <include resource="appender/console-appender.xml"/>
 
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
-<!-- 로그를 파일로 남기는 부분 -->
-<!--    <springProfile name="prod">-->
-<!--        <include resource="file-info-appender.xml"/>-->
-<!--        <include resource="file-warn-appender.xml"/>-->
-<!--        <include resource="file-error-appender.xml"/>-->
+    <springProfile name="prod">
 
-<!--        <root level="INFO">-->
-<!--            <appender-ref ref="FILE-INFO"/>-->
-<!--            <appender-ref ref="FILE-WARN"/>-->
-<!--            <appender-ref ref="FILE-ERROR"/>-->
-<!--        </root>-->
-<!--    </springProfile>-->
+        <include resource="appender/cloud-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CLOUDWATCH"/>
+        </root>
+    </springProfile>
 </configuration>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.handong.rebon.auth.presentation.LoginInterceptor;
 import com.handong.rebon.auth.presentation.LoginMemberArgumentResolver;
-import com.handong.rebon.common.LogInterceptor;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -18,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     private final LoginInterceptor loginInterceptor;
-    private final LogInterceptor logInterceptor;
     private final LoginMemberArgumentResolver loginMemberArgumentResolver;
 
     @Override
@@ -30,7 +28,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/api/**");
-        registry.addInterceptor(logInterceptor);
     }
 
     @Override
