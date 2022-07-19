@@ -16,6 +16,8 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+log/
+backup/
 
 ### IntelliJ IDEA ###
 .idea
@@ -38,6 +40,6 @@ out/
 
 ### Submodule ###
 /src/main/resources/application-prod.yml
+/src/main/resources/appender/cloud-appender.xml
 
-log/
-backup/
+
