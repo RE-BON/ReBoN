@@ -142,7 +142,7 @@
 }
 @media (max-width: 767px) {
   .detail-slider {
-    margin-top: 15%;
+    margin-top: 7vh;
     z-index: 1;
     position: relative;
   }

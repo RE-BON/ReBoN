@@ -4,6 +4,7 @@ import '../../../styles/review.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser, faShareNodes, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
 import { MoreVertical, Trash, Edit } from 'react-feather';
 import ReviewDropdown from './ReviewDropdown';
@@ -230,6 +231,7 @@ export default function Review({ shopName, shopImage, shopId }) {
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>
+            {/* faHeart는 빈거,  */}
             <div className="review-like-wrapper">
               <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
               <span className="review-like-num">{reviewLike}</span>
@@ -287,11 +289,14 @@ export default function Review({ shopName, shopImage, shopId }) {
               <FontAwesomeIcon icon={faShareNodes} className="review-icon" size="1x" />
             </button>
             {/* <div className="review-footer-line"></div> */}
+            {/* solidHeart */}
             <button className="review-like-wrapper">
-              <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
+              <span id="heartIcon">
+                <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
+              </span>
             </button>
             <div className="review-write-wrapper">
-              <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
+              <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" onClick={handleLike} />
               <Link to="../post" style={{ textDecoration: 'none' }}>
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
