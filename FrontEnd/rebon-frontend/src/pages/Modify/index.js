@@ -95,7 +95,6 @@ export default function Modify() {
           <div className="post-tip-mobile">
             <div className="post-tip-box-mobile">나만의 꿀팁</div>
             <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
-            ss
           </div>
         ) : (
           <div className="post-tip">
