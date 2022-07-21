@@ -32,6 +32,7 @@ export default function SearchModal() {
   //여기서 계속 새로고침 되는 것이 문젠데..
   const [word, setWord] = useState('');
   const onChangeword = (e) => {
+    e.preventDefault();
     setWord(e.target.value);
   };
 

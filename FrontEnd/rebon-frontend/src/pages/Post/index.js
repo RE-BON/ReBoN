@@ -10,6 +10,15 @@ import axios from 'axios';
 import AWS from 'aws-sdk';
 
 export default function Post() {
+  const [myTip, setMyTip] = useState('');
+  const onChangeMyTip = (e) => {
+    setMyTip(e.target.value);
+  };
+
+  const [myContent, setMyContent] = useState('');
+  const onChangeMyContent = (e) => {
+    setMyContent(e.target.value);
+  };
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';
   const bucket = 'elice-boardgame-project';
@@ -71,23 +80,20 @@ export default function Post() {
         {isMobile ? (
           <div className="post-tip-mobile">
             <div className="post-tip-box-mobile">나만의 꿀팁</div>
-            <input
-              placeholder="마라도 횟집에 대한 나만의 꿀팁을 적어주세요&#13;&#10;ex.2층 창가자리 뷰가 예뻐요)"
-              maxLength="500"
-            />
+            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
           </div>
         ) : (
           <div className="post-tip">
             <div className="post-tip-box">나만의 꿀팁</div>
-            <input placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
           </div>
         )}
 
-        <div className="post-tip-count">1/500</div>
+        <div className="post-tip-count">{myTip.length}/500</div>
 
         <div className="post-review">
-          <textarea rows="6" placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
-          <div className="post-review-count">1/1000</div>
+          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
+          <div className="post-review-count">{myContent.length}/1000</div>
         </div>
 
         <div className="post-attach">

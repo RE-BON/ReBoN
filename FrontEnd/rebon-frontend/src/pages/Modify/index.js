@@ -11,19 +11,41 @@ import axios from 'axios';
 import AWS from 'aws-sdk';
 
 export default function Modify() {
-  const [review, setReview] = useState({});
-  useEffect(() => {
-    axios
-      .get('http://3.34.139.61:8080/api/my-reviews')
-      .then((response) => {
-        console.log(1111111111111111);
-        // setReview(response.data);
-        // console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const data = [
+    {
+      id: 1,
+      shopName: '팜스발리',
+      content: '이것은 더미데이터 입니다, 맛이 좋아요',
+      tip: '필수로 시키자',
+      star: 5,
+      empathyCount: 0,
+      images: [],
+    },
+  ];
+
+  const [myTip, setMyTip] = useState(data[0]['tip']);
+  const onChangeMyTip = (e) => {
+    setMyTip(e.target.value);
+  };
+
+  const [myContent, setMyContent] = useState(data[0]['content']);
+  const onChangeMyContent = (e) => {
+    setMyContent(e.target.value);
+  };
+  // dummy 데이터 아닌 경우 아래 사용
+
+  // const [review, setReview] = useState({});
+  // useEffect(() => {
+  //   axios
+  //     .get('http://3.34.139.61:8080/api/my-reviews')
+  //     .then((response) => {
+  //       setReview(response.data);
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';
@@ -66,29 +88,27 @@ export default function Modify() {
         )}
 
         <div className="post-star">
-          <Star />
+          <Star rate={data[0]['star']} />
         </div>
 
         {isMobile ? (
           <div className="post-tip-mobile">
             <div className="post-tip-box-mobile">나만의 꿀팁</div>
-            <input
-              placeholder="마라도 횟집에 대한 나만의 꿀팁을 적어주세요&#13;&#10;ex.2층 창가자리 뷰가 예뻐요)"
-              maxLength="500"
-            />
+            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            ss
           </div>
         ) : (
           <div className="post-tip">
             <div className="post-tip-box">나만의 꿀팁</div>
-            <input placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
           </div>
         )}
 
-        <div className="post-tip-count">1/500</div>
+        <div className="post-tip-count">{myTip.length}/500</div>
 
         <div className="post-review">
-          <textarea rows="6" placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
-          <div className="post-review-count">1/1000</div>
+          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
+          <div className="post-review-count">{myContent.length}/1000</div>
         </div>
 
         <div className="post-attach">

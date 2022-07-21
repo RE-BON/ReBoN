@@ -5,7 +5,7 @@ import SearchModal from './SearchModal';
 import axios from 'axios';
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function Header() {
           setIsLogin(true);
         })
         .catch((error) => {
-          console.log('error!!!');
+          console.log(error);
           // setIsLogin(false);
         });
     }
@@ -36,6 +36,7 @@ export default function Header() {
   //   headerBorder.classList.remove('header-wrapper-home');
   //   headerBorder.classList.add('header-wrapper-normal');
   // }
+  console.log('Header 새로고침 입니다');
 
   return (
     <div className="header-wrapper">
@@ -54,7 +55,7 @@ export default function Header() {
                 <img src="/image/user.png" alt="user" />
               </div>
             </Link>
-            <span className="header-logon-name">{token.nickName}</span>
+            {/* <span className="header-logon-name">{token.nickName}</span> */}
           </div>
         ) : (
           <div className="header-logoff">

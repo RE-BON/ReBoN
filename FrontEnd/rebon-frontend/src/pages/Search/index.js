@@ -45,7 +45,7 @@ export default function Search() {
         });
     }
   }, []);
-
+  console.log('Search 페이지 입니다');
   return (
     <div className="search-background">
       <div className="search-wrapper">
