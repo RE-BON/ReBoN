@@ -2,9 +2,15 @@ import '../../styles/header.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchModal from './SearchModal';
+import HeaderModal from './HeaderModal';
+import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 
 export default function Header() {
+  const isMobile = useMediaQuery({
+    query: '(max-width:767px)',
+  });
+
   const [isLogin, setIsLogin] = useState(true);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
 
@@ -50,11 +56,14 @@ export default function Header() {
               <SearchModal />
             </div>
 
-            <Link to="/mypage" style={{ color: 'inherit', textDecoration: 'none' }}>
+            {isMobile ? (
+              <HeaderModal />
+            ) : (
               <div className="header-logon-icon">
-                <img src="/image/user.png" alt="user" />
+                <HeaderModal />
               </div>
-            </Link>
+            )}
+
             {/* <span className="header-logon-name">{token.nickName}</span> */}
           </div>
         ) : (
