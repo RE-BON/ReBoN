@@ -1,111 +1,486 @@
-.footprint-container {
-  width: 60vw;
-  height: 90vh;
-  margin-left: 65%;
-  padding-right: 20vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
+@media (max-width: 767px) {
+  .footprint-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 10%;
+  }
+  .footprint-list-icon {
+    float: right;
+    margin-right: 1%;
+    background-color: transparent;
+    border: none;
+  }
+  .footprint-title {
+    margin: 8% 5% 5% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-wrapper {
+    font-size: 13px;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-bold-hr {
+    border: solid 1px #000000;
+  }
+  .footprint-light-hr {
+    border-bottom: 1px solid #d8d8d8;
+    margin-bottom: 10%;
+  }
+  .footprint-remove-wrapper {
+    float: right;
+    margin-right: 3%;
+  }
+  .footprint-name {
+    display: inline;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-user-name {
+    display: inline;
+    font-size: 0.9rem;
+    margin-right: 2%;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-rating {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 174, 0, 0.938);
+    margin-left: 2%;
+  }
+  .footprint-date {
+    display: inline;
+    font-size: 0.7rem;
+    font-weight: lighter;
+    color: #898c8f;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-wrapper {
+    box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
+    height: 4vh;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: inline-block;
+    align-items: center;
+    width: 98%;
+    height: 35px;
+    line-height: 30px;
+  }
+  .footprint-tip-name {
+    background-color: #ffeded;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-right: 3%;
+    margin-left: 1%;
+    border: 1px solid #ff6b6c;
+    color: #ff6b6c;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-content {
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 10px;
+    font-weight: 600;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-post {
+    font-size: 0.7rem;
+    font-family: 'Pretendard' !important;
+    margin-top: 3%;
+  }
+  .footprint-image-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 5%;
+    height: 20vh;
+    margin-bottom: 10%;
+  }
+  .footprint-image-sub-wrapper {
+    margin-right: 5%;
+  }
+  .footprint-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.footprint-title {
-  margin: 8% 5% 5% 5%;
-  border-bottom: 1px solid black;
-  font-size: 15px;
-  padding: 0 0 2% 5%;
-  font-weight: bolder;
+@media (min-width: 768px) and (max-width: 991px) {
+  .footprint-container {
+    width: 60vw;
+    margin-left: 65%;
+    padding-right: 20vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .footprint-title {
+    margin: 8% 5% 5% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+  }
+
+  .footprint-wrapper {
+    margin-left: 6%;
+    width: 90%;
+    font-size: 13px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .footprint-bold-hr {
+    border: solid 1px #000000;
+  }
+  .footprint-light-hr {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 5% 2% 4% 2%;
+    width: 96%;
+  }
+  .footprint-content {
+    margin-left: 5%;
+    width: 90%;
+  }
+  .footprint-remove-wrapper {
+    float: right;
+    margin-right: 3%;
+  }
+
+  .footprint-name {
+    display: inline;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-user-name {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 2%;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-rating {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 174, 0, 0.938);
+    margin-left: 2%;
+  }
+  .footprint-date {
+    display: inline;
+    font-size: 0.7rem;
+    font-weight: lighter;
+    color: #898c8f;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-wrapper {
+    box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
+    height: 4vh;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: inline-block;
+    align-items: center;
+    width: 98%;
+    height: 35px;
+    line-height: 30px;
+  }
+  .footprint-tip-name {
+    background-color: #ffeded;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-right: 3%;
+    margin-left: 1%;
+    border: 1px solid #ff6b6c;
+    color: #ff6b6c;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-content {
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 10px;
+    font-weight: 600;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-post {
+    font-size: 0.7rem;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-image-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 8vh;
+    margin-top: 5%;
+  }
+  .footprint-image-sub-wrapper {
+    margin-right: 2%;
+  }
+  .footprint-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footprint-container {
+    width: 60vw;
+    height: 90vh;
+    margin-left: 65%;
+    padding-right: 20vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .footprint-title {
+    margin: 8% 5% 5% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+  }
+
+  .footprint-wrapper {
+    margin-left: 6%;
+    width: 90%;
+    font-size: 13px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .footprint-bold-hr {
+    border: solid 1px #000000;
+  }
+  .footprint-light-hr {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 5% 2% 4% 2%;
+    width: 96%;
+  }
+  .footprint-content {
+    margin-left: 5%;
+    width: 90%;
+  }
+  .footprint-remove-wrapper {
+    float: right;
+    margin-right: 3%;
+  }
+
+  .footprint-name {
+    display: inline;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-user-name {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 2%;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-rating {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 174, 0, 0.938);
+    margin-left: 2%;
+  }
+  .footprint-date {
+    display: inline;
+    font-size: 0.7rem;
+    font-weight: lighter;
+    color: #898c8f;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-wrapper {
+    box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
+    height: 4vh;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: inline-block;
+    align-items: center;
+    width: 98%;
+    height: 35px;
+    line-height: 30px;
+  }
+  .footprint-tip-name {
+    background-color: #ffeded;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-right: 3%;
+    margin-left: 1%;
+    border: 1px solid #ff6b6c;
+    color: #ff6b6c;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-content {
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 10px;
+    font-weight: 600;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-post {
+    font-size: 0.7rem;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-image-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 15vh;
+    margin-top: 5%;
+  }
+  .footprint-image-sub-wrapper {
+    margin-right: 2%;
+  }
+  .footprint-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.footprint-wrapper {
-  margin-left: 6%;
-  width: 90%;
-  font-size: 13px;
-}
+@media (min-width: 1200px) {
+  .footprint-container {
+    width: 60vw;
+    height: 90vh;
+    margin-left: 65%;
+    padding-right: 20vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 
-.footprint-bold-hr {
-  /* background-color: blue;
-  height: 90px; */
-  border: solid 1px #000000;
-}
-.footprint-light-hr {
-  border-bottom: 1px solid #d8d8d8;
-  margin: 5% 2% 4% 2%;
-  width: 96%;
-}
-.footprint-content {
-  margin-left: 5%;
-  width: 90%;
-}
-.footprint-remove-wrapper {
-  float: right;
-  margin-right: 3%;
-}
+  .footprint-title {
+    margin: 8% 5% 5% 5%;
+    border-bottom: 1px solid black;
+    font-size: 15px;
+    padding: 0 0 2% 5%;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+  }
 
-.footprint-name {
-  display: inline;
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-.footprint-user-name {
-  display: inline;
-  font-size: 1rem;
-  font-weight: bold;
-  margin-right: 2%;
-}
-.footprint-rating {
-  display: inline;
-  font-size: 1rem;
-  font-weight: bold;
-  color: rgba(255, 174, 0, 0.938);
-  margin-left: 2%;
-}
-.footprint-date {
-  display: inline;
-  font-size: 0.7rem;
-  font-weight: lighter;
-  color: #898c8f;
-}
-.footprint-tip-wrapper {
-  box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
-  height: 4vh;
-  border-radius: 10px;
-  margin-top: 2%;
-  margin-bottom: 3%;
-  display: inline-block;
-  align-items: center;
-  width: 98%;
-  height: 35px;
-  line-height: 30px;
-}
-.footprint-tip-name {
-  background-color: #ffeded;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 0.5rem;
-  font-weight: bold;
-  border-radius: 10px;
-  margin-right: 3%;
-  margin-left: 1%;
-  border: 1px solid #ff6b6c;
-  color: #ff6b6c;
-}
-.footprint-tip-content {
-  font-size: 12px;
-  font-weight: normal;
-  padding-top: 10px;
-  font-weight: 600;
-}
-.footprint-post {
-  font-size: 0.7rem;
-}
-.footprint-image-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.footprint-image {
-  width: 98%;
-  height: 130px;
-  margin-top: 13%;
-  margin-right: 2%;
+  .footprint-wrapper {
+    margin-left: 6%;
+    width: 90%;
+    font-size: 13px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .footprint-bold-hr {
+    border: solid 1px #000000;
+  }
+  .footprint-light-hr {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 5% 2% 4% 2%;
+    width: 96%;
+  }
+  .footprint-content {
+    margin-left: 5%;
+    width: 90%;
+  }
+  .footprint-remove-wrapper {
+    float: right;
+    margin-right: 3%;
+  }
+
+  .footprint-name {
+    display: inline;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-user-name {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-right: 2%;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-rating {
+    display: inline;
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgba(255, 174, 0, 0.938);
+    margin-left: 2%;
+  }
+  .footprint-date {
+    display: inline;
+    font-size: 0.7rem;
+    font-weight: lighter;
+    color: #898c8f;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-wrapper {
+    box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.15);
+    height: 4vh;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: inline-block;
+    align-items: center;
+    width: 98%;
+    height: 35px;
+    line-height: 30px;
+  }
+  .footprint-tip-name {
+    background-color: #ffeded;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-right: 3%;
+    margin-left: 1%;
+    border: 1px solid #ff6b6c;
+    color: #ff6b6c;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-tip-content {
+    font-size: 12px;
+    font-weight: normal;
+    padding-top: 10px;
+    font-weight: 600;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-post {
+    font-size: 0.7rem;
+    font-family: 'Pretendard' !important;
+  }
+  .footprint-image-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 18vh;
+    margin-top: 5%;
+  }
+  .footprint-image-sub-wrapper {
+    margin-right: 2%;
+  }
+  .footprint-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }

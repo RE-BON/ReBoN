@@ -135,6 +135,56 @@ include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-requ
 |===
 include::{snippets}/MemberCreateAcceptanceTest/checkDuplicatedNickname/http-response.adoc[]
 
+
+=== 내 정보 조회 로그인이 된 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Lone | true | 조회하고자 하는 사용자의 id 값
+|===
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfoWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfoWithLogin/http-response.adoc[]
+
+
+=== 내 정보 조회 로그인이 되지 않은 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Lone | true | 조회하고자 하는 사용자의 id 값
+|===
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfoWithoutLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/MemberReadAcceptanceTest/findMemberInfoWithoutLogin/http-response.adoc[]
+
+
+=== 내 정보 수정 로그인이 된 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| nickname | String | true | 수정할 nickname
+| agreed | boolean | true | 수정할 마케팅 수신 동의 여부
+|===
+include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithLogin/http-response.adoc[]
+
+=== 내 정보 수정 로그인이 되지 않은 경우
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| nickname | String | true | 수정할 nickname
+| agreed | boolean | true | 수정할 마케팅 수신 동의 여부
+|===
+include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithoutLogin/http-request.adoc[]
+
+==== Response
+include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithoutLogin/http-response.adoc[]
+
+
 == Tag API
 
 === 전체 Tag 리스트 조회
@@ -196,6 +246,12 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 | open | boolean | true | 영업중 여부 (false = 전체 가게 조회, true = 현재 시간에 운영중인 가게만 조회)
 | token | String | false | Authorization header에 bearer type으로 jwt 보내주기
 |===
+
+==== sorting 조건
+- 별점순: sort=shopScore.star,asc(desc)
+- 리뷰 많은 순: sort=shopScore.reviewCount,asc(desc)
+- 최신순: sort=createdAt,asc(desc)
+
 include::{snippets}/ShopReadAcceptanceTest/searchSchoolFoodOrWesternRestaurantInPohang/http-request.adoc[]
 
 ==== Response
@@ -371,6 +427,30 @@ include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-req
 ==== Response
 include::{snippets}/ReviewDeleteAcceptanceTest/cannotDeleteWithNotOwner/http-response.adoc[]
 
+
+=== Review 공감 기능
+==== Request (Path Variable)
+|===
+| 값 | 타입 | 필수 | 설명
+| id | Long | true | 공감하고자 하는 리뷰의 id 값
+|===
+include::{snippets}/ReviewEmpathyAcceptanceTest/empathizeReview/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewEmpathyAcceptanceTest/empathizeReview/http-response.adoc[]
+
+=== Review 공감 취소 기능
+==== Request (Path Variable)
+|===
+| 값 | 타입 | 필수 | 설명
+
+| id | Long | true | 공감을 취소하고자 하는 리뷰의 id 값
+|===
+include::{snippets}/ReviewEmpathyAcceptanceTest/unEmpathizeReview/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewEmpathyAcceptanceTest/unEmpathizeReview/http-response.adoc[]
+
 === 내가 쓴 리뷰를 수정하려는 경우
 ==== Request
 
@@ -441,3 +521,4 @@ include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByBelowZeroExcessFive
 
 ==== Response
 include::{snippets}/ReviewUpdateAcceptanceTest/reviewUpdateByBelowZeroExcessFive/http-response.adoc[]
+

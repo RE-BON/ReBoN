@@ -22,7 +22,6 @@ import com.handong.rebon.shop.domain.ShopSearchCondition;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.tag.application.TagService;
@@ -155,13 +154,7 @@ public class ShopService {
                 shopRequestDto.getPhone()
         );
 
-        Location location = new Location(
-                shopRequestDto.getAddress(),
-                shopRequestDto.getLongitude(),
-                shopRequestDto.getLatitude()
-        );
-
-        shop.update(content, location);
+        shop.update(content, shopRequestDto.getAddress());
     }
 
     private void updateCategory(ShopRequestDto shopRequestDto, Shop shop, Category category) {

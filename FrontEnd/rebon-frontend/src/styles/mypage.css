@@ -1,93 +1,388 @@
 * {
   font-family: 'Pretendard' !important;
 }
+@media (max-width: 767px) {
+  .mb-my-wrapper {
+    padding-top: 7vh;
+    height: 100vh;
+    width: 100%;
+  }
+  .mb-sideMenu-intro {
+    height: 13vh;
+    background-image: url('../../public/image/mypage-background.png');
+    background-repeat: no-repeat;
+    background-size: 100vw 12vh;
+    width: 100vw;
+    padding-top: 20px;
+  }
+  .mb-hello,
+  .mb-name {
+    width: 90%;
+    margin-left: 5%;
+    font-family: 'Pretendard' !important;
+    font-size: bold;
+  }
+  .mb-person-wrapper {
+    display: inline;
+  }
+  .mb-name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .mb-mypage-tab {
+    height: 7vh;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 4fr 0.1fr 4fr;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+    margin-bottom: 3vh;
+  }
+  .mb-setting-icon {
+    margin-top: -3px;
+    margin-left: 5px;
+  }
+  .tab-click-active,
+  .tab-click-stay {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .tab-click-active {
+    border-bottom: 3px solid #ff6b6c;
+  }
+  .mb-border {
+    border-right: 1px solid #c4c4c4;
+    height: 50%;
+    margin-top: 15px;
+  }
+  .btn-click-active,
+  .btn-click-stay {
+    font-family: 'Pretendard' !important;
+    font-size: 1rem;
+  }
+  .btn-click-active {
+    color: #ff6b6c;
+  }
+  .btn-click-stay {
+    color: black;
+  }
+  .btn-name {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+  .tab-click-stay {
+    color: gray;
+  }
+  .mb-mypage-content {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .my-wrapper {
+    position: fixed;
+    padding-top: 5em;
+    height: 100vh;
+  }
+  .mypage-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
 
-.my-wrapper {
-  position: fixed;
-  padding-top: 5em;
-  height: 100vh;
+  .mypage-tab {
+    padding-top: 1rem;
+    position: absolute;
+    padding-left: 4rem;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    background-color: #ffeeee;
+  }
+
+  .mypage-content {
+    width: 40%;
+    margin-left: 40%;
+  }
+
+  .sideMenu-wrapper {
+    background-color: transparent;
+    height: 100vh;
+  }
+
+  .sideMenu-intro {
+    padding: 40px 0;
+    font-size: 21px;
+  }
+
+  .side-row {
+    border: 1px solid black;
+  }
+
+  .side-col {
+    border: 1px solid black;
+  }
+
+  .name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .sidebtn-wrapper {
+    /*환경설정, 발자국, 찜*/
+    position: relative;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .sidebtn-icon {
+    display: inline;
+    border: 1px solid #e4e4e4;
+    border-radius: 100px;
+    padding: 7px 5px;
+  }
+
+  .btn-name {
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+
+  .sub-txt {
+    color: #797d81;
+    font-size: 10px;
+  }
+
+  .sideMenu-bottom {
+    position: absolute;
+    bottom: 15%;
+    font-size: 13px;
+  }
+
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+
+  .tab-click-stay {
+    color: gray;
+  }
 }
 
-.mypage-wrapper {
-  display: flex;
+@media (min-width: 992px) and (max-width: 1199px) {
+  .my-wrapper {
+    position: fixed;
+    padding-top: 5em;
+    height: 100vh;
+  }
+  .mypage-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .mypage-tab {
+    padding-top: 1rem;
+    position: absolute;
+    min-width: 25rem;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    background-color: #ffeeee;
+  }
+
+  .mypage-content {
+  }
+
+  .sideMenu-wrapper {
+    background-color: transparent;
+    height: 100vh;
+  }
+
+  .sideMenu-intro {
+    padding: 40px 0;
+    font-size: 21px;
+  }
+
+  .side-row {
+    border: 1px solid black;
+  }
+
+  .side-col {
+    border: 1px solid black;
+  }
+
+  .name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .sidebtn-wrapper {
+    /*환경설정, 발자국, 찜*/
+    position: relative;
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .sidebtn-icon {
+    display: inline;
+    border: 1px solid #e4e4e4;
+    border-radius: 100px;
+    padding: 7px 5px;
+  }
+
+  .btn-name {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .sub-txt {
+    color: #797d81;
+    font-size: 10px;
+  }
+
+  .sideMenu-bottom {
+    position: absolute;
+    bottom: 15%;
+    font-size: 13px;
+  }
+
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+
+  .tab-click-stay {
+    color: gray;
+  }
 }
 
-.mypage-tab {
-  position: absolute;
-  width: 65%;
-  height: 100vh;
-  padding-left: 34%;
-  background-color: #ffeeee;
-}
+@media (min-width: 1200px) {
+  .my-wrapper {
+    position: fixed;
+    padding-top: 10vh;
+    height: 100vh;
+  }
+  .mypage-wrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-top: -3rem;
+  }
 
-.mypage-content {
-  width: 40%;
-  margin-left: 40%;
-}
+  .mypage-tab {
+    padding-top: 1rem;
+    position: absolute;
+    min-width: 35rem;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    background-color: #ffeeee;
+  }
 
-.sideMenu-wrapper {
-  background-color: transparent;
-  height: 100vh;
+  .sideMenu-wrapper {
+    background-color: transparent;
+    height: 100vh;
+  }
+
+  .sideMenu-intro {
+    padding: 3rem 0;
+    font-size: 21px;
+  }
+
+  .side-row {
+    border: 1px solid black;
+  }
+
+  .side-col {
+    border: 1px solid black;
+  }
+
+  .name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .sidebtn-wrapper {
+    /*환경설정, 발자국, 찜*/
+    position: relative;
+    background-color: white;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 10px;
+    max-width: 98%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .sidebtn-icon {
+    display: inline;
+    border: 1px solid #e4e4e4;
+    border-radius: 100px;
+    padding: 7px 5px;
+    margin-right: 1rem;
+  }
+
+  .btn-name {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  .sub-txt {
+    color: #797d81;
+    font-size: 10px;
+  }
+
+  .sideMenu-bottom {
+    position: absolute;
+    bottom: 15vh;
+    font-size: 13px;
+  }
+
+  .tab-click-active {
+    color: #ff6b6c;
+  }
+
+  .tab-click-stay {
+    color: gray;
+  }
 }
 
 .sideMenu-intro {
-  padding: 40px 0;
-  font-size: 21px;
-}
-
-.side-row {
-  border: 1px solid black;
-}
-
-.side-col {
-  border: 1px solid black;
+  font-family: 'Pretendard' !important;
+  font-weight: 400;
 }
 
 .name {
-  font-weight: bold;
-  text-decoration: underline;
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
 }
 
-.sidebtn-wrapper {
-  /*환경설정, 발자국, 찜*/
-  position: relative;
-  background-color: white;
-  margin-bottom: 15px;
-  padding: 12px;
-  border-radius: 10px;
-  width: 98%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.sidebtn-icon {
-  display: inline;
-  border: 1px solid #e4e4e4;
-  border-radius: 100px;
-  padding: 7px 5px;
+.name-button {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
 }
 
 .btn-name {
-  font-size: 13px;
-  font-weight: bold;
+  font-family: 'Pretendard' !important;
 }
 
 .sub-txt {
-  color: #797d81;
-  font-size: 10px;
+  font-family: 'Pretendard' !important;
 }
 
-.sideMenu-bottom {
-  position: absolute;
-  bottom: 15%;
-  font-size: 13px;
-}
-
-.tab-click-active {
-  color: #ff6b6c;
-}
-
-.tab-click-stay {
-  color: gray;
+.withdrawal-click {
+  font-family: 'Pretendard' !important;
+  font-weight: 700;
 }

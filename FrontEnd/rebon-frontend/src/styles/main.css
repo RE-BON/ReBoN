@@ -1,7 +1,13 @@
-.main-wrapper{
+.main-wrapper {
   background-image: url('/public/image/main-background.png');
   background-repeat: no-repeat;
-  background-position:0 150px ;
+  background-position: 0 150px;
+}
+
+.main-wrapper {
+  background-image: url('/public/image/main-background.png');
+  background-repeat: no-repeat;
+  background-position: 0 150px;
 }
 
 .main-wrapper {
@@ -30,7 +36,7 @@
   border-radius: 20px;
   padding: 5px 10px;
   font-size: 13px;
-  color:#898C8F !important;
+  color: #898c8f !important;
   font-weight: 100 !important;
 }
 
@@ -41,7 +47,7 @@
   padding: 5px 10px;
   font-size: 13px;
   background: rgba(255, 255, 255, 0.9);
-  color: #FF6B6C !important;
+  color: #ff6b6c !important;
 }
 
 .searchTitle {
@@ -61,23 +67,23 @@
 }
 
 .best-img {
-  width: 100%;
+  width: 11.6rem;
   height: 280px;
   object-fit: cover;
   border-radius: 20px;
-  filter: brightness(70%); 
+  filter: brightness(70%);
 }
 
 .best-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content:start;
-  gap: 25px;
+  justify-content: start;
+  gap: 20px;
 }
 
 .titleRow-best {
   position: absolute;
-  top:230px;
+  top: 230px;
   display: flex;
   margin: 8px 5px;
 }
@@ -87,31 +93,30 @@
   margin: 8px 5px;
 }
 
-
-.tagRow-best{
+.tagRow-best {
   position: absolute;
-  top:200px;
+  top: 200px;
   margin: 0 10px;
 }
 
-.likeBtn{
+.likeBtn {
   position: absolute;
   right: 6px;
-  top:12px;
+  top: 12px;
   margin: 0 10px;
 }
 
-.bookmark-icon{
+.bookmark-icon {
   position: absolute;
   left: 10px;
-  top:0px;
+  top: 0px;
 }
 
-.best-num{
-  color:white;
+.best-num {
+  color: white;
   position: absolute;
   left: 22px;
-  top:2px;
+  top: 2px;
 }
 
 .placeName {
@@ -123,7 +128,7 @@
 .placeName-best {
   margin-right: 10px;
   margin: 0 10px;
-  color:white;
+  color: white;
 }
 
 .starNum {
@@ -132,20 +137,29 @@
   margin-left: 10px;
 }
 
-.starNum-best{
+.starNum-best {
   font-weight: bold;
-  color: #FEDB04;
+  color: #fedb04;
   margin-left: 10px;
 }
 
-.heart-icon, .bookmark-icon{
+.heart-icon,
+.bookmark-icon {
   color: #ff6b6c;
 }
 
-.heart-icon-fi{
+.heart-icon-fi {
   color: white;
 }
 
+.heart-icon,
+.bookmark-icon {
+  color: #ff6b6c;
+}
+
+.heart-icon-fi {
+  color: white;
+}
 
 /* Main Card */
 .mainCard {
@@ -154,10 +168,10 @@
   margin-bottom: 35px;
 }
 
-.likeBtn-main{
+.likeBtn-main {
   position: absolute;
   right: 6px;
-  top:12px;
+  top: 12px;
   margin: 0 10px;
 }
 
@@ -166,7 +180,7 @@
   height: 150px;
   object-fit: cover;
   border-radius: 16px 16px 0 0 !important;
-  border: 1px solid #C4C4C4;
+  border: 1px solid #c4c4c4;
   border-bottom: none;
 }
 
@@ -174,13 +188,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: start !important;
-  gap:35px;
+  gap: 35px;
 }
 
-.mainCard-bottom{
-  border: 1px solid #C4C4C4;
+.mainCard-bottom {
+  border: 1px solid #c4c4c4;
   overflow: auto;
-  border-radius: 0 0 15px 15px ;
+  border-radius: 0 0 15px 15px;
   padding: 0 10px 10px 10px;
 }
 
@@ -201,15 +215,15 @@
   margin-bottom: 24px;
 }
 
-.divider-right{
-  display:flex;
+.divider-right {
+  display: flex;
   align-items: center;
 }
 
-.main-toggle-label{
+.main-toggle-label {
   margin: 0 1.3rem 0 0.5rem;
   font-size: 0.8rem;
-  color: #A5A9AB;
+  color: #a5a9ab;
 }
 
 .filter {
@@ -239,11 +253,22 @@
   font-weight: bold;
   font-size: 13px;
 }
-.select-main input[type='radio'] + label {
+/* .select-main input[type='radio'] + label {
   background-color: #fff;
   color: #333;
 }
 .select-main input[type='radio']:checked + label {
   background-color: #333;
   color: #fff;
+} */
+.radio-click-active {
+  background-color: #333;
+  color: #fff;
+}
+.radio-click-stay {
+  background-color: #fff;
+  color: #333;
+}
+
+@media screen and (max-width: 500px) {
 }

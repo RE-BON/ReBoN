@@ -10,12 +10,14 @@ import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.member.domain.Member;
+import com.handong.rebon.review.domain.Review;
+import com.handong.rebon.review.domain.content.ReviewScore;
+import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
 import com.handong.rebon.shop.domain.like.Likes;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 import com.handong.rebon.tag.domain.Tag;
 
@@ -50,8 +52,7 @@ public abstract class Shop extends BaseEntity {
     @Embedded
     private ShopImages shopImages;
 
-    @Embedded
-    private Location location;
+    private String address;
 
     @Embedded
     private ShopScore shopScore;
@@ -62,12 +63,15 @@ public abstract class Shop extends BaseEntity {
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ShopTag> shopTags = new ArrayList<>();
 
+    @OneToMany(mappedBy = "shop")
+    private List<Review> reviews = new ArrayList<>();
+
     public Shop(
             Long id,
             Category category,
             ShopContent shopContent,
             ShopImages shopImages,
-            Location location,
+            String address,
             ShopScore shopScore,
             boolean deleted
     ) {
@@ -76,7 +80,7 @@ public abstract class Shop extends BaseEntity {
         this.category = category;
         this.shopContent = shopContent;
         this.shopImages = shopImages;
-        this.location = location;
+        this.address = address;
         this.shopScore = shopScore;
 
         shopImages.belongTo(this);
@@ -101,9 +105,9 @@ public abstract class Shop extends BaseEntity {
         this.shopCategories.addAll(shopCategories);
     }
 
-    public void update(ShopContent content, Location location) {
+    public void update(ShopContent content, String address) {
         this.shopContent = content;
-        this.location = location;
+        this.address = address;
     }
 
     public void updateCategories(Category category, List<Category> subCategories) {
@@ -137,6 +141,32 @@ public abstract class Shop extends BaseEntity {
         return this.category.equals(category);
     }
 
+    public void validateOnlyShopTag() {
+        if (this.shopTags.size() == 1) {
+            throw new ShopTagNumberException();
+        }
+    }
+
+    public boolean containLike(LoginMember loginMember) {
+        if (loginMember.isAnonymous()) {
+            return false;
+        }
+        return likes.stream()
+                    .anyMatch(l -> l.contain(loginMember.getId()));
+    }
+
+    public void plusReviewCount() {
+        shopScore.plusReviewCount();
+    }
+
+    public void calculateStar() {
+        shopScore.calculateStar(reviews);
+    }
+
+    public int getReviewCount() {
+        return shopScore.getReviewCount();
+    }
+
     public int getLikeCount() {
         return this.likes.size();
     }
@@ -151,19 +181,5 @@ public abstract class Shop extends BaseEntity {
 
     public double getStar() {
         return shopScore.getStar();
-    }
-
-    public void validateOnlyShopTag() {
-        if (this.shopTags.size() == 1) {
-            throw new ShopTagNumberException();
-        }
-    }
-
-    public boolean containLike(LoginMember loginMember) {
-        if (loginMember.isAnonymous()) {
-            return false;
-        }
-        return likes.stream()
-                    .anyMatch(l -> l.contain(loginMember.getId()));
     }
 }

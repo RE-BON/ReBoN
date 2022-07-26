@@ -18,15 +18,17 @@ public class ShopSimpleResponseDto {
     private Long id;
     private String name;
     private double star;
+    private int reviewCount;
     private boolean like;
     private List<ShopTagResponseDto> tags;
     private String image;
 
     @Builder
-    public ShopSimpleResponseDto(Long id, String name, double star, boolean like, List<ShopTagResponseDto> tags, String image) {
+    public ShopSimpleResponseDto(Long id, String name, double star, int reviewCount, boolean like, List<ShopTagResponseDto> tags, String image) {
         this.id = id;
         this.name = name;
         this.star = star;
+        this.reviewCount = reviewCount;
         this.like = like;
         this.tags = tags;
         this.image = image;
@@ -41,6 +43,7 @@ public class ShopSimpleResponseDto {
                                     .id(shop.getId())
                                     .name(shop.getName())
                                     .star(shop.getStar())
+                                    .reviewCount(shop.getReviewCount())
                                     .like(shop.containLike(loginMember))
                                     .tags(tags)
                                     .image(shop.getMainImage())

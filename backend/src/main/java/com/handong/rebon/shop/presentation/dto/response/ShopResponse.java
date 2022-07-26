@@ -82,8 +82,6 @@ public class ShopResponse {
                            .businessHour(dto.getBusinessHour())
                            .menus(convertToMenuResponse(dto.getMenus()))
                            .address(dto.getAddress())
-                           .longitude(dto.getLongitude())
-                           .latitude(dto.getLatitude())
                            .images(convertToImageResponse(dto.getImages()))
                            .build();
     }
