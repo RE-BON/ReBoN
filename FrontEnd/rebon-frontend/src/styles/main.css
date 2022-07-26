@@ -1,23 +1,22 @@
 .main-wrapper {
-  background-image: url('/public/image/main-background.png');
+  /* background-image: url('/public/image/main-background.png');
   background-repeat: no-repeat;
-  background-position: 0 150px;
+  background-position: 0 10vh; */
 }
 
 .main-wrapper {
-  background-image: url('/public/image/main-background.png');
-  background-repeat: no-repeat;
-  background-position: 0 150px;
-}
-
-.main-wrapper {
-  padding-top: 7%;
+  padding-top: 10vh;
   height: 100vh;
 }
 
 .TabPanel {
-  margin: 0 20%;
   font-size: 18px;
+  background-image: url('/public/image/main-background.png');
+  background-repeat: no-repeat;
+}
+
+.TabPanel-margin {
+  margin: 0 20%;
 }
 
 .MuiTab-root {
@@ -60,7 +59,7 @@
 .bestCard {
   position: relative;
   border-radius: 20px;
-  min-width: 23%;
+  min-width: 9rem;
   max-width: 23%;
   margin-bottom: 25px;
   height: 280px;
@@ -77,7 +76,7 @@
 .best-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-between;
   gap: 20px;
 }
 
@@ -101,9 +100,8 @@
 
 .likeBtn {
   position: absolute;
-  right: 6px;
+  left: 145px;
   top: 12px;
-  margin: 0 10px;
 }
 
 .bookmark-icon {
@@ -187,7 +185,7 @@
 .mainCard-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start !important;
+  justify-content: space-between !important;
   gap: 35px;
 }
 

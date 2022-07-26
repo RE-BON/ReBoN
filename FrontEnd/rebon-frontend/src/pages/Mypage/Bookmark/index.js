@@ -68,7 +68,7 @@ export default function Bookmark() {
               <Tab label="숙소" {...a11yProps(2)} />
             </Tabs>
           </Box>
-          <TabPanel className="TabPanel" value={value} index={0}>
+          <TabPanel value={value} index={0}>
             <div className="category-wrapper"></div>
             <div className="best-wrapper"></div>
 
