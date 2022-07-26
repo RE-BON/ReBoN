@@ -1,10 +1,4 @@
 .main-wrapper {
-  /* background-image: url('/public/image/main-background.png');
-  background-repeat: no-repeat;
-  background-position: 0 10vh; */
-}
-
-.main-wrapper {
   padding-top: 10vh;
   height: 100vh;
 }
