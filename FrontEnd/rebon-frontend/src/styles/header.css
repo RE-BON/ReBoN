@@ -6,10 +6,19 @@
   .header-wrapper header {
     min-width: 90vw;
   }
+  .header-logon-icon {
+    position: relative;
+    background-color: #e9e9ea;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+  }
 
   .header-logon-icon img {
-    margin-right: -1rem;
-    width: 2rem;
+    position: absolute;
+    top: -0.6rem;
+    left: -0.65rem;
+    padding: 1rem;
   }
 
   header .logo-img {

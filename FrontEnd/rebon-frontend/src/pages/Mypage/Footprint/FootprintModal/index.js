@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
+// import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
 import './../../../../styles/review-modal.css';
 import { Link } from 'react-router-dom';
 

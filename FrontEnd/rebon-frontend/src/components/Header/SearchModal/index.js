@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar';
 import Tags from '../../../pages/Search/Tags';
 import AutoCompletes from '../../../pages/Search/AutoCompletes';
 import '../../../styles/header-search-modal.css';

@@ -57,7 +57,9 @@ export default function Header() {
             </div>
 
             {isMobile ? (
-              <HeaderModal />
+              <div className="header-logon-icon">
+                <img src="/image/profile.png" alt="user" />
+              </div>
             ) : (
               <div className="header-logon-icon">
                 <HeaderModal />
