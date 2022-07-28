@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar';
 import Tags from '../../../pages/Search/Tags';
 import AutoCompletes from '../../../pages/Search/AutoCompletes';
 import '../../../styles/header-search-modal.css';
@@ -34,6 +34,7 @@ export default function SearchModal() {
   //여기서 계속 새로고침 되는 것이 문젠데..
   const [word, setWord] = useState('');
   const onChangeword = (e) => {
+    e.preventDefault();
     setWord(e.target.value);
   };
   const [tag, setTags] = useState([]);

@@ -2,23 +2,51 @@ import '../../styles/post.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/Header';
 import Star from './Star';
-import PostModal from './PostModal';
-import { useState } from 'react';
+import ModifyModal from './ModifyModal';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
-export default function Post() {
-  const [myTip, setMyTip] = useState('');
+export default function Modify() {
+  const data = [
+    {
+      id: 1,
+      shopName: '팜스발리',
+      content: '이것은 더미데이터 입니다, 맛이 좋아요',
+      tip: '필수로 시키자',
+      star: 5,
+      empathyCount: 0,
+      images: [],
+    },
+  ];
+
+  const [myTip, setMyTip] = useState(data[0]['tip']);
   const onChangeMyTip = (e) => {
     setMyTip(e.target.value);
   };
 
-  const [myContent, setMyContent] = useState('');
+  const [myContent, setMyContent] = useState(data[0]['content']);
   const onChangeMyContent = (e) => {
     setMyContent(e.target.value);
   };
+  // dummy 데이터 아닌 경우 아래 사용
+
+  // const [review, setReview] = useState({});
+  // useEffect(() => {
+  //   axios
+  //     .get('http://3.34.139.61:8080/api/my-reviews')
+  //     .then((response) => {
+  //       setReview(response.data);
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';
   const bucket = 'elice-boardgame-project';
@@ -45,36 +73,22 @@ export default function Post() {
     });
   };
 
-  const postSubmit = () => {
-    axios
-      .post('http://3.34.139.61:8080/api/shops/1/reviews', {
-        content: '맛이 좋아요',
-        tip: '필수로 시키자',
-        imageUrls: [],
-        star: 5,
-      })
-      .then(function (response) {
-        // -- 이 200일 경우
-        console.log(111111111111111);
-      })
-      .catch(function (error) {
-        // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
-        console.log(error);
-      })
-      .then(function () {
-        // 항상 실행
-      });
-  };
-
   return (
     <>
       {isMobile ? <div></div> : <Header />}
 
       <div className="post-wrapper">
-        {isMobile ? <div className="post-title">리뷰쓰기</div> : <div className="post-title">리뷰쓰기</div>}
+        {isMobile ? (
+          <div className="post-title">
+            <FontAwesomeIcon icon={faArrowLeft} />
+            리뷰쓰기
+          </div>
+        ) : (
+          <div className="post-title">리뷰쓰기</div>
+        )}
 
         <div className="post-star">
-          <Star />
+          <Star rate={data[0]['star']} />
         </div>
 
         {isMobile ? (
@@ -120,8 +134,8 @@ export default function Post() {
         </div>
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
-          <div className="post-button-finish" onClick={postSubmit}>
-            <PostModal />
+          <div className="post-button-finish">
+            <ModifyModal />
           </div>
         </div>
       </div>

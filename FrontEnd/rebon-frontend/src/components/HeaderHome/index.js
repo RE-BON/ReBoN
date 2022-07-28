@@ -1,14 +1,37 @@
 import '../../styles/header-home.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchModal from './SearchModal';
+import axios from 'axios';
 export default function Header() {
   const userName = localStorage.getItem('userName');
   //로그인인지 아닌지에 따라 헤더 상태 다름
-  const [isLogin, setIsLogin] = useState(true);
-  function Login(e) {
-    setIsLogin(true);
-  }
+  const [isLogin, setIsLogin] = useState(false);
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+
+  useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    if (token) {
+      axios
+        .get('http://3.34.139.61:8080/api/members', config)
+        .then((response) => {
+          setIsLogin(true);
+          setToken(response.data);
+        })
+        .catch((error) => {
+          console.log('error!!!');
+          setIsLogin(false);
+        });
+    }
+  }, []);
+
+  // window.addEventListener('locationchange', function () {
+  //   console.log('location changed!');
+  // });
+
+  // console.log(window.location.href);
 
   return (
     <div className="header-home-wrapper">
@@ -27,7 +50,7 @@ export default function Header() {
                 <img src="/image/user.png" alt="user" />
               </div>
             </Link>
-            <span className="header-home-logon-name">{userName}</span>
+            <span className="header-home-logon-name">{token.nickName}</span>
           </div>
         ) : (
           <div className="header-home-logoff">
