@@ -1,9 +1,10 @@
-.mainCard {
-  width: 30%;
+.bookmarkCard {
+  width: 15rem;
+  min-width: 5rem;
   margin-bottom: 35px;
 }
 
-.mainCard-img {
+.bookmarkCard-img {
   height: 150px;
   background-color: #f5f5f5;
   border-radius: 16px;

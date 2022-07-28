@@ -77,8 +77,6 @@ public class AdminShopRegister {
                                                       .end(end)
                                                       .phone("010-1234-5678")
                                                       .address("경상북도 포항시 OO")
-                                                      .latitude("41.40338")
-                                                      .longitude("2.17403")
                                                       .images(basicImage())
                                                       .menus(basicCafeMenu())
                                                       .build();

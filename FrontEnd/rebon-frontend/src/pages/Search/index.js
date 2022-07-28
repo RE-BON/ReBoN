@@ -17,6 +17,7 @@ export default function Search() {
     query: '(min-width:768px) and (max-width:1199px)',
   });
   const [autoComState, setAutoComState] = useState('none');
+
   const onChangeState = () => {
     setAutoComState('block');
   };
@@ -27,6 +28,8 @@ export default function Search() {
   const onChangeKeyword = (e) => {
     setWord(e.target.value);
     console.log(word);
+    setKeyword(e.target.value);
+    // console.log(keyword);
   };
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export default function Search() {
         });
     }
   }, []);
-  console.log('Search 페이지 입니다');
+
   return (
     <div className="search-background">
       <div className="search-wrapper">

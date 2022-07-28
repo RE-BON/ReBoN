@@ -152,7 +152,7 @@ class ReviewIntegrationTest extends IntegrationTest {
                 new ShopContent(shopName, LocalTime.of(12, 0), LocalTime.of(23, 0), "010-1234-1212"),
                 new ShopImages(),
                 null,
-                new ShopScore(0.0, 0), false
+                new ShopScore(0.0, 0, 0), false
         );
         return shopRepository.save(shop);
     }
