@@ -74,4 +74,15 @@ public class ApiShopController {
         ShopLikeResponseDto shopLikeResponseDto = shopService.unlike(shopLikeRequestDto);
         return ResponseEntity.ok(ShopLikeResponse.from(shopLikeResponseDto));
     }
+
+    @RequiredLogin
+    @GetMapping("/shops/likes")
+    public ResponseEntity<List<ShopSimpleResponse>> getLikeShops(
+            @Login LoginMember loginMember,
+            @RequestParam Long categoryId,
+            @PageableDefault Pageable pageable
+    ) {
+        List<ShopSimpleResponseDto> responses = shopService.findLikeShops(loginMember.getId(), categoryId, pageable);
+        return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
+    }
 }
