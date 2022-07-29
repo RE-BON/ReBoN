@@ -27,11 +27,15 @@
   }
 
   .header-logon-icon img {
-    width: 2.3rem;
+    width: 2.2rem;
   }
 
   header .logo-img {
     width: 9rem;
+  }
+
+  .header-logon .profile img {
+    width: 2rem;
   }
 }
 
@@ -51,6 +55,10 @@
 
   header .logo-img {
     width: 10rem;
+  }
+
+  .header-logon .profile img {
+    width: 2rem;
   }
 }
 

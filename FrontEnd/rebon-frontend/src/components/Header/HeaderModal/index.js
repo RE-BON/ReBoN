@@ -51,7 +51,7 @@ export default function HeaderModal() {
     <ModalProvider backgroundComponent={FadingBackground}>
       <Dropdown>
         <Dropdown.Toggle as={CustomToggle}>
-          <img src="/image/user-background.png" alt="user" className="header-modal-img" />
+          <img src="/image/user.png" alt="user" className="header-modal-img" />
         </Dropdown.Toggle>
         <Dropdown.Menu align="end">
           <Dropdown.Item eventKey="1">
