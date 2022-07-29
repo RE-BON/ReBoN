@@ -1,83 +1,12 @@
-.review-modal-wrapper {
-}
-.review-modal-close-wrapper {
-  text-align: end;
-}
-.review-report-cause {
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 3rem;
-  margin-top: 2rem;
-  border: 1px solid red;
-}
-.review-report-cause-wrapper {
-  /* display: block; */
-}
-.review-report-cause-list {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 1rem;
-}
-.review-report-radio {
+.header-report-radio {
   display: inline;
   margin-right: 1rem;
   border: 1px solid #d8d8d8;
   width: 50px;
   border: 2px solid red;
 }
-.review-report-radio-content {
-  display: inline;
-}
-.review-modal-report-button-wrapper {
-  text-align: center;
-}
 
-.review-report-cause-wrapper input[type='radio'] {
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  margin-top: 1px;
-  overflow: hidden;
-  color: #ff6b6c;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-.review-report-cause-wrapper input[type='radio'] + label {
-  display: inline-block;
-  position: relative;
-  padding-left: 30px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.review-report-cause-wrapper input[type='radio']:checked + label:after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 5px;
-  width: 13px;
-  height: 13px;
-  background-color: #ffeded;
-  color: #ff6b6c;
-  border-radius: 100%;
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
-}
-
-.review-modal-report-button {
-  width: 7rem;
-  height: 2rem;
-  /* padding: 2px 13px; */
-  margin-top: 2rem;
-  align-items: center;
-  border-radius: 10px;
-  background: #ff6b6c;
-  border: 1px solid red;
-}
-.review-modal-report,
-.review-modal-close {
+.header-modal-close {
   display: inline;
   font-weight: bold;
   margin-left: 1rem;
@@ -85,15 +14,28 @@
   font-family: 'Pretendard' !important;
 }
 
-.review-modal-close {
+.header-modal-image {
+  width: 2rem;
+}
+
+.header-modal-user {
+  width: 1.3rem;
+  margin-right: 1rem;
+}
+
+.header-modal-logout {
+  width: 1.5rem;
+  margin-left: 0.1rem;
+  margin-right: 0.7rem;
+}
+
+.header-modal-withdrawal {
+  width: 1.3rem;
+  margin-left: 0.1rem;
+  margin-right: 0.8rem;
+}
+
+.header-modal-report {
   background-color: transparent;
   border: #262626;
-}
-
-.review-modal-close-button {
-  color: black;
-}
-
-.dropdown-item-icon {
-  display: inline;
 }

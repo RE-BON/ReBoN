@@ -7,7 +7,6 @@ import AutoCompletes from '../../../pages/Search/AutoCompletes';
 import '../../../styles/header-search-modal.css';
 import axios from 'axios';
 
-
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
@@ -15,6 +14,7 @@ export default function SearchModal() {
   function toggleModal(e) {
     setOpacity(0);
     setIsOpen(!isOpen);
+    setWord('');
   }
 
   function afterOpen() {
@@ -34,7 +34,6 @@ export default function SearchModal() {
   //여기서 계속 새로고침 되는 것이 문젠데..
   const [word, setWord] = useState('');
   const onChangeword = (e) => {
-    e.preventDefault();
     setWord(e.target.value);
   };
   const [tag, setTags] = useState([]);
@@ -45,22 +44,18 @@ export default function SearchModal() {
         setTags(response.data);
       })
       .catch((error) => {
-        console.log('Search Modal error');
+        console.log(error);
       });
   }, []);
 
-  const FadingBackground = styled(BaseModalBackground)`
-    opacity: ${(props) => props.opacity};
-    transition: all 0.3s ease-in-out;
-  `;
-
   const [autoComState, setAutoComState] = useState('none');
   const onChangeState = () => {
+    console.log('자동완성');
     setAutoComState('block');
   };
 
   return (
-    <ModalProvider backgroundComponent={FadingBackground}>
+    <ModalProvider>
       <div onClick={toggleModal}>
         <SearchBar />
       </div>
