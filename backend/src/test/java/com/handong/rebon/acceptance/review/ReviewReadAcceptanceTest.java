@@ -32,7 +32,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     void getReviewByShopWithLogin() {
         //given
         String bearerToken = getBearerToken();
-        Shop shop = makeTestReview(bearerToken);
+        Shop shop = makeTestReview(bearerToken,"맛이 좋아요", "불고기 피자 시키세요",5);
 
         //when
         ExtractableResponse<Response> response = getReviewByShop(shop.getId(), bearerToken);
@@ -49,7 +49,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     void getReviewByShopWithoutLogin() {
         //given
         String bearerToken = getBearerToken();
-        Shop shop = makeTestReview(bearerToken);
+        Shop shop = makeTestReview(bearerToken,"맛이 좋아요", "불고기 피자 시키세요",5);
 
         //when
         ExtractableResponse<Response> response = getReviewByShop(shop.getId(), null);
@@ -63,7 +63,7 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     void getReviewByMemberWithLogin() {
         //given
         String bearerToken = getBearerToken();
-        makeTestReview(bearerToken);
+        makeTestReview(bearerToken, "맛이 좋아요", "불고기 피자 시키세요",5);
 
         //when
         ExtractableResponse<Response> response = getReviewByMember(bearerToken);
@@ -84,14 +84,39 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
-    public ExtractableResponse<Response> getReviewByShop(Long shopId, String token) {
+    @Test
+    @DisplayName("별점 순으로 식당 조회하기")
+    void getReviewByShopSortStar() {
+        //given
+        String bearerToken = getBearerToken();
+        makeTestReview(bearerToken, "그저 그래요", "김치피자 시키세요",2);
+        Shop shop = makeTestReview(bearerToken, "맛이 좋아요", "불고기 피자 시키세요",5);
+        makeTestReview(bearerToken, "먹을만 해요", "치킨 같이 드세요",3);
+        makeTestReview(bearerToken, "쏘쏘,,", "벌집 모양으로 커팅하세요",1);
+        makeTestReview(bearerToken, "김치 불고기 조합이 좋아요", "",4);
+        //when
+        ExtractableResponse<Response> response = getReviewByShop(shop.getId(), bearerToken, "reviewScore.star,desc");
+        List<ReviewGetByShopResponse> result = response.jsonPath().getList(".", ReviewGetByShopResponse.class);
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(result.get(0).getStar()).isEqualTo(5);
+        assertThat(result).hasSize(5);
+    }
+
+    public ExtractableResponse<Response> getReviewByShop(Long shopId, String token, String... sort) {
         RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
                                                       .log().all();
+        String sortCondition = "createdAt,asc";
         if (!Objects.isNull(token)) {
             requestSpec.header("Authorization", token);
         }
+        if (sort.length > 0) {
+            sortCondition = sort[0];
+        }
         return requestSpec.contentType(APPLICATION_JSON_VALUE)
                           .when()
+                          .queryParam("sort", sortCondition)
                           .get("/api/shops/" + shopId + "/reviews")
                           .then()
                           .log().all()
@@ -121,8 +146,8 @@ public class ReviewReadAcceptanceTest extends ReviewAcceptanceTest {
     }
 
     @NotNull
-    private Shop makeTestReview(String bearerToken) {
-        ReviewRequest reviewRequest = new ReviewRequest("맛이 좋아요", "필수로 시키자", 5);
+    private Shop makeTestReview(String bearerToken, String content, String tip, int star) {
+        ReviewRequest reviewRequest = new ReviewRequest(content, tip, star);
         Shop shop = shops.get("팜스발리");
         saveReview(reviewRequest, shop.getId(), bearerToken);
         return shop;
