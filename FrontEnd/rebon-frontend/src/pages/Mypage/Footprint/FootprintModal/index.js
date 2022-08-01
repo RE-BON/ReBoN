@@ -64,9 +64,11 @@ export default function ReviewModal() {
         </Dropdown.Toggle>
         <Dropdown.Menu align="end">
           <Dropdown.Item eventKey="1">
-            <div onClick={toggleModal}>
-              <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
-            </div>
+            <Link to="/modify" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <div onClick={toggleModal}>
+                <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
+              </div>
+            </Link>
           </Dropdown.Item>
           <Dropdown.Item eventKey="2">
             <div onClick={toggleModal}>

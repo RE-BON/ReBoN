@@ -23,7 +23,6 @@ export default function Search() {
   };
   //검색창 입력받기
   const [keyword, setKeyword] = useState('');
-  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const [word, setWord] = useState('');
   const onChangeKeyword = (e) => {
     setWord(e.target.value);
@@ -32,23 +31,24 @@ export default function Search() {
     // console.log(keyword);
   };
 
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   useEffect(() => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-
     if (token) {
       axios
         .get('http://3.34.139.61:8080/api/members', config)
         .then((response) => {
-          console.log(response.data);
+          setToken(response.data);
         })
         .catch((error) => {
-          console.log('error!!');
+          console.log(error);
         });
     }
   }, []);
 
+  console.log(window.sessionStorage.getItem('token'));
   return (
     <div className="search-background">
       <div className="search-wrapper">

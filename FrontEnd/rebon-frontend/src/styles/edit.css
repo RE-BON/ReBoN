@@ -283,10 +283,14 @@
   position: relative;
 }
 
+.icon-user img {
+  width: 5rem;
+}
+
 .icon-camera {
   z-index: 1;
-  margin-top: -25px;
-  margin-left: 55px;
+  margin-top: -26px;
+  margin-left: 52px;
   display: flex;
   justify-content: center;
   align-items: center;
