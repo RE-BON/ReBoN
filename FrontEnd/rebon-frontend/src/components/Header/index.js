@@ -13,6 +13,7 @@ export default function Header() {
 
   const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+
   useEffect(() => {
     console.log(token);
     const config = {
@@ -22,7 +23,8 @@ export default function Header() {
       axios
         .get('http://3.34.139.61:8080/api/members', config)
         .then((response) => {
-          setToken(response.data);
+          // console.log(response.data);
+          // setToken(response.data);
           setIsLogin(true);
         })
         .catch((error) => {

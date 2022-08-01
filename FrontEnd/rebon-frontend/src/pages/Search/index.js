@@ -47,6 +47,8 @@ export default function Search() {
         });
     }
   }, []);
+
+  console.log(window.sessionStorage.getItem('token'));
   return (
     <div className="search-background">
       <div className="search-wrapper">
