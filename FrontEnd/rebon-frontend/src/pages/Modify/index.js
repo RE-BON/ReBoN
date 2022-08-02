@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Star from './Star';
 import ModifyModal from './ModifyModal';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
@@ -22,7 +23,7 @@ export default function Modify() {
       images: [],
     },
   ];
-
+  const navigate = useNavigate();
   const [myTip, setMyTip] = useState(data[0]['tip']);
   const onChangeMyTip = (e) => {
     setMyTip(e.target.value);
@@ -32,20 +33,6 @@ export default function Modify() {
   const onChangeMyContent = (e) => {
     setMyContent(e.target.value);
   };
-  // dummy 데이터 아닌 경우 아래 사용
-
-  // const [review, setReview] = useState({});
-  // useEffect(() => {
-  //   axios
-  //     .get('http://3.34.139.61:8080/api/my-reviews')
-  //     .then((response) => {
-  //       setReview(response.data);
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';
@@ -80,8 +67,8 @@ export default function Modify() {
       <div className="post-wrapper">
         {isMobile ? (
           <div className="post-title">
-            <FontAwesomeIcon icon={faArrowLeft} />
-            리뷰쓰기
+            <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate(-1)} />
+            {'    '}리뷰쓰기
           </div>
         ) : (
           <div className="post-title">리뷰쓰기</div>
