@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StringUtil {
+
     public static String makeContainingKeyword(String keyword) {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("%");
@@ -20,6 +21,11 @@ public class StringUtil {
         StringTokenizer st = new StringTokenizer(businessHour, "~");
         String[] start = st.nextToken().split(":");
         String[] end = st.nextToken().split(":");
+
+        if (end[0].equals("24")) {
+            end[0] = "23";
+            end[1] = "59";
+        }
 
         return new LocalTime[]{
                 LocalTime.of(Integer.parseInt(start[0]), Integer.parseInt(start[1])),

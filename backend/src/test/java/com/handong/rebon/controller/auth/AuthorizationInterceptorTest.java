@@ -13,7 +13,6 @@ import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 import com.handong.rebon.review.application.dto.request.ReviewCreateRequestDto;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
-import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -96,7 +95,7 @@ public class AuthorizationInterceptorTest extends ControllerTest {
                                                       .subCategories(List.of(subCategoryId))
                                                       .tags(List.of(tagId))
                                                       .images(List.of(ImageFactory.createFakeImage("정면사진")))
-                                                      .menus(List.of(new MenuGroupRequestDto("피자메뉴", List.of())))
+                                                      .menus("")
                                                       .name("팜스발리")
                                                       .build();
         Long shopId = shopService.create(shopRequestDto);

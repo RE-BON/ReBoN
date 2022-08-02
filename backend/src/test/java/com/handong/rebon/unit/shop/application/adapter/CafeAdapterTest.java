@@ -3,7 +3,7 @@ package com.handong.rebon.unit.shop.application.adapter;
 import java.util.ArrayList;
 
 import com.handong.rebon.category.domain.Category;
-import com.handong.rebon.shop.application.MenuGroupService;
+import com.handong.rebon.shop.application.MenuService;
 import com.handong.rebon.shop.application.adapter.CafeServiceAdapter;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.domain.Shop;
@@ -27,13 +27,13 @@ import static org.mockito.BDDMockito.given;
 class CafeAdapterTest {
 
     @Mock
-    private MenuGroupService menuGroupService;
+    private MenuService menuService;
 
     @Test
     @DisplayName("카페 카테고리인 경우 지원한다.")
     void supportCategory() {
         // given
-        CafeServiceAdapter adapter = new CafeServiceAdapter(menuGroupService);
+        CafeServiceAdapter adapter = new CafeServiceAdapter(menuService);
         Category category = new Category("카페");
 
         // when
@@ -48,7 +48,7 @@ class CafeAdapterTest {
     @DisplayName("카페 카테고리가 아닌 경우 지원하지 않는다.")
     void notSupportCategory(String name) {
         // given
-        CafeServiceAdapter adapter = new CafeServiceAdapter(menuGroupService);
+        CafeServiceAdapter adapter = new CafeServiceAdapter(menuService);
         Category category = new Category(name);
 
         // when
@@ -62,12 +62,12 @@ class CafeAdapterTest {
     @DisplayName("Cafe를 생성한다")
     void create() {
         // given
-        CafeServiceAdapter adapter = new CafeServiceAdapter(menuGroupService);
+        CafeServiceAdapter adapter = new CafeServiceAdapter(menuService);
         ShopImages shopImages = new ShopImages();
         ShopRequestDto data = ShopRequestDto.builder()
                                             .name("스타벅스")
                                             .build();
-        given(menuGroupService.createMenu(any(), any())).willReturn(new ArrayList<>());
+        given(menuService.createMenus(any())).willReturn(new ArrayList<>());
 
         // when
         Shop shop = adapter.create(shopImages, data);

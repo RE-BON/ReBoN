@@ -1,8 +1,6 @@
 package com.handong.rebon.common.admin;
 
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,8 +10,6 @@ import com.handong.rebon.shop.application.ShopAdapterService;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.adapter.ShopServiceAdapter;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
-import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
-import com.handong.rebon.shop.application.dto.request.menu.MenuRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
@@ -40,7 +36,7 @@ public class AdminShopRegister {
     public Shop simpleRegister(String name, Category parent, List<Category> subs, List<Tag> tags, ShopImages shopImages) {
         ShopRequestDto shopRequestDto = ShopRequestDto.builder()
                                                       .name(name)
-                                                      .menus(Collections.emptyList())
+                                                      .menus("")
                                                       .build();
 
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(parent);
@@ -93,22 +89,8 @@ public class AdminShopRegister {
         );
     }
 
-    private List<MenuGroupRequestDto> basicCafeMenu() {
-        List<MenuRequestDto> coffee = Arrays.asList(
-                new MenuRequestDto("아메리카노", 5000),
-                new MenuRequestDto("딸기 라떼", 6000),
-                new MenuRequestDto("에스프레소", 4000)
-        );
-
-        List<MenuRequestDto> dessert = Arrays.asList(
-                new MenuRequestDto("딸기 케이크", 7000),
-                new MenuRequestDto("초코 케이크", 7000)
-        );
-
-        return List.of(
-                new MenuGroupRequestDto("커피류", coffee),
-                new MenuGroupRequestDto("디저트류", dessert)
-        );
+    private String basicCafeMenu() {
+        return "아메리카노 5,000 | 딸기 라떼 6,000 | 에스프레소 4,000 | 딸기 케이크 7,000 | 초코 케이크 7,000";
     }
 
     public void delete(Shop shop) {
