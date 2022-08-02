@@ -5,6 +5,7 @@ import Main from './pages/Main';
 import MainCategoryData from './pages/Main/MainCategoryData';
 import Search from './pages/Search';
 import Post from './pages/Post';
+import Modify from './pages/Modify';
 import Mypage from './pages/Mypage';
 import ReviewDropdown from './pages/Detail/Review/ReviewDropdown';
 import Join from './pages/Join';
@@ -27,6 +28,7 @@ function Router() {
         {/* <Route path="/main" element={<MainData />} /> */}
         <Route path="/main" element={<MainCategoryData />} />
         <Route path="/post" element={<Post />} />
+        <Route path="/modify" element={<Modify />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage/*" element={<Mypage />} />

@@ -52,7 +52,7 @@ export default function Edit() {
         <div className="edit-info-icon">
           <div>
             <span className="icon-user">
-              <img src="image/user.png" alt="user-img" />
+              <img src="image/user-background.png" alt="user-img" />
             </span>
             <span className="icon-camera">
               <img src="image/camera.png" alt="camera-img" />
