@@ -19,6 +19,11 @@
     font-size: 0.5rem;
   }
 
+  .edit-info {
+    width: 70%;
+    margin-left: 13%;
+  }
+
   /* 취소 & 수정 완료 버튼 */
   .edit-info-submit {
     position: absolute;
@@ -82,6 +87,11 @@
   .edit-title div {
     padding: 0 0 2% 5%;
     font-weight: bolder;
+  }
+
+  .edit-info {
+    width: 60%;
+    margin-left: 13%;
   }
 
   /* 취소 & 수정 완료 버튼 */
@@ -150,6 +160,11 @@
   .edit-title div {
     padding: 0 0 2% 5%;
     font-weight: bolder;
+  }
+
+  .edit-info {
+    width: 60%;
+    margin-left: 13%;
   }
 
   /* 취소 & 수정 완료 버튼 */
@@ -222,6 +237,11 @@
     font-weight: bolder;
   }
 
+  .edit-info {
+    width: 60%;
+    margin-left: 13%;
+  }
+
   /* 취소 & 수정 완료 버튼 */
   .edit-info-submit {
     margin-top: 20%;
@@ -264,11 +284,6 @@
 .edit-title div {
   font-family: 'Pretendard' !important;
   font-weight: 800;
-}
-
-.edit-info {
-  width: 60%;
-  margin-left: 13%;
 }
 
 .edit-info-icon {

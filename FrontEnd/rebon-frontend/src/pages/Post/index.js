@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
 import PostModal from './PostModal';
-import { useState } from 'react';
+import { useState, useNavigate } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
@@ -83,8 +83,6 @@ export default function Post() {
       {isMobile ? <div></div> : <Header />}
 
       <div className="post-wrapper">
-        {isMobile ? <div className="post-title">리뷰쓰기</div> : <div className="post-title">리뷰쓰기</div>}
-
         <div className="post-star">
           <form name="myform" id="myform" method="post" action="./save">
             <div className="star-wrapper">

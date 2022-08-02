@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Star from './Star';
 import ModifyModal from './ModifyModal';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
@@ -22,7 +23,7 @@ export default function Modify() {
       images: [],
     },
   ];
-
+  const navigate = useNavigate();
   const [myTip, setMyTip] = useState(data[0]['tip']);
   const onChangeMyTip = (e) => {
     setMyTip(e.target.value);
@@ -66,8 +67,8 @@ export default function Modify() {
       <div className="post-wrapper">
         {isMobile ? (
           <div className="post-title">
-            <FontAwesomeIcon icon={faArrowLeft} />
-            리뷰쓰기
+            <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate(-1)} />
+            {'    '}리뷰쓰기
           </div>
         ) : (
           <div className="post-title">리뷰쓰기</div>
