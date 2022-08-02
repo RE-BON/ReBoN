@@ -1,24 +1,33 @@
 import '../../styles/post.css';
+import '../../styles/post-star.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
-import Star from './Star';
 import PostModal from './PostModal';
 import { useState } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 
 export default function Post() {
+  //별 state
+  const [pharase, setPharase] = useState(null);
+  let state = pharase;
+  const [starRate, setStarRate] = useState(null);
+
+  //나만의 꿀팁 state
   const [myTip, setMyTip] = useState('');
   const onChangeMyTip = (e) => {
     setMyTip(e.target.value);
   };
 
+  //콘텐츠 state
   const [myContent, setMyContent] = useState('');
   const onChangeMyContent = (e) => {
     setMyContent(e.target.value);
   };
+
+  //이미지 state
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';
   const bucket = 'elice-boardgame-project';
@@ -45,24 +54,25 @@ export default function Post() {
     });
   };
 
-  const [starRate, setStarRate] = useState(null);
-  const getStarRate = (rate) => {
-    setStarRate(rate);
-  };
-
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const postSubmit = () => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios
-      .post('http://3.34.139.61:8080/api/shops/1/reviews', config, {
-        content: myContent,
-        tip: myTip,
-        imageUrls: [],
-        star: 5,
+      .post(
+        'http://3.34.139.61:8080/api/shops/1/reviews',
+        {
+          content: myContent,
+          tip: myTip,
+          imageUrls: [],
+          star: starRate,
+        },
+        config
+      )
+      .then(function (response) {
+        console.log(response);
       })
-      .then(function (response) {})
       .catch(function (error) {
         console.log(error);
       });
@@ -76,7 +86,68 @@ export default function Post() {
         {isMobile ? <div className="post-title">리뷰쓰기</div> : <div className="post-title">리뷰쓰기</div>}
 
         <div className="post-star">
-          <Star getStarRate={getStarRate} />
+          <form name="myform" id="myform" method="post" action="./save">
+            <div className="star-wrapper">
+              <fieldset>
+                <input
+                  onClick={() => {
+                    setPharase('최고예요.');
+                    setStarRate(5);
+                  }}
+                  type="radio"
+                  name="rating"
+                  value="5"
+                  id="rate1"
+                />
+                <label htmlFor="rate1">★</label>
+                <input
+                  onClick={() => {
+                    setPharase('좋아요.');
+                    setStarRate(4);
+                  }}
+                  type="radio"
+                  name="rating"
+                  value="4"
+                  id="rate2"
+                />
+                <label htmlFor="rate2">★</label>
+                <input
+                  onClick={() => {
+                    setPharase('괜찮아요.');
+                    setStarRate(3);
+                  }}
+                  type="radio"
+                  name="rating"
+                  value="3"
+                  id="rate3"
+                />
+                <label htmlFor="rate3">★</label>
+                <input
+                  onClick={() => {
+                    setPharase('그저 그래요.');
+                    setStarRate(2);
+                  }}
+                  type="radio"
+                  name="rating"
+                  value="2"
+                  id="rate4"
+                />
+                <label htmlFor="rate4">★</label>
+                <input
+                  onClick={() => {
+                    setPharase('별로예요.');
+                    setStarRate(1);
+                  }}
+                  type="radio"
+                  name="rating"
+                  value="1"
+                  id="rate5"
+                />
+                <label htmlFor="rate5">★</label>
+              </fieldset>
+              <div className="star-wrapper-pharases">{state == null ? null : <span>{pharase}</span>}</div>
+            </div>
+          </form>
         </div>
 
         {isMobile ? (
