@@ -9,15 +9,15 @@ import AWS from 'aws-sdk';
 
 export default function Post() {
   const [imageSrc, setImageSrc] = useState('');
-  const region = "us-east-1";
-  const bucket = "elice-boardgame-project";
+  const [file, setFile] = useState();
+  const region = 'us-east-1';
+  const bucket = 'rebon';
 
   AWS.config.update({
     region: region,
-    accessKeyId: "AKIAWHWKYOWONYWK7TQK",
-    secretAccessKey: "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",
-});
-
+    accessKeyId: 'AKIAWHWKYOWONYWK7TQK',
+    secretAccessKey: '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',
+  });
 
   const preview = (fileBlob) => {
     const reader = new FileReader();
@@ -29,9 +29,29 @@ export default function Post() {
         resolve();
       };
     });
-
   };
 
+  const imgUpload = async (e) => {
+    const upload = new AWS.S3.ManagedUpload({
+      params: {
+        Bucket: bucket, // 버킷 이름
+        Key: 'test1.png',
+        Body: file, // 파일 객체
+      },
+    });
+
+    const promise = upload.promise();
+    promise.then(
+      function () {
+        // 이미지 업로드 성공
+        alert('이미지 업로드 성공');
+      },
+      function (err) {
+        // 이미지 업로드 실패
+        alert('이미지 업로드 실패');
+      }
+    );
+  };
 
   return (
     <>
@@ -55,21 +75,34 @@ export default function Post() {
         </div>
 
         <div className="post-attach">
-        <input type="file" id="input-file" accept=".gif, .jpg, .png" hidden onChange={(e) => {
-                        preview(e.target.files[0]);
-                    }}/>
+          <input
+            type="file"
+            id="input-file"
+            accept=".gif, .jpg, .png"
+            hidden
+            onChange={(e) => {
+              preview(e.target.files[0]);
+              setFile(e.target.files[0]);
+            }}
+          />
           <div className="post-attach-contents">
-            
-              {imageSrc === ''? <label className="post-attach-image" for="input-file">
-                <FontAwesomeIcon icon={faPlus} size="1x" /></label> :
-                <img className='previewImg' src={imageSrc} />}
-            
+            {imageSrc === '' ? (
+              <label className="post-attach-image" for="input-file">
+                <FontAwesomeIcon icon={faPlus} size="1x" />
+              </label>
+            ) : (
+              <img className="previewImg" src={imageSrc} />
+            )}
+
             <div className="post-attach-count">1/10</div>
           </div>
         </div>
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
           <div className="post-button-finish">
+            <div className="post-modal-click" onClick={imgUpload}>
+              작성완료
+            </div>
             <PostModal />
           </div>
         </div>

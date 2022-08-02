@@ -34,9 +34,9 @@ export default function PostModal() {
 
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
-      <div className="post-modal-click" onClick={toggleModal}>
+      {/* <div className="post-modal-click" onClick={toggleModal}>
         작성완료
-      </div>
+      </div> */}
 
       <StyledModal
         isOpen={isOpen}
