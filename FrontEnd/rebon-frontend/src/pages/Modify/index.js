@@ -32,20 +32,6 @@ export default function Modify() {
   const onChangeMyContent = (e) => {
     setMyContent(e.target.value);
   };
-  // dummy 데이터 아닌 경우 아래 사용
-
-  // const [review, setReview] = useState({});
-  // useEffect(() => {
-  //   axios
-  //     .get('http://3.34.139.61:8080/api/my-reviews')
-  //     .then((response) => {
-  //       setReview(response.data);
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   const [imageSrc, setImageSrc] = useState('');
   const region = 'us-east-1';

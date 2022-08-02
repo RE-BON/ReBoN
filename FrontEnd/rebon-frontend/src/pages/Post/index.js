@@ -45,24 +45,26 @@ export default function Post() {
     });
   };
 
+  const [starRate, setStarRate] = useState(null);
+  const getStarRate = (rate) => {
+    setStarRate(rate);
+  };
+
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const postSubmit = () => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     axios
-      .post('http://3.34.139.61:8080/api/shops/1/reviews', {
-        content: '맛이 좋아요',
-        tip: '필수로 시키자',
+      .post('http://3.34.139.61:8080/api/shops/1/reviews', config, {
+        content: myContent,
+        tip: myTip,
         imageUrls: [],
         star: 5,
       })
-      .then(function (response) {
-        // -- 이 200일 경우
-        console.log(111111111111111);
-      })
+      .then(function (response) {})
       .catch(function (error) {
-        // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
         console.log(error);
-      })
-      .then(function () {
-        // 항상 실행
       });
   };
 
@@ -74,7 +76,7 @@ export default function Post() {
         {isMobile ? <div className="post-title">리뷰쓰기</div> : <div className="post-title">리뷰쓰기</div>}
 
         <div className="post-star">
-          <Star />
+          <Star getStarRate={getStarRate} />
         </div>
 
         {isMobile ? (

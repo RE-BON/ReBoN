@@ -5,7 +5,7 @@ import { FiHeart } from 'react-icons/fi';
 import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Bookmark from './Bookmark';
 import Footprint from './Footprint';
@@ -15,10 +15,29 @@ import LogoutModal from './LogoutModal';
 import Withdrawal from './Withdrawal';
 import '../../styles/mypage.css';
 import { useMediaQuery } from 'react-responsive';
+import axios from 'axios';
 
 export default function Mypage() {
-  const userName = localStorage.getItem('userName');
   const [clickedTab, setClickedTab] = useState(1);
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    if (token) {
+      axios
+        .get('http://3.34.139.61:8080/api/members', config)
+        .then((response) => {
+          setUserInfo(response.data);
+          console.log(response.data, 1111111111111);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
@@ -31,7 +50,7 @@ export default function Mypage() {
             <div className="mb-sideMenu-intro">
               <span className="mb-hello">안녕하세요.</span>
               <br />
-              <span className="mb-name">{userName}</span>님
+              <span className="mb-name">{userInfo.nickName}</span>님
               <Link to="" onClick={() => setClickedTab(1)}>
                 <ImCog color="black" size="18" className="mb-setting-icon" />
               </Link>
@@ -68,7 +87,7 @@ export default function Mypage() {
                 <div className="sideMenu-intro">
                   안녕하세요.
                   <br />
-                  <span className="name">{userName}</span>님{' '}
+                  <span className="name">{userInfo.nickName}</span>님{' '}
                   <Link to="" onClick={() => setClickedTab(1)}>
                     <ImCog className={clickedTab === 1 ? 'tab-click-active' : 'tab-click-stay'} color="black" size="18" />
                   </Link>
