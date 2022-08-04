@@ -8,8 +8,11 @@ import java.util.regex.Matcher;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.util.StringUtil;
 
+import lombok.Getter;
+
 import static com.handong.rebon.common.DataInitializer.HOUR_PATTERN;
 
+@Getter
 public class ShopInfoDto {
     private Long id;
     private String name;
@@ -75,58 +78,6 @@ public class ShopInfoDto {
 
     public String getAbbreviationAddress() {
         return abbrAddress.split(" ")[0];
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public List<String> getCategory() {
-        return category;
-    }
-
-    public List<String> getShortAddress() {
-        return shortAddress;
-    }
-
-    public String getRoadAddress() {
-        return roadAddress;
-    }
-
-    public String getAbbrAddress() {
-        return abbrAddress;
-    }
-
-    public String getThumUrl() {
-        return thumUrl;
-    }
-
-    public String getBizhourInfo() {
-        return bizhourInfo;
-    }
-
-    public int getMenuExist() {
-        return menuExist;
-    }
-
-    public String getMenuInfo() {
-        return menuInfo;
-    }
-
-    public Category getMainCategory() {
-        return mainCategory;
-    }
-
-    public String getSearchTag() {
-        return searchTag;
     }
 
     public void setBasicData(Category category, String query) {

@@ -1,6 +1,8 @@
 package com.handong.rebon.util;
 
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import lombok.AccessLevel;
@@ -31,5 +33,9 @@ public class StringUtil {
                 LocalTime.of(Integer.parseInt(start[0]), Integer.parseInt(start[1])),
                 LocalTime.of(Integer.parseInt(end[0]), Integer.parseInt(end[1]))
         };
+    }
+
+    public static boolean validatesEmptyList(List<String> list) {
+        return !Objects.isNull(list) && !list.isEmpty();
     }
 }

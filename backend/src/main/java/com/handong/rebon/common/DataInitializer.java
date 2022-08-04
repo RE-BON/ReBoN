@@ -26,6 +26,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.handong.rebon.util.StringUtil.validatesEmptyList;
+
 @RequiredArgsConstructor
 @Component
 @Profile("prod")
@@ -83,7 +85,8 @@ public class DataInitializer implements ApplicationRunner {
                      .flatMap(Collection::stream)
                      .map(NaverShopDto::getAllShops)
                      .flatMap(Collection::stream)
-                     .filter(dto -> validatesAddress(dto.getShortAddress()))
+                     .filter(dto -> validatesEmptyList(dto.getShortAddress()))
+                     .filter(dto -> containKeyword(dto.getShortAddress(), "포항"))
                      .map(dto -> {
                          Category category = dto.getMainCategory();
                          List<Category> subCategories = getSubCategories(category, dto.getCategory());
@@ -100,13 +103,18 @@ public class DataInitializer implements ApplicationRunner {
                      }).collect(Collectors.toList());
     }
 
-    private boolean validatesAddress(List<String> address) {
-        if (Objects.isNull(address) || address.isEmpty()) {
-            return false;
-        }
+    private boolean containKeyword(List<String> address, String keyword) {
         String basicAddress = address.get(0);
         return basicAddress.contains("포항");
     }
+
+    //    private boolean validatesAddress(List<String> address) {
+    //        if (Objects.isNull(address) || address.isEmpty()) {
+    //            return false;
+    //        }
+    //        String basicAddress = address.get(0);
+    //        return basicAddress.contains("포항");
+    //    }
 
     private List<Tag> getTags(String address) {
         List<Tag> tags = new ArrayList<>();

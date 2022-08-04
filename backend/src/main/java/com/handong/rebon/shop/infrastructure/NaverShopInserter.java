@@ -32,7 +32,7 @@ public class NaverShopInserter {
         List<NaverShopDto> results = new ArrayList<>();
         int displayCount = 10;
 
-        NaverShopDto shopDto = getShops(query, condition, 1, displayCount);
+        NaverShopDto shopDto = getShop(query, condition, 1, displayCount);
         results.add(shopDto);
 
         int pageCount = (int) Math.ceil((double) shopDto.getTotalCount() / displayCount);
@@ -41,7 +41,7 @@ public class NaverShopInserter {
         }
 
         for (int page = 2; page <= pageCount; page++) {
-            NaverShopDto result = getShops(query, condition, page, displayCount);
+            NaverShopDto result = getShop(query, condition, page, displayCount);
             results.add(result);
         }
 
@@ -50,8 +50,8 @@ public class NaverShopInserter {
         return new ArrayList<>(results);
     }
 
-    private NaverShopDto getShops(String query, String condition, int page, int displayCount) {
-        String url = "https://map.naver.com/v5/api/search?caller=pcweb&query=" + query + " " + condition + "&type=all&displayCount=" + displayCount + "&lang=ko&page=" + page;
+    private NaverShopDto getShop(String query, String condition, int page, int displayCount) {
+        String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s %s&type=all&displayCount=%d&lang=ko&page=%d", query, condition, displayCount, page);
         ResponseEntity<NaverShopDto> response = restTemplate.getForEntity(url, NaverShopDto.class);
         return response.getBody();
     }
