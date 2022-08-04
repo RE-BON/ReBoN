@@ -57,8 +57,8 @@ public class NaverShopInserter {
     }
 
     /**
-     *  503 에러 발생.. 저번에 한 번 데이터 받아오는거 성공했는데
-     *  다시해보니 에러 발생..
+     * 503 에러 발생.. 저번에 한 번 데이터 받아오는거 성공했는데
+     * 다시해보니 에러 발생..
      */
     public List<NaverShopDto> getShopsWebClient(Category category, String query, String condition) {
         try {
