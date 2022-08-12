@@ -4,9 +4,7 @@ import { RiContactsBookLine } from 'react-icons/ri';
 export default function Star(props) {
   const status = props.rate - 1;
   const rate = ['별로예요.', '그저 그래요.', '괜찮아요.', '좋아요.', '최고예요.'];
-
   const [starRate, setStarRate] = useState(status);
-  console.log(starRate);
   const [pharase, setPharase] = useState(rate[status]);
   let state = pharase;
 
