@@ -10,15 +10,17 @@ export default function BookmarkCard() {
         <div className="bookmarkCard-img">
           <FiHeart md={8} size="22" />
         </div>
-        <div className="titleRow">
-          <div className="placeName">Place one</div>
-          <div className="starNum">4.9</div>
+        <div className="bookmarkCard-bottom">
+          <div className="titleRow">
+            <div className="placeName">Place one</div>
+            <div className="starNum">4.9</div>
+          </div>
+          <ul className="tag-wrapper">
+            <li className="tag">칠포해수욕장</li>
+            <li className="tag">칠포읍</li>
+            <li className="tag">한식</li>
+          </ul>
         </div>
-        <ul className="tag-wrapper">
-          <li className="tag">칠포해수욕장</li>
-          <li className="tag">칠포읍</li>
-          <li className="tag">한식</li>
-        </ul>
       </div>
       {/* /////////////////////// 모바일 /////////////////////// */}
       <div className="bookmarkCard-mobile">
