@@ -8,6 +8,10 @@ import PostModal from './PostModal';
 import { useState } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
+import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import { Link } from 'react-router-dom';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function Post() {
   const [myTip, setMyTip] = useState('');
@@ -21,7 +25,11 @@ export default function Post() {
   };
   const [imageSrc, setImageSrc] = useState('');
   const [file, setFile] = useState();
-  const region = 'us-east-1';
+  const [fileName, setFileName] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+
+  const region = 'ap-northeast-2';
   const bucket = 'rebon';
 
   AWS.config.update({
@@ -50,7 +58,7 @@ export default function Post() {
     const upload = new AWS.S3.ManagedUpload({
       params: {
         Bucket: bucket, // 버킷 이름
-        Key: 'test1.png',
+        Key: fileName,
         Body: file, // 파일 객체
       },
     });
@@ -59,7 +67,8 @@ export default function Post() {
     promise.then(
       function () {
         // 이미지 업로드 성공
-        alert('이미지 업로드 성공');
+        setOpacity(0);
+        setIsOpen(!isOpen);
       },
       function (err) {
         // 이미지 업로드 실패
@@ -88,6 +97,29 @@ export default function Post() {
         // 항상 실행
       });
   };
+
+  function toggleModal(e) {
+    setOpacity(0);
+    setIsOpen(!isOpen);
+  }
+
+  function afterOpen() {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 100);
+  }
+
+  function beforeClose() {
+    return new Promise((resolve) => {
+      setOpacity(0);
+      setTimeout(resolve, 300);
+    });
+  }
+
+  const FadingBackground = styled(BaseModalBackground)`
+    opacity: ${(props) => props.opacity};
+    transition: all 0.3s ease-in-out;
+  `;
 
   return (
     <>
@@ -128,6 +160,7 @@ export default function Post() {
             onChange={(e) => {
               preview(e.target.files[0]);
               setFile(e.target.files[0]);
+              setFileName(e.target.files[0].name);
             }}
           />
           <div className="post-attach-contents">
@@ -148,10 +181,40 @@ export default function Post() {
             <div className="post-modal-click" onClick={imgUpload}>
               작성완료
             </div>
-            <PostModal />
+            {/* <PostModal /> */}
+            <ModalProvider backgroundComponent={FadingBackground}>
+              <StyledModal
+                isOpen={isOpen}
+                afterOpen={afterOpen}
+                beforeClose={beforeClose}
+                onBackgroundClick={toggleModal}
+                onEscapeKeydown={toggleModal}
+                opacity={opacity}
+                backgroundProps={{ opacity }}
+              >
+                <div className="post-modal-wrapper">
+                  <button className="close" onClick={toggleModal}>
+                    <Link to="/mypage/footprint" style={{ color: 'inherit', textDecoration: 'none' }}>
+                      <FontAwesomeIcon icon={faXmark} />
+                    </Link>
+                  </button>
+                  <img className="post-modal-image" alt="review-image" src="image/reviewLogo.png" />
+                  <div className="post-modal-notice">리뷰가 등록되었습니다.</div>
+                </div>
+              </StyledModal>
+            </ModalProvider>
           </div>
         </div>
       </div>
     </>
   );
 }
+
+const StyledModal = Modal.styled`
+  width: 21rem;
+  height: 16rem;
+  padding : 20px;
+  border-radius:20px;
+  background-color: white;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;
