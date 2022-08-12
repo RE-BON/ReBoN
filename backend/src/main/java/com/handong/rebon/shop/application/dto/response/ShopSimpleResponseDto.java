@@ -47,15 +47,15 @@ public class ShopSimpleResponseDto {
                                     .build();
     }
 
-    public static ShopSimpleResponseDto from(Likes like) {
+    public static ShopSimpleResponseDto from(Shop shop) {
 
         return ShopSimpleResponseDto.builder()
-                                    .id(like.getShop().getId())
-                                    .name(like.getShop().getName())
-                                    .star(like.getShop().getStar())
+                                    .id(shop.getId())
+                                    .name(shop.getName())
+                                    .star(shop.getStar())
                                     .like(true)
-                                    .tags(ShopTagResponseDto.toDtos(like.getShop()))
-                                    .image(like.getShop().getMainImage())
+                                    .tags(ShopTagResponseDto.toDtos(shop))
+                                    .image(shop.getMainImage())
                                     .build();
     }
 }

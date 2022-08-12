@@ -185,14 +185,11 @@ public class ShopService {
         Category category = categoryService.findById(categoryId);
         Member member = memberService.findById(memberId);
 
-        long skipSize = (long) pageable.getPageNumber() * pageable.getPageSize();
 
-        return member.filterByCategory(category)
-                     .stream()
-                     .skip(skipSize)
-                     .limit(pageable.getPageSize())
-                     .map(ShopSimpleResponseDto::from)
-                     .collect(Collectors.toList());
+        Page<Shop> shops = shopRepository.findByCategoryAndLikesMember(category, member, pageable);
+        return shops.get()
+                    .map(ShopSimpleResponseDto::from)
+                    .collect(Collectors.toList());
 
     }
 
