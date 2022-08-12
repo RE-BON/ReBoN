@@ -65,7 +65,7 @@ public class Member extends BaseEntity {
         empathies.add(empathy);
     }
 
-    public void unEmpathizeReview(Empathy empathy){
+    public void unEmpathizeReview(Empathy empathy) {
         empathies.remove(empathy);
     }
 
@@ -86,9 +86,9 @@ public class Member extends BaseEntity {
         return profile.getNickname();
     }
 
-    public String getEmail() { return profile.getEmail(); }
+    public String getEmail() {return profile.getEmail();}
 
-    public String getImage() { return profile.getImage(); }
+    public String getImage() {return profile.getImage();}
 
     public List<Likes> filterByCategory(Category category) {
         return likes.stream()

@@ -12,5 +12,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRep
     Page<Review> findAllByMember(Member member, Pageable pageable);
 
     Page<Review> findAllByShop(Shop shop, Pageable pageable);
-
 }
