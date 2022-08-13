@@ -1,6 +1,8 @@
 package com.handong.rebon.util;
 
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 import lombok.AccessLevel;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StringUtil {
+
     public static String makeContainingKeyword(String keyword) {
         StringBuilder stringbuilder = new StringBuilder();
         stringbuilder.append("%");
@@ -21,9 +24,18 @@ public class StringUtil {
         String[] start = st.nextToken().split(":");
         String[] end = st.nextToken().split(":");
 
+        if (end[0].equals("24")) {
+            end[0] = "23";
+            end[1] = "59";
+        }
+
         return new LocalTime[]{
                 LocalTime.of(Integer.parseInt(start[0]), Integer.parseInt(start[1])),
                 LocalTime.of(Integer.parseInt(end[0]), Integer.parseInt(end[1]))
         };
+    }
+
+    public static boolean validatesEmptyList(List<String> list) {
+        return !Objects.isNull(list) && !list.isEmpty();
     }
 }

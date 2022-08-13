@@ -29,8 +29,9 @@ public class Lodging extends Shop {
             ShopImages shopImages,
             String address,
             ShopScore shopScore,
+            Long naverId,
             boolean deleted
     ) {
-        super(id, category, shopContent, shopImages, address, shopScore, deleted);
+        super(id, category, shopContent, shopImages, address, shopScore, naverId, deleted);
     }
 }

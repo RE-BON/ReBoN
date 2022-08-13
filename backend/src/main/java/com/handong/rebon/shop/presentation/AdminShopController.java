@@ -43,7 +43,7 @@ public class AdminShopController {
         List<RootCategoryResponseDto> categories = categoryService.findRootCategoriesAndChildren();
         model.addAttribute("categories", CategoryAssembler.rootCategoryResponses(categories));
 
-        ShopRequest shopRequest = new ShopRequest(DEFAULT_MENU_GROUP_SIZE);
+        ShopRequest shopRequest = new ShopRequest();
         model.addAttribute("shopRequest", shopRequest);
         return "shop/createForm";
     }
@@ -76,7 +76,7 @@ public class AdminShopController {
         List<RootCategoryResponseDto> categories = categoryService.findRootCategoriesAndChildren();
         model.addAttribute("categories", CategoryAssembler.rootCategoryResponses(categories));
 
-        ShopRequest shopRequest = new ShopRequest(DEFAULT_MENU_GROUP_SIZE);
+        ShopRequest shopRequest = new ShopRequest();
         model.addAttribute("shopRequest", shopRequest);
         return "shop/updateForm";
     }
