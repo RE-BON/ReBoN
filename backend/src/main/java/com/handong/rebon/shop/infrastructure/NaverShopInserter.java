@@ -1,5 +1,7 @@
 package com.handong.rebon.shop.infrastructure;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -28,30 +30,11 @@ public class NaverShopInserter {
         this.restTemplate = restTemplate;
     }
 
-    public List<NaverShopDto> getShops(Category category, String query, String condition) {
-        List<NaverShopDto> results = new ArrayList<>();
-        int displayCount = 10;
-
-        NaverShopDto shopDto = getShop(query, condition, 1, displayCount);
-        results.add(shopDto);
-
-        int pageCount = (int) Math.ceil((double) shopDto.getTotalCount() / displayCount);
-        if (pageCount > TOTAL_COUNT / displayCount) {
-            pageCount = 31;
-        }
-
-        for (int page = 2; page <= pageCount; page++) {
-            NaverShopDto result = getShop(query, condition, page, displayCount);
-            results.add(result);
-        }
-
-        results.forEach(dto -> dto.setBasicData(category, query));
-
-        return new ArrayList<>(results);
-    }
-
-    private NaverShopDto getShop(String query, String condition, int page, int displayCount) {
-        String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s %s&type=all&displayCount=%d&lang=ko&page=%d", query, condition, displayCount, page);
+    public NaverShopDto getShop(String query, String condition, int page, int displayCount) {
+//        String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s&type=all&displayCount=%d&lang=ko&page=%d",
+//                URLEncoder.encode(query + " " + condition, StandardCharsets.UTF_8), displayCount, page);
+        String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s&type=all&displayCount=%d&lang=ko&page=%d",
+                query + " " + condition, displayCount, page);
         ResponseEntity<NaverShopDto> response = restTemplate.getForEntity(url, NaverShopDto.class);
         return response.getBody();
     }
