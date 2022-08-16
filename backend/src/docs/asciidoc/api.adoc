@@ -235,6 +235,25 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 
 == Shop API
 
+=== Naver Shop 등록
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| keyword | String | true | 검색할 지역(ex. 포항, 구룡포)
+| displayCount | int | true | 한 번에 등록할 가게 수(ex. 10인 경우 -> 식당 10, 카페 10, 숙소 10)
+| page | int | false | 검색할 페이지 수
+|===
+
+include::{snippets}/NaverShopInsertAcceptanceTest/naverShopInsert/http-request.adoc[]
+
+==== Response
+===== 성공
+include::{snippets}/NaverShopInsertAcceptanceTest/naverShopInsert/http-response.adoc[]
+
+===== 없는 페이지
+include::{snippets}/NaverShopInsertAcceptanceTest/naverShopInsertNotExist/http-response.adoc[]
+
 === Shop 리스트 조회(지역, 카테고리 별)
 ==== Request
 |===
