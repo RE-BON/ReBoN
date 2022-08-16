@@ -1,7 +1,5 @@
 package com.handong.rebon.shop.infrastructure;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -31,8 +29,8 @@ public class NaverShopInserter {
     }
 
     public NaverShopDto getShop(String query, String condition, int page, int displayCount) {
-//        String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s&type=all&displayCount=%d&lang=ko&page=%d",
-//                URLEncoder.encode(query + " " + condition, StandardCharsets.UTF_8), displayCount, page);
+        //        String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s&type=all&displayCount=%d&lang=ko&page=%d",
+        //                URLEncoder.encode(query + " " + condition, StandardCharsets.UTF_8), displayCount, page);
         String url = String.format("https://map.naver.com/v5/api/search?caller=pcweb&query=%s&type=all&displayCount=%d&lang=ko&page=%d",
                 query + " " + condition, displayCount, page);
         ResponseEntity<NaverShopDto> response = restTemplate.getForEntity(url, NaverShopDto.class);
