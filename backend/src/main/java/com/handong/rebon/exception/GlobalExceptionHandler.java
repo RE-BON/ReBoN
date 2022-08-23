@@ -17,26 +17,34 @@ import org.slf4j.LoggerFactory;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private Logger logger = LoggerFactory.getLogger(RebonApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(NoSuchOAuthMemberException.class)
-    public ResponseEntity<OAuthLoginFailErrorResponse> oAuthLoginFailHandler(NoSuchOAuthMemberException exception) {
+    public ResponseEntity<OAuthLoginFailErrorResponse> oAuthLoginFailHandler(NoSuchOAuthMemberException e) {
+        logger.info("Login Fail : " + e.getMessage());
         return ResponseEntity
-                .status(exception.getHttpStatus())
-                .body(OAuthLoginFailErrorResponse.from(exception));
+                .status(e.getHttpStatus())
+                .body(OAuthLoginFailErrorResponse.from(e));
     }
 
     @ExceptionHandler(RebonException.class)
     public ResponseEntity<ExceptionResponse> rebonException(RebonException e) {
+
+        if (e.getHttpStatus().is4xxClientError()) {
+            logger.info("Client Error : " + e.getMessage());
+        } else if (e.getHttpStatus().is5xxServerError()) {
+            logger.error("Server Error : " + e.getMessage());
+        }
         return ResponseEntity.status(e.getHttpStatus())
                              .body(new ExceptionResponse(e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ExceptionResponse> commonException(Exception e) {
+
         logger.error("Unknown Exception : " + e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                              .body(new ExceptionResponse(e.getMessage()));
     }
 }
