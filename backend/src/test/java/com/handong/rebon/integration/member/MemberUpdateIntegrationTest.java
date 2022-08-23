@@ -43,4 +43,21 @@ public class MemberUpdateIntegrationTest extends IntegrationTest {
                 .extracting("nickName")
                 .isEqualTo(memberUpdateRequestDto.getNickname());
     }
+
+    @Test
+    @DisplayName("탈퇴자 정보로 수정할 수 있다.")
+    void updateAnonymousInfo() {
+        //given
+        Member member = new Member("test@test.com", "test", true, "google");
+        Member savedMember = memberRepository.save(member);
+
+        //when
+        savedMember.withdraw();
+
+        //then
+        assertThat(savedMember).extracting("nickName")
+                               .isEqualTo("withdrawer");
+        assertThat(savedMember).extracting("email")
+                               .isEqualTo("withdrawer");
+    }
 }
