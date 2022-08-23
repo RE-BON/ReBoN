@@ -69,4 +69,11 @@ public class MemberService {
 
         member.update(memberUpdateRequestDto.getNickname(), memberUpdateRequestDto.isAgreed());
     }
+
+    @Transactional
+    public void withdraw(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                                        .orElseThrow(MemberNotFoundException::new);
+        member.withdraw();
+    }
 }
