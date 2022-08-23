@@ -13,10 +13,11 @@
         </root>
     </springProfile>
     <springProfile name="prod">
-
-        <include resource="appender/cloud-appender.xml"/>
+        <include resource="appender/cloud-info-appender.xml"/>
+        <include resource="appender/cloud-error-appender.xml"/>
         <root level="INFO">
-            <appender-ref ref="CLOUDWATCH"/>
+            <appender-ref ref="CLOUDWATCH-INFO"/>
+            <appender-ref ref="CLOUDWATCH-ERROR"/>
         </root>
     </springProfile>
 </configuration>

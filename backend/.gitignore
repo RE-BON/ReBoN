@@ -40,6 +40,7 @@ out/
 
 ### Submodule ###
 /src/main/resources/application-prod.yml
-/src/main/resources/appender/cloud-appender.xml
+/src/main/resources/appender/cloud-info-appender.xml
+/src/main/resources/appender/cloud-error-appender.xml
 
 
