@@ -85,12 +85,18 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 
-processResources.dependsOn('copySecret')
+processResources.dependsOn('copySecret', 'copyAppender')
 
 task copySecret(type: Copy) {
     from './security'
     include '*.yml'
     into './src/main/resources'
+}
+
+task copyAppender(type: Copy) {
+    from './security/appender'
+    include '*.xml'
+    into './src/main/resources/appender'
 }
 
 compileQuerydsl {
