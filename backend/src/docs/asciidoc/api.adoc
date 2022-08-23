@@ -184,6 +184,16 @@ include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithoutLogin/http
 ==== Response
 include::{snippets}/MemberUpdateAcceptanceTest/updateMemberInfoWithoutLogin/http-response.adoc[]
 
+=== 회원탈퇴
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+|===
+include::{snippets}/MemberUpdateAcceptanceTest/withdrawMember/http-request.adoc[]
+
+==== Response
+include::{snippets}/MemberUpdateAcceptanceTest/withdrawMember/http-response.adoc[]
 
 == Tag API
 
