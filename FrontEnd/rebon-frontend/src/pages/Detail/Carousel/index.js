@@ -56,13 +56,6 @@ export default function Detail({ isMobile, imageInfo, imageLength }) {
     prevArrow: <SamplePrevArrow_mobile />,
   };
 
-  useEffect(() => {
-    console.log("Carousel!");
-    console.log("image type이 ?  ",typeof imageInfo)
-
-    console.log("images is ",imageInfo, ' length is ',imageInfo.length);
-  }, []);
-
   return (
     <>
       {typeof imageInfo === 'string' ? (

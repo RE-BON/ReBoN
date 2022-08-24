@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="201abbac-c99e-478c-9026-09f260be9d0b" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Detail/Carousel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Carousel/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Detail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Join/Register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Join/Register/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Join/Terms/marketingModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Join/Terms/marketingModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Join/Terms/privacyModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Join/Terms/privacyModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Join/Terms/termsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Join/Terms/termsModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Join/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Join/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Main/BestCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/BestCard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Main/Divider/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/Divider/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/detail.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +39,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/lily/Desktop/Rebon/ReBoN/FrontEnd/rebon-frontend/node_modules/prettier",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -62,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1661322079068</updated>
       <workItem from="1661322080352" duration="106000" />
-      <workItem from="1661322216144" duration="4978000" />
+      <workItem from="1661322216144" duration="5551000" />
     </task>
     <servers />
   </component>

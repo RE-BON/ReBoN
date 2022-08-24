@@ -20,74 +20,12 @@ export default function Detail() {
   const isTablet = useMediaQuery({
     query: '(min-width:768px) and (max-width:991px)',
   });
-  const [shopInfo2, setShopInfo2] = useState({
-    id: 1,
-    name: '팜스발리',
-    star: 5.0,
-    like: true,
-    businessHour: '08:00~22:00',
-    tags: [
-      {
-        id: 1,
-        name: '포항',
-      },
-      {
-        id: 3,
-        name: '한동대',
-      },
-    ],
-    phone: '010-1234-5678',
-
-    subCategories: [
-      {
-        id: 9,
-        name: '식당',
-      },
-    ],
-    address: '경상북도 포항시 북구 흥해읍 한동로 558',
-    menus: [
-      {
-        name: '피자류',
-        menus: [
-          {
-            name: '김치 불고기',
-            price: 13700,
-          },
-          {
-            name: '고구마',
-            price: 11000,
-          },
-        ],
-      },
-
-      {
-        name: '치킨류',
-        menus: [
-          {
-            name: '허니 치킨',
-            price: 13700,
-          },
-          {
-            name: '후라이드 치킨',
-            price: 11000,
-          },
-        ],
-      },
-    ],
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Supreme_pizza.jpg/800px-Supreme_pizza.jpg',
-  });
-
   useEffect(() => {
-    console.log("Detail!");
     setShopNum(Number(location.pathname.slice(8)));
     const shopNumber = Number(location.pathname.slice(8));
-    console.log("shopNumber is ",shopNumber);
     axios
-      // .get('http://3.34.139.61:8080/api/shops/' + location.pathname.slice(8))
       .get(`http://3.34.139.61:8080/api/shops/${shopNumber}`)
       .then((response) => {
-        console.log('shopInfo is ',response.data);
-        console.log("shopInfo menu is ",response.data.menus);
         setShopInfo(response.data);
       })
       .catch((error) => {
@@ -101,7 +39,6 @@ export default function Detail() {
       {shopInfo?(
         isMobile ? <Carousel isMobile="1" imageInfo={shopInfo?.images} imageLength={shopInfo?.images.length} /> : <Carousel isMobile="0" imageInfo={shopInfo?.images[0].url} />
       ):''}
-      {/*{shopInfo && isMobile ? <Carousel isMobile="1" imageInfo={shopInfo?.images} imageLength={shopInfo?.images.length} /> : <Carousel isMobile="0" imageInfo={shopInfo?.images[0].url} />}*/}
       <div className="detail-shop-wrapper">
         <div className="detail-title-wrapper">
           <div className="detail-shop-star-wrapper">

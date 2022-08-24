@@ -16,6 +16,8 @@ import { useMediaQuery } from 'react-responsive';
 import '../../../styles/toggle.css';
 
 import Toggle from 'react-toggle';
+import axios from "axios";
+import { useLocation } from 'react-router';
 
 // const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 //   <Link
@@ -32,55 +34,23 @@ import Toggle from 'react-toggle';
 
 export default function Review({ shopName, shopImage, shopId }) {
   const { Kakao } = window;
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false); //모달 상태 관리 : 기본값 - 닫힘
   const dimmerRef = useRef(); // useRef를 활용하여 dim처리 해줘야 하는 부분
   const [toggleOn, setToggleOn] = useState(false);
+  const [reviewInfo, setReviewInfo] = useState([]);
   const [reviewLike, setReviewLike] = useState();
   const [reviewTip, setReviewTip] = useState([]);
   const [ready, setReady] = useState(true);
   const [reviewReady, setReviewReady] = useState(false);
   const [sortReady, setSortReady] = useState(true);
   const [sort, setSort] = useState(1);
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
-  const [review, setReview] = useState([
-    {
-      id: 1,
-      authorName: 'test',
-      shopName: '팜스발리',
-      content: '맛이 좋아요',
-      tip: '필수로 시키자',
-      star: 5,
-      empathyCount: 0,
-      images: [],
-      liked: true,
-    },
-    {
-      id: 2,
-      authorName: 'ralph',
-      shopName: '팜스발리',
-      content: '맛이 별로예요',
-      tip: '김치 불고기 피자가 제일 맛있어요',
-      star: 2,
-      empathyCount: 6,
-      images: [],
-      liked: false,
-    },
-    {
-      id: 3,
-      authorName: 'peace',
-      shopName: '팜스발리',
-      content:
-        '피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요',
-      tip: null,
-      star: 4,
-      empathyCount: 20,
-      images: [],
-      liked: true,
-    },
-  ]);
-  const [reviewInfo, setReviewInfo] = useState([
+
+  const [reviewInfo2, setReviewInfo2] = useState([
     {
       id: 1,
       authorName: 'test',
@@ -119,6 +89,21 @@ export default function Review({ shopName, shopImage, shopId }) {
 
   useEffect(() => {
     setReviewReady(false);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const shopNumber = Number(location.pathname.slice(8));
+    axios
+      .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
+      .then((response) => {
+        console.log("Review: ",response.data);
+        setReviewInfo(response.data);
+      })
+      .catch((error) => {
+        console.log('Review error');
+      });
+
+
     var likeNum = 0;
     var tips = [];
     var hi = [];
@@ -177,7 +162,6 @@ export default function Review({ shopName, shopImage, shopId }) {
   // }, []);
 
   const ActionMenu = () => {
-    console.log('hello');
     // return (
     <Dropdown>
       <Dropdown.Toggle>
