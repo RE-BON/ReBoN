@@ -54,8 +54,8 @@ export default function ReviewContent({ data, sort }) {
       {sort === '1'
         ? data
             .sort((a, b) => b.empathyCount - a.empathyCount)
-            .map((info) => (
-              <div className="review-content">
+            .map((info, index) => (
+              <div className="review-content" key={index}>
                 {' '}
                 <div className="review-user-image">
                   <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
@@ -94,8 +94,8 @@ export default function ReviewContent({ data, sort }) {
         : sort === '2'
         ? data
             .sort((a, b) => b.id - a.id)
-            .map((info) => (
-              <div className="review-content">
+            .map((info,index) => (
+              <div className="review-content" key={index}>
                 {' '}
                 <div className="review-user-image">
                   <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
@@ -135,8 +135,8 @@ export default function ReviewContent({ data, sort }) {
         : sort === '3'
         ? data
             .sort((a, b) => b.star - a.star)
-            .map((info) => (
-              <div className="review-content">
+            .map((info, index) => (
+              <div className="review-content" key={index}>
                 {' '}
                 <div className="review-user-image">
                   <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />
@@ -175,8 +175,8 @@ export default function ReviewContent({ data, sort }) {
             ))
         : data
             .sort((a, b) => a.star - b.star)
-            .map((info) => (
-              <div className="review-content">
+            .map((info, index) => (
+              <div className="review-content" key={index}>
                 {' '}
                 <div className="review-user-image">
                   <FontAwesomeIcon icon={faCircleUser} className="review-user-icon" color="#BDBDBD" />

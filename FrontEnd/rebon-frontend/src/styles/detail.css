@@ -76,7 +76,7 @@
 .detail-address-name {
   color: #898c8f;
   font-size: 0.9rem;
-  font-family: 'Pretendard' !important;
+  /*font-family: 'Pretendard' !important;*/
   font-weight: bold;
 }
 .detail-info-main-value {

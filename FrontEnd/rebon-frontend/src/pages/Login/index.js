@@ -11,7 +11,7 @@ export default function Login() {
           <img className="logo" alt="googleLogo" src="image/logo.png" hidden/>
         </div>
       <div className="centerBox">
-        <div class="join-title">
+        <div className="join-title">
           빠르고 쉽게
           <br /> ReBON에 로그인하세요!
           <br />

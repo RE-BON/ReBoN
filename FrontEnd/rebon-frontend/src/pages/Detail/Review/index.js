@@ -248,15 +248,16 @@ export default function Review({ shopName, shopImage, shopId }) {
           </div>
           <div className="review-order">
             <select
-              class="form-select"
+              // className="form-select"
               aria-label="Default select example"
-              className="review-select"
+              className="review-select form-select"
               // onChange={sortChange}
               onChange={(e) => {
                 setSort(e.target.value);
               }}
+              defaultValue={"1"}
             >
-              <option selected value="1" className="review-select-option">
+              <option value="1" className="review-select-option">
                 좋아요순
               </option>
               <option value="2">최신순</option>

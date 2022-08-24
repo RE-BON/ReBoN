@@ -34,7 +34,7 @@ function SamplePrevArrow_mobile(props) {
   );
 }
 
-export default function Detail({ isMobile, imageInfo }) {
+export default function Detail({ isMobile, imageInfo, imageLength }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -56,79 +56,89 @@ export default function Detail({ isMobile, imageInfo }) {
     prevArrow: <SamplePrevArrow_mobile />,
   };
 
+  useEffect(() => {
+    console.log("Carousel!");
+    console.log("image type이 ?  ",typeof imageInfo)
+
+    console.log("images is ",imageInfo, ' length is ',imageInfo.length);
+  }, []);
+
   return (
     <>
-      {isMobile === '1' ? (
-        <Slider {...settings_mobile} className="detail-slider">
-          <div className="slider-first-wrapper">
-            <img className="detail-main-image" alt="review-image" src="/image/detail.png" />
-          </div>
-          <div className="slider-second-wrapper">
-            <div className="slider-first-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+      {typeof imageInfo === 'string' ? (
+        isMobile === '1' ? (
+            <Slider {...settings_mobile} className="detail-slider">
+              <div className="slider-first-wrapper">{imageInfo ? <img className="detail-main-image" alt="review-image" src={imageInfo} /> : ''}</div>
+            </Slider>
+        ) : (
+            <Slider {...settings} className="detail-slider">
+              <div className="slider-first-wrapper">{imageInfo ? <img className="detail-main-image" alt="review-image" src={imageInfo} /> : ''}</div>
+              <div className="slider-second-wrapper">
+                <div className="slider-first-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                </div>
+                <div className="slider-second-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                </div>
               </div>
-              <div className="slider-second-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+            </Slider>
+        )
+      ):(
+        isMobile === '1' ? (
+          imageInfo.length === 1 ? (
+            <Slider {...settings_mobile} className="detail-slider">
+              <div className="slider-first-wrapper">{imageInfo ? <img className="detail-main-image" alt="review-image" src={imageInfo} /> : ''}</div>
+            </Slider>
+          ):(
+            <Slider {...settings_mobile} className="detail-slider">
+              <div className="slider-first-wrapper">{imageInfo ? <img className="detail-main-image" alt="review-image" src={imageInfo} /> : ''}</div>
+              <div className="slider-second-wrapper">
+                <div className="slider-first-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                </div>
+                <div className="slider-second-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
+                </div>
               </div>
-            </div>
-            <div className="slider-second-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+            </Slider>
+          )
+        ) : (
+          imageInfo.length === 1 ? (
+            <Slider {...settings} className="detail-slider">
+              <div className="slider-first-wrapper">{imageInfo[0] ? <img className="detail-main-image" alt="review-image" src={imageInfo[0].url} /> : ''}</div>
+              <div className="slider-second-wrapper">
+                <div className="slider-first-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo[0] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[0].url} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo[0] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[0].url} /> : ''}</div>
+                </div>
+                <div className="slider-second-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo[0] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[0].url} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo[0] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[0].url} /> : ''}</div>
+                </div>
               </div>
-              <div className="slider-second-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
+            </Slider>
+          ):(
+            <Slider {...settings} className="detail-slider">
+              <div className="slider-first-wrapper">{imageInfo[0] ? <img className="detail-main-image" alt="review-image" src={imageInfo[0].url} /> : ''}</div>
+              <div className="slider-second-wrapper">
+                <div className="slider-first-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo[1] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[1].url} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo[2] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[2].url} /> : ''}</div>
+                </div>
+                <div className="slider-second-sub-wrapper">
+                  <div className="slider-first-sub-image-wrapper">{imageInfo[3] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[3].url} /> : ''}</div>
+                  <div className="slider-second-sub-image-wrapper">{imageInfo[4] ? <img className="detail-sub-image" alt="review-image" src={imageInfo[4].url} /> : ''}</div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="slider-first-wrapper">{imageInfo ? <img className="detail-main-image" alt="review-image" src={imageInfo} /> : ''}</div>
-          <div className="slider-second-wrapper">
-            <div className="slider-first-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-              <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-            </div>
-            <div className="slider-second-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-              <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-            </div>
-          </div>
-        </Slider>
-      ) : (
-        <Slider {...settings} className="detail-slider">
-          <div className="slider-first-wrapper">
-            <img className="detail-main-image" alt="review-image" src="/image/detail.png" />
-          </div>
-          <div className="slider-second-wrapper">
-            <div className="slider-first-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
-              </div>
-              <div className="slider-second-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
-              </div>
-            </div>
-            <div className="slider-second-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
-              </div>
-              <div className="slider-second-sub-image-wrapper">
-                <img className="detail-sub-image" alt="review-image" src="/image/detail.png" />
-              </div>
-            </div>
-          </div>
-          <div className="slider-first-wrapper">{imageInfo ? <img className="detail-main-image" alt="review-image" src={imageInfo} /> : ''}</div>
-          <div className="slider-second-wrapper">
-            <div className="slider-first-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-              <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-            </div>
-            <div className="slider-second-sub-wrapper">
-              <div className="slider-first-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-              <div className="slider-second-sub-image-wrapper">{imageInfo ? <img className="detail-sub-image" alt="review-image" src={imageInfo} /> : ''}</div>
-            </div>
-          </div>
-        </Slider>
+            </Slider>
+          )
+        )
       )}
     </>
   );
 }
+
