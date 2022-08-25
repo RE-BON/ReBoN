@@ -7,7 +7,6 @@ import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 
 export default function Header() {
-  const url = 'http://localhost:3000';
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
@@ -34,7 +33,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className={`header-wrapper ${window.location.href === `${url}/` ? 'header-wrapper-pink' : ''}`}>
+    <div className={`header-wrapper ${window.location.pathname === '/' ? 'header-wrapper-pink' : ''}`}>
       <header>
         <Link to="/">
           <img src="/image/logo.png" alt="logo" className="logo-img" />

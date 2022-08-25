@@ -18,7 +18,6 @@ import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 
 export default function Mypage() {
-  const url = 'http://localhost:3000';
   const [clickedTab, setClickedTab] = useState(1);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const [userInfo, setUserInfo] = useState({});
@@ -41,6 +40,7 @@ export default function Mypage() {
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
+
   return (
     <>
       {isMobile ? (
@@ -55,7 +55,7 @@ export default function Mypage() {
                 <ImCog color="black" size="18" className="mb-setting-icon" />
               </Link>
             </div>
-            {window.location.href === `${url}/mypage/withdrawal` ? null : (
+            {window.location.pathname === '/mypage/withdrawal' ? null : (
               <div className="mb-mypage-tab">
                 <div className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
                   <Link to="/mypage/footprint" onClick={() => setClickedTab(2)} style={{ color: 'inherit', textDecoration: 'none' }}>
