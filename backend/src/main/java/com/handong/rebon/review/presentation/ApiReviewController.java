@@ -7,16 +7,14 @@ import com.handong.rebon.auth.domain.Login;
 import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.auth.domain.RequiredLogin;
 import com.handong.rebon.review.application.ReviewService;
-
 import com.handong.rebon.review.application.dto.request.*;
-
-import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewEmpathizeResponseDto;
+import com.handong.rebon.review.application.dto.response.ReviewGetByMemberResponseDto;
 import com.handong.rebon.review.application.dto.response.ReviewGetByShopResponseDto;
 import com.handong.rebon.review.presentation.dto.ReviewAssembler;
 import com.handong.rebon.review.presentation.dto.request.ReviewRequest;
-import com.handong.rebon.review.presentation.dto.response.ReviewGetByMemberResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewEmpathizeResponse;
+import com.handong.rebon.review.presentation.dto.response.ReviewGetByMemberResponse;
 import com.handong.rebon.review.presentation.dto.response.ReviewGetByShopResponse;
 
 import org.springframework.data.domain.Pageable;
@@ -114,7 +112,7 @@ public class ApiReviewController {
         ReviewEmpathizeResponseDto reviewEmpathizeResponseDto = reviewService.unEmpathize(empathizeRequestDto);
         return ResponseEntity.ok(ReviewEmpathizeResponse.from(reviewEmpathizeResponseDto));
     }
-    
+
     @PatchMapping("/reviews/{reviewId}")
     public ResponseEntity<Void> update(
             @Login LoginMember loginMember,

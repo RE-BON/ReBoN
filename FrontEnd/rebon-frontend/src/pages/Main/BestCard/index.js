@@ -28,6 +28,44 @@ export default function BestCard({ data, checked }) {
     }
   };
 
+  const [bestInfo, setBestInfo] = useState([
+    {
+      id: 1,
+      name: '팜스발리',
+      star: 0.0,
+      like: true,
+      tags: [
+        {
+          id: 1,
+          name: '포항',
+        },
+        {
+          id: 3,
+          name: '한동대',
+        },
+      ],
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Supreme_pizza.jpg/800px-Supreme_pizza.jpg',
+    },
+    {
+      id: 3,
+      name: '한동대 학관',
+      star: 0.0,
+      like: false,
+      tags: [
+        {
+          id: 1,
+          name: '포항',
+        },
+        {
+          id: 3,
+          name: '한동대',
+        },
+      ],
+      image:
+        'https://mblogthumb-phinf.pstatic.net/MjAxOTAxMTNfMTA0/MDAxNTQ3Mzc5NjQ1MzA2.jBPcIF5Tqd8GIrxEQhLG04tIQi33JGLThx4RQuimNVcg.2Nf25aUFMoCd4CdXBwv4HWg8ugDx0Ym9y9nhmEppNE0g.JPEG.let1997/Screenshot_20190113-204020_Naver_Blog.jpg?type=w800',
+    },
+  ]);
+
   return (
     <>
       {bestList

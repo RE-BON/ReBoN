@@ -2,7 +2,6 @@ package com.handong.rebon.member.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.*;
 
 import com.handong.rebon.common.BaseEntity;
@@ -62,7 +61,7 @@ public class Member extends BaseEntity {
         empathies.add(empathy);
     }
 
-    public void unEmpathizeReview(Empathy empathy){
+    public void unEmpathizeReview(Empathy empathy) {
         empathies.remove(empathy);
     }
 
