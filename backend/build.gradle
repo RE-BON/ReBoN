@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    implementation 'ca.pjer:logback-awslogs-appender:1.6.0'
 
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
@@ -84,12 +85,18 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 
-processResources.dependsOn('copySecret')
+processResources.dependsOn('copySecret', 'copyAppender')
 
 task copySecret(type: Copy) {
     from './security'
     include '*.yml'
     into './src/main/resources'
+}
+
+task copyAppender(type: Copy) {
+    from './security/appender'
+    include '*.xml'
+    into './src/main/resources/appender'
 }
 
 compileQuerydsl {
