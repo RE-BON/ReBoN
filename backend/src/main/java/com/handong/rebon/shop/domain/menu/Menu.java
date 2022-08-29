@@ -21,23 +21,11 @@ public class Menu extends BaseEntity {
     private int price;
 
     @ManyToOne
-    private MenuGroup menuGroup;
-
-    @ManyToOne
     private Shop shop;
 
     public Menu(String name, int price) {
-        this(name, price, null);
-    }
-
-    public Menu(String name, int price, MenuGroup menuGroup) {
         this.name = name;
         this.price = price;
-        this.menuGroup = menuGroup;
-    }
-
-    public void belongTo(MenuGroup menuGroup) {
-        this.menuGroup = menuGroup;
     }
 
     public void belongShop(Shop shop) {
