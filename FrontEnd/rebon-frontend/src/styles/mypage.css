@@ -283,7 +283,7 @@
   .mypage-tab {
     padding-top: 1rem;
     position: absolute;
-    min-width: 35rem;
+    min-width: 32rem;
     height: 100vh;
     display: flex;
     justify-content: end;

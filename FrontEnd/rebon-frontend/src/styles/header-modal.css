@@ -1,0 +1,41 @@
+.header-report-radio {
+  display: inline;
+  margin-right: 1rem;
+  border: 1px solid #d8d8d8;
+  width: 50px;
+  border: 2px solid red;
+}
+
+.header-modal-close {
+  display: inline;
+  font-weight: bold;
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  font-family: 'Pretendard' !important;
+}
+
+.header-modal-img {
+  width: 1.6rem;
+}
+
+.header-modal-user {
+  width: 1.3rem;
+  margin-right: 1rem;
+}
+
+.header-modal-logout {
+  width: 1.5rem;
+  margin-left: 0.1rem;
+  margin-right: 0.7rem;
+}
+
+.header-modal-withdrawal {
+  width: 1.3rem;
+  margin-left: 0.1rem;
+  margin-right: 0.8rem;
+}
+
+.header-modal-report {
+  background-color: transparent;
+  border: #262626;
+}

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
+// import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
 import './../../../../styles/review-modal.css';
 import { Link } from 'react-router-dom';
 
@@ -64,9 +64,11 @@ export default function ReviewModal() {
         </Dropdown.Toggle>
         <Dropdown.Menu align="end">
           <Dropdown.Item eventKey="1">
-            <div onClick={toggleModal}>
-              <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
-            </div>
+            <Link to="/modify" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <div onClick={toggleModal}>
+                <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
+              </div>
+            </Link>
           </Dropdown.Item>
           <Dropdown.Item eventKey="2">
             <div onClick={toggleModal}>

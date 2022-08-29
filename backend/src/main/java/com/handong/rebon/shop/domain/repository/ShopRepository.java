@@ -1,6 +1,7 @@
 package com.handong.rebon.shop.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.member.domain.Member;
@@ -14,5 +15,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface ShopRepository extends JpaRepository<Shop, Long>, ShopRepositoryCustom {
     List<Shop> findByCategory(Category category);
 
+
     Page<Shop> findByCategoryAndLikesMember(Category category, Member member, Pageable pageable);
+    Optional<Shop> findByNaverId(Long naverId);
 }

@@ -1,84 +1,224 @@
-@media (max-width: 7687x) {
+@media (max-width: 767px) {
   .withdrawal-container {
     padding: 0.1rem;
   }
+
+  .title {
+    margin: 8% 5% 5% 5%;
+    border-bottom: 2px solid black;
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .withdrawal-wrapper {
+    margin-left: 1.5rem;
+    width: 85%;
+    font-size: 13px;
+  }
+
+  .withdrawal-notice {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 3%;
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-notice-describe {
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-agree {
+    margin-left: -1rem;
+    width: 85vw;
+    margin-top: 15%;
+    padding: 9px 14px;
+    background-color: #f5f5f5;
+    font-size: 13px;
+  }
+
+  .agree-button {
+    color: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 50%;
+    padding: 0 3px;
+    margin-right: 10px;
+  }
+
+  .agree-describe {
+    font-family: 'Pretendard' !important;
+    font-weight: 600;
+  }
+
+  .withdrawal-submit {
+    position: absolute;
+    bottom: 0;
+    width: 110vw;
+    color: white;
+    margin-left: -5rem;
+    padding: 1rem 0;
+    background-color: #c4c4c4;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-submit:hover {
+    background-color: #ff6b6c;
+    font-family: 'Pretendard' !important;
+  }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .withdrawal-container {
+    padding-top: 4vh;
     width: 60vw;
     height: 90vh;
-    margin-left: 65%;
+    margin-left: 70%;
     padding-right: 20vw;
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
   .title {
-    padding: 5vh 0 2% 5%;
+    margin: 8% 5% 5% 5%;
+    border-bottom: 2px solid black;
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .withdrawal-wrapper {
+    margin-left: 10%;
+    width: 85%;
+    font-size: 13px;
+  }
+
+  .withdrawal-notice {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 3%;
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-notice-describe {
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-agree {
+    margin-top: 15%;
+    padding: 9px 14px;
+    background-color: #f5f5f5;
+    font-size: 13px;
+  }
+
+  .agree-button {
+    color: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 50%;
+    padding: 0 3px;
+    margin-right: 10px;
+  }
+
+  .agree-describe {
+    font-family: 'Pretendard' !important;
+    font-weight: 600;
+  }
+
+  .withdrawal-submit {
+    margin: 0 auto;
+    margin-top: 18%;
+    width: 55%;
+    padding: 3% 0;
+    color: white;
+    background-color: #c4c4c4;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-submit:hover {
+    background-color: #ff6b6c;
   }
 }
 
-.title {
-  margin: 8% 5% 5% 5%;
-  border-bottom: 2px solid black;
-  font-size: 15px;
-  font-weight: bolder;
-  font-family: 'Pretendard' !important;
-  font-weight: 700;
-}
+@media (min-width: 1200px) {
+  .withdrawal-container {
+    padding-top: 10vh;
+    min-width: 60vw;
+    height: 90vh;
+    margin-left: 37rem;
+    padding-right: 20vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 
-.withdrawal-wrapper {
-  margin-left: 10%;
-  width: 85%;
-  font-size: 13px;
-}
+  .title {
+    margin: 8% 5% 5% 5%;
+    border-bottom: 2px solid black;
+    font-size: 15px;
+    font-weight: bolder;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
 
-.withdrawal-notice {
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 3%;
-  font-family: 'Pretendard' !important;
-}
+  .withdrawal-wrapper {
+    margin-left: 10%;
+    width: 85%;
+    font-size: 13px;
+  }
 
-.withdrawal-notice-describe {
-  font-family: 'Pretendard' !important;
-}
+  .withdrawal-notice {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 3%;
+    font-family: 'Pretendard' !important;
+  }
 
-.withdrawal-agree {
-  margin-top: 15%;
-  padding: 9px 14px;
-  background-color: #f5f5f5;
-  font-size: 13px;
-}
+  .withdrawal-notice-describe {
+    font-family: 'Pretendard' !important;
+  }
 
-.agree-button {
-  color: white;
-  border: 1px solid #c4c4c4;
-  border-radius: 50%;
-  padding: 0 3px;
-  margin-right: 10px;
-}
+  .withdrawal-agree {
+    margin-top: 15%;
+    padding: 9px 14px;
+    background-color: #f5f5f5;
+    font-size: 13px;
+  }
 
-.agree-describe {
-  font-family: 'Pretendard' !important;
-  font-weight: 600;
-}
+  .agree-button {
+    color: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 50%;
+    padding: 0 3px;
+    margin-right: 10px;
+  }
 
-.withdrawal-submit {
-  margin: 0 auto;
-  margin-top: 18%;
-  width: 55%;
-  padding: 3% 0;
-  color: white;
-  background-color: #c4c4c4;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: bold;
-  font-family: 'Pretendard' !important;
-}
+  .agree-describe {
+    font-family: 'Pretendard' !important;
+    font-weight: 600;
+  }
 
-.withdrawal-submit:hover {
-  background-color: #ff6b6c;
+  .withdrawal-submit {
+    margin: 0 auto;
+    margin-top: 18%;
+    width: 55%;
+    padding: 3% 0;
+    color: white;
+    background-color: #c4c4c4;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Pretendard' !important;
+  }
+
+  .withdrawal-submit:hover {
+    background-color: #ff6b6c;
+  }
 }

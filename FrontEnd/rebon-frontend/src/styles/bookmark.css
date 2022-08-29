@@ -1,8 +1,8 @@
 .bookmark-container {
   width: 60vw;
   height: 90vh;
-  margin-left: 65%;
-  padding-right: 20vw;
+  margin-left: 60%;
+  padding-right: 10vw;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -23,12 +23,39 @@
   font-weight: bolder;
 }
 
-.bookmark-wrapper .MuiTab-root {
-  z-index: 0;
-}
-
 .bookmark-wrapper .Mui-selected {
   color: #ff6b6c !important;
   font-weight: bold;
   z-index: -1;
+}
+
+.boookmarkCard-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.TabPanel-bookmark {
+  width: 55.5%;
+  margin-left: 21.5%;
+  padding: 0 !important;
+}
+
+.TabPanel-bookmark .css-19kzrtu {
+  padding: 24px 0 !important;
+}
+
+@media (max-width: 767px) {
+  .bookmark-container {
+    display: none;
+  }
+  .bookmark-container-mobile {
+    display: block !important;
+    margin-top: 2rem;
+  }
+  .css-q8iqya {
+    border-bottom: 1px solid #c4c4c4 !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
 }

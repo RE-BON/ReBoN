@@ -30,7 +30,7 @@ import Toggle from 'react-toggle';
 //   </Link>
 // ));
 
-export default function Review() {
+export default function Review({ shopName, shopImage, shopId }) {
   const { Kakao } = window;
   const [isMenuOpen, setIsMenuOpen] = useState(false); //모달 상태 관리 : 기본값 - 닫힘
   const dimmerRef = useRef(); // useRef를 활용하여 dim처리 해줘야 하는 부분
@@ -130,8 +130,6 @@ export default function Review() {
 
     setReviewLike(likeNum);
     setReviewReady(true);
-
-    Kakao.init('58024163a4e32fd01f0150a8e3667109');
   }, []);
 
   const shareKakao = () => {
@@ -139,8 +137,8 @@ export default function Review() {
       objectType: 'feed',
       content: {
         title: 'ReBon: ',
-        description: 'Shop 공유',
-        imageUrl: 'urls',
+        description: "'" + shopName + "'" + ' 공유',
+        imageUrl: shopImage,
         link: {
           mobileWebUrl: '모바일 url!',
           androidExecParams: 'test',
@@ -150,7 +148,15 @@ export default function Review() {
         {
           title: '웹으로 이동',
           link: {
-            mobileWebUrl: '공유할 url!',
+            mobileWebUrl: 'http://localhost:3000/detail/' + shopId,
+            webUrl: 'http://localhost:3000/detail/' + shopId,
+          },
+        },
+        {
+          title: '앱으로 이동',
+          link: {
+            mobileWebUrl: 'http://localhost:3000/detail/' + shopId,
+            webUrl: 'http://localhost:3000/detail/' + shopId,
           },
         },
       ],
