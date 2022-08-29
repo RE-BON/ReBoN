@@ -3,7 +3,6 @@ import FootprintModal from './FootprintModal';
 import '../../../styles/footprint.css';
 import ReviewStar from '../../Detail/Review/ReviewStar';
 import { useMediaQuery } from 'react-responsive';
-import ReviewModal from '../../Detail/Review/ReviewModal';
 import Logout from '../../Logout';
 import axios from 'axios';
 
@@ -33,36 +32,34 @@ export default function Footprint() {
         });
     }
   }, []);
-  // const [footInfo, setFootInfo] = useState([
-  //   {
-  //     id: 1,
-  //     shopName: '버거킹',
-  //     content: '맛이 좋아요',
-  //     tip: '필수로 시키자',
-  //     star: 5,
-  //     empathyCount: 0,
-  //     images: [],
-  //   },
-  //   {
-  //     id: 2,
-  //     shopName: '팜스발리',
-  //     content: '맛이 별로예요',
-  //     tip: '김치 불고기 피자가 제일 맛있어요',
-  //     star: 2,
-  //     empathyCount: 6,
-  //     images: [],
-  //   },
-  //   {
-  //     id: 3,
-  //     shopName: '애슐리',
-  //     content:
-  //       '피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요',
-  //     tip: null,
-  //     star: 4,
-  //     empathyCount: 20,
-  //     images: [],
-  //   },
-  // ]);
+
+  function handleDelete(targetId) {
+    console.log(targetId);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    if (token) {
+      axios
+        .delete(`http://3.34.139.61:8080/api/reviews/${targetId}`, config)
+        .then(function (response) {
+          console.log('DELETE: ', response.data);
+          axios
+            .get('http://3.34.139.61:8080/api/my-reviews', config)
+            .then((response) => {
+              console.log('GET: ', response.data);
+              setFootInfo(response.data);
+            })
+            .catch((error) => {
+              if (error.response.status === '401') return Logout;
+              else console.log(error);
+            });
+        })
+        .catch(function (error) {
+          throw new Error(error);
+        });
+    }
+  }
   return (
     <>
       {footInfo ? (
@@ -75,7 +72,7 @@ export default function Footprint() {
                       <div className="footprint-content">
                         <div className="footprint-user">
                           <div className="footprint-list-icon">
-                            <FootprintModal />
+                            <FootprintModal info={info} handleDelete={handleDelete} />
                           </div>
                           <span className="footprint-user-name">{info.shopName}</span>
                           <span className="footprint-rating">
@@ -115,7 +112,7 @@ export default function Footprint() {
                     <>
                       <div className="footprint-content">
                         <div className="footprint-remove-wrapper">
-                          <FootprintModal />
+                          <FootprintModal info={info} handleDelete={handleDelete} />
                         </div>
                         <div className="footprint-user">
                           <span className="footprint-user-name">{info.shopName}</span>

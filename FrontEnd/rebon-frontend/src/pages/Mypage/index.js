@@ -31,7 +31,6 @@ export default function Mypage() {
         .get('http://3.34.139.61:8080/api/members', config)
         .then((response) => {
           setUserInfo(response.data);
-          console.log(response.data, 1111111111111);
         })
         .catch((error) => {
           console.log(error);
@@ -41,6 +40,7 @@ export default function Mypage() {
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
+
   return (
     <>
       {isMobile ? (
@@ -55,19 +55,22 @@ export default function Mypage() {
                 <ImCog color="black" size="18" className="mb-setting-icon" />
               </Link>
             </div>
-            <div className="mb-mypage-tab">
-              <div className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
-                <Link to="/mypage/footprint" onClick={() => setClickedTab(2)} style={{ color: 'inherit', textDecoration: 'none' }}>
-                  <div className={clickedTab === 2 ? 'btn-click-active' : 'btn-click-stay'}>발자국</div>
-                </Link>
+            {window.location.pathname === '/mypage/withdrawal' ? null : (
+              <div className="mb-mypage-tab">
+                <div className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <Link to="/mypage/footprint" onClick={() => setClickedTab(2)} style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <div className={clickedTab === 2 ? 'btn-click-active' : 'btn-click-stay'}>발자국</div>
+                  </Link>
+                </div>
+                <div className="mb-border"></div>
+                <div className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
+                  <Link to="/mypage/bookmark" onClick={() => setClickedTab(3)} style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <div className={clickedTab === 3 ? 'btn-click-active' : 'btn-click-stay'}>찜</div>
+                  </Link>
+                </div>
               </div>
-              <div className="mb-border"></div>
-              <div className={clickedTab === 3 ? 'tab-click-active' : 'tab-click-stay'}>
-                <Link to="/mypage/bookmark" onClick={() => setClickedTab(3)} style={{ color: 'inherit', textDecoration: 'none' }}>
-                  <div className={clickedTab === 3 ? 'btn-click-active' : 'btn-click-stay'}>찜</div>
-                </Link>
-              </div>
-            </div>
+            )}
+
             <div className="mb-mypage-content">
               <Routes>
                 <Route path="" element={<Edit />} />
