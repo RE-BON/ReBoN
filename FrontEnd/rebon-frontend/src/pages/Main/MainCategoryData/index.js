@@ -18,6 +18,18 @@ export default function MainCategoryData() {
       .catch((error) => {
         console.log('MainCategoryData error');
       });
+    console.log('8888');
+    axios
+      .get('https://map.naver.com/v5/api/search?caller=pcweb&query=%ED%8F%AC%ED%95%AD%EC%8B%9D%EB%8B%B9&type=all&page=1&displayCount=10&lang=ko')
+      .then((response) => {
+        // setRestCategory(response.data[0].children);
+        // setAccoCategory(response.data[1].children);
+        // setCafeCategory(response.data[2].children);
+        console.log('result is ', response.data);
+      })
+      .catch((error) => {
+        console.log('get error');
+      });
   }, []);
 
   return <>{restCategory && accoCategory && cafeCategory ? <MainShopData restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} /> : ''}</>;

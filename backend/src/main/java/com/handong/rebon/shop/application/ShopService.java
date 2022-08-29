@@ -32,6 +32,7 @@ import com.handong.rebon.tag.application.TagService;
 import com.handong.rebon.tag.domain.Tag;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -185,6 +186,21 @@ public class ShopService {
         shopImageRepository.deleteById(shop.getId());
         return saveImages(shopRequestDto.getImages());
     }
+
+    @Transactional(readOnly = true)
+    public List<ShopSimpleResponseDto> findLikeShops(Long memberId, Long categoryId, Pageable pageable) {
+
+        Category category = categoryService.findById(categoryId);
+        Member member = memberService.findById(memberId);
+
+
+        Page<Shop> shops = shopRepository.findByCategoryAndLikesMember(category, member, pageable);
+        return shops.get()
+                    .map(ShopSimpleResponseDto::from)
+                    .collect(Collectors.toList());
+
+    }
+
 
     @Transactional(readOnly = true)
     public boolean isLike(Long id, LoginMember loginMember) {
