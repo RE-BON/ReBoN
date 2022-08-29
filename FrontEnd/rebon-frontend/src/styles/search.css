@@ -35,7 +35,7 @@
   }
 
   .search-content .title {
-    margin-left: -15px;
+    margin-left: 1rem;
     width: 100%;
     font-size: 1.4rem;
     line-height: 1.2em;
@@ -52,7 +52,7 @@
     background-size: cover;
   }
   .search-content .title {
-    margin-left: -15px;
+    margin-left: 0.5rem;
     width: 100%;
     font-size: 1.4rem;
     line-height: 1.2em;
@@ -82,7 +82,7 @@
 }
 
 .search-content {
-  min-width: 35vw;
+  min-width: 31vw;
 }
 
 .search-content span {
@@ -94,7 +94,7 @@
   padding: 0.8rem 0;
   margin-bottom: 0.7rem;
   border-radius: 50px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid #ff6c6c;
 }
 
 .search-content .input-bar input {
@@ -109,4 +109,9 @@
 
 .search-content .input-bar input:focus {
   outline: none;
+}
+
+.search-content .tags-wrapper {
+  margin-left: 0.1rem;
+  width: 28rem;
 }

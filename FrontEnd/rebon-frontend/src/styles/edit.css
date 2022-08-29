@@ -28,8 +28,8 @@
   .edit-info-submit {
     position: absolute;
     bottom: 0;
-    margin-left: -4rem;
-    width: 107vw;
+    margin-left: -20vw;
+    width: 110vw;
     display: flex;
   }
 

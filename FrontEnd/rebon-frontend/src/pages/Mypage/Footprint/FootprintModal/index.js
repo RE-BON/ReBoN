@@ -1,42 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-// import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
 import './../../../../styles/review-modal.css';
 import { Link } from 'react-router-dom';
-
-import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
-import { MoreVertical, Trash, Edit, AlertOctagon, X } from 'react-feather';
-export default function ReviewModal() {
+import { Dropdown } from 'react-bootstrap';
+import { MoreVertical, Trash, Edit, X } from 'react-feather';
+export default function FootprintModal({ info, handleDelete }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [opacity, setOpacity] = useState(0);
-  const [report, setReport] = useState([]);
 
   function toggleModal(e) {
-    console.log('hihihi');
-    setOpacity(0);
     setIsOpen(!isOpen);
   }
 
-  function afterOpen() {
-    setTimeout(() => {
-      setOpacity(1);
-    }, 100);
+  function onClickDelete(targetId) {
+    handleDelete(targetId);
   }
-
-  function beforeClose() {
-    return new Promise((resolve) => {
-      setOpacity(0);
-      setTimeout(resolve, 300);
-    });
-  }
-
-  const handleClickReport = (e) => {
-    console.log(e.target.value);
-    setReport(e.target.value);
-  };
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <Link
@@ -55,7 +33,6 @@ export default function ReviewModal() {
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;
   `;
-
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
       <Dropdown>
@@ -64,6 +41,7 @@ export default function ReviewModal() {
         </Dropdown.Toggle>
         <Dropdown.Menu align="end">
           <Dropdown.Item eventKey="1">
+            {/* url 위치 알맞은 데로 가기 */}
             <Link to="/modify" style={{ color: 'inherit', textDecoration: 'none' }}>
               <div onClick={toggleModal}>
                 <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
@@ -71,7 +49,12 @@ export default function ReviewModal() {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item eventKey="2">
-            <div onClick={toggleModal}>
+            <div
+              onClick={() => {
+                onClickDelete(info.id);
+                toggleModal();
+              }}
+            >
               <Trash size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰삭제</p>
             </div>
           </Dropdown.Item>
