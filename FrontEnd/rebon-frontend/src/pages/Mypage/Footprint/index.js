@@ -23,15 +23,14 @@ export default function Footprint() {
       axios
         .get('http://3.34.139.61:8080/api/my-reviews', config)
         .then((response) => {
-          console.log('GET: ', response.data);
+          console.log('Footprint: ', response.data);
           setFootInfo(response.data);
         })
         .catch((error) => {
-          if (error.response.status === '401') return Logout;
-          else console.log(error);
+          if (error.response.status === 401) return Logout;
+          else console.log('Footprint error');
         });
     }
-    console.log(footInfo);
   }, []);
 
   function handleDelete(targetId) {

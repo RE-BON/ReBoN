@@ -12,39 +12,34 @@ import ReviewContent from './ReviewContent';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-// import 'react-toggle/style.css';
 import '../../../styles/toggle.css';
 
 import Toggle from 'react-toggle';
+import axios from "axios";
+import { useLocation } from 'react-router';
+import LogoutContent from "../../Logout/LogoutContent";
 
-// const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-//   <Link
-//     to=""
-//     ref={ref}
-//     onClick={(e) => {
-//       e.preventDefault();
-//       onClick(e);
-//     }}
-//   >
-//     {children}
-//   </Link>
-// ));
 
 export default function Review({ shopName, shopImage, shopId }) {
   const { Kakao } = window;
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false); //모달 상태 관리 : 기본값 - 닫힘
   const dimmerRef = useRef(); // useRef를 활용하여 dim처리 해줘야 하는 부분
   const [toggleOn, setToggleOn] = useState(false);
+  const [reviewInfo, setReviewInfo] = useState([]);
   const [reviewLike, setReviewLike] = useState();
   const [reviewTip, setReviewTip] = useState([]);
   const [ready, setReady] = useState(true);
   const [reviewReady, setReviewReady] = useState(false);
   const [sortReady, setSortReady] = useState(true);
   const [sort, setSort] = useState(1);
+  const [logout, setLogout] = useState(false);
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
-  const [review, setReview] = useState([
+
+  const [reviewInfo2, setReviewInfo2] = useState([
     {
       id: 1,
       authorName: 'test',
@@ -80,57 +75,39 @@ export default function Review({ shopName, shopImage, shopId }) {
       liked: true,
     },
   ]);
-  const [reviewInfo, setReviewInfo] = useState([
-    {
-      id: 1,
-      authorName: 'test',
-      shopName: '팜스발리',
-      content: '맛이 좋아요',
-      tip: '필수로 시키자',
-      star: 5,
-      empathyCount: 0,
-      images: [],
-      liked: true,
-    },
-    {
-      id: 2,
-      authorName: 'ralph',
-      shopName: '팜스발리',
-      content: '맛이 별로예요',
-      tip: '김치 불고기 피자가 제일 맛있어요',
-      star: 2,
-      empathyCount: 6,
-      images: [],
-      liked: false,
-    },
-    {
-      id: 3,
-      authorName: 'peace',
-      shopName: '팜스발리',
-      content:
-        '피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요',
-      tip: null,
-      star: 4,
-      empathyCount: 20,
-      images: [],
-      liked: true,
-    },
-  ]);
+
 
   useEffect(() => {
     setReviewReady(false);
-    var likeNum = 0;
-    var tips = [];
-    var hi = [];
-    for (var i = 0; i < reviewInfo.length; i++) {
-      if (reviewInfo[i].liked) likeNum = likeNum + 1;
-      if (reviewInfo[i].tip !== null) tips.push(reviewInfo[i]);
-      setReviewTip(tips);
-    }
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const shopNumber = Number(location.pathname.slice(8));
+    axios
+      .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
+      .then((response) => {
+        setReviewInfo(response.data);
+        var likeNum = 0;
+        if(response.data){
+          for (var i = 0; i < response.data.length; i++) {
+            if (response.data[i].liked) likeNum = likeNum + 1;
+          }
+          setReviewTip(response.data.filter(function (item) {
+            return item.tip !== null;
+          }));
+        }
 
-    setReviewLike(likeNum);
+        setReviewLike(likeNum);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          setLogout(true)
+        }
+        else console.log('Review error');
+      });
+
     setReviewReady(true);
-  }, []);
+  }, [shopImage]);
 
   const shareKakao = () => {
     Kakao.Link.sendDefault({
@@ -138,7 +115,7 @@ export default function Review({ shopName, shopImage, shopId }) {
       content: {
         title: 'ReBon: ',
         description: "'" + shopName + "'" + ' 공유',
-        imageUrl: shopImage,
+        imageUrl: shopImage[0] ? shopImage[0].url:shopImage,
         link: {
           mobileWebUrl: '모바일 url!',
           androidExecParams: 'test',
@@ -163,36 +140,6 @@ export default function Review({ shopName, shopImage, shopId }) {
     });
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://34.238.48.93:8080/api/shops/1')
-  //     .then((response) => {
-  //       setShopInfo(response.data);
-  //       console.log(shopInfo);
-  //       console.log(shopInfo.tags);
-  //     })
-  //     .catch((error) => {
-  //       console.log('error');
-  //     });
-  // }, []);
-
-  const ActionMenu = () => {
-    console.log('hello');
-    // return (
-    <Dropdown>
-      <Dropdown.Toggle>
-        <MoreVertical size="15px" className="text-secondary" />
-      </Dropdown.Toggle>
-      <Dropdown.Menu align="end">
-        <Dropdown.Header>SETTINGS</Dropdown.Header>
-        <Dropdown.Item eventKey="1">
-          {' '}
-          <Edit size="18px" className="dropdown-item-icon" /> 활동내역 보기
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>;
-    // );
-  };
 
   const openMenu = () => {
     setIsMenuOpen(true);
@@ -203,12 +150,8 @@ export default function Review({ shopName, shopImage, shopId }) {
   };
 
   const toggleChange = (event) => {
-    setReady(false);
-
     if (toggleOn) setToggleOn(false);
     else setToggleOn(true);
-
-    setReady(true);
   };
 
   return (
@@ -248,15 +191,17 @@ export default function Review({ shopName, shopImage, shopId }) {
           </div>
           <div className="review-order">
             <select
-              class="form-select"
+              // className="form-select"
               aria-label="Default select example"
-              className="review-select"
+              className="review-select form-select"
               // onChange={sortChange}
               onChange={(e) => {
                 setSort(e.target.value);
               }}
+              defaultValue={"1"}
+              style={{paddingBottom:"5px"}}
             >
-              <option selected value="1" className="review-select-option">
+              <option value="1" className="review-select-option" style={{fontSize:"7px"}}>
                 좋아요순
               </option>
               <option value="2">최신순</option>
@@ -265,22 +210,29 @@ export default function Review({ shopName, shopImage, shopId }) {
             </select>
           </div>
         </div>
-
-        {ready && reviewReady && sortReady ? (
-          !toggleOn ? (
-            reviewInfo.length > 0 && sortReady ? (
-              <ReviewContent data={reviewInfo} sort={sort} />
+        {
+          logout?(
+            <LogoutContent/>
+          ):(
+            reviewReady && sortReady ? (
+              !toggleOn ? (
+                reviewInfo.length > 0 && sortReady ? (
+                  <ReviewContent data={reviewInfo} sort={sort} toggleOn={toggleOn}/>
+                ) : (
+                  ''
+                )
+              ) : reviewTip.length > 0 && sortReady ? (
+                <ReviewContent data={reviewTip} sort={sort} toggleOn={toggleOn}/>
+              ) : (
+                ''
+              )
             ) : (
               ''
             )
-          ) : reviewTip.length > 0 && sortReady ? (
-            <ReviewContent data={reviewTip} sort={sort} />
-          ) : (
-            ''
           )
-        ) : (
-          ''
-        )}
+        }
+
+
         {isMobile ? (
           <div className="review-footer-sticky">
             <button className="review-share-wrapper" onClick={shareKakao}>

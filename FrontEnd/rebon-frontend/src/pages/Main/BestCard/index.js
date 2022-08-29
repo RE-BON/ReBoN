@@ -17,7 +17,7 @@ export default function BestCard({ data, checked }) {
         if (result.length > 0 && result[0].shop.length > 0) setBestList(result[0].shop);
         else setBestList(null);
       }
-    }, 100);
+    }, 300);
   }, [data, checked]);
 
   const [like, setLike] = useState(false);
@@ -58,10 +58,10 @@ export default function BestCard({ data, checked }) {
               return (
                 <div className="bestCard">
                   {item.image ? (
-                    <img class="best-img" src={item.image} />
+                    <img className="best-img" src={item.image} />
                   ) : (
                     <img
-                      class="best-img"
+                      className="best-img"
                       src="https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg"
                     />
                   )}

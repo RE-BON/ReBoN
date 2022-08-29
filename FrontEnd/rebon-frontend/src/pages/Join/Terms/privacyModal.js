@@ -17,7 +17,7 @@ export default function PrivacyModal() {
           서비스 이용약관
           <FontAwesomeIcon icon={faXmark} size="1x" />
         </div>
-        <div class="terms-modal-contents">
+        <div className="terms-modal-contents">
           Eleven(1절)
           <br />
           <br />
@@ -33,7 +33,7 @@ export default function PrivacyModal() {
           비친 나를 가만히 바라봐
         </div>
 
-        <div class="terms-select">
+        <div className="terms-select">
           <input type="checkbox" id="terms-select" name="marcketing" />
           <label for="terms-select">
             <FontAwesomeIcon icon={faCheck} />
