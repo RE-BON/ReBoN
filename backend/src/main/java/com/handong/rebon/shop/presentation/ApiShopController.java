@@ -76,9 +76,21 @@ public class ApiShopController {
         return ResponseEntity.ok(ShopLikeResponse.from(shopLikeResponseDto));
     }
 
+
+    @RequiredLogin
+    @GetMapping("/shops/likes")
+    public ResponseEntity<List<ShopSimpleResponse>> getLikeShops(
+            @Login LoginMember loginMember,
+            @RequestParam Long categoryId,
+            @PageableDefault Pageable pageable
+    ) {
+        List<ShopSimpleResponseDto> responses = shopService.findLikeShops(loginMember.getId(), categoryId, pageable);
+        return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
+
     @PostMapping("/shops/naver")
     public ResponseEntity<Void> naverShops(@RequestBody NaverShopRequest shopRequest) {
         shopService.createNaverShops(shopRequest.getKeyword(), shopRequest.getDisplayCount(), shopRequest.getPage());
         return ResponseEntity.ok().build();
+
     }
 }
