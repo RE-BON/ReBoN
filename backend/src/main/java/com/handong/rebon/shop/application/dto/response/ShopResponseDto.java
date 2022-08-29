@@ -1,23 +1,18 @@
 package com.handong.rebon.shop.application.dto.response;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.shop.application.dto.response.category.ShopCategoryResponseDto;
 import com.handong.rebon.shop.application.dto.response.image.ShopImageResponseDto;
-import com.handong.rebon.shop.application.dto.response.menu.MenuGroupResponseDto;
 import com.handong.rebon.shop.application.dto.response.menu.MenuResponseDto;
 import com.handong.rebon.shop.application.dto.response.tag.ShopTagResponseDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.menu.Menu;
-import com.handong.rebon.shop.domain.menu.MenuGroup;
 import com.handong.rebon.shop.domain.tag.ShopTag;
 
 import lombok.Builder;
@@ -35,19 +30,16 @@ public class ShopResponseDto {
     private String phone;
     private List<ShopCategoryResponseDto> subCategories;
     private String businessHour;
-    private List<MenuGroupResponseDto> menus;
+    private List<MenuResponseDto> menus;
     private String address;
-    private String longitude;
-    private String latitude;
     private List<ShopImageResponseDto> images;
 
     public static ShopResponseDto from(Shop shop) {
-        return of(shop, Collections.emptyMap());
+        return of(shop, Collections.emptyList());
     }
 
-    public static ShopResponseDto of(Shop shop, Map<MenuGroup, List<Menu>> menus) {
+    public static ShopResponseDto of(Shop shop, List<Menu> menus) {
         ShopContent shopContent = shop.getShopContent();
-        Location location = shop.getLocation();
         return ShopResponseDto.builder()
                               .id(shop.getId())
                               .category(ShopCategoryResponseDto.from(shop.getCategory()))
@@ -56,11 +48,9 @@ public class ShopResponseDto {
                               .tags(convertToShopTagResponseDto(shop.getShopTags()))
                               .phone(shopContent.getPhone())
                               .subCategories(convertToShopCategoryResponseDto(shop.getShopCategories()))
-                              .businessHour(shopContent.getBusinessHour())
-                              .menus(convertToMenuGroupResponseDto(menus))
-                              .address(location.getAddress())
-                              .longitude(location.getLongitude())
-                              .latitude(location.getLatitude())
+                              .businessHour(shopContent.businessHour())
+                              .menus(convertToMenuResponseDto(menus))
+                              .address(shop.getAddress())
                               .images(convertToShopImageResponseDto(shop.getShopImages()))
                               .build();
     }
@@ -83,14 +73,9 @@ public class ShopResponseDto {
                              .collect(Collectors.toList());
     }
 
-    private static List<MenuGroupResponseDto> convertToMenuGroupResponseDto(Map<MenuGroup, List<Menu>> menus) {
-        List<MenuGroupResponseDto> results = new ArrayList<>();
-        menus.forEach((key, value) -> {
-            List<MenuResponseDto> values = value.stream()
-                                                .map(MenuResponseDto::from)
-                                                .collect(Collectors.toList());
-            results.add(new MenuGroupResponseDto(key.getId(), key.getName(), values));
-        });
-        return results;
+    private static List<MenuResponseDto> convertToMenuResponseDto(List<Menu> menus) {
+        return menus.stream()
+                    .map(MenuResponseDto::from)
+                    .collect(Collectors.toList());
     }
 }

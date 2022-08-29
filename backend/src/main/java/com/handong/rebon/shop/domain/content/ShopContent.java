@@ -23,6 +23,10 @@ public class ShopContent {
         this(name, LocalTime.MIN, LocalTime.MAX, "");
     }
 
+    public ShopContent(String name, LocalTime[] hours, String phone) {
+        this(name, hours[0], hours[1], phone);
+    }
+
     @Builder
     public ShopContent(String name, LocalTime start, LocalTime end, String phone) {
         validatesBlankName(name);
@@ -38,7 +42,7 @@ public class ShopContent {
         }
     }
 
-    public String getBusinessHour() {
+    public String businessHour() {
         StringBuilder sb = new StringBuilder();
         sb.append(start).append(":").append(end);
         return sb.toString();

@@ -3,8 +3,6 @@ package com.handong.rebon.shop.application.dto.request;
 import java.time.LocalTime;
 import java.util.List;
 
-import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +22,7 @@ public class ShopRequestDto {
     private LocalTime end;
     private String phone;
     private String address;
-    private String longitude;
-    private String latitude;
     private List<MultipartFile> images;
     private List<Long> tags;
-    private List<MenuGroupRequestDto> menus;
+    private String menus;
 }

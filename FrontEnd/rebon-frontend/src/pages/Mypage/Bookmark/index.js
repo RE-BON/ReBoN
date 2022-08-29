@@ -42,72 +42,105 @@ export default function Bookmark() {
     setValue(newValue);
   };
   return (
-    <div className="bookmark-container">
-      <div className="bookmark-title">찜목록</div>
-      <div className="bookmark-wrapper">
-        <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, width: '55.5%', marginLeft: '21.5%' }}>
-            <Tabs
-              className="box"
-              value={value}
-              TabIndicatorProps={{
-                style: {
-                  backgroundColor: '#ff6b6c',
-                  marginLeft: '1.7em',
-                  width: '2.3em',
-                  bottom: '25%',
-                  zIndex: '-1',
-                },
-              }}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-              centered
-            >
-              <Tab label="식당" {...a11yProps(0)} />
-              <Tab label="카페" {...a11yProps(1)} />
-              <Tab label="숙소" {...a11yProps(2)} />
-            </Tabs>
+    <>
+      <div className="bookmark-container">
+        <div className="bookmark-title">찜목록</div>
+        <div className="bookmark-wrapper">
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, width: '55.5%', marginLeft: '21.5%' }}>
+              <Tabs
+                className="box"
+                value={value}
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: '#ff6b6c',
+                    marginLeft: '1.7em',
+                    width: '2.3em',
+                    bottom: '25%',
+                    zIndex: '-1',
+                  },
+                }}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                centered
+              >
+                <Tab label="식당" {...a11yProps(0)} />
+                <Tab label="카페" {...a11yProps(1)} />
+                <Tab label="숙소" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <TabPanel class="TabPanel-bookmark" value={value} index={0}>
+              <div className="boookmarkCard-wrapper">
+                <BookmarkCard />
+                <BookmarkCard />
+              </div>
+            </TabPanel>
+
+            <TabPanel class="TabPanel-bookmark" value={value} index={1}>
+              <div className="boookmarkCard-wrapper">
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+              </div>
+            </TabPanel>
+
+            <TabPanel class="TabPanel-bookmark" value={value} index={2}>
+              <div className="mainCard-wrapper">
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+                <BookmarkCard />
+              </div>
+            </TabPanel>
           </Box>
-          <TabPanel className="TabPanel" value={value} index={0}>
-            <div className="category-wrapper"></div>
-            <div className="best-wrapper"></div>
-
-            <div className="mainCard-wrapper">
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-            </div>
-          </TabPanel>
-
-          <TabPanel className="TabPanel" value={value} index={1}>
-            <div className="mainCard-wrapper">
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-            </div>
-          </TabPanel>
-
-          <TabPanel className="TabPanel" value={value} index={2}>
-            <div className="mainCard-wrapper">
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-              <BookmarkCard />
-            </div>
-          </TabPanel>
-        </Box>
+        </div>
       </div>
-    </div>
+
+      {/* /////////////////////////////////// 모바일 버전 ///////////////////////////////////////// */}
+
+      <div className="bookmark-container-mobile" hidden>
+        <div className="bookmark-wrapper">
+          <Box sx={{ width: '100%' }}>
+            <Box sx={{ borderBottom: 1, width: '55.5%', marginLeft: '21.5%' }}>
+              <Tabs
+                className="box"
+                value={value}
+                TabIndicatorProps={{
+                  style: {
+                    backgroundColor: '#ff6b6c',
+                    marginLeft: '1.7em',
+                    width: '2.3em',
+                    bottom: '25%',
+                    zIndex: '-1',
+                  },
+                }}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                centered
+              >
+                <Tab label="식당" {...a11yProps(0)} />
+                <Tab label="카페" {...a11yProps(1)} />
+                <Tab label="숙소" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <TabPanel className="TabPanel-bookmark" value={value} index={0}>
+              <div className="category-wrapper"></div>
+              <div className="best-wrapper"></div>
+
+              <div className="mainCard-wrapper">
+                <BookmarkCard />
+              </div>
+            </TabPanel>
+          </Box>
+        </div>
+      </div>
+    </>
   );
 }

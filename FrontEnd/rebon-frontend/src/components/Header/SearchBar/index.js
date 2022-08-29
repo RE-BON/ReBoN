@@ -4,7 +4,7 @@ import '../../../styles/header-search-bar.css';
 export default function Searchbar() {
   return (
     <div className="search-bar-wrapper">
-      <input placeholder="가고 싶은 지역을 입력해주세요." />
+      <input placeholder="가고 싶은 지역을 입력해주세요." value={''} />
       <img src="../../../../image/search-icon.png" alt="header-search-icon" />
     </div>
   );

@@ -20,7 +20,7 @@
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.4",
     "@testing-library/user-event": "13.5.0",
-    "aws-sdk": "2.1174.0",
+    "aws-sdk": "^2.1177.0",
     "axios": "^0.27.2",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",

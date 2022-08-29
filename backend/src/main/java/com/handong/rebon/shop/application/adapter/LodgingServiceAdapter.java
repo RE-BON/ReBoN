@@ -7,8 +7,8 @@ import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.content.ShopScore;
-import com.handong.rebon.shop.domain.location.Location;
 import com.handong.rebon.shop.domain.type.Lodging;
+import com.handong.rebon.shop.infrastructure.dto.ShopInfoDto;
 
 import org.springframework.stereotype.Component;
 
@@ -27,9 +27,9 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
     public Shop create(ShopImages shopImages, ShopRequestDto data) {
         return Lodging.builder()
                       .shopContent(new ShopContent(data.getName(), data.getStart(), data.getEnd(), data.getPhone()))
-                      .location(new Location(data.getAddress(), data.getLongitude(), data.getLatitude()))
+                      .address(data.getAddress())
                       .shopImages(shopImages)
-                      .shopScore(new ShopScore(0.0, 0))
+                      .shopScore(new ShopScore(0.0, 0, 0))
                       .build();
     }
 
@@ -40,5 +40,18 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
 
     @Override
     public void update(Shop shop, ShopRequestDto shopRequestDto) {
+    }
+
+    @Override
+    public Shop createNaverShop(ShopImages shopImages, ShopInfoDto data) {
+        ShopContent content = new ShopContent(data.getName(), data.getBizhours(), data.getTel());
+        ShopScore score = new ShopScore(0.0, 0, 0);
+        return Lodging.builder()
+                      .shopContent(content)
+                      .address(data.getRoadAddress())
+                      .shopImages(shopImages)
+                      .shopScore(score)
+                      .naverId(data.getId())
+                      .build();
     }
 }

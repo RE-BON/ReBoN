@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
-import SearchBar from './SearchBar';
+import SearchBar from '../SearchBar';
 import Tags from '../../../pages/Search/Tags';
 import AutoCompletes from '../../../pages/Search/AutoCompletes';
 import '../../../styles/header-search-modal.css';
 import axios from 'axios';
-
 
 export default function SearchModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +14,7 @@ export default function SearchModal() {
   function toggleModal(e) {
     setOpacity(0);
     setIsOpen(!isOpen);
+    setWord('');
   }
 
   function afterOpen() {
@@ -44,22 +44,18 @@ export default function SearchModal() {
         setTags(response.data);
       })
       .catch((error) => {
-        console.log('Search Modal error');
+        console.log(error);
       });
   }, []);
 
-  const FadingBackground = styled(BaseModalBackground)`
-    opacity: ${(props) => props.opacity};
-    transition: all 0.3s ease-in-out;
-  `;
-
   const [autoComState, setAutoComState] = useState('none');
   const onChangeState = () => {
+    console.log('자동완성');
     setAutoComState('block');
   };
 
   return (
-    <ModalProvider backgroundComponent={FadingBackground}>
+    <ModalProvider>
       <div onClick={toggleModal}>
         <SearchBar />
       </div>

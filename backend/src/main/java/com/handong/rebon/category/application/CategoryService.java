@@ -1,7 +1,6 @@
 package com.handong.rebon.category.application;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.application.dto.CategoryDtoAssembler;
@@ -13,6 +12,7 @@ import com.handong.rebon.category.domain.repository.CategoryRepository;
 import com.handong.rebon.exception.category.CategoryExistException;
 import com.handong.rebon.exception.category.CategoryNotFoundException;
 import com.handong.rebon.exception.category.CategoryParentIdNullException;
+import com.handong.rebon.exception.category.NoSuchCategoryException;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 
@@ -111,5 +111,35 @@ public class CategoryService {
         checkChildCategoryExist(category.getParent(), categoryUpdateRequestDto.getName());
         Category parentCategory = this.findById(categoryUpdateRequestDto.getParentId());
         category.update(parentCategory, categoryUpdateRequestDto.getName());
+    }
+
+    @Transactional(readOnly = true)
+    public Category findByName(String name) {
+        return categoryRepository.findByName(name)
+                                 .orElseThrow(NoSuchCategoryException::new);
+    }
+
+    @Transactional
+    public List<Category> getSubCategories(Category mainCategory, List<String> categories) {
+        List<Category> subCategories = new ArrayList<>();
+        if (Objects.isNull(categories) || categories.isEmpty()) {
+            return subCategories;
+        }
+
+        categories.stream()
+                  .map(s -> s.split(","))
+                  .flatMap(Arrays::stream)
+                  .forEach(name -> {
+                      Optional<Category> category = categoryRepository.findByName(name);
+
+                      if (category.isEmpty()) {
+                          Category newCategory = categoryRepository.save(new Category(name, mainCategory));
+                          subCategories.add(newCategory);
+                      } else {
+                          subCategories.add(category.get());
+                      }
+                  });
+
+        return subCategories;
     }
 }

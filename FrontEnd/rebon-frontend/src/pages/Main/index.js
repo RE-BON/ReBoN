@@ -48,12 +48,13 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
   const [restChecked, setRestChecked] = useState(restCategory[0].id);
   const [accoChecked, setAccoChecked] = useState(accoCategory[0].id);
   const [cafeChecked, setCafeChecked] = useState(cafeCategory[0].id);
+  const [restResult, setRestResult] = useState(restData.filter((d) => d.id === restCategory[0].id));
   const location = useLocation();
 
   const getData = () => {
-    console.log('=======rest 카테고리 : =========== ', restCategory);
-    console.log('=======acco 카테고리 : =========== ', accoCategory);
-    console.log('=======cafe 카테고리 : =========== ', cafeCategory);
+    // console.log('=======rest 카테고리 : =========== ', restCategory);
+    // console.log('=======acco 카테고리 : =========== ', accoCategory);
+    // console.log('=======cafe 카테고리 : =========== ', cafeCategory);
   };
 
   useEffect(() => {
@@ -74,6 +75,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs
+                class="tabs"
                 TabIndicatorProps={{
                   style: {
                     backgroundColor: '#ff6b6c',
@@ -91,82 +93,91 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
               </Tabs>
             </Box>
             <TabPanel className="TabPanel" value={value} index={0}>
-              <div className="category-wrapper">
-                <div class="select-main">
-                  {restCategory
-                    ? restCategory.map((rest, index) => (
-                        <>
-                          <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id)} />
-                          <label for={rest.id} className={restChecked === rest.id ? 'radio-click-active' : 'radio-click-stay'}>
-                            {rest.name}
-                          </label>
-                        </>
-                      ))
-                    : restCategory.length}
+              <div className="TabPanel-margin">
+                <div className="category-wrapper">
+                  <div class="select-main">
+                    {restCategory
+                      ? restCategory.map((rest, index) => (
+                          <>
+                            {/* <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id), setRestResult(restData.filter((d) => d.id === rest.id))} /> */}
+                            <input type="radio" id={rest.id} value={rest.id} name="restaurant" checked={restChecked === rest.id} onClick={() => setRestChecked(rest.id)} />
+                            <label for={rest.id} className={restChecked === rest.id ? 'radio-click-active' : 'radio-click-stay'}>
+                              {rest.name}
+                            </label>
+                          </>
+                        ))
+                      : restCategory.length}
+                  </div>
                 </div>
-              </div>
 
-              <div className="main-background">
-                <div className="searchTitle">📍{location.state.item.name} 식당</div>
-              </div>
+                <div className="main-background">
+                  <div className="searchTitle">📍{location.state.item.name} 식당</div>
+                </div>
 
-              <div className="best-wrapper">
-                <BestCard data={restData} checked={restChecked} />
-              </div>
+                <div className="best-wrapper">
+                  {/* <BestCard data={restData} checked={restChecked}  result={restResult}/> */}
+                  <BestCard data={restData} checked={restChecked} />
+                </div>
 
-              <Divider data={restData} checked={restChecked} tagId={location.state.item.id} subId={restCategory[0].id} />
+                {/* <Divider data={restData} checked={restChecked} tagId={location.state.item.id} subId={restChecked} /> */}
+                <Divider data={restData} tagId={location.state.item.id} cateId={1} checked={restChecked} />
+              </div>
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={1}>
-              <div className="category-wrapper">
-                <div class="select-main">
-                  {cafeCategory
-                    ? cafeCategory.map((cafe, index) => (
-                        <>
-                          <input type="radio" id={cafe.id} value={cafe.id} name="cafe" checked={cafeChecked === cafe.id} onClick={() => setCafeChecked(cafe.id)} />
-                          <label for={cafe.id} className={cafeChecked === cafe.id ? 'radio-click-active' : 'radio-click-stay'}>
-                            {cafe.name}
-                          </label>
-                        </>
-                      ))
-                    : cafeCategory.length}
+              <div className="TabPanel-margin">
+                <div className="category-wrapper">
+                  <div class="select-main">
+                    {cafeCategory
+                      ? cafeCategory.map((cafe, index) => (
+                          <>
+                            <input type="radio" id={cafe.id} value={cafe.id} name="cafe" checked={cafeChecked === cafe.id} onClick={() => setCafeChecked(cafe.id)} />
+                            <label for={cafe.id} className={cafeChecked === cafe.id ? 'radio-click-active' : 'radio-click-stay'}>
+                              {cafe.name}
+                            </label>
+                          </>
+                        ))
+                      : cafeCategory.length}
+                  </div>
                 </div>
-              </div>
 
-              <div className="main-background">
-                <div className="searchTitle">📍{location.state.item.name} 카페</div>
-              </div>
+                <div className="main-background">
+                  <div className="searchTitle">📍{location.state.item.name} 카페</div>
+                </div>
 
-              <div className="best-wrapper">
-                <BestCard data={cafeData} checked={cafeChecked} />
-              </div>
+                <div className="best-wrapper">
+                  <BestCard data={cafeData} checked={cafeChecked} />
+                </div>
 
-              <Divider data={cafeData} checked={cafeChecked} tagId={location.state.item.id} subId={cafeCategory[0].id} />
+                <Divider data={cafeData} checked={cafeChecked} tagId={location.state.item.id} subId={cafeCategory[0].id} />
+              </div>
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={2}>
-              <div className="category-wrapper">
-                <div class="select-main">
-                  {accoCategory
-                    ? accoCategory.map((acco, index) => (
-                        <>
-                          <input type="radio" id={acco.id} value={acco.id} name="accomodation" checked={accoChecked === acco.id} onClick={() => setAccoChecked(acco.id)} />
-                          <label for={acco.id} className={accoChecked === acco.id ? 'radio-click-active' : 'radio-click-stay'}>
-                            {acco.name}
-                          </label>
-                        </>
-                      ))
-                    : accoCategory.length}
+              <div className="TabPanel-margin">
+                <div className="category-wrapper">
+                  <div class="select-main">
+                    {accoCategory
+                      ? accoCategory.map((acco, index) => (
+                          <>
+                            <input type="radio" id={acco.id} value={acco.id} name="accomodation" checked={accoChecked === acco.id} onClick={() => setAccoChecked(acco.id)} />
+                            <label for={acco.id} className={accoChecked === acco.id ? 'radio-click-active' : 'radio-click-stay'}>
+                              {acco.name}
+                            </label>
+                          </>
+                        ))
+                      : accoCategory.length}
+                  </div>
                 </div>
-              </div>
 
-              <div className="main-background">
-                <div className="searchTitle">📍{location.state.item.name} 숙소</div>
-              </div>
+                <div className="main-background">
+                  <div className="searchTitle">📍{location.state.item.name} 숙소</div>
+                </div>
 
-              <div className="best-wrapper">
-                <BestCard data={accoData} checked={accoChecked} />
-              </div>
+                <div className="best-wrapper">
+                  <BestCard data={accoData} checked={accoChecked} />
+                </div>
 
-              <Divider data={accoData} checked={accoChecked} tagId={location.state.item.id} subId={accoCategory[0].id} />
+                <Divider data={accoData} checked={accoChecked} tagId={location.state.item.id} subId={accoCategory[0].id} />
+              </div>
             </TabPanel>
           </Box>
           {/* </> */}

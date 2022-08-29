@@ -1,7 +1,10 @@
 package com.handong.rebon.integration.shop;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.category.domain.Category;
@@ -13,8 +16,6 @@ import com.handong.rebon.common.factory.ImageFactory;
 import com.handong.rebon.integration.IntegrationTest;
 import com.handong.rebon.shop.application.ShopService;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
-import com.handong.rebon.shop.application.dto.request.menu.MenuGroupRequestDto;
-import com.handong.rebon.shop.application.dto.request.menu.MenuRequestDto;
 import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
 import com.handong.rebon.shop.domain.type.Restaurant;
@@ -82,7 +83,6 @@ class ShopIntegrationTest extends IntegrationTest {
         assertThat(id).isNotNull();
         assertThat(restaurant.getShopContent().getName()).isEqualTo("팜스발리");
         assertThat(restaurant.getMenus()).hasSize(4);
-        assertThat(restaurant.getMenus().get(0).getMenuGroup()).isNotNull();
         assertThat(restaurant.getShopTags()).hasSize(2);
         assertThat(restaurant.getCategory().getName()).isEqualTo("식당");
         assertThat(restaurant.getShopCategories()).hasSize(2);
@@ -201,25 +201,14 @@ class ShopIntegrationTest extends IntegrationTest {
                              .end(LocalTime.of(22, 0))
                              .phone("010-1234-5678")
                              .address("경상북도 포항")
-                             .longitude("129.389762")
-                             .latitude("36.102440")
                              .tags(tagIds)
                              .images(getImages())
                              .menus(getMenus())
                              .build();
     }
 
-    private List<MenuGroupRequestDto> getMenus() {
-        return List.of(
-                new MenuGroupRequestDto("피자메뉴", Arrays.asList(
-                        new MenuRequestDto("치즈 피자", 15000),
-                        new MenuRequestDto("페퍼로니 피자", 16000)
-                )),
-                new MenuGroupRequestDto("파스타메뉴", Arrays.asList(
-                        new MenuRequestDto("토마토 파스타", 13000),
-                        new MenuRequestDto("크림 파스타", 13000)
-                ))
-        );
+    private String getMenus() {
+        return "치즈 피자 15,000 | 페퍼로니 피자 16,000 | 토마토 파스타 13,000 | 크림 파스타 13,000";
     }
 
     private List<MultipartFile> getImages() {
