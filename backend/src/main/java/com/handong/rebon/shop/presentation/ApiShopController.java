@@ -11,6 +11,7 @@ import com.handong.rebon.shop.application.dto.request.ShopSearchDto;
 import com.handong.rebon.shop.application.dto.response.ShopLikeResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
 import com.handong.rebon.shop.application.dto.response.ShopSimpleResponseDto;
+import com.handong.rebon.shop.presentation.dto.request.NaverShopRequest;
 import com.handong.rebon.shop.presentation.dto.request.ShopSearchRequest;
 import com.handong.rebon.shop.presentation.dto.response.ShopLikeResponse;
 import com.handong.rebon.shop.presentation.dto.response.ShopResponse;
@@ -73,5 +74,23 @@ public class ApiShopController {
         ShopLikeRequestDto shopLikeRequestDto = new ShopLikeRequestDto(loginMember.getId(), shopId);
         ShopLikeResponseDto shopLikeResponseDto = shopService.unlike(shopLikeRequestDto);
         return ResponseEntity.ok(ShopLikeResponse.from(shopLikeResponseDto));
+    }
+
+
+    @RequiredLogin
+    @GetMapping("/shops/likes")
+    public ResponseEntity<List<ShopSimpleResponse>> getLikeShops(
+            @Login LoginMember loginMember,
+            @RequestParam Long categoryId,
+            @PageableDefault Pageable pageable
+    ) {
+        List<ShopSimpleResponseDto> responses = shopService.findLikeShops(loginMember.getId(), categoryId, pageable);
+        return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
+
+    @PostMapping("/shops/naver")
+    public ResponseEntity<Void> naverShops(@RequestBody NaverShopRequest shopRequest) {
+        shopService.createNaverShops(shopRequest.getKeyword(), shopRequest.getDisplayCount(), shopRequest.getPage());
+        return ResponseEntity.ok().build();
+
     }
 }

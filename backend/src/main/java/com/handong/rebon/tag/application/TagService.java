@@ -1,6 +1,8 @@
 package com.handong.rebon.tag.application;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.exception.tag.NoSuchTagException;
@@ -90,5 +92,26 @@ public class TagService {
         return tags.stream()
                    .map(TagResponseDto::from)
                    .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<Tag> getTags(String address) {
+        List<Tag> tags = new ArrayList<>();
+
+        String[] addressUnits = address.split(" ");
+        for (String name : addressUnits) {
+            Optional<Tag> tag = tagRepository.findByName(name);
+
+            if (tag.isEmpty()) {
+                Tag newTag = tagRepository.save(new Tag(name));
+                tagSearchRepository.save(newTag);
+                tags.add(newTag);
+                continue;
+            }
+
+            tags.add(tag.get());
+        }
+
+        return tags;
     }
 }

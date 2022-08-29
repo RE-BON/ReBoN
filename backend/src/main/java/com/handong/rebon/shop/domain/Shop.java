@@ -11,8 +11,6 @@ import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.exception.shop.ShopTagNumberException;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.review.domain.Review;
-import com.handong.rebon.review.domain.content.ReviewScore;
-import com.handong.rebon.review.domain.empathy.Empathy;
 import com.handong.rebon.shop.domain.category.ShopCategory;
 import com.handong.rebon.shop.domain.content.ShopContent;
 import com.handong.rebon.shop.domain.content.ShopImages;
@@ -63,6 +61,8 @@ public abstract class Shop extends BaseEntity {
     @OneToMany(mappedBy = "shop", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ShopTag> shopTags = new ArrayList<>();
 
+    private Long naverId;
+
     @OneToMany(mappedBy = "shop")
     private List<Review> reviews = new ArrayList<>();
 
@@ -73,6 +73,7 @@ public abstract class Shop extends BaseEntity {
             ShopImages shopImages,
             String address,
             ShopScore shopScore,
+            Long naverId,
             boolean deleted
     ) {
         super(deleted);
@@ -82,6 +83,7 @@ public abstract class Shop extends BaseEntity {
         this.shopImages = shopImages;
         this.address = address;
         this.shopScore = shopScore;
+        this.naverId = naverId;
 
         shopImages.belongTo(this);
     }
@@ -141,6 +143,14 @@ public abstract class Shop extends BaseEntity {
         return this.category.equals(category);
     }
 
+    public void plusReviewCount() {
+        shopScore.plusReviewCount();
+    }
+
+    public void calculateStar() {
+        shopScore.calculateStar(reviews);
+    }
+
     public void validateOnlyShopTag() {
         if (this.shopTags.size() == 1) {
             throw new ShopTagNumberException();
@@ -155,12 +165,16 @@ public abstract class Shop extends BaseEntity {
                     .anyMatch(l -> l.contain(loginMember.getId()));
     }
 
-    public void plusReviewCount() {
-        shopScore.plusReviewCount();
+    public List<Tag> getTags() {
+        return shopTags.stream()
+                       .map(ShopTag::getTag)
+                       .collect(Collectors.toList());
     }
 
-    public void calculateStar() {
-        shopScore.calculateStar(reviews);
+    public List<Category> getSubcategories() {
+        return shopCategories.stream()
+                             .map(ShopCategory::getCategory)
+                             .collect(Collectors.toList());
     }
 
     public int getReviewCount() {

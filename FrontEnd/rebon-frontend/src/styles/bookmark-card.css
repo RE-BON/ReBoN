@@ -7,10 +7,19 @@
 .bookmarkCard-img {
   height: 150px;
   background-color: #f5f5f5;
-  border-radius: 16px;
+  border: 1px solid #c4c4c4;
+  border-radius: 16px 16px 0 0 !important;
   text-align: end;
   padding: 4%;
   color: #ff6b6c;
+  border-bottom: none;
+}
+
+.bookmarkCard-bottom {
+  border-radius: 0 0 15px 15px;
+  border: 1px solid #c4c4c4;
+  overflow: auto;
+  padding: 0 10px 10px 10px;
 }
 
 .mainCard-wrapper {

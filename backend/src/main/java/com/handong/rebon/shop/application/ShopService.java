@@ -1,6 +1,8 @@
 package com.handong.rebon.shop.application;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.handong.rebon.auth.domain.LoginMember;
@@ -24,19 +26,25 @@ import com.handong.rebon.shop.domain.content.ShopImage;
 import com.handong.rebon.shop.domain.content.ShopImages;
 import com.handong.rebon.shop.domain.repository.ShopImageRepository;
 import com.handong.rebon.shop.domain.repository.ShopRepository;
+import com.handong.rebon.shop.infrastructure.NaverShopInserter;
+import com.handong.rebon.shop.infrastructure.dto.NaverShopDto;
 import com.handong.rebon.tag.application.TagService;
 import com.handong.rebon.tag.domain.Tag;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
+import static com.handong.rebon.util.StringUtil.validatesEmptyList;
+
 @RequiredArgsConstructor
 @Service
 public class ShopService {
+    private static final List<String> TYPES = List.of("식당", "카페", "숙소");
 
     private final CategoryService categoryService;
     private final TagService tagService;
@@ -45,6 +53,7 @@ public class ShopService {
     private final ShopRepository shopRepository;
     private final ImageUploader imageUploader;
     private final ShopImageRepository shopImageRepository;
+    private final NaverShopInserter shopInserter;
 
     @Transactional
     public Long create(ShopRequestDto shopRequestDto) {
@@ -179,8 +188,78 @@ public class ShopService {
     }
 
     @Transactional(readOnly = true)
+    public List<ShopSimpleResponseDto> findLikeShops(Long memberId, Long categoryId, Pageable pageable) {
+
+        Category category = categoryService.findById(categoryId);
+        Member member = memberService.findById(memberId);
+
+
+        Page<Shop> shops = shopRepository.findByCategoryAndLikesMember(category, member, pageable);
+        return shops.get()
+                    .map(ShopSimpleResponseDto::from)
+                    .collect(Collectors.toList());
+
+    }
+
+
+    @Transactional(readOnly = true)
     public boolean isLike(Long id, LoginMember loginMember) {
         Shop shop = findById(id);
         return shop.containLike(loginMember);
+    }
+
+    public void createNaverShops(String keyword, int displayCount, int page) {
+        List<Shop> shops = new ArrayList<>();
+
+        for (String name : TYPES) {
+            Category category = categoryService.findByName(name);
+            NaverShopDto naverShop = shopInserter.getShop(keyword, name, page, displayCount);
+            naverShop.setBasicData(category, keyword);
+            List<Shop> shop = toShop(naverShop);
+            shops.addAll(shop);
+        }
+
+        List<Shop> results = new ArrayList<>();
+        for (Shop newShop : shops) {
+            Optional<Shop> shop = shopRepository.findByNaverId(newShop.getNaverId());
+
+            if (shop.isEmpty()) {
+                results.add(newShop);
+                continue;
+            }
+
+            Shop existingShop = shop.get();
+            List<Tag> tags = newShop.getTags();
+            List<Category> categories = newShop.getSubcategories();
+            existingShop.updateTags(tags);
+            existingShop.updateCategories(existingShop.getCategory(), categories);
+        }
+
+        shopRepository.saveAll(results);
+    }
+
+    private List<Shop> toShop(NaverShopDto naverShop) {
+        return naverShop.getAllShops().stream()
+                        .filter(dto -> validatesEmptyList(dto.getShortAddress()))
+                        .filter(dto -> containKeyword(dto.getShortAddress(), "포항"))
+                        .map(dto -> {
+                            Category category = dto.getMainCategory();
+                            List<Category> subCategories = categoryService.getSubCategories(category, dto.getCategory());
+                            List<Tag> tags = tagService.getTags(dto.getTagCandidates());
+                            ShopImages shopImages = new ShopImages(List.of(new ShopImage(dto.getThumUrl(), true)));
+
+                            ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(category);
+                            Shop shop = adapter.createNaverShop(shopImages, dto);
+
+                            shop.addTags(tags);
+                            shop.addCategories(category, subCategories);
+
+                            return shop;
+                        }).collect(Collectors.toList());
+    }
+
+    private boolean containKeyword(List<String> address, String keyword) {
+        String basicAddress = address.get(0);
+        return basicAddress.contains(keyword);
     }
 }

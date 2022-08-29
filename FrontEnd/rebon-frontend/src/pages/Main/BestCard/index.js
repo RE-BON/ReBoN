@@ -3,6 +3,7 @@ import '../../../styles/main.css';
 import { FiHeart } from 'react-icons/fi';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
 
@@ -12,6 +13,7 @@ export default function BestCard({ data, checked }) {
     setTimeout(function () {
       if (data) {
         const result = data.filter((d) => d.id === checked);
+        console.log(result);
         if (result.length > 0 && result[0].shop.length > 0) setBestList(result[0].shop);
         else setBestList(null);
       }
@@ -20,51 +22,31 @@ export default function BestCard({ data, checked }) {
 
   const [like, setLike] = useState(false);
 
-  const likeClick = () => {
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+
+  const likeClick = (shopId, e) => {
     if (like) {
       setLike(false);
+      console.log('토큰');
+      console.log(token);
     } else {
       setLike(true);
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      if (token) {
+        var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/like';
+        axios
+          .post(url, config)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
-
-  const [bestInfo, setBestInfo] = useState([
-    {
-      id: 1,
-      name: '팜스발리',
-      star: 0.0,
-      like: true,
-      tags: [
-        {
-          id: 1,
-          name: '포항',
-        },
-        {
-          id: 3,
-          name: '한동대',
-        },
-      ],
-      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Supreme_pizza.jpg/800px-Supreme_pizza.jpg',
-    },
-    {
-      id: 3,
-      name: '한동대 학관',
-      star: 0.0,
-      like: false,
-      tags: [
-        {
-          id: 1,
-          name: '포항',
-        },
-        {
-          id: 3,
-          name: '한동대',
-        },
-      ],
-      image:
-        'https://mblogthumb-phinf.pstatic.net/MjAxOTAxMTNfMTA0/MDAxNTQ3Mzc5NjQ1MzA2.jBPcIF5Tqd8GIrxEQhLG04tIQi33JGLThx4RQuimNVcg.2Nf25aUFMoCd4CdXBwv4HWg8ugDx0Ym9y9nhmEppNE0g.JPEG.let1997/Screenshot_20190113-204020_Naver_Blog.jpg?type=w800',
-    },
-  ]);
 
   return (
     <>
@@ -92,9 +74,23 @@ export default function BestCard({ data, checked }) {
 
                   <div className="likeBtn">
                     {item.like ? (
-                      <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} />
+                      <FaHeart
+                        className="heart-icon"
+                        md={8}
+                        size="22"
+                        onClick={(e) => {
+                          likeClick(item.id, e);
+                        }}
+                      />
                     ) : (
-                      <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />
+                      <FiHeart
+                        className="heart-icon-fi"
+                        md={8}
+                        size="22"
+                        onClick={(e) => {
+                          likeClick(item.id, e);
+                        }}
+                      />
                     )}
                   </div>
 
