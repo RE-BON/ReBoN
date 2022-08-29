@@ -17,7 +17,7 @@ export default function MarcketingModal() {
           서비스 이용약관
           <FontAwesomeIcon icon={faXmark} size="1x" />
         </div>
-        <div class="terms-modal-contents">
+        <div className="terms-modal-contents">
           봄여름가을겨울
           <br />
           <br />
@@ -31,7 +31,7 @@ export default function MarcketingModal() {
           la, la La, la-la-la-la, la-la-la-la, la, la La, la-la-la-la, la-la-la-la, la, la 이듬해 질 녘 꽃 피는 봄 한여름 밤의 꿈 (음) 가을 타 겨울 내린 눈 봄 여름 가을 겨울 (우){' '}
         </div>
 
-        <div class="terms-select">
+        <div className="terms-select">
           <input type="checkbox" id="terms-select" name="marcketing" />
           <label for="terms-select">
             <FontAwesomeIcon icon={faCheck} />

@@ -19,7 +19,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
           setMainInfo(response.data);
         });
       }
-    }, 100);
+    }, 400);
   }, [data, checked, open, sort]);
 
   const likeClick = ({ sort }) => {
@@ -47,10 +47,10 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
             return (
               <div className="mainCard">
                 {item.image ? (
-                  <img class="main-img" src={item.image} />
+                  <img className="main-img" src={item.image} />
                 ) : (
                   <img
-                    class="main-img"
+                    className="main-img"
                     src="https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg"
                   />
                 )}

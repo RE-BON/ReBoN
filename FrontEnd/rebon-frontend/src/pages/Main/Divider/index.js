@@ -17,7 +17,7 @@ export default function Divider({ data, tagId, cateId, checked }) {
         if (result.length > 0 && result[0].shop.length > 0) setShopInfo(result[0].shop);
         else setShopInfo(null);
       }
-    }, 100);
+    }, 400);
     setReady(true);
   }, [checked]);
 
@@ -40,8 +40,9 @@ export default function Divider({ data, tagId, cateId, checked }) {
                 onChange={(e) => {
                   setSort(e.target.value);
                 }}
+                defaultValue={"shopScore.star"}
               >
-                <option value="shopScore.star" selected>
+                <option value="shopScore.star">
                   별점순
                 </option>
                 <option value="shopScore.reviewCount">리뷰많은 순</option>

@@ -16,7 +16,7 @@ export default function TermsModal() {
           서비스 이용약관
           <FontAwesomeIcon icon={faXmark} size="1x" />
         </div>
-        <div class="terms-modal-contents">
+        <div className="terms-modal-contents">
           회전목마(1절) <br /> <br />
           Umm 내가 슬플 때마다 이 노래가 찾아와 세상이 둥근 것처럼 우린 동글동글 인생은 회전목마 우린 매일 달려가 언제쯤 끝나 난 잘 몰라 (huh, huh, huh)
           <br /> <br />
@@ -30,7 +30,7 @@ export default function TermsModal() {
           잘 몰라 빙빙 돌아가는 회전목마처럼 영원히 계속될 것처럼 빙빙 돌아온 우리의 시간처럼 인생은 회전목마 I'm on a TV show You would never even know 사실 얼마나 많이 불안했는지
         </div>
 
-        <div class="terms-select">
+        <div className="terms-select">
           <input type="checkbox" id="terms-select" name="marcketing" />
           <label for="terms-select">
             <FontAwesomeIcon icon={faCheck} />

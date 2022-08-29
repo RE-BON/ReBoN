@@ -75,7 +75,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs
-                class="tabs"
+                className="tabs"
                 TabIndicatorProps={{
                   style: {
                     backgroundColor: '#ff6b6c',
@@ -95,7 +95,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
             <TabPanel className="TabPanel" value={value} index={0}>
               <div className="TabPanel-margin">
                 <div className="category-wrapper">
-                  <div class="select-main">
+                  <div className="select-main">
                     {restCategory
                       ? restCategory.map((rest, index) => (
                           <>
@@ -126,7 +126,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
             <TabPanel className="TabPanel" value={value} index={1}>
               <div className="TabPanel-margin">
                 <div className="category-wrapper">
-                  <div class="select-main">
+                  <div className="select-main">
                     {cafeCategory
                       ? cafeCategory.map((cafe, index) => (
                           <>

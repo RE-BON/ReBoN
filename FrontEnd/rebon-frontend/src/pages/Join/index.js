@@ -7,7 +7,7 @@ export default function Join() {
   return (
     <div className="join-wrapper">
       <div className="centerBox">
-        <div class="join-title">
+        <div className="join-title">
           빠르고 쉽게
           <br /> <span className="ReBON">ReBON</span>에 가입하세요!
           <br />
