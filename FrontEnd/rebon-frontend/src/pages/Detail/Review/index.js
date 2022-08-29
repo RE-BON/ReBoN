@@ -12,25 +12,13 @@ import ReviewContent from './ReviewContent';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-// import 'react-toggle/style.css';
 import '../../../styles/toggle.css';
 
 import Toggle from 'react-toggle';
 import axios from "axios";
 import { useLocation } from 'react-router';
+import LogoutContent from "../../Logout/LogoutContent";
 
-// const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-//   <Link
-//     to=""
-//     ref={ref}
-//     onClick={(e) => {
-//       e.preventDefault();
-//       onClick(e);
-//     }}
-//   >
-//     {children}
-//   </Link>
-// ));
 
 export default function Review({ shopName, shopImage, shopId }) {
   const { Kakao } = window;
@@ -45,6 +33,7 @@ export default function Review({ shopName, shopImage, shopId }) {
   const [reviewReady, setReviewReady] = useState(false);
   const [sortReady, setSortReady] = useState(true);
   const [sort, setSort] = useState(1);
+  const [logout, setLogout] = useState(false);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
@@ -87,6 +76,7 @@ export default function Review({ shopName, shopImage, shopId }) {
     },
   ]);
 
+
   useEffect(() => {
     setReviewReady(false);
     const config = {
@@ -96,26 +86,28 @@ export default function Review({ shopName, shopImage, shopId }) {
     axios
       .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
       .then((response) => {
-        console.log("Review: ",response.data);
         setReviewInfo(response.data);
+        var likeNum = 0;
+        if(response.data){
+          for (var i = 0; i < response.data.length; i++) {
+            if (response.data[i].liked) likeNum = likeNum + 1;
+          }
+          setReviewTip(response.data.filter(function (item) {
+            return item.tip !== null;
+          }));
+        }
+
+        setReviewLike(likeNum);
       })
       .catch((error) => {
-        console.log('Review error');
+        if (error.response.status === 401) {
+          setLogout(true)
+        }
+        else console.log('Review error');
       });
 
-
-    var likeNum = 0;
-    var tips = [];
-    var hi = [];
-    for (var i = 0; i < reviewInfo.length; i++) {
-      if (reviewInfo[i].liked) likeNum = likeNum + 1;
-      if (reviewInfo[i].tip !== null) tips.push(reviewInfo[i]);
-      setReviewTip(tips);
-    }
-
-    setReviewLike(likeNum);
     setReviewReady(true);
-  }, []);
+  }, [shopImage]);
 
   const shareKakao = () => {
     Kakao.Link.sendDefault({
@@ -123,7 +115,7 @@ export default function Review({ shopName, shopImage, shopId }) {
       content: {
         title: 'ReBon: ',
         description: "'" + shopName + "'" + ' 공유',
-        imageUrl: shopImage,
+        imageUrl: shopImage[0] ? shopImage[0].url:shopImage,
         link: {
           mobileWebUrl: '모바일 url!',
           androidExecParams: 'test',
@@ -148,35 +140,6 @@ export default function Review({ shopName, shopImage, shopId }) {
     });
   };
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://34.238.48.93:8080/api/shops/1')
-  //     .then((response) => {
-  //       setShopInfo(response.data);
-  //       console.log(shopInfo);
-  //       console.log(shopInfo.tags);
-  //     })
-  //     .catch((error) => {
-  //       console.log('error');
-  //     });
-  // }, []);
-
-  const ActionMenu = () => {
-    // return (
-    <Dropdown>
-      <Dropdown.Toggle>
-        <MoreVertical size="15px" className="text-secondary" />
-      </Dropdown.Toggle>
-      <Dropdown.Menu align="end">
-        <Dropdown.Header>SETTINGS</Dropdown.Header>
-        <Dropdown.Item eventKey="1">
-          {' '}
-          <Edit size="18px" className="dropdown-item-icon" /> 활동내역 보기
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>;
-    // );
-  };
 
   const openMenu = () => {
     setIsMenuOpen(true);
@@ -187,12 +150,8 @@ export default function Review({ shopName, shopImage, shopId }) {
   };
 
   const toggleChange = (event) => {
-    setReady(false);
-
     if (toggleOn) setToggleOn(false);
     else setToggleOn(true);
-
-    setReady(true);
   };
 
   return (
@@ -240,8 +199,9 @@ export default function Review({ shopName, shopImage, shopId }) {
                 setSort(e.target.value);
               }}
               defaultValue={"1"}
+              style={{paddingBottom:"5px"}}
             >
-              <option value="1" className="review-select-option">
+              <option value="1" className="review-select-option" style={{fontSize:"7px"}}>
                 좋아요순
               </option>
               <option value="2">최신순</option>
@@ -250,22 +210,29 @@ export default function Review({ shopName, shopImage, shopId }) {
             </select>
           </div>
         </div>
-
-        {ready && reviewReady && sortReady ? (
-          !toggleOn ? (
-            reviewInfo.length > 0 && sortReady ? (
-              <ReviewContent data={reviewInfo} sort={sort} />
+        {
+          logout?(
+            <LogoutContent/>
+          ):(
+            reviewReady && sortReady ? (
+              !toggleOn ? (
+                reviewInfo.length > 0 && sortReady ? (
+                  <ReviewContent data={reviewInfo} sort={sort} toggleOn={toggleOn}/>
+                ) : (
+                  ''
+                )
+              ) : reviewTip.length > 0 && sortReady ? (
+                <ReviewContent data={reviewTip} sort={sort} toggleOn={toggleOn}/>
+              ) : (
+                ''
+              )
             ) : (
               ''
             )
-          ) : reviewTip.length > 0 && sortReady ? (
-            <ReviewContent data={reviewTip} sort={sort} />
-          ) : (
-            ''
           )
-        ) : (
-          ''
-        )}
+        }
+
+
         {isMobile ? (
           <div className="review-footer-sticky">
             <button className="review-share-wrapper" onClick={shareKakao}>

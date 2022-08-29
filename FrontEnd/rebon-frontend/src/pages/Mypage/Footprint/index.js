@@ -28,7 +28,7 @@ export default function Footprint() {
           setFootInfo(response.data);
         })
         .catch((error) => {
-          if (error.response.status === '401') return Logout;
+          if (error.response.status === 401) return Logout;
           else console.log('Footprint error');
         });
     }

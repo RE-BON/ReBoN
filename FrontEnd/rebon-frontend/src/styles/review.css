@@ -1,3 +1,17 @@
+.review-toggle-wrapper{
+  width : 75%;
+  /*display: flex;*/
+  /*flex-direction: ;*/
+  justify-content: space-between;
+  margin-top: 3px;
+}
+.review-toggle{
+  margin-top: 2px;
+}
+.review-toggle-label{
+  width : 50%;
+  float:right;
+}
 @media (max-width: 767px) {
   .review-wrapper {
     height: 100%;
@@ -92,17 +106,18 @@
     text-align: end;
   }
   .review-select {
+    block-size: fit-content;
+    border-radius: 5px;
+    padding: 5px 35px 5px 5px;
     border-color: #d9d9d9;
-    width: 110px;
-    height: 25px;
+    /*width: 110px;*/
+    /*height: 25px;*/
     font-size: 14px;
     font-weight: normal;
-    font-family: 'Pretendard' !important;
+    /*font-family: 'Pretendard' !important;*/
   }
 
   .review-order .review-select option {
-    color: red;
-    font-size: 5rem;
     font-family: 'Pretendard' !important;
   }
   .review-content {
@@ -324,17 +339,24 @@
     text-align: end;
   }
   .review-select {
+    /*border-color: #d9d9d9;*/
+    /*width: 110px;*/
+    /*height: 25px;*/
+    /*font-size: 14px;*/
+    /*font-weight: normal;*/
+    /*font-family: 'Pretendard' !important;*/
+
+    block-size: fit-content;
+    border-radius: 5px;
+    padding: 5px 35px 5px 5px;
     border-color: #d9d9d9;
-    width: 110px;
-    height: 25px;
+    /*width: 110px;*/
+    /*height: 25px;*/
     font-size: 14px;
     font-weight: normal;
-    font-family: 'Pretendard' !important;
   }
 
   .review-order .review-select option {
-    color: red;
-    font-size: 5rem;
     font-family: 'Pretendard' !important;
   }
   .review-content {
@@ -563,17 +585,23 @@
     text-align: end;
   }
   .review-select {
+    /*border-color: #d9d9d9;*/
+    /*width: 110px;*/
+    /*height: 25px;*/
+    /*font-size: 14px;*/
+    /*font-weight: normal;*/
+    /*font-family: 'Pretendard' !important;*/
+    block-size: fit-content;
+    border-radius: 5px;
+    padding: 5px 35px 5px 5px;
     border-color: #d9d9d9;
-    width: 110px;
-    height: 25px;
+    /*width: 110px;*/
+    /*height: 25px;*/
     font-size: 14px;
     font-weight: normal;
-    font-family: 'Pretendard' !important;
   }
 
   .review-order .review-select option {
-    color: red;
-    font-size: 5rem;
     font-family: 'Pretendard' !important;
   }
   .review-content {
@@ -801,17 +829,23 @@
     text-align: end;
   }
   .review-select {
+    /*border-color: #d9d9d9;*/
+    /*width: 110px;*/
+    /*height: 30px;*/
+    /*font-weight: normal;*/
+    /*font-family: 'Pretendard' !important;*/
+
+    block-size: fit-content;
+    border-radius: 5px;
+    padding: 5px 35px 5px 5px;
     border-color: #d9d9d9;
-    width: 110px;
-    height: 25px;
+    /*width: 110px;*/
+    /*height: 25px;*/
     font-size: 14px;
     font-weight: normal;
-    font-family: 'Pretendard' !important;
   }
 
   .review-order .review-select option {
-    color: red;
-    font-size: 5rem;
     font-family: 'Pretendard' !important;
   }
   .review-content {

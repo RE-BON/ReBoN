@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -17,11 +17,36 @@ import ReviewStar from '../ReviewStar';
 import '../../../../styles/review.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from "axios";
 // import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
 
-export default function ReviewContent({ data, sort }) {
+export default function ReviewContent({ data, sort, toggleOn }) {
   const [alllikeData, setAllLikeData] = useState([]);
   // var ID = parseInt(window.sessionStorage.getItem('id'));
+
+  useEffect(() => {
+    // if(location.state.email !=null){
+    //   console.log(location.state.email);
+    // }
+
+  },[toggleOn]);
+  //
+  // useEffect(() => {
+  //   setReviewReady(false);
+  //   const config = {
+  //     headers: { Authorization: `Bearer ${token}` },
+  //   };
+  //   const shopNumber = Number(location.pathname.slice(8));
+  //   axios
+  //     .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
+  //     .then((response) => {
+  //       console.log("Review: ", response.data);
+  //       setReviewInfo(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Review error');
+  //     });
+  // },[]);
 
   const onToggle = (reviewID) => {
     if (alllikeData.includes(reviewID)) {

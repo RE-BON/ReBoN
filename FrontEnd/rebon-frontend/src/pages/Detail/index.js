@@ -154,20 +154,20 @@ export default function Detail() {
             <div className="detail-address-name">주소</div>
             <div className="detail-address-value">
               {shopInfo?.address}
-              {/*<div className="detail-map">*/}
-              {/*  {isMobile ? (*/}
-              {/*    <Map searchPlace={shopInfo?.address} isMobile="1" />*/}
-              {/*  ) : isTablet ? (*/}
-              {/*    <Map searchPlace={shopInfo?.address} isMobile="2" />*/}
-              {/*  ) : (*/}
-              {/*    <Map searchPlace={shopInfo?.address} isMobile="0" />*/}
-              {/*  )}*/}
-              {/*</div>*/}
+              <div className="detail-map">
+                {isMobile ? (
+                  <Map searchPlace={shopInfo?.address} isMobile="1" />
+                ) : isTablet ? (
+                  <Map searchPlace={shopInfo?.address} isMobile="2" />
+                ) : (
+                  <Map searchPlace={shopInfo?.address} isMobile="0" />
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <Review shopName={shopInfo?.name} shopImage={shopInfo?.image} shopId={location.pathname.slice(8)} />
+      <Review shopName={shopInfo?.name} shopImage={shopInfo?.images} shopId={location.pathname.slice(8)} />
       <Footer />
     </div>
   );
