@@ -56,8 +56,8 @@ public class MemberUpdateIntegrationTest extends IntegrationTest {
 
         //then
         assertThat(savedMember).extracting("nickName")
-                               .isEqualTo("withdrawer");
+                               .isEqualTo("anonymous");
         assertThat(savedMember).extracting("email")
-                               .isEqualTo("withdrawer");
+                               .isEqualTo("");
     }
 }
