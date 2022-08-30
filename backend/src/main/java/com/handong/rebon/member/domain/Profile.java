@@ -23,8 +23,8 @@ public class Profile {
     }
 
     public void withdraw() {
-        nickname = "withdrawer";
+        nickname = "anonymous";
         image = "";
-        email = "withdrawer";
+        email = "";
     }
 }
