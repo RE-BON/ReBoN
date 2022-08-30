@@ -5,22 +5,26 @@ import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import Loading from "../../Login/Loading";
 
 export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
   const [like, setLike] = useState(false);
   const [mainInfo, setMainInfo] = useState(null);
   const [subId, setSubId] = useState();
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setReady(false);
     setTimeout(function () {
       if (data) {
         var url = 'http://3.34.139.61:8080/api/shops?tag=' + tagId + '&category=' + cateId + '&subCategories=' + checked + '&open=' + open + '&sort=' + sort + '%2Cdesc';
         axios.get(url).then((response) => {
           setMainInfo(response.data);
+          setReady(true);
         });
       }
     }, 400);
-  }, [data, checked, open, sort]);
+  }, [data, checked, open, sort, cateId]);
 
   const likeClick = ({ sort }) => {
     if (like) {
@@ -40,9 +44,10 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
   `;
 
   return (
-    <>
-      {mainInfo
-        ? mainInfo.map((item, idx) => {
+    <>{
+      ready ?
+        mainInfo
+          ? mainInfo.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
             return (
               <div className="mainCard">
@@ -74,8 +79,13 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
               </div>
             );
           })
-        : ''}
-      {}
+          :  <Loading/>
+        :
+    mainInfo ? (<Loading/>) : ''}
+
+
+      {/*{*/}
+      {/*}*/}
     </>
   );
 }
