@@ -7,7 +7,7 @@
     <list default="true" id="a3b12cbc-44b8-4ca9-b044-4f9486341a97" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Post/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +31,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/lily/Desktop/Rebon/ReBoN/FrontEnd/rebon-frontend/src/styles",
+    "last_opened_file_path": "/Users/lily/Desktop/Rebon/ReBoN/FrontEnd/rebon-frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -56,7 +56,8 @@
       <option name="presentableId" value="Default" />
       <updated>1661772043306</updated>
       <workItem from="1661772046675" duration="989000" />
-      <workItem from="1661818170069" duration="12653000" />
+      <workItem from="1661818170069" duration="13274000" />
+      <workItem from="1661846005055" duration="2572000" />
     </task>
     <servers />
   </component>

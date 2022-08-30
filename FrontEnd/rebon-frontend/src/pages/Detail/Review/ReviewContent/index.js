@@ -21,33 +21,17 @@ import axios from "axios";
 // import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
 
 export default function ReviewContent({ data, sort, toggleOn }) {
-  const token = useState(window.sessionStorage.getItem('token'));
+  const token = window.sessionStorage.getItem('token');
   const [alllikeData, setAllLikeData] = useState([]);
-  // var ID = parseInt(window.sessionStorage.getItem('id'));
+  const [filteredList, setFilteredList] = useState([]);
 
   useEffect(() => {
-    // if(location.state.email !=null){
-    //   console.log(location.state.email);
-    // }
+    const reviewList = data.filter((element, index) => {
+      return element.liked;
+    });
 
-  },[toggleOn]);
-  //
-  // useEffect(() => {
-  //   setReviewReady(false);
-  //   const config = {
-  //     headers: { Authorization: `Bearer ${token}` },
-  //   };
-  //   const shopNumber = Number(location.pathname.slice(8));
-  //   axios
-  //     .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
-  //     .then((response) => {
-  //       console.log("Review: ", response.data);
-  //       setReviewInfo(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log('Review error');
-  //     });
-  // },[]);
+    setFilteredList(reviewList);
+    },[]);
 
   const onToggle = (reviewId) => {
     if (alllikeData.includes(reviewId)) {
@@ -62,8 +46,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    const response = await axios.post(`http://3.34.139.61:8080/api/reviews/${reviewId}/unempathize`, config);
-    console.log("delete, response : ",response.data);
+    const response = await axios.post(`http://3.34.139.61:8080/api/reviews/${reviewId}/unempathize`, {},config);
   };
 
   const addLike = async (reviewId) => {
@@ -71,7 +54,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    const response = await axios.post(`http://3.34.139.61:8080/api/reviews/${reviewId}/empathize`, config);
+    const response = await axios.post(`http://3.34.139.61:8080/api/reviews/${reviewId}/empathize`,{}, config);
   };
 
   return (
@@ -104,12 +87,12 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <button className="review-button">
-                      {/*{alllikeData.includes(info.id) ? (*/}
-                      {/*  <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />*/}
-                      {/*) : (*/}
-                      {/*  <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />*/}
-                      {/*)}*/}
+                    <button className="review-button" onClick={() => onToggle(info.id)}>
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
+                      ) : (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                      )}
                     </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
@@ -145,12 +128,12 @@ export default function ReviewContent({ data, sort, toggleOn }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <button className="review-button">
-                      {/*{alllikeData.includes(info.id) ? (*/}
-                      {/*  <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />*/}
-                      {/*) : (*/}
-                      {/*  <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />*/}
-                      {/*)}*/}
+                    <button className="review-button" onClick={() => onToggle(info.id)}>
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
+                      ) : (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                      )}
                     </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
@@ -186,12 +169,12 @@ export default function ReviewContent({ data, sort, toggleOn }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <button className="review-button">
-                      {/*{alllikeData.includes(info.id) ? (*/}
-                      {/*  <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />*/}
-                      {/*) : (*/}
-                      {/*  <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" onClick={onToggle(info.id)} />*/}
-                      {/*)}*/}
+                    <button className="review-button" onClick={() => onToggle(info.id)}>
+                      {alllikeData.includes(info.id) ? (
+                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
+                      ) : (
+                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                      )}
                     </button>
                     <span className="review-like-num">{info.empathyCount}</span>
                   </div>
@@ -226,14 +209,82 @@ export default function ReviewContent({ data, sort, toggleOn }) {
 
                   <div className="review-post">{info.content}</div>
                   <div className="review-like-button">
-                    <button className="review-button" onClick={() => onToggle(info.id)}>
-                      {alllikeData.includes(info.id) ? (
-                        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
-                      ) : (
-                        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
-                      )}
-                    </button>
-                    <span className="review-like-num">{info.empathyCount}</span>
+                    {/*<button className="review-button" onClick={() => onToggle(info.id)}>*/}
+                    {/*  {alllikeData.includes(info.id) ? (*/}
+                    {/*    <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>*/}
+                    {/*  ) : (*/}
+                    {/*    <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />*/}
+                    {/*  )}*/}
+                    {/*</button>*/}
+                    {/*<span className="review-like-num">{info.empathyCount}</span>*/}
+
+                    {/*{alllikeData.includes(info.id) ?*/}
+                    {/*  filteredList.includes(info.id) ?*/}
+                    {/*    (*/}
+                    {/*      <button className="review-button" onClick={() => onToggle(info.id)} disabled>*/}
+                    {/*    ) : (*/}
+                    {/*        <button className="review-button" onClick={() => onToggle(info.id)}>*/}
+                    {/*    )*/}
+                    {/*    :(*/}
+                    {/*      <></>*/}
+                    {/*    )*/}
+                    {/*}*/}
+
+
+                    {alllikeData.includes(info.id) ?
+                      filteredList.includes(info.id) ? (
+                        <>
+                          <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
+                          </button>
+                          <span className="review-like-num">{info.empathyCount+1}</span>
+                        </>
+                      ):(
+                        <>
+                          <button className="review-button" onClick={() => onToggle(info.id)}>
+                            <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
+                          </button>
+                          <span className="review-like-num">{info.empathyCount+1}</span>
+                        </>
+                      )
+                     :
+                      filteredList.includes(info.id) ? (
+                        <>
+                          <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                          </button>
+                          <span className="review-like-num">{info.empathyCount}</span>
+                        </>
+                      ):(
+                        <>
+                          <button className="review-button" onClick={() => onToggle(info.id)} >
+                            <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                          </button>
+                          <span className="review-like-num">{info.empathyCount}</span>
+                        </>
+                      )
+                    }
+
+
+
+
+                      {/*{alllikeData.includes(info.id) ?*/}
+                      {/*  (*/}
+                      {/*    <>*/}
+                      {/*      <button className="review-button" onClick={() => onToggle(info.id)}>*/}
+                      {/*        <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>*/}
+                      {/*      </button>*/}
+                      {/*      <span className="review-like-num">{info.empathyCount+1}</span>*/}
+                      {/*    </>*/}
+                      {/*  ) : (*/}
+                      {/*    <>*/}
+                      {/*      <button className="review-button" onClick={() => onToggle(info.id)} >*/}
+                      {/*        <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />*/}
+                      {/*      </button>*/}
+                      {/*      <span className="review-like-num">{info.empathyCount}</span>*/}
+                      {/*    </>*/}
+                      {/*  )*/}
+                      {/*}*/}
                   </div>
                 </div>
               </div>

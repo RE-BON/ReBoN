@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
 import PostModal from './PostModal';
 // import Logout from '../Logout';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import AWS from 'aws-sdk';
 import styled from 'styled-components';
