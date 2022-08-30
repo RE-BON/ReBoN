@@ -365,14 +365,14 @@
   .footprint-container {
     width: 60vw;
     height: 90vh;
-    margin-left: 65%;
+    margin-left: 38rem;
     padding-right: 20vw;
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
   .footprint-title {
-    margin: 8% 5% 5% 5%;
+    margin: 5rem 3rem 3rem 2rem;
     border-bottom: 1px solid black;
     font-size: 15px;
     padding: 0 0 2% 5%;
@@ -381,7 +381,7 @@
   }
 
   .footprint-wrapper {
-    margin-left: 6%;
+    margin-left: 1rem;
     width: 90%;
     font-size: 13px;
     font-family: 'Pretendard' !important;

@@ -5,7 +5,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
 import PostModal from './PostModal';
-import { useState, useNavigate } from 'react';
+// import Logout from '../Logout';
+import { useState } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 import styled from 'styled-components';
@@ -93,7 +94,8 @@ export default function Post() {
     };
     axios
       .post(
-        'http://3.34.139.61:8080/api/shops/1/reviews',
+        `http://3.34.139.61:8080/api/shops/1/reviews`,
+        //1에 ${shopId}
         {
           content: myContent,
           tip: myTip,
@@ -103,10 +105,12 @@ export default function Post() {
         config
       )
       .then(function (response) {
-        console.log(response);
+        console.log(response.data);
       })
       .catch(function (error) {
-        console.log(error);
+        if (error.response.status === 400) {
+          alert(error.response.data.message);
+        } else console.log(error);
       });
   };
 
@@ -248,7 +252,11 @@ export default function Post() {
         </div>
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
-          <div className="post-button-finish">
+
+          {/* <div className="post-button-finish" onClick={postSubmit}> */}
+          {/* {!myTip || !myContent || !starRate ? '작성완료' : <PostModal />} */}
+
+          <div className="post-button-finish" onClick={postSubmit}>
             <div className="post-modal-click" onClick={imgUpload}>
               작성완료
             </div>

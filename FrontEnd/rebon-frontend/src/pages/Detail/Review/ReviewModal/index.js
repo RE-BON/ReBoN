@@ -15,7 +15,6 @@ export default function ReviewModal() {
   const [report, setReport] = useState([]);
 
   function toggleModal(e) {
-    console.log('hihihi');
     setOpacity(0);
     setIsOpen(!isOpen);
   }
@@ -115,7 +114,7 @@ export default function ReviewModal() {
             </label>
           </div>
           <div className="review-modal-report-button-wrapper">
-            <button className="review-modal-report-button">신고하기</button>
+            <button className="review-modal-report-button" onClick={toggleModal}>신고하기</button>
           </div>
         </div>
       </StyledModal>
