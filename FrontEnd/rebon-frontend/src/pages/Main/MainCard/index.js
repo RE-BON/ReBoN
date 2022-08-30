@@ -59,10 +59,10 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
                     src="https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg"
                   />
                 )}
-
                 <div className="likeBtn-main">
                   {item.like ? <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} /> : <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />}
                 </div>
+
                 <div className="mainCard-bottom">
                   <div className="titleRow">
                     <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
