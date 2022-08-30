@@ -253,14 +253,20 @@ export default function Post() {
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
 
-          {/* <div className="post-button-finish" onClick={postSubmit}> */}
-          {/* {!myTip || !myContent || !starRate ? '작성완료' : <PostModal />} */}
-
-          <div className="post-button-finish" onClick={postSubmit}>
-            <div className="post-modal-click" onClick={imgUpload}>
+          <div className="post-button-finish">
+            <div
+              className="post-modal-click"
+              onClick={() => {
+                if (!(!myContent || !starRate)) {
+                  imgUpload();
+                  toggleModal();
+                }
+                postSubmit();
+              }}
+            >
               작성완료
             </div>
-            {/* <PostModal /> */}
+            <PostModal />
             <ModalProvider backgroundComponent={FadingBackground}>
               <StyledModal
                 isOpen={isOpen}
