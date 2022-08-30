@@ -10,36 +10,60 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 export default function BestCard({ data, checked }) {
   const [bestList, setBestList] = useState();
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
-  const [like, setLike] = useState(false);
-  // const [isLike, setIsLike] = useState(false);
+  const [like, setLike] = useState([]);
 
   useEffect(() => {
     setTimeout(function () {
       if (data) {
         const result = data.filter((d) => d.id === checked);
-        var isLike = false;
-
+        var isLike = [];
         if (result.length > 0 && result[0].shop.length > 0) {
           setBestList(result[0].shop);
+          result[0].shop.map((data, idx) => {
+            if (data.like) {
+              isLike[idx] = true;
+            } else {
+              isLike[idx] = false;
+            }
+          });
+          setLike(isLike);
         } else setBestList(null);
       }
-    }, 1000);
+    }, 1200);
   }, [data, checked]);
 
-  useEffect(() => {
-    // setIsLike(false);
-  }, []);
+  const likeClick = (shopId, isLike, idx, e) => {
+    var newLike = [...like];
+    if (like[idx]) {
+      newLike[idx] = false;
 
-  const likeClick = (shopId, idx, e) => {
-    if (like) {
-      setLike(false);
-      console.log('토큰');
-      console.log(token);
+      setLike(newLike);
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      if (token) {
+        var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/unlike';
+        axios
+          .post(
+            url,
+            {
+              likeCount: 0,
+              like: false,
+            },
+            config
+          )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     } else {
-      // var newList = [...bestList];
-      // newList[idx].like = true;
-      // setBestList(newList);
-      // setLike(true);
+      newLike[idx] = true;
+      setLike(newLike);
+
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
@@ -90,13 +114,13 @@ export default function BestCard({ data, checked }) {
                   </div>
 
                   <div className="likeBtn">
-                    {item.like || like ? (
+                    {like[idx] ? (
                       <FaHeart
                         className="heart-icon"
                         md={8}
                         size="22"
                         onClick={(e) => {
-                          likeClick(item.id, idx, e);
+                          likeClick(item.id, item.like, idx, e);
                         }}
                       />
                     ) : (
@@ -105,7 +129,7 @@ export default function BestCard({ data, checked }) {
                         md={8}
                         size="22"
                         onClick={(e) => {
-                          likeClick(item.id, idx, e);
+                          likeClick(item.id, item.like, idx, e);
                         }}
                       />
                     )}
