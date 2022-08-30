@@ -77,8 +77,8 @@ export default function Post() {
     promise.then(
       function () {
         // 이미지 업로드 성공
-        setOpacity(0);
-        setIsOpen(!isOpen);
+        // setOpacity(0);
+        // setIsOpen(!isOpen);
       },
       function (err) {
         // 이미지 업로드 실패
@@ -99,7 +99,7 @@ export default function Post() {
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [],
+          imageUrls: [`https://rebon.s3.ap-northeast-2.amazonaws.com/${fileName}`],
           star: starRate,
         },
         config
