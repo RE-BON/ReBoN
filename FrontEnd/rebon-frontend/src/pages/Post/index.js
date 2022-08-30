@@ -14,7 +14,7 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function Post() {
+export default function Post({ shopId }) {
   //별 state
   const [pharase, setPharase] = useState(null);
   let state = pharase;
@@ -77,8 +77,8 @@ export default function Post() {
     promise.then(
       function () {
         // 이미지 업로드 성공
-        setOpacity(0);
-        setIsOpen(!isOpen);
+        // setOpacity(0);
+        // setIsOpen(!isOpen);
       },
       function (err) {
         // 이미지 업로드 실패
@@ -106,6 +106,7 @@ export default function Post() {
       )
       .then(function (response) {
         console.log(response.data);
+        console.log('shopId', shopId);
       })
       .catch(function (error) {
         if (error.response.status === 400) {
@@ -253,14 +254,20 @@ export default function Post() {
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
 
-          {/* <div className="post-button-finish" onClick={postSubmit}> */}
-          {/* {!myTip || !myContent || !starRate ? '작성완료' : <PostModal />} */}
-
-          <div className="post-button-finish" onClick={postSubmit}>
-            <div className="post-modal-click" onClick={imgUpload}>
+          <div className="post-button-finish">
+            <div
+              className="post-modal-click"
+              onClick={() => {
+                if (!(!myContent || !starRate)) {
+                  imgUpload();
+                  toggleModal();
+                }
+                postSubmit();
+              }}
+            >
               작성완료
             </div>
-            {/* <PostModal /> */}
+            <PostModal />
             <ModalProvider backgroundComponent={FadingBackground}>
               <StyledModal
                 isOpen={isOpen}
