@@ -44,6 +44,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
       {mainInfo
         ? mainInfo.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
+            var star = item.star.toFixed(1);
             return (
               <div className="mainCard">
                 {item.image ? (
@@ -63,7 +64,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
                     <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
                       <div className="placeName-main">{item.name}</div>
                     </Link>
-                    <div className="starNum">{item.star}</div>
+                    <div className="starNum">{star}</div>
                   </div>
                   {/* <div className="">
                         {item.tags.map((tag) => (

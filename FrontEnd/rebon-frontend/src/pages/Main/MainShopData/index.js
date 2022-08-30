@@ -9,6 +9,7 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
   const [restData, setRestData] = useState(null);
   const [accoData, setAccoData] = useState(null);
   const [cafeData, setCafeData] = useState(null);
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
 
   useEffect(() => {
     setReady(false);
@@ -19,8 +20,29 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
 
     restCategory.map((data, index) => {
       var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
+      var shopId;
       axios.get(url).then((response) => {
         const restState = { id: data.id, shop: response.data };
+        response.data.map((shopData, idx) => {
+          shopId = shopData.id;
+
+          const config = {
+            headers: { Authorization: `Bearer ${token}` },
+          };
+          if (token) {
+            axios
+              .get('http://3.34.139.61:8080/api/shops/' + shopData.id + '/isLike', config)
+              .then((response) => {
+                if (response.data) {
+                  restState.shop[idx].like = true;
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+
         restArr.push(restState);
       });
     });
@@ -28,8 +50,28 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
 
     accoCategory.map((data, index) => {
       var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
+      var shopId;
       axios.get(url).then((response) => {
         const accoState = { id: data.id, shop: response.data };
+        response.data.map((shopData, idx) => {
+          shopId = shopData.id;
+
+          const config = {
+            headers: { Authorization: `Bearer ${token}` },
+          };
+          if (token) {
+            axios
+              .get('http://3.34.139.61:8080/api/shops/' + shopData.id + '/isLike', config)
+              .then((response) => {
+                if (response.data) {
+                  accoState.shop[idx].like = true;
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
         accoArr.push(accoState);
       });
     });

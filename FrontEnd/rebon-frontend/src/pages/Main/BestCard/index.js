@@ -9,35 +9,51 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 
 export default function BestCard({ data, checked }) {
   const [bestList, setBestList] = useState();
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+  const [like, setLike] = useState(false);
+  // const [isLike, setIsLike] = useState(false);
+
   useEffect(() => {
     setTimeout(function () {
       if (data) {
         const result = data.filter((d) => d.id === checked);
-        console.log(result);
-        if (result.length > 0 && result[0].shop.length > 0) setBestList(result[0].shop);
-        else setBestList(null);
+        var isLike = false;
+
+        if (result.length > 0 && result[0].shop.length > 0) {
+          setBestList(result[0].shop);
+        } else setBestList(null);
       }
-    }, 300);
+    }, 1000);
   }, [data, checked]);
 
-  const [like, setLike] = useState(false);
+  useEffect(() => {
+    // setIsLike(false);
+  }, []);
 
-  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
-
-  const likeClick = (shopId, e) => {
+  const likeClick = (shopId, idx, e) => {
     if (like) {
       setLike(false);
       console.log('토큰');
       console.log(token);
     } else {
-      setLike(true);
+      // var newList = [...bestList];
+      // newList[idx].like = true;
+      // setBestList(newList);
+      // setLike(true);
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
       if (token) {
         var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/like';
         axios
-          .post(url, config)
+          .post(
+            url,
+            {
+              likeCount: 1,
+              like: true,
+            },
+            config
+          )
           .then((response) => {
             console.log(response);
           })
@@ -54,6 +70,7 @@ export default function BestCard({ data, checked }) {
         ? bestList.map((item, idx) => {
             if (idx < 4) {
               var address = '/detail/' + item.id.toString();
+              var star = item.star.toFixed(1);
 
               return (
                 <div className="bestCard">
@@ -69,17 +86,17 @@ export default function BestCard({ data, checked }) {
                     <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
                       <div className="placeName-best">{item.name}</div>
                     </Link>
-                    <div className="starNum-best">{item.star}</div>
+                    <div className="starNum-best">{star}</div>
                   </div>
 
                   <div className="likeBtn">
-                    {item.like ? (
+                    {item.like || like ? (
                       <FaHeart
                         className="heart-icon"
                         md={8}
                         size="22"
                         onClick={(e) => {
-                          likeClick(item.id, e);
+                          likeClick(item.id, idx, e);
                         }}
                       />
                     ) : (
@@ -88,7 +105,7 @@ export default function BestCard({ data, checked }) {
                         md={8}
                         size="22"
                         onClick={(e) => {
-                          likeClick(item.id, e);
+                          likeClick(item.id, idx, e);
                         }}
                       />
                     )}
