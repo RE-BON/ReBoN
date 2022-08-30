@@ -86,7 +86,11 @@ public class Member extends BaseEntity {
         return profile.getNickname();
     }
 
-    public String getEmail() {return profile.getEmail();}
+    public String getEmail() {
+        return profile.getEmail();
+    }
 
-    public String getImage() {return profile.getImage();}
+    public String getImage() {
+        return profile.getImage();
+    }
 }
