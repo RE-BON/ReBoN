@@ -61,4 +61,14 @@ public class ApiMemberController {
         MemberReadResponseDto memberInfo = memberService.findMemberInfo(loginMember.getId());
         return ResponseEntity.ok(MemberReadResponse.from(memberInfo));
     }
+
+    @RequiredLogin
+    @PatchMapping("/members/withdraw")
+    public ResponseEntity<Void> withdraw(@Login LoginMember loginMember) {
+
+        memberService.withdraw(loginMember.getId());
+
+        return ResponseEntity.ok()
+                             .build();
+    }
 }

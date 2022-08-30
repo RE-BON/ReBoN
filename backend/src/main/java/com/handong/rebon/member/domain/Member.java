@@ -74,6 +74,10 @@ public class Member extends BaseEntity {
         this.isAgreed = isAgreed;
     }
 
+    public void withdraw() {
+        profile.withdraw();
+    }
+
     public void likeShop(Likes likes) {
         this.likes.add(likes);
     }
@@ -86,9 +90,13 @@ public class Member extends BaseEntity {
         return profile.getNickname();
     }
 
-    public String getEmail() {return profile.getEmail();}
+    public String getEmail() {
+        return profile.getEmail();
+    }
 
-    public String getImage() {return profile.getImage();}
+    public String getImage() {
+        return profile.getImage();
+    }
 
     public List<Likes> filterByCategory(Category category) {
         return likes.stream()
