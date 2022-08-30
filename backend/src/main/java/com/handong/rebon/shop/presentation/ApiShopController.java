@@ -86,7 +86,8 @@ public class ApiShopController {
     ) {
         List<ShopSimpleResponseDto> responses = shopService.findLikeShops(loginMember.getId(), categoryId, pageable);
         return ResponseEntity.ok(ShopSimpleResponse.convert(responses));
-
+    }
+    
     @PostMapping("/shops/naver")
     public ResponseEntity<Void> naverShops(@RequestBody NaverShopRequest shopRequest) {
         shopService.createNaverShops(shopRequest.getKeyword(), shopRequest.getDisplayCount(), shopRequest.getPage());
