@@ -245,6 +245,25 @@ include::{snippets}/CategoryReadAcceptanceTest/getAllRootAndChildrent/http-respo
 
 == Shop API
 
+=== Naver Shop 등록
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+
+| keyword | String | true | 검색할 지역(ex. 포항, 구룡포)
+| displayCount | int | true | 한 번에 등록할 가게 수(ex. 10인 경우 -> 식당 10, 카페 10, 숙소 10)
+| page | int | false | 검색할 페이지 수
+|===
+
+include::{snippets}/NaverShopInsertAcceptanceTest/naverShopInsert/http-request.adoc[]
+
+==== Response
+===== 성공
+include::{snippets}/NaverShopInsertAcceptanceTest/naverShopInsert/http-response.adoc[]
+
+===== 없는 페이지
+include::{snippets}/NaverShopInsertAcceptanceTest/naverShopInsertNotExist/http-response.adoc[]
+
 === Shop 리스트 조회(지역, 카테고리 별)
 ==== Request
 |===
@@ -403,11 +422,33 @@ include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithLogin/http-res
 
 |===
 | 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| shopId | Long | true | Path variable로 리뷰 조회 가게 보내주기
 |===
+
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithoutLogin/http-request.adoc[]
 
 ==== Response
 include::{snippets}/ReviewReadAcceptanceTest/getReviewByMemberWithoutLogin/http-response.adoc[]
+
+=== 가게 리뷰 조회 - 별점순
+
+==== Request
+
+|===
+| 값 | 타입 | 필수 | 설명
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+| shopId | Long | true | Path variable로 리뷰 조회 가게 보내주기
+| sort | String | false | params로 sort하고싶은 조건 보내기
+|===
+- 별점순: sort=reviewScore.star,asc(desc)
+- 좋아요 많은 순: sort=reviewScore.empathyCount,asc(desc)
+- 최신순: sort=createdAt,asc(desc)
+
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopSortStar/http-request.adoc[]
+
+==== Response
+include::{snippets}/ReviewReadAcceptanceTest/getReviewByShopSortStar/http-response.adoc[]
 
 
 === 리뷰 삭제 로그인이 된 경우

@@ -5,7 +5,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
 import PostModal from './PostModal';
-import { useState, useNavigate } from 'react';
+// import Logout from '../Logout';
+import { useState } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 import styled from 'styled-components';
@@ -13,7 +14,7 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-export default function Post() {
+export default function Post({ shopId }) {
   //별 state
   const [pharase, setPharase] = useState(null);
   let state = pharase;
@@ -76,8 +77,8 @@ export default function Post() {
     promise.then(
       function () {
         // 이미지 업로드 성공
-        setOpacity(0);
-        setIsOpen(!isOpen);
+        // setOpacity(0);
+        // setIsOpen(!isOpen);
       },
       function (err) {
         // 이미지 업로드 실패
@@ -93,7 +94,8 @@ export default function Post() {
     };
     axios
       .post(
-        'http://3.34.139.61:8080/api/shops/1/reviews',
+        `http://3.34.139.61:8080/api/shops/1/reviews`,
+        //1에 ${shopId}
         {
           content: myContent,
           tip: myTip,
@@ -103,10 +105,13 @@ export default function Post() {
         config
       )
       .then(function (response) {
-        console.log(response);
+        console.log(response.data);
+        console.log('shopId', shopId);
       })
       .catch(function (error) {
-        console.log(error);
+        if (error.response.status === 400) {
+          alert(error.response.data.message);
+        } else console.log(error);
       });
   };
 
@@ -248,11 +253,21 @@ export default function Post() {
         </div>
         <div className="post-button">
           <div className="post-button-cancel">취소</div>
+
           <div className="post-button-finish">
-            <div className="post-modal-click" onClick={imgUpload}>
+            <div
+              className="post-modal-click"
+              onClick={() => {
+                if (!(!myContent || !starRate)) {
+                  imgUpload();
+                  toggleModal();
+                }
+                postSubmit();
+              }}
+            >
               작성완료
             </div>
-            {/* <PostModal /> */}
+            <PostModal />
             <ModalProvider backgroundComponent={FadingBackground}>
               <StyledModal
                 isOpen={isOpen}

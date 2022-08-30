@@ -3,12 +3,15 @@ package com.handong.rebon.shop.domain.like;
 import java.util.Objects;
 import javax.persistence.*;
 
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.member.domain.Member;
 import com.handong.rebon.shop.domain.Shop;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Likes {
 
@@ -44,5 +47,9 @@ public class Likes {
     @Override
     public int hashCode() {
         return Objects.hash(member, shop);
+    }
+
+    public boolean isSameCategory(Category category) {
+        return shop.sameCategory(category);
     }
 }

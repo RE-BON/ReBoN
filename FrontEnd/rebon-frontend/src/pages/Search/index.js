@@ -66,7 +66,9 @@ export default function Search() {
           <div style={{ display: autoComState }}>
             <AutoCompletes word={word} />
           </div>
-          <Tags />
+          <div className="tags-wrapper">
+            <Tags />
+          </div>
         </div>
       </div>
     </div>

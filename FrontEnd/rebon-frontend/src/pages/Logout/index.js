@@ -9,7 +9,7 @@ export default function Logout() {
       <Header />
       <div className="login-wrapper">
         <div className="login-icon">
-          <img src="image/login.png" />
+          <img src="/image/login.png" />
         </div>
         <div className="login-notice">
           로그인이 필요한 서비스 입니다.

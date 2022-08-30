@@ -2,10 +2,14 @@ package com.handong.rebon.member.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.*;
 
+import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.common.BaseEntity;
 import com.handong.rebon.review.domain.empathy.Empathy;
+import com.handong.rebon.shop.domain.Shop;
 import com.handong.rebon.shop.domain.like.Likes;
 
 import lombok.*;
@@ -92,5 +96,11 @@ public class Member extends BaseEntity {
 
     public String getImage() {
         return profile.getImage();
+    }
+
+    public List<Likes> filterByCategory(Category category) {
+        return likes.stream()
+                    .filter(like -> like.isSameCategory(category))
+                    .collect(Collectors.toList());
     }
 }

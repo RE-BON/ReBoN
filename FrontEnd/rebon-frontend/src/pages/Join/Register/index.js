@@ -46,8 +46,8 @@ export default function Register() {
   return (
     <div className="register-wrapper">
       <div className="centerBox">
-        <div class="register-title">마지막 단계입니다!</div>
-        <div class="register-body">
+        <div className="register-title">마지막 단계입니다!</div>
+        <div className="register-body">
           <div className="register-left">
             <div>닉네임</div>
             <input className="nickname" type="text"></input>
