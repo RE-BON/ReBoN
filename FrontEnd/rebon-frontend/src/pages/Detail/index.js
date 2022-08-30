@@ -36,9 +36,15 @@ export default function Detail() {
   return (
     <div className="detail-wrapper">
       <Header />
-      {shopInfo?(
-        isMobile ? <Carousel isMobile="1" imageInfo={shopInfo?.images} imageLength={shopInfo?.images.length} /> : <Carousel isMobile="0" imageInfo={shopInfo?.images[0].url} />
-      ):''}
+      {shopInfo ? (
+        isMobile ? (
+          <Carousel isMobile="1" imageInfo={shopInfo?.images} imageLength={shopInfo?.images.length} />
+        ) : (
+          <Carousel isMobile="0" imageInfo={shopInfo?.images[0].url} />
+        )
+      ) : (
+        ''
+      )}
       <div className="detail-shop-wrapper">
         <div className="detail-title-wrapper">
           <div className="detail-shop-star-wrapper">
@@ -110,7 +116,13 @@ export default function Detail() {
           <hr></hr>
           <div className="detail-tag-wrapper">
             {/* {shopInfo.tags.length > 0 ? shopInfo.tags.map((tag) => <span className="detail-tag">{tag.name}</span>) : ''} */}
-            {shopInfo?.tags ? shopInfo?.tags.map((tag,index) => <span className="detail-tag" key={index}>{tag.name}</span>) : ''}
+            {shopInfo?.tags
+              ? shopInfo?.tags.map((tag, index) => (
+                  <span className="detail-tag" key={index}>
+                    {tag.name}
+                  </span>
+                ))
+              : ''}
           </div>
           <div className="detail-top-content-wrapper">
             <div className="detail-info-top-wrapper">
@@ -129,7 +141,13 @@ export default function Detail() {
           <div className="detail-info-wrapper">
             <div className="detail-info-name-category">업종</div>
             <div className="detail-info-category">
-              {shopInfo?.subCategories ? shopInfo?.subCategories.map((sub,index) => <div className="detail-info-value-category" key={index}>{sub.name}</div>) : ''}
+              {shopInfo?.subCategories
+                ? shopInfo?.subCategories.map((sub, index) => (
+                    <div className="detail-info-value-category" key={index}>
+                      {sub.name}
+                    </div>
+                  ))
+                : ''}
             </div>
           </div>
 
@@ -137,17 +155,17 @@ export default function Detail() {
             <div className="detail-info-name">메뉴</div>
             <div className="detail-info-value">
               {shopInfo?.menus
-                ? shopInfo.menus.map((menu,index) => (
+                ? shopInfo.menus.map((menu, index) => (
                     <>
-                      {index%5===0?<hr style={{width:'45%'}}/>:''}
+                      {index % 5 === 0 ? <hr style={{ width: '45%' }} /> : ''}
                       <div className="detail-info-sub-value" key={index}>
                         <div className="detail-menu-name">{menu.name}</div>
                         <div className="detail-menu-value">{menu.price.toLocaleString()}원</div>
                       </div>
-                      </>
+                    </>
                   ))
                 : ''}
-              <hr style={{width:'45%'}}/>
+              <hr style={{ width: '45%' }} />
             </div>
           </div>
           <div className="detail-address-wrapper">
