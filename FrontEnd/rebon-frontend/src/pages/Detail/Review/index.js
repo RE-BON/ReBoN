@@ -15,10 +15,9 @@ import { useMediaQuery } from 'react-responsive';
 import '../../../styles/toggle.css';
 
 import Toggle from 'react-toggle';
-import axios from "axios";
+import axios from 'axios';
 import { useLocation } from 'react-router';
-import LogoutContent from "../../Logout/LogoutContent";
-
+import LogoutContent from '../../Logout/LogoutContent';
 
 export default function Review({ shopName, shopImage, shopId }) {
   const { Kakao } = window;
@@ -76,7 +75,6 @@ export default function Review({ shopName, shopImage, shopId }) {
     },
   ]);
 
-
   useEffect(() => {
     setReviewReady(false);
     const config = {
@@ -88,22 +86,23 @@ export default function Review({ shopName, shopImage, shopId }) {
       .then((response) => {
         setReviewInfo(response.data);
         var likeNum = 0;
-        if(response.data){
+        if (response.data) {
           for (var i = 0; i < response.data.length; i++) {
             if (response.data[i].liked) likeNum = likeNum + 1;
           }
-          setReviewTip(response.data.filter(function (item) {
-            return item.tip !== null;
-          }));
+          setReviewTip(
+            response.data.filter(function (item) {
+              return item.tip !== null;
+            })
+          );
         }
 
         setReviewLike(likeNum);
       })
       .catch((error) => {
         if (error.response.status === 401) {
-          setLogout(true)
-        }
-        else console.log('Review error');
+          setLogout(true);
+        } else console.log('Review error');
       });
 
     setReviewReady(true);
@@ -115,7 +114,7 @@ export default function Review({ shopName, shopImage, shopId }) {
       content: {
         title: 'ReBon: ',
         description: "'" + shopName + "'" + ' 공유',
-        imageUrl: shopImage[0] ? shopImage[0].url:shopImage,
+        imageUrl: shopImage[0] ? shopImage[0].url : shopImage,
         link: {
           mobileWebUrl: '모바일 url!',
           androidExecParams: 'test',
@@ -139,7 +138,6 @@ export default function Review({ shopName, shopImage, shopId }) {
       ],
     });
   };
-
 
   const openMenu = () => {
     setIsMenuOpen(true);
@@ -169,7 +167,7 @@ export default function Review({ shopName, shopImage, shopId }) {
             <div className="review-num">({reviewInfo.length})</div>
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
-              <Link to="../post" style={{ textDecoration: 'none' }}>
+              <Link to={`../post/${shopId}`} style={{ textDecoration: 'none' }}>
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>
@@ -198,10 +196,10 @@ export default function Review({ shopName, shopImage, shopId }) {
               onChange={(e) => {
                 setSort(e.target.value);
               }}
-              defaultValue={"1"}
-              style={{paddingBottom:"5px"}}
+              defaultValue={'1'}
+              style={{ paddingBottom: '5px' }}
             >
-              <option value="1" className="review-select-option" style={{fontSize:"7px"}}>
+              <option value="1" className="review-select-option" style={{ fontSize: '7px' }}>
                 좋아요순
               </option>
               <option value="2">최신순</option>
@@ -210,28 +208,23 @@ export default function Review({ shopName, shopImage, shopId }) {
             </select>
           </div>
         </div>
-        {
-          logout?(
-            <LogoutContent/>
-          ):(
-            reviewReady && sortReady ? (
-              !toggleOn ? (
-                reviewInfo.length > 0 && sortReady ? (
-                  <ReviewContent data={reviewInfo} sort={sort} toggleOn={toggleOn}/>
-                ) : (
-                  ''
-                )
-              ) : reviewTip.length > 0 && sortReady ? (
-                <ReviewContent data={reviewTip} sort={sort} toggleOn={toggleOn}/>
-              ) : (
-                ''
-              )
+        {logout ? (
+          <LogoutContent />
+        ) : reviewReady && sortReady ? (
+          !toggleOn ? (
+            reviewInfo.length > 0 && sortReady ? (
+              <ReviewContent data={reviewInfo} sort={sort} toggleOn={toggleOn} />
             ) : (
               ''
             )
+          ) : reviewTip.length > 0 && sortReady ? (
+            <ReviewContent data={reviewTip} sort={sort} toggleOn={toggleOn} />
+          ) : (
+            ''
           )
-        }
-
+        ) : (
+          ''
+        )}
 
         {isMobile ? (
           <div className="review-footer-sticky">
@@ -244,7 +237,7 @@ export default function Review({ shopName, shopImage, shopId }) {
             </button>
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
-              <Link to="../post" style={{ textDecoration: 'none' }}>
+              <Link to={`/post/${shopId}`} style={{ textDecoration: 'none' }}>
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>

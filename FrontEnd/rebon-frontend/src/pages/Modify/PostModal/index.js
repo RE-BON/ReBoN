@@ -5,7 +5,9 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import '../../../styles/post-modal.css';
-export default function ModifyModal() {
+import AWS from 'aws-sdk';
+
+export default function PostModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -34,9 +36,9 @@ export default function ModifyModal() {
 
   return (
     <ModalProvider backgroundComponent={FadingBackground}>
-      <div className="post-modal-click" onClick={toggleModal}>
+      {/* <div className="post-modal-click" onClick={toggleModal}>
         작성완료
-      </div>
+      </div> */}
 
       <StyledModal
         isOpen={isOpen}
