@@ -238,6 +238,7 @@ export default function Review({ shopName, shopImage, shopId }) {
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
               <Link to={`/post/${shopId}`} style={{ textDecoration: 'none' }}>
+
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>

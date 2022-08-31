@@ -15,10 +15,12 @@ import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
 
+
 export default function Post() {
   const location = useLocation();
   const shopId = Number(location.pathname.slice(6));
   console.log(shopId);
+
   //별 state
   const [pharase, setPharase] = useState(null);
   let state = pharase;
@@ -103,13 +105,14 @@ export default function Post() {
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [`https://rebon.s3.ap-northeast-2.amazonaws.com/${fileName}`],
+          imageUrls: [],
           star: starRate,
         },
         config
       )
       .then(function (response) {
         console.log(response.data);
+        console.log('shopId', shopId);
       })
       .catch(function (error) {
         if (error.response.status === 400) {

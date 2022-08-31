@@ -21,4 +21,10 @@ public class Profile {
         this.email = email;
         this.nickname = nickname;
     }
+
+    public void withdraw() {
+        nickname = "anonymous";
+        image = "";
+        email = "";
+    }
 }
