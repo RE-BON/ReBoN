@@ -167,7 +167,7 @@ export default function Review({ shopName, shopImage, shopId }) {
             <div className="review-num">({reviewInfo.length})</div>
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
-              <Link to="../post" style={{ textDecoration: 'none' }}>
+              <Link to={`../post/${shopId}`} style={{ textDecoration: 'none' }}>
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>
@@ -237,7 +237,8 @@ export default function Review({ shopName, shopImage, shopId }) {
             </button>
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
-              <Link to="../post" style={{ textDecoration: 'none' }} shopId={shopId}>
+              <Link to={`/post/${shopId}`} style={{ textDecoration: 'none' }}>
+
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>
