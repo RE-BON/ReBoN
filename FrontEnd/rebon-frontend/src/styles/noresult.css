@@ -1,0 +1,115 @@
+@media (max-width: 767px) {
+  .no-wrapper {
+    padding-top: 10vh;
+    font-family: 'Pretendard' !important;
+    margin: auto;
+  }
+
+  .no-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 107, 108, 0.1);
+    border-radius: 50%;
+  }
+
+  .no-icon img {
+    width: 110%;
+  }
+
+  .no-notice {
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .no-notice div {
+    padding-top: 8px;
+    font-size: 15px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .button {
+    text-align: center;
+    margin-top: 40px;
+    color: #ff6b6c;
+  }
+
+  .button-no {
+    margin: 10px auto;
+    padding: 5px 10px;
+    width: 85vw;
+    border: 1px solid #ff6b6c;
+    border-radius: 7px;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .button-join {
+    margin: 0 auto;
+    padding: 5px 10px;
+    width: 85vw;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+}
+@media (min-width: 767px) {
+  .no-wrapper {
+    padding-top: 10%;
+    font-family: 'Pretendard' !important;
+    margin: auto;
+  }
+
+  .no-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px auto;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+  }
+
+  .no-icon img {
+    width: 110%;
+  }
+
+  .no-notice {
+    text-align: center;
+    font-size: 17px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .no-notice div {
+    padding-top: 8px;
+    font-size: 15px;
+    font-family: 'Pretendard' !important;
+  }
+
+  .button {
+    text-align: center;
+    margin-top: 40px;
+    color: #ff6b6c;
+  }
+
+  .button-no {
+    margin: 10px auto;
+    padding: 5px 10px;
+    width: 30vw;
+    border: 1px solid #ff6b6c;
+    border-radius: 7px;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+
+  .button-join {
+    margin: 0 auto;
+    padding: 5px 10px;
+    width: 20%;
+    font-family: 'Pretendard' !important;
+    font-weight: 700;
+  }
+}

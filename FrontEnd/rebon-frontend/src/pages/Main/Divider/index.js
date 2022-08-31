@@ -3,12 +3,14 @@ import '../../../styles/main.css';
 import Toggle from 'react-toggle';
 import MainCard from '../MainCard';
 import axios from 'axios';
+import NoResult from "../../NoResult";
 
 export default function Divider({ data, tagId, cateId, checked }) {
   const [toggleOn, setToggleOn] = useState(false);
   const [sort, setSort] = useState('shopScore.star');
   const [shopInfo, setShopInfo] = useState(null);
   const [ready, setReady] = useState(false);
+  // const [noResult, setNoResult] = useState(false);
 
   useEffect(() => {
     setTimeout(function () {
@@ -28,7 +30,9 @@ export default function Divider({ data, tagId, cateId, checked }) {
 
   return (
     <>
-      {ready ? (
+      {ready ?
+        shopInfo?
+        (
         <>
           <div className="divider-main">
             <div className="divider-right">
@@ -59,6 +63,9 @@ export default function Divider({ data, tagId, cateId, checked }) {
           </div>
         </>
       ) : (
+        // <NoResult/>
+          ''
+          ) : (
         ''
       )}
     </>

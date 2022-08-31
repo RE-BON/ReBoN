@@ -23,7 +23,6 @@ export default function Footprint() {
       axios
         .get('http://3.34.139.61:8080/api/my-reviews', config)
         .then((response) => {
-          console.log('Footprint: ', response.data);
           setFootInfo(response.data);
         })
         .catch((error) => {
@@ -130,20 +129,36 @@ export default function Footprint() {
 
                           <div className="footprint-post">{info.content}</div>
                         </div>
-                        <div className="footprint-image-wrapper">
-                          <div className="footprint-image-sub-wrapper">
-                            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
+                        {/*{info.image ? (*/}
+                        {/*    <div className="footprint-image-wrapper">*/}
+                        {/*      {}*/}
+                        {/*    </div>*/}
+                        {/*) : ''}*/}
+                        {info.image ? (
+                          <div className="footprint-image-wrapper">
+                            {info.map((item, index) => {
+                              return (
+                                <div className="footprint-image-sub-wrapper">
+                                  <img className="footprint-image" alt="footprint-img" src={item.url} />
+                                </div>
+                              );
+                            })}
                           </div>
-                          <div className="footprint-image-sub-wrapper">
-                            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                          </div>
-                          <div className="footprint-image-sub-wrapper">
-                            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                          </div>
-                          <div className="footprint-image-sub-wrapper">
-                            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                          </div>
-                        </div>
+                        ):''}
+                        {/*<div className="footprint-image-wrapper">*/}
+                        {/*  <div className="footprint-image-sub-wrapper">*/}
+                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
+                        {/*  </div>*/}
+                        {/*  <div className="footprint-image-sub-wrapper">*/}
+                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
+                        {/*  </div>*/}
+                        {/*  <div className="footprint-image-sub-wrapper">*/}
+                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
+                        {/*  </div>*/}
+                        {/*  <div className="footprint-image-sub-wrapper">*/}
+                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
+                        {/*  </div>*/}
+                        {/*</div>*/}
                       </div>
                       <div className="footprint-light-hr" />
                     </>
