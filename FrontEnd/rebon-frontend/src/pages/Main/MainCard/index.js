@@ -5,23 +5,27 @@ import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import Loading from '../../Login/Loading';
 
 export default function MainCard({ tagId, cateId, data, checked, open, sort, like, changeLike }) {
   const [mainInfo, setMainInfo] = useState(null);
   const [subId, setSubId] = useState();
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setReady(false);
     setTimeout(function () {
       if (data) {
         var url = 'http://3.34.139.61:8080/api/shops?tag=' + tagId + '&category=' + cateId + '&subCategories=' + checked + '&open=' + open + '&sort=' + sort + '%2Cdesc';
 
         axios.get(url).then((response) => {
           setMainInfo(response.data);
+          setReady(true);
         });
       }
     }, 1200);
-  }, [data, checked, open, sort]);
+  }, [data, checked, open, sort, cateId]);
 
   const likeClick = (shopId, idx, e) => {
     if (like[idx]) {
@@ -85,8 +89,9 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
 
   return (
     <>
-      {mainInfo
-        ? mainInfo.map((item, idx) => {
+      {ready ? (
+        mainInfo ? (
+          mainInfo.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
             var star = item.star.toFixed(1);
 
@@ -100,7 +105,6 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                     src="https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg"
                   />
                 )}
-
                 <div className="likeBtn-main">
                   {like[idx] ? (
                     <FaHeart
@@ -122,6 +126,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                     />
                   )}
                 </div>
+
                 <div className="mainCard-bottom">
                   <div className="titleRow">
                     <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
@@ -138,8 +143,17 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
               </div>
             );
           })
-        : ''}
-      {}
+        ) : (
+          <Loading />
+        )
+      ) : mainInfo ? (
+        <Loading />
+      ) : (
+        ''
+      )}
+
+      {/*{*/}
+      {/*}*/}
     </>
   );
 }

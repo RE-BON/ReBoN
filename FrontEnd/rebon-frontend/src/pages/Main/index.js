@@ -52,9 +52,9 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
   const location = useLocation();
 
   const getData = () => {
-    // console.log('=======rest 카테고리 : =========== ', restCategory);
-    // console.log('=======acco 카테고리 : =========== ', accoCategory);
-    // console.log('=======cafe 카테고리 : =========== ', cafeCategory);
+    console.log('=======rest 카테고리 : =========== ', restData);
+    console.log('=======acco 카테고리 : =========== ', accoData);
+    console.log('=======cafe 카테고리 : =========== ', cafeData);
   };
 
   useEffect(() => {
@@ -119,8 +119,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   <BestCard data={restData} checked={restChecked} />
                 </div>
 
-                {/* <Divider data={restData} checked={restChecked} tagId={location.state.item.id} subId={restChecked} /> */}
-                <Divider data={restData} tagId={location.state.item.id} cateId={1} checked={restChecked} />
+                <Divider cateId={1} data={restData} tagId={location.state.item.id}  checked={restChecked} />
               </div>
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={1}>
@@ -148,7 +147,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   <BestCard data={cafeData} checked={cafeChecked} />
                 </div>
 
-                <Divider data={cafeData} checked={cafeChecked} tagId={location.state.item.id} subId={cafeCategory[0].id} />
+                <Divider cateId={2} data={cafeData} checked={cafeChecked} tagId={location.state.item.id} subId={cafeCategory[0].id} />
               </div>
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={2}>
@@ -176,7 +175,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   <BestCard data={accoData} checked={accoChecked} />
                 </div>
 
-                <Divider data={accoData} checked={accoChecked} tagId={location.state.item.id} subId={accoCategory[0].id} />
+                <Divider cateId={3} data={accoData} checked={accoChecked} tagId={location.state.item.id} subId={accoCategory[0].id} />
               </div>
             </TabPanel>
           </Box>

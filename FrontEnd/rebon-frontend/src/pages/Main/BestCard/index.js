@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { BsFillBookmarkFill } from 'react-icons/bs';
+import NoResult from "../../NoResult";
 
 export default function BestCard({ data, checked }) {
   const [bestList, setBestList] = useState();
@@ -147,7 +148,7 @@ export default function BestCard({ data, checked }) {
               );
             }
           })
-        : ''}
+        : <NoResult/>}
     </>
   );
 }
