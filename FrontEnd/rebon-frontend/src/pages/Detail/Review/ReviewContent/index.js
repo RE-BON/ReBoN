@@ -27,10 +27,12 @@ export default function ReviewContent({ data, sort, toggleOn }) {
 
   useEffect(() => {
     const reviewList = data.filter((element, index) => {
-      return element.liked;
+      return element.liked===true;
     });
-
+    console.log("original: ",data);
+    console.log("filter: ",reviewList);
     setFilteredList(reviewList);
+    setAllLikeData(reviewList);
     },[]);
 
   const onToggle = (reviewId) => {
@@ -234,13 +236,15 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     {alllikeData.includes(info.id) ?
                       filteredList.includes(info.id) ? (
                         <>
+                          11. {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                             <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                           </button>
-                          <span className="review-like-num">{info.empathyCount+1}</span>
+                          <span className="review-like-num">{info.empathyCount}</span>
                         </>
                       ):(
                         <>
+                          22 {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)}>
                             <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                           </button>
@@ -250,13 +254,15 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                      :
                       filteredList.includes(info.id) ? (
                         <>
+                          33 {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)} disabled>
-                            <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
+                            <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                           </button>
-                          <span className="review-like-num">{info.empathyCount}</span>
+                          <span className="review-like-num">{info.empathyCount-1}</span>
                         </>
                       ):(
                         <>
+                          44 {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)} >
                             <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                           </button>
