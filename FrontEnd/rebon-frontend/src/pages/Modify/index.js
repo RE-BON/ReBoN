@@ -14,10 +14,8 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
-// import { useParams } from 'react-router';
 
 export default function Modify() {
-  // const params = useParams();
   const location = useLocation().state;
   const locationId = location.id;
   const initialContent = location.content;
@@ -98,17 +96,17 @@ export default function Modify() {
   };
 
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
-  const postSubmit = () => {
+  const patchSubmit = () => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios
       .patch(
-        `http://3.34.139.61:8080/api/shops/${locationId}/reviews`,
+        `http://3.34.139.61:8080/api/reviews/${locationId}`,
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [], //`https://rebon.s3.ap-northeast-2.amazonaws.com/${fileName}`
+          imageUrls: [],
           star: starRate,
         },
         config
@@ -270,7 +268,7 @@ export default function Modify() {
                   imgUpload();
                   toggleModal();
                 }
-                postSubmit();
+                patchSubmit();
               }}
             >
               작성완료
