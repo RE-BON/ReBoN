@@ -32,5 +32,15 @@ export default function MainCategoryData() {
       });
   }, []);
 
-  return <>{restCategory && accoCategory && cafeCategory ? <MainShopData restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} /> : ''}</>;
+  return (
+    <>
+      {restCategory && accoCategory && cafeCategory ? (
+        <>
+          <MainShopData restCategory={restCategory} accoCategory={accoCategory} cafeCategory={cafeCategory} />
+        </>
+      ) : (
+        ''
+      )}
+    </>
+  );
 }
