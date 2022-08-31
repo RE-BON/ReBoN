@@ -27,8 +27,8 @@ function Router() {
         <Route path="/detail/:id" element={<Detail />} />
         {/* <Route path="/main" element={<MainData />} /> */}
         <Route path="/main" element={<MainCategoryData />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/modify" element={<Modify />} />
+        <Route path="/post/:id" element={<Post />} />
+        <Route path="/modify/:id" element={<Modify />} />
         <Route path="/reviewdropdown" element={<ReviewDropdown />} />
         <Route path="/login" element={<Login />} />
         <Route path="/mypage/*" element={<Mypage />} />

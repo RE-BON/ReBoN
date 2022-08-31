@@ -13,8 +13,14 @@ import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from 'react-router';
 
-export default function Post({ shopId }) {
+
+export default function Post() {
+  const location = useLocation();
+  const shopId = Number(location.pathname.slice(6));
+  console.log(shopId);
+
   //별 state
   const [pharase, setPharase] = useState(null);
   let state = pharase;
@@ -94,7 +100,7 @@ export default function Post({ shopId }) {
     };
     axios
       .post(
-        `http://3.34.139.61:8080/api/shops/1/reviews`,
+        `http://3.34.139.61:8080/api/shops/${shopId}/reviews`,
         //1에 ${shopId}
         {
           content: myContent,
@@ -284,7 +290,7 @@ export default function Post({ shopId }) {
                       <FontAwesomeIcon icon={faXmark} />
                     </Link>
                   </button>
-                  <img className="post-modal-image" alt="review-image" src="image/reviewLogo.png" />
+                  <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
                   <div className="post-modal-notice">리뷰가 등록되었습니다.</div>
                 </div>
               </StyledModal>

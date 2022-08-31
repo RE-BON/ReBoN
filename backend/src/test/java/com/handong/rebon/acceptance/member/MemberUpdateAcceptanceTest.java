@@ -75,6 +75,34 @@ public class MemberUpdateAcceptanceTest extends AcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
     }
 
+    @Test
+    @DisplayName("회원이 탈퇴를 진행하면, 회원의 개인 정보는 탈퇴자 정보로 바뀐다.")
+    void withdrawMember() {
+        //given
+        ExtractableResponse<Response> registerResponse = 회원가입("test@gmail.com", "test");
+        String token = extractedToken(registerResponse);
+        String bearerToken = "Bearer " + token;
+
+        //when
+        ExtractableResponse<Response> response = withdrawMember(bearerToken);
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    public ExtractableResponse<Response> withdrawMember(String token) {
+        RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
+                                                      .log().all();
+        if (!Objects.isNull(token)) {
+            requestSpec.header("Authorization", token);
+        }
+        return requestSpec.contentType(APPLICATION_JSON_VALUE)
+                          .when()
+                          .patch("/api/members/withdraw")
+                          .then()
+                          .log().all()
+                          .extract();
+    }
+
     public ExtractableResponse<Response> updateMemberInfo(String token, MemberUpdateRequest memberUpdateRequest) {
         RequestSpecification requestSpec = RestAssured.given(getRequestSpecification())
                                                       .log().all();
