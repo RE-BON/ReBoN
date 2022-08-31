@@ -16,6 +16,10 @@ export default function FootprintModal({ info, handleDelete }) {
     handleDelete(targetId);
   }
 
+  function onClickModify(target) {
+    console.log(target);
+  }
+
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <Link
       to=""
@@ -42,8 +46,17 @@ export default function FootprintModal({ info, handleDelete }) {
         <Dropdown.Menu align="end">
           <Dropdown.Item eventKey="1">
             {/* url 위치 알맞은 데로 가기 */}
-            <Link to="/modify" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <div onClick={toggleModal}>
+            <Link
+              to={`/modify/${info.id}`}
+              state={{ star: info.star, content: info.content, id: info.id, images: info.images, name: info.shopName, tip: info.tip }}
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <div
+                onClick={() => {
+                  onClickModify(info);
+                  toggleModal();
+                }}
+              >
                 <Edit size="18px" className="dropdown-item-icon" /> <p className="review-modal-report">리뷰수정</p>
               </div>
             </Link>
