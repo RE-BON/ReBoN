@@ -100,7 +100,6 @@ export default function Mypage() {
                   <Row className="sidebtn-wrapper">
                     <Col md={3} className={clickedTab === 2 ? 'tab-click-active' : 'tab-click-stay'}>
                       <div className="sidebtn-icon">
-                        {console.log(clickedTab)}
                         <RiFootprintLine size="24" />
                       </div>
                     </Col>

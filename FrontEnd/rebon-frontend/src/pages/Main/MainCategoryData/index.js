@@ -12,8 +12,8 @@ export default function MainCategoryData() {
       .get('http://3.34.139.61:8080/api/categories')
       .then((response) => {
         setRestCategory(response.data[0].children);
-        setAccoCategory(response.data[1].children);
-        setCafeCategory(response.data[2].children);
+        setCafeCategory(response.data[1].children);
+        setAccoCategory(response.data[2].children);
       })
       .catch((error) => {
         console.log('MainCategoryData error');
@@ -22,13 +22,9 @@ export default function MainCategoryData() {
     axios
       .get('https://map.naver.com/v5/api/search?caller=pcweb&query=%ED%8F%AC%ED%95%AD%EC%8B%9D%EB%8B%B9&type=all&page=1&displayCount=10&lang=ko')
       .then((response) => {
-        // setRestCategory(response.data[0].children);
-        // setAccoCategory(response.data[1].children);
-        // setCafeCategory(response.data[2].children);
-        console.log('result is ', response.data);
       })
       .catch((error) => {
-        console.log('get error');
+        console.log('MainCategoryData error');
       });
   }, []);
 
