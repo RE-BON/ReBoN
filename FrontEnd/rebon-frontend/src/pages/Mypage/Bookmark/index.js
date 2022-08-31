@@ -42,10 +42,9 @@ export default function Bookmark() {
   const [value, setValue] = React.useState(0);
   const [ready, setReady] = useState(false);
   const [restData, setRestData] = useState();
+  const [accoData, setAccoData] = useState();
+  const [cafeData, setCafeData] = useState();
   const token = window.sessionStorage.getItem('token');
-  // const [restCategory, setRestCategory] = useState();
-  // const [accoCategory, setAccoCategory] = useState();
-  // const [cafeCategory, setCafeCategory] = useState();
 
   const location = useLocation();
   const getData = () => {
@@ -55,16 +54,26 @@ export default function Bookmark() {
   };
 
   useEffect(() => {
-    var url = 'http://3.34.139.61:8080/api/shops/likes?categoryId=1&page=1&size=1';
-    var shopId;
+    var restUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=1&page=1&size=2';
+    var accoUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=2&page=1&size=1';
+    var cafeUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=3&page=1&size=1';
+
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
     if (token) {
-      axios.get(url, config).then((response) => {
-        console.log('좋아요 응답');
-        console.log(response.data);
+      axios.get(restUrl, config).then((response) => {
         setRestData(response.data);
+        console.log('식당 좋아요!!');
+        console.log(response);
+      });
+
+      axios.get(accoUrl, config).then((response) => {
+        setAccoData(response.data);
+      });
+
+      axios.get(cafeUrl, config).then((response) => {
+        setCafeData(response.data);
       });
     }
   }, []);
@@ -109,13 +118,13 @@ export default function Bookmark() {
 
             <TabPanel class="TabPanel-bookmark" value={value} index={1}>
               <div className="boookmarkCard-wrapper">
-                <BookmarkCard data={restData} />
+                <BookmarkCard data={accoData} />
               </div>
             </TabPanel>
 
             <TabPanel class="TabPanel-bookmark" value={value} index={2}>
               <div className="mainCard-wrapper">
-                <BookmarkCard data={restData} />
+                <BookmarkCard data={cafeData} />
               </div>
             </TabPanel>
           </Box>
@@ -155,6 +164,22 @@ export default function Bookmark() {
 
               <div className="mainCard-wrapper">
                 <BookmarkCard data={restData} />
+              </div>
+            </TabPanel>
+            <TabPanel className="TabPanel-bookmark" value={value} index={1}>
+              <div className="category-wrapper"></div>
+              <div className="best-wrapper"></div>
+
+              <div className="mainCard-wrapper">
+                <BookmarkCard data={accoData} />
+              </div>
+            </TabPanel>
+            <TabPanel className="TabPanel-bookmark" value={value} index={2}>
+              <div className="category-wrapper"></div>
+              <div className="best-wrapper"></div>
+
+              <div className="mainCard-wrapper">
+                <BookmarkCard data={cafeData} />
               </div>
             </TabPanel>
           </Box>
