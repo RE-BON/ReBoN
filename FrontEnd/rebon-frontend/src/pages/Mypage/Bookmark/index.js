@@ -54,9 +54,9 @@ export default function Bookmark() {
   };
 
   useEffect(() => {
-    var restUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=1&page=1&size=2';
-    var accoUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=2&page=1&size=1';
-    var cafeUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=3&page=1&size=1';
+    var restUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=1&page=0&size=10';
+    var accoUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=2&page=0&size=10';
+    var cafeUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=3&page=0&size=10';
 
     const config = {
       headers: { Authorization: `Bearer ${token}` },
