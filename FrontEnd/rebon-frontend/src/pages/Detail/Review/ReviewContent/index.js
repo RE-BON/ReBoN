@@ -88,12 +88,23 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     ''
                   )}
                   <div className="review-post">{info.content}</div>
+                  {info.images? info.images.map((item, index)  => {
+                    const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
+                    return (
+                      <div className="footprint-image-wrapper">
+
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src= {url}/>
+                        </div>
+                      </div>
+
+                    );
+                  }) : ''}
                   <div className="review-like-button">
                     <button className="review-button" onClick={() => onToggle(info.id)}>
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
@@ -101,7 +112,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         ):(
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
@@ -111,7 +121,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
@@ -119,7 +128,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         ):(
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} >
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
@@ -161,12 +169,23 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
 
                   <div className="review-post">{info.content}</div>
+                  {info.images? info.images.map((item, index)  => {
+                    const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
+                    return (
+                      <div className="footprint-image-wrapper">
+
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src= {url}/>
+                        </div>
+                      </div>
+
+                    );
+                  }) : ''}
                   <div className="review-like-button">
                     <button className="review-button" onClick={() => onToggle(info.id)}>
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
@@ -174,7 +193,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         ):(
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
@@ -184,7 +202,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
@@ -192,7 +209,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         ):(
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} >
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
@@ -234,12 +250,23 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
 
                   <div className="review-post">{info.content}</div>
+                  {info.images? info.images.map((item, index)  => {
+                    const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
+                    return (
+                      <div className="footprint-image-wrapper">
+
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src= {url}/>
+                        </div>
+                      </div>
+
+                    );
+                  }) : ''}
                   <div className="review-like-button">
                     <button className="review-button" onClick={() => onToggle(info.id)}>
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
@@ -247,7 +274,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         ):(
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
@@ -257,7 +283,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
@@ -265,7 +290,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         ):(
                           <>
-                            {info.id}
                             <button className="review-button" onClick={() => onToggle(info.id)} >
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
@@ -306,12 +330,23 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
 
                   <div className="review-post">{info.content}</div>
+                  {info.images? info.images.map((item, index)  => {
+                    const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
+                    return (
+                      <div className="footprint-image-wrapper">
+
+                        <div className="footprint-image-sub-wrapper">
+                          <img className="footprint-image" alt="footprint-img" src= {url}/>
+                        </div>
+                      </div>
+
+                    );
+                  }) : ''}
                   <div className="review-like-button">
 
                     {alllikeData.includes(info.id) ?
                       filteredList.includes(info.id) ? (
                         <>
-                          {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                             <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                           </button>
@@ -319,7 +354,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         </>
                       ):(
                         <>
-                        {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)}>
                             <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                           </button>
@@ -329,7 +363,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                      :
                       filteredList.includes(info.id) ? (
                         <>
-                          {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)} disabled>
                             <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                           </button>
@@ -337,7 +370,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         </>
                       ):(
                         <>
-                         {info.id}
                           <button className="review-button" onClick={() => onToggle(info.id)} >
                             <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                           </button>
