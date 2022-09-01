@@ -101,7 +101,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     );
                   }) : ''}
                   <div className="review-like-button">
-                    <button className="review-button" onClick={() => onToggle(info.id)}>
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
@@ -135,8 +134,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         )
                       }
-                    </button>
-                    <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>
               </div>
@@ -182,7 +179,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     );
                   }) : ''}
                   <div className="review-like-button">
-                    <button className="review-button" onClick={() => onToggle(info.id)}>
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
@@ -216,8 +212,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         )
                       }
-                    </button>
-                    <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>
               </div>
@@ -263,7 +257,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     );
                   }) : ''}
                   <div className="review-like-button">
-                    <button className="review-button" onClick={() => onToggle(info.id)}>
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
@@ -297,8 +290,6 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                           </>
                         )
                       }
-                    </button>
-                    <span className="review-like-num">{info.empathyCount}</span>
                   </div>
                 </div>
               </div>

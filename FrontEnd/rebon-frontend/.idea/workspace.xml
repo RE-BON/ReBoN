@@ -7,7 +7,6 @@
     <list default="true" id="615f973f-73a2-4d17-a1c7-a6d338eca78b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Mypage/Footprint/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Mypage/Footprint/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../backend/security" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/security" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
