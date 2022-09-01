@@ -81,7 +81,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                     backgroundColor: '#ff6b6c',
                   },
                 }}
-                className="box"
+                // className="box"
                 value={value}
                 onChange={handleChange}
                 aria-label="basic tabs example"

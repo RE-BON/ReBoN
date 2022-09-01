@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3b12cbc-44b8-4ca9-b044-4f9486341a97" name="Changes" comment="">
+    <list default="true" id="615f973f-73a2-4d17-a1c7-a6d338eca78b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/BestCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/BestCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/Divider/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/Divider/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainCategoryData/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainCategoryData/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainShopData/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainShopData/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Modify/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Modify/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Mypage/Bookmark/BookmarkCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Mypage/Bookmark/BookmarkCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Mypage/Bookmark/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Mypage/Bookmark/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/bookmark-card.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/bookmark-card.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../backend/security" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/security" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/src/docs/asciidoc/api.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/src/docs/asciidoc/api.adoc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +42,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/hyerm2/Desktop/project/ReBoN/FrontEnd/rebon-frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lily/Desktop/Rebon/ReBoN/FrontEnd/rebon-frontend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -59,7 +70,6 @@
       <workItem from="1661818170069" duration="13274000" />
       <workItem from="1661846005055" duration="2572000" />
       <workItem from="1661935899721" duration="876000" />
-      <workItem from="1662024502311" duration="187000" />
     </task>
     <servers />
   </component>

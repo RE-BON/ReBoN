@@ -334,6 +334,20 @@ include::{snippets}/ShopLikeAcceptanceTest/loginMemberLike/http-request.adoc[]
 ==== Response
 include::{snippets}/ShopLikeAcceptanceTest/loginMemberLike/http-response.adoc[]
 
+=== 내가 찜한 Shop list 조회
+==== Request
+|===
+| 값 | 타입 | 필수 | 설명
+| categoryId | Long | true | 조회하고자 하는 카테고리(식당, 카페, 숙소)
+| page | Integer | false | 원하는 페이지
+| size | Integer | false | 한 페이지에 보여줄 데이터 수
+| token | String | true | Authorization header에 bearer type으로 jwt 보내주기
+|===
+include::{snippets}/LikeShopReadAcceptanceTest/getLikeShops/http-request.adoc[]
+
+==== Response
+include::{snippets}/LikeShopReadAcceptanceTest/getLikeShops/http-response.adoc[]
+
 == Review API
 
 === 리뷰 생성 로그인이 된 경우

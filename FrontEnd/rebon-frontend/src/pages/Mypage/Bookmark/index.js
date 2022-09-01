@@ -1,12 +1,15 @@
 import BookmarkCard from './BookmarkCard';
 import '../../../styles/bookmark.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import axios from 'axios';
+
+import { useLocation } from 'react-router';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,6 +40,43 @@ TabPanel.propTypes = {
 
 export default function Bookmark() {
   const [value, setValue] = React.useState(0);
+  const [ready, setReady] = useState(false);
+  const [restData, setRestData] = useState();
+  const [accoData, setAccoData] = useState();
+  const [cafeData, setCafeData] = useState();
+  const token = window.sessionStorage.getItem('token');
+
+  const location = useLocation();
+  const getData = () => {
+    // console.log('=======rest 카테고리 : =========== ', restCategory);
+    // console.log('=======acco 카테고리 : =========== ', accoCategory);
+    // console.log('=======cafe 카테고리 : =========== ', cafeCategory);
+  };
+
+  useEffect(() => {
+    var restUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=1&page=0&size=10';
+    var accoUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=2&page=0&size=10';
+    var cafeUrl = 'http://3.34.139.61:8080/api/shops/likes?categoryId=3&page=0&size=10';
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    if (token) {
+      axios.get(restUrl, config).then((response) => {
+        setRestData(response.data);
+        console.log('식당 좋아요!!');
+        console.log(response);
+      });
+
+      axios.get(accoUrl, config).then((response) => {
+        setAccoData(response.data);
+      });
+
+      axios.get(cafeUrl, config).then((response) => {
+        setCafeData(response.data);
+      });
+    }
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,32 +111,20 @@ export default function Bookmark() {
             </Box>
             <TabPanel class="TabPanel-bookmark" value={value} index={0}>
               <div className="boookmarkCard-wrapper">
-                <BookmarkCard />
-                <BookmarkCard />
+                <BookmarkCard data={restData} />
+                {/* <BookmarkCard /> */}
               </div>
             </TabPanel>
 
             <TabPanel class="TabPanel-bookmark" value={value} index={1}>
               <div className="boookmarkCard-wrapper">
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
+                <BookmarkCard data={accoData} />
               </div>
             </TabPanel>
 
             <TabPanel class="TabPanel-bookmark" value={value} index={2}>
               <div className="mainCard-wrapper">
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
-                <BookmarkCard />
+                <BookmarkCard data={cafeData} />
               </div>
             </TabPanel>
           </Box>
@@ -135,7 +163,23 @@ export default function Bookmark() {
               <div className="best-wrapper"></div>
 
               <div className="mainCard-wrapper">
-                <BookmarkCard />
+                <BookmarkCard data={restData} />
+              </div>
+            </TabPanel>
+            <TabPanel className="TabPanel-bookmark" value={value} index={1}>
+              <div className="category-wrapper"></div>
+              <div className="best-wrapper"></div>
+
+              <div className="mainCard-wrapper">
+                <BookmarkCard data={accoData} />
+              </div>
+            </TabPanel>
+            <TabPanel className="TabPanel-bookmark" value={value} index={2}>
+              <div className="category-wrapper"></div>
+              <div className="best-wrapper"></div>
+
+              <div className="mainCard-wrapper">
+                <BookmarkCard data={cafeData} />
               </div>
             </TabPanel>
           </Box>
