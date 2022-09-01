@@ -24,9 +24,10 @@ export default function Modify() {
   const initialImages = location.images;
 
   //별 state
-  const [pharase, setPharase] = useState('null');
+  const initialPharase = ['별로예요.', '그저 그래요.', '괜찮아요.', '좋아요.', '최고예요.'];
+  const [pharase, setPharase] = useState(initialPharase[initialStar - 1]);
   let state = pharase;
-  const [starRate, setStarRate] = useState(3);
+  const [starRate, setStarRate] = useState(initialStar);
 
   //나만의 꿀팁 state
   const [myTip, setMyTip] = useState(initialTip);
@@ -112,7 +113,7 @@ export default function Modify() {
         config
       )
       .then(function (response) {
-        console.log('PATCH했습니다!!!');
+        console.log(response);
       })
       .catch(function (error) {
         if (error.response.status === 400) {
@@ -162,6 +163,7 @@ export default function Modify() {
                   name="rating"
                   value="5"
                   id="rate1"
+                  checked={starRate === 5 ? true : false}
                 />
                 <label htmlFor="rate1">★</label>
                 <input
@@ -173,6 +175,7 @@ export default function Modify() {
                   name="rating"
                   value="4"
                   id="rate2"
+                  checked={starRate === 4 ? true : false}
                 />
                 <label htmlFor="rate2">★</label>
                 <input
@@ -184,6 +187,7 @@ export default function Modify() {
                   name="rating"
                   value="3"
                   id="rate3"
+                  checked={starRate === 3 ? true : false}
                 />
                 <label htmlFor="rate3">★</label>
                 <input
@@ -195,6 +199,7 @@ export default function Modify() {
                   name="rating"
                   value="2"
                   id="rate4"
+                  checked={starRate === 2 ? true : false}
                 />
                 <label htmlFor="rate4">★</label>
                 <input
@@ -206,6 +211,7 @@ export default function Modify() {
                   name="rating"
                   value="1"
                   id="rate5"
+                  checked={starRate === 1 ? true : false}
                 />
                 <label htmlFor="rate5">★</label>
               </fieldset>
