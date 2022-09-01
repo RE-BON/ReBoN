@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a3b12cbc-44b8-4ca9-b044-4f9486341a97" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/.header-modal 2.css.icloud" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../backend/security" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/security" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +31,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lily/Desktop/Rebon/ReBoN/FrontEnd/rebon-frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hyerm2/Desktop/project/ReBoN/FrontEnd/rebon-frontend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -60,6 +59,7 @@
       <workItem from="1661818170069" duration="13274000" />
       <workItem from="1661846005055" duration="2572000" />
       <workItem from="1661935899721" duration="876000" />
+      <workItem from="1662024502311" duration="187000" />
     </task>
     <servers />
   </component>
