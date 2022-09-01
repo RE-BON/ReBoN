@@ -7,7 +7,6 @@ import { Dropdown } from 'react-bootstrap';
 import { MoreVertical, Trash, Edit, X } from 'react-feather';
 export default function FootprintModal({ info, handleDelete }) {
   const [isOpen, setIsOpen] = useState(false);
-
   function toggleModal(e) {
     setIsOpen(!isOpen);
   }

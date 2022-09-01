@@ -31,49 +31,12 @@ export default function Review({ shopName, shopImage, shopId }) {
   const [ready, setReady] = useState(true);
   const [reviewReady, setReviewReady] = useState(false);
   const [sortReady, setSortReady] = useState(true);
-  const [sort, setSort] = useState(1);
+  const [sort, setSort] = useState('1');
   const [logout, setLogout] = useState(false);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
-
-  const [reviewInfo2, setReviewInfo2] = useState([
-    {
-      id: 1,
-      authorName: 'test',
-      shopName: '팜스발리',
-      content: '맛이 좋아요',
-      tip: '필수로 시키자',
-      star: 5,
-      empathyCount: 0,
-      images: [],
-      liked: true,
-    },
-    {
-      id: 2,
-      authorName: 'ralph',
-      shopName: '팜스발리',
-      content: '맛이 별로예요',
-      tip: '김치 불고기 피자가 제일 맛있어요',
-      star: 2,
-      empathyCount: 6,
-      images: [],
-      liked: false,
-    },
-    {
-      id: 3,
-      authorName: 'peace',
-      shopName: '팜스발리',
-      content:
-        '피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요 피자도 맛있고 치킨도 맛있어요',
-      tip: null,
-      star: 4,
-      empathyCount: 20,
-      images: [],
-      liked: true,
-    },
-  ]);
 
   useEffect(() => {
     setReviewReady(false);
@@ -81,8 +44,13 @@ export default function Review({ shopName, shopImage, shopId }) {
       headers: { Authorization: `Bearer ${token}` },
     };
     const shopNumber = Number(location.pathname.slice(8));
+
+    const sortUrl = sort === '1' ? 'reviewScore.empathyCount,desc': sort === '2' ? 'sort=createdAt,desc' : sort === '3' ? 'reviewScore.star,desc' : 'reviewScore.star,asc'
+
+    const url = 'http://3.34.139.61:8080/api/shops/' + shopNumber + '/reviews?sort='+ sortUrl
     axios
-      .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
+      // .get(`http://3.34.139.61:8080/api/shops/${shopNumber}/reviews`, config)
+      .get(url, config)
       .then((response) => {
         setReviewInfo(response.data);
         var likeNum = 0;
@@ -106,7 +74,8 @@ export default function Review({ shopName, shopImage, shopId }) {
       });
 
     setReviewReady(true);
-  }, [shopImage]);
+  }, [shopImage,sort]);
+
 
   const shareKakao = () => {
     Kakao.Link.sendDefault({
@@ -124,15 +93,15 @@ export default function Review({ shopName, shopImage, shopId }) {
         {
           title: '웹으로 이동',
           link: {
-            mobileWebUrl: 'http://localhost:3000/detail/' + shopId,
-            webUrl: 'http://localhost:3000/detail/' + shopId,
+            mobileWebUrl: 'http://rebon.s3-website.ap-northeast-2.amazonaws.com/detail/' + shopId,
+            webUrl: 'http://rebon.s3-website.ap-northeast-2.amazonaws.com/detail/' + shopId,
           },
         },
         {
           title: '앱으로 이동',
           link: {
-            mobileWebUrl: 'http://localhost:3000/detail/' + shopId,
-            webUrl: 'http://localhost:3000/detail/' + shopId,
+            mobileWebUrl: 'http://rebon.s3-website.ap-northeast-2.amazonaws.com/detail/' + shopId,
+            webUrl: 'http://rebon.s3-website.ap-northeast-2.amazonaws.com/detail/' + shopId,
           },
         },
       ],
@@ -167,7 +136,7 @@ export default function Review({ shopName, shopImage, shopId }) {
             <div className="review-num">({reviewInfo.length})</div>
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
-              <Link to={`../post/${shopId}`} style={{ textDecoration: 'none' }}>
+              <Link to={`../post/${shopId}`} state={{ shopName: shopName }} style={{ textDecoration: 'none' }}>
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>
@@ -238,7 +207,6 @@ export default function Review({ shopName, shopImage, shopId }) {
             <div className="review-write-wrapper">
               <FontAwesomeIcon icon={faPenToSquare} className="review-write-icon" size="1x" />
               <Link to={`/post/${shopId}`} style={{ textDecoration: 'none' }}>
-
                 <span className="review-write-button">리뷰쓰기</span>
               </Link>
             </div>

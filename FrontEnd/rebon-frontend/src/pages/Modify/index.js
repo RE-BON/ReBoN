@@ -18,15 +18,16 @@ import { useLocation } from 'react-router';
 export default function Modify() {
   const location = useLocation().state;
   const locationId = location.id;
+  const locationName = location.name;
   const initialContent = location.content;
   const initialStar = location.star;
   const initialTip = location.tip;
   const initialImages = location.images;
-
   //별 state
-  const [pharase, setPharase] = useState('null');
+  const initialPharase = ['별로예요.', '그저 그래요.', '괜찮아요.', '좋아요.', '최고예요.'];
+  const [pharase, setPharase] = useState(initialPharase[initialStar - 1]);
   let state = pharase;
-  const [starRate, setStarRate] = useState(3);
+  const [starRate, setStarRate] = useState(initialStar);
 
   //나만의 꿀팁 state
   const [myTip, setMyTip] = useState(initialTip);
@@ -43,7 +44,7 @@ export default function Modify() {
   //이미지 state
   const [imageSrc, setImageSrc] = useState(''); //initialImages이부분 이미지 이름 다시
   const [file, setFile] = useState();
-  const [fileName, setFileName] = useState();
+  const [fileName, setFileName] = useState(initialImages);
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -106,13 +107,13 @@ export default function Modify() {
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [],
+          imageUrls: [fileName],
           star: starRate,
         },
         config
       )
       .then(function (response) {
-        console.log('PATCH했습니다!!!');
+        console.log(response);
       })
       .catch(function (error) {
         if (error.response.status === 400) {
@@ -162,6 +163,7 @@ export default function Modify() {
                   name="rating"
                   value="5"
                   id="rate1"
+                  checked={starRate === 5 ? true : false}
                 />
                 <label htmlFor="rate1">★</label>
                 <input
@@ -173,6 +175,7 @@ export default function Modify() {
                   name="rating"
                   value="4"
                   id="rate2"
+                  checked={starRate === 4 ? true : false}
                 />
                 <label htmlFor="rate2">★</label>
                 <input
@@ -184,6 +187,7 @@ export default function Modify() {
                   name="rating"
                   value="3"
                   id="rate3"
+                  checked={starRate === 3 ? true : false}
                 />
                 <label htmlFor="rate3">★</label>
                 <input
@@ -195,6 +199,7 @@ export default function Modify() {
                   name="rating"
                   value="2"
                   id="rate4"
+                  checked={starRate === 2 ? true : false}
                 />
                 <label htmlFor="rate4">★</label>
                 <input
@@ -206,6 +211,7 @@ export default function Modify() {
                   name="rating"
                   value="1"
                   id="rate5"
+                  checked={starRate === 1 ? true : false}
                 />
                 <label htmlFor="rate5">★</label>
               </fieldset>
@@ -217,19 +223,19 @@ export default function Modify() {
         {isMobile ? (
           <div className="post-tip-mobile">
             <div className="post-tip-box-mobile">나만의 꿀팁</div>
-            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder={`"${locationName}"에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)`} maxLength="500" />
           </div>
         ) : (
           <div className="post-tip">
             <div className="post-tip-box">나만의 꿀팁</div>
-            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder={`"${locationName}"에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)`} maxLength="500" />
           </div>
         )}
 
         <div className="post-tip-count">{myTip.length}/500</div>
 
         <div className="post-review">
-          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
+          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder={`"${locationName}"에 대한 리뷰를 적어주세요`} maxLength="500"></textarea>
           <div className="post-review-count">{myContent.length}/1000</div>
         </div>
 

@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
 import PostModal from './PostModal';
 // import Logout from '../Logout';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AWS from 'aws-sdk';
 import styled from 'styled-components';
@@ -15,11 +15,10 @@ import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
 
-
 export default function Post() {
   const location = useLocation();
   const shopId = Number(location.pathname.slice(6));
-  console.log(shopId);
+  const shopName = location.state.shopName;
 
   //별 state
   const [pharase, setPharase] = useState(null);
@@ -105,7 +104,7 @@ export default function Post() {
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [],
+          imageUrls: [fileName],
           star: starRate,
         },
         config
@@ -217,19 +216,19 @@ export default function Post() {
         {isMobile ? (
           <div className="post-tip-mobile">
             <div className="post-tip-box-mobile">나만의 꿀팁</div>
-            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder={`"${shopName}"에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)`} maxLength="500" />
           </div>
         ) : (
           <div className="post-tip">
             <div className="post-tip-box">나만의 꿀팁</div>
-            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder={`"${shopName}"에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)`} maxLength="500" />
           </div>
         )}
 
         <div className="post-tip-count">{myTip.length}/500</div>
 
         <div className="post-review">
-          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
+          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder={`"${shopName}"에 대한 리뷰를 적어주세요`} maxLength="500"></textarea>
           <div className="post-review-count">{myContent.length}/1000</div>
         </div>
 

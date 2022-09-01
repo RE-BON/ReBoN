@@ -87,14 +87,21 @@ export default function Footprint() {
                           )}
                           <div className="footprint-post">{info.content}</div>
                         </div>
-                        <div className="footprint-image-wrapper">
-                          <div className="footprint-image-sub-wrapper">
-                            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                          </div>
-                          <div className="footprint-image-sub-wrapper">
-                            <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />
-                          </div>
-                        </div>
+                          {info.images? info.images.map((item, index)  => {
+                            const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
+                            return (
+                              <div className="footprint-image-wrapper">
+
+                              <div className="footprint-image-sub-wrapper">
+                                <img className="footprint-image" alt="footprint-img" src= {url}/>
+                              </div>
+                              </div>
+
+                            );
+                          }) : ''}
+                          {/*<div className="footprint-image-sub-wrapper">*!/*/}
+                          {/*  <img className="footprint-image" alt="footprint-img" src= {url}/>*/}
+                          {/*</div>*/}
                       </div>
                       <div className="footprint-light-hr" />
                     </>
@@ -134,17 +141,18 @@ export default function Footprint() {
                         {/*      {}*/}
                         {/*    </div>*/}
                         {/*) : ''}*/}
-                        {info.image ? (
-                          <div className="footprint-image-wrapper">
-                            {info.map((item, index) => {
-                              return (
-                                <div className="footprint-image-sub-wrapper">
-                                  <img className="footprint-image" alt="footprint-img" src={item.url} />
-                                </div>
-                              );
-                            })}
-                          </div>
-                        ):''}
+                        {info.images? info.images.map((item, index)  => {
+                          const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
+                          return (
+                            <div className="footprint-image-wrapper">
+
+                              <div className="footprint-image-sub-wrapper">
+                                <img className="footprint-image" alt="footprint-img" src= {url}/>
+                              </div>
+                            </div>
+
+                          );
+                        }) : ''}
                         {/*<div className="footprint-image-wrapper">*/}
                         {/*  <div className="footprint-image-sub-wrapper">*/}
                         {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
