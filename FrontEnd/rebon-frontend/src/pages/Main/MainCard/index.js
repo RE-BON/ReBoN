@@ -5,12 +5,12 @@ import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
-import Loading from "../../Login/Loading";
+import Loading from '../../Login/Loading';
 
-export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
-  const [like, setLike] = useState(false);
+export default function MainCard({ tagId, cateId, data, checked, open, sort, like, changeLike }) {
   const [mainInfo, setMainInfo] = useState(null);
   const [subId, setSubId] = useState();
+  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -18,19 +18,63 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
     setTimeout(function () {
       if (data) {
         var url = 'http://3.34.139.61:8080/api/shops?tag=' + tagId + '&category=' + cateId + '&subCategories=' + checked + '&open=' + open + '&sort=' + sort + '%2Cdesc';
+
         axios.get(url).then((response) => {
           setMainInfo(response.data);
           setReady(true);
         });
       }
-    }, 400);
+    }, 1200);
   }, [data, checked, open, sort, cateId]);
 
-  const likeClick = ({ sort }) => {
-    if (like) {
-      setLike(false);
+  const likeClick = (shopId, idx, e) => {
+    if (like[idx]) {
+      changeLike(idx);
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      if (token) {
+        var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/unlike';
+        axios
+          .post(
+            url,
+            {
+              likeCount: 0,
+              like: false,
+            },
+            config
+          )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     } else {
-      setLike(true);
+      changeLike(idx);
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      if (token) {
+        var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/like';
+        axios
+          .post(
+            url,
+            {
+              likeCount: 1,
+              like: true,
+            },
+            config
+          )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
   };
 
@@ -44,11 +88,13 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
   `;
 
   return (
-    <>{
-      ready ?
-        mainInfo
-          ? mainInfo.map((item, idx) => {
+    <>
+      {ready ? (
+        mainInfo ? (
+          mainInfo.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
+            var star = item.star.toFixed(1);
+
             return (
               <div className="mainCard">
                 {item.image ? (
@@ -60,7 +106,25 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
                   />
                 )}
                 <div className="likeBtn-main">
-                  {item.like ? <FaHeart className="heart-icon" md={8} size="22" onClick={likeClick} /> : <FiHeart className="heart-icon-fi" md={8} size="22" onClick={likeClick} />}
+                  {like[idx] ? (
+                    <FaHeart
+                      className="heart-icon"
+                      md={8}
+                      size="22"
+                      onClick={(e) => {
+                        likeClick(item.id, idx, e);
+                      }}
+                    />
+                  ) : (
+                    <FiHeart
+                      className="heart-icon-fi"
+                      md={8}
+                      size="22"
+                      onClick={(e) => {
+                        likeClick(item.id, idx, e);
+                      }}
+                    />
+                  )}
                 </div>
 
                 <div className="mainCard-bottom">
@@ -68,7 +132,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
                     <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
                       <div className="placeName-main">{item.name}</div>
                     </Link>
-                    <div className="starNum">{item.star}</div>
+                    <div className="starNum">{star}</div>
                   </div>
                   {/* <div className="">
                         {item.tags.map((tag) => (
@@ -79,10 +143,14 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort }) {
               </div>
             );
           })
-          :  <Loading/>
-        :
-    mainInfo ? (<Loading/>) : ''}
-
+        ) : (
+          <Loading />
+        )
+      ) : mainInfo ? (
+        <Loading />
+      ) : (
+        ''
+      )}
 
       {/*{*/}
       {/*}*/}
