@@ -252,12 +252,12 @@ export default function Modify() {
             }}
           />
           <div className="post-attach-contents">
-            {imageSrc === '' ? (
+            {fileName === '' ? (
               <label className="post-attach-image" for="input-file">
                 <FontAwesomeIcon icon={faPlus} size="1x" />
               </label>
             ) : (
-              <img className="previewImg" src={imageSrc} />
+              <img className="previewImg" src={`https://rebon.s3.ap-northeast-2.amazonaws.com/${fileName}`} />
             )}
 
             <div className="post-attach-count">1/10</div>
