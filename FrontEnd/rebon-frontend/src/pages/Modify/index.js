@@ -18,6 +18,7 @@ import { useLocation } from 'react-router';
 export default function Modify() {
   const location = useLocation().state;
   const locationId = location.id;
+  const locationName = location.name;
   const initialContent = location.content;
   const initialStar = location.star;
   const initialTip = location.tip;
@@ -223,19 +224,19 @@ export default function Modify() {
         {isMobile ? (
           <div className="post-tip-mobile">
             <div className="post-tip-box-mobile">나만의 꿀팁</div>
-            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder={`"${locationName}"에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)`} maxLength="500" />
           </div>
         ) : (
           <div className="post-tip">
             <div className="post-tip-box">나만의 꿀팁</div>
-            <input onChange={onChangeMyTip} value={myTip} placeholder="''마라도 횟집''에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)" maxLength="500" />
+            <input onChange={onChangeMyTip} value={myTip} placeholder={`"${locationName}"에 대한 나만의 꿀팁을 적어주세요(ex.2층 창가자리 뷰가 예뻐요)`} maxLength="500" />
           </div>
         )}
 
         <div className="post-tip-count">{myTip.length}/500</div>
 
         <div className="post-review">
-          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder="  ''마라도 횟집''에 대한 리뷰를 적어주세요" maxLength="500"></textarea>
+          <textarea rows="6" onChange={onChangeMyContent} value={myContent} placeholder={`"${locationName}"에 대한 리뷰를 적어주세요`} maxLength="500"></textarea>
           <div className="post-review-count">{myContent.length}/1000</div>
         </div>
 
