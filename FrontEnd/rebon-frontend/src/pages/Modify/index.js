@@ -23,7 +23,6 @@ export default function Modify() {
   const initialStar = location.star;
   const initialTip = location.tip;
   const initialImages = location.images;
-
   //별 state
   const initialPharase = ['별로예요.', '그저 그래요.', '괜찮아요.', '좋아요.', '최고예요.'];
   const [pharase, setPharase] = useState(initialPharase[initialStar - 1]);
@@ -45,7 +44,7 @@ export default function Modify() {
   //이미지 state
   const [imageSrc, setImageSrc] = useState(''); //initialImages이부분 이미지 이름 다시
   const [file, setFile] = useState();
-  const [fileName, setFileName] = useState();
+  const [fileName, setFileName] = useState(initialImages);
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -108,7 +107,7 @@ export default function Modify() {
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [],
+          imageUrls: [fileName],
           star: starRate,
         },
         config

@@ -19,7 +19,6 @@ export default function Post() {
   const location = useLocation();
   const shopId = Number(location.pathname.slice(6));
   const shopName = location.state.shopName;
-  console.log(shopId);
 
   //별 state
   const [pharase, setPharase] = useState(null);
@@ -105,7 +104,7 @@ export default function Post() {
         {
           content: myContent,
           tip: myTip,
-          imageUrls: [],
+          imageUrls: [fileName],
           star: starRate,
         },
         config
