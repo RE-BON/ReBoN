@@ -37,17 +37,18 @@ export default function SNSButtons() {
   }, []);
 
   const googleLoginHandler = () => {
-    const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://localhost:3000/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+    const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
     window.location.href = GOOGLE_LOGIN_URL;
   };
 
   const naverLoginHandler = () => {
+    // const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading`;
     const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://localhost:3000/loading`;
     window.location.href = NAVER_LOGIN_URL;
   };
 
   const kakaoLoginHandler = () => {
-    const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=http://localhost:3000/loading`;
+    const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading`;
     window.location.href = KAKAO_LOGIN_URL;
   };
 
