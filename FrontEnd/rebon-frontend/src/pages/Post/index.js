@@ -81,12 +81,12 @@ export default function Post() {
     const promise = upload.promise();
     promise.then(
       function () {
-        // 이미지 업로드 성공
+        // alert('이미지 업로드 성공');
         // setOpacity(0);
         // setIsOpen(!isOpen);
       },
       function (err) {
-        // 이미지 업로드 실패
+        console.log(err);
         alert('이미지 업로드 실패');
       }
     );
@@ -285,7 +285,7 @@ export default function Post() {
               >
                 <div className="post-modal-wrapper">
                   <button className="close" onClick={toggleModal}>
-                    <Link to="/mypage/footprint" style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <Link to={`/detail/${shopId}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       <FontAwesomeIcon icon={faXmark} />
                     </Link>
                   </button>

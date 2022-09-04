@@ -51,6 +51,7 @@ export default function Edit() {
       )
       .then(function (response) {
         // -- 이 200일 경우
+        console.log('post!', name);
         setAlertState({ display: 'block', check: 'success', message: '사용 가능한 아이디 입니다' });
       })
       .catch(function (error) {
@@ -70,7 +71,7 @@ export default function Edit() {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    console.log("name is ",name," userAgreed is ", userAgreed);
+    console.log('name is ', name, ' userAgreed is ', userAgreed);
     axios
       .patch(
         'http://3.34.139.61:8080/api/members',
@@ -82,14 +83,26 @@ export default function Edit() {
       )
       .then(function (response) {
         // -- 이 200일 경우
-        window.location.reload()
+        window.location.reload();
         // setAlertState({ display: 'block', check: 'success', message: '사용 가능한 아이디 입니다' });
+        axios
+          .get('http://3.34.139.61:8080/api/members', config)
+          .then((response) => {
+            setUserInfo(response.data);
+            setName(response.data.nickName);
+            setUserAgreed(response.data.agreed);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch(function (error) {
+        console.log(error);
+        console.log(error.message);
         // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
         // setName(userInfo);
         // setAlertState({ display: 'block', check: 'error', message: '이미 있는 아이디 입니다' });
-      })
+      });
   };
 
   return (
@@ -112,12 +125,7 @@ export default function Edit() {
         <div className="edit-info-title">닉네임</div>
         <div className="edit-info-name">
           <input className="name-input" value={name} placeholder="한글로 공백없이 입력해주세요." onChange={onChangeName}></input>
-          <div
-            className="name-button"
-            onClick={() => {
-              checkNick();
-            }}
-          >
+          <div className="name-button" onClick={checkNick}>
             중복확인
           </div>
         </div>
