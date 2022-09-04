@@ -39,7 +39,7 @@ export default function PrivacyModal() {
         </div>
 
         <div className="terms-select">
-          <input type="checkbox" id="terms-select" name="marcketing" />
+          <input type="checkbox" id="terms-select" name="marcketing" />0
           <label for="terms-select">
             <FontAwesomeIcon icon={faCheck} />
           </label>
