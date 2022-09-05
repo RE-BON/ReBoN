@@ -22,21 +22,23 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
     var accoArr = [];
     var cafeArr = [];
 
-    const noRest = [74, 91, 29];
-    if (!noRest.includes(data.id)) {
-      var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
-      axios
-        .get(url, config)
-        .then((response) => {
-          const restState = { id: data.id, shop: response.data };
-          restArr.push(restState);
-        })
-        .catch((error) => {
-          if (error.response.status === 500) {
-            restArr.push([]);
-          } else console.log('restShop error');
-        });
-    }
+    restCategory.map((data, index) => {
+      const noRest = [74, 91, 29];
+      if (!noRest.includes(data.id)) {
+        var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
+        axios
+          .get(url, config)
+          .then((response) => {
+            const restState = { id: data.id, shop: response.data };
+            restArr.push(restState);
+          })
+          .catch((error) => {
+            if (error.response.status === 500) {
+              restArr.push([]);
+            } else console.log('restShop error');
+          });
+      }
+    });
 
     setRestData(restArr);
 
