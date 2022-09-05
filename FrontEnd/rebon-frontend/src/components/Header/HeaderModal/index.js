@@ -5,6 +5,7 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faXmark } from '@fortawesome/free-solid-svg-icons';
 // import SearchBar from './../../../../components/Header/SearchModal/SearchBar';
+import LogoutModal from './LogoutModal';
 import '../../../styles/header-modal.css';
 
 import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
@@ -66,7 +67,7 @@ export default function HeaderModal() {
             <Link to="/logout" style={{ color: 'inherit', textDecoration: 'none' }}>
               <div onClick={toggleModal}>
                 <img src="/image/logout-black.png" alt="user" className="header-modal-logout" />
-                로그아웃
+                <LogoutModal />
               </div>
             </Link>
           </Dropdown.Item>

@@ -114,8 +114,8 @@ export default function Post() {
         config
       )
       .then(function (response) {
-        console.log(response.data);
-        console.log('shopId', shopId);
+        // console.log(response.data);
+        // console.log('shopId', shopId);
       })
       .catch(function (error) {
         if (error.response.status === 400) {
