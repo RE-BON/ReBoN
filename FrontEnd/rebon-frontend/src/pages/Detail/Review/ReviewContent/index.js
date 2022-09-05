@@ -29,16 +29,23 @@ export default function ReviewContent({ data, sort, toggleOn }) {
     const reviewList = data.filter((element, index) => {
       return element.liked===true;
     });
+    const result = reviewList.map(review => review.id);
     console.log("original: ",data);
-    console.log("filter: ",reviewList);
-    setFilteredList(reviewList);
-    setAllLikeData(reviewList);
+    console.log("filter: ",result);
+    setFilteredList(result);
+    setAllLikeData(result);
     },[]);
 
   const onToggle = (reviewId) => {
     if (alllikeData.includes(reviewId)) {
+      console.log("delete~")
+      console.log("alllike: ",alllikeData);
+      console.log("filter: ",filteredList);
       deleteLike(reviewId);
     } else {
+      console.log("add~")
+      console.log("alllike: ",alllikeData);
+      console.log("filter: ",filteredList)
       addLike(reviewId);
     }
   };
@@ -104,7 +111,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
                             <span className="review-like-num">{info.empathyCount}</span>
@@ -120,7 +127,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)} >
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
                             <span className="review-like-num">{info.empathyCount-1}</span>
@@ -182,7 +189,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
                             <span className="review-like-num">{info.empathyCount}</span>
@@ -198,7 +205,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
                             <span className="review-like-num">{info.empathyCount-1}</span>
@@ -260,7 +267,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
                             <span className="review-like-num">{info.empathyCount}</span>
@@ -276,7 +283,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
                             <span className="review-like-num">{info.empathyCount-1}</span>
@@ -338,7 +345,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     {alllikeData.includes(info.id) ?
                       filteredList.includes(info.id) ? (
                         <>
-                          <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                          <button className="review-button" onClick={() => onToggle(info.id)}>
                             <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                           </button>
                           <span className="review-like-num">{info.empathyCount}</span>
@@ -354,7 +361,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                      :
                       filteredList.includes(info.id) ? (
                         <>
-                          <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                          <button className="review-button" onClick={() => onToggle(info.id)}>
                             <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                           </button>
                           <span className="review-like-num">{info.empathyCount-1}</span>
