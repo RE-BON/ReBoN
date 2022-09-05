@@ -14,11 +14,15 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
+import Login from '../Login';
 
 export default function Post() {
   const location = useLocation();
   const shopId = Number(location.pathname.slice(6));
   const shopName = location.state.shopName;
+
+  //로그인 state
+  const [loginState, setLoginState] = useState(false);
 
   //별 state
   const [pharase, setPharase] = useState(null);
@@ -116,6 +120,10 @@ export default function Post() {
       .catch(function (error) {
         if (error.response.status === 400) {
           alert(error.response.data.message);
+        } else if (error.response.status === 401) {
+          setLoginState(false);
+          alert(error.response.data.message);
+          document.location.href = '/login ';
         } else console.log(error);
       });
   };
@@ -263,7 +271,7 @@ export default function Post() {
             <div
               className="post-modal-click"
               onClick={() => {
-                if (!(!myContent || !starRate)) {
+                if (!(!myContent || !starRate || loginState)) {
                   imgUpload();
                   toggleModal();
                 }

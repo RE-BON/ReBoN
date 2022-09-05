@@ -52,10 +52,12 @@ export default function Edit() {
       .then(function (response) {
         // -- 이 200일 경우
         console.log('post!', name);
+        console.log(response);
         setAlertState({ display: 'block', check: 'success', message: '사용 가능한 아이디 입니다' });
       })
       .catch(function (error) {
         // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
+        alert(error.response.data.message);
         setName(userInfo);
         setAlertState({ display: 'block', check: 'error', message: '이미 있는 아이디 입니다' });
       });
