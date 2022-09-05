@@ -29,11 +29,10 @@ export default function ReviewContent({ data, sort, toggleOn }) {
     const reviewList = data.filter((element, index) => {
       return element.liked===true;
     });
-    console.log("original: ",data);
-    console.log("filter: ",reviewList);
-    setFilteredList(reviewList);
-    setAllLikeData(reviewList);
-    },[toggleOn]);
+    const result = reviewList.map(review => review.id);
+    setFilteredList(result);
+    setAllLikeData(result);
+    },[]);
 
   const onToggle = (reviewId) => {
     if (alllikeData.includes(reviewId)) {
@@ -104,7 +103,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
                             <span className="review-like-num">{info.empathyCount}</span>
@@ -120,7 +119,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)} >
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
                             <span className="review-like-num">{info.empathyCount-1}</span>
@@ -182,7 +181,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
                             <span className="review-like-num">{info.empathyCount}</span>
@@ -198,7 +197,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
                             <span className="review-like-num">{info.empathyCount-1}</span>
@@ -260,7 +259,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                       {alllikeData.includes(info.id) ?
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                             </button>
                             <span className="review-like-num">{info.empathyCount}</span>
@@ -276,7 +275,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                         :
                         filteredList.includes(info.id) ? (
                           <>
-                            <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                            <button className="review-button" onClick={() => onToggle(info.id)}>
                               <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                             </button>
                             <span className="review-like-num">{info.empathyCount-1}</span>
@@ -338,7 +337,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     {alllikeData.includes(info.id) ?
                       filteredList.includes(info.id) ? (
                         <>
-                          <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                          <button className="review-button" onClick={() => onToggle(info.id)}>
                             <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
                           </button>
                           <span className="review-like-num">{info.empathyCount}</span>
@@ -354,7 +353,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                      :
                       filteredList.includes(info.id) ? (
                         <>
-                          <button className="review-button" onClick={() => onToggle(info.id)} disabled>
+                          <button className="review-button" onClick={() => onToggle(info.id)}>
                             <FontAwesomeIcon icon={regularHeart} className="review-like-icon" size="1x" color="#FF6B6C" />
                           </button>
                           <span className="review-like-num">{info.empathyCount-1}</span>

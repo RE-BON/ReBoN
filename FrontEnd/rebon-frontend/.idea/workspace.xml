@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="615f973f-73a2-4d17-a1c7-a6d338eca78b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Carousel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Carousel/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/ReviewContent/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Review/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Detail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Mypage/Footprint/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Mypage/Footprint/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/detail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/security" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/security" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +19,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectId" id="2E1ncwFL20g7QvFqauLlYzapVTU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -57,7 +50,6 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="615f973f-73a2-4d17-a1c7-a6d338eca78b" name="Changes" comment="" />
       <created>1661772043306</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -66,7 +58,7 @@
       <workItem from="1661818170069" duration="13274000" />
       <workItem from="1661846005055" duration="2572000" />
       <workItem from="1661935899721" duration="876000" />
-      <workItem from="1662174915906" duration="7906000" />
+      <workItem from="1662342670111" duration="2268000" />
     </task>
     <servers />
   </component>
