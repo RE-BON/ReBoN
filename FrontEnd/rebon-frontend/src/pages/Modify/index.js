@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
-import PostModal from './PostModal';
+import PostModal from '../Post/PostModal';
 // import Logout from '../Logout';
 import { useState } from 'react';
 import axios from 'axios';

@@ -213,10 +213,14 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
   );
 }
 const StyledModal = Modal.styled`
-  width: 21rem;
-  height: 16rem;
-  padding : 20px;
-  border-radius:20px;
-  background-color: white;
-  opacity: ${(props) => props.opacity};
-  transition : all 0.3s ease-in-out;`;
+width: 21rem;
+height: 16rem;
+background-color: white;
+padding : 20px;
+border-radius:20px;
+opacity: ${(props) => props.opacity};
+transition : all 0.3s ease-in-out;
+  `;
+// const StyledModal = Modal.styled`
+
+// `;
