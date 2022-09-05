@@ -18,23 +18,28 @@ export default function PrivacyModal() {
           <FontAwesomeIcon icon={faXmark} size="1x" />
         </div>
         <div className="terms-modal-contents">
-          Eleven(1절)
+          "RE-BON"은 본인인증서비스 제공을 위해 본인으로부터 아래의 개인정보를 입력받으며, 입력받은 개인정보의 이용 및 활용을 위해 다음의 사항에 대하여 본인으로부터 동의를
+          받습니다.
           <br />
           <br />
-          따분한 나의 눈빛이 무표정했던 얼굴이 널 보며 빛나고 있어 널 담은 눈동자는 odd 내 안에 빼곡하게 피어나는 blue 내가 지금 느끼는 이 감정들은 true 내 입술을 간지럽힌 낯선 그
-          이름 난 몰랐어 내 맘이 이리 다채로운지 긴 꿈을 꾸게 해 이 방은 작은 heaven 춤을 추곤 해 실컷 어지러울 만큼 Oh my, oh my God 한 칸 더 채우고 있어 잘 봐 one, two, three,
-          four, five, six, seven You make me feel like eleven
+          1. 입력받는 정보
+          <br />
+          가.정보항목
+          <br />
+          인증 : 성명, 이메일 아이디
+          <br />
+          나.입력방법 본인인증 요청시 서비스 페이지 또는 본인인증 팝업창 페이지에서 이용자가 직접 입력
           <br />
           <br />
-          Eleven(2절) <br />
-          투명한 너와 나의 사이 가만히 들여다보다 일렁인 물결 속으로 더 빠져드는 걸 그날 향기로운 보랏빛의 mood 셀 수 없이 반복해도 기분 좋은 꿈 감히 누가 이렇게 날 설레게 할 줄 난
-          몰랐어 내 맘이 이리 다채로운지 긴 꿈을 꾸게 해 이 방은 작은 heaven 춤을 추곤 해 실컷 어지러울 만큼 Oh my, oh my God 한 칸 더 채우고 있어 잘 봐 one, two, three, four,
-          five, six, seven You make me feel like eleven (hey) 내 앞에 있는 너를 (hey) 그 눈에 비친 나를 (그 눈에 비친 나를) Aya, aya, aya (가만히 바라봐) 내 앞에 있는 너를 그 눈에
-          비친 나를 가만히 바라봐
+          2. 개인정보의 이용목적과 수집 및 제공 정보 가.이용 목적 서비스(회원가입, ID/PW찾기 등)이용을 위한 본인인증 신용카드 명의자 확인
+          <br /> 3. 개인정보의 보유 및 이용기간 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로
+          명기한 기간 동안 보유합니다. <br />
+          가.회사 내부 방침에 의한 정보보유 사유 본인확인 발생 및 신고기록, 보유 이유: 부정 이용 방지 및 민원 처리 보유 기간: 5년 나.관계법령에 의한 정보보유 사유 이용자 불만 또는
+          분쟁 처리에 관한 기록 보유 이유: 소비자보호에 관한 법률 보유 기간: 3년
         </div>
 
         <div className="terms-select">
-          <input type="checkbox" id="terms-select" name="marcketing" />
+          <input type="checkbox" id="terms-select" name="marcketing" />0
           <label for="terms-select">
             <FontAwesomeIcon icon={faCheck} />
           </label>

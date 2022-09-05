@@ -119,7 +119,7 @@ export default function Main({ restCategory, accoCategory, cafeCategory, restDat
                   <BestCard data={restData} checked={restChecked} />
                 </div>
 
-                <Divider cateId={1} data={restData} tagId={location.state.item.id}  checked={restChecked} />
+                <Divider cateId={1} data={restData} tagId={location.state.item.id} checked={restChecked} />
               </div>
             </TabPanel>
             <TabPanel className="TabPanel" value={value} index={1}>
