@@ -16,9 +16,9 @@ import Logout from './pages/Logout';
 // import Terms from './pages/Terms';
 import Loding from './pages/Login/Loading';
 /*추후변경필요*/
+import TermsModal from './pages/Join/Terms/termsModal';
 import TermsMarketing from './pages/Join/Terms/marketingModal';
 import TermsPrivacy from './pages/Join/Terms/privacyModal';
-import TermsModal from './pages/Join/Terms/termsModal';
 
 function Router() {
   return (
@@ -38,6 +38,8 @@ function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/join/register" element={<Terms />} />
         <Route path="/termsModal" element={<TermsModal />} />
+        <Route path="/privacyModal" element={<TermsPrivacy />} />
+        <Route path="/marketingModal" element={<TermsMarketing />} />
         <Route path="/" element={<Search />} />
         <Route path="/loading" element={<Loding />} />
       </Routes>

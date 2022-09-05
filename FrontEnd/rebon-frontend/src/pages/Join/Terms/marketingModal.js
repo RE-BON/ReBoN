@@ -47,7 +47,9 @@ export default function MarcketingModal() {
           </label>
           위 사항을 모두 확인했고, 서비스 이용약관에 동의합니다
         </div>
-        <div className="terms-modal-btn">확인</div>
+        <div className="terms-modal-btn" onClick={goBack}>
+          확인
+        </div>
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ export default function Terms() {
   const checkNick = () => {
     axios
       .post('http://3.34.139.61:8080/api/members/nickname/check-duplicate', {
-        nickname: { name },
+        nickname: name,
       })
       .then(function (response) {
         // -- 이 200일 경우
@@ -123,7 +123,7 @@ export default function Terms() {
                 <FontAwesomeIcon icon={faCheck} />
               </label>
               개인정보 취급방식(필수)
-              <Link to="/termsModal" style={{ color: 'inherit', textDecoration: 'none' }}>
+              <Link to="/privacyModal" style={{ color: 'inherit', textDecoration: 'none' }}>
                 <IoIosArrowForward />
               </Link>
             </div>
@@ -134,7 +134,7 @@ export default function Terms() {
                 <FontAwesomeIcon icon={faCheck} />
               </label>
               마케팅 수신동의(선택)
-              <Link to="/termsModal" style={{ marginLeft: '1em', color: 'inherit', textDecoration: 'none' }}>
+              <Link to="/marketingModal" style={{ marginLeft: '1em', color: 'inherit', textDecoration: 'none' }}>
                 <IoIosArrowForward />
               </Link>
             </div>

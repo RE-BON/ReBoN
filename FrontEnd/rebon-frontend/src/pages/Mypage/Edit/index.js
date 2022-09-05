@@ -57,8 +57,8 @@ export default function Edit() {
       })
       .catch(function (error) {
         // 오류발생시 실행 -- 이 400일 경우, alert error 출력, 닉네임 input 공백,
-        alert(error.response.data.message);
-        setName(userInfo);
+        // alert(error.response.data.message);
+        setName(userInfo.nickName);
         setAlertState({ display: 'block', check: 'error', message: '이미 있는 아이디 입니다' });
       });
   };

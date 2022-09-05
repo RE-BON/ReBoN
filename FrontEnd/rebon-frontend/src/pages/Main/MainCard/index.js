@@ -112,6 +112,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
   const FadingBackground = styled(BaseModalBackground)`
     opacity: ${(props) => props.opacity};
     transition: all 0.3s ease-in-out;
+    background: rgba(0, 0, 0, 0.2);
   `;
 
   // const StyledLink = styled(Link)`
@@ -191,7 +192,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                         <FontAwesomeIcon icon={faXmark} />
                       </button>
                       <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
-                      <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요 :)</div>
+                      <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요:)</div>
                     </div>
                   </StyledModal>
                 </ModalProvider>

@@ -32,20 +32,27 @@ export default function PrivacyModal() {
           <br />
           <br />
           2. 개인정보의 이용목적과 수집 및 제공 정보 가.이용 목적 서비스(회원가입, ID/PW찾기 등)이용을 위한 본인인증 신용카드 명의자 확인
+          <br />
           <br /> 3. 개인정보의 보유 및 이용기간 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용목적이 달성되면 지체없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로
           명기한 기간 동안 보유합니다. <br />
-          가.회사 내부 방침에 의한 정보보유 사유 본인확인 발생 및 신고기록, 보유 이유: 부정 이용 방지 및 민원 처리 보유 기간: 5년 나.관계법령에 의한 정보보유 사유 이용자 불만 또는
-          분쟁 처리에 관한 기록 보유 이유: 소비자보호에 관한 법률 보유 기간: 3년
+          가.회사 내부 방침에 의한 정보보유 사유 본인확인 발생 및 신고기록,
+          <br /> 보유 이유: 부정 이용 방지 및 민원 처리 <br />
+          보유 기간: 5년 나.관계법령에 의한 정보보유 사유 이용자 불만 또는 분쟁 처리에 관한 기록 <br />
+          보유 이유: 소비자보호에 관한 법률
+          <br />
+          보유 기간: 3년
         </div>
 
         <div className="terms-select">
-          <input type="checkbox" id="terms-select" name="marcketing" />0
+          <input type="checkbox" id="terms-select" name="marcketing" />
           <label for="terms-select">
             <FontAwesomeIcon icon={faCheck} />
           </label>
           위 사항을 모두 확인했고, 서비스 이용약관에 동의합니다
         </div>
-        <div className="terms-modal-btn">확인</div>
+        <div className="terms-modal-btn" onClick={goBack}>
+          확인
+        </div>
       </div>
     </div>
   );
