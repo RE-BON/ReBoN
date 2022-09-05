@@ -24,6 +24,8 @@ export default function Footprint() {
         .get('http://3.34.139.61:8080/api/my-reviews', config)
         .then((response) => {
           setFootInfo(response.data);
+          console.log("name is ",response.data[0].images[0] === null)
+
         })
         .catch((error) => {
           if (error.response.status === 401) return Logout;
@@ -42,11 +44,9 @@ export default function Footprint() {
       axios
         .delete(`http://3.34.139.61:8080/api/reviews/${targetId}`, config)
         .then(function (response) {
-          console.log('DELETE: ', response.data);
           axios
             .get('http://3.34.139.61:8080/api/my-reviews', config)
             .then((response) => {
-              console.log('GET: ', response.data);
               setFootInfo(response.data);
             })
             .catch((error) => {
@@ -87,7 +87,7 @@ export default function Footprint() {
                           )}
                           <div className="footprint-post">{info.content}</div>
                         </div>
-                          {info.images? info.images.map((item, index)  => {
+                          {info.images && info.images[0]!==null? info.images.map((item, index)  => {
                             const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
                             return (
                               <div className="footprint-image-wrapper">
@@ -99,10 +99,11 @@ export default function Footprint() {
 
                             );
                           }) : ''}
-                          {/*<div className="footprint-image-sub-wrapper">*!/*/}
-                          {/*  <img className="footprint-image" alt="footprint-img" src= {url}/>*/}
-                          {/*</div>*/}
+
                       </div>
+                      {/*<div className="footprint-image-sub-wrapper">*!/*/}
+                      {/*  <img className="footprint-image" alt="footprint-img" src= {url}/>*/}
+                      {/*</div>*/}
                       <div className="footprint-light-hr" />
                     </>
                   ))
@@ -141,32 +142,17 @@ export default function Footprint() {
                         {/*      {}*/}
                         {/*    </div>*/}
                         {/*) : ''}*/}
-                        {info.images? info.images.map((item, index)  => {
+                        {info.images && info.images[0]!==null ? info.images.map((item, index)  => {
                           const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
                           return (
                             <div className="footprint-image-wrapper">
-
                               <div className="footprint-image-sub-wrapper">
-                                <img className="footprint-image" alt="footprint-img" src= {url}/>
+                                <img className="footprint-image" alt="사진을 가져오지 못했습니다." src= {url}/>
                               </div>
                             </div>
 
                           );
                         }) : ''}
-                        {/*<div className="footprint-image-wrapper">*/}
-                        {/*  <div className="footprint-image-sub-wrapper">*/}
-                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
-                        {/*  </div>*/}
-                        {/*  <div className="footprint-image-sub-wrapper">*/}
-                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
-                        {/*  </div>*/}
-                        {/*  <div className="footprint-image-sub-wrapper">*/}
-                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
-                        {/*  </div>*/}
-                        {/*  <div className="footprint-image-sub-wrapper">*/}
-                        {/*    <img className="footprint-image" alt="footprint-img" src="../../../../image/detail.png" />*/}
-                        {/*  </div>*/}
-                        {/*</div>*/}
                       </div>
                       <div className="footprint-light-hr" />
                     </>

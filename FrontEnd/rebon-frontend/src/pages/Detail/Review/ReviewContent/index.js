@@ -33,7 +33,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
     console.log("filter: ",reviewList);
     setFilteredList(reviewList);
     setAllLikeData(reviewList);
-    },[]);
+    },[toggleOn]);
 
   const onToggle = (reviewId) => {
     if (alllikeData.includes(reviewId)) {
@@ -88,7 +88,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                     ''
                   )}
                   <div className="review-post">{info.content}</div>
-                  {info.images? info.images.map((item, index)  => {
+                  {info.images && info.images[0]!==null ? info.images.map((item, index)  => {
                     const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
                     return (
                       <div className="footprint-image-wrapper">
@@ -166,7 +166,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
 
                   <div className="review-post">{info.content}</div>
-                  {info.images? info.images.map((item, index)  => {
+                  {info.images && info.images[0]!==null ? info.images.map((item, index)  => {
                     const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
                     return (
                       <div className="footprint-image-wrapper">
@@ -244,7 +244,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
 
                   <div className="review-post">{info.content}</div>
-                  {info.images? info.images.map((item, index)  => {
+                  {info.images && info.images[0]!==null? info.images.map((item, index)  => {
                     const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
                     return (
                       <div className="footprint-image-wrapper">
@@ -321,7 +321,7 @@ export default function ReviewContent({ data, sort, toggleOn }) {
                   )}
 
                   <div className="review-post">{info.content}</div>
-                  {info.images? info.images.map((item, index)  => {
+                  {info.images && info.images[0]!==null? info.images.map((item, index)  => {
                     const url = `https://rebon.s3.ap-northeast-2.amazonaws.com/${item}`
                     return (
                       <div className="footprint-image-wrapper">
