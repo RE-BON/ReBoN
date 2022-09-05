@@ -52,7 +52,7 @@ export default function Detail() {
 
             {shopInfo?.name ? <h3 className="detail-shop-name">{shopInfo?.name}</h3> : ''}
             <div className="detail-star-wrapper">
-              {shopInfo?.star === 0 ? (
+              {shopInfo?.star.toFixed() == 0 ? (
                 <>
                   <label className="detail-star">★</label>
                   <label className="detail-star">★</label>
@@ -60,7 +60,7 @@ export default function Detail() {
                   <label className="detail-star">★</label>
                   <label className="detail-star">★</label>
                 </>
-              ) : shopInfo?.star === 1 ? (
+              ) : shopInfo?.star.toFixed() == 1 ? (
                 <>
                   <label className="detail-star-point">★</label>
                   <label className="detail-star">★</label>
@@ -68,7 +68,7 @@ export default function Detail() {
                   <label className="detail-star">★</label>
                   <label className="detail-star">★</label>
                 </>
-              ) : shopInfo?.star === 2 ? (
+              ) : shopInfo?.star.toFixed() == 2 ? (
                 <>
                   <label className="detail-star-point">★</label>
                   <label className="detail-star-point">★</label>
@@ -76,7 +76,7 @@ export default function Detail() {
                   <label className="detail-star">★</label>
                   <label className="detail-star">★</label>
                 </>
-              ) : shopInfo?.star === 3 ? (
+              ) : shopInfo?.star.toFixed() == 3 ? (
                 <>
                   <label className="detail-star-point">★</label>
                   <label className="detail-star-point">★</label>
@@ -84,7 +84,7 @@ export default function Detail() {
                   <label className="detail-star">★</label>
                   <label className="detail-star">★</label>
                 </>
-              ) : shopInfo?.star === 4 ? (
+              ) : shopInfo?.star.toFixed() == 4 ? (
                 <>
                   <label className="detail-star-point">★</label>
                   <label className="detail-star-point">★</label>
@@ -92,7 +92,7 @@ export default function Detail() {
                   <label className="detail-star-point">★</label>
                   <label className="detail-star">★</label>
                 </>
-              ) : shopInfo?.star === 5 ? (
+              ) : shopInfo?.star.toFixed() == 5 ? (
                 <>
                   <label className="detail-star-point">★</label>
                   <label className="detail-star-point">★</label>
@@ -101,15 +101,9 @@ export default function Detail() {
                   <label className="detail-star-point">★</label>
                 </>
               ) : (
-                <>
-                  <label className="detail-star-point">★</label>
-                  <label className="detail-star-point">★</label>
-                  <label className="detail-star-point">★</label>
-                  <label className="detail-star-point">★</label>
-                  <label className="detail-star-point">★</label>
-                </>
+               ''
               )}
-              <div className="detail-shop-rating">{shopInfo?.star}.0</div>
+              <div className="detail-shop-rating">{shopInfo?.star.toFixed()}.0</div>
             </div>
           </div>
 
@@ -133,7 +127,7 @@ export default function Detail() {
             </div>
             <div className="detail-info-top-wrapper">
               <div className="detail-top-info-name">영업시간</div>
-              <div className="detail-top-info-value">{shopInfo?.businessHour}</div>
+              <div className="detail-top-info-value">{shopInfo?.businessHour.substring(0,5)} ~ {shopInfo?.businessHour.substring(6,11)}</div>
             </div>
           </div>
         </div>
@@ -185,7 +179,7 @@ export default function Detail() {
           </div>
         </div>
       </div>
-      <Review shopName={shopInfo?.name} shopImage={shopInfo?.images} shopId={location.pathname.slice(8)} />
+      <Review shopName={shopInfo?.name} shopImage={shopInfo?.images} shopId={location.pathname.slice(8)} like={shopInfo?.like}/>
       <Footer />
     </div>
   );
