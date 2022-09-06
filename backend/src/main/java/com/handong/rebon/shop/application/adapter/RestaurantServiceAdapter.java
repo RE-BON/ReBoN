@@ -3,6 +3,7 @@ package com.handong.rebon.shop.application.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.MenuService;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
@@ -66,10 +67,10 @@ public class RestaurantServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public ShopResponseDto convertToShopResponseDto(Shop shop) {
+    public ShopResponseDto convertToShopResponseDto(Shop shop, LoginMember loginMember) {
         Restaurant restaurant = (Restaurant) shop;
         List<Menu> menuGroups = restaurant.getMenus();
-        return ShopResponseDto.of(shop, menuGroups);
+        return ShopResponseDto.of(shop, menuGroups, loginMember);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.handong.rebon.shop.application.adapter;
 
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
@@ -12,7 +13,7 @@ public interface ShopServiceAdapter {
 
     Shop create(ShopImages shopImages, ShopRequestDto shopRequestDto);
 
-    ShopResponseDto convertToShopResponseDto(Shop shop);
+    ShopResponseDto convertToShopResponseDto(Shop shop, LoginMember loginMember);
 
     void update(Shop shop, ShopRequestDto shopRequestDto);
 

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.shop.application.dto.response.category.ShopCategoryResponseDto;
 import com.handong.rebon.shop.application.dto.response.image.ShopImageResponseDto;
 import com.handong.rebon.shop.application.dto.response.menu.MenuResponseDto;
@@ -34,16 +35,17 @@ public class ShopResponseDto {
     private String address;
     private List<ShopImageResponseDto> images;
 
-    public static ShopResponseDto from(Shop shop) {
-        return of(shop, Collections.emptyList());
+    public static ShopResponseDto of(Shop shop, LoginMember loginMember) {
+        return of(shop, Collections.emptyList(), loginMember);
     }
 
-    public static ShopResponseDto of(Shop shop, List<Menu> menus) {
+    public static ShopResponseDto of(Shop shop, List<Menu> menus, LoginMember loginMember) {
         ShopContent shopContent = shop.getShopContent();
         return ShopResponseDto.builder()
                               .id(shop.getId())
                               .category(ShopCategoryResponseDto.from(shop.getCategory()))
                               .name(shop.getName())
+                              .like(shop.containLike(loginMember))
                               .star(shop.getStar())
                               .tags(convertToShopTagResponseDto(shop.getShopTags()))
                               .phone(shopContent.getPhone())
