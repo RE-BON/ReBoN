@@ -44,6 +44,30 @@ export default function MainShopData({ restCategory, accoCategory, cafeCategory 
       const noCafe = [96];
       if (!noCafe.includes(data.id)) {
         var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=2&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
+        // restCategory.map((data, index) => {
+        //   const noRest = [74, 91, 29];
+        //   if (!noRest.includes(data.id)) {
+        //     var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=1&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
+        axios
+          .get(url, config)
+          .then((response) => {
+            const cafeState = { id: data.id, shop: response.data };
+            cafeArr.push(cafeState);
+          })
+          .catch((error) => {
+            if (error.response.status === 500) {
+              cafeArr.push([]);
+            } else console.log('cafeShop error');
+          });
+      }
+    });
+
+    setRestData(restArr);
+
+    cafeCategory.map((data, index) => {
+      const noCafe = [96];
+      if (!noCafe.includes(data.id)) {
+        var url = 'http://3.34.139.61:8080/api/shops?tag=' + location.state.item.id + '&category=2&subCategories=' + data.id + '&open=false&sort=shopScore.star%2Cdesc';
         axios
           .get(url, config)
           .then((response) => {

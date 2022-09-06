@@ -2,8 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import '../../../styles/review.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser, faShareNodes, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { faHeart, faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCircleUser,
+  faShareNodes,
+  faEllipsisVertical,
+  faHeart as solidHeart
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart, faHeart, faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { Dropdown, Image, Row, Col, Table, Button } from 'react-bootstrap';
 import { MoreVertical, Trash, Edit } from 'react-feather';
 import ReviewDropdown from './ReviewDropdown';
@@ -19,7 +24,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router';
 import LogoutContent from '../../Logout/LogoutContent';
 
-export default function Review({ shopName, shopImage, shopId }) {
+export default function Review({ shopName, shopImage, shopId, like }) {
   const { Kakao } = window;
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false); //모달 상태 관리 : 기본값 - 닫힘
@@ -34,16 +39,17 @@ export default function Review({ shopName, shopImage, shopId }) {
   const [sort, setSort] = useState('1');
   const [logout, setLogout] = useState(false);
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+  const [likeShop, setLikeShop] = useState(like);
   const isMobile = useMediaQuery({
     query: '(max-width:767px)',
   });
+  const shopNumber = Number(location.pathname.slice(8));
 
   useEffect(() => {
     setReviewReady(false);
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    const shopNumber = Number(location.pathname.slice(8));
 
     const sortUrl = sort === '1' ? 'reviewScore.empathyCount,desc': sort === '2' ? 'sort=createdAt,desc' : sort === '3' ? 'reviewScore.star,desc' : 'reviewScore.star,asc'
 
@@ -60,7 +66,7 @@ export default function Review({ shopName, shopImage, shopId }) {
           }
           setReviewTip(
             response.data.filter(function (item) {
-              return item.tip !== null;
+              return item.tip !== '';
             })
           );
         }
@@ -108,6 +114,24 @@ export default function Review({ shopName, shopImage, shopId }) {
     });
   };
 
+
+  const likeToggle = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    if(likeShop){
+      const response = await axios.post(`http://3.34.139.61:8080/api/shops/${shopNumber}/unlike`, {},config);
+      const url = 'http://3.34.139.61:8080/api/shops/' + shopNumber
+      const shopResponse = axios.get(url, config)
+    }
+    else{
+      const response = await axios.post(`http://3.34.139.61:8080/api/shops/${shopNumber}/like`, {},config);
+      const url = 'http://3.34.139.61:8080/api/shops/' + shopNumber
+      const shopResponse = axios.get(url, config)
+    }
+    setLikeShop(!likeShop)
+  };
+
   const openMenu = () => {
     setIsMenuOpen(true);
   };
@@ -141,8 +165,19 @@ export default function Review({ shopName, shopImage, shopId }) {
               </Link>
             </div>
             <div className="review-like-wrapper">
-              <FontAwesomeIcon icon={faHeart} className="review-icon" size="1x" />
-              <span className="review-like-num">{reviewLike}</span>
+              {likeShop ?
+                (
+                    <button className="review-button" onClick={() => likeToggle()}>
+                      <FontAwesomeIcon icon={solidHeart} className="review-like-icon" size="1x" color="#FF6B6C"/>
+                    </button>
+                )
+                :
+                (
+                  <button className="review-button" onClick={() => likeToggle()}>
+                    <FontAwesomeIcon icon={regularHeart} className="review-icon" size="1x" color="#262626"/>
+                  </button>
+                )
+              }
             </div>
             <button className="review-share-wrapper" onClick={shareKakao}>
               <FontAwesomeIcon icon={faShareNodes} className="review-icon" size="1x" />
