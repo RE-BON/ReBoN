@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("*")
-                .allowedOrigins("http://rebon.s3-website.ap-northeast-2.amazonaws.com/", "http://localhost:8080");
+                .allowedOrigins("http://rebon.s3-website.ap-northeast-2.amazonaws.com/", "http://localhost:3000", "http://localhost:8080");
     }
 
     @Override
