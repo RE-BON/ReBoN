@@ -10,6 +10,7 @@ import com.handong.rebon.member.application.dto.request.MemberUpdateRequestDto;
 import com.handong.rebon.member.application.dto.response.MemberCreateResponseDto;
 import com.handong.rebon.member.application.dto.response.MemberReadResponseDto;
 import com.handong.rebon.member.presentation.dto.MemberAssembler;
+import com.handong.rebon.member.presentation.dto.request.DuplicateRequest;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 import com.handong.rebon.member.presentation.dto.request.MemberUpdateRequest;
 import com.handong.rebon.member.presentation.dto.response.MemberCreateResponse;
@@ -35,13 +36,6 @@ public class ApiMemberController {
                              .body(MemberCreateResponse.from(response));
     }
 
-    @PostMapping("/members/nickname/check-duplicate")
-    public ResponseEntity<Void> nicknameDuplicateCheck(@RequestBody String nickname) {
-        memberService.checkNicknameDuplicate(nickname);
-        return ResponseEntity.ok()
-                             .build();
-    }
-
     @RequiredLogin
     @PatchMapping("/members")
     public ResponseEntity<Void> update(
@@ -51,6 +45,13 @@ public class ApiMemberController {
         MemberUpdateRequestDto memberUpdateRequestDto = MemberAssembler.memberUpdateRequestDto(loginMember.getId(), memberUpdateRequest);
         memberService.update(memberUpdateRequestDto);
 
+        return ResponseEntity.ok()
+                             .build();
+    }
+
+    @PostMapping("/members/nickname/check-duplicate")
+    public ResponseEntity<Void> nicknameDuplicateCheck(@RequestBody DuplicateRequest duplicateRequest) {
+        memberService.checkNicknameDuplicate(duplicateRequest.getNickname());
         return ResponseEntity.ok()
                              .build();
     }

@@ -1,6 +1,7 @@
 package com.handong.rebon.acceptance.member;
 
 import com.handong.rebon.acceptance.AcceptanceTest;
+import com.handong.rebon.member.presentation.dto.request.DuplicateRequest;
 import com.handong.rebon.member.presentation.dto.request.MemberCreateRequest;
 
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,9 @@ public class MemberCreateAcceptanceTest extends AcceptanceTest {
     void checkDidNotDuplicateNickname() {
         //given
         String nickname = "ReBoN";
+        DuplicateRequest duplicateRequest = new DuplicateRequest(nickname);
         //when
-        ExtractableResponse<Response> response = checkDuplicateNickname(nickname);
+        ExtractableResponse<Response> response = checkDuplicateNickname(duplicateRequest);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
@@ -54,16 +56,17 @@ public class MemberCreateAcceptanceTest extends AcceptanceTest {
     void checkDuplicatedNickname() {
         //given
         String nickname = "test";
+        DuplicateRequest duplicateRequest = new DuplicateRequest(nickname);
         saveMember(new MemberCreateRequest("test@gmail.com", nickname, "google", true));
 
         //when
-        ExtractableResponse<Response> response = checkDuplicateNickname(nickname);
+        ExtractableResponse<Response> response = checkDuplicateNickname(duplicateRequest);
 
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
-    private ExtractableResponse<Response> checkDuplicateNickname(String nickname) {
+    private ExtractableResponse<Response> checkDuplicateNickname(DuplicateRequest nickname) {
         return RestAssured.given(getRequestSpecification())
                           .log().all()
                           .contentType(APPLICATION_JSON_VALUE)
