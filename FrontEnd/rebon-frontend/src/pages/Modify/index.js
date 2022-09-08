@@ -252,7 +252,7 @@ export default function Modify() {
               setFileName(e.target.files[0].name);
             }}
           />
-          <div className="post-attach-contents">]
+          <div className="post-attach-contents">
             {fileName === '' ? (
               <label className="post-attach-image" for="input-file">
                 <FontAwesomeIcon icon={faPlus} size="1x" />
