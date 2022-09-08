@@ -43,7 +43,7 @@
   font-size: 14px;
   font-family: 'Pretendard' !important;
   color: #898c8f;
-  font: weight 500px;
+  font-weight : 500;
 }
 .detail-tag-wrapper {
   margin-top: 3%;
@@ -255,7 +255,6 @@
     display: inline;
     font-size: 20px;
     color: #e9e9ea;
-    font-family: 'Pretendard' !important;
   }
   .detail-shop-rating {
     color: #898c8f;
@@ -493,7 +492,6 @@
   .detail-star {
     font-size: 20px;
     color: #e9e9ea;
-    font-family: 'Pretendard' !important;
   }
   .detail-shop-rating {
     display: inline;
@@ -714,7 +712,6 @@
   .detail-star {
     font-size: 20px;
     color: #e9e9ea;
-    font-family: 'Pretendard' !important;
   }
   .detail-shop-rating {
     display: inline;
@@ -940,7 +937,6 @@
   .detail-star {
     font-size: 20px;
     color: #e9e9ea;
-    font-family: 'Pretendard' !important;
   }
   .detail-shop-rating {
     display: inline;

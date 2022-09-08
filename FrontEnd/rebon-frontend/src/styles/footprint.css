@@ -227,6 +227,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 8vh;
     margin-top: 5%;
+    margin-bottom: 5%;
   }
   .footprint-image-sub-wrapper {
     margin-right: 2%;
@@ -350,6 +351,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 15vh;
     margin-top: 5%;
+    margin-bottom: 5%;
   }
   .footprint-image-sub-wrapper {
     margin-right: 2%;
@@ -474,6 +476,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     height: 18vh;
     margin-top: 5%;
+    margin-bottom: 5%;
   }
   .footprint-image-sub-wrapper {
     margin-right: 2%;

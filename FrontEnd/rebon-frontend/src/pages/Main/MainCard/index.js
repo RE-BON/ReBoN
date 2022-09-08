@@ -6,12 +6,22 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Loading from '../../Login/Loading';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function MainCard({ tagId, cateId, data, checked, open, sort, like, changeLike }) {
   const [mainInfo, setMainInfo] = useState(null);
   const [subId, setSubId] = useState();
-  const [token, setToken] = useState(window.sessionStorage.getItem('token'));
+  const token = window.sessionStorage.getItem('token');
   const [ready, setReady] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(0);
+
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   useEffect(() => {
     setReady(false);
@@ -19,72 +29,92 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
       if (data) {
         var url = 'http://3.34.139.61:8080/api/shops?tag=' + tagId + '&category=' + cateId + '&subCategories=' + checked + '&open=' + open + '&sort=' + sort + '%2Cdesc';
 
-        axios.get(url).then((response) => {
+        axios.get(url, config).then((response) => {
           setMainInfo(response.data);
           setReady(true);
         });
       }
-    }, 1200);
+    }, 400);
   }, [data, checked, open, sort, cateId]);
 
   const likeClick = (shopId, idx, e) => {
-    if (like[idx]) {
-      changeLike(idx);
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      if (token) {
-        var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/unlike';
-        axios
-          .post(
-            url,
-            {
-              likeCount: 0,
-              like: false,
-            },
-            config
-          )
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    if (token) {
+      if (like[idx]) {
+        changeLike(idx);
+
+        if (token) {
+          var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/unlike';
+          axios
+            .post(
+              url,
+              {
+                likeCount: 0,
+                like: false,
+              },
+              config
+            )
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      } else {
+        changeLike(idx);
+
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        if (token) {
+          var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/like';
+          axios
+            .post(
+              url,
+              {
+                likeCount: 1,
+                like: true,
+              },
+              config
+            )
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }
     } else {
-      changeLike(idx);
-
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      if (token) {
-        var url = 'http://3.34.139.61:8080/api/shops/' + shopId + '/like';
-        axios
-          .post(
-            url,
-            {
-              likeCount: 1,
-              like: true,
-            },
-            config
-          )
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      // alert('로그인 후 좋아요를 눌러주세요 :)');
+      toggleModal();
     }
   };
 
-  const StyledLink = styled(Link)`
-    box-sizing: border-box;
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    hover: none;
+  function toggleModal(e) {
+    setOpacity(0);
+    setIsOpen(!isOpen);
+  }
+
+  function afterOpen() {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 100);
+  }
+
+  function beforeClose() {
+    return new Promise((resolve) => {
+      setOpacity(0);
+      setTimeout(resolve, 300);
+    });
+  }
+
+  const FadingBackground = styled(BaseModalBackground)`
+    /* opacity: ${(props) => props.opacity}; */
+    transition: all 0.3s ease-in-out;
+    /* background: */
+    background-color: rgba(0, 0, 0, 0.15);
+    opacity: 0.8;
   `;
 
   return (
@@ -93,7 +123,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
         mainInfo ? (
           mainInfo.map((item, idx) => {
             var address = '/detail/' + item.id.toString();
-            var star = item.star.toFixed(1);
+            var star = item.star.toFixed();
 
             return (
               <div className="mainCard">
@@ -106,7 +136,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                   />
                 )}
                 <div className="likeBtn-main">
-                  {like[idx] ? (
+                  {item.like ? (
                     <FaHeart
                       className="heart-icon"
                       md={8}
@@ -132,7 +162,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                     <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
                       <div className="placeName-main">{item.name}</div>
                     </Link>
-                    <div className="starNum">{star}</div>
+                    <div className="starNum">{star}.0</div>
                   </div>
                   {/* <div className="">
                         {item.tags.map((tag) => (
@@ -140,6 +170,25 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                         ))}
                       </div> */}
                 </div>
+                <ModalProvider backgroundComponent={FadingBackground}>
+                  <StyledModal
+                    isOpen={isOpen}
+                    afterOpen={afterOpen}
+                    beforeClose={beforeClose}
+                    onBackgroundClick={toggleModal}
+                    onEscapeKeydown={toggleModal}
+                    opacity={opacity}
+                    backgroundProps={{ opacity }}
+                  >
+                    <div className="post-modal-wrapper">
+                      <button className="close" onClick={toggleModal}>
+                        <FontAwesomeIcon icon={faXmark} />
+                      </button>
+                      <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
+                      <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요//:)</div>
+                    </div>
+                  </StyledModal>
+                </ModalProvider>
               </div>
             );
           })
@@ -157,3 +206,11 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
     </>
   );
 }
+const StyledModal = Modal.styled`
+  width: 21rem;
+  height: 16rem;
+  padding : 20px;
+  border-radius:20px;
+  background-color: white;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;

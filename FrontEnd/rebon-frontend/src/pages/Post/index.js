@@ -14,11 +14,15 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
+import Login from '../Login';
 
 export default function Post() {
   const location = useLocation();
   const shopId = Number(location.pathname.slice(6));
   const shopName = location.state.shopName;
+
+  //로그인 state
+  const [loginState, setLoginState] = useState(false);
 
   //별 state
   const [pharase, setPharase] = useState(null);
@@ -81,12 +85,12 @@ export default function Post() {
     const promise = upload.promise();
     promise.then(
       function () {
-        // 이미지 업로드 성공
+        // alert('이미지 업로드 성공');
         // setOpacity(0);
         // setIsOpen(!isOpen);
       },
       function (err) {
-        // 이미지 업로드 실패
+        console.log(err);
         alert('이미지 업로드 실패');
       }
     );
@@ -110,12 +114,16 @@ export default function Post() {
         config
       )
       .then(function (response) {
-        console.log(response.data);
-        console.log('shopId', shopId);
+        // console.log(response.data);
+        // console.log('shopId', shopId);
       })
       .catch(function (error) {
         if (error.response.status === 400) {
           alert(error.response.data.message);
+        } else if (error.response.status === 401) {
+          setLoginState(false);
+          alert(error.response.data.message);
+          document.location.href = '/login ';
         } else console.log(error);
       });
   };
@@ -263,7 +271,7 @@ export default function Post() {
             <div
               className="post-modal-click"
               onClick={() => {
-                if (!(!myContent || !starRate)) {
+                if (!(!myContent || !starRate || loginState)) {
                   imgUpload();
                   toggleModal();
                 }
@@ -285,7 +293,7 @@ export default function Post() {
               >
                 <div className="post-modal-wrapper">
                   <button className="close" onClick={toggleModal}>
-                    <Link to="/mypage/footprint" style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <Link to={`/detail/${shopId}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                       <FontAwesomeIcon icon={faXmark} />
                     </Link>
                   </button>

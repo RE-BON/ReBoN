@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from 'react-responsive';
 import Header from '../../components/Header';
-import PostModal from './PostModal';
+import PostModal from '../Post/PostModal';
 // import Logout from '../Logout';
 import { useState } from 'react';
 import axios from 'axios';
@@ -44,7 +44,7 @@ export default function Modify() {
   //이미지 state
   const [imageSrc, setImageSrc] = useState(''); //initialImages이부분 이미지 이름 다시
   const [file, setFile] = useState();
-  const [fileName, setFileName] = useState(initialImages);
+  const [fileName, setFileName] = useState(initialImages[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
 
@@ -98,6 +98,7 @@ export default function Modify() {
 
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const patchSubmit = () => {
+    // console.log(initialImages, fileName);
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
@@ -113,12 +114,12 @@ export default function Modify() {
         config
       )
       .then(function (response) {
-        console.log(response);
+        console.log('patch!!', response.config.data);
       })
       .catch(function (error) {
         if (error.response.status === 400) {
           alert(error.response.data.message);
-        } else console.log(error);
+        } else alert(error.response.data.message);
       });
   };
 
@@ -251,7 +252,7 @@ export default function Modify() {
               setFileName(e.target.files[0].name);
             }}
           />
-          <div className="post-attach-contents">
+          <div className="post-attach-contents">]
             {fileName === '' ? (
               <label className="post-attach-image" for="input-file">
                 <FontAwesomeIcon icon={faPlus} size="1x" />
@@ -272,9 +273,9 @@ export default function Modify() {
               onClick={() => {
                 if (!(!myContent || !starRate)) {
                   imgUpload();
-                  toggleModal();
                 }
                 patchSubmit();
+                toggleModal();
               }}
             >
               작성완료
@@ -297,7 +298,7 @@ export default function Modify() {
                     </Link>
                   </button>
                   <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
-                  <div className="post-modal-notice">리뷰가 등록되었습니다.</div>
+                  <div className="post-modal-notice">리뷰가 수정되었습니다.</div>
                 </div>
               </StyledModal>
             </ModalProvider>
