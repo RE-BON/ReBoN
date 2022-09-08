@@ -117,15 +117,6 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
     opacity: 0.8;
   `;
 
-  // const StyledLink = styled(Link)`
-  //   box-sizing: border-box;
-  //   display: block;
-  //   text-align: center;
-  //   text-decoration: none;
-  //   color: black;
-  //   hover: none;
-  // `;
-
   return (
     <>
       {ready ? (
