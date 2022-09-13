@@ -70,6 +70,20 @@ export default function Terms() {
       });
   };
 
+  const allClick= () => {
+    const is_checked = document.getElementById('agreement-select').checked;
+    if(is_checked) {
+      document.getElementById('agreement-select1').checked = true;
+      document.getElementById('agreement-select2').checked = true;
+      document.getElementById('agreement-select3').checked = true;
+    }
+    else{
+      document.getElementById('agreement-select1').checked = false;
+      document.getElementById('agreement-select2').checked = false;
+      document.getElementById('agreement-select3').checked = false;
+    }
+  }
+
   return (
     <div className="terms-wrapper">
       <div className="termsBox">
@@ -98,8 +112,8 @@ export default function Terms() {
 
           <div>
             <div className="agreement-select">
-              <input type="checkbox" id="agreement-select" name="marcketing" />
-              <label for="agreement-select">
+              <input type="checkbox" id="agreement-select" name="marcketing" onClick={allClick}/>
+              <label for="agreement-select" >
                 <FontAwesomeIcon icon={faCheck} />
               </label>
               전체동의

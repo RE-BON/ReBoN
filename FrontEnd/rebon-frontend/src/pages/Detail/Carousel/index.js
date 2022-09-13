@@ -117,7 +117,7 @@ export default function Detail({ isMobile, imageInfo, imageLength }) {
           ):(
             <Slider {...settings} className="detail-slider">
               <div className="slider-first-wrapper">{imageInfo[0] ? <img className="detail-main-image" alt="잘못된 이미지" src={imageInfo[0].url} /> : ''}</div>
-              <div className="slider-second-wrapper">지
+              <div className="slider-second-wrapper">
                 <div className="slider-first-sub-wrapper">
                   <div className="slider-first-sub-image-wrapper">{imageInfo[1] ? <img className="detail-sub-image" alt="잘못된 이미지" src={imageInfo[1].url} /> : ''}</div>
                   <div className="slider-second-sub-image-wrapper">{imageInfo[2] ? <img className="detail-sub-image" alt="잘못된 이미지" src={imageInfo[2].url} /> : ''}</div>
