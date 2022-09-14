@@ -95,7 +95,7 @@ export default function Modify() {
       }
     );
   };
-
+  console.log(fileName, 'fileName');
   const [token, setToken] = useState(window.sessionStorage.getItem('token'));
   const patchSubmit = () => {
     // console.log(initialImages, fileName);
@@ -253,12 +253,12 @@ export default function Modify() {
             }}
           />
           <div className="post-attach-contents">
-            {fileName === '' ? (
+            {!fileName ? (
               <label className="post-attach-image" for="input-file">
                 <FontAwesomeIcon icon={faPlus} size="1x" />
               </label>
             ) : (
-              <img className="previewImg" src={`https://rebon.s3.ap-northeast-2.amazonaws.com/${fileName}`} />
+              <img className="previewImg" alt="postImg" src={`https://rebon.s3.ap-northeast-2.amazonaws.com/${fileName}`} />
             )}
 
             <div className="post-attach-count">1/10</div>
