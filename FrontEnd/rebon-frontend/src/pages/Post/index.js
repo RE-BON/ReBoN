@@ -113,17 +113,14 @@ export default function Post() {
         },
         config
       )
-      .then(function (response) {
-        // console.log(response.data);
-        // console.log('shopId', shopId);
-      })
+      // .then(function (response) {})
       .catch(function (error) {
-        if (error.response.status === 400) {
-          alert(error.response.data.message);
-        } else if (error.response.status === 401) {
+        if (error.response.status === 401) {
           setLoginState(false);
           alert(error.response.data.message);
           document.location.href = '/login ';
+        } else if (error.response.status === 400) {
+          alert(error.response.data.message);
         } else console.log(error);
       });
   };
