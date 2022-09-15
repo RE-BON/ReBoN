@@ -122,75 +122,77 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
       {ready ? (
         mainInfo ? (
           mainInfo.map((item, idx) => {
-            var address = '/detail/' + item.id.toString();
-            var star = item.star.toFixed();
+            if(item.id!==321 && item.id!==269 && item.id!==442){
+              var address = '/detail/' + item.id.toString();
+              var star = item.star.toFixed();
 
-            return (
-              <div className="mainCard">
-                {item.image ? (
-                  <img className="main-img" src={item.image} />
-                ) : (
-                  <img
-                    className="main-img"
-                    src="https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg"
-                  />
-                )}
-                <div className="likeBtn-main">
-                  {item.like ? (
-                    <FaHeart
-                      className="heart-icon"
-                      md={8}
-                      size="22"
-                      onClick={(e) => {
-                        likeClick(item.id, idx, e);
-                      }}
-                    />
+              return (
+                <div className="mainCard">
+                  {item.image ? (
+                    <img className="main-img" src={item.image} />
                   ) : (
-                    <FiHeart
-                      className="heart-icon-fi"
-                      md={8}
-                      size="22"
-                      onClick={(e) => {
-                        likeClick(item.id, idx, e);
-                      }}
+                    <img
+                      className="main-img"
+                      src="https://previews.123rf.com/images/julynx/julynx1408/julynx140800023/30746516-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%97%86%EA%B1%B0%EB%82%98-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%82%AC%EC%A7%84-%EC%97%86%EC%9D%8C.jpg"
                     />
                   )}
-                </div>
-
-                <div className="mainCard-bottom">
-                  <div className="titleRow">
-                    <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      <div className="placeName-main">{item.name}</div>
-                    </Link>
-                    <div className="starNum">{star}.0</div>
+                  <div className="likeBtn-main">
+                    {item.like ? (
+                      <FaHeart
+                        className="heart-icon"
+                        md={8}
+                        size="22"
+                        onClick={(e) => {
+                          likeClick(item.id, idx, e);
+                        }}
+                      />
+                    ) : (
+                      <FiHeart
+                        className="heart-icon-fi"
+                        md={8}
+                        size="22"
+                        onClick={(e) => {
+                          likeClick(item.id, idx, e);
+                        }}
+                      />
+                    )}
                   </div>
-                  {/* <div className="">
+
+                  <div className="mainCard-bottom">
+                    <div className="titleRow">
+                      <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <div className="placeName-main">{item.name}</div>
+                      </Link>
+                      <div className="starNum">{star}.0</div>
+                    </div>
+                    {/* <div className="">
                         {item.tags.map((tag) => (
                           <span className="tag">{tag.name}</span>
                         ))}
                       </div> */}
+                  </div>
+                  <ModalProvider backgroundComponent={FadingBackground}>
+                    <StyledModal
+                      isOpen={isOpen}
+                      afterOpen={afterOpen}
+                      beforeClose={beforeClose}
+                      onBackgroundClick={toggleModal}
+                      onEscapeKeydown={toggleModal}
+                      opacity={opacity}
+                      backgroundProps={{ opacity }}
+                    >
+                      <div className="post-modal-wrapper">
+                        <button className="close" onClick={toggleModal}>
+                          <FontAwesomeIcon icon={faXmark} />
+                        </button>
+                        <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
+                        <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요//:)</div>
+                      </div>
+                    </StyledModal>
+                  </ModalProvider>
                 </div>
-                <ModalProvider backgroundComponent={FadingBackground}>
-                  <StyledModal
-                    isOpen={isOpen}
-                    afterOpen={afterOpen}
-                    beforeClose={beforeClose}
-                    onBackgroundClick={toggleModal}
-                    onEscapeKeydown={toggleModal}
-                    opacity={opacity}
-                    backgroundProps={{ opacity }}
-                  >
-                    <div className="post-modal-wrapper">
-                      <button className="close" onClick={toggleModal}>
-                        <FontAwesomeIcon icon={faXmark} />
-                      </button>
-                      <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
-                      <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요//:)</div>
-                    </div>
-                  </StyledModal>
-                </ModalProvider>
-              </div>
-            );
+              );
+            }
           })
         ) : (
           <Loading />

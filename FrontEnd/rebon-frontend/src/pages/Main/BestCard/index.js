@@ -128,7 +128,7 @@ export default function BestCard({ data, checked }) {
     <>
       {bestList ? (
         bestList.map((item, idx) => {
-          if (idx < 4) {
+          if (idx < 4 && item.id!==321) {
             var address = '/detail/' + item.id.toString();
             var star = item.star.toFixed();
 
