@@ -136,7 +136,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                   />
                 )}
                 <div className="likeBtn-main">
-                  {item.like ? (
+                  {like[idx] ? (
                     <FaHeart
                       className="heart-icon"
                       md={8}
