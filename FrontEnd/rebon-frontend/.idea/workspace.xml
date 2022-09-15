@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bf48b1a8-67f8-4796-bd46-f5d0447e0979" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Detail/Carousel/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Detail/Carousel/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Join/Terms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Join/Terms/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/footprint.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/footprint.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login/LoginButton/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login/LoginButton/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/BestCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/BestCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Main/MainShopData/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main/MainShopData/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/security" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/security" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/lily/Desktop/Rebon/ReBoN/FrontEnd/rebon-frontend",
+    "last_opened_file_path": "/Users/hyerm2/Desktop/project/ReBoN/FrontEnd/rebon-frontend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -52,6 +54,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="bf48b1a8-67f8-4796-bd46-f5d0447e0979" name="Changes" comment="" />
       <created>1661772043306</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -61,6 +64,9 @@
       <workItem from="1661846005055" duration="2572000" />
       <workItem from="1661935899721" duration="876000" />
       <workItem from="1662532740082" duration="1406000" />
+      <workItem from="1662645879773" duration="155000" />
+      <workItem from="1662860252386" duration="238000" />
+      <workItem from="1663208591064" duration="880000" />
     </task>
     <servers />
   </component>

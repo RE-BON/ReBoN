@@ -122,8 +122,9 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
       {ready ? (
         mainInfo ? (
           mainInfo.map((item, idx) => {
-            var address = '/detail/' + item.id.toString();
-            var star = item.star.toFixed();
+            if(item.id!==321 && item.id!==269 && item.id!==442){
+              var address = '/detail/' + item.id.toString();
+              var star = item.star.toFixed();
 
             return (
               <div className="mainCard">
@@ -136,7 +137,7 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                   />
                 )}
                 <div className="likeBtn-main">
-                  {item.like ? (
+                  {like[idx] ? (
                     <FaHeart
                       className="heart-icon"
                       md={8}
@@ -157,40 +158,41 @@ export default function MainCard({ tagId, cateId, data, checked, open, sort, lik
                   )}
                 </div>
 
-                <div className="mainCard-bottom">
-                  <div className="titleRow">
-                    <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      <div className="placeName-main">{item.name}</div>
-                    </Link>
-                    <div className="starNum">{star}.0</div>
-                  </div>
-                  {/* <div className="">
+                  <div className="mainCard-bottom">
+                    <div className="titleRow">
+                      <Link to={address} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        <div className="placeName-main">{item.name}</div>
+                      </Link>
+                      <div className="starNum">{star}.0</div>
+                    </div>
+                    {/* <div className="">
                         {item.tags.map((tag) => (
                           <span className="tag">{tag.name}</span>
                         ))}
                       </div> */}
+                  </div>
+                  <ModalProvider backgroundComponent={FadingBackground}>
+                    <StyledModal
+                      isOpen={isOpen}
+                      afterOpen={afterOpen}
+                      beforeClose={beforeClose}
+                      onBackgroundClick={toggleModal}
+                      onEscapeKeydown={toggleModal}
+                      opacity={opacity}
+                      backgroundProps={{ opacity }}
+                    >
+                      <div className="post-modal-wrapper">
+                        <button className="close" onClick={toggleModal}>
+                          <FontAwesomeIcon icon={faXmark} />
+                        </button>
+                        <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
+                        <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요//:)</div>
+                      </div>
+                    </StyledModal>
+                  </ModalProvider>
                 </div>
-                <ModalProvider backgroundComponent={FadingBackground}>
-                  <StyledModal
-                    isOpen={isOpen}
-                    afterOpen={afterOpen}
-                    beforeClose={beforeClose}
-                    onBackgroundClick={toggleModal}
-                    onEscapeKeydown={toggleModal}
-                    opacity={opacity}
-                    backgroundProps={{ opacity }}
-                  >
-                    <div className="post-modal-wrapper">
-                      <button className="close" onClick={toggleModal}>
-                        <FontAwesomeIcon icon={faXmark} />
-                      </button>
-                      <img className="post-modal-image" alt="review-image" src="/image/reviewLogo.png" />
-                      <div className="post-modal-notice">로그인 후 좋아요를 눌러주세요//:)</div>
-                    </div>
-                  </StyledModal>
-                </ModalProvider>
-              </div>
-            );
+              );
+            }
           })
         ) : (
           <Loading />

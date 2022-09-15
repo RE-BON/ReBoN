@@ -14,8 +14,8 @@ export default function SNSButtons() {
   };
 
   const naverLoginHandler = () => {
-    // const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading`;
-    const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://localhost:3000/loading`;
+    const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading`;
+    // const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://localhost:3000/loading`;
     window.location.href = NAVER_LOGIN_URL;
   };
 
