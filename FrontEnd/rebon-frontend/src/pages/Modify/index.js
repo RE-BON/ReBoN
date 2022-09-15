@@ -47,6 +47,7 @@ export default function Modify() {
   const [fileName, setFileName] = useState(initialImages[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [opacity, setOpacity] = useState(0);
+  let initialState = initialImages[0].slice(initialImages[0].length - 4);
 
   const region = 'ap-northeast-2';
   const bucket = 'rebon';
@@ -253,7 +254,7 @@ export default function Modify() {
             }}
           />
           <div className="post-attach-contents">
-            {!fileName ? (
+            {!fileName || initialState === null ? (
               <label className="post-attach-image" for="input-file">
                 <FontAwesomeIcon icon={faPlus} size="1x" />
               </label>
