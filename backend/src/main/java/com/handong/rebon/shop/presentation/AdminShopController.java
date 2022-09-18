@@ -55,8 +55,8 @@ public class AdminShopController {
     }
 
     @GetMapping("/shops/{id}")
-    public String viewShop(@PathVariable Long id, Model model) {
-        ShopResponseDto shopResponseDto = shopService.findOneById(id);
+    public String viewShop(@Login LoginMember loginMember, @PathVariable Long id, Model model) {
+        ShopResponseDto shopResponseDto = shopService.findOneById(id, loginMember);
         model.addAttribute("shop", shopResponseDto);
         return "shop/detail";
     }

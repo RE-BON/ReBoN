@@ -101,10 +101,10 @@ public class ShopService {
     }
 
     @Transactional(readOnly = true)
-    public ShopResponseDto findOneById(Long id) {
+    public ShopResponseDto findOneById(Long id, LoginMember loginMember) {
         Shop shop = findById(id);
         ShopServiceAdapter adapter = shopAdapterService.shopAdapterByCategory(shop.getCategory());
-        return adapter.convertToShopResponseDto(shop);
+        return adapter.convertToShopResponseDto(shop, loginMember);
     }
 
     @Transactional

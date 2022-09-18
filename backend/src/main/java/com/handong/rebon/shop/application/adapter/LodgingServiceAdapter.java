@@ -1,5 +1,6 @@
 package com.handong.rebon.shop.application.adapter;
 
+import com.handong.rebon.auth.domain.LoginMember;
 import com.handong.rebon.category.domain.Category;
 import com.handong.rebon.shop.application.dto.request.ShopRequestDto;
 import com.handong.rebon.shop.application.dto.response.ShopResponseDto;
@@ -34,8 +35,8 @@ public class LodgingServiceAdapter implements ShopServiceAdapter {
     }
 
     @Override
-    public ShopResponseDto convertToShopResponseDto(Shop shop) {
-        return ShopResponseDto.from(shop);
+    public ShopResponseDto convertToShopResponseDto(Shop shop, LoginMember loginMember) {
+        return ShopResponseDto.of(shop, loginMember);
     }
 
     @Override
